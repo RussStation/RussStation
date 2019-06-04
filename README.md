@@ -1,4 +1,4 @@
-##RussStation
+## RussStation
 
 A codebase built from /tg/station codebase
 https://github.com/tgstation/tgstation
