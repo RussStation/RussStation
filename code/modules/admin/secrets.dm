@@ -593,7 +593,8 @@
 				purrbation.")
 			log_admin("[key_name(usr)] has removed everyone from purrbation.")
 
-		if("flipmovement")
+		//honk start --Custom keybindings
+		/*if("flipmovement")
 			if(!check_rights(R_FUN))
 				return
 			if(alert("Flip all movement controls?","Confirm","Yes","Cancel") == "Cancel")
@@ -645,8 +646,8 @@
 				return
 			SSinput.setup_default_movement_keys()
 			message_admins("[key_name_admin(usr)] has reset all movement keys.")
-			log_admin("[key_name(usr)] has reset all movement keys.")
-
+			log_admin("[key_name(usr)] has reset all movement keys.")*/
+		//honk end
 		if("customportal")
 			if(!check_rights(R_FUN))
 				return

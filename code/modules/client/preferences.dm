@@ -27,7 +27,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/UI_style = null
 	var/buttons_locked = FALSE
-	var/hotkeys = FALSE
+	var/hotkeys = TRUE // honk --Custom keybindings
 	var/tgui_fancy = TRUE
 	var/tgui_lock = TRUE
 	var/windowflashing = TRUE
@@ -142,7 +142,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Settings</a>"
 	dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Game Preferences</a>"
 	dat += "<a href='?_src_=prefs;preference=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>OOC Preferences</a>"
-
+	dat += "<a href='?_src_=prefs;preference=tab;tab=3' [current_tab == 3 ? "class='linkOn'" : ""]>Keybindings</a>" //honk --Custom keybindings
 	if(!path)
 		dat += "<div class='notice'>Please create an account to save your preferences</div>"
 
@@ -446,7 +446,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>tgui Style:</b> <a href='?_src_=prefs;preference=tgui_fancy'>[(tgui_fancy) ? "Fancy" : "No Frills"]</a><br>"
 			dat += "<br>"
 			dat += "<b>Action Buttons:</b> <a href='?_src_=prefs;preference=action_buttons'>[(buttons_locked) ? "Locked In Place" : "Unlocked"]</a><br>"
-			dat += "<b>Keybindings:</b> <a href='?_src_=prefs;preference=hotkeys'>[(hotkeys) ? "Hotkeys" : "Default"]</a><br>"
+			//dat += "<b>Keybindings:</b> <a href='?_src_=prefs;preference=hotkeys'>[(hotkeys) ? "Hotkeys" : "Default"]</a><br>" //honk --custom keybindings
 			dat += "<br>"
 			dat += "<b>PDA Color:</b> <span style='border:1px solid #161616; background-color: [pda_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=pda_color;task=input'>Change</a><BR>"
 			dat += "<b>PDA Style:</b> <a href='?_src_=prefs;task=input;preference=pda_style'>[pda_style]</a><br>"
@@ -621,7 +621,69 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "</td>"
 			dat += "</tr></table>"
+		//honk start --Custom keybindings tab
+		if (3) // Keybindings
+			dat += "<center><a href='?_src_=prefs;preference=hotkeys'>[(hotkeys) ? "Hotkeys" : "Default"]</a>"
+			dat += "<a href='?_src_=prefs;preference=reset_bindings'>Reset to default</a></center>"
+			if(hotkeys)
+				var/button
+				var/button_bound
 
+				dat += "<table><tr><td width='340px' height='300px' valign='top'>"
+				dat += "<h2>Client</h2>"
+				BUTTON_KEY_MOVEMENT("Move North (up)", ACTION_MOVENORTH, NORTH)
+				BUTTON_KEY_MOVEMENT("Move West (left)", ACTION_MOVEWEST, WEST)
+				BUTTON_KEY_MOVEMENT("Move South (down)", ACTION_MOVESOUTH, SOUTH)
+				BUTTON_KEY_MOVEMENT("Move East (right)", ACTION_MOVEEAST, EAST)
+
+				BUTTON_KEY("OOC", ACTION_OOC)			
+				BUTTON_KEY("Adminhelp", ACTION_AHELP)
+				BUTTON_KEY("Screenshot", ACTION_SCREENSHOT)
+				BUTTON_KEY("Minimal HUD", ACTION_MINHUD)
+
+
+				dat += "<h2>Mob</h2>"
+				BUTTON_KEY("Say", ACTION_SAY)
+				BUTTON_KEY("Emote", ACTION_ME)
+				BUTTON_KEY("Stop pulling", ACTION_STOPPULLING)
+				BUTTON_KEY("Cycle intent clockwise", ACTION_INTENTRIGHT)
+				BUTTON_KEY("Cycle intent counter-clockwise", ACTION_INTENTLEFT)
+				BUTTON_KEY("Swap hands", ACTION_SWAPHAND)
+				BUTTON_KEY("Use item on self", ACTION_USESELF)
+				BUTTON_KEY("Drop", ACTION_DROP)
+				BUTTON_KEY("Equip", ACTION_EQUIP)
+
+				dat += "</td><td width='300px' height='300px' valign='top'>"
+
+				dat += "<h2>Mob</h2>"
+				BUTTON_KEY("Target head", ACTION_TARGETHEAD)
+				BUTTON_KEY("Target right arm", ACTION_TARGETRARM)
+				BUTTON_KEY("Target chest", ACTION_TARGETCHEST)
+				BUTTON_KEY("Target left arm", ACTION_TARGETLARM)
+				BUTTON_KEY("Target right leg", ACTION_TARGETRLEG)
+				BUTTON_KEY("Target groin", ACTION_TARGETGROIN)
+				BUTTON_KEY("Target left leg", ACTION_TARGETLLEG)
+
+				BUTTON_KEY("Resist", ACTION_RESIST)
+				BUTTON_KEY("Toggle throw", ACTION_TOGGLETHROW)
+				BUTTON_KEY("Help intent", ACTION_INTENTHELP)
+				BUTTON_KEY("Disarm intent", ACTION_INTENTDISARM)
+				BUTTON_KEY("Grab intent", ACTION_INTENTGRAB)
+				BUTTON_KEY("Harm intent", ACTION_INTENTHARM)
+				
+				if(parent.holder)
+					dat += "<h2>Admin</h2>"
+					BUTTON_KEY("Adminchat", ACTION_ASAY)
+					BUTTON_KEY("Admin ghost", ACTION_AGHOST)
+					BUTTON_KEY("Player panel", ACTION_PLAYERPANEL)
+					BUTTON_KEY("Toggle build mode", ACTION_BUILDMODE)
+					BUTTON_KEY("Stealth mode", ACTION_STEALTHMIN)
+					BUTTON_KEY("Deadchat", ACTION_DSAY)
+
+				dat += "</td></tr></table>"
+			else
+				dat += "<b>Default keybindings selected</b>"
+		//honk end
 	dat += "<hr><center>"
 
 	if(!IsGuestKey(user.key))
@@ -636,6 +698,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 	onclose(user, "preferences_window", src)
+
+
 
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
@@ -774,7 +838,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(job_preferences[j] == JP_HIGH)
 				job_preferences[j] = JP_MEDIUM
 				//technically break here
-	
+
 	job_preferences[job.title] = level
 	return TRUE
 
@@ -792,7 +856,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		to_chat(user, "<span class='danger'>UpdateJobPreference - desired level was not a number. Please notify coders!</span>")
 		ShowChoices(user)
 		return
-	
+
 	var/jpval = null
 	switch(desiredLvl)
 		if(3)
@@ -807,7 +871,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			jpval = null
 		else
 			jpval = JP_LOW
-	
+
 	SetJobPreferenceLevel(job, jpval)
 	SetChoices(user)
 
@@ -1319,7 +1383,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/pickedPDAColor = input(user, "Choose your PDA Interface color.", "Character Preference",pda_color) as color|null
 					if(pickedPDAColor)
 						pda_color = pickedPDAColor
-
+			//honk start --Custom Keybindings
+			if(href_list["keybinding"])
+				update_keybindings(user, href_list["keybinding"], href_list["dir"])
+			//honk end
 		else
 			switch(href_list["preference"])
 				if("publicity")
@@ -1339,8 +1406,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("hotkeys")
 					hotkeys = !hotkeys
 					if(hotkeys)
-						winset(user, null, "input.focus=true input.background-color=[COLOR_INPUT_ENABLED] mainwindow.macro=default")
+						bindings.bind_movement() //honk --Custom Keybindings
+						winset(user, null, "input.focus=true input.background-color=[COLOR_INPUT_DISABLED] mainwindow.macro=default")//honk --Custom Kebyindings
 					else
+						bindings.unbind_movement() //honk --Custom Keybindings
 						winset(user, null, "input.focus=true input.background-color=[COLOR_INPUT_ENABLED] mainwindow.macro=old_default")
 				if("action_buttons")
 					buttons_locked = !buttons_locked
@@ -1445,7 +1514,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					auto_fit_viewport = !auto_fit_viewport
 					if(auto_fit_viewport && parent)
 						parent.fit_viewport()
-				
+
 				if("widescreenpref")
 					widescreenpref = !widescreenpref
 					user.client.change_view(CONFIG_GET(string/default_view))
@@ -1467,6 +1536,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("tab")
 					if (href_list["tab"])
 						current_tab = text2num(href_list["tab"])
+
+				// honk start --Custom keybindings
+				if("reset_bindings")
+					reset_keybindings()
+				// honk end
 
 	ShowChoices(user)
 	return 1
