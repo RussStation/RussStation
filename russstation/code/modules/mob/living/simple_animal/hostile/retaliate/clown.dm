@@ -69,3 +69,10 @@
 	loot = list(/obj/item/soap, /obj/item/grown/bananapeel)
 
 //end
+
+//Jimmithy
+/mob/living/simple_animal/hostile/retaliate/clown/russ/mouse/Jimmithy
+	name = "Jimmithy"
+	real_name = "Jimmithy"
+
+//end
