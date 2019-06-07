@@ -4,9 +4,11 @@
 	var/time = 40
 	var/required_machine = /obj/machinery/processor
 
+/* honk start -- Contains "faggot"
 /datum/food_processor_process/meat
 	input = /obj/item/reagent_containers/food/snacks/meat/slab
-	output = /obj/item/reagent_containers/food/snacks/meatball
+	output = /obj/item/reagent_containers/food/snacks/faggot
+honk end */
 
 /datum/food_processor_process/bacon
 	input = /obj/item/reagent_containers/food/snacks/meat/rawcutlet

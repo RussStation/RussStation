@@ -129,15 +129,17 @@ datum/crafting_recipe/food/donut/meat
 
 ////////////////////////////////////////////////DONKPOCCKETS////////////////////////////////////////////////
 
+/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/donkpocket
 	time = 15
 	name = "Donkpocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 1
+		/obj/item/reagent_containers/food/snacks/faggot = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket
 	subcategory = CAT_PASTRY
+honk end */
 
 /datum/crafting_recipe/food/dankpocket
 	time = 15
@@ -205,16 +207,18 @@ datum/crafting_recipe/food/donut/meat
 	result = /obj/item/reagent_containers/food/snacks/hotdog
 	subcategory = CAT_PASTRY
 
+/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/meatbun
 	name = "Meat bun"
 	reqs = list(
 		/datum/reagent/consumable/soysauce = 5,
 		/obj/item/reagent_containers/food/snacks/bun = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 1,
+		/obj/item/reagent_containers/food/snacks/faggot = 1,
 		/obj/item/reagent_containers/food/snacks/grown/cabbage = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/meatbun
 	subcategory = CAT_PASTRY
+honk end */
 
 /datum/crafting_recipe/food/khachapuri
 	name = "Khachapuri"
