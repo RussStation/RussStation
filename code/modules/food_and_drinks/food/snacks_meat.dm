@@ -101,14 +101,16 @@
 	tastes = list("meat" = 1, "salmon" = 1)
 	foodtype = MEAT | ALCOHOL
 
-/obj/item/reagent_containers/food/snacks/meatball
-	name = "meatball"
+/* honk start -- Contains faggot
+/obj/item/reagent_containers/food/snacks/faggot
+	name = "faggot"
 	desc = "A great meal all round."
-	icon_state = "meatball"
+	icon_state = "faggot"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 1)
 	filling_color = "#800000"
 	tastes = list("meat" = 1)
 	foodtype = MEAT
+honk end */
 
 /obj/item/reagent_containers/food/snacks/sausage
 	name = "sausage"
