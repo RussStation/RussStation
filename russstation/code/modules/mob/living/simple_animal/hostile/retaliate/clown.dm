@@ -43,4 +43,3 @@
 	turns_per_move = 1
 
 	del_on_death = TRUE
-	loot = list(/obj/item/clothing/mask/gas/clown_hat, /obj/item/clothing/shoes/clown_shoes, /obj/item/reagent_containers/food/snacks/grown/russ/citrus/white)
