@@ -1,5 +1,3 @@
-//start - reasons: fsASDASDASFAS FASF ASF GHWRHSHFSHFD HDF
-
 /mob/living/simple_animal/hostile/retaliate/clown/russ
 	icon = 'russstation/icons/mob/clown_mobs.dmi'
 
@@ -45,34 +43,3 @@
 	turns_per_move = 1
 
 	del_on_death = TRUE
-	loot = list(/obj/item/clothing/mask/gas/clown_hat, /obj/item/clothing/shoes/clown_shoes, /obj/item/reagent_containers/food/snacks/grown/russ/citrus/white)
-
-//Clown Mouse
-/mob/living/simple_animal/hostile/retaliate/clown/russ/mouse
-	name = "Clouse"
-	desc = "Who in their right mind would train a mouse to be a clown?"
-	icon_state = "clown_mouse"
-	icon_living = "clown_mouse"
-	icon_dead = "clown_mouse_dead"
-	response_help = "pats"
-	response_disarm = "abuses"
-	response_harm = "abuses"
-	turns_per_move = 1
-	speak = list("Honk")
-	emote_see = list("honks it's tiny nose", "starts making cable ties", "puts something in it's backpack", "pulls out a tiny horn from it's backpack")
-	health = 15
-	harm_intent_damage = 0.5
-	melee_damage_lower = 0.5
-	melee_damage_upper = 0.5
-	speed = -5
-	del_on_death = FALSE
-	loot = list(/obj/item/soap, /obj/item/grown/bananapeel)
-
-//end
-
-//Jimmithy
-/mob/living/simple_animal/hostile/retaliate/clown/russ/mouse/Jimmithy
-	name = "Jimmithy"
-	real_name = "Jimmithy"
-
-//end
