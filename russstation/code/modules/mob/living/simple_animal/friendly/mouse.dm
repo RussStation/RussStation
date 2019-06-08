@@ -15,6 +15,7 @@
 	speak = list("Honk")
 	emote_see = list("honks it's tiny nose", "starts making cable ties", "puts something in it's backpack", "pulls out a tiny horn from it's backpack")
 	health = 15 // triple mouse health
+	maxHealth = 15
 	del_on_death = FALSE
 	loot = list(/obj/item/soap, /obj/item/grown/bananapeel)
 
