@@ -135,14 +135,16 @@
 	result = /obj/item/reagent_containers/food/snacks/stewedsoymeat
 	subcategory = CAT_MEAT
 
+/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/sausage
 	name = "Sausage"
 	reqs = list(
-		/obj/item/reagent_containers/food/snacks/meatball = 1,
+		/obj/item/reagent_containers/food/snacks/faggot = 1,
 		/obj/item/reagent_containers/food/snacks/meat/cutlet = 2
 	)
 	result = /obj/item/reagent_containers/food/snacks/sausage
 	subcategory = CAT_MEAT
+honk end */
 
 /datum/crafting_recipe/food/nugget
 	name = "Chicken nugget"
@@ -152,15 +154,17 @@
 	result = /obj/item/reagent_containers/food/snacks/nugget
 	subcategory = CAT_MEAT
 
+/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/rawkhinkali
 	name = "Raw Khinkali"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/doughslice = 1,
 		/obj/item/reagent_containers/food/snacks/grown/garlic = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 1
+		/obj/item/reagent_containers/food/snacks/faggot = 1
 	)
 	result =  /obj/item/reagent_containers/food/snacks/rawkhinkali
 	subcategory = CAT_MEAT
+honk end */
 
 /datum/crafting_recipe/food/pigblanket
 	name = "Pig in a Blanket"
