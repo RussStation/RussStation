@@ -5,10 +5,10 @@
 /mob/key_down(datum/keyinfo/I, client/user)
 	switch(I.action)
 		if(ACTION_SAY)
-			get_say()
+			say_wrapper()
 			return
 		if(ACTION_ME)
-			me_verb()
+			me_wrapper()
 			return
 		if(ACTION_STOPPULLING)
 			if(!pulling)
