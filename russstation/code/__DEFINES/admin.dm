@@ -1,0 +1,2 @@
+#define ADMIN_PUNISHMENT_SHAMEBRERO "Shamebrero"
+#define ADMIN_PUNISHMENT_PONCHOSHAME "Poncho of Shame"

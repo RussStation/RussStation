@@ -23,7 +23,7 @@
 	var/last_turn = 0
 	var/move_delay = 0
 	var/area			= null
-
+	var/typing = FALSE //honk --Needed for typing indicator
 		///////////////
 		//SOUND STUFF//
 		///////////////
