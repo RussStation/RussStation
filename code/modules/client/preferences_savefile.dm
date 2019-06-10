@@ -56,7 +56,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		var/job_civilian_high = 0
 		var/job_civilian_med = 0
 		var/job_civilian_low = 0
-		
+
 		var/job_medsci_high = 0
 		var/job_medsci_med = 0
 		var/job_medsci_low = 0
@@ -191,6 +191,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 
+	load_keybindings(S) // honk --Custom keybindings
+
 	return TRUE
 
 /datum/preferences/proc/save_preferences()
@@ -236,6 +238,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["tip_delay"], tip_delay)
 	WRITE_FILE(S["pda_style"], pda_style)
 	WRITE_FILE(S["pda_color"], pda_color)
+
+	save_keybindings(S) // honk --Custom keybindings
 
 	return TRUE
 
