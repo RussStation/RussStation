@@ -13842,7 +13842,7 @@
 /obj/machinery/status_display/evac{
 	pixel_y = 32
 	},
-/obj/item/bedsheet/clown,
+/obj/item/bedsheet/random,
 /turf/open/floor/plasteel/grimy,
 /area/hallway/secondary/service)
 "aDG" = (
@@ -16990,7 +16990,7 @@
 /obj/machinery/status_display/evac{
 	pixel_y = 32
 	},
-/obj/item/bedsheet/mime,
+/obj/item/bedsheet/random,
 /turf/open/floor/wood,
 /area/hallway/secondary/service)
 "aIQ" = (
@@ -20207,7 +20207,6 @@
 	},
 /area/crew_quarters/abandoned_gambling_den/secondary)
 "aOv" = (
-/obj/structure/dresser,
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
@@ -20224,6 +20223,7 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/structure/statue/bananium/clown,
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aOw" = (
@@ -20245,11 +20245,15 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/machinery/camera{
+	c_tag = "Clown's Office";
+	dir = 2;
+	name = "service camera"
+	},
 /mob/living/simple_animal/mouse/russ/clouse/jimmithy,
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aOx" = (
-/obj/machinery/vending/autodrobe,
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
@@ -20272,13 +20276,19 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/structure/table/wood,
+/obj/item/storage/crayons,
+/obj/item/flashlight/lamp/bananalamp{
+	pixel_y = 5
+	},
+/obj/item/clipboard,
+/obj/item/toy/figure/clown,
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aOy" = (
 /obj/structure/sign/poster/contraband/random{
 	pixel_y = 32
 	},
-/obj/structure/closet/crate/wooden/toy,
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
@@ -20289,23 +20299,14 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/structure/bed,
+/obj/item/bedsheet/clown,
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aOz" = (
-/obj/structure/table/wood,
-/obj/structure/extinguisher_cabinet{
-	pixel_x = 26
-	},
-/obj/item/storage/crayons,
-/obj/item/storage/crayons,
-/obj/item/flashlight/lamp/bananalamp{
-	pixel_y = 5
-	},
 /obj/item/radio/intercom{
 	pixel_y = 26
 	},
-/obj/item/toy/figure/clown,
-/obj/item/clipboard,
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
@@ -21319,6 +21320,7 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/structure/closet/crate/wooden/toy,
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aQf" = (
@@ -21333,6 +21335,7 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/structure/chair/stool,
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aQg" = (
@@ -22291,7 +22294,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock{
-	name = "Theatre Backstage";
+	name = "Clown's Office";
 	req_access_txt = "46"
 	},
 /obj/effect/turf_decal/stripes/line{
@@ -22319,6 +22322,10 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aRP" = (
@@ -22333,6 +22340,19 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/bot,
+/obj/structure/window/reinforced/tinted{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aRQ" = (
@@ -22352,7 +22372,8 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
-/turf/open/floor/plasteel,
+/obj/machinery/vending/autodrobe,
+/turf/open/floor/plasteel/white/side,
 /area/crew_quarters/theatre)
 "aRR" = (
 /obj/structure/cable/yellow{
@@ -22364,13 +22385,12 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/red{
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/plasteel/white/side{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
 "aRS" = (
 /obj/structure/cable/yellow{
@@ -22391,7 +22411,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock{
-	name = "Theatre Backstage";
+	name = "Mime's Office";
 	req_access_txt = "46"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -22436,7 +22456,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock{
-	name = "Theatre Backstage";
+	name = "Clown's Office";
 	req_access_txt = "46"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -23494,21 +23514,32 @@
 	pixel_x = -28
 	},
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden,
-/turf/open/floor/plasteel/cafeteria,
+/obj/structure/window/reinforced/tinted{
+	dir = 1
+	},
+/obj/structure/bed,
+/obj/item/bedsheet/mime,
+/turf/open/floor/plasteel/white/side,
 /area/crew_quarters/theatre)
 "aTw" = (
 /obj/effect/landmark/start/mime,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
-/turf/open/floor/plasteel/cafeteria,
+/obj/structure/window/reinforced/tinted{
+	dir = 1
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/plasteel/white/side{
+	dir = 1
+	},
 /area/crew_quarters/theatre)
 "aTx" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
 /obj/effect/landmark/event_spawn,
-/turf/open/floor/plasteel/cafeteria,
+/turf/open/floor/plasteel/white/side,
 /area/crew_quarters/theatre)
 "aTy" = (
 /obj/machinery/firealarm{
@@ -23526,13 +23557,8 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/obj/machinery/camera{
-	c_tag = "Theatre Backstage";
-	dir = 8;
-	name = "service camera"
-	},
 /obj/effect/turf_decal/bot,
-/turf/open/floor/plasteel,
+/turf/open/floor/plasteel/white/side,
 /area/crew_quarters/theatre)
 "aTz" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -24759,10 +24785,11 @@
 	pixel_y = -3
 	},
 /obj/item/lipstick/random,
-/obj/structure/sign/warning/nosmoking{
-	pixel_y = -32
+/obj/structure/extinguisher_cabinet{
+	dir = 4;
+	pixel_y = -27
 	},
-/turf/open/floor/plasteel/cafeteria,
+/turf/open/floor/plasteel/white/side,
 /area/crew_quarters/theatre)
 "aVi" = (
 /obj/structure/table/wood,
@@ -24773,29 +24800,37 @@
 /obj/structure/sign/poster/contraband/random{
 	pixel_y = -32
 	},
-/turf/open/floor/plasteel/cafeteria,
+/turf/open/floor/plasteel/white/side{
+	dir = 1
+	},
 /area/crew_quarters/theatre)
 "aVj" = (
-/obj/machinery/vending/autodrobe,
 /obj/machinery/airalarm{
 	dir = 1;
 	pixel_y = -22
 	},
 /obj/machinery/light,
-/turf/open/floor/plasteel/cafeteria,
-/area/crew_quarters/theatre)
-"aVk" = (
 /obj/structure/table/wood,
 /obj/item/clipboard,
 /obj/item/toy/figure/mime,
-/turf/open/floor/plasteel/cafeteria,
+/obj/machinery/camera{
+	c_tag = "Mime's Office";
+	dir = 1;
+	name = "service camera"
+	},
+/turf/open/floor/plasteel/white/side,
+/area/crew_quarters/theatre)
+"aVk" = (
+/turf/open/floor/plasteel/white/side{
+	dir = 1
+	},
 /area/crew_quarters/theatre)
 "aVl" = (
 /obj/structure/dresser,
 /obj/structure/sign/poster/contraband/random{
 	pixel_y = -32
 	},
-/turf/open/floor/plasteel/cafeteria,
+/turf/open/floor/plasteel/white/side,
 /area/crew_quarters/theatre)
 "aVm" = (
 /obj/structure/cable/yellow{
@@ -35535,7 +35570,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/camera{
-	c_tag = "Security - Head of Security's Quarters";
+	c_tag = "Clown's Office";
 	dir = 2
 	},
 /turf/open/floor/plasteel/grimy,
@@ -107882,7 +107917,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/mob/living/simple_animal/pet/gondola/russ/camdola,
+/mob/living/simple_animal/pet/cat/Runtime,
 /turf/open/floor/plasteel,
 /area/crew_quarters/heads/cmo)
 "dAc" = (
@@ -126369,6 +126404,21 @@
 /obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/engine,
 /area/science/mixing/chamber)
+"fEP" = (
+/obj/effect/landmark/start/clown,
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/structure/window/reinforced,
+/turf/open/floor/plasteel,
+/area/crew_quarters/theatre)
 "fGq" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/closed/wall,
@@ -126571,6 +126621,15 @@
 	},
 /turf/open/floor/plating,
 /area/quartermaster/storage)
+"hpN" = (
+/obj/effect/landmark/start/mime,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4
+	},
+/turf/open/floor/plasteel/white/side{
+	dir = 1
+	},
+/area/crew_quarters/theatre)
 "hrP" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -126992,6 +127051,13 @@
 	},
 /turf/closed/wall/r_wall,
 /area/crew_quarters/heads/hor)
+"kxK" = (
+/obj/machinery/door/airlock{
+	name = "Clown's Office";
+	req_access_txt = "46"
+	},
+/turf/open/floor/plating,
+/area/crew_quarters/theatre)
 "kyo" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -127025,6 +127091,13 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/mixing)
+"kSL" = (
+/obj/machinery/door/airlock{
+	name = "Mime's Office";
+	req_access_txt = "46"
+	},
+/turf/open/floor/plating,
+/area/crew_quarters/theatre)
 "kZq" = (
 /obj/effect/turf_decal/delivery,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -162162,11 +162235,11 @@ aKp
 aLF
 aMX
 aOy
-aQf
+fEP
 aRR
-aTw
+hpN
 aVk
-aMX
+kSL
 asM
 bav
 bbY
@@ -162675,7 +162748,7 @@ ehG
 ehH
 ehI
 aMX
-aMX
+kxK
 aQi
 aRT
 aTz
