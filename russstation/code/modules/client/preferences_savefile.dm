@@ -1,7 +1,7 @@
 /datum/preferences/proc/load_keybindings(var/savefile/S)
 	var/list/keybindings
 	S["keybindings"] >> keybindings
-	if(!islist(keybindings) || !keybindings.len)
+	if(!islist(keybindings) || !keybindings.len || keybindings.len != GLOB.keybinding_default.len)
 		keybindings = GLOB.keybinding_default
 
 	bindings.from_list(keybindings)
