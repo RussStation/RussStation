@@ -35,6 +35,7 @@ GLOBAL_VAR(restart_counter)
 		world.log = file("[GLOB.log_directory]/dd.log") //not all runtimes trigger world/Error, so this is the only way to ensure we can see all of them.
 #endif
 
+	russ_initialize() // honk -- loads sprite accessories for now see hippie station for other uses.
 	LoadVerbs(/datum/verbs/menu)
 	if(CONFIG_GET(flag/usewhitelist))
 		load_whitelist()

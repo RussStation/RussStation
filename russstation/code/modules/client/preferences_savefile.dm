@@ -8,3 +8,13 @@
 
 /datum/preferences/proc/save_keybindings(var/savefile/S)
 	WRITE_FILE(S["keybindings"], bindings.to_list())
+
+/datum/preferences/proc/russ_character_pref_load(savefile/S)
+	//diona
+	S["feature_diona_hair"] >> features["diona_hair"]
+	features["diona_hair"] 	= sanitize_inlist(features["diona_hair"], GLOB.diona_hair_list)
+
+/datum/preferences/proc/russ_character_pref_save(savefile/S)
+	//diona
+	S["feature_diona_hair"] << features["diona_hair"]
+

@@ -389,6 +389,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["moth_wings"] 	= sanitize_inlist(features["moth_wings"], GLOB.moth_wings_list, "Plain")
 
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
+	russ_character_pref_load(S) // honk -- loads character customization preferences
+
 	//Validate job prefs
 	for(var/j in job_preferences)
 		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
@@ -452,6 +454,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Jobs
 	WRITE_FILE(S["joblessrole"]		, joblessrole)
+	russ_character_pref_save(S) // honk -- saves character customization preferences
 	//Write prefs
 	WRITE_FILE(S["job_preferences"] , job_preferences)
 

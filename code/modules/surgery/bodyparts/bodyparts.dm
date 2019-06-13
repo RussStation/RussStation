@@ -406,6 +406,14 @@
 				limb.icon_state = "[species_id]_[body_zone]_[icon_gender]"
 			else
 				limb.icon_state = "[species_id]_[body_zone]"
+		// honk start -- Russ Station races (eg. dionae)
+		if(should_draw_russ)
+			limb.icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+			if(should_draw_gender)
+				limb.icon_state = "[species_id]_[body_zone]_[icon_gender]"
+			else
+				limb.icon_state = "[species_id]_[body_zone]"
+		// honk end
 		if(aux_zone)
 			aux = image(limb.icon, "[species_id]_[aux_zone]", -aux_layer, image_dir)
 			. += aux

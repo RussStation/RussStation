@@ -1073,3 +1073,8 @@
 
 /mob/living/carbon/human/species/zombie/krokodil_addict
 	race = /datum/species/krokodil_addict
+
+// honk start -- adds diona
+/mob/living/carbon/human/species/diona
+	race = /datum/species/diona
+// honk end
