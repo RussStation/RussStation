@@ -26,6 +26,6 @@
 	real_name = "Jimmithy"
 	gold_core_spawnable = NO_SPAWN
 
-/obj/item/reagent_containers/food/snacks/deadmouse
+/obj/item/reagent_containers/food/snacks/deadmouse/russ/deadclouse
 	icon = 'russstation/icons/mob/animal.dmi'
 	grind_results = list(/datum/reagent/consumable/laughter = 20, /datum/reagent/liquidgibs = 5)
