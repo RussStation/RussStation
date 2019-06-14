@@ -417,6 +417,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "</td>"
 					mutant_category = 0
 
+			dat = add_russ_choices(dat)
 			if(CONFIG_GET(flag/join_with_mutant_humans))
 
 				if("wings" in pref_species.default_features && GLOB.r_wings_list.len >1)
@@ -1542,7 +1543,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("reset_bindings")
 					reset_keybindings()
 				// honk end
-
+	process_russ_link(user, href_list) //honk -- checks for russ station links and handles those
 	ShowChoices(user)
 	return 1
 
