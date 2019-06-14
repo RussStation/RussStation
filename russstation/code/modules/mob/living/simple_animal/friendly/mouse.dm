@@ -21,11 +21,25 @@
 	. = ..()
 	AddComponent(/datum/component/squeak/bikehorn, 50)
 
+//This is needed for dropping a corpse with proper states and also dropping lootis if there's any
+/mob/living/simple_animal/mouse/russ/clouse/death(gibbed,toast)
+	if(!gibbed)
+		var/obj/item/reagent_containers/food/snacks/deadmouse/russ/deadclouse/M = new(loc)
+		M.icon_state = icon_dead					
+		if(toast) //had to copy it since we're bypassing the default mouse death proc
+			M.add_atom_colour("#3A3A3A", FIXED_COLOUR_PRIORITY)
+			M.desc = "It's toast."
+	qdel(src)
+	..(1)
+
 /mob/living/simple_animal/mouse/russ/clouse/jimmithy
 	name = "Jimmithy"
 	real_name = "Jimmithy"
 	gold_core_spawnable = NO_SPAWN
 
-/obj/item/reagent_containers/food/snacks/deadmouse
+// Drops
+
+/obj/item/reagent_containers/food/snacks/deadmouse/russ/deadclouse
 	icon = 'russstation/icons/mob/animal.dmi'
+	name = "dead clouse"
 	grind_results = list(/datum/reagent/consumable/laughter = 20, /datum/reagent/liquidgibs = 5)
