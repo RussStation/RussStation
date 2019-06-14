@@ -1543,7 +1543,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("reset_bindings")
 					reset_keybindings()
 				// honk end
-	process_russ_link(user, href_list) //honk -- for loadout preferences such as species accessories
+	process_russ_link(user, href_list) //honk -- checks for russ station links and handles those
 	ShowChoices(user)
 	return 1
 

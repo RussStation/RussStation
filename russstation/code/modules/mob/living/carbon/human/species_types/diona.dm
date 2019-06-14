@@ -3,17 +3,14 @@
 	name = "Diona"
 	id = "diona"
 	sexes = 0
-	//default_color = "59CE00"
 	species_traits = list(NOBLOOD,NOEYESPRITES, NO_UNDERWEAR)
 	inherent_traits = list(TRAIT_NOBREATH,TRAIT_RESISTCOLD,TRAIT_RESISTLOWPRESSURE)
 	mutant_bodyparts = list("diona_hair")
 	default_features = list("diona_hair" = "diona_bracket")
-	attack_verb = "slash"
-	attack_sound = 'sound/weapons/slice.ogg'
-	miss_sound = 'sound/weapons/slashmiss.ogg'
-	burnmod = 1.5
-	heatmod = 2
-	speedmod = 5
+	damage_overlay_type = "" //diona don't have blood
+	burnmod = 1.5     //take more damage from lasers
+	heatmod = 2       //take more damage from fire
+	speedmod = 5      //very slow
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/plant
 	disliked_food = MEAT | DAIRY
 	liked_food = VEGETABLES | FRUIT | GRAIN
@@ -30,12 +27,14 @@
 
 	return randname
 
-/datum/species/diona/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+/datum/species/diona/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
+	C.draw_russ_parts()  //changes icons to be fetched from russstation/icons/mob/mutant_bodyparts.dmi
 	. = ..()
 	C.faction |= "plants"
 	C.faction |= "vines"
 
-/datum/species/diona/on_species_loss(mob/living/carbon/C)
+/datum/species/diona/on_species_loss(mob/living/carbon/C, datum/species/old_species, pref_load)
+	C.draw_russ_parts(TRUE)  //icon path is reset to default
 	. = ..()
 	C.faction -= "plants"
 	C.faction -= "vines"
@@ -85,11 +84,3 @@
 				H.show_message("<span class='userdanger'>The radiation beam singes you!</span>")
 		if(/obj/item/projectile/energy/florayield)
 			H.set_nutrition(min(H.nutrition+30, NUTRITION_LEVEL_FULL))
-
-/datum/species/diona/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
-	C.draw_russ_parts()
-	. = ..()
-
-/datum/species/diona/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
-	C.draw_russ_parts(TRUE)
-	. = ..()

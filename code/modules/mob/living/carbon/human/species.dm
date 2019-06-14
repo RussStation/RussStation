@@ -656,7 +656,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 					S = GLOB.moth_wings_list[H.dna.features["moth_wings"]]
 				if("caps")
 					S = GLOB.caps_list[H.dna.features["caps"]]
-				else // honk start -- our species mutant bodyparts such as dionae's hair
+				else // honk start -- our species mutant bodyparts such as diona hair
 					S = russ_mutant_bodyparts(bodypart, H) // honk end
 
 			if(!S || S.icon_state == "none")
