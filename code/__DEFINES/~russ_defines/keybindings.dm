@@ -114,6 +114,8 @@ GLOBAL_LIST_INIT(keybinding_validkeys, list(
 
 #define ACTION_RESIST "Resist"
 
+#define ACTION_WALK "Walk"
+#define ACTION_TOGGLEWALK "Toggle Run/Walk"
 #define ACTION_TOGGLETHROW "Toggle Throw"
 #define ACTION_INTENTHELP "Intent Help"
 #define ACTION_INTENTDISARM "Intent Disarm"
@@ -146,6 +148,8 @@ GLOBAL_LIST_INIT(keybinding_default, list(
 	ACTION_SAY = "T",
 	ACTION_ME = "M",
 
+	ACTION_WALK = "Alt", //TODO: add modifier key list, leaving this one without keybinding until then.
+	ACTION_TOGGLEWALK = "Unbound",
 	ACTION_STOPPULLING = "Delete",
 	ACTION_INTENTRIGHT = "G",
 	ACTION_INTENTLEFT = "H",

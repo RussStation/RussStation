@@ -21,6 +21,12 @@
 			return
 		if(ACTION_INTENTLEFT)
 			a_intent_change(INTENT_HOTKEY_LEFT)
+			return			
+		if(ACTION_TOGGLEWALK)
+			toggle_move_intent()
+			return			
+		if(ACTION_WALK)
+			toggle_move_intent()
 			return
 		if(ACTION_SWAPHAND)
 			swap_hand()
@@ -85,3 +91,10 @@
 				return
 
 	return ..()
+
+/mob/key_up(datum/keyinfo/I, client/user)
+	switch(I.action)
+		if(ACTION_WALK)
+			toggle_move_intent()
+			return
+	. = ..()
