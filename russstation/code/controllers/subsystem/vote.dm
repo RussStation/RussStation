@@ -1,50 +1,4 @@
-SUBSYSTEM_DEF(vote)
-	name = "Vote"
-	wait = 10
-
-	flags = SS_KEEP_TIMING|SS_NO_INIT
-
-	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
-
-	var/initiator = null
-	var/started_time = null
-	var/time_remaining = 0
-	var/mode = null
-	var/question = null
-	var/list/choices = list()
-	var/list/voted = list()
-	var/list/voting = list()
-	var/list/generated_actions = list()
-
-/datum/controller/subsystem/vote/fire()	//called by master_controller
-	if(mode)
-		time_remaining = round((started_time + CONFIG_GET(number/vote_period) - world.time)/10)
-
-		if(time_remaining < 0)
-			result()
-			for(var/client/C in voting)
-				C << browse(null, "window=vote;can_close=0")
-			reset()
-		else
-			var/datum/browser/client_popup
-			for(var/client/C in voting)
-				client_popup = new(C, "vote", "Voting Panel")
-				client_popup.set_window_options("can_close=0")
-				client_popup.set_content(interface(C))
-				client_popup.open(FALSE)
-
-
-/datum/controller/subsystem/vote/proc/reset()
-	initiator = null
-	time_remaining = 0
-	mode = null
-	question = null
-	choices.Cut()
-	voted.Cut()
-	voting.Cut()
-	remove_action_buttons()
-
-/* honk start -- redefined in the russ station folder for automatic crew transfer votes
+//copies of the default tg vote procs with minor changes for adding russ station votes
 /datum/controller/subsystem/vote/proc/get_result()
 	//get the highest number of votes
 	var/greatest_votes = 0
@@ -67,11 +21,16 @@ SUBSYSTEM_DEF(vote)
 				choices["Continue Playing"] += non_voters.len
 				if(choices["Continue Playing"] >= greatest_votes)
 					greatest_votes = choices["Continue Playing"]
+			if(mode == "crew transfer") //russ station vote
+				choices["Continue The Round"] += non_voters.len
+				if(choices["Continue The Round"] >= greatest_votes)
+					greatest_votes = choices["Continue The Round"]
 			else if(mode == "gamemode")
 				if(GLOB.master_mode in choices)
 					choices[GLOB.master_mode] += non_voters.len
 					if(choices[GLOB.master_mode] >= greatest_votes)
 						greatest_votes = choices[GLOB.master_mode]
+			
 	//get all options with that many votes and return them in a list
 	. = list()
 	if(greatest_votes)
@@ -79,80 +38,8 @@ SUBSYSTEM_DEF(vote)
 			if(choices[option] == greatest_votes)
 				. += option
 	return .
-honk end */
 
-/datum/controller/subsystem/vote/proc/announce_result()
-	var/list/winners = get_result()
-	var/text
-	if(winners.len > 0)
-		if(question)
-			text += "<b>[question]</b>"
-		else
-			text += "<b>[capitalize(mode)] Vote</b>"
-		for(var/i=1,i<=choices.len,i++)
-			var/votes = choices[choices[i]]
-			if(!votes)
-				votes = 0
-			text += "\n<b>[choices[i]]:</b> [votes]"
-		if(mode != "custom")
-			if(winners.len > 1)
-				text = "\n<b>Vote Tied Between:</b>"
-				for(var/option in winners)
-					text += "\n\t[option]"
-			. = pick(winners)
-			text += "\n<b>Vote Result: [.]</b>"
-		else
-			text += "\n<b>Did not vote:</b> [GLOB.clients.len-voted.len]"
-	else
-		text += "<b>Vote Result: Inconclusive - No Votes!</b>"
-	log_vote(text)
-	remove_action_buttons()
-	to_chat(world, "\n<font color='purple'>[text]</font>")
-	return .
 
-/* honk start -- redefined in the russ station folder for automatic crew transfer votes
-/datum/controller/subsystem/vote/proc/result()
-	. = announce_result()
-	var/restart = 0
-	if(.)
-		switch(mode)
-			if("restart")
-				if(. == "Restart Round")
-					restart = 1
-			if("gamemode")
-				if(GLOB.master_mode != .)
-					SSticker.save_mode(.)
-					if(SSticker.HasRoundStarted())
-						restart = 1
-					else
-						GLOB.master_mode = .
-	if(restart)
-		var/active_admins = 0
-		for(var/client/C in GLOB.admins)
-			if(!C.is_afk() && check_rights_for(C, R_SERVER))
-				active_admins = 1
-				break
-		if(!active_admins)
-			SSticker.Reboot("Restart vote successful.", "restart vote")
-		else
-			to_chat(world, "<span style='boldannounce'>Notice:Restart vote will not restart the server automatically because there are active admins on.</span>")
-			message_admins("A restart vote has passed, but there are active admins on with +server, so it has been canceled. If you wish, you may restart the server.")
-
-	return .
-honk end */
-
-/datum/controller/subsystem/vote/proc/submit_vote(vote)
-	if(mode)
-		if(CONFIG_GET(flag/no_dead_vote) && usr.stat == DEAD && !usr.client.holder)
-			return 0
-		if(!(usr.ckey in voted))
-			if(vote && 1<=vote && vote<=choices.len)
-				voted += usr.ckey
-				choices[choices[vote]]++	//check this
-				return vote
-	return 0
-
-/* honk start -- redefined in the russ station folder for automatic crew transfer votes
 /datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key)
 	if(!mode)
 		if(started_time)
@@ -166,7 +53,7 @@ honk end */
 			if(GLOB.admin_datums[ckey])
 				admin = TRUE
 
-			if(next_allowed_time > world.time && !admin)
+			if(next_allowed_time > world.time && !admin && vote_type != "crew transfer")
 				to_chat(usr, "<span class='warning'>A vote was initiated recently, you must wait [DisplayTimeText(next_allowed_time-world.time)] before a new vote can be started!</span>")
 				return 0
 
@@ -176,6 +63,8 @@ honk end */
 				choices.Add("Restart Round","Continue Playing")
 			if("gamemode")
 				choices.Add(config.votable_modes)
+			if("crew transfer") //russ station vote
+				choices.Add("Initiate Crew Transfer","Continue The Round")
 			if("custom")
 				question = stripped_input(usr,"What is the vote for?")
 				if(!question)
@@ -185,6 +74,10 @@ honk end */
 					if(!option || mode || !usr.client)
 						break
 					choices.Add(option)
+			if("crew transfer")
+				choices.Add("Initiate Crew Transfer","Continue The Round")
+			else
+				return 0
 		mode = vote_type
 		initiator = initiator_key
 		started_time = world.time
@@ -242,6 +135,10 @@ honk end */
 		if(trialmin)
 			. += "\t(<a href='?src=[REF(src)];vote=toggle_restart'>[avr ? "Allowed" : "Disallowed"]</a>)"
 		. += "</li><li>"
+		//callshuttle
+		if(trialmin)	//BEST ANTIVIRUS GET IT TODAY!!
+			. += "<a href='?src=[REF(src)];vote=crew transfer'>Crew Transfer</a>"
+		. += "</li><li>"
 		//gamemode
 		var/avm = CONFIG_GET(flag/allow_vote_mode)
 		if(trialmin || avm)
@@ -280,6 +177,13 @@ honk end */
 		if("restart")
 			if(CONFIG_GET(flag/allow_vote_restart) || usr.client.holder)
 				initiate_vote("restart",usr.key)
+		if("crew transfer")
+			if(CONFIG_GET(flag/transfer_vote) || usr.client.holder)
+				var/srd = CONFIG_GET(number/shuttle_refuel_delay)
+				if(srd < world.time)
+					initiate_vote("crew transfer",usr.key)
+				else
+					to_chat(usr, "<span style='boldannounce'>Shuttle call can only initiate after [DisplayTimeText(srd - (world.time - SSticker.round_start_time))].</span>")
 		if("gamemode")
 			if(CONFIG_GET(flag/allow_vote_mode) || usr.client.holder)
 				initiate_vote("gamemode",usr.key)
@@ -289,44 +193,51 @@ honk end */
 		else
 			submit_vote(round(text2num(href_list["vote"])))
 	usr.vote()
-honk end */
 
-/datum/controller/subsystem/vote/proc/remove_action_buttons()
-	for(var/v in generated_actions)
-		var/datum/action/vote/V = v
-		if(!QDELETED(V))
-			V.remove_from_client()
-			V.Remove(V.owner)
-	generated_actions = list()
+/datum/controller/subsystem/vote/proc/result()
+	. = announce_result()
+	var/restart = 0
+	var/crewtransfer = 0
+	if(.)
+		switch(mode)
+			if("restart")
+				if(. == "Restart Round")
+					restart = 1
+			if("gamemode")
+				if(GLOB.master_mode != .)
+					SSticker.save_mode(.)
+					if(SSticker.HasRoundStarted())
+						restart = 1
+					else
+						GLOB.master_mode = .
+			if("crew transfer")
+				if(. == "Initiate Crew Transfer")
+					crewtransfer = 1
+	if(restart)
+		var/active_admins = 0
+		for(var/client/C in GLOB.admins)
+			if(!C.is_afk() && check_rights_for(C, R_SERVER))
+				active_admins = 1
+				break
+		if(!active_admins)
+			SSticker.Reboot("Restart vote successful.", "restart vote")
+		else
+			to_chat(world, "<span style='boldannounce'>Notice:Restart vote will not restart the server automatically because there are active admins on.</span>")
+			message_admins("A restart vote has passed, but there are active admins on with +server, so it has been canceled. If you wish, you may restart the server.")
+	if(crewtransfer)
+		var/shuttle_timer = SSshuttle.emergency.timeLeft()
+		if(shuttle_timer >= 6000 || (SSshuttle.emergency.mode != SHUTTLE_CALL && SSshuttle.emergency.mode != SHUTTLE_DOCKED && SSshuttle.emergency.mode != SHUTTLE_ESCAPE))
+			SSshuttle.block_recall(6000)
+			if(SSshuttle.emergency.mode == SHUTTLE_CALL && shuttle_timer >= 6000)	//Apparently doing the emergency request twice cancels the call so these check are just in case
+				SSshuttle.emergency.setTimer(6000)
+				priority_announce("The emergency shuttle will arrive in [SSshuttle.emergency.timeLeft()/60] minutes.")
+			else if (SSshuttle.emergency.mode != SHUTTLE_CALL)
+				SSshuttle.emergency.request()
+				SSshuttle.emergency.setTimer(6000)
+				priority_announce("The emergency shuttle will arrive in [SSshuttle.emergency.timeLeft()/60] minutes.")
 
-/mob/verb/vote()
-	set category = "OOC"
-	set name = "Vote"
+			message_admins("The emergency shuttle has been force-called due to a successful crew transfer vote.")
+		else
+			to_chat(world, "<span style='boldannounce'>Notice: The crew transfer vote has failed because the shuttle has already been called.</span>")
 
-	var/datum/browser/popup = new(src, "vote", "Voting Panel")
-	popup.set_window_options("can_close=0")
-	popup.set_content(SSvote.interface(client))
-	popup.open(FALSE)
-
-/datum/action/vote
-	name = "Vote!"
-	button_icon_state = "vote"
-
-/datum/action/vote/Trigger()
-	if(owner)
-		owner.vote()
-		remove_from_client()
-		Remove(owner)
-
-/datum/action/vote/IsAvailable()
-	return 1
-
-/datum/action/vote/proc/remove_from_client()
-	if(!owner)
-		return
-	if(owner.client)
-		owner.client.player_details.player_actions -= src
-	else if(owner.ckey)
-		var/datum/player_details/P = GLOB.player_details[owner.ckey]
-		if(P)
-			P.player_actions -= src
+	return .

@@ -298,6 +298,11 @@ SUBSYSTEM_DEF(ticker)
 			var/datum/holiday/holiday = SSevents.holidays[holidayname]
 			to_chat(world, "<h4>[holiday.greet()]</h4>")
 
+	//honk start -- starts the automatic crew transfer vote timer
+	if(CONFIG_GET(flag/transfer_vote))
+		votetimer()
+	//honk end
+
 	PostSetup()
 
 	return TRUE
