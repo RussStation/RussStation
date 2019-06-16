@@ -44,7 +44,6 @@ SUBSYSTEM_DEF(vote)
 	voting.Cut()
 	remove_action_buttons()
 
-/* honk start -- redefined in the russ station folder for automatic crew transfer votes
 /datum/controller/subsystem/vote/proc/get_result()
 	//get the highest number of votes
 	var/greatest_votes = 0
@@ -67,6 +66,10 @@ SUBSYSTEM_DEF(vote)
 				choices["Continue Playing"] += non_voters.len
 				if(choices["Continue Playing"] >= greatest_votes)
 					greatest_votes = choices["Continue Playing"]
+			if(mode == "crew transfer") //honk start -- counts people who didn't vote as a "no" if enabled in configs
+				choices["Continue The Round"] += non_voters.len
+				if(choices["Continue The Round"] >= greatest_votes)
+					greatest_votes = choices["Continue The Round"] //honk end
 			else if(mode == "gamemode")
 				if(GLOB.master_mode in choices)
 					choices[GLOB.master_mode] += non_voters.len
@@ -79,7 +82,6 @@ SUBSYSTEM_DEF(vote)
 			if(choices[option] == greatest_votes)
 				. += option
 	return .
-honk end */
 
 /datum/controller/subsystem/vote/proc/announce_result()
 	var/list/winners = get_result()
@@ -110,7 +112,6 @@ honk end */
 	to_chat(world, "\n<font color='purple'>[text]</font>")
 	return .
 
-/* honk start -- redefined in the russ station folder for automatic crew transfer votes
 /datum/controller/subsystem/vote/proc/result()
 	. = announce_result()
 	var/restart = 0
@@ -126,6 +127,9 @@ honk end */
 						restart = 1
 					else
 						GLOB.master_mode = .
+			if("crew transfer") //honk start -- for checking if the vote was successful and then initiating the resulting actions
+				if(. == "Initiate Crew Transfer")
+					shuttlecall() //honk end
 	if(restart)
 		var/active_admins = 0
 		for(var/client/C in GLOB.admins)
@@ -139,7 +143,6 @@ honk end */
 			message_admins("A restart vote has passed, but there are active admins on with +server, so it has been canceled. If you wish, you may restart the server.")
 
 	return .
-honk end */
 
 /datum/controller/subsystem/vote/proc/submit_vote(vote)
 	if(mode)
@@ -152,7 +155,6 @@ honk end */
 				return vote
 	return 0
 
-/* honk start -- redefined in the russ station folder for automatic crew transfer votes
 /datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key)
 	if(!mode)
 		if(started_time)
@@ -176,6 +178,8 @@ honk end */
 				choices.Add("Restart Round","Continue Playing")
 			if("gamemode")
 				choices.Add(config.votable_modes)
+			if("crew transfer") //honk start -- adds the options for a crew transfer vote
+				choices.Add("Initiate Crew Transfer","Continue The Round") //honk end
 			if("custom")
 				question = stripped_input(usr,"What is the vote for?")
 				if(!question)
@@ -242,6 +246,12 @@ honk end */
 		if(trialmin)
 			. += "\t(<a href='?src=[REF(src)];vote=toggle_restart'>[avr ? "Allowed" : "Disallowed"]</a>)"
 		. += "</li><li>"
+		//honk start -- adds an admin only button for initiating a crew transfer vote
+		//callshuttle
+		if(trialmin)	//BEST ANTIVIRUS GET IT TODAY!!
+			. += "<a href='?src=[REF(src)];vote=crew transfer'>Crew Transfer</a>"
+		. += "</li><li>"
+		//honk end
 		//gamemode
 		var/avm = CONFIG_GET(flag/allow_vote_mode)
 		if(trialmin || avm)
@@ -280,6 +290,8 @@ honk end */
 		if("restart")
 			if(CONFIG_GET(flag/allow_vote_restart) || usr.client.holder)
 				initiate_vote("restart",usr.key)
+		if("crew transfer") //honk start -- makes the admin button for calling a crew transfer vote work
+			russ_Topic() //honk end
 		if("gamemode")
 			if(CONFIG_GET(flag/allow_vote_mode) || usr.client.holder)
 				initiate_vote("gamemode",usr.key)
@@ -289,7 +301,7 @@ honk end */
 		else
 			submit_vote(round(text2num(href_list["vote"])))
 	usr.vote()
-honk end */
+
 
 /datum/controller/subsystem/vote/proc/remove_action_buttons()
 	for(var/v in generated_actions)
