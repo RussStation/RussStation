@@ -11,7 +11,7 @@ RussStation and /tg/station's respective commit histories are unrelated. Within 
 First run `npm install` to download the required dependencies. Ensure that `mergestrategies.json` is configured to your use case. Open a terminal to the root folder of the station. Call spacemerge from within the root folder using the following format.
 
 ```
-Usage: spacemerge [options]
+Usage: node path/to/spacemerge [options]
 
 Options:
   --verbose           output all responses from git
