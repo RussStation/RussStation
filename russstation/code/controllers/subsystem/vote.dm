@@ -1,9 +1,9 @@
 /datum/controller/subsystem/vote/
 	var/shuttle_refuel_delay = 0
-	var/transfer_vote = 0
+	var/transfer_vote_config = 0
 
 /datum/controller/subsystem/vote/proc/russ_Topic()
-	if(transfer_vote || usr.client.holder)
+	if(transfer_vote_config || usr.client.holder)
 		if(shuttle_refuel_delay < world.time)
 			initiate_vote("crew transfer",usr.key)
 		else
