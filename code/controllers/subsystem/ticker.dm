@@ -137,6 +137,8 @@ SUBSYSTEM_DEF(ticker)
 		gametime_offset = rand(0, 23) HOURS
 	else if(CONFIG_GET(flag/shift_time_realtime))
 		gametime_offset = world.timeofday
+
+	russ_initialize() //honk -- gets config values
 	return ..()
 
 /datum/controller/subsystem/ticker/fire()

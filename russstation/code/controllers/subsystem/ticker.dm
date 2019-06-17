@@ -1,11 +1,14 @@
-var/initialdelay = 0
-var/subsequentdelay = 0
-var/transfervotes = 0
+/datum/controller/subsystem/ticker/
+	var/initial_delay = 54000
+	var/subsequent_delay = 18000
+	var/transfer_votes = 0
+
+/datum/controller/subsystem/ticker/proc/russ_initialize()
+	initial_delay = CONFIG_GET(number/transfer_delay_initial)
+	subsequent_delay = CONFIG_GET(number/transfer_delay_subsequent)
 
 /datum/controller/subsystem/ticker/proc/votetimer()
-	initialdelay = CONFIG_GET(number/transfer_delay_initial)
-	subsequentdelay = CONFIG_GET(number/transfer_delay_subsequent)
-	if(world.time - (initialdelay + (subsequentdelay * transfervotes)) >= 0)
+	if(world.time - (initial_delay + (subsequent_delay * transfer_votes)) >= 0)
 		if(SSshuttle.emergency.timeLeft() >= 6000 || SSshuttle.emergency.mode == SHUTTLE_IDLE || SSshuttle.emergency.mode == SHUTTLE_RECALL)
 			SSvote.initiate_vote("crew transfer","the server")
-			transfervotes ++
+			transfer_votes ++
