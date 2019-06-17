@@ -193,6 +193,10 @@ SUBSYSTEM_DEF(ticker)
 			mode.process(wait * 0.1)
 			check_queue()
 			check_maprotate()
+			//honk start -- starts the automatic crew transfer vote timer
+			if(CONFIG_GET(flag/transfer_vote))
+				votetimer()
+			//honk end 
 
 			if(!roundend_check_paused && mode.check_finished(force_ending) || force_ending)
 				current_state = GAME_STATE_FINISHED
@@ -297,11 +301,6 @@ SUBSYSTEM_DEF(ticker)
 		for(var/holidayname in SSevents.holidays)
 			var/datum/holiday/holiday = SSevents.holidays[holidayname]
 			to_chat(world, "<h4>[holiday.greet()]</h4>")
-
-	//honk start -- starts the automatic crew transfer vote timer
-	if(CONFIG_GET(flag/transfer_vote))
-		votetimer()
-	//honk end
 
 	PostSetup()
 
