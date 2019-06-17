@@ -66,6 +66,12 @@ SUBSYSTEM_DEF(vote)
 				choices["Continue Playing"] += non_voters.len
 				if(choices["Continue Playing"] >= greatest_votes)
 					greatest_votes = choices["Continue Playing"]
+			//honk start -- counts people who didn't vote as a "no" if enabled in configs
+			if(mode == "crew transfer") 
+				choices["Continue The Round"] += non_voters.len
+				if(choices["Continue The Round"] >= greatest_votes)
+					greatest_votes = choices["Continue The Round"]
+			//honk end
 			else if(mode == "gamemode")
 				if(GLOB.master_mode in choices)
 					choices[GLOB.master_mode] += non_voters.len
@@ -123,6 +129,11 @@ SUBSYSTEM_DEF(vote)
 						restart = 1
 					else
 						GLOB.master_mode = .
+			//honk start -- for checking if the vote was successful and then initiating the resulting actions
+			if("crew transfer")
+				if(. == "Initiate Crew Transfer")
+					shuttlecall()
+			//honk end
 	if(restart)
 		var/active_admins = 0
 		for(var/client/C in GLOB.admins)
@@ -171,6 +182,10 @@ SUBSYSTEM_DEF(vote)
 				choices.Add("Restart Round","Continue Playing")
 			if("gamemode")
 				choices.Add(config.votable_modes)
+			//honk start -- adds the options for a crew transfer vote
+			if("crew transfer") 
+				choices.Add("Initiate Crew Transfer","Continue The Round")
+			//honk end
 			if("custom")
 				question = stripped_input(usr,"What is the vote for?")
 				if(!question)
@@ -180,8 +195,6 @@ SUBSYSTEM_DEF(vote)
 					if(!option || mode || !usr.client)
 						break
 					choices.Add(option)
-			else
-				return 0
 		mode = vote_type
 		initiator = initiator_key
 		started_time = world.time
@@ -239,6 +252,12 @@ SUBSYSTEM_DEF(vote)
 		if(trialmin)
 			. += "\t(<a href='?src=[REF(src)];vote=toggle_restart'>[avr ? "Allowed" : "Disallowed"]</a>)"
 		. += "</li><li>"
+		//honk start -- adds an admin only button for initiating a crew transfer vote
+		//callshuttle
+		if(trialmin)	//BEST ANTIVIRUS GET IT TODAY!!
+			. += "<a href='?src=[REF(src)];vote=crew transfer'>Crew Transfer</a>"
+		. += "</li><li>"
+		//honk end
 		//gamemode
 		var/avm = CONFIG_GET(flag/allow_vote_mode)
 		if(trialmin || avm)
@@ -277,6 +296,10 @@ SUBSYSTEM_DEF(vote)
 		if("restart")
 			if(CONFIG_GET(flag/allow_vote_restart) || usr.client.holder)
 				initiate_vote("restart",usr.key)
+		//honk start -- makes the admin button for calling a crew transfer vote work
+		if("crew transfer")
+			russ_Topic()
+		//honk end
 		if("gamemode")
 			if(CONFIG_GET(flag/allow_vote_mode) || usr.client.holder)
 				initiate_vote("gamemode",usr.key)
@@ -286,6 +309,7 @@ SUBSYSTEM_DEF(vote)
 		else
 			submit_vote(round(text2num(href_list["vote"])))
 	usr.vote()
+
 
 /datum/controller/subsystem/vote/proc/remove_action_buttons()
 	for(var/v in generated_actions)
