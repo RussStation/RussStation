@@ -137,8 +137,6 @@ SUBSYSTEM_DEF(ticker)
 		gametime_offset = rand(0, 23) HOURS
 	else if(CONFIG_GET(flag/shift_time_realtime))
 		gametime_offset = world.timeofday
-
-	russ_initialize() //honk -- gets config values
 	return ..()
 
 /datum/controller/subsystem/ticker/fire()
@@ -195,10 +193,6 @@ SUBSYSTEM_DEF(ticker)
 			mode.process(wait * 0.1)
 			check_queue()
 			check_maprotate()
-			//honk start -- starts the automatic crew transfer vote timer
-			if(CONFIG_GET(flag/transfer_vote))
-				votetimer()
-			//honk end 
 
 			if(!roundend_check_paused && mode.check_finished(force_ending) || force_ending)
 				current_state = GAME_STATE_FINISHED
