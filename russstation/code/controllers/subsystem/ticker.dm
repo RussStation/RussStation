@@ -6,6 +6,7 @@
 /datum/controller/subsystem/ticker/proc/russ_initialize()
 	initial_delay = CONFIG_GET(number/transfer_delay_initial)
 	subsequent_delay = CONFIG_GET(number/transfer_delay_subsequent)
+	SSvote.shuttle_refuel_delay = CONFIG_GET(number/shuttle_refuel_delay)
 
 /datum/controller/subsystem/ticker/proc/votetimer()
 	if(world.time - (initial_delay + (subsequent_delay * transfer_votes)) >= 0)

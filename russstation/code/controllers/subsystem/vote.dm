@@ -1,10 +1,12 @@
+/datum/controller/subsystem/vote/
+	var/shuttle_refuel_delay = 0
+
 /datum/controller/subsystem/vote/proc/russ_Topic()
 	if(CONFIG_GET(flag/transfer_vote) || usr.client.holder)
-		var/srd = CONFIG_GET(number/shuttle_refuel_delay)
-		if(srd < world.time)
+		if(shuttle_refuel_delay < world.time)
 			initiate_vote("crew transfer",usr.key)
 		else
-			to_chat(usr, "<span style='boldannounce'>Shuttle call can only initiate after [DisplayTimeText(srd - (world.time - SSticker.round_start_time))].</span>")
+			to_chat(usr, "<span style='boldannounce'>Shuttle call can only initiate after [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))].</span>")
 
 /datum/controller/subsystem/vote/proc/shuttlecall()
 	var/shuttle_timer = SSshuttle.emergency.timeLeft()
