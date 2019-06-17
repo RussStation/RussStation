@@ -7,7 +7,7 @@
 	initial_delay = CONFIG_GET(number/transfer_delay_initial)
 	subsequent_delay = CONFIG_GET(number/transfer_delay_subsequent)
 	SSvote.shuttle_refuel_delay = CONFIG_GET(number/shuttle_refuel_delay)
-	SSvote.transfer_vote_config = CONFIG_GET(flag/transfer_vote_config)
+	SSvote.transfer_vote_config = CONFIG_GET(flag/transfer_vote)
 
 /datum/controller/subsystem/ticker/proc/votetimer()
 	if(world.time - (initial_delay + (subsequent_delay * transfer_votes)) >= 0)
