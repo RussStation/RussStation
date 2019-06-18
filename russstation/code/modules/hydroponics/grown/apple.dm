@@ -18,7 +18,6 @@
 
 /obj/item/reagent_containers/food/snacks/grown/russ/bung
 	seed = /obj/item/seeds/russ/bung
-	apple/bung
 	name = "bung apple"
 	desc = "Smells horrendous. Give it to the clown."
 	icon_state = "bungapple"
