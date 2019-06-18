@@ -25,7 +25,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/russ/mystery_pod/attack_self(mob/user)
 	var/B
-	var/num = 1
+	var/num = 25
 
 
 	if(seed.potency > 90)//speshal things when the potency is really high
@@ -515,7 +515,6 @@
 			/obj/item/toy/figure/secofficer,
 			/obj/item/toy/figure/virologist,
 			/obj/item/toy/figure/warden)
-			num = 25
 
 		if (186 to 206)
 			B = pick(/obj/item/stack/sheet/mineral/sandstone,
@@ -529,7 +528,6 @@
 			/obj/item/stack/sheet/mineral/plastitanium,
 			/obj/item/stack/sheet/mineral/abductor,
 			/obj/item/stack/sheet/mineral/adamantine)
-			num = 25
 
 		if (207 to 213)
 			new /obj/item/clothing/mask/gas/clown_hat(get_turf(user), num)
