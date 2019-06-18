@@ -7,7 +7,7 @@
 	species = "replicapod"
 	plantname = "Replica Pod"
 	product = /mob/living/carbon/human //verrry special -- Urist
-	mutatelist = list(/obj/item/seeds/russ/mystery)
+	mutatelist = list(/obj/item/seeds/russ/mystery) //honk -- Mystery Pods
 	lifespan = 50
 	endurance = 8
 	maturation = 10
