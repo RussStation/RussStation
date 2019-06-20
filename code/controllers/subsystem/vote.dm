@@ -66,12 +66,6 @@ SUBSYSTEM_DEF(vote)
 				choices["Continue Playing"] += non_voters.len
 				if(choices["Continue Playing"] >= greatest_votes)
 					greatest_votes = choices["Continue Playing"]
-			//honk start -- counts people who didn't vote as a "no" if enabled in configs
-			if(mode == "crew transfer") 
-				choices["Continue The Round"] += non_voters.len
-				if(choices["Continue The Round"] >= greatest_votes)
-					greatest_votes = choices["Continue The Round"]
-			//honk end
 			else if(mode == "gamemode")
 				if(GLOB.master_mode in choices)
 					choices[GLOB.master_mode] += non_voters.len
