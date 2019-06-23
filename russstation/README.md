@@ -20,7 +20,7 @@ All modifications to tg files should be marked.
 - Commenting out some /tg/ code must be done by putting `/* honk start -- reason` one line before the commented out code, with said line having only the comment itself, and `honk end */` one line after the commented out code, always in an empty line.
 - Some examples:
 ```
-var/obj/O = new(clown) // clown -- added argument to new
+var/obj/O = new(clown) // honk -- added argument to new
 ```
 ```
 /* honk start -- mirrored in our file
