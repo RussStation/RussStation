@@ -5,6 +5,9 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/Initialize(mapload)
 	. = ..()
+	access_card = new /obj/item/card/id(src)
+	var/datum/job/C = new /datum/job/clown
+	access_card.access = C.get_access()
 	if(small_sprite_type)
 		var/datum/action/small_sprite/small_action = new small_sprite_type()
 		small_action.Grant(src)
@@ -12,7 +15,6 @@
 
 //Clown Hulk
 /mob/living/simple_animal/hostile/retaliate/clown/clownhulk
-	access_card = null
 	harm_intent_damage = 20
 	melee_damage_lower = 20
 	melee_damage_upper = 25
@@ -73,6 +75,10 @@
 
 /mob/living/simple_animal/hostile/retaliate/clown/russ
 	icon = 'russstation/icons/mob/clown_mobs.dmi'
+
+/mob/living/simple_animal/hostile/retaliate/clown/russ/goblin/Initialize(mapload)
+	. = ..()
+	access_card = null
 
 //Goblin
 /mob/living/simple_animal/hostile/retaliate/clown/russ/goblin
