@@ -100,11 +100,11 @@
 	stored_research = SSresearch.science_tech
 
 /obj/machinery/computer/scan_consolenew/examine(mob/user)
-	..()
+	. = ..()
 	if(jokerready < world.time)
-		to_chat(user, "<span class='notice'>JOKER algorithm available.</span>")
+		. += "<span class='notice'>JOKER algorithm available.</span>"
 	else
-		to_chat(user, "<span class='notice'>JOKER algorithm available in about [round(0.00166666667 * (jokerready - world.time))] minutes.")
+		. += "<span class='notice'>JOKER algorithm available in about [round(0.00166666667 * (jokerready - world.time))] minutes.</span>"
 
 /obj/machinery/computer/scan_consolenew/ui_interact(mob/user, last_change)
 	. = ..()
@@ -817,7 +817,7 @@
 				if(chromosomes.len)
 					var/obj/item/chromosome/CM = input("Select a chromosome to apply", "Apply Chromosome") as null|anything in chromosomes
 					if(CM)
-						to_chat(usr, "<span class='notice'>You apply [CM] to [HM.name].")
+						to_chat(usr, "<span class='notice'>You apply [CM] to [HM.name].</span>")
 						stored_chromosomes -= CM
 						CM.apply(HM)
 

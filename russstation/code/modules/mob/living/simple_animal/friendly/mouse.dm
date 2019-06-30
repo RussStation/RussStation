@@ -19,7 +19,7 @@
 
 /mob/living/simple_animal/mouse/russ/clouse/Initialize()
 	. = ..()
-	AddComponent(/datum/component/squeak/bikehorn, 50)
+	AddComponent(/datum/component/squeak, list('sound/items/bikehorn.ogg'=1), 50)
 
 //This is needed for dropping a corpse with proper states and also dropping lootis if there's any
 /mob/living/simple_animal/mouse/russ/clouse/death(gibbed,toast)

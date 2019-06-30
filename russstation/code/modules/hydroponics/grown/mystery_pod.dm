@@ -292,7 +292,7 @@
 			/obj/item/crowbar,
 			/obj/item/wirecutters,
 			/obj/item/multitool,
-			/obj/item/stack/cable_coil/random)
+			/obj/item/stack/cable_coil)
 
 		if(63 to 93)
 			B = pick(/mob/living/simple_animal/butterfly,

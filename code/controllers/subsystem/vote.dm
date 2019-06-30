@@ -71,6 +71,17 @@ SUBSYSTEM_DEF(vote)
 					choices[GLOB.master_mode] += non_voters.len
 					if(choices[GLOB.master_mode] >= greatest_votes)
 						greatest_votes = choices[GLOB.master_mode]
+			else if(mode == "map")
+				for (var/non_voter_ckey in non_voters)
+					var/client/C = non_voters[non_voter_ckey]
+					if(C.prefs.preferred_map)
+						var/preferred_map = C.prefs.preferred_map
+						choices[preferred_map] += 1
+						greatest_votes = max(greatest_votes, choices[preferred_map])
+					else if(global.config.defaultmap)
+						var/default_map = global.config.defaultmap.map_name
+						choices[default_map] += 1
+						greatest_votes = max(greatest_votes, choices[default_map])
 	//get all options with that many votes and return them in a list
 	. = list()
 	if(greatest_votes)
@@ -262,6 +273,16 @@ SUBSYSTEM_DEF(vote)
 			. += "\t(<a href='?src=[REF(src)];vote=toggle_gamemode'>[avm ? "Allowed" : "Disallowed"]</a>)"
 
 		. += "</li>"
+		//map
+		var/avmap = CONFIG_GET(flag/allow_vote_map)
+		if(trialmin || avmap)
+			. += "<a href='?src=[REF(src)];vote=map'>Map</a>"
+		else
+			. += "<font color='grey'>Map (Disallowed)</font>"
+		if(trialmin)
+			. += "\t(<a href='?src=[REF(src)];vote=toggle_map'>[avmap ? "Allowed" : "Disallowed"]</a>)"
+
+		. += "</li>"
 		//custom
 		if(trialmin)
 			. += "<li><a href='?src=[REF(src)];vote=custom'>Custom</a></li>"
@@ -273,6 +294,12 @@ SUBSYSTEM_DEF(vote)
 /datum/controller/subsystem/vote/Topic(href,href_list[],hsrc)
 	if(!usr || !usr.client)
 		return	//not necessary but meh...just in-case somebody does something stupid
+
+	var/trialmin = 0
+	if(usr.client.holder)
+		if(check_rights_for(usr.client, R_ADMIN))
+			trialmin = 1
+	
 	switch(href_list["vote"])
 		if("close")
 			voting -= usr.client
@@ -297,13 +324,15 @@ SUBSYSTEM_DEF(vote)
 		if("gamemode")
 			if(CONFIG_GET(flag/allow_vote_mode) || usr.client.holder)
 				initiate_vote("gamemode",usr.key)
+		if("map")
+			if(CONFIG_GET(flag/allow_vote_map) || usr.client.holder)
+				initiate_vote("map",usr.key)
 		if("custom")
 			if(usr.client.holder)
 				initiate_vote("custom",usr.key)
 		else
 			submit_vote(round(text2num(href_list["vote"])))
 	usr.vote()
-
 
 /datum/controller/subsystem/vote/proc/remove_action_buttons()
 	for(var/v in generated_actions)
