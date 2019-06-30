@@ -34,3 +34,21 @@
 				H.equip_to_slot_or_del(S, SLOT_WEAR_SUIT)
 
 	punish_log(target, punishment)
+
+/client/proc/admin_force_cancel_shuttle()
+	set category = "Admin"
+	set name = "Force Cancel Shuttle"
+	if(!check_rights(0))
+		return
+	if(alert(src, "You sure?", "Confirm", "Yes", "No") != "Yes")
+		return
+
+	if(EMERGENCY_AT_LEAST_DOCKED)
+		return
+
+	SSshuttle.emergency.forcecancel()
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Force Cancel Shuttle") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_admin("[key_name(usr)] admin-force-recalled the emergency shuttle.")
+	message_admins("<span class='adminnotice'>[key_name_admin(usr)] admin-force-recalled the emergency shuttle.</span>")
+
+	return
