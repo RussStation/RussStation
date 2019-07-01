@@ -24,7 +24,7 @@
 	name = "Spaghetti meatball"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 2
+		/obj/item/reagent_containers/food/snacks/meatball = 2 // honk -- Contains "faggot"
 	)
 	result = /obj/item/reagent_containers/food/snacks/spaghetti/meatballspaghetti
 	subcategory = CAT_SPAGHETTI
