@@ -108,7 +108,10 @@ SUBSYSTEM_DEF(vote)
 				text = "\n<b>Vote Tied Between:</b>"
 				for(var/option in winners)
 					text += "\n\t[option]"
-			. = pick(winners)
+			if(mode == "Crew Transfer") // a tied crew transfer vote should always default to not calling
+				. = "Continue The Round"
+			else 
+				. = pick(winners)
 			text += "\n<b>Vote Result: [.]</b>"
 		else
 			text += "\n<b>Did not vote:</b> [GLOB.clients.len-voted.len]"
