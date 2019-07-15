@@ -108,7 +108,7 @@ SUBSYSTEM_DEF(vote)
 				text = "\n<b>Vote Tied Between:</b>"
 				for(var/option in winners)
 					text += "\n\t[option]"
-			if(mode == "crew transfer") // a tied crew transfer vote should always default to not calling
+			if(mode == "crew transfer" && winners.len > 1) // a tied crew transfer vote should always default to not calling
 				. = "Continue The Round"
 			else 
 				. = pick(winners)
