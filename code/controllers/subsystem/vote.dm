@@ -108,7 +108,10 @@ SUBSYSTEM_DEF(vote)
 				text = "\n<b>Vote Tied Between:</b>"
 				for(var/option in winners)
 					text += "\n\t[option]"
-			. = pick(winners)
+			if(mode == "crew transfer" && winners.len > 1) // a tied crew transfer vote should always default to not calling
+				. = "Continue The Round"
+			else 
+				. = pick(winners)
 			text += "\n<b>Vote Result: [.]</b>"
 		else
 			text += "\n<b>Did not vote:</b> [GLOB.clients.len-voted.len]"
@@ -134,6 +137,9 @@ SUBSYSTEM_DEF(vote)
 						restart = 1
 					else
 						GLOB.master_mode = .
+			if("map")
+				SSmapping.changemap(global.config.maplist[.])
+				SSmapping.map_voted = TRUE
 			//honk start -- for checking if the vote was successful and then initiating the resulting actions
 			if("crew transfer")
 				if(. == "Initiate Crew Transfer")
@@ -187,6 +193,12 @@ SUBSYSTEM_DEF(vote)
 				choices.Add("Restart Round","Continue Playing")
 			if("gamemode")
 				choices.Add(config.votable_modes)
+			if("map")
+				for(var/map in global.config.maplist)
+					var/datum/map_config/VM = config.maplist[map]
+					if(!VM.votable)
+						continue
+					choices.Add(VM.map_name)
 			//honk start -- adds the options for a crew transfer vote
 			if("crew transfer") 
 				choices.Add("Initiate Crew Transfer","Continue The Round")
@@ -200,6 +212,8 @@ SUBSYSTEM_DEF(vote)
 					if(!option || mode || !usr.client)
 						break
 					choices.Add(option)
+			else
+				return 0
 		mode = vote_type
 		initiator = initiator_key
 		started_time = world.time
@@ -259,7 +273,7 @@ SUBSYSTEM_DEF(vote)
 		. += "</li><li>"
 		//honk start -- adds an admin only button for initiating a crew transfer vote
 		//callshuttle
-		if(trialmin)	//BEST ANTIVIRUS GET IT TODAY!!
+		if(trialmin)
 			. += "<a href='?src=[REF(src)];vote=crew transfer'>Crew Transfer</a>"
 		. += "</li><li>"
 		//honk end
@@ -309,11 +323,14 @@ SUBSYSTEM_DEF(vote)
 			if(usr.client.holder)
 				reset()
 		if("toggle_restart")
-			if(usr.client.holder)
+			if(usr.client.holder && trialmin)
 				CONFIG_SET(flag/allow_vote_restart, !CONFIG_GET(flag/allow_vote_restart))
 		if("toggle_gamemode")
-			if(usr.client.holder)
+			if(usr.client.holder && trialmin)
 				CONFIG_SET(flag/allow_vote_mode, !CONFIG_GET(flag/allow_vote_mode))
+		if("toggle_map")
+			if(usr.client.holder && trialmin)
+				CONFIG_SET(flag/allow_vote_map, !CONFIG_GET(flag/allow_vote_map))
 		if("restart")
 			if(CONFIG_GET(flag/allow_vote_restart) || usr.client.holder)
 				initiate_vote("restart",usr.key)
