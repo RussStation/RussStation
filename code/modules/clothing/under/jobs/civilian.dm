@@ -254,41 +254,52 @@ honk end */
 	can_adjust = FALSE
 
 /obj/item/clothing/under/lawyer/black
+	name = "lawyer black suit"
 	icon_state = "lawyer_black"
 	item_state = "lawyer_black"
 	item_color = "lawyer_black"
 
 /obj/item/clothing/under/lawyer/black/skirt
-	name = "Lawyer black suitskirt"
+	name = "lawyer black suitskirt"
 	icon_state = "lawyer_black_skirt"
 	item_state = "lawyer_black"
 	item_color = "lawyer_black_skirt"
 	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/lawyer/female
+	name = "female black suit"
 	icon_state = "black_suit_fem"
-	item_state = "black_suit_fem"
+	item_state = "bl_suit"
 	item_color = "black_suit_fem"
 
+/obj/item/clothing/under/lawyer/female/skirt
+	name = "female black suitskirt"
+	icon_state = "black_suit_fem_skirt"
+	item_state = "bl_suit"
+	item_color = "black_suit_fem_skirt"
+	fitted = FEMALE_UNIFORM_TOP
+
 /obj/item/clothing/under/lawyer/red
+	name = "lawyer red suit"
 	icon_state = "lawyer_red"
 	item_state = "lawyer_red"
 	item_color = "lawyer_red"
 
 /obj/item/clothing/under/lawyer/red/skirt
-	name = "Lawyer red suitskirt"
+	name = "lawyer red suitskirt"
 	icon_state = "lawyer_red_skirt"
 	item_state = "lawyer_red"
 	item_color = "lawyer_red_skirt"
 	fitted = FEMALE_UNIFORM_TOP
 
 /obj/item/clothing/under/lawyer/blue
+	name = "lawyer blue suit"
 	icon_state = "lawyer_blue"
 	item_state = "lawyer_blue"
 	item_color = "lawyer_blue"
 
 /obj/item/clothing/under/lawyer/blue/skirt
-	name = "Lawyer blue suitskirt"
+	name = "lawyer blue suitskirt"
 	icon_state = "lawyer_blue_skirt"
 	item_state = "lawyer_blue"
 	item_color = "lawyer_blue_skirt"
@@ -298,7 +309,7 @@ honk end */
 	name = "blue suit"
 	desc = "A classy suit and tie."
 	icon_state = "bluesuit"
-	item_state = "bluesuit"
+	item_state = "b_suit"
 	item_color = "bluesuit"
 	can_adjust = TRUE
 	alt_covers_chest = TRUE
@@ -307,7 +318,7 @@ honk end */
 	name = "blue suitskirt"
 	desc = "A classy suitskirt and tie."
 	icon_state = "bluesuit_skirt"
-	item_state = "bluesuit"
+	item_state = "b_suit"
 	item_color = "bluesuit_skirt"
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
@@ -316,7 +327,7 @@ honk end */
 /obj/item/clothing/under/lawyer/purpsuit
 	name = "purple suit"
 	icon_state = "lawyer_purp"
-	item_state = "lawyer_purp"
+	item_state = "p_suit"
 	item_color = "lawyer_purp"
 	fitted = NO_FEMALE_UNIFORM
 	can_adjust = TRUE
@@ -325,7 +336,7 @@ honk end */
 /obj/item/clothing/under/lawyer/purpsuit/skirt
 	name = "purple suitskirt"
 	icon_state = "lawyer_purp_skirt"
-	item_state = "lawyer_purp"
+	item_state = "p_suit"
 	item_color = "lawyer_purp_skirt"
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
@@ -342,10 +353,27 @@ honk end */
 
 /obj/item/clothing/under/lawyer/blacksuit/skirt
 	name = "black suitskirt"
-	desc = "A professional black suitskirt. Nanotrasen Investigation Bureau approved!"
-	icon_state = "reallyblack_suit_skirt"
+	desc = "A professional black suit. Nanotrasen Investigation Bureau approved!"
+	icon_state = "blacksuit_skirt"
 	item_state = "bar_suit"
-	item_color = "reallyblack_suit_skirt"
+	item_color = "blacksuit_skirt"
+	can_adjust = FALSE
+	alt_covers_chest = TRUE
+	fitted = FEMALE_UNIFORM_TOP
+
+/obj/item/clothing/under/lawyer/really_black
+	name = "executive suit"
+	desc = "A formal black suit and red tie, intended for the station's finest."
+	icon_state = "really_black_suit"
+	item_state = "bl_suit"
+	item_color = "really_black_suit"
+
+/obj/item/clothing/under/lawyer/really_black/skirt
+	name = "executive suitskirt"
+	desc = "A formal black suitskirt and red tie, intended for the station's finest."
+	icon_state = "really_black_suit_skirt"
+	item_state = "bl_suit"
+	item_color = "really_black_suit_skirt"
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
