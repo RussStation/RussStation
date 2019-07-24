@@ -209,19 +209,6 @@
 	item_color = "hydroponics"
 	permeability_coefficient = 0.5
 
-
-/* honk start -- adding hydroponics skirt COMMENTED OUT BECAUSE OF REDUNDANCY
-/obj/item/clothing/under/russ/rank/hydroponics/skirt
-	name = "botanist's jumpskirt"
-	desc = "A botanist's jumpskirt, provides the freedom botanist's desire" //if you want a better description make it
-	icon_state = "hydroskirt" //sprite
-	item_state = "g_suit" //inhand sprite, icons/mob/items_righthand or lefthand
-	item_color = "hydroskirt"
-	permeability_coefficient = 0.5
-	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-honk end */
-
 /obj/item/clothing/under/rank/hydroponics/skirt
 	name = "botanist's jumpskirt"
 	desc = "It's a jumpskirt designed to protect against minor plant-related hazards."
