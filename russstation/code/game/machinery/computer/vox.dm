@@ -1,6 +1,4 @@
-
-
-
+///A console that contains the vox announcement system of the AI
 /obj/machinery/computer/vox
 	name = "vox announcement system"
 	desc = "A console for making high priority announcements"
@@ -9,8 +7,8 @@
 	icon_keyboard = "tech_key"
 	req_access = list(ACCESS_HEADS)
 	circuit = /obj/item/circuitboard/computer/vox
-	var/authenticated = 0
-	var/auth_id = "Unknown" //Who is currently logged in?
+	var/authenticated = 0 ///Determines if someone is currently logged in. 0 - no one, 1 - authorized user 2 - emagged unknown
+	var/auth_id = "Unknown" ///Who is currently logged in?
 	var/state = STATE_DEFAULT
 	var/last_announcement = ""
 	var/const/STATE_DEFAULT = 1
@@ -18,7 +16,11 @@
 
 #ifdef AI_VOX
 #define VOX_DELAY 600
-
+/**
+ * Handles href's for the vox console, an href_list of "say_word" is used for playing the word	
+ * that has been selected to only the user of the console. "operation" handles the rest of the
+ * possible buttons used by the computer.
+ */
 /obj/machinery/computer/vox/Topic(href, href_list)
 	if(..())
 		return
@@ -66,7 +68,7 @@
 				announce_help(usr)
 
 	updateUsrDialog()
-
+///Emagging the console disables access checks
 /obj/machinery/computer/vox/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		return
@@ -76,13 +78,14 @@
 	to_chat(user, "<span class='danger'>You bypass the console's authentication system!</span>")
 	playsound(src, 'sound/machines/terminal_alert.ogg', 50, 0)
 
-
+///Prompts the user for a vox message and then makes the announcement to everyone on the z-level
 /obj/machinery/computer/vox/proc/announce(mob/living/user)
-	var/static/announcing_vox = 0 // Stores the time of the last announcement
+	var/static/announcing_vox = 0 /// Stores the time of the last announcement
 	if(announcing_vox > world.time)
 		to_chat(user, "<span class='notice'>Please wait [DisplayTimeText(announcing_vox - world.time)].</span>")
 		return
 
+	///A stripped input of the users message
 	var/message = stripped_input(user, "WARNING: Misuse of this system can result in you being job banned. More help is available in 'Announcement Help'", "What?")
 
 	last_announcement = message
@@ -119,6 +122,7 @@
 		play_vox_word(word, z, null)
 	deadchat_broadcast(" made a vox announcement from <span class='name'>[get_area_name(usr, TRUE)]</span>.", "<span class='name'>[user.real_name]</span>", user)
 
+///A list of all of the available vox words that play their associated word when clicked
 /obj/machinery/computer/vox/proc/announce_help(mob/living/user)
 	if(user.incapacitated())
 		return

@@ -1,23 +1,23 @@
-
+///A camera console to replace AI's doorknob functionalities
 /obj/machinery/computer/camera_advanced/camera_advanced_doors
 	name = "advanced doorknob system"
 	desc = "Used to access the various cameras on the station and remotely open doors."
 	req_access = list()
 	light_color = LIGHT_COLOR_RED
-	var/hud_type = DATA_HUD_DIAGNOSTIC_BASIC
+	var/hud_type = DATA_HUD_DIAGNOSTIC_BASIC ///Having a diagnostic hud allows users to see if doors are shocked
 
 /mob/camera/aiEye/remote/door_control
 	visible_icon = TRUE
 	icon = 'icons/mob/cameramob.dmi'
 	icon_state = "generic_camera"
-
+///Creates the remote eye mob that the user controls
 /obj/machinery/computer/camera_advanced/camera_advanced_doors/CreateEye()
 	eyeobj = new /mob/camera/aiEye/remote/door_control(get_turf(src))
 	eyeobj.origin = src
 	eyeobj.visible_icon = TRUE
 	eyeobj.icon = 'icons/mob/cameramob.dmi'
 	eyeobj.icon_state = "generic_camera"
-
+///Grants the hotkey interactions with doors to the user
 /obj/machinery/computer/camera_advanced/camera_advanced_doors/GrantActions(mob/living/user)
 	..()
 	var/datum/atom_hud/H = GLOB.huds[hud_type]
@@ -27,7 +27,7 @@
 	RegisterSignal(user, COMSIG_CAMERA_CLICK_CTRL_SHIFT, .proc/DoorEmergencyAccess)
 	if(obj_flags & EMAGGED)
 		RegisterSignal(user, COMSIG_CAMERA_CLICK_ALT, .proc/DoorElectrify)
-
+///Removes the hotkey interactions from the user
 /obj/machinery/computer/camera_advanced/camera_advanced_doors/remove_eye_control(mob/living/user)
 	var/datum/atom_hud/H = GLOB.huds[hud_type]
 	H.remove_hud_from(user)
@@ -37,7 +37,7 @@
 	if(obj_flags & EMAGGED)
 		UnregisterSignal(user, COMSIG_CAMERA_CLICK_ALT)
 	..()
-
+///Emagging the console allows the user to shock doors
 /obj/machinery/computer/camera_advanced/camera_advanced_doors/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		return
@@ -45,26 +45,26 @@
 	to_chat(user, "<span class='danger'>You overide the door safety system!</span>")
 	playsound(src, 'sound/machines/terminal_alert.ogg', 50, 0)
 
-//Bolt door
+///Bolt door
 /obj/machinery/door/airlock/CtrlClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_CAMERA_CLICK_CTRL, src)
 	..()
 
-//Shock door
+///Shock door, only available after emagging
 /obj/machinery/door/airlock/AltClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_CAMERA_CLICK_ALT, src)
 	..()
 
-//Open door
+///Open door
 /obj/machinery/door/airlock/ShiftClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_CAMERA_CLICK_SHIFT, src)
 	..()
 
-//Set door emergency access
+///Set door emergency access
 /obj/machinery/door/airlock/CtrlShiftClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_CAMERA_CLICK_CTRL_SHIFT, src)
 	..()
-
+///Bolts the airlock
 /obj/machinery/computer/camera_advanced/camera_advanced_doors/proc/DoorBolt(mob/living/user, obj/machinery/door/airlock/D)
 	if(!GLOB.cameranet.checkTurfVis(D.loc))
 		to_chat(user, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
@@ -77,7 +77,7 @@
 	else
 		D.bolt_drop(eyeobj)
 	D.add_hiddenprint(user)
-
+///Electrifies the airlock
 /obj/machinery/computer/camera_advanced/camera_advanced_doors/proc/DoorElectrify(mob/living/user, obj/machinery/door/airlock/D)
 	if(!GLOB.cameranet.checkTurfVis(D.loc))
 		to_chat(user, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
@@ -89,7 +89,7 @@
 		D.shock_perm(eyeobj)
 	else
 		D.shock_restore(eyeobj)
-
+///Opens the airlock
 /obj/machinery/computer/camera_advanced/camera_advanced_doors/proc/DoorOpen(mob/living/user, obj/machinery/door/airlock/D)
 	if(!GLOB.cameranet.checkTurfVis(D.loc))
 		to_chat(user, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
@@ -99,7 +99,7 @@
 
 	D.user_toggle_open(eyeobj)
 	D.add_hiddenprint(user)
-
+///Toggles emergency access to the airlock
 /obj/machinery/computer/camera_advanced/camera_advanced_doors/proc/DoorEmergencyAccess(mob/living/user, obj/machinery/door/airlock/D)
 	if(!GLOB.cameranet.checkTurfVis(D.loc))
 		to_chat(user, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
