@@ -442,6 +442,20 @@
 	qdel(chain)
 	return ..()
 
+//just a nerfed version of the real thing for the bounty hunters.
+/obj/item/gun/magic/hook/bounty
+	name = "hook"
+	ammo_type = /obj/item/ammo_casing/magic/hook/bounty
+
+/obj/item/gun/magic/hook/bounty/shoot_with_empty_chamber(mob/living/user)
+	to_chat(user, "<span class='warning'>The [src] isn't ready to fire yet!</span>")
+
+/obj/item/ammo_casing/magic/hook/bounty
+	projectile_type = /obj/item/projectile/hook/bounty
+
+/obj/item/projectile/hook/bounty
+	damage = 0
+	paralyze = 20
 
 //Immortality Talisman
 /obj/item/immortality_talisman
@@ -661,6 +675,7 @@
 	nemesis_factions = list("mining", "boss")
 	var/transform_cooldown
 	var/swiping = FALSE
+	var/bleed_stacks_per_hit = 3
 
 /obj/item/melee/transforming/cleaving_saw/examine(mob/user)
 	. = ..()
@@ -701,12 +716,11 @@
 		user.changeNext_move(CLICK_CD_MELEE * 0.5) //when closed, it attacks very rapidly
 
 /obj/item/melee/transforming/cleaving_saw/nemesis_effects(mob/living/user, mob/living/target)
-	var/datum/status_effect/saw_bleed/B = target.has_status_effect(STATUS_EFFECT_SAWBLEED)
+	var/datum/status_effect/stacking/saw_bleed/B = target.has_status_effect(STATUS_EFFECT_SAWBLEED)
 	if(!B)
-		if(!active) //This isn't in the above if-check so that the else doesn't care about active
-			target.apply_status_effect(STATUS_EFFECT_SAWBLEED)
+		target.apply_status_effect(STATUS_EFFECT_SAWBLEED,bleed_stacks_per_hit)
 	else
-		B.add_bleed(B.bleed_buildup)
+		B.add_stacks(bleed_stacks_per_hit)
 
 /obj/item/melee/transforming/cleaving_saw/attack(mob/living/target, mob/living/carbon/human/user)
 	if(!active || swiping || !target.density || get_turf(target) == get_turf(user))
@@ -786,9 +800,9 @@
 
 /obj/item/melee/ghost_sword/attack_self(mob/user)
 	if(summon_cooldown > world.time)
-		to_chat(user, "You just recently called out for aid. You don't want to annoy the spirits.")
+		to_chat(user, "<span class='warning'>You just recently called out for aid. You don't want to annoy the spirits!</span>")
 		return
-	to_chat(user, "You call out for aid, attempting to summon spirits to your side.")
+	to_chat(user, "<span class='notice'>You call out for aid, attempting to summon spirits to your side.</span>")
 
 	notify_ghosts("[user] is raising [user.p_their()] [src], calling for your help!",
 		enter_link="<a href=?src=[REF(src)];orbit=1>(Click to help)</a>",
