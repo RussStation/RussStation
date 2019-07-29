@@ -10,13 +10,15 @@
 
 ///The subtype of remote eye that has access rights to open doors
 /mob/camera/aiEye/remote/door_control
+	ai_detector_visible = TRUE
+	ai_detector_color = COLOR_RED
 	visible_icon = TRUE
 	icon = 'icons/mob/cameramob.dmi'
 	icon_state = "generic_camera"
 
 ///Creates the remote eye mob that the user controls
 /obj/machinery/computer/camera_advanced/doorknob/CreateEye()
-	eyeobj = new /mob/camera/aiEye/remote/door_control(get_turf(src))
+	eyeobj = new /mob/camera/aiEye/remote/door_control()
 	eyeobj.origin = src
 	eyeobj.visible_icon = TRUE
 	eyeobj.icon = 'icons/mob/cameramob.dmi'
