@@ -1,7 +1,8 @@
 ///A camera console to replace AI's doorknob functionalities
-/obj/machinery/computer/camera_advanced/camera_advanced_doors
+/obj/machinery/computer/camera_advanced/doorknob
 	name = "advanced doorknob system"
 	desc = "Used to access the various cameras on the station and remotely open doors."
+	circuit = /obj/item/circuitboard/computer/doorknob
 	req_access = list()
 	light_color = LIGHT_COLOR_RED
 	var/datum/action/innate/doorknob_help/doorknob_help
@@ -14,7 +15,7 @@
 	icon_state = "generic_camera"
 
 ///Creates the remote eye mob that the user controls
-/obj/machinery/computer/camera_advanced/camera_advanced_doors/CreateEye()
+/obj/machinery/computer/camera_advanced/doorknob/CreateEye()
 	eyeobj = new /mob/camera/aiEye/remote/door_control(get_turf(src))
 	eyeobj.origin = src
 	eyeobj.visible_icon = TRUE
@@ -23,7 +24,7 @@
 	doorknob_help = new
 
 ///Grants the hotkey interactions with doors to the user
-/obj/machinery/computer/camera_advanced/camera_advanced_doors/GrantActions(mob/living/user)
+/obj/machinery/computer/camera_advanced/doorknob/GrantActions(mob/living/user)
 	..()
 	var/datum/atom_hud/H = GLOB.huds[hud_type]
 	H.add_hud_to(user)
@@ -39,7 +40,7 @@
 		RegisterSignal(user, COMSIG_CAMERA_CLICK_ALT, .proc/DoorElectrify)
 
 ///Removes the hotkey interactions from the user
-/obj/machinery/computer/camera_advanced/camera_advanced_doors/remove_eye_control(mob/living/user)
+/obj/machinery/computer/camera_advanced/doorknob/remove_eye_control(mob/living/user)
 	var/datum/atom_hud/H = GLOB.huds[hud_type]
 	H.remove_hud_from(user)
 	UnregisterSignal(user, COMSIG_CAMERA_CLICK_CTRL)
@@ -60,7 +61,7 @@
 /datum/action/innate/doorknob_help/Activate()
 	if(!target || !isliving(owner))
 		return
-	to_chat(owner, "<b>Hot-key shortcuts:</b>")
+	to_chat(owner, "<b>Hot-keys:</b>")
 	to_chat(owner, "Shift-click a door to open/close it.")
 	to_chat(owner, "Ctrl-click a door to toggle its bolts.")
 	to_chat(owner, "Ctrl-shift-click a door to toggle emergency access.")
@@ -68,7 +69,7 @@
 		to_chat(owner, "Alt-click a door to electrify it.")
 
 ///Emagging the console allows the user to shock doors
-/obj/machinery/computer/camera_advanced/camera_advanced_doors/emag_act(mob/user)
+/obj/machinery/computer/camera_advanced/doorknob/emag_act(mob/user)
 	if(obj_flags & EMAGGED)
 		return
 	obj_flags |= EMAGGED
@@ -96,7 +97,7 @@
 	..()
 
 ///Bolts the airlock
-/obj/machinery/computer/camera_advanced/camera_advanced_doors/proc/DoorBolt(mob/living/user, obj/machinery/door/airlock/D)
+/obj/machinery/computer/camera_advanced/doorknob/proc/DoorBolt(mob/living/user, obj/machinery/door/airlock/D)
 	if(!GLOB.cameranet.checkTurfVis(D.loc))
 		to_chat(user, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
 		return
@@ -110,7 +111,7 @@
 	D.add_hiddenprint(user)
 
 ///Electrifies the airlock
-/obj/machinery/computer/camera_advanced/camera_advanced_doors/proc/DoorElectrify(mob/living/user, obj/machinery/door/airlock/D)
+/obj/machinery/computer/camera_advanced/doorknob/proc/DoorElectrify(mob/living/user, obj/machinery/door/airlock/D)
 	if(!GLOB.cameranet.checkTurfVis(D.loc))
 		to_chat(user, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
 		return
@@ -123,7 +124,7 @@
 		D.shock_restore(eyeobj)
 
 ///Opens the airlock
-/obj/machinery/computer/camera_advanced/camera_advanced_doors/proc/DoorOpen(mob/living/user, obj/machinery/door/airlock/D)
+/obj/machinery/computer/camera_advanced/doorknob/proc/DoorOpen(mob/living/user, obj/machinery/door/airlock/D)
 	if(!GLOB.cameranet.checkTurfVis(D.loc))
 		to_chat(user, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
 		return
@@ -134,7 +135,7 @@
 	D.add_hiddenprint(user)
 
 ///Toggles emergency access to the airlock
-/obj/machinery/computer/camera_advanced/camera_advanced_doors/proc/DoorEmergencyAccess(mob/living/user, obj/machinery/door/airlock/D)
+/obj/machinery/computer/camera_advanced/doorknob/proc/DoorEmergencyAccess(mob/living/user, obj/machinery/door/airlock/D)
 	if(!GLOB.cameranet.checkTurfVis(D.loc))
 		to_chat(user, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
 		return
