@@ -9,3 +9,15 @@
     contains = list(/obj/vehicle/ridden/wheelchair/russ/hotrod)
     crate_name = "The Hotrod"
     crate_type = /obj/structure/closet/crate/large
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////// Security ////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/datum/supply_pack/security/bearsky
+    name = "Officer Bearsky Crate"
+    desc = "Hunts the Syndicate like wild terrestrial salmon"
+    cost = 5000
+    contains = list(/mob/living/simple_animal/bot/secbot/bearsky)
+    crate_name = "officer bearsky crate"
+    crate_type = /obj/structure/closet/crate/critter
