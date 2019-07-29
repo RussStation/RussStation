@@ -1,4 +1,4 @@
-/mob/living/simple_animal/cat/SCP529
+/mob/living/simple_animal/pet/cat/SCP529
     name = "SCP-529"
     desc = "A friendly tabby cat that seems to be missing half of her body."
     icon = 'russstation/icons/mob/josie.dmi'
