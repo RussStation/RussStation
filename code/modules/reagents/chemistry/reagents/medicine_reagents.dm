@@ -129,7 +129,7 @@
 	taste_description = "sludge"
 
 /datum/reagent/medicine/cryoxadone/on_mob_life(mob/living/carbon/M)
-	var/power = -0.00003 * (M.bodytemperature ** 2) + 3
+	var/power = -0.00001 * (M.bodytemperature ** 2) + 1 // honk -- chem nerfs
 	if(M.bodytemperature < T0C)
 		M.adjustOxyLoss(-3 * power, 0)
 		M.adjustBruteLoss(-power, 0)
@@ -227,7 +227,7 @@
 			if(show_message)
 				to_chat(M, "<span class='warning'>You don't feel so good...</span>")
 		else if(M.getFireLoss())
-			M.adjustFireLoss(-reac_volume)
+			//M.adjustFireLoss(-reac_volume) // honk -- chem nerfs
 			if(show_message)
 				to_chat(M, "<span class='danger'>You feel your burns healing! It stings like hell!</span>")
 			M.emote("scream")
@@ -235,7 +235,7 @@
 	..()
 
 /datum/reagent/medicine/silver_sulfadiazine/on_mob_life(mob/living/carbon/M)
-	M.adjustFireLoss(-2*REM, 0)
+	M.adjustFireLoss(-0.6 * REM, 0) // honk -- chem nerfs
 	..()
 	. = 1
 
@@ -281,7 +281,7 @@
 			if(show_message)
 				to_chat(M, "<span class='warning'>You don't feel so good...</span>")
 		else if(M.getBruteLoss())
-			M.adjustBruteLoss(-reac_volume)
+			//M.adjustBruteLoss(-reac_volume) // honk -- chem nerfs
 			if(show_message)
 				to_chat(M, "<span class='danger'>You feel your bruises healing! It stings like hell!</span>")
 			M.emote("scream")
@@ -290,7 +290,7 @@
 
 
 /datum/reagent/medicine/styptic_powder/on_mob_life(mob/living/carbon/M)
-	M.adjustBruteLoss(-2*REM, 0)
+	M.adjustBruteLoss(-0.6 * REM, 0) // honk -- chem nerfs
 	..()
 	. = 1
 
