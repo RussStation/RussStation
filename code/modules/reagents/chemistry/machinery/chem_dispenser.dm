@@ -79,7 +79,7 @@
 		/datum/reagent/toxin
 	)
 
-	var/list/saved_recipes = list()
+	//var/list/saved_recipes = list() // honk -- chem macro removal
 
 /obj/machinery/chem_dispenser/Initialize()
 	. = ..()
@@ -198,7 +198,7 @@
 		data["beakerTransferAmounts"] = null
 
 	var/chemicals[0]
-	var/recipes[0]
+	//var/recipes[0] // honk -- chem macro removal
 	var/is_hallucinating = FALSE
 	if(user.hallucinating())
 		is_hallucinating = TRUE
@@ -209,10 +209,12 @@
 			if(is_hallucinating && prob(5))
 				chemname = "[pick_list_replacements("hallucination.json", "chemicals")]"
 			chemicals.Add(list(list("title" = chemname, "id" = ckey(temp.name))))
-	for(var/recipe in saved_recipes)
-		recipes.Add(list(recipe))
+	// honk start -- chem macro removal
+	//for(var/recipe in saved_recipes)
+	//	recipes.Add(list(recipe))
 	data["chemicals"] = chemicals
-	data["recipes"] = recipes
+	//data["recipes"] = recipes
+	// honk end
 	return data
 
 /obj/machinery/chem_dispenser/ui_act(action, params)
@@ -254,6 +256,7 @@
 		if("eject")
 			replace_beaker(usr)
 			. = TRUE
+		/* honk start -- chem macro removal
 		if("dispense_recipe")
 			if(!is_operational() || QDELETED(cell))
 				return
@@ -308,6 +311,7 @@
 				if (resmismatch && alert("[src] is not yet capable of replicating this recipe with the precision it needs, do you want to save it anyway?",, "Yes","No") == "No")
 					return
 				saved_recipes += list(list("recipe_name" = name, "contents" = recipe))
+		honk end */
 
 /obj/machinery/chem_dispenser/attackby(obj/item/I, mob/user, params)
 	if(default_unfasten_wrench(user, I))
@@ -404,6 +408,7 @@
 		return FALSE
 	return TRUE
 
+/* honk start -- chem macro removal
 /obj/machinery/chem_dispenser/proc/process_recipe_list(var/recipe)
 	var/list/key_list = list()
 	var/list/final_list = list()
@@ -412,6 +417,7 @@
 		var/list/splitreagent = splittext(reagents, "=")
 		final_list += list(avoid_assoc_duplicate_keys(splitreagent[1],key_list) = text2num(splitreagent[2]))
 	return final_list
+honk end */
 
 /obj/machinery/chem_dispenser/AltClick(mob/living/user)
 	..()
