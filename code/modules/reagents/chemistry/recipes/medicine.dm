@@ -166,6 +166,7 @@
 	id = /datum/reagent/medicine/mannitol
 	results = list(/datum/reagent/medicine/mannitol = 3)
 	required_reagents = list(/datum/reagent/consumable/sugar = 1, /datum/reagent/hydrogen = 1, /datum/reagent/water = 1)
+	required_catalysts = list(/datum/reagent/raney_nickel = 5) // honk -- chem nerfs
 	mix_message = "The solution slightly bubbles, becoming thicker."
 
 /datum/chemical_reaction/neurine

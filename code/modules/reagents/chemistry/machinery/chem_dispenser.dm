@@ -60,7 +60,10 @@
 		/datum/reagent/sulfur,
 		/datum/reagent/toxin/acid,
 		/datum/reagent/water,
-		/datum/reagent/fuel
+		/datum/reagent/fuel,
+		// honk start -- russstation reagents
+		/datum/reagent/nickel
+		// honk end
 	)
 	//these become available once the manipulator has been upgraded to tier 4 (femto)
 	var/list/upgrade_reagents = list(
@@ -673,7 +676,10 @@ honk end */
 		/datum/reagent/drug/space_drugs,
 		/datum/reagent/toxin,
 		/datum/reagent/toxin/plasma,
-		/datum/reagent/uranium
+		/datum/reagent/uranium,
+		// honk start -- russtation reagents
+		/datum/reagent/nickel
+		// honk end
 	)
 
 /obj/machinery/chem_dispenser/abductor/Initialize()
