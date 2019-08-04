@@ -1,3 +1,5 @@
+//Original code from Hippie Station with some edits to allow TG emoji
+///Checks text for emoji icon names between two ':' characters
 /proc/emoji_parse(text)
 	. = text
 	if(!CONFIG_GET(flag/emojis))
