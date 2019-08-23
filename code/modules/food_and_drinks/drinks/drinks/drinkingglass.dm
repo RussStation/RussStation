@@ -21,7 +21,7 @@
 			name = R.glass_name
 			desc = R.glass_desc
 		if(R.glass_icon_state)
-			icon_state = R.glass_icon_state
+			check_full_icon_state(R) // honk -- check for the icon states. Thanks to hippie for the pattern.
 		else
 			var/mutable_appearance/reagent_overlay = mutable_appearance(icon, "glassoverlay")
 			icon_state = "glass_empty"
