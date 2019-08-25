@@ -33,12 +33,12 @@ WHEN SIF IS ANGERED (Stage 2):
 
 WHEN SIF IS ENRAGED (Stage 3): 
 	- Sif's specials take 60% less time to recharge from (Angered = 50) to (Enraged = 30)
-	- Sif is way slower but does more damage, as well as dodges projectiles and melee attacks more often.
+	- Sif is way slower but does more damage, as well as chances to dodge projectiles and melee attacks more often.
 
 When Sif dies, it leaves behind a: 
 	!! Sword Of The Forsaken !! -> Giant ass sword that does damage. Small chance of blocking hits and almost no chance to block projectiles.
 	!! Necklace Of The Forsaken !! -> Works by instantly reviving or fully healing the user at their discretion (one time use and can be used when dead, knocked out or alive)
-
+	!! Dark Energy !! (If killed with a kinetic crusher) -> A Kinetic Crusher attachment which performs a bash attack for 100 damage (only works on big boy mobs like megafaunas)
 Difficulty: Medium
 */
 
@@ -479,3 +479,4 @@ Difficulty: Medium
 /obj/structure/closet/crate/necropolis/sif/crusher/PopulateContents()
 	new /obj/item/melee/sword_of_the_forsaken(src)
 	new /obj/item/clothing/neck/necklace/necklace_of_the_forsaken(src)
+	new /obj/item/crusher_trophy/dark_energy(src)
