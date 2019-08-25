@@ -5,7 +5,7 @@
 	icon = 'russstation/icons/obj/lavaland/artefacts.dmi'
 	icon_state = "sif_energy"
 	denied_type = /obj/item/crusher_trophy/dark_energy
-	bonus_value = 100
+	bonus_value = 30
 
 /obj/item/crusher_trophy/dark_energy/effect_desc()
 	return "mark detonation to perform a bash dealing <b>[bonus_value]</b> damage"
