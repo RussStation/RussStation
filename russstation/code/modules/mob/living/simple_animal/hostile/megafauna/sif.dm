@@ -8,7 +8,7 @@ Speical attacks:
 	- Sif can also do an AOE spin attack.
 
 	Links for videos on all of Sif's modes and attacks:
-	
+
 	Summon:			  https://bungdeep.com/Sif/Sif_Summon.mp4
 	Angered Stage:	  https://bungdeep.com/Sif/Sif_Angered.mp4
 	Enraged Stage:	  https://bungdeep.com/Sif/Sif_Enraged.mp4
@@ -22,20 +22,20 @@ Speical attacks:
 	Death:			  https://bungdeep.com/Sif/Sif_Death.mp4
 
 Sif has three stages:
- 1. Normal state when it has health above 50%. 
- 2. When Sif reaches below 50% health it enters a angered state, which makes Sif's movement speed faster and attack speed slower, 
+ 1. Normal state when it has health above 50%.
+ 2. When Sif reaches below 50% health it enters a angered state, which makes Sif's movement speed faster and attack speed slower,
  	with increased usage of specials.
  3. At 20% health Sif is significantly slowed but constantly doing special attacks.
 
 WHEN SIF IS ANGERED (Stage 2):
 	- Sif's specials take 50% less time to recharge from (Normal = 100) to (Angered = 50)
-	- Sif's attack speed decreased by 30% and movement speed increased by 50% 
+	- Sif's attack speed decreased by 30% and movement speed increased by 50%
 
-WHEN SIF IS ENRAGED (Stage 3): 
+WHEN SIF IS ENRAGED (Stage 3):
 	- Sif's specials take 60% less time to recharge from (Angered = 50) to (Enraged = 30)
 	- Sif is way slower but does more damage, as well as chances to dodge projectiles and melee attacks more often.
 
-When Sif dies, it leaves behind a: 
+When Sif dies, it leaves behind a:
 	!! Sword Of The Forsaken !! -> Giant ass sword that does damage. Small chance of blocking hits and almost no chance to block projectiles.
 	!! Necklace Of The Forsaken !! -> Works by instantly reviving or fully healing the user at their discretion (one time use and can be used when dead, knocked out or alive)
 	!! Dark Energy !! (If killed with a kinetic crusher) -> A Kinetic Crusher attachment which performs a bash attack for 100 damage (only works on big boy mobs like megafaunas)
@@ -63,7 +63,7 @@ Difficulty: Medium
 	pixel_x = -32 //Hit box perfectly centered
 	move_to_delay = 3
 	rapid_melee = 4
-	melee_queue_distance = 10 
+	melee_queue_distance = 10
 	ranged = FALSE
 	del_on_death = 1
 	loot = list(/obj/structure/closet/crate/necropolis/sif)
@@ -80,7 +80,7 @@ Difficulty: Medium
 	var/enraged = FALSE //active at < 20% health
 	var/stageTwo = FALSE
 	var/stageThree = FALSE
-	var/currentPower = 0 //Every few seconds this variable gets higher, when it gets high 
+	var/currentPower = 0 //Every few seconds this variable gets higher, when it gets high
 						 //enough it will use a special attack then reset the variable to 0
 
 //With a GPS sif can be identified by the "Infinity Signal".
@@ -104,9 +104,9 @@ Difficulty: Medium
 	icon_state = "Interact_Sword"
 	playsound(get_turf(src.loc), 'sound/effects/curse1.ogg', 100, 1)
 	spawn(30)
-	visible_message("<span class='notice'>The ground shakes.</span>")
 		if(!QDELETED(src))
 			new /mob/living/simple_animal/hostile/megafauna/sif(get_turf(src.loc))
+			visible_message("<span class='notice'>The ground shakes.</span>")
 			playsound(get_turf(src.loc), 'sound/effects/curse3.ogg', 100, 1)
 			playsound(get_turf(src.loc), 'sound/effects/meteorimpact.ogg', 100, 1)
 			qdel(src)
@@ -119,7 +119,7 @@ Difficulty: Medium
 			if(S != src)
 				return INITIALIZE_HINT_QDEL
 
-//Sif's charge attack 
+//Sif's charge attack
 /mob/living/simple_animal/hostile/megafauna/sif/proc/rush()
 
 	//Target
@@ -131,7 +131,7 @@ Difficulty: Medium
 	//Targets turf
 	if(!chargeturf)
 		return //Exit proc
-	
+
 	var/dir = get_dir(src, chargeturf)
 	var/turf/T = get_ranged_target_turf(chargeturf, dir, 2)
 
@@ -149,14 +149,14 @@ Difficulty: Medium
 	var/atom/prevLoc = target.loc
 	sleep((get_dist(src, T) * movespeed) + 1)
 	src.loc = prevLoc
-	walk(src, 0) 
+	walk(src, 0)
 	charging = FALSE
 	//Stop charging
 
 /mob/living/simple_animal/hostile/megafauna/sif/Move()
 	//Move
 	..()
-	
+
 	//Charging currentPower every step
 	if(!charging || !spinning)
 		src.currentPower += 2
@@ -203,7 +203,7 @@ Difficulty: Medium
 		switch(rand(0,100))
 			if(0 to 1)
 				passed = 1
-	
+
 	if(enraged)
 		switch(rand(0,100))
 			if(0 to 5)
@@ -224,7 +224,7 @@ Difficulty: Medium
 	playsound(src, 'russstation/sound/effects/howl.ogg', 100, 1)
 	var/mob/living/L = target
 	shake_camera(L, 4, 3)
-	src.speed = 10 
+	src.speed = 10
 	src.move_to_delay = 2
 	src.melee_damage_lower = 25
 	src.melee_damage_upper = 25
@@ -261,7 +261,7 @@ Difficulty: Medium
 	if(stageThree)
 		src.move_to_delay = 4
 		return 4
-	
+
 	src.move_to_delay = 3
 	return 2
 
@@ -284,7 +284,7 @@ Difficulty: Medium
 	if(charging == FALSE)
 		..()
 
-//Immune to explosions when spinning or charging 
+//Immune to explosions when spinning or charging
 /mob/living/simple_animal/hostile/megafauna/sif/ex_act(severity, target)
 	return 0
 
@@ -342,7 +342,7 @@ Difficulty: Medium
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=Sword Of The Forsaken=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 
-/*Videos on what the sword can do: 
+/*Videos on what the sword can do:
 **
 **Attacking: ----------	https://bungdeep.com/Sif/Sword_of_the_Forsaken_Attack.mp4
 **Butchering: --------- https://bungdeep.com/Sif/Sword_of_the_Forsaken_Butcher.mp4
@@ -384,7 +384,7 @@ Difficulty: Medium
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=Necklace Of The Forsaken=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 
-/*Videos on what the necklace can do: 
+/*Videos on what the necklace can do:
 **
 **Binding the necklace to yourself: ------- https://bungdeep.com/Sif/Necklace_of_the_Forsaken_Binding.mp4.mp4
 **Reviving when died: --------------------- https://bungdeep.com/Sif/Necklace_of_the_Forsaken_Death_Revive.mp4
@@ -422,7 +422,7 @@ Difficulty: Medium
 	icon_state = "necklace_forsaken_active"
 	if(!active_owner)
 		return
-	var/mob/living/carbon/human/H = active_owner 
+	var/mob/living/carbon/human/H = active_owner
 	active_owner = null
 	to_chat(H, "<span class='userdanger'>You feel a scorching burn fill your body and limbs!</span>")
 	H.revive(TRUE, FALSE)
