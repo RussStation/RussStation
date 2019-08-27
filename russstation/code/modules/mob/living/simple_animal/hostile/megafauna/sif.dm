@@ -220,7 +220,7 @@ Difficulty: Medium
 /mob/living/simple_animal/hostile/megafauna/sif/proc/angered()
 	src.angered = TRUE
 	src.stageTwo = TRUE
-	src.target.visible_message("<span class='danger'>[src] lets out a ear ripping howl!</span>", "<span class='userdanger'>[src] lets out an ear ripping roar!</span>")
+	src.visible_message("<span class='userdanger'>[src] lets out a ear ripping howl!</span>", "<span class='userdanger'>[src] lets out an ear ripping roar!</span>")
 	playsound(src, 'russstation/sound/effects/howl.ogg', 100, 1)
 	var/mob/living/L = target
 	shake_camera(L, 4, 3)
@@ -234,7 +234,7 @@ Difficulty: Medium
 /mob/living/simple_animal/hostile/megafauna/sif/proc/enraged()
 	src.stageThree = TRUE
 	src.enraged = TRUE
-	src.target.visible_message("<span class='danger'>[src] lets out a ear ripping yelp!</span>", "<span class='userdanger'>[src] lets out an ear ripping yelp!</span>")
+	src.visible_message("<span class='userdanger'>[src] lets out a ear ripping yelp!</span>", "<span class='userdanger'>[src] lets out an ear ripping yelp!</span>")
 	playsound(src, 'russstation/sound/effects/howl.ogg', 100, 1)
 	var/mob/living/L = target
 	shake_camera(L, 8, 6)
@@ -386,7 +386,7 @@ Difficulty: Medium
 
 /*Videos on what the necklace can do:
 **
-**Binding the necklace to yourself: ------- https://bungdeep.com/Sif/Necklace_of_the_Forsaken_Binding.mp4.mp4
+**Binding the necklace to yourself: ------- https://bungdeep.com/Sif/Necklace_of_the_Forsaken_Binding.mp4
 **Reviving when died: --------------------- https://bungdeep.com/Sif/Necklace_of_the_Forsaken_Death_Revive.mp4
 **Becomes a cosmetic item after it is used: https://bungdeep.com/Sif/Necklace_of_the_Forsaken_Revive_Used.png
 **
