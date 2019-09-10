@@ -198,7 +198,7 @@ SUBSYSTEM_DEF(ticker)
 			//honk start -- starts the automatic crew transfer vote timer
 			if(CONFIG_GET(flag/transfer_vote))
 				votetimer()
-			//honk end 
+			//honk end
 
 			if(!roundend_check_paused && mode.check_finished(force_ending) || force_ending)
 				current_state = GAME_STATE_FINISHED
@@ -648,7 +648,8 @@ SUBSYSTEM_DEF(ticker)
 		'sound/roundend/its_only_game.ogg',
 		'sound/roundend/yeehaw.ogg',
 		'sound/roundend/disappointed.ogg',
-		'sound/roundend/scrunglartiy.ogg'\
+		'sound/roundend/scrunglartiy.ogg'
+		'sound/roundend/AW_FUCK.ogg'\
 		)
 
 	SEND_SOUND(world, sound(round_end_sound))
