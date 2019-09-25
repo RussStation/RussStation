@@ -129,11 +129,11 @@
 /turf/closed/mineral/Spread(turf/T)
 	T.ChangeTurf(type)
 
-/turf/closed/mineral/random
+/turf/closed/mineral/random //HONK - ADDED TO RANDOM POOL ADAMANTINE
 	var/list/mineralSpawnChanceList = list(/turf/closed/mineral/uranium = 5, /turf/closed/mineral/diamond = 1, /turf/closed/mineral/gold = 10,
 		/turf/closed/mineral/silver = 12, /turf/closed/mineral/plasma = 20, /turf/closed/mineral/iron = 40, /turf/closed/mineral/titanium = 11,
-		/turf/closed/mineral/gibtonite = 4, /turf/open/floor/plating/asteroid/airless/cave = 2, /turf/closed/mineral/bscrystal = 1)
-		//Currently, Adamantine won't spawn as it has no uses. -Durandan
+		/turf/closed/mineral/gibtonite = 4, /turf/open/floor/plating/asteroid/airless/cave = 2, /turf/closed/mineral/bscrystal = 1,
+		/turf/closed/mineral/clay = 15, /turf/closed/mineral/adamantine = 1) //Currently, Adamantine won't spawn as it has no uses. -Durandan //NOW IT DOES BITCHES - iamgoofball
 	var/mineralChance = 13
 	var/display_icon_state = "rock"
 
@@ -163,7 +163,8 @@
 	mineralChance = 25
 	mineralSpawnChanceList = list(
 		/turf/closed/mineral/uranium = 35, /turf/closed/mineral/diamond = 30, /turf/closed/mineral/gold = 45, /turf/closed/mineral/titanium = 45,
-		/turf/closed/mineral/silver = 50, /turf/closed/mineral/plasma = 50, /turf/closed/mineral/bscrystal = 20)
+		/turf/closed/mineral/silver = 50, /turf/closed/mineral/plasma = 50, /turf/closed/mineral/bscrystal = 20,
+		/turf/closed/mineral/adamantine = 25)//honk - adamantine
 
 /turf/closed/mineral/random/high_chance/volcanic
 	environment_type = "basalt"
@@ -173,7 +174,8 @@
 	defer_change = 1
 	mineralSpawnChanceList = list(
 		/turf/closed/mineral/uranium/volcanic = 35, /turf/closed/mineral/diamond/volcanic = 30, /turf/closed/mineral/gold/volcanic = 45, /turf/closed/mineral/titanium/volcanic = 45,
-		/turf/closed/mineral/silver/volcanic = 50, /turf/closed/mineral/plasma/volcanic = 50, /turf/closed/mineral/bscrystal/volcanic = 20)
+		/turf/closed/mineral/silver/volcanic = 50, /turf/closed/mineral/plasma/volcanic = 50, /turf/closed/mineral/bscrystal/volcanic = 20,
+		/turf/closed/mineral/adamantine = 15) //honk - adamantine
 
 
 
@@ -197,7 +199,8 @@
 	mineralSpawnChanceList = list(
 		/turf/closed/mineral/uranium/volcanic = 5, /turf/closed/mineral/diamond/volcanic = 1, /turf/closed/mineral/gold/volcanic = 10, /turf/closed/mineral/titanium/volcanic = 11,
 		/turf/closed/mineral/silver/volcanic = 12, /turf/closed/mineral/plasma/volcanic = 20, /turf/closed/mineral/iron/volcanic = 40,
-		/turf/closed/mineral/gibtonite/volcanic = 4, /turf/open/floor/plating/asteroid/airless/cave/volcanic = 1, /turf/closed/mineral/bscrystal/volcanic = 1)
+		/turf/closed/mineral/gibtonite/volcanic = 4, /turf/open/floor/plating/asteroid/airless/cave/volcanic = 1, /turf/closed/mineral/bscrystal/volcanic = 1,
+		/turf/closed/mineral/clay = 15, /turf/closed/mineral/adamantine = 1) //honk - adamntine and clay
 
 
 /turf/closed/mineral/random/labormineral
