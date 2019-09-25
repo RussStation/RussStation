@@ -73,6 +73,7 @@ Difficulty: Medium
 	score_type = SIF_SCORE
 	deathmessage = "falls into the abyss."
 	deathsound = 'russstation/sound/effects/death_howl.ogg'
+	var/can_special = 1 //Enables sif to do what he does best, spin and charge
 	var/spinIntervals = 0 //Counts how many spins Sif does before setting spinning status to false
 	var/spinning = FALSE //AOE spin special attack status
 	var/charging = FALSE //dashing special attack status
@@ -82,6 +83,47 @@ Difficulty: Medium
 	var/stageThree = FALSE
 	var/currentPower = 0 //Every few seconds this variable gets higher, when it gets high
 						 //enough it will use a special attack then reset the variable to 0
+
+//A living beacon for the sif ruins (hard to find sif considering the GPS only shows when sif is summoned)
+//Spawns on a really small enclosed lava island that is hard to reach in Sifs ruins
+/mob/living/simple_animal/hostile/megafauna/sif/living_beacon
+	name = "Beacon"
+	desc = "A robot that has a beacon on its back as well as tiny legs and muscular arms that it uses to walk with."
+	health = 75
+	maxHealth = 75
+	movement_type = GROUND
+	attacktext = "punches"
+	attack_sound = 'sound/items/sheath.ogg'
+	icon_state = "beacon"
+	icon_living = "beacon"
+	icon = 'russstation/icons/mob/lavaland/beacon.dmi'
+	icon_dead = "beacon_dead"
+	friendly = "pokes"
+	speak_emote = list("mechanically moans")
+	melee_damage_lower = 5
+	melee_damage_upper = 5
+	speed = 5
+	pixel_x = 0 //reset hitbox from original
+	move_to_delay = 4
+	del_on_death = 0
+	loot = list()
+	crusher_loot = list()
+	internal_type = /obj/item/gps/internal/sif
+	deathmessage = "moans as the sound of its power begins to wind down."
+	deathsound = 'sound/voice/borg_deathsound.ogg' 
+	can_special = 0
+	true_spawn = TRUE
+	environment_smash = ENVIRONMENT_SMASH_NONE
+	sentience_type = SENTIENCE_ARTIFICIAL
+	move_force = MOVE_FORCE_WEAK
+	move_resist = MOVE_FORCE_WEAK
+	pull_force = MOVE_FORCE_WEAK
+	faction = list("mining")
+	layer = MOB_LAYER
+
+//no medals rewarded for killing the beacon
+/mob/living/simple_animal/hostile/megafauna/sif/living_beacon/grant_achievement(medaltype, scoretype, crusher_kill, list/grant_achievement)
+	return
 
 //With a GPS sif can be identified by the "Infinity Signal".
 /obj/item/gps/internal/sif
@@ -110,14 +152,6 @@ Difficulty: Medium
 			playsound(get_turf(src.loc), 'sound/effects/curse3.ogg', 100, 1)
 			playsound(get_turf(src.loc), 'sound/effects/meteorimpact.ogg', 100, 1)
 			qdel(src)
-
-//Make sure there is one sif at any given moment
-/mob/living/simple_animal/hostile/megafauna/sif/Initialize()
-	. = ..()
-	if(true_spawn)
-		for(var/mob/living/simple_animal/hostile/megafauna/sif/S in GLOB.mob_living_list)
-			if(S != src)
-				return INITIALIZE_HINT_QDEL
 
 //Sif's charge attack
 /mob/living/simple_animal/hostile/megafauna/sif/proc/rush()
@@ -157,38 +191,41 @@ Difficulty: Medium
 	//Move
 	..()
 
-	//Charging currentPower every step
-	if(!charging || !spinning)
-		src.currentPower += 2
+	//Can they perform these tasks?
+	if(can_special == 1)
 
-	//Sets sif's anger status.
-	if(src.health <= 1000 && src.stageTwo == FALSE)
-		angered()
+		//Charging currentPower every step
+		if(!charging || !spinning)
+			src.currentPower += 2
 
-	//Sets sifs enrage status.
-	if(src.health <= 400 && src.stageThree == FALSE)
-		enraged()
+		//Sets sif's anger status.
+		if(src.health <= 1000 && src.stageTwo == FALSE)
+			angered()
 
-	//Whenever Sif moves he destroys walls in his way.
-	if(src.angered == TRUE || src.enraged == TRUE)
-		DestroySurroundings()
+		//Sets sifs enrage status.
+		if(src.health <= 400 && src.stageThree == FALSE)
+			enraged()
 
-	//Normally Sif will do a special when he has 100 currentPower.
-	if(src.angered == FALSE && src.currentPower >= 100)
-		special()
+		//Whenever Sif moves he destroys walls in his way.
+		if(src.angered == TRUE || src.enraged == TRUE)
+			DestroySurroundings()
 
-	//Now requires 50 power when angery
-	if(src.angered == TRUE && src.currentPower >= 50 && src.enraged == FALSE)
-		special()
+		//Normally Sif will do a special when he has 100 currentPower.
+		if(src.angered == FALSE && src.currentPower >= 100)
+			special()
 
-	//Now requires 30 power when enraged
-	if(src.enraged == TRUE && src.currentPower >= 30)
-		special()
+		//Now requires 50 power when angery
+		if(src.angered == TRUE && src.currentPower >= 50 && src.enraged == FALSE)
+			special()
 
-	//visual effect
-	if(src.charging == TRUE)
-		new /obj/effect/temp_visual/decoy/fading(loc,src)
-		DestroySurroundings()
+		//Now requires 30 power when enraged
+		if(src.enraged == TRUE && src.currentPower >= 30)
+			special()
+
+		//visual effect
+		if(src.charging == TRUE)
+			new /obj/effect/temp_visual/decoy/fading(loc,src)
+			DestroySurroundings()
 
 //Sif's AOE spin attack
 /mob/living/simple_animal/hostile/megafauna/sif/proc/spinAttack()
@@ -298,28 +335,31 @@ Difficulty: Medium
 		src.speed = default_attackspeed()
 
 /mob/living/simple_animal/hostile/megafauna/sif/Moved()
-	if(charging == TRUE)
-		DestroySurroundings()
 
-	//Stop spinning
-	if(src.spinIntervals == 5)
-		icon_state = "Great_Brown_Wolf"
-		src.spinIntervals = 0
-		spinning = FALSE
-		src.speed = default_attackspeed()
+	if(can_special == 1)
 
-	//Start spinning
-	if(spinning == TRUE)
-		icon_state = "Great_Brown_Wolf_Spin"
-		src.spinIntervals += 1
-		if(isturf(src.loc) || isobj(src.loc) && src.loc.density)
-			src.ex_act(EXPLODE_HEAVY)
-			explosion(get_turf(src), 0, 0, 4, 0, adminlog = FALSE, ignorecap = FALSE, flame_range = 0, silent = TRUE, smoke = FALSE)
-			playsound(src, pick('russstation/sound/effects/whoosh1.ogg', 'russstation/sound/effects/whoosh2.ogg', 'russstation/sound/effects/whoosh3.ogg'), 300, 1)
-			playsound(src, 'russstation/sound/effects/blade_spin.ogg', 400, 1)
-			if(angered)
-				src.speed = 8
-				src.move_to_delay = 2
+		if(charging == TRUE)
+			DestroySurroundings()
+
+		//Stop spinning 
+		if(src.spinIntervals == 5)
+			icon_state = "Great_Brown_Wolf"
+			src.spinIntervals = 0
+			spinning = FALSE
+			src.speed = default_attackspeed()
+
+		//Start spinning
+		if(spinning == TRUE)
+			icon_state = "Great_Brown_Wolf_Spin"
+			src.spinIntervals += 1
+			if(isturf(src.loc) || isobj(src.loc) && src.loc.density)
+				src.ex_act(EXPLODE_HEAVY)
+				explosion(get_turf(src), 0, 0, 4, 0, adminlog = FALSE, ignorecap = FALSE, flame_range = 0, silent = TRUE, smoke = FALSE)
+				playsound(src, pick('russstation/sound/effects/whoosh1.ogg', 'russstation/sound/effects/whoosh2.ogg', 'russstation/sound/effects/whoosh3.ogg'), 300, 1)
+				playsound(src, 'russstation/sound/effects/blade_spin.ogg', 400, 1)
+				if(angered)
+					src.speed = 8
+					src.move_to_delay = 2
 
 	playsound(src, 'sound/effects/meteorimpact.ogg', 200, 1, 2, 1)
 	..()
@@ -334,7 +374,7 @@ Difficulty: Medium
 			var/mob/living/L = A
 			L.visible_message("<span class='danger'>[src] stomps on [L]!</span>", "<span class='userdanger'>[src] stomps on you!</span>")
 			src.forceMove(get_turf(L))
-			L.apply_damage(35, BRUTE)
+			L.apply_damage(20, BRUTE)
 			playsound(get_turf(L), 'russstation/sound/effects/sif_stomp.ogg', 400, 1)
 			shake_camera(L, 4, 3)
 			shake_camera(src, 2, 3)
