@@ -105,6 +105,11 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	var/list/grind_results //A reagent list containing the reagents this item produces when ground up in a grinder - this can be an empty list to allow for reagent transferring only
 	var/list/juice_results //A reagent list containing blah blah... but when JUICED in a grinder!
 
+	//HONK - Smelting vars
+	var/datum/reagent/smelted_material = null
+	var/starting_material = null
+	//HONK - END
+
 /obj/item/Initialize()
 
 	materials =	typelist("materials", materials)
@@ -119,6 +124,12 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 	if(GLOB.rpg_loot_items)
 		AddComponent(/datum/component/fantasy)
+
+	//HONK - START
+	if(starting_material)
+		smelted_material = new starting_material()
+		smelted_material.volume = 30
+	//HONK - END
 
 	if(force_string)
 		item_flags |= FORCE_STRING_OVERRIDE
