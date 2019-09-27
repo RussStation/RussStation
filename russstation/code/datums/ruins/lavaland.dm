@@ -9,7 +9,7 @@
 
 //always spawn dwarfs
 /datum/map_template/ruin/lavaland/dwarf
-	name = "Dorf Coloney"
+	name = "Dorf Colony"
 	id = "dorf-man"
 	description = "A new chapter of dwarven history starts here."
 	suffix = "lavaland_surface_dwarf.dmm"
