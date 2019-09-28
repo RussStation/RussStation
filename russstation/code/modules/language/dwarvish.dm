@@ -1,5 +1,6 @@
 /datum/language/dwarvish
 	name = "dwarven"
+	icon = 'russstation/icons/misc/language.dmi'
 	desc = "The secret language of the Dwarves."
 	speech_verb = "says"
 	ask_verb = "inquires"
