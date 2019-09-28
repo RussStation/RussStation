@@ -354,6 +354,7 @@
 /obj/item/clothing/suit/armor/vest/dwarf
 	name = "dwarfven armour"
 	desc = "Great for stopping sponges."
+	alternate_worn_icon = 'russstation/icons/mob/suit.dmi'
 	icon = 'russstation/icons/obj/clothing/suits.dmi'
 	icon_state = "dwarf"
 	item_state = "dwarf"
@@ -382,6 +383,7 @@
 /obj/item/clothing/head/helmet/dwarf
 	name = "dwarven helm"
 	desc = "Protects the head from tantrums."
+	alternate_worn_icon = 'russstation/icons/mob/head.dmi'
 	icon = 'russstation/icons/obj/clothing/hats.dmi'
 	icon_state = "dwarf"
 	item_state = "dwarf"
