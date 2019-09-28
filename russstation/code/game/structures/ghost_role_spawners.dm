@@ -2,7 +2,7 @@
 	name = "dwarven dorm"
 	desc = "A dorm fit for a dwarf to claim or use."
 	mob_name = "dwarf"
-	icon = 'icons/obj/device.dmi'
+	icon = 'russstation/icons/obj/device.dmi'
 	icon_state = "migrant_portal"
 	density = TRUE 
 	anchored = TRUE 
@@ -41,5 +41,5 @@
 	icon_state = "manlydorfglass"
 	item_state = "coffee"
 	spillable = 1
-	
+	isGlass = FALSE
 
