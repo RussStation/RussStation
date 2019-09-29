@@ -17,13 +17,18 @@
 	punchdamagehigh = 11 //fist fighting with dorfs is very dangerous
 	mutanteyes = /obj/item/organ/eyes/night_vision
 
-/datum/species/dwarf/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
+/datum/species/dwarf/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
+	C.draw_russ_parts(FALSE)
 	. = ..()
 	var/dwarf_hair = pick("Beard (Dwarf)", "Beard (Very Long)", "Beard (Full)")
-	var/mob/living/carbon/human/H = C 
-	H.grant_language(/datum/language/dwarvish)
-	H.facial_hair_style = dwarf_hair
-	H.update_hair()
+	C.grant_language(/datum/language/dwarvish)
+	C.facial_hair_style = dwarf_hair
+	C.update_hair()
+
+/datum/species/dwarf/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
+	C.draw_russ_parts(TRUE)
+	. = ..()
+	
 
 /datum/species/dwarf/random_name(gender, unique, lastname)
 	return dwarf_name()
