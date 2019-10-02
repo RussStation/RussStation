@@ -95,7 +95,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/russ/citrus/slimelime
 	seed = /obj/item/seeds/russ/slimelime
-	name = "slimelime"
+	name = "slime lime"
 	desc = "A sticky and transparent lime, made of slime!."
 	icon_state = "slimelime"
 	filling_color = "#00FF00"
