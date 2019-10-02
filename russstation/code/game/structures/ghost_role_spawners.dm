@@ -37,7 +37,6 @@
 /obj/item/reagent_containers/food/drinks/wooden_mug
 	name = "wooden mug"
 	desc = "A mug for serving hearty brews."
-	item_state = "manlydorfglass"
 	icon_state = "manlydorfglass"
 	item_state = "coffee"
 	spillable = 1
