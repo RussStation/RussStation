@@ -75,4 +75,34 @@
 			G.visible_message("<span class='notice'>The goblin starts shaking it's feet viciously as it opens it's eyes.</span>")
 			qdel(src)
 
+//slime limes!
+/obj/item/seeds/russ/slimelime
+	name = "pack of slime lime seeds"
+	desc = "Almost seems like a pack of gummy candy"
+	icon_state = "seed-slimelime"
+	species = "slimelime"
+	plantname = "Slime Lime Tree"
+	product = /obj/item/reagent_containers/food/snacks/grown/russ/citrus/slimelime
+	lifespan = 25
+	endurance = 25
+	production = 2
+	icon_grow = "slimelime-grow"
+	icon_harvest = "slimelime-harvest"
+	icon_dead = "slimelime-dead"
+	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/squash)
+	reagents_add = list(/datum/reagent/toxin/slimejelly = 0.05, /datum/reagent/consumable/nutriment/vitamin = 0.09, /datum/reagent/consumable/limejuice = 0.1)
+	rarity = 80
+
+/obj/item/reagent_containers/food/snacks/grown/russ/citrus/slimelime
+	seed = /obj/item/seeds/russ/slimelime
+	name = "slime lime"
+	desc = "A sticky and transparent lime, made of slime!."
+	icon_state = "slimelime"
+	filling_color = "#00FF00"
+	juice_results = list(/datum/reagent/consumable/limejuice = 0)
+	distill_reagent = /datum/reagent/consumable/ethanol/booger
+
+
+
+
 //end
