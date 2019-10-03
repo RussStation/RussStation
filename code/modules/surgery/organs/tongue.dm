@@ -19,6 +19,7 @@
 		/datum/language/ratvar,
 		/datum/language/aphasia,
 		/datum/language/piratespeak,
+		/datum/language/dwarvish, //honk
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)

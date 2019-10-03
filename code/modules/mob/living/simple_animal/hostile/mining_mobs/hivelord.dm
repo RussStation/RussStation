@@ -191,7 +191,7 @@
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/proc/infest(mob/living/carbon/human/H)
 	visible_message("<span class='warning'>[name] burrows into the flesh of [H]!</span>")
 	var/mob/living/simple_animal/hostile/asteroid/hivelord/legion/L
-	if(H.dna.check_mutation(DWARFISM)) //dwarf legions aren't just fluff!
+	if(H.dna.check_mutation(DWARFISM) || isdwarf(H)) //dwarf legions aren't just fluff! //HONK - Added dwarfs to legion conversion
 		L = new /mob/living/simple_animal/hostile/asteroid/hivelord/legion/dwarf(H.loc)
 	else
 		L = new(H.loc)

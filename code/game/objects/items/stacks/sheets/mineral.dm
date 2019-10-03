@@ -12,6 +12,7 @@ Mineral Sheets
 		- Clown
 		- Titanium
 		- Plastitanium
+		- Clay (russstation/code/game/objects/items/stacks/sheets/mineral.dm) //honk
 	Others:
 		- Adamantine
 		- Mythril

@@ -18,6 +18,7 @@
 	var/refined_type = null //What this ore defaults to being refined into
 	novariants = TRUE // Ore stacks handle their icon updates themselves to keep the illusion that there's more going
 	var/list/stack_overlays
+	var/reagent_id = null //honk - reagent ids for smelted ore
 
 /obj/item/stack/ore/update_icon()
 	var/difference = min(ORESTACK_OVERLAYS_MAX, amount) - (LAZYLEN(stack_overlays)+1)
@@ -71,6 +72,7 @@
 	points = 30
 	materials = list(MAT_URANIUM=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/uranium
+	reagent_id = /datum/reagent/uranium //honk
 
 /obj/item/stack/ore/iron
 	name = "iron ore"
@@ -80,6 +82,7 @@
 	points = 1
 	materials = list(MAT_METAL=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/metal
+	reagent_id = /datum/reagent/iron //honk
 
 /obj/item/stack/ore/glass
 	name = "sand pile"
@@ -131,6 +134,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 15
 	materials = list(MAT_PLASMA=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/plasma
+	reagent_id = /datum/reagent/dorf_plasma //honk
 
 /obj/item/stack/ore/plasma/welder_act(mob/living/user, obj/item/I)
 	to_chat(user, "<span class='warning'>You can't hit a high enough temperature to smelt [src] properly!</span>")
@@ -145,6 +149,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 16
 	materials = list(MAT_SILVER=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/silver
+	reagent_id = /datum/reagent/silver //honk
 
 /obj/item/stack/ore/gold
 	name = "gold ore"
@@ -154,6 +159,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 18
 	materials = list(MAT_GOLD=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/gold
+	reagent_id = /datum/reagent/gold //honk
 
 /obj/item/stack/ore/diamond
 	name = "diamond ore"
@@ -163,6 +169,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 50
 	materials = list(MAT_DIAMOND=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/diamond
+	reagent_id = /datum/reagent/diamond //honk
 
 /obj/item/stack/ore/bananium
 	name = "bananium ore"
@@ -172,6 +179,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 60
 	materials = list(MAT_BANANIUM=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/bananium
+	reagent_id = /datum/reagent/dorf_bananium //honk
 
 /obj/item/stack/ore/titanium
 	name = "titanium ore"
@@ -181,6 +189,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 50
 	materials = list(MAT_TITANIUM=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/titanium
+	reagent_id = /datum/reagent/dorf_titanium //honk
 
 /obj/item/stack/ore/slag
 	name = "slag"

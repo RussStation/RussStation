@@ -816,6 +816,13 @@
 	taste_description = "iron"
 
 	color = "#C8A5DC" // rgb: 200, 165, 220
+	//honk - start
+	produce_type = /obj/item/stack/sheet/metal
+	attack_force = 15
+	pick_speed = 1
+	blunt_damage = TRUE
+	sharp_result = TRUE
+	//honk end
 
 /datum/reagent/iron/on_mob_life(mob/living/carbon/C)
 	if(C.blood_volume < BLOOD_VOLUME_NORMAL)
@@ -834,6 +841,13 @@
 	reagent_state = SOLID
 	color = "#F7C430" // rgb: 247, 196, 48
 	taste_description = "expensive metal"
+	//honk - start
+	produce_type = /obj/item/stack/sheet/mineral/gold
+	attack_force = 10
+	pick_speed = 1.5
+	blunt_damage = TRUE
+	sharp_result = TRUE
+	//honk end
 
 /datum/reagent/silver
 	name = "Silver"
@@ -841,6 +855,13 @@
 	reagent_state = SOLID
 	color = "#D0D0D0" // rgb: 208, 208, 208
 	taste_description = "expensive yet reasonable metal"
+	//honk - start
+	produce_type = /obj/item/stack/sheet/mineral/silver
+	attack_force = 15
+	pick_speed = 1.2
+	blunt_damage = TRUE
+	sharp_result = TRUE
+	//honk end
 
 /datum/reagent/silver/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(M.has_bane(BANE_SILVER))
@@ -854,6 +875,12 @@
 	color = "#B8B8C0" // rgb: 184, 184, 192
 	taste_description = "the inside of a reactor"
 	var/irradiation_level = 1
+	//honk - start
+	produce_type = /obj/item/stack/sheet/mineral/uranium
+	attack_force = 10
+	pick_speed = 1.75
+	sharp_result = TRUE
+	//honk end
 
 /datum/reagent/uranium/on_mob_life(mob/living/carbon/M)
 	M.apply_effect(irradiation_level/M.metabolism_efficiency,EFFECT_IRRADIATE,0)

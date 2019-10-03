@@ -20,6 +20,7 @@
 				CAT_ROBOT,
 				CAT_MISC,
 				CAT_PRIMAL,
+				CAT_SMITH, //honk
 				CAT_FOOD,
 				CAT_CLOTHING)
 	var/list/subcategories = list(
@@ -29,6 +30,7 @@
 						CAT_NONE, //Robot subcategories
 						CAT_NONE, //Misc subcategories
 						CAT_NONE, //Tribal subcategories
+						CAT_NONE, // HONK - Blacksmithing subcategories
 						list(	//Food subcategories
 							CAT_BREAD,
 							CAT_BURGER,
