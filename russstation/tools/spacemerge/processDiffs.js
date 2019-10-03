@@ -47,7 +47,7 @@ function makeOursHandler(path) {
 function makeCheckHandler(path) {
 	return () => {
 		const contents = readFileSync(path);
-		if (!/(\/\/|\/\*)[t\f\v ]*honk/.test(contents)) {
+		if (!/(\/\/|\/\*)[t\f\v ]*honk/i.test(contents)) {
 			checkout(path, false);
 		}
 	};
