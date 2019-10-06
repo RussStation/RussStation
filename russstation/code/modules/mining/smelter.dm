@@ -113,9 +113,8 @@
 			return
 	if(istype(W, /obj/item/melee/smith_hammer))
 		if(current_mold)
-			to_chat(user, "You break the result out of [current_mold] and start to hammer it into shape.")
+			to_chat(user, "You break the result out of [current_mold] breaking the mold and start to hammer the metal into shape.")
 			if(do_after(user, 80, target = src))
-				new current_mold.type(get_turf(src))
 				var/datum/reagent/R = current_mold.reagents.get_master_reagent()
 				var/obj/item/I
 				if(!istype(current_mold, /obj/item/reagent_containers/glass/mold/bar))
