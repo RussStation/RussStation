@@ -3,7 +3,7 @@
 	if (!message)
 		return
 
-	var/message_mode = get_message_mode(emoji_parse(message))
+	var/message_mode = get_message_mode(emoji_parse(message)) //honk - testing a fix for emoji parsing issues. submit to /tg/ after some playtesting
 	if(client && (message_mode == MODE_ADMIN || message_mode == MODE_DEADMIN))
 		message = copytext(message, 3)
 		if(findtext(message, " ", 1, 2))
