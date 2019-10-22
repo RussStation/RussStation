@@ -64,7 +64,7 @@
 				if(91 to INFINITY)
 					filling_overlay.icon_state = "reagent100"
 
-			filling_overlay.color = list("#0000", "#0000", "#0000", "#000f", mix_color_from_reagents(beaker.reagents.reagent_list))
+			filling_overlay.color = mix_color_from_reagents(beaker.reagents.reagent_list)
 			add_overlay(filling_overlay)
 
 /obj/machinery/iv_drip/MouseDrop(mob/living/target)
@@ -144,13 +144,13 @@
 			// If the beaker is full, ping
 			if(!amount)
 				if(prob(5))
-					visible_message("[src] pings.")
+					visible_message("<span class='hear'>[src] pings.</span>")
 				return
 
 			// If the human is losing too much blood, beep.
 			if(attached.blood_volume < BLOOD_VOLUME_SAFE && prob(5))
-				visible_message("[src] beeps loudly.")
-				playsound(loc, 'sound/machines/twobeep_high.ogg', 50, 1)
+				visible_message("<span class='hear'>[src] beeps loudly.</span>")
+				playsound(loc, 'sound/machines/twobeep_high.ogg', 50, TRUE)
 			attached.transfer_blood_to(beaker, amount)
 			update_icon()
 
@@ -161,7 +161,7 @@
 	if(!ishuman(user))
 		return
 	if(attached)
-		visible_message("[attached] is detached from [src]")
+		visible_message("<span class='notice'>[attached] is detached from [src].</span>")
 		attached = null
 		update_icon()
 		return

@@ -42,8 +42,8 @@ GLOBAL_LIST_INIT(poll_ignore_desc, list(
 	POLL_IGNORE_SHADE = "Shade",
 	POLL_IGNORE_IMAGINARYFRIEND = "Imaginary Friend",
 	POLL_IGNORE_SPLITPERSONALITY = "Split Personality",
-	POLL_IGNORE_CONTRACTOR_SUPPORT = "Contractor Support Unit",
-	POLL_IGNORE_DWARF = "Dwarf Dorm Room" //honk
+	POLL_IGNORE_CONTRACTOR_SUPPORT = "Contractor Support Unit", // honk -- start
+	POLL_IGNORE_DWARF = "Dwarf Dorm Room" // honk -- end
 ))
 GLOBAL_LIST_INIT(poll_ignore, init_poll_ignore())
 
