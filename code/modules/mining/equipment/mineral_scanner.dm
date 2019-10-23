@@ -70,14 +70,14 @@
 			if(oldC)
 				qdel(oldC)
 			var/obj/effect/temp_visual/mining_overlay/C = new /obj/effect/temp_visual/mining_overlay(M)
-			//honk - icon swap
+			//honk start - icon swap
 			if(M.mineralType == /obj/item/stack/ore/adamantine || M.mineralType == /obj/item/stack/sheet/mineral/clay)
 				C.icon = 'russstation/icons/effects/ore_visuals.dmi'
 				C.icon_state = M.scan_state
 			else
 				C.icon = 'icons/effects/ore_visuals.dmi'
 				C.icon_state = M.scan_state
-			//honk - end
+			//honk end
 
 
 /obj/effect/temp_visual/mining_overlay

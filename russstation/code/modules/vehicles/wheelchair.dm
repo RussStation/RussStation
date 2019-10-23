@@ -6,7 +6,7 @@
     desc = "A rugged display of two-wheeled freedom."
     icon_state = "hotrod"
     armor = list("melee" = 20, "bullet" = 20, "laser" = 20, "energy" = 0, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 40) // American Engineering
-    moveMult = 2 // roughly full running speed
+    delay_multiplier = 2 // roughly full running speed
 
 /obj/vehicle/ridden/wheelchair/russ/hotrod/wrench_act(mob/living/user, obj/item/I)
     to_chat(user, "<span class='notice'>You feel deep shame for trying to dismantle such a glorious symbol of freedom</span>")

@@ -11,7 +11,7 @@
 
 /datum/outfit/yalp_cultist
 	name = "Cultist of Yalp Elor"
-	uniform = /obj/item/clothing/under/rank/chaplain
+	uniform = /obj/item/clothing/under/rank/civilian/chaplain
 	suit = /obj/item/clothing/suit/chaplainsuit/holidaypriest
 	gloves = /obj/item/clothing/gloves/color/red
 	shoes = /obj/item/clothing/shoes/sneakers/black
@@ -33,8 +33,8 @@
 	H.eye_color = "000"
 	H.gender = MALE
 	H.skin_tone = "caucasian3"
-	H.hair_style = "Business Hair 3"
-	H.facial_hair_style = "Shaved"
+	H.hairstyle = "Business Hair 3"
+	H.facial_hairstyle = "Shaved"
 	H.hair_color = "000"
 	H.facial_hair_color = H.hair_color
 	H.update_body()
@@ -63,7 +63,7 @@
 
 /datum/outfit/spacepol
 	name = "Spacepol Officer"
-	uniform = /obj/item/clothing/under/rank/security/spacepol
+	uniform = /obj/item/clothing/under/rank/security/officer/spacepol
 	suit = /obj/item/clothing/suit/armor/vest/blueshirt
 	belt = /obj/item/gun/ballistic/automatic/pistol/m1911
 	head = /obj/item/clothing/head/helmet/police

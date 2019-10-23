@@ -31,6 +31,11 @@
 		return wear_mask
 	if(check_glasses && glasses && (glasses.flags_cover & GLASSESCOVERSEYES))
 		return glasses
+/mob/living/carbon/is_pepper_proof(check_head = TRUE, check_mask = TRUE)
+	if(check_head &&(head?.flags_cover & PEPPERPROOF))
+		return head
+	if(check_mask &&(wear_mask?.flags_cover & PEPPERPROOF))
+		return wear_mask
 
 /mob/living/carbon/check_projectile_dismemberment(obj/item/projectile/P, def_zone)
 	var/obj/item/bodypart/affecting = get_bodypart(def_zone)
@@ -57,7 +62,8 @@
 				if(isturf(I.loc))
 					I.attack_hand(src)
 					if(get_active_held_item() == I) //if our attack_hand() picks up the item...
-						visible_message("<span class='warning'>[src] catches [I]!</span>") //catch that sucker!
+						visible_message("<span class='warning'>[src] catches [I]!</span>", \
+										"<span class='userdanger'>You catch [I] in mid-air!</span>")
 						throw_mode_off()
 						return 1
 	..()
@@ -98,7 +104,7 @@
 		if(prob(probability))
 			if(affecting.dismember(I.damtype))
 				I.add_mob_blood(src)
-				playsound(get_turf(src), I.get_dismember_sound(), 80, 1)
+				playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
 		return TRUE //successful attack
 
 /mob/living/carbon/attack_drone(mob/living/simple_animal/drone/user)
@@ -159,7 +165,7 @@
 					M.powerlevel = 0
 
 				visible_message("<span class='danger'>The [M.name] has shocked [src]!</span>", \
-				"<span class='userdanger'>The [M.name] has shocked [src]!</span>")
+				"<span class='userdanger'>The [M.name] has shocked you!</span>")
 
 				do_sparks(5, TRUE, src)
 				var/power = M.powerlevel + rand(0,3)
@@ -210,17 +216,19 @@
 		O.emp_act(severity)
 
 ///Adds to the parent by also adding functionality to propagate shocks through pulling and doing some fluff effects.
-/mob/living/carbon/electrocute_act(shock_damage, source, siemens_coeff = 1, safety = FALSE, override = FALSE, tesla_shock = FALSE, illusion = FALSE, stun = TRUE)
+/mob/living/carbon/electrocute_act(shock_damage, source, siemens_coeff = 1, flags = NONE)
 	. = ..()
+	if(!.)
+		return
 	//Pulling
-	if(iscarbon(pulling) && !illusion && source != pulling)
+	if(iscarbon(pulling) && !(flags & SHOCK_ILLUSION) && source != pulling)
 		var/mob/living/carbon/C = pulling
-		C.electrocute_act(shock_damage*0.75, src, 1, 0, override, 0, illusion, stun)
-	if(iscarbon(pulledby) && !illusion && source != pulledby)
+		C.electrocute_act(shock_damage*0.75, src, flags)
+	if(iscarbon(pulledby) && !(flags & SHOCK_ILLUSION) && source != pulledby)
 		var/mob/living/carbon/C = pulledby
-		C.electrocute_act(shock_damage*0.75, src, 1, 0, override, 0, illusion, stun)
+		C.electrocute_act(shock_damage*0.75, src, flags)
 	//Stun
-	var/should_stun = (!tesla_shock || siemens_coeff > 0.5) && stun
+	var/should_stun = (!(flags & SHOCK_TESLA) || siemens_coeff > 0.5) && !(flags & SHOCK_NOSTUN)
 	if(should_stun)
 		Paralyze(40)
 	//Jitter and other fluff.
@@ -228,10 +236,7 @@
 	do_jitter_animation(jitteriness)
 	stuttering += 2
 	addtimer(CALLBACK(src, .proc/secondary_shock, should_stun), 20)
-	if(override)
-		return override
-	else
-		return shock_damage
+	return shock_damage
 
 ///Called slightly after electrocute act to reduce jittering and apply a secondary stun.
 /mob/living/carbon/proc/secondary_shock(should_stun)
@@ -270,7 +275,7 @@
 	AdjustImmobilized(-60)
 	set_resting(FALSE)
 
-	playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+	playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
 
 
 /mob/living/carbon/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0)
@@ -336,7 +341,8 @@
 	var/effect_amount = intensity - ear_safety
 	if(effect_amount > 0)
 		if(stun_pwr)
-			Paralyze(stun_pwr*effect_amount)
+			Paralyze((stun_pwr*effect_amount)*0.1)
+			Knockdown(stun_pwr*effect_amount)
 
 		if(istype(ears) && (deafen_pwr || damage_pwr))
 			var/ear_damage = damage_pwr * effect_amount

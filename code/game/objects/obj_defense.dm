@@ -22,6 +22,8 @@
 
 ///returns the damage value of the attack after processing the obj's various armor protections
 /obj/proc/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir, armour_penetration = 0)
+	if(damage_flag == "melee" && damage_amount < damage_deflection)
+		return 0
 	switch(damage_type)
 		if(BRUTE)
 		if(BURN)
@@ -39,11 +41,11 @@
 	switch(damage_type)
 		if(BRUTE)
 			if(damage_amount)
-				playsound(src, 'sound/weapons/smash.ogg', 50, 1)
+				playsound(src, 'sound/weapons/smash.ogg', 50, TRUE)
 			else
-				playsound(src, 'sound/weapons/tap.ogg', 50, 1)
+				playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
 		if(BURN)
-			playsound(src.loc, 'sound/items/welder.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
 
 /obj/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	..()
@@ -54,13 +56,11 @@
 		return
 	..() //contents explosion
 	if(target == src)
-		obj_integrity = 0
-		qdel(src)
+		take_damage(INFINITY, BRUTE, "bomb", 0)
 		return
 	switch(severity)
 		if(1)
-			obj_integrity = 0
-			qdel(src)
+			take_damage(INFINITY, BRUTE, "bomb", 0)
 		if(2)
 			take_damage(rand(100, 250), BRUTE, "bomb", 0)
 		if(3)
@@ -68,7 +68,7 @@
 
 /obj/bullet_act(obj/item/projectile/P)
 	. = ..()
-	playsound(src, P.hitsound, 50, 1)
+	playsound(src, P.hitsound, 50, TRUE)
 	visible_message("<span class='danger'>[src] is hit by \a [P]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 	if(!QDELETED(src)) //Bullet on_hit effect might have already destroyed this object
 		take_damage(P.damage, P.damage_type, P.flag, 0, turn(P.dir, 180), P.armour_penetration)
@@ -77,18 +77,15 @@
 /obj/proc/hulk_damage()
 	return 150 //the damage hulks do on punches to this object, is affected by melee armor
 
-/obj/attack_hulk(mob/living/carbon/human/user, does_attack_animation = 0)
-	if(user.a_intent == INTENT_HARM)
-		..(user, 1)
-		visible_message("<span class='danger'>[user] smashes [src]!</span>", null, null, COMBAT_MESSAGE_RANGE)
-		if(density)
-			playsound(src, 'sound/effects/meteorimpact.ogg', 100, 1)
-			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ), forced="hulk")
-		else
-			playsound(src, 'sound/effects/bang.ogg', 50, 1)
-		take_damage(hulk_damage(), BRUTE, "melee", 0, get_dir(src, user))
-		return 1
-	return 0
+/obj/attack_hulk(mob/living/carbon/human/user)
+	..()
+	user.visible_message("<span class='danger'>[user] smashes [src]!</span>", "<span class='danger'>You smash [src]!</span>", null, COMBAT_MESSAGE_RANGE)
+	if(density)
+		playsound(src, 'sound/effects/meteorimpact.ogg', 100, TRUE)
+	else
+		playsound(src, 'sound/effects/bang.ogg', 50, TRUE)
+	take_damage(hulk_damage(), BRUTE, "melee", 0, get_dir(src, user))
+	return TRUE
 
 /obj/blob_act(obj/structure/blob/B)
 	if(isturf(loc))
@@ -104,7 +101,7 @@
 
 /obj/attack_alien(mob/living/carbon/alien/humanoid/user)
 	if(attack_generic(user, 60, BRUTE, "melee", 0))
-		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
+		playsound(src.loc, 'sound/weapons/slash.ogg', 100, TRUE)
 
 /obj/attack_animal(mob/living/simple_animal/M)
 	if(!M.melee_damage_upper && !M.obj_damage)
@@ -119,7 +116,7 @@
 		else
 			. = attack_generic(M, rand(M.melee_damage_lower,M.melee_damage_upper), M.melee_damage_type, "melee", play_soundeffect, M.armour_penetration)
 		if(. && !play_soundeffect)
-			playsound(src, 'sound/effects/meteorimpact.ogg', 100, 1)
+			playsound(src, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 
 /obj/force_pushed(atom/movable/pusher, force = MOVE_FORCE_DEFAULT, direction)
 	return TRUE
@@ -135,7 +132,7 @@
 /obj/attack_slime(mob/living/simple_animal/slime/user)
 	if(!user.is_adult)
 		return
-	attack_generic(user, rand(10, 15), "melee", 1)
+	attack_generic(user, rand(10, 15), BRUTE, "melee", 1)
 
 /obj/mech_melee_attack(obj/mecha/M)
 	M.do_attack_animation(src)
@@ -147,15 +144,15 @@
 	else
 		switch(M.damtype)
 			if(BRUTE)
-				playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
+				playsound(src, 'sound/weapons/punch4.ogg', 50, TRUE)
 			if(BURN)
-				playsound(src, 'sound/items/welder.ogg', 50, 1)
+				playsound(src, 'sound/items/welder.ogg', 50, TRUE)
 			if(TOX)
-				playsound(src, 'sound/effects/spray2.ogg', 50, 1)
+				playsound(src, 'sound/effects/spray2.ogg', 50, TRUE)
 				return 0
 			else
 				return 0
-	visible_message("<span class='danger'>[M.name] has hit [src].</span>", null, null, COMBAT_MESSAGE_RANGE)
+	M.visible_message("<span class='danger'>[M.name] hits [src]!</span>", "<span class='danger'>You hit [src]!</span>", null, COMBAT_MESSAGE_RANGE)
 	return take_damage(M.force*3, mech_damtype, "melee", play_soundeffect, get_dir(src, M)) // multiplied by 3 so we can hit objs hard but not be overpowered against mobs.
 
 /obj/singularity_act()
@@ -189,7 +186,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 			if(armour_value != "acid" && armour_value != "fire")
 				armor = armor.modifyAllRatings(0 - round(sqrt(acid_level)*0.1))
 		if(prob(33))
-			playsound(loc, 'sound/items/welder.ogg', 150, 1)
+			playsound(loc, 'sound/items/welder.ogg', 150, TRUE)
 		take_damage(min(1 + round(sqrt(acid_level)*0.3), 300), BURN, "acid", 0)
 
 	acid_level = max(acid_level - (5 + 3*round(sqrt(acid_level))), 0)
@@ -243,7 +240,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(has_buckled_mobs())
 		for(var/m in buckled_mobs)
 			var/mob/living/buckled_mob = m
-			buckled_mob.electrocute_act((CLAMP(round(strength/400), 10, 90) + rand(-5, 5)), src, tesla_shock = 1)
+			buckled_mob.electrocute_act((CLAMP(round(strength/400), 10, 90) + rand(-5, 5)), src, flags = SHOCK_TESLA)
 
 /obj/proc/reset_shocked()
 	obj_flags &= ~BEING_SHOCKED

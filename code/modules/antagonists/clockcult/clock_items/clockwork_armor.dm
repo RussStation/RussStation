@@ -7,7 +7,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACE
-	armor = list("melee" = 50, "bullet" = 70, "laser" = -25, "energy" = 0, "bomb" = 60, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
+	armor = list("melee" = 60, "bullet" = 70, "laser" = -25, "energy" = 0, "bomb" = 60, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
 
 /obj/item/clothing/head/helmet/clockwork/Initialize()
 	. = ..()
@@ -49,7 +49,7 @@
 			to_chat(user, "<span class='userdanger'>The helmet tries to drive a spike through your head as you scramble to remove it!</span>")
 			user.emote("scream")
 			user.apply_damage(30, BRUTE, BODY_ZONE_HEAD)
-			user.adjustBrainLoss(30)
+			user.adjustOrganLoss(ORGAN_SLOT_BRAIN, 30)
 		addtimer(CALLBACK(user, /mob/living.proc/dropItemToGround, src, TRUE), 1) //equipped happens before putting stuff on(but not before picking items up), 1). thus, we need to wait for it to be on before forcing it off.
 
 /obj/item/clothing/head/helmet/clockwork/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
@@ -125,7 +125,6 @@
 	icon = 'icons/obj/clothing/clockwork_garb.dmi'
 	icon_state = "clockwork_gauntlets"
 	item_state = "clockwork_gauntlets"
-	item_color = null //So they don't wash.
 	strip_delay = 50
 	equip_delay_other = 30
 	body_parts_covered = ARMS

@@ -381,7 +381,6 @@
 			/obj/item/reagent_containers/glass/bottle/morphine,
 			/obj/item/reagent_containers/glass/bottle/chloralhydrate,
 			/obj/item/reagent_containers/glass/bottle/mannitol,
-			/obj/item/reagent_containers/glass/bottle/charcoal,
 			/obj/item/reagent_containers/glass/bottle/mutagen,
 			/obj/item/reagent_containers/glass/bottle/plasma,
 			/obj/item/reagent_containers/glass/bottle/synaptizine,
@@ -532,7 +531,6 @@
 		if (207 to 213)
 			new /obj/item/clothing/mask/gas/clown_hat(get_turf(user), num)
 			new /obj/item/clothing/shoes/clown_shoes(get_turf(user), num)
-			new /obj/item/clothing/under/rank/clown(get_turf(user), num)
 			new /obj/item/toy/crayon/rainbow(get_turf(user), num)
 			new /obj/item/bikehorn(get_turf(user), num)
 			new /obj/structure/statue/bananium/clown(get_turf(user), num)

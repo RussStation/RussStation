@@ -40,6 +40,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/self_consuming = FALSE
 	var/reagent_weight = 1 //affects how far it travels when sprayed
 	var/metabolizing = FALSE
+	var/harmful = FALSE;
 
 	//honk - dorf smithing vars (tried creating a sperate file but it wouldn't work, this is the best way to do it)
 	var/attack_force = 5 //damage by force
@@ -76,7 +77,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	holder.remove_reagent(type, metabolization_rate * M.metabolism_efficiency) //By default it slowly disappears.
 	return
 
-datum/reagent/proc/on_transfer(atom/A, method=TOUCH, volume) //Called after a reagent is transfered
+/datum/reagent/proc/on_transfer(atom/A, method=TOUCH, trans_volume) //Called after a reagent is transfered
 	return
 
 
@@ -110,6 +111,9 @@ datum/reagent/proc/on_transfer(atom/A, method=TOUCH, volume) //Called after a re
 /datum/reagent/proc/on_update(atom/A)
 	return
 
+//called on expose_temperature
+/datum/reagent/proc/on_temp_change()
+	return
 // Called when the reagent container is hit by an explosion
 /datum/reagent/proc/on_ex_act(severity)
 	return

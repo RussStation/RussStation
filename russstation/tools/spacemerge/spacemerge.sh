@@ -28,5 +28,6 @@ git checkout --theirs tgstation.dme
 git checkout --ours html/changelogs/.all_changelog.yml
 git checkout --ours html/templates/header.html
 git checkout --ours README.md
+git checkout --ours .travis.yml
 
 echo "And that's all she wrote."

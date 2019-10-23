@@ -14,12 +14,12 @@
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "tong"
 
-/obj/machinery/smelter 
-	name = "smelter" 
+/obj/machinery/smelter
+	name = "smelter"
 	desc = "An old Sendarian tool. Fuel: (0/20)"
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "forge"
-	density = TRUE 
+	density = TRUE
 	anchored = FALSE
 	var/obj/item/reagent_containers/glass/bucket/iron_crucible_bucket/crucible = null
 	var/mutable_appearance/my_bucket = null
@@ -38,14 +38,14 @@
 		qdel(W)
 
 	if(istype(W, /obj/item/reagent_containers/glass/bucket/iron_crucible_bucket) && bucket_loaded == FALSE) //load in bucket
-		to_chat(user, "You load the smelter with a crucible. It is now ready to smelt ore.") 
+		to_chat(user, "You load the smelter with a crucible. It is now ready to smelt ore.")
 		crucible = W
-		bucket_loaded = TRUE 
+		bucket_loaded = TRUE
 		user.dropItemToGround(W)
-		W.loc = src 
+		W.loc = src
 		my_bucket = mutable_appearance('russstation/icons/obj/blacksmithing.dmi', W.icon_state)
 		add_overlay(my_bucket)
-		return 
+		return
 
 	if(istype(W, /obj/item/crucible_tongs) && bucket_loaded == TRUE) //take out bucket
 		to_chat(user, "You take the crucible out of the smelter.")
@@ -54,7 +54,7 @@
 		C.volume = 100
 		cut_overlay(my_bucket)
 		bucket_loaded = FALSE
-		my_bucket = null 
+		my_bucket = null
 		crucible = null
 		return
 
@@ -101,11 +101,11 @@
 				return //get out of here if its not ore tdogTrigger (stops things like water pickaxe heads and such)
 			to_chat(user, "you place [M] on [src].")
 			user.dropItemToGround(M)
-			M.loc = src 
-			current_mold = M 
+			M.loc = src
+			current_mold = M
 			my_mold = mutable_appearance('russstation/icons/obj/blacksmithing.dmi', M.icon_state)
 			add_overlay(my_mold)
-			return 
+			return
 		if(R && R.volume)
 			to_chat(user, "There's not enough in the mold to make a full cast!")
 		else
@@ -128,9 +128,9 @@
 				qdel(current_mold)
 				cut_overlay(my_mold)
 				my_mold = null
-				current_mold = null 
-				return 
-		else 
+				current_mold = null
+				return
+		else
 			to_chat(user, "There's nothing in [current_mold]!")
 			return
 
@@ -148,7 +148,7 @@
 	var/attack_amt = 0
 	var/blunt_bonus = FALSE //determinse if the reagent used for the part has a bonus for blunt materials
 
-/obj/item/mold_result/blade 
+/obj/item/mold_result/blade
 	name = "blade"
 	desc = "A blade made of "
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
@@ -210,7 +210,7 @@
 	if(smelted_material.sharp_result)
 		sharpness = IS_SHARP
 	if(smelted_material.blunt_damage)
-		blunt_bonus = TRUE 
+		blunt_bonus = TRUE
 
 //Forging anvil hammer
 /obj/item/melee/smith_hammer
@@ -233,18 +233,18 @@
 
 /obj/item/melee/smithed_sword/CheckParts(list/parts_list)
 	..()
-	var/obj/item/mold_result/blade/B = locate() in contents 
+	var/obj/item/mold_result/blade/B = locate() in contents
 	if(B)
 		var/image/I = image('russstation/icons/obj/blacksmithing.dmi', "sword_blade")
-		I.color = B.color 
+		I.color = B.color
 		smelted_material = new B.smelted_material.type()
 		add_overlay(I)
 		name = "[B.material_type] broadsword"
-		force = B.attack_amt * 2 
+		force = B.attack_amt * 2
 		desc = "A broadsword made of [B.material_type]."
 		armour_penetration = B.armour_penetration
 		sharpness = B.sharpness
-	
+
 //Forged Pickaxe
 /obj/item/pickaxe/smithed_pickaxe
 	name = "unobtanium pickaxe"
@@ -255,14 +255,14 @@
 
 /obj/item/pickaxe/smithed_pickaxe/CheckParts(list/parts_list)
 	..()
-	var/obj/item/mold_result/pickaxe_head/P = locate() in contents 
+	var/obj/item/mold_result/pickaxe_head/P = locate() in contents
 	if(P)
 		var/image/I = image('russstation/icons/obj/blacksmithing.dmi', "pickaxe_head")
-		I.color = P.color 
+		I.color = P.color
 		smelted_material = new P.smelted_material.type()
 		add_overlay(I)
 		name = "[P.material_type] pickaxe"
-		force = P.attack_amt 
+		force = P.attack_amt
 		toolspeed = P.pickaxe_speed
 		desc = "A pickaxe made of [P.material_type] head."
 		armour_penetration = P.armour_penetration * 1.25 //if you think about it, pickaxes are the best at piercing armour
@@ -281,17 +281,17 @@
 	var/obj/item/mold_result/shovel_head/S = locate() in contents
 	if(S)
 		var/image/I = image('russstation/icons/obj/blacksmithing.dmi', "shovel_head")
-		I.color = S.color 
+		I.color = S.color
 		add_overlay(I)
 		smelted_material = new S.smelted_material.type()
 		name = "[S.material_type] shovel"
 		if(S.blunt_bonus == TRUE)
 			force = S.attack_amt *1.25
-		else 
-			force = S.attack_amt * 0.75 
+		else
+			force = S.attack_amt * 0.75
 		toolspeed = S.pickaxe_speed * 0.5 // gotta DIG FAST
 		desc = "A shovel with a [S.material_type] head."
-		armour_penetration = S.armour_penetration * 0.5 
+		armour_penetration = S.armour_penetration * 0.5
 		sharpness = S.sharpness
 
 //Forged Knife
@@ -307,7 +307,7 @@
 	var/obj/item/mold_result/knife_head/K = locate() in contents
 	if(K)
 		var/image/I = image('russstation/icons/obj/blacksmithing.dmi', "knife_head")
-		I.color = K.color 
+		I.color = K.color
 		add_overlay(I)
 		smelted_material = new K.smelted_material.type()
 		name = "[K.material_type] knife"
@@ -331,10 +331,10 @@
 
 /obj/item/twohanded/smithed_war_hammer/CheckParts(list/parts_list)
 	..()
-	var/obj/item/mold_result/war_hammer_head/W = locate() in contents 
+	var/obj/item/mold_result/war_hammer_head/W = locate() in contents
 	if(W)
 		var/image/I = image('russstation/icons/obj/blacksmithing.dmi', "war_hammer_head")
-		I.color = W.color 
+		I.color = W.color
 		add_overlay(I)
 		smelted_material = new W.smelted_material.type()
 		name = "[W.material_type] warhammer"
@@ -342,24 +342,24 @@
 			force = W.attack_amt * 2
 			force_unwielded = W.attack_amt * 2
 			force_wielded = W.attack_amt * 4
-		else 
+		else
 			force = W.attack_amt * 0.75
 			force_unwielded = W.attack_amt * 0.75
 			force_wielded = W.attack_amt * 2
 		desc = "A warhammer made of [W.material_type]."
-		armour_penetration = W.armour_penetration * 3 
+		armour_penetration = W.armour_penetration * 3
 		sharpness = W.sharpness
 
 //Forged Armour
 /obj/item/clothing/suit/armor/vest/dwarf
 	name = "dwarfven armour"
 	desc = "Great for stopping sponges."
-	alternate_worn_icon = 'russstation/icons/mob/suit.dmi'
+	mob_overlay_icon = 'russstation/icons/mob/suit.dmi'
 	icon = 'russstation/icons/obj/clothing/suits.dmi'
 	icon_state = "dwarf"
 	item_state = "dwarf"
 	body_parts_covered = CHEST|GROIN|ARMS
-	cold_protection = CHEST|GROIN|ARMS 
+	cold_protection = CHEST|GROIN|ARMS
 	heat_protection = CHEST|GROIN|ARMS
 	armor = list(melee = 50, bullet = 10, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0, fire = 80, acid = 80)
 	strip_delay = 80
@@ -368,10 +368,10 @@
 
 /obj/item/clothing/suit/armor/vest/dwarf/CheckParts(list/parts_list)
 	..()
-	var/obj/item/mold_result/armour_plating/S = locate() in contents 
+	var/obj/item/mold_result/armour_plating/S = locate() in contents
 	if(S)
 		var/image/Q = image(icon, icon_state)
-		Q.color = S.color 
+		Q.color = S.color
 		add_overlay(Q)
 		smelted_material = new S.smelted_material.type()
 		name = "[S.material_type] armour"
@@ -383,7 +383,7 @@
 /obj/item/clothing/head/helmet/dwarf
 	name = "dwarven helm"
 	desc = "Protects the head from tantrums."
-	alternate_worn_icon = 'russstation/icons/mob/head.dmi'
+	mob_overlay_icon = 'russstation/icons/mob/head.dmi'
 	icon = 'russstation/icons/obj/clothing/hats.dmi'
 	icon_state = "dwarf"
 	item_state = "dwarf"

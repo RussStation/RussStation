@@ -10,7 +10,7 @@
 	icon_living = "basic"
 	icon_dead = "basic"
 	gender = NEUTER
-	mob_biotypes = list(MOB_ROBOTIC)
+	mob_biotypes = MOB_ROBOTIC
 	health = 15
 	maxHealth = 15
 	healable = 0
@@ -18,7 +18,7 @@
 	melee_damage_upper = 3
 	attacktext = "claws"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
-	projectilesound = 'sound/weapons/gunshot.ogg'
+	projectilesound = 'sound/weapons/gun/pistol/shot.ogg'
 	projectiletype = /obj/item/projectile/hivebotbullet
 	faction = list("hivebot")
 	check_friendly_fire = 1

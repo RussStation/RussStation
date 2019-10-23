@@ -80,7 +80,7 @@
 		flags = CHANGETURF_DEFER_CHANGE
 	ScrapeAway(null, flags)
 	addtimer(CALLBACK(src, .proc/AfterChange), 1, TIMER_UNIQUE)
-	playsound(src, 'sound/effects/break_stone.ogg', 50, 1) //beautiful destruction
+	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE) //beautiful destruction
 
 /turf/closed/mineral/attack_animal(mob/living/simple_animal/user)
 	if((user.environment_smash & ENVIRONMENT_SMASH_WALLS) || (user.environment_smash & ENVIRONMENT_SMASH_RWALLS))
@@ -89,7 +89,7 @@
 
 /turf/closed/mineral/attack_alien(mob/living/carbon/alien/M)
 	to_chat(M, "<span class='notice'>You start digging into the rock...</span>")
-	playsound(src, 'sound/effects/break_stone.ogg', 50, 1)
+	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE)
 	if(do_after(M, 40, target = src))
 		to_chat(M, "<span class='notice'>You tunnel into the rock.</span>")
 		gets_drilled(M)
@@ -129,11 +129,12 @@
 /turf/closed/mineral/Spread(turf/T)
 	T.ChangeTurf(type)
 
-/turf/closed/mineral/random //HONK - ADDED TO RANDOM POOL ADAMANTINE
+/turf/closed/mineral/random //HONK start -- ADDED TO RANDOM POOL ADAMANTINE
 	var/list/mineralSpawnChanceList = list(/turf/closed/mineral/uranium = 5, /turf/closed/mineral/diamond = 1, /turf/closed/mineral/gold = 10,
 		/turf/closed/mineral/silver = 12, /turf/closed/mineral/plasma = 20, /turf/closed/mineral/iron = 40, /turf/closed/mineral/titanium = 11,
 		/turf/closed/mineral/gibtonite = 4, /turf/open/floor/plating/asteroid/airless/cave = 2, /turf/closed/mineral/bscrystal = 1,
 		/turf/closed/mineral/clay = 15, /turf/closed/mineral/adamantine = 1) //Currently, Adamantine won't spawn as it has no uses. -Durandan //NOW IT DOES BITCHES - iamgoofball
+	// honk end
 	var/mineralChance = 13
 	var/display_icon_state = "rock"
 
@@ -157,14 +158,18 @@
 			src = M
 			M.levelupdate()
 
+/turf/closed/mineral/random/no_caves
+	mineralSpawnChanceList = list(/turf/closed/mineral/uranium = 5, /turf/closed/mineral/diamond = 1, /turf/closed/mineral/gold = 10,
+		/turf/closed/mineral/silver = 12, /turf/closed/mineral/plasma = 20, /turf/closed/mineral/iron = 40, /turf/closed/mineral/titanium = 11,
+		/turf/closed/mineral/gibtonite = 4, /turf/closed/mineral/bscrystal = 1)
 
 /turf/closed/mineral/random/high_chance
 	icon_state = "rock_highchance"
 	mineralChance = 25
 	mineralSpawnChanceList = list(
 		/turf/closed/mineral/uranium = 35, /turf/closed/mineral/diamond = 30, /turf/closed/mineral/gold = 45, /turf/closed/mineral/titanium = 45,
-		/turf/closed/mineral/silver = 50, /turf/closed/mineral/plasma = 50, /turf/closed/mineral/bscrystal = 20,
-		/turf/closed/mineral/adamantine = 25)//honk - adamantine
+		/turf/closed/mineral/silver = 50, /turf/closed/mineral/plasma = 50, /turf/closed/mineral/bscrystal = 20, // honk start -- adamantine
+		/turf/closed/mineral/adamantine = 25) // honk end
 
 /turf/closed/mineral/random/high_chance/volcanic
 	environment_type = "basalt"
@@ -174,8 +179,8 @@
 	defer_change = 1
 	mineralSpawnChanceList = list(
 		/turf/closed/mineral/uranium/volcanic = 35, /turf/closed/mineral/diamond/volcanic = 30, /turf/closed/mineral/gold/volcanic = 45, /turf/closed/mineral/titanium/volcanic = 45,
-		/turf/closed/mineral/silver/volcanic = 50, /turf/closed/mineral/plasma/volcanic = 50, /turf/closed/mineral/bscrystal/volcanic = 20,
-		/turf/closed/mineral/adamantine = 15) //honk - adamantine
+		/turf/closed/mineral/silver/volcanic = 50, /turf/closed/mineral/plasma/volcanic = 50, /turf/closed/mineral/bscrystal/volcanic = 20, // honk start -- adamantine
+		/turf/closed/mineral/adamantine = 15) // honk end
 
 
 
@@ -199,8 +204,8 @@
 	mineralSpawnChanceList = list(
 		/turf/closed/mineral/uranium/volcanic = 5, /turf/closed/mineral/diamond/volcanic = 1, /turf/closed/mineral/gold/volcanic = 10, /turf/closed/mineral/titanium/volcanic = 11,
 		/turf/closed/mineral/silver/volcanic = 12, /turf/closed/mineral/plasma/volcanic = 20, /turf/closed/mineral/iron/volcanic = 40,
-		/turf/closed/mineral/gibtonite/volcanic = 4, /turf/open/floor/plating/asteroid/airless/cave/volcanic = 1, /turf/closed/mineral/bscrystal/volcanic = 1,
-		/turf/closed/mineral/clay = 15, /turf/closed/mineral/adamantine = 1) //honk - adamntine and clay
+		/turf/closed/mineral/gibtonite/volcanic = 4, /turf/open/floor/plating/asteroid/airless/cave/volcanic = 1, /turf/closed/mineral/bscrystal/volcanic = 1, //honk start -- adamntine and clay
+		/turf/closed/mineral/clay = 15, /turf/closed/mineral/adamantine = 1)  //honk end
 
 
 /turf/closed/mineral/random/labormineral
@@ -393,7 +398,7 @@
 	smooth = SMOOTH_MORE|SMOOTH_BORDER
 	canSmoothWith = list (/turf/closed)
 	baseturfs = /turf/open/floor/plating/ashplanet/wateryrock
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+	initial_gas_mix = OPENTURF_LOW_PRESSURE
 	environment_type = "waste"
 	turf_type = /turf/open/floor/plating/ashplanet/rocky
 	defer_change = 1
@@ -490,7 +495,7 @@
 
 /turf/closed/mineral/gibtonite/gets_drilled(mob/user, triggered_by_explosion = 0)
 	if(stage == GIBTONITE_UNSTRUCK && mineralAmt >= 1) //Gibtonite deposit is activated
-		playsound(src,'sound/effects/hit_on_shattered_glass.ogg',50,1)
+		playsound(src,'sound/effects/hit_on_shattered_glass.ogg',50,TRUE)
 		explosive_reaction(user, triggered_by_explosion)
 		return
 	if(stage == GIBTONITE_ACTIVE && mineralAmt >= 1) //Gibtonite deposit goes kaboom

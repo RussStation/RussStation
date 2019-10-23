@@ -100,7 +100,7 @@
 				return
 			reagents.trans_to(W, W.max_fuel, transfered_by = user)
 			user.visible_message("<span class='notice'>[user] refills [user.p_their()] [W.name].</span>", "<span class='notice'>You refill [W].</span>")
-			playsound(src, 'sound/effects/refill.ogg', 50, 1)
+			playsound(src, 'sound/effects/refill.ogg', 50, TRUE)
 			W.update_icon()
 		else
 			user.visible_message("<span class='warning'>[user] catastrophically fails at refilling [user.p_their()] [W.name]!</span>", "<span class='userdanger'>That was stupid of you.</span>")
@@ -191,6 +191,7 @@
 	desc = "A stationairy, plumbed, water tank."
 
 /obj/structure/reagent_dispensers/plumbed/wrench_act(mob/living/user, obj/item/I)
+	..()
 	default_unfasten_wrench(user, I)
 	return TRUE
 

@@ -3,6 +3,18 @@
 /obj/structure/fans/tiny/invisible //For blocking air in ruin doorways
 	invisibility = INVISIBILITY_ABSTRACT
 
+
+///Wizard tower item
+/obj/item/disk/design_disk/adv/knight_gear
+	name = "Magic Disk of Smithing"
+
+/obj/item/disk/design_disk/adv/knight_gear/Initialize()
+	. = ..()
+	var/datum/design/knight_armour/A = new
+	var/datum/design/knight_helmet/H = new
+	blueprints[1] = A
+	blueprints[2] = H
+
 //lavaland_surface_seed_vault.dmm
 //Seed Vault
 
@@ -34,7 +46,7 @@
 	desc = "Allows for the construction of a Golem Shell."
 	id = "golem"
 	build_type = AUTOLATHE
-	materials = list(MAT_METAL = 40000)
+	materials = list(/datum/material/iron = 40000)
 	build_path = /obj/item/golem_shell
 	category = list("Imported")
 
@@ -77,6 +89,7 @@
 		/obj/item/stack/sheet/bone					= /datum/species/golem/bone,
 		/obj/item/stack/sheet/durathread			= /datum/species/golem/durathread,
 		/obj/item/stack/sheet/cotton/durathread		= /datum/species/golem/durathread,
+		/obj/item/stack/sheet/mineral/snow			= /datum/species/golem/snow,
 		/obj/item/stack/sheet/capitalisium			= /datum/species/golem/capitalist,
 		/obj/item/stack/sheet/stalinium				= /datum/species/golem/soviet)
 
@@ -152,7 +165,4 @@
 
 /obj/item/clothing/mask/chameleon/gps/Initialize()
 	. = ..()
-	new /obj/item/gps/internal/lavaland_syndicate_base(src)
-
-/obj/item/gps/internal/lavaland_syndicate_base
-	gpstag = "Encrypted Signal"
+	AddComponent(/datum/component/gps, "Encrypted Signal")

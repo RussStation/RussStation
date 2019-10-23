@@ -89,7 +89,7 @@
 	var/stun_time = 100
 
 /obj/structure/trap/stun/trap_effect(mob/living/L)
-	L.electrocute_act(30, src, safety=1) // electrocute act does a message.
+	L.electrocute_act(30, src, flags = SHOCK_NOGLOVES) // electrocute act does a message.
 	L.Paralyze(stun_time)
 
 /obj/structure/trap/stun/hunter
@@ -149,7 +149,7 @@
 
 /obj/item/bountytrap/proc/announce_fugitive()
 	spark_system.start()
-	playsound(src, 'sound/machines/ding.ogg', 50, 1)
+	playsound(src, 'sound/machines/ding.ogg', 50, TRUE)
 	radio.talk_into(src, "Fugitive has triggered this trap in the [get_area_name(src)]!", RADIO_CHANNEL_COMMON)
 
 /obj/item/bountytrap/attack_self(mob/living/user)
@@ -174,11 +174,7 @@
 /obj/structure/trap/fire/trap_effect(mob/living/L)
 	to_chat(L, "<span class='danger'><B>Spontaneous combustion!</B></span>")
 	L.Paralyze(20)
-
-/obj/structure/trap/fire/flare()
-	..()
 	new /obj/effect/hotspot(get_turf(src))
-
 
 /obj/structure/trap/chill
 	name = "frost trap"
@@ -202,9 +198,6 @@
 	to_chat(L, "<span class='danger'><B>The ground quakes beneath your feet!</B></span>")
 	L.Paralyze(100)
 	L.adjustBruteLoss(35)
-
-/obj/structure/trap/damage/flare()
-	..()
 	var/obj/structure/flora/rock/giant_rock = new(get_turf(src))
 	QDEL_IN(giant_rock, 200)
 

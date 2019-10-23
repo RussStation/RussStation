@@ -81,8 +81,9 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 		if(linked_dirs & check_dir)
 			var/TB = get_step(loc, check_dir)
 			var/obj/structure/cable/C = locate(/obj/structure/cable) in TB
-			C.linked_dirs &= ~inverse
-			C.update_icon()
+			if(C)
+				C.linked_dirs &= ~inverse
+				C.update_icon()
 
 	if(powernet)
 		cut_cable_from_powernet()				// update the powernets
@@ -125,7 +126,7 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 						dir_string = "[dir_string]-node"
 						break
 		icon_state = dir_string
-	
+
 
 /obj/structure/cable/proc/handlecable(obj/item/W, mob/user, params)
 	var/turf/T = get_turf(src)
@@ -134,7 +135,7 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 	if(W.tool_behaviour == TOOL_WIRECUTTER)
 		if (shock(user, 50))
 			return
-		user.visible_message("[user] cuts the cable.", "<span class='notice'>You cut the cable.</span>")
+		user.visible_message("<span class='notice'>[user] cuts the cable.</span>", "<span class='notice'>You cut the cable.</span>")
 		investigate_log("was cut by [key_name(usr)] in [AREACOORD(src)]", INVESTIGATE_WIRES)
 		deconstruct()
 		return
@@ -283,16 +284,16 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 // Powernets handling helpers
 //////////////////////////////////////////////
 
-/obj/structure/cable/proc/get_cable_connections(powernetless_only, ignore_dir = null)
+/obj/structure/cable/proc/get_cable_connections(powernetless_only)
 	. = list()
 	var/turf/T
 	for(var/check_dir in GLOB.cardinals)
-		if((linked_dirs & check_dir) && check_dir != ignore_dir)
+		if(linked_dirs & check_dir)
 			T = get_step(src, check_dir)
 			if(T)
 				var/obj/structure/cable/C = locate(/obj/structure/cable) in T
 				if(C)
-					.[C] = check_dir
+					. += C
 
 /obj/structure/cable/proc/get_machine_connections(powernetless_only)
 	. = list()
@@ -325,12 +326,12 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 
 	//clear the powernet of any machines on tile first
 	for(var/obj/machinery/power/P in T1)
-		P.disconnect_from_network() 
+		P.disconnect_from_network()
 
 	var/list/P_list = list()
 	for(var/dir_check in GLOB.cardinals)
 		if(linked_dirs & dir_check)
-			T1 = get_step(T1, dir_check)
+			T1 = get_step(loc, dir_check)
 			P_list += locate(/obj/structure/cable) in T1
 
 	// remove the cut cable from its turf and powernet, so that it doesn't get count in propagate_network worklist
@@ -338,7 +339,11 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 		moveToNullspace()
 	powernet.remove_cable(src) //remove the cut cable from its powernet
 
+	var/first = TRUE
 	for(var/obj/O in P_list)
+		if(first)
+			first = FALSE
+			continue
 		addtimer(CALLBACK(O, .proc/auto_propogate_cut_cable, O), 0) //so we don't rebuild the network X times when singulo/explosion destroys a line of X cables
 
 ///////////////////////////////////////////////
@@ -363,13 +368,13 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list (new/datum/stack_recipe("cable restrai
 	max_amount = MAXCOIL
 	amount = MAXCOIL
 	merge_type = /obj/item/stack/cable_coil // This is here to let its children merge between themselves
-	item_color = "red"
+	var/cable_color = "red"
 	desc = "A coil of insulated power cable."
 	throwforce = 0
 	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 3
 	throw_range = 5
-	materials = list(MAT_METAL=10, MAT_GLASS=5)
+	materials = list(/datum/material/iron=10, /datum/material/glass=5)
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
@@ -384,8 +389,8 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list (new/datum/stack_recipe("cable restrai
 	cost = 1
 
 /obj/item/stack/cable_coil/cyborg/attack_self(mob/user)
-	var/cable_color = input(user,"Pick a cable color.","Cable Color") in list("red","yellow","green","blue","pink","orange","cyan","white")
-	item_color = cable_color
+	var/picked = input(user,"Pick a cable color.","Cable Color") in list("red","yellow","green","blue","pink","orange","cyan","white")
+	cable_color = picked
 	update_icon()
 
 /obj/item/stack/cable_coil/suicide_act(mob/user)
@@ -445,7 +450,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list (new/datum/stack_recipe("cable restrai
 
 /obj/item/stack/cable_coil/proc/get_new_cable(location)
 	var/path = /obj/structure/cable
-	return new path(location, item_color)
+	return new path(location, cable_color)
 
 // called when cable_coil is clicked on a turf
 /obj/item/stack/cable_coil/proc/place_turf(turf/T, mob/user, dirnew)
@@ -459,7 +464,7 @@ GLOBAL_LIST_INIT(cable_coil_recipes, list (new/datum/stack_recipe("cable restrai
 	if(get_amount() < 1) // Out of cable
 		to_chat(user, "<span class='warning'>There is no cable left!</span>")
 		return
-	
+
 	if(get_dist(T,user) > 1) // Too far
 		to_chat(user, "<span class='warning'>You can't lay cable at a place that far away!</span>")
 		return

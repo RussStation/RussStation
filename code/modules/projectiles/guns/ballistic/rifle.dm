@@ -8,11 +8,11 @@
 	bolt_type = BOLT_TYPE_STANDARD
 	semi_auto = FALSE
 	internal_magazine = TRUE
-	fire_sound = "sound/weapons/rifleshot.ogg"
-	fire_sound_volume = 80
+	fire_sound = 'sound/weapons/gun/rifle/shot.ogg'
+	fire_sound_volume = 90
 	vary_fire_sound = FALSE
-	rack_sound = "sound/weapons/mosinboltout.ogg"
-	bolt_drop_sound = "sound/weapons/mosinboltin.ogg"
+	rack_sound = 'sound/weapons/gun/rifle/bolt_out.ogg'
+	bolt_drop_sound = 'sound/weapons/gun/rifle/bolt_in.ogg'
 	tac_reloads = FALSE
 
 obj/item/gun/ballistic/rifle/update_icon()
@@ -91,6 +91,7 @@ obj/item/gun/ballistic/rifle/attackby(obj/item/A, mob/user, params)
 	can_bayonet = FALSE
 	item_flags = NEEDS_PERMIT | DROPDEL | ABSTRACT | NOBLUDGEON
 	flags_1 = NONE
+	trigger_guard = TRIGGER_GUARD_ALLOW_ALL
 
 	mag_type = /obj/item/ammo_box/magazine/internal/boltaction/enchanted/arcane_barrage
 

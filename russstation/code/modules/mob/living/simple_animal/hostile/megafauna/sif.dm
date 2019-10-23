@@ -68,7 +68,7 @@ Difficulty: Medium
 	del_on_death = 1
 	loot = list(/obj/structure/closet/crate/necropolis/sif)
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/sif/crusher)
-	internal_type = /obj/item/gps/internal/sif
+	gps_name = "Infinity Signal"
 	medal_type = BOSS_MEDAL_SIF
 	score_type = SIF_SCORE
 	deathmessage = "falls into the abyss."
@@ -108,9 +108,9 @@ Difficulty: Medium
 	del_on_death = 0
 	loot = list()
 	crusher_loot = list()
-	internal_type = /obj/item/gps/internal/sif
+	gps_name = "Infinity Signal"
 	deathmessage = "moans as the sound of its power begins to wind down."
-	deathsound = 'sound/voice/borg_deathsound.ogg' 
+	deathsound = 'sound/voice/borg_deathsound.ogg'
 	can_special = 0
 	true_spawn = TRUE
 	environment_smash = ENVIRONMENT_SMASH_NONE
@@ -124,13 +124,6 @@ Difficulty: Medium
 //no medals rewarded for killing the beacon
 /mob/living/simple_animal/hostile/megafauna/sif/living_beacon/grant_achievement(medaltype, scoretype, crusher_kill, list/grant_achievement)
 	return
-
-//With a GPS sif can be identified by the "Infinity Signal".
-/obj/item/gps/internal/sif
-	icon_state = null
-	gpstag = "Infinity Signal"
-	desc = "The message keeps overflowing."
-	invisibility = 100
 
 //Sword structure, used to summon sif.
 /obj/structure/sword/sif
@@ -341,7 +334,7 @@ Difficulty: Medium
 		if(charging == TRUE)
 			DestroySurroundings()
 
-		//Stop spinning 
+		//Stop spinning
 		if(src.spinIntervals == 5)
 			icon_state = "Great_Brown_Wolf"
 			src.spinIntervals = 0

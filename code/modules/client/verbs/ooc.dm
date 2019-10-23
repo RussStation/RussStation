@@ -288,7 +288,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	var/list/choices = list()
 	var/displayed_choicename = ""
 	for(var/client/C in GLOB.clients)
-		if(C.holder.fakekey)
+		if(C.holder?.fakekey)
 			displayed_choicename = C.holder.fakekey
 		else
 			displayed_choicename = C.key
@@ -300,7 +300,8 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	var/selection = input("Please, select a player!", "Ignore", null, null) as null|anything in choices
 	if(!selection || !(selection in choices))
 		return
-	selection = choices[selection]
+	displayed_choicename = selection // ckey string
+	selection = choices[selection] // client
 	if(selection == src)
 		to_chat(src, "You can't ignore yourself.")
 		return

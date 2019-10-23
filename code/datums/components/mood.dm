@@ -25,6 +25,8 @@
 	RegisterSignal(parent, COMSIG_LIVING_REVIVE, .proc/on_revive)
 
 	RegisterSignal(parent, COMSIG_MOB_HUD_CREATED, .proc/modify_hud)
+	RegisterSignal(parent, COMSIG_JOB_RECEIVED, .proc/register_job_signals)
+
 	var/mob/living/owner = parent
 	if(owner.hud_used)
 		modify_hud()
@@ -36,16 +38,20 @@
 	unmodify_hud()
 	return ..()
 
+/datum/component/mood/proc/register_job_signals(datum/source, job)
+	if(job in list("Research Director", "Scientist", "Roboticist"))
+		RegisterSignal(parent, COMSIG_ADD_MOOD_EVENT_RND, .proc/add_event) //Mood events that are only for RnD members
+
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*\n<EM>Your current mood</EM>\n"
 	msg += "<span class='notice'>My mental status: </span>" //Long term
 	switch(sanity)
 		if(SANITY_GREAT to INFINITY)
-			msg += "<span class='nicegreen'>My mind feels like a temple!<span>\n"
+			msg += "<span class='nicegreen'>My mind feels like a temple!</span>\n"
 		if(SANITY_NEUTRAL to SANITY_GREAT)
-			msg += "<span class='nicegreen'>I have been feeling great lately!<span>\n"
+			msg += "<span class='nicegreen'>I have been feeling great lately!</span>\n"
 		if(SANITY_DISTURBED to SANITY_NEUTRAL)
-			msg += "<span class='nicegreen'>I have felt quite decent lately.<span>\n"
+			msg += "<span class='nicegreen'>I have felt quite decent lately.</span>\n"
 		if(SANITY_UNSTABLE to SANITY_DISTURBED)
 			msg += "<span class='warning'>I'm feeling a little bit unhinged...</span>\n"
 		if(SANITY_CRAZY to SANITY_UNSTABLE)
@@ -56,23 +62,23 @@
 	msg += "<span class='notice'>My current mood: </span>" //Short term
 	switch(mood_level)
 		if(1)
-			msg += "<span class='boldwarning'>I wish I was dead!<span>\n"
+			msg += "<span class='boldwarning'>I wish I was dead!</span>\n"
 		if(2)
-			msg += "<span class='boldwarning'>I feel terrible...<span>\n"
+			msg += "<span class='boldwarning'>I feel terrible...</span>\n"
 		if(3)
-			msg += "<span class='boldwarning'>I feel very upset.<span>\n"
+			msg += "<span class='boldwarning'>I feel very upset.</span>\n"
 		if(4)
-			msg += "<span class='boldwarning'>I'm a bit sad.<span>\n"
+			msg += "<span class='boldwarning'>I'm a bit sad.</span>\n"
 		if(5)
-			msg += "<span class='nicegreen'>I'm alright.<span>\n"
+			msg += "<span class='nicegreen'>I'm alright.</span>\n"
 		if(6)
-			msg += "<span class='nicegreen'>I feel pretty okay.<span>\n"
+			msg += "<span class='nicegreen'>I feel pretty okay.</span>\n"
 		if(7)
-			msg += "<span class='nicegreen'>I feel pretty good.<span>\n"
+			msg += "<span class='nicegreen'>I feel pretty good.</span>\n"
 		if(8)
-			msg += "<span class='nicegreen'>I feel amazing!<span>\n"
+			msg += "<span class='nicegreen'>I feel amazing!</span>\n"
 		if(9)
-			msg += "<span class='nicegreen'>I love life!<span>\n"
+			msg += "<span class='nicegreen'>I love life!</span>\n"
 
 	msg += "<span class='notice'>Moodlets:\n</span>"//All moodlets
 	if(mood_events.len)
@@ -80,7 +86,7 @@
 			var/datum/mood_event/event = mood_events[i]
 			msg += event.description
 	else
-		msg += "<span class='nicegreen'>I don't have much of a reaction to anything right now.<span>\n"
+		msg += "<span class='nicegreen'>I don't have much of a reaction to anything right now.</span>\n"
 	to_chat(user || parent, msg)
 
 ///Called after moodevent/s have been added/removed.
@@ -171,47 +177,43 @@
 					screen_obj.color = "#2eeb9a"
 			break
 
-/datum/component/mood/process() //Called on SSmood process
-	var/mob/living/owner = parent
-
+///Called on SSmood process
+/datum/component/mood/process()
 	switch(mood_level)
 		if(1)
-			setSanity(sanity-0.3)
+			setSanity(sanity-0.3, SANITY_INSANE)
 		if(2)
-			setSanity(sanity-0.15)
+			setSanity(sanity-0.15, SANITY_INSANE)
 		if(3)
-			setSanity(sanity-0.1)
+			setSanity(sanity-0.1, SANITY_CRAZY)
 		if(4)
-			setSanity(sanity-0.05, minimum=SANITY_UNSTABLE)
+			setSanity(sanity-0.05, SANITY_UNSTABLE)
 		if(5)
-			setSanity(sanity+0.1, maximum=SANITY_NEUTRAL)
+			setSanity(sanity, SANITY_UNSTABLE) //This makes sure that mood gets increased should you be below the minimum.
 		if(6)
-			setSanity(sanity+0.2, maximum=SANITY_GREAT)
+			setSanity(sanity+0.2, SANITY_UNSTABLE)
 		if(7)
-			setSanity(sanity+0.3, maximum=INFINITY)
+			setSanity(sanity+0.3, SANITY_UNSTABLE)
 		if(8)
-			setSanity(sanity+0.4, maximum=INFINITY)
+			setSanity(sanity+0.4, SANITY_NEUTRAL, SANITY_MAXIMUM)
 		if(9)
-			setSanity(sanity+0.6, maximum=INFINITY)
+			setSanity(sanity+0.6, SANITY_NEUTRAL, SANITY_MAXIMUM)
+	HandleNutrition()
 
-	HandleNutrition(owner)
-
-/datum/component/mood/proc/setSanity(amount, minimum=SANITY_INSANE, maximum=SANITY_GREAT)
-	var/mob/living/owner = parent
-
-	if(amount == sanity)
-		return
+///Sets sanity to the specified amount and applies effects.
+/datum/component/mood/proc/setSanity(amount, minimum=SANITY_INSANE, maximum=SANITY_GREAT, override = FALSE)
 	// If we're out of the acceptable minimum-maximum range move back towards it in steps of 0.5
 	// If the new amount would move towards the acceptable range faster then use it instead
-	if(sanity < minimum && amount < sanity + 0.5)
-		amount = sanity + 0.5
-
-	// Disturbed stops you from getting any more sane
-	if(HAS_TRAIT(owner, TRAIT_UNSTABLE))
-		sanity = min(amount,sanity)
+	if(amount < minimum)
+		amount += CLAMP(minimum - sanity, 0, 0.7)
 	else
-		sanity = amount
-
+		if(!override && HAS_TRAIT(parent, TRAIT_UNSTABLE))
+			maximum = sanity
+		if(amount > maximum)
+			amount = max(maximum, sanity)
+	if(amount == sanity) //Prevents stuff from flicking around.
+		return
+	sanity = amount
 	var/mob/living/master = parent
 	switch(sanity)
 		if(SANITY_INSANE to SANITY_CRAZY)
@@ -247,7 +249,7 @@
 	master.crit_threshold = (master.crit_threshold - insanity_effect) + newval
 	insanity_effect = newval
 
-/datum/component/mood/proc/add_event(datum/source, category, type, param) //Category will override any events in the same category, should be unique unless the event is based on the same thing like hunger.
+/datum/component/mood/proc/add_event(datum/source, category, type, ...) //Category will override any events in the same category, should be unique unless the event is based on the same thing like hunger.
 	var/datum/mood_event/the_event
 	if(!istext(category))
 		category = REF(category)
@@ -259,7 +261,9 @@
 			if(the_event.timeout)
 				addtimer(CALLBACK(src, .proc/clear_event, null, category), the_event.timeout, TIMER_UNIQUE|TIMER_OVERRIDE)
 			return 0 //Don't have to update the event.
-	the_event = new type(src, param)
+	var/list/params = args.Copy(4)
+	params.Insert(1, parent)
+	the_event = new type(arglist(params))
 
 	mood_events[category] = the_event
 	the_event.category = category
@@ -313,13 +317,12 @@
 /datum/component/mood/proc/hud_click(datum/source, location, control, params, mob/user)
 	print_mood(user)
 
-/datum/component/mood/proc/HandleNutrition(mob/living/L)
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		if(isethereal(H))
-			HandleCharge(H)
-		if(HAS_TRAIT(H, TRAIT_NOHUNGER))
-			return FALSE //no mood events for nutrition
+/datum/component/mood/proc/HandleNutrition()
+	var/mob/living/L = parent
+	if(isethereal(L))
+		HandleCharge(L)
+	if(HAS_TRAIT(L, TRAIT_NOHUNGER))
+		return FALSE //no mood events for nutrition
 	switch(L.nutrition)
 		if(NUTRITION_LEVEL_FULL to INFINITY)
 			if (!HAS_TRAIT(L, TRAIT_VORACIOUS))
@@ -338,7 +341,7 @@
 			add_event(null, "nutrition", /datum/mood_event/starving)
 
 /datum/component/mood/proc/HandleCharge(mob/living/carbon/human/H)
-	var/datum/species/ethereal/E = H.dna?.species
+	var/datum/species/ethereal/E = H.dna.species
 	switch(E.get_charge(H))
 		if(ETHEREAL_CHARGE_NONE to ETHEREAL_CHARGE_LOWPOWER)
 			add_event(null, "charge", /datum/mood_event/decharged)
@@ -351,7 +354,7 @@
 
 /datum/component/mood/proc/check_area_mood(datum/source, var/area/A)
 	if(A.mood_bonus)
-		add_event(null, "area", /datum/mood_event/area, list(A.mood_bonus, A.mood_message))
+		add_event(null, "area", /datum/mood_event/area, A.mood_bonus, A.mood_message)
 	else
 		clear_event(null, "area")
 
@@ -360,7 +363,7 @@
 	if(!full_heal)
 		return
 	remove_temp_moods()
-	setSanity(initial(sanity))
+	setSanity(initial(sanity), override = TRUE)
 
 #undef MINOR_INSANITY_PEN
 #undef MAJOR_INSANITY_PEN
