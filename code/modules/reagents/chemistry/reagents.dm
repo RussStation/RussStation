@@ -40,7 +40,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/self_consuming = FALSE
 	var/reagent_weight = 1 //affects how far it travels when sprayed
 	var/metabolizing = FALSE
-	var/harmful = FALSE;
+	var/harmful = FALSE;//is it bad for you? Currently only used for borghypo. C2s and Toxins have it TRUE by default.
 
 	//honk - dorf smithing vars (tried creating a sperate file but it wouldn't work, this is the best way to do it)
 	var/attack_force = 5 //damage by force

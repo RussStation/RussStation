@@ -80,7 +80,8 @@
 	icon_state = "clowngoblin"
 	icon_living = "clowngoblin"
 	icon_dead = null
-	response_help = "honks the"
+	response_help_simple = "honks the"
+	response_help_continuous = "honks the"
 	speak = list("Honk!")
 	speak_emote = list("sqeaks")
 	emote_see = list("honks")
@@ -100,7 +101,8 @@
 	icon_state = "clowngoblin"
 	icon_living = "clowngoblin"
 	icon_dead = null
-	response_help = "honks the"
+	response_help_simple = "honks the"
+	response_help_continuous = "honks the"
 	speak = list("Honk!")
 	speak_emote = list("sqeaks")
 	emote_see = list("honks")
