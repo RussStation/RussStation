@@ -13,7 +13,7 @@
 /mob/living/simple_animal/bot/secbot/bearsky/stun_attack(mob/living/carbon/C)
     var/judgement_criteria = judgement_criteria()
     playsound(src, 'sound/weapons/cqchit2.ogg', 50, TRUE, -1)
-    addtimer(CALLBACK(src, .proc/update_icon), 2)
+    addtimer(CALLBACK(src, /atom/.proc/update_icon), 2)
     var/threat = 5
     C.Paralyze(100)
     threat = C.assess_threat(judgement_criteria, weaponcheck=CALLBACK(src, .proc/check_for_weapons))

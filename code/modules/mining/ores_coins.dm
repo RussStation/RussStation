@@ -16,7 +16,9 @@
 	singular_name = "ore chunk"
 	var/points = 0 //How many points this ore gets you from the ore redemption machine
 	var/refined_type = null //What this ore defaults to being refined into
+	var/mine_experience = 5 //How much experience do you get for mining this ore?
 	novariants = TRUE // Ore stacks handle their icon updates themselves to keep the illusion that there's more going
+	mats_per_stack = MINERAL_MATERIAL_AMOUNT
 	var/list/stack_overlays
 	var/reagent_id = null //honk - reagent ids for smelted ore
 
@@ -71,9 +73,11 @@
 	item_state = "Uranium ore"
 	singular_name = "uranium ore chunk"
 	points = 30
-	materials = list(/datum/material/uranium=MINERAL_MATERIAL_AMOUNT)
+	material_flags = MATERIAL_NO_EFFECTS
+	custom_materials = list(/datum/material/uranium=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/uranium
 	reagent_id = /datum/reagent/uranium //honk
+	mine_experience = 6
 
 /obj/item/stack/ore/iron
 	name = "iron ore"
@@ -81,9 +85,10 @@
 	item_state = "Iron ore"
 	singular_name = "iron ore chunk"
 	points = 1
-	materials = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/metal
 	reagent_id = /datum/reagent/iron //honk
+	mine_experience = 1
 
 /obj/item/stack/ore/glass
 	name = "sand pile"
@@ -91,18 +96,19 @@
 	item_state = "Glass ore"
 	singular_name = "sand pile"
 	points = 1
-	materials = list(/datum/material/glass=MINERAL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/glass=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/glass
 	w_class = WEIGHT_CLASS_TINY
+	mine_experience = 0 //its sand
 
 GLOBAL_LIST_INIT(sand_recipes, list(\
 		new /datum/stack_recipe("sandstone", /obj/item/stack/sheet/mineral/sandstone, 1, 1, 50),\
 		new /datum/stack_recipe("aesthetic volcanic floor tile", /obj/item/stack/tile/basalt, 2, 1, 50)\
 ))
 
-/obj/item/stack/ore/glass/Initialize(mapload, new_amount, merge = TRUE)
-	recipes = GLOB.sand_recipes
+/obj/item/stack/ore/glass/get_main_recipes()
 	. = ..()
+	. += GLOB.sand_recipes
 
 /obj/item/stack/ore/glass/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(..() || !ishuman(hit_atom))
@@ -125,8 +131,9 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 /obj/item/stack/ore/glass/basalt
 	name = "volcanic ash"
 	icon_state = "volcanic_sand"
-	icon_state = "volcanic_sand"
+	item_state = "volcanic_sand"
 	singular_name = "volcanic ash pile"
+	mine_experience = 0
 
 /obj/item/stack/ore/plasma
 	name = "plasma ore"
@@ -134,9 +141,10 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	item_state = "Plasma ore"
 	singular_name = "plasma ore chunk"
 	points = 15
-	materials = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/plasma
 	reagent_id = /datum/reagent/dorf_plasma //honk
+	mine_experience = 5
 
 /obj/item/stack/ore/plasma/welder_act(mob/living/user, obj/item/I)
 	to_chat(user, "<span class='warning'>You can't hit a high enough temperature to smelt [src] properly!</span>")
@@ -149,17 +157,19 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	item_state = "Silver ore"
 	singular_name = "silver ore chunk"
 	points = 16
-	materials = list(/datum/material/silver=MINERAL_MATERIAL_AMOUNT)
+	mine_experience = 3
+	custom_materials = list(/datum/material/silver=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/silver
 	reagent_id = /datum/reagent/silver //honk
 
 /obj/item/stack/ore/gold
 	name = "gold ore"
 	icon_state = "Gold ore"
-	icon_state = "Gold ore"
+	item_state = "Gold ore"
 	singular_name = "gold ore chunk"
 	points = 18
-	materials = list(/datum/material/gold=MINERAL_MATERIAL_AMOUNT)
+	mine_experience = 5
+	custom_materials = list(/datum/material/gold=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/gold
 	reagent_id = /datum/reagent/gold //honk
 
@@ -169,8 +179,9 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	item_state = "Diamond ore"
 	singular_name = "diamond ore chunk"
 	points = 50
-	materials = list(/datum/material/diamond=MINERAL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/diamond=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/diamond
+	mine_experience = 10
 	reagent_id = /datum/reagent/diamond //honk
 
 /obj/item/stack/ore/bananium
@@ -179,9 +190,10 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	item_state = "Bananium ore"
 	singular_name = "bananium ore chunk"
 	points = 60
-	materials = list(/datum/material/bananium=MINERAL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/bananium=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/bananium
 	reagent_id = /datum/reagent/dorf_bananium //honk
+	mine_experience = 15
 
 /obj/item/stack/ore/titanium
 	name = "titanium ore"
@@ -189,9 +201,10 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	item_state = "Titanium ore"
 	singular_name = "titanium ore chunk"
 	points = 50
-	materials = list(/datum/material/titanium=MINERAL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/titanium=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/titanium
 	reagent_id = /datum/reagent/dorf_titanium //honk
+	mine_experience = 3
 
 /obj/item/stack/ore/slag
 	name = "slag"
@@ -253,7 +266,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	else
 		..()
 
-/obj/item/twohanded/required/gibtonite/bullet_act(obj/item/projectile/P)
+/obj/item/twohanded/required/gibtonite/bullet_act(obj/projectile/P)
 	GibtoniteReaction(P.firer)
 	. = ..()
 
@@ -319,7 +332,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	throwforce = 2
 	w_class = WEIGHT_CLASS_TINY
 	custom_materials = list(/datum/material/iron = 400)
-	material_flags = MATERIAL_ADD_PREFIX
+	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR
 	var/string_attached
 	var/list/sideslist = list("heads","tails")
 	var/cooldown = 0
@@ -456,7 +469,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	icon_state = "coin_valid"
 	custom_materials = list(/datum/material/plastic = 400)
 	sideslist = list("valid", "salad")
-	material_flags = MATERIAL_NO_COLOR
+	material_flags = NONE
 
 /obj/item/coin/iron
 

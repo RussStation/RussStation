@@ -30,6 +30,7 @@
 		/////////
 		//OTHER//
 		/////////
+	///Player preferences datum for the client
 	var/datum/preferences/prefs = null
 	///last turn of the controlled mob, I think this is only used by mechs?
 	var/last_turn = 0
@@ -45,6 +46,7 @@
 	var/ambience_playing = null
 	///Whether an ambience sound has been played and one shouldn't be played again, unset by a callback
 	var/played = FALSE
+		////////////
 		//SECURITY//
 		////////////
 	// comment out the line below when debugging locally to enable the options & messages menu
