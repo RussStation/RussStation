@@ -11,23 +11,3 @@
 
 /datum/preferences/proc/reset_keybindings()
 	bindings.from_list(GLOB.keybinding_default)
-
-/datum/preferences/proc/add_russ_choices(dat)  //adds a button for customising added race's hair/additional body parts
-	if("diona_hair" in pref_species.mutant_bodyparts)
-		dat += "<td valign='top' width='7%'>"
-
-		dat += "<h3>Hair</h3>"
-
-		dat += "<a href='?_src_=prefs;preference=diona_hair;task=input'>[features["diona_hair"]]</a><BR>"
-
-		dat += "</td>"
-	return dat
-
-/datum/preferences/proc/process_russ_link(mob/user, list/href_list)  //handles added russ station links
-	switch(href_list["task"])
-		if("input")
-			if(href_list["preference"] == "diona_hair")
-				var/new_diona_hair
-				new_diona_hair = input(user, "Choose your character's hair:", "Character Preference") as null|anything in GLOB.diona_hair_list
-				if(new_diona_hair)
-					features["diona_hair"] = new_diona_hair

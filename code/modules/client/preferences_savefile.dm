@@ -329,6 +329,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_lizard_legs"]			>> features["legs"]
 	S["feature_moth_wings"]				>> features["moth_wings"]
 	S["feature_moth_markings"]			>> features["moth_markings"]
+	S["feature_diona_hair"] 			>> features["diona_hair"] // honk -- diona hair feature
 	if(!CONFIG_GET(flag/join_with_mutant_humans))
 		features["tail_human"] = "none"
 		features["ears"] = "none"
@@ -416,7 +417,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["feature_lizard_legs"]	= sanitize_inlist(features["legs"], GLOB.legs_list, "Normal Legs")
 	features["moth_wings"] 	= sanitize_inlist(features["moth_wings"], GLOB.moth_wings_list, "Plain")
 	features["moth_markings"] 	= sanitize_inlist(features["moth_markings"], GLOB.moth_markings_list, "None")
-	russ_character_pref_load(S) // honk -- loads character customization preferences
+	features["diona_hair"] 	= sanitize_inlist(features["diona_hair"], GLOB.diona_hair_list) // honk -- add diona hair features
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
 	//Validate job prefs
 	for(var/j in job_preferences)
@@ -481,7 +482,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Jobs
 	WRITE_FILE(S["joblessrole"]		, joblessrole)
-	russ_character_pref_save(S) // honk -- saves character customization preferences
+	S["feature_diona_hair"] << features["diona_hair"] // honk -- save diona_hair
 	//Write prefs
 	WRITE_FILE(S["job_preferences"] , job_preferences)
 
