@@ -477,7 +477,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "</td>"
 					mutant_category = 0
 
-			dat = add_russ_choices(dat) //honk -- SOMEONE FORGOT TO LABEL THIS >:(
+			if("diona_hair" in pref_species.mutant_bodyparts) // honk start -- adds a button for customising added race's hair/additional body parts
+				dat += "<td valign='top' width='7%'>"
+				
+				dat += "<h3>Hair</h3>"
+				
+				dat += "<a href='?_src_=prefs;preference=diona_hair;task=input'>[features["diona_hair"]]</a><BR>"
+				
+				dat += "</td>" // honk end
 			//Adds a thing to select which phobia because I can't be assed to put that in the quirks window
 			if("Phobia" in all_quirks)
 				dat += "<h3>Phobia</h3>"
@@ -1105,7 +1112,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				SetQuirks(user)
 			else
 				SetQuirks(user)
-		return TRUE
+		return TRUE			
 
 	switch(href_list["task"])
 		if("random")
@@ -1150,6 +1157,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 
 			switch(href_list["preference"])
+				if("diona_hair") // honk start -- diona hair options
+					var/new_diona_hair
+					new_diona_hair = input(user, "Choose your character's hair:", "Character Preference") as null|anything in GLOB.diona_hair_list
+					if(new_diona_hair)
+						features["diona_hair"] = new_diona_hair // honk end
 				if("ghostform")
 					if(unlock_content)
 						var/new_form = input(user, "Thanks for supporting BYOND - Choose your ghostly form:","Thanks for supporting BYOND",null) as null|anything in GLOB.ghost_forms
@@ -1637,7 +1649,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("reset_bindings")
 					reset_keybindings()
 				// honk end
-	process_russ_link(user, href_list) //honk -- checks for russ station links and handles those
 	ShowChoices(user)
 	return 1
 
