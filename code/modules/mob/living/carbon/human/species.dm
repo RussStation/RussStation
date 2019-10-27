@@ -699,7 +699,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 					S = GLOB.moth_markings_list[H.dna.features["moth_markings"]]
 				if("caps")
 					S = GLOB.caps_list[H.dna.features["caps"]]
-				if("diona_hair") // honk start -- add diona_gair to their DNA
+				if("diona_hair") // honk start -- add diona_hair to their DNA
 					S = GLOB.diona_hair_list[H.dna.features["diona_hair"]] // honk end
 			if(!S || S.icon_state == "none")
 				continue

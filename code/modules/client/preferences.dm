@@ -1112,7 +1112,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				SetQuirks(user)
 			else
 				SetQuirks(user)
-		return TRUE			
+		return TRUE
 
 	switch(href_list["task"])
 		if("random")
