@@ -626,7 +626,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			bodyparts_to_add -= "wings_open"
 		else if ("wings" in mutant_bodyparts)
 			bodyparts_to_add -= "wings_open"
-	russ_handle_hiding_bodyparts(bodyparts_to_add, HD, H) // honk -- hide our shit
+	if("diona_hair" in mutant_bodyparts) // honk start -- diona hair
+		if((human.wear_mask && (human.wear_mask.flags_inv & HIDEFACE)) || (human.head && (human.head.flags_inv & HIDEFACE)) || !head || head.status == BODYPART_ROBOTIC)
+			bodyparts_adding -= "diona_hair" // honk end
 
 	//Digitigrade legs are stuck in the phantom zone between true limbs and mutant bodyparts. Mainly it just needs more agressive updating than most limbs.
 	var/update_needed = FALSE
@@ -697,8 +699,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 					S = GLOB.moth_markings_list[H.dna.features["moth_markings"]]
 				if("caps")
 					S = GLOB.caps_list[H.dna.features["caps"]]
-				else // honk start -- our species mutant bodyparts such as diona hair
-					S = russ_mutant_bodyparts(bodypart, H) // honk end
+				if("diona_hair") // honk start -- add diona_gair to their DNA
+					S = GLOB.diona_hair_list[H.dna.features["diona_hair"]] // honk end
 			if(!S || S.icon_state == "none")
 				continue
 
