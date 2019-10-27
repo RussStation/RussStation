@@ -627,8 +627,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		else if ("wings" in mutant_bodyparts)
 			bodyparts_to_add -= "wings_open"
 	if("diona_hair" in mutant_bodyparts) // honk start -- diona hair
-		if((human.wear_mask && (human.wear_mask.flags_inv & HIDEFACE)) || (human.head && (human.head.flags_inv & HIDEFACE)) || !head || head.status == BODYPART_ROBOTIC)
-			bodyparts_adding -= "diona_hair" // honk end
+		if((H.wear_mask && (H.wear_mask.flags_inv & HIDEFACE)) || (H.head && (H.head.flags_inv & HIDEFACE)) || !HD || HD.status == BODYPART_ROBOTIC)
+			bodyparts_to_add -= "diona_hair" // honk end
 
 	//Digitigrade legs are stuck in the phantom zone between true limbs and mutant bodyparts. Mainly it just needs more agressive updating than most limbs.
 	var/update_needed = FALSE
