@@ -20,14 +20,3 @@
 	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	defer_change = 1
-
-/turf/closed/mineral/clay 
-	mineralType = /obj/item/stack/sheet/mineral/clay
-	spreadChance = 20
-	spread = 1
-	scan_state = "rock_Clay"
-	environment_type = "basalt"
-	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
-	defer_change = 1
