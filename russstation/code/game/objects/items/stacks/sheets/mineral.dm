@@ -22,7 +22,6 @@ GLOBAL_LIST_INIT(clay_recipes, list(
 	merge_type = /obj/item/stack/sheet/mineral/clay 
 	sheettype = "clay"
 
-/obj/item/stack/sheet/mineral/clay/Initialize(mapload, new_amount, merge = TRUE)
-	recipes = GLOB.clay_recipes
+/obj/item/stack/sheet/mineral/clay/get_main_recipes()
 	. = ..()
-	
+	. += GLOB.clay_recipes
