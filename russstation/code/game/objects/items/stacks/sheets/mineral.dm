@@ -1,5 +1,5 @@
 /*
- * Adamantine
+ * Clay
  */
 
 GLOBAL_LIST_INIT(clay_recipes, list(
@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(clay_recipes, list(
 	name = "clay"
 	icon = 'russstation/icons/obj/stack_objects.dmi'
 	icon_state = "sheet-clay"
-	singular_name = "clay"
+	singular_name = "clay lump"
 	layer = LOW_ITEM_LAYER
 	merge_type = /obj/item/stack/sheet/mineral/clay 
 	sheettype = "clay"
