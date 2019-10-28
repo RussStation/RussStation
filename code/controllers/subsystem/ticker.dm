@@ -138,7 +138,10 @@ SUBSYSTEM_DEF(ticker)
 	else if(CONFIG_GET(flag/shift_time_realtime))
 		gametime_offset = world.timeofday
 
-	russ_initialize() //honk -- gets config values
+	initial_delay = CONFIG_GET(number/transfer_delay_initial) // honk start -- gets config values
+	subsequent_delay = CONFIG_GET(number/transfer_delay_subsequent)
+	SSvote.shuttle_refuel_delay = CONFIG_GET(number/shuttle_refuel_delay)
+	SSvote.transfer_vote_config = CONFIG_GET(flag/transfer_vote) // honk end
 	return ..()
 
 /datum/controller/subsystem/ticker/fire()

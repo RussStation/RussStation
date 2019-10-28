@@ -336,10 +336,12 @@ SUBSYSTEM_DEF(vote)
 		if("restart")
 			if(CONFIG_GET(flag/allow_vote_restart) || usr.client.holder)
 				initiate_vote("restart",usr.key)
-		//honk start -- makes the admin button for calling a crew transfer vote work
-		if("crew transfer")
-			russ_Topic()
-		//honk end
+		if("crew transfer") // honk start -- crew transfer vote
+			if(transfer_vote_config || usr.client.holder) 
+				if(shuttle_refuel_delay < world.time)
+					initiate_vote("crew transfer",usr.key)
+				else
+					to_chat(usr, "<span style='boldannounce'>Shuttle call can only initiate after [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))].</span>") // honk end
 		if("gamemode")
 			if(CONFIG_GET(flag/allow_vote_mode) || usr.client.holder)
 				initiate_vote("gamemode",usr.key)
