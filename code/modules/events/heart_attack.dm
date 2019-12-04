@@ -1,7 +1,7 @@
 /datum/round_event_control/heart_attack
 	name = "Random Heart Attack"
 	typepath = /datum/round_event/heart_attack
-	weight = 20
+	weight = 0 // honk - changed from 20 to 0 players found it too annoying
 	max_occurrences = 2
 	min_players = 40 // To avoid shafting lowpop
 

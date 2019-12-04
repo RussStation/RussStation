@@ -1,7 +1,7 @@
 /datum/round_event_control/spontaneous_appendicitis
 	name = "Spontaneous Appendicitis"
 	typepath = /datum/round_event/spontaneous_appendicitis
-	weight = 20
+	weight = 0 // honk - changed from 20 to 0 players found it too annoying 
 	max_occurrences = 4
 	earliest_start = 10 MINUTES
 	min_players = 5 // To make your chance of getting help a bit higher.
