@@ -134,6 +134,7 @@ Difficulty: Medium
 	name = "Massive Glowing Sword"
 	desc = "Sweet! A free sword!"
 	max_integrity = 10000
+	anchored = TRUE
 	icon = 'russstation/icons/mob/lavaland/sif_sword.dmi'
 	icon_state = "Idle_Sword"
 	layer = HIGH_OBJ_LAYER //Looks better when its over everything... cause its huge
