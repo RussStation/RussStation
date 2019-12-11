@@ -22,17 +22,21 @@ git checkout -b "$BASE_BRANCH_NAME$(date +%y%m%d)"
 
 git merge tgstation/master -Xignore-space-change -Xdiff-algorithm=minimal --squash --allow-unrelated-histories
 
-git diff --name-only --diff-filter=U | node "$SPACEMERGE_PATH/processDiffs"
+npm run build --prefix $SPACEMERGE_PATH
+
+git diff --name-only --diff-filter=U | node "$SPACEMERGE_PATH/process-diffs.js"
+
+npm "$SPACEMERGE_PATH/scrub-conflicts.js"
 
 git checkout --theirs .editorconfig
 git checkout --theirs tgstation.dme
-git checkout --theirs .github\CODEOWNERS
+git checkout --theirs .github/CODEOWNERS
 git checkout --ours html/changelogs/.all_changelog.yml
 git checkout --ours html/templates/header.html
 git checkout --ours README.md
 git checkout --ours .travis.yml
-git checkout --ours .github\CONTRIBUTING.md
-git checkout --ours .github\ISSUE_TEMPLATE\bug_report.md
-git checkout --ours .github\ISSUE_TEMPLATE\feature_request.md
+git checkout --ours .github/CONTRIBUTING.md
+git checkout --ours .github/ISSUE_TEMPLATE/bug_report.md
+git checkout --ours .github/ISSUE_TEMPLATE/feature_request.md
 
 echo "And that's all she wrote."
