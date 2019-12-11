@@ -15,7 +15,7 @@ fi
 
 git fetch --all
 git checkout master
-git reset --hard origin/master
+git reset --hard master
 git clean -f
 
 git checkout -b "$BASE_BRANCH_NAME$(date +%y%m%d)"
