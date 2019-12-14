@@ -61,7 +61,7 @@ function makeOursHandler(path: string) {
 
 function makeCheckHandler(path: string) {
 	return () => {
-		const contents = readFileSync(path, { encoding: "utf8 "});
+		const contents = readFileSync(path, { encoding: "utf8"});
 		if (!honkRegex.test(contents)) {
 			checkout(path, false);
 		}

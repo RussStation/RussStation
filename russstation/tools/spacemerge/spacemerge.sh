@@ -26,7 +26,7 @@ npm run build --prefix $SPACEMERGE_PATH
 
 git diff --name-only --diff-filter=U | node "$SPACEMERGE_PATH/process-diffs.js"
 
-npm "$SPACEMERGE_PATH/scrub-conflicts.js"
+node "$SPACEMERGE_PATH/scrub-conflicts.js"
 
 git checkout --theirs .editorconfig
 git checkout --theirs tgstation.dme
