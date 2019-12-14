@@ -22,7 +22,11 @@ git checkout -b "$BASE_BRANCH_NAME$(date +%y%m%d)"
 
 git merge tgstation/master -Xignore-space-change -Xdiff-algorithm=minimal --squash --allow-unrelated-histories
 
-npm run build --prefix $SPACEMERGE_PATH
+root=$(pwd)
+cd $SPACEMERGE_PATH
+npm install
+npm run build
+cd $root
 
 git diff --name-only --diff-filter=U | node "$SPACEMERGE_PATH/process-diffs.js"
 
