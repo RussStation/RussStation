@@ -1,7 +1,7 @@
-import find from "find";
-import path from "path";
-import fs from "fs";
-import os from "os";
+import * as find from "find";
+import { resolve } from "path";
+import { readFile } from "fs";
+import { EOL } from "os";
 
 import { honkRegex } from "./config";
 
@@ -11,10 +11,10 @@ interface ConflictLines {
 	end: number | undefined
 }
 
-find.eachfile(/\.dm$/, path.resolve("code"), fileName => {
-	fs.readFile(fileName, "utf8", (err, data) => {
+find.eachfile(/\.dm$/, resolve("code"), fileName => {
+	readFile(fileName, "utf8", (err, data) => {
 		if (err) console.error(err);
-		const file = data.split(os.EOL);
+		const file = data.split(EOL);
 		const conflictLinesList = getConflictLinesList(file);
 		for (let conflictLines of conflictLinesList) {
 			if (!oursHasHonkComment(file, conflictLines)) takeTheirs(file, conflictLines);
@@ -26,7 +26,7 @@ find.eachfile(/\.dm$/, path.resolve("code"), fileName => {
 function oursHasHonkComment(file: string[], { start, mid = manditory<number>(0) }: ConflictLines) {
 	return file
 		.slice(start + 1, mid)
-		.join(os.EOL)
+		.join(EOL)
 		.match(honkRegex) !== null;
 }
 
