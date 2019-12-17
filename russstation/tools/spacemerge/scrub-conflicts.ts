@@ -1,47 +1,66 @@
-import * as find from "find";
-import { resolve } from "path";
-import { readFile } from "fs";
+import { writeFileSync } from "fs";
 import { EOL } from "os";
 
 import { honkRegex } from "./config";
 
 interface ConflictLines {
 	start: number,
+	mid: number,
+	end: number
+}
+
+interface ConflictLinesBuilder {
+	start: number,
 	mid: number | undefined,
 	end: number | undefined
 }
 
-find.eachfile(/\.dm$/, resolve("code"), fileName => {
-	readFile(fileName, "utf8", (err, data) => {
-		if (err) console.error(err);
-		const file = data.split(EOL);
-		const conflictLinesList = getConflictLinesList(file);
-		for (let conflictLines of conflictLinesList) {
-			if (!oursHasHonkComment(file, conflictLines)) takeTheirs(file, conflictLines);
-		}
-		
-	});
-});
+export function scrubConflicts(data: string, path: string) {
+	let file = data.split(/\r?\n/);
+	let hasBeenScrubbed = false;
 
-function oursHasHonkComment(file: string[], { start, mid = manditory<number>(0) }: ConflictLines) {
+	let conflictLines = findConflictLines(file, path);
+	while (conflictLines) {
+		const { start, mid, end } = conflictLines;
+		if (!oursHasHonkComment(file, conflictLines)) {
+			file = takeTheirs(file, conflictLines);
+			hasBeenScrubbed = true;
+			conflictLines = findConflictLines(file, path, start + (end - (mid + 1)));
+		} else {
+			conflictLines = findConflictLines(file, path, end + 1);
+		}
+	}
+
+	if (hasBeenScrubbed) {
+		writeFileSync(path, file.join(EOL));
+		console.log(`[SCRUB] ${path}`);
+	} else {
+		console.log(`[NOSCRUB] ${path}`)
+	}
+	
+}
+
+function oursHasHonkComment(file: string[], { start, mid }: ConflictLines) {
 	return file
 		.slice(start + 1, mid)
 		.join(EOL)
 		.match(honkRegex) !== null;
 }
 
-function takeTheirs(file: string[], { start, mid = manditory<number>(0), end = manditory<number>(0) }: ConflictLines) {
-	file = [ 
+function takeTheirs(file: string[], { start, mid, end }: ConflictLines) {
+	return [ 
 		...file.slice(0, start),
 		...file.slice(mid + 1, end),
 		...file.slice(end + 1)
 	];
 }
 
-function getConflictLinesList(file: string[]) {
-	let current: ConflictLines | undefined;
-	const conflicts: ConflictLines[] = [];
-	for (let i = 0; i < file.length; i++) {
+function findConflictLines(file: string[], fileName: string, start = 0): ConflictLines | undefined {
+	if (start >= file.length) return undefined;
+
+	let current: ConflictLinesBuilder | undefined;
+
+	for (let i = start; i < file.length; i++) {
 		if (file[i].startsWith("<<<<<<<") && !current) {
 			current = { 
 				start: i,
@@ -50,17 +69,15 @@ function getConflictLinesList(file: string[]) {
 			};
 		} else if (file[i].startsWith("=======") && current) {
 			current.mid = i;
-		} else if (file[i].startsWith(">>>>>>>") && current) {
+		} else if (file[i].startsWith(">>>>>>>") && current && current.mid) {
 			current.end = i;
-			conflicts.push(current);
-			current = undefined;
+			return {
+				start: current.start,
+				mid: current.mid,
+				end: current.end
+			}
 		}
 	}
 
-	return conflicts;
-}
-
-function manditory<T>(def: T) { // def is short for default
-	throw new Error("Required argument was undefined");
-	return def;
+	return undefined;
 }

@@ -30,8 +30,6 @@ cd $root
 
 git diff --name-only --diff-filter=U | node "$SPACEMERGE_PATH/process-diffs.js"
 
-node "$SPACEMERGE_PATH/scrub-conflicts.js"
-
 git checkout --theirs .editorconfig
 git checkout --theirs tgstation.dme
 git checkout --theirs .github/CODEOWNERS

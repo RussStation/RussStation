@@ -1,11 +1,13 @@
 import { execSync } from "child_process";
 import { readFileSync } from "fs";
+
 import { mergeStrategies, honkRegex } from "./config";
+import { scrubConflicts } from "./scrub-conflicts";
 
 let inputBuf: string = "";
 
 // Map<string, string => () => void>
-const strategies = new Map([
+const strategies = new Map<string, (path: string) => () => void>([
 	["THEIRS", makeTheirsHandler],
 	["OURS", makeOursHandler],
 	["CHECK", makeCheckHandler]
@@ -30,7 +32,7 @@ function getActionFromPath(path: string): () => void {
 		if (path.startsWith(match)) {
 			const action = strategies.get(strategy);
 			if (action !== undefined) return action(path);
-			else return makeUncaughtStrategyHandler(strategy, path)
+			else return makeUncaughtStrategyHandler(strategy, path);
 		}
 	}
 
@@ -43,7 +45,7 @@ function makeUncaughtPathHandler(path: string) {
 
 function makeUncaughtStrategyHandler(strategy: string, path: string) {
 	return () => {
-		console.error(`Couldn't find strategy: ${strategy} associated with path: ${path}`)
+		console.error(`Couldn't find strategy: ${strategy} associated with path: ${path}`);
 	}
 }
 
@@ -61,13 +63,14 @@ function makeOursHandler(path: string) {
 
 function makeCheckHandler(path: string) {
 	return () => {
-		const contents = readFileSync(path, { encoding: "utf8"});
-		if (!honkRegex.test(contents)) {
-			checkout(path, false);
-		}
+		const contents = readFileSync(path, { encoding: "utf8" });
+		if (!honkRegex.test(contents)) checkout(path, false);
+		else scrubConflicts(contents, path);
 	};
 }
 
 function checkout(path: string, isOurs: boolean) {
-    execSync(`git checkout --${isOurs ? "ours" : "theirs"} ${path}`, { cwd: process.cwd(), encoding: "utf8", stdio: ["ignore", process.stdout, process.stderr] });
+	const side = isOurs ? "ours" : "theirs";
+
+    execSync(`git checkout --${side} ${path}`, { cwd: process.cwd(), encoding: "utf8", stdio: ["ignore", process.stdout, process.stderr] });
 }
