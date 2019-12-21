@@ -1,22 +1,25 @@
 const { readFileSync } = require("fs");
 const { EOL } = require("os");
+const { resolve } = require("path");
 
-const tgIncludes = readFileSync(process.cwd() + "/tgstation.dme", { encoding: "utf8" })
-    .split('\n')
-    .filter(str => str.startsWith("#include"))
-    .map(str => str.substring(8))
+const delim = `${EOL}  `;
 
-const rsIncludes = readFileSync(process.cwd() + "/RussStation.dme", { encoding: "utf8" })
-    .split('\n')
-    .filter(str => str.startsWith("#include"))
-    .map(str => str.substring(8))
+const tgIncludes = getIncludesFromFile("tgstation.dme");
+const rsIncludes = getIncludesFromFile("RussStation.dme");
 
 const tgUnique = tgIncludes.filter(path => !rsIncludes.includes(path));
 const rsUnique = rsIncludes.filter(path => !tgIncludes.includes(path));
 
-console.log("/tg/station unique includes:")
-console.log(tgUnique)
-console.log()
+console.log(`\
+/tg/station unique includes:
+  ${tgUnique.join(delim)}
 
-console.log("RussStation unique includes:")
-console.log(rsUnique)
+RussStation unique includes:
+  ${rsUnique.join(delim)}`)
+
+function getIncludesFromFile(fileName) {
+	return readFileSync(resolve(fileName), { encoding: "utf8" })
+    	.split(/\r?\n/)
+    	.filter(str => str.startsWith("#include"))
+    	.map(str => str.substring(10, str.length - 1));
+}
