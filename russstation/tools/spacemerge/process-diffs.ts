@@ -1,5 +1,6 @@
 import { execSync } from "child_process";
 import { readFileSync } from "fs";
+import getStdin from "get-stdin";
 
 import { mergeStrategies, honkRegex } from "./config";
 import { scrubConflicts } from "./scrub-conflicts";
@@ -13,26 +14,24 @@ const strategies = new Map<string, (path: string) => () => void>([
 	["CHECK", makeCheckHandler]
 ]);
 
-process.stdin.setEncoding("utf8");
+(async () => {
+	const input = await getStdin();
 
-process.stdin.on("readable", () => {
-	let chunk: string | Buffer;
-	while ((chunk = process.stdin.read()) !== null) inputBuf += chunk;
-});
-
-process.stdin.on("end", () => {
-	inputBuf
-        .split("\n")
+	input.split("\n")
         .map(getActionFromPath)
         .forEach(handler => handler());
-});
+})();
 
 function getActionFromPath(path: string): () => void {
 	for (let [match, strategy] of Object.entries(mergeStrategies)) {
 		if (path.startsWith(match)) {
 			const action = strategies.get(strategy);
-			if (action !== undefined) return action(path);
-			else return makeUncaughtStrategyHandler(strategy, path);
+			
+			if (action !== undefined) {
+				return action(path);
+			} else {
+				return makeUncaughtStrategyHandler(strategy, path);
+			}
 		}
 	}
 
@@ -64,8 +63,12 @@ function makeOursHandler(path: string) {
 function makeCheckHandler(path: string) {
 	return () => {
 		const contents = readFileSync(path, { encoding: "utf8" });
-		if (!honkRegex.test(contents)) checkout(path, false);
-		else scrubConflicts(contents, path);
+		
+		if (!honkRegex.test(contents)) {
+			checkout(path, false);
+		} else { 
+			scrubConflicts(contents, path);
+		}	
 	};
 }
 
