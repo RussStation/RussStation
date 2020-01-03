@@ -2,8 +2,9 @@ import { execSync } from "child_process";
 import { readFileSync } from "fs";
 import getStdin from "get-stdin";
 
-import { mergeStrategies, honkRegex } from "./config";
+import { mergeStrategies, CommentPatterns } from "./config";
 import { scrubConflicts } from "./scrub-conflicts";
+import { matchesInList } from "./util";
 
 let inputBuf: string = "";
 
@@ -64,10 +65,10 @@ function makeCheckHandler(path: string) {
 	return () => {
 		const contents = readFileSync(path, { encoding: "utf8" });
 		
-		if (!honkRegex.test(contents)) {
-			checkout(path, false);
-		} else { 
+		if (matchesInList(contents, CommentPatterns)) {
 			scrubConflicts(contents, path);
+		} else { 
+			checkout(path, false);
 		}	
 	};
 }
