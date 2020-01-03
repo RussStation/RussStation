@@ -206,8 +206,11 @@
 	invisibility = INVISIBILITY_MAXIMUM
 	new /obj/effect/temp_visual/monkeyify/humanify(loc)
 	sleep(22)
+
 	var/mob/living/carbon/human/O = new( loc )
 	for(var/obj/item/C in O.loc)
+		if(C.anchored)
+			continue
 		O.equip_to_appropriate_slot(C)
 
 	dna.transfer_identity(O)
@@ -455,6 +458,7 @@
 
 	new_xeno.a_intent = INTENT_HARM
 	new_xeno.key = key
+	update_atom_languages()
 
 	to_chat(new_xeno, "<B>You are now an alien.</B>")
 	. = new_xeno
