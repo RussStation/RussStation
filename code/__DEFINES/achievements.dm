@@ -33,6 +33,7 @@
 #define BOSS_MEDAL_LEGION	  "Legion Killer"
 #define BOSS_MEDAL_TENDRIL	  "Tendril Exterminator"
 #define BOSS_MEDAL_SWARMERS   "Swarmer Beacon Killer"
+#define BOSS_MEDAL_SIF        "Sif Killer" //Honk - Added end round medal for Sif
 
 #define BOSS_MEDAL_MINER_CRUSHER	  	"Blood-drunk Miner Crusher"
 #define BOSS_MEDAL_BUBBLEGUM_CRUSHER  	"Bubblegum Crusher"
@@ -52,3 +53,4 @@
 #define LEGION_SCORE 	     "Legion Killed"
 #define SWARMER_BEACON_SCORE "Swarmer Beacs Killed"
 #define TENDRIL_CLEAR_SCORE	 "Tendrils Killed"
+#define SIF_SCORE            "Sif Killed" //Honk - Added end round score for Sif

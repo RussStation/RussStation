@@ -344,7 +344,7 @@ honk end */
 	name = "Spicy-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 1,
+		/obj/item/reagent_containers/food/snacks/meatball = 1, // honk -- meatball name change
 		/obj/item/reagent_containers/food/snacks/grown/chili
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket/spicy
@@ -355,7 +355,7 @@ honk end */
 	name = "Teriyaki-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 1,
+		/obj/item/reagent_containers/food/snacks/meatball = 1, // honk -- meatball name change
 		/datum/reagent/consumable/soysauce = 3
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket/teriyaki
@@ -366,7 +366,7 @@ honk end */
 	name = "Pizza-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 1,
+		/obj/item/reagent_containers/food/snacks/meatball = 1, // honk -- meatball name change
 		/obj/item/reagent_containers/food/snacks/grown/tomato = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket/pizza
@@ -398,7 +398,7 @@ honk end */
 	name = "Gondola-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 1,
+		/obj/item/reagent_containers/food/snacks/meatball = 1, // honk -- meatball name change
 		/datum/reagent/tranquility = 5
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket/gondola

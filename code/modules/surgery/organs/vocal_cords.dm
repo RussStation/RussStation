@@ -81,7 +81,7 @@
 	if(isliving(owner))
 		var/mob/living/L = owner
 		if(!L.can_speak_vocal())
-		return FALSE
+			return FALSE
 	if(check_flags & AB_CHECK_CONSCIOUS)
 		if(owner.stat)
 			return FALSE
