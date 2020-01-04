@@ -13,4 +13,7 @@ export const mergeStrategies: Record<string, string> = {
 	".github": "OURS"
 };
 
-export const honkRegex: RegExp = /(\/\/|\/\*)[t\f\v ]*honk/i;
+export const CommentPatterns: RegExp[] = [
+	/(\/\/|\/\*)[t\f\v ]*honk/i,
+	/honk.*\*\//i
+];

@@ -16,22 +16,22 @@
 			if(ishuman(target))
 				var/mob/living/carbon/human/H = target
 				if(H.head)
-					var/obj/item/I = H.get_item_by_slot(SLOT_HEAD)
+					var/obj/item/I = H.get_item_by_slot(ITEM_SLOT_HEAD)
 					H.doUnEquip(I, TRUE, H.loc, FALSE)
 
 				var/obj/item/clothing/head/sombrero/shamebrero/S = new /obj/item/clothing/head/sombrero/shamebrero(H.loc)
-				H.equip_to_slot_or_del(S, SLOT_HEAD)
+				H.equip_to_slot_or_del(S, ITEM_SLOT_HEAD)
 				///obj/item/clothing/suit/poncho/ponchoshame
-		
+
 		if (ADMIN_PUNISHMENT_PONCHOSHAME)
 			if(ishuman(target))
 				var/mob/living/carbon/human/H = target
 				if(H.head)
-					var/obj/item/I = H.get_item_by_slot(SLOT_WEAR_SUIT)
+					var/obj/item/I = H.get_item_by_slot(ITEM_SLOT_OCLOTHING)
 					H.doUnEquip(I, TRUE, H.loc, FALSE)
 
 				var/obj/item/clothing/suit/poncho/ponchoshame/S = new /obj/item/clothing/suit/poncho/ponchoshame(H.loc)
-				H.equip_to_slot_or_del(S, SLOT_WEAR_SUIT)
+				H.equip_to_slot_or_del(S, ITEM_SLOT_OCLOTHING)
 
 	punish_log(target, punishment)
 

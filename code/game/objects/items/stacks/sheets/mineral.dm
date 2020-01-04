@@ -16,8 +16,8 @@ Mineral Sheets
 	Others:
 		- Adamantine
 		- Mythril
-		- Enriched Uranium
-		- Abductor
+		- Alien Alloy
+		- Coal
 */
 
 /*
@@ -334,7 +334,7 @@ GLOBAL_LIST_INIT(plastitanium_recipes, list ( \
 /*
  * Snow
  */
- 
+
 /obj/item/stack/sheet/mineral/snow
 	name = "snow"
 	icon_state = "sheet-snow"
