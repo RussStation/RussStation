@@ -168,8 +168,12 @@
 				Use it to cook or boil food ingredients (meats, doughs, egg, spaghetti, donkpocket, etc...).
 				It can cook multiple items at once.
 
+<!-- honk start -- contains gamer words
 				<h2>Processor:</h2>
 				Use it to process certain ingredients (meat into faggot, doughslice into spaghetti, potato into fries,etc...)
+honk end -->
+				<h2>Processor:</h2>
+				Use it to process certain ingredients (meat into meatball, doughslice into spaghetti, potato into fries,etc...)
 
 				<h2>Gibber:</h2>
 				Stuff an animal in it to grind it into meat.
