@@ -199,10 +199,6 @@ honk end -->
 				</body>
 				</html>
 			"}
-/*honk start -- Contains "faggot"
-				<h2>Processor:</h2>
-				Use it to process certain ingredients (meat into faggot, doughslice into spaghetti, potato into fries,etc...)
-honk end */
 
 /obj/item/book/manual/nuclear
 	name = "Fission Mailed: Nuclear Sabotage 101"
