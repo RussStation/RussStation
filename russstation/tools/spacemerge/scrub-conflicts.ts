@@ -1,7 +1,8 @@
 import { writeFileSync } from "fs";
 import { EOL } from "os";
 
-import { honkRegex } from "./config";
+import { CommentPatterns } from "./config";
+import { matchesInList } from "./util";
 
 interface ConflictLines {
 	start: number,
@@ -22,7 +23,7 @@ export function scrubConflicts(data: string, path: string) {
 	let conflictLines = findConflictLines(file, path);
 	while (conflictLines) {
 		const { start, mid, end } = conflictLines;
-		if (!oursHasHonkComment(file, conflictLines)) {
+		if (!oursHasFlagComment(file, conflictLines)) {
 			file = takeTheirs(file, conflictLines);
 			hasBeenScrubbed = true;
 			conflictLines = findConflictLines(file, path, start + (end - (mid + 1)));
@@ -40,11 +41,12 @@ export function scrubConflicts(data: string, path: string) {
 	
 }
 
-function oursHasHonkComment(file: string[], { start, mid }: ConflictLines) {
-	return file
+function oursHasFlagComment(file: string[], { start, mid }: ConflictLines) {
+	const ours = file
 		.slice(start + 1, mid)
 		.join(EOL)
-		.match(honkRegex) !== null;
+
+	return matchesInList(ours, CommentPatterns)
 }
 
 function takeTheirs(file: string[], { start, mid, end }: ConflictLines) {

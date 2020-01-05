@@ -47,9 +47,24 @@
 	mood_change = -2
 	timeout = 4 MINUTES
 
-/datum/mood_event/depression
+/datum/mood_event/depression_minimal
+	description = "<span class='warning'>I feel a bit down.</span>\n"
+	mood_change = -10
+	timeout = 2 MINUTES
+
+/datum/mood_event/depression_mild
 	description = "<span class='warning'>I feel sad for no particular reason.</span>\n"
 	mood_change = -12
+	timeout = 2 MINUTES
+
+/datum/mood_event/depression_moderate
+	description = "<span class='warning'>I feel miserable.</span>\n"
+	mood_change = -14
+	timeout = 2 MINUTES
+
+/datum/mood_event/depression_severe
+	description = "<span class='warning'>I've lost all hope.</span>\n"
+	mood_change = -16
 	timeout = 2 MINUTES
 
 /datum/mood_event/shameful_suicide //suicide_acts that return SHAME, like sord
@@ -191,6 +206,11 @@
 	description = "<span class='warning'>I've produced better art than that from my ass.</span>\n"
 	mood_change = -2
 	timeout = 1200
+
+/datum/mood_event/graverobbing
+	description ="<span class='boldwarning'>I just desecrated someone's grave... I can't believe I did that...</span>\n"
+	mood_change = -8
+	timeout = 3 MINUTES
 
 //These are unused so far but I want to remember them to use them later
 /datum/mood_event/cloned_corpse

@@ -64,13 +64,15 @@
 
 /obj/machinery/computer/scan_consolenew/attackby(obj/item/I, mob/user, params)
 	if (istype(I, /obj/item/disk/data)) //INSERT SOME DISKETTES
-		if (!src.diskette)
-			if (!user.transferItemToLoc(I,src))
-				return
-			src.diskette = I
-			to_chat(user, "<span class='notice'>You insert [I].</span>")
-			src.updateUsrDialog()
+		if (!user.transferItemToLoc(I,src))
 			return
+		if(diskette)
+			diskette.forceMove(drop_location())
+			diskette = null
+		diskette = I
+		to_chat(user, "<span class='notice'>You insert [I].</span>")
+		updateUsrDialog()
+		return
 	if (istype(I, /obj/item/chromosome))
 		if(LAZYLEN(stored_chromosomes) < max_chromosomes)
 			I.forceMove(src)
@@ -858,7 +860,7 @@
 						var/result_path = get_mixed_mutation(combine, path)
 						if(result_path)
 							stored_mutations += new result_path()
-							to_chat(usr, "<span class='boldnotice'>Succes! New mutation has been added to storage</span>")
+							to_chat(usr, "<span class='boldnotice'>Success! New mutation has been added to storage</span>")
 							discover(result_path)
 							combine = null
 						else

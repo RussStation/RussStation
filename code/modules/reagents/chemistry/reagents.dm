@@ -40,14 +40,13 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/self_consuming = FALSE
 	var/reagent_weight = 1 //affects how far it travels when sprayed
 	var/metabolizing = FALSE
-	var/harmful = FALSE;//is it bad for you? Currently only used for borghypo. C2s and Toxins have it TRUE by default.
-
+	var/harmful = FALSE //is it bad for you? Currently only used for borghypo. C2s and Toxins have it TRUE by default.
 	//honk - dorf smithing vars (tried creating a sperate file but it wouldn't work, this is the best way to do it)
 	var/attack_force = 5 //damage by force
 	var/penetration_value = 0 // bad dragon xd
 	var/sharp_result = FALSE // if the molded reagent comes out sharp
 	var/pick_speed = 40 // how fast the reagent would mine
-	var/produce_type = /obj/item/stack/ore/slag // what a reagent produces if used in mold... dumbs it down so you dont add oxygen to molds making oxygen tools 
+	var/produce_type = /obj/item/stack/ore/slag // what a reagent produces if used in mold... dumbs it down so you dont add oxygen to molds making oxygen tools
 	var/blunt_damage = FALSE //if the reagen would make a good blunt weapon
 	//honk - end (These values do not effect the overall reagent, the only time these vars come into action is when smelting them into weapons! so dont panic)
 

@@ -71,8 +71,10 @@ Difficulty: Medium
 	loot = list(/obj/structure/closet/crate/necropolis/sif)
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/sif/crusher)
 	gps_name = "Infinity Signal"
-	medal_type = BOSS_MEDAL_SIF
-	score_type = SIF_SCORE
+	achievement_type = /datum/award/achievement/boss/sif_kill
+	crusher_achievement_type = /datum/award/achievement/boss/sif_crusher
+	score_achievement_type = /datum/award/score/sif_score
+
 	deathmessage = "falls into the abyss."
 	deathsound = 'russstation/sound/effects/death_howl.ogg'
 	var/can_special = 1 //Enables sif to do what he does best, spin and charge
@@ -440,7 +442,7 @@ Difficulty: Medium
 	var/numUses = 1
 
 /obj/item/clothing/neck/necklace/necklace_of_the_forsaken/item_action_slot_check(slot)
-	return slot == SLOT_NECK
+	return slot == ITEM_SLOT_NECK
 
 /obj/item/clothing/neck/necklace/necklace_of_the_forsaken/dropped(mob/user)
 	..()

@@ -396,7 +396,6 @@ GLOBAL_LIST_EMPTY(asset_datums)
 		"tgui-fallback.html" = 'tgui-next/packages/tgui/public/tgui-fallback.html',
 		"tgui.bundle.js" = 'tgui-next/packages/tgui/public/tgui.bundle.js',
 		"tgui.bundle.css" = 'tgui-next/packages/tgui/public/tgui.bundle.css',
-		"shim-console.js" = 'tgui-next/packages/tgui/public/shim-console.js',
 		"shim-html5shiv.js" = 'tgui-next/packages/tgui/public/shim-html5shiv.js',
 		"shim-ie8.js" = 'tgui-next/packages/tgui/public/shim-ie8.js',
 		"shim-dom4.js" = 'tgui-next/packages/tgui/public/shim-dom4.js',
@@ -586,6 +585,22 @@ GLOBAL_LIST_EMPTY(asset_datums)
 		"medium_button.png" = 'html/medium_button.png',
 		"minor_button.png" = 'html/minor_button.png',
 		"none_button.png" = 'html/none_button.png',
+	)
+
+/datum/asset/simple/arcade
+	assets = list(
+		"boss1.gif" = 'icons/UI_Icons/Arcade/boss1.gif',
+		"boss2.gif" = 'icons/UI_Icons/Arcade/boss2.gif',
+		"boss3.gif" = 'icons/UI_Icons/Arcade/boss3.gif',
+		"boss4.gif" = 'icons/UI_Icons/Arcade/boss4.gif',
+		"boss5.gif" = 'icons/UI_Icons/Arcade/boss5.gif',
+		"boss6.gif" = 'icons/UI_Icons/Arcade/boss6.gif',
+		)
+
+/datum/asset/spritesheet/simple/achievements
+	name ="achievements"
+	assets = list(
+		"default" = 'icons/UI_Icons/Achievements/default.png'
 	)
 
 /datum/asset/spritesheet/simple/pills

@@ -325,7 +325,7 @@
 	item_state = "spickaxe"
 	force = 11
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = SLOT_BACK
+	slot_flags = ITEM_SLOT_BACK
 	throw_speed = 4
 	attack_verb = list("attacked","bludgeoned","pulped","gored","torn")
 

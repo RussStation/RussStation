@@ -1,7 +1,8 @@
-import { map } from 'common/fp';
+import { map } from 'common/collections';
 import { Fragment } from 'inferno';
 import { act } from '../byond';
 import { AnimatedNumber, Box, Button, LabeledList, Section, Tabs } from '../components';
+import { InterfaceLockNoticeBox } from './common/InterfaceLockNoticeBox';
 
 export const Cargo = props => {
   const { state } = props;
@@ -59,7 +60,7 @@ export const Cargo = props => {
                   disabled={!(data.away && data.docked)}
                   onClick={() => act(ref, 'loan')} />
               ) : (
-                <span className="color-bad">Loaned to Centcom</span>
+                <Box color="bad">Loaned to Centcom</Box>
               )}
             </LabeledList.Item>
           ) : ''}
@@ -161,6 +162,8 @@ const Catalog = props => {
                 content={(data.self_paid
                   ? Math.round(pack.cost * 1.1)
                   : pack.cost) + ' credits'}
+                tooltip={pack.desc}
+                tooltipPosition="left"
                 onClick={() => act(ref, 'add', {
                   id: pack.id,
                 })} />
@@ -290,6 +293,56 @@ const Cart = props => {
             </Box>
           )}
         </Box>
+      )}
+    </Fragment>
+  );
+};
+
+export const CargoExpress = props => {
+  const { state } = props;
+  const { config, data } = state;
+  const { ref } = config;
+  const supplies = data.supplies || {};
+  return (
+    <Fragment>
+      <InterfaceLockNoticeBox
+        siliconUser={data.siliconUser}
+        locked={data.locked}
+        onLockStatusChange={() => act(ref, 'lock')}
+        accessText="a QM-level ID card" />
+      {!data.locked &&(
+        <Fragment>
+          <Section
+            title="Cargo Express"
+            buttons={(
+              <Box inline bold>
+                <AnimatedNumber value={Math.round(data.points)} /> credits
+              </Box>
+            )}>
+            <LabeledList>
+              <LabeledList.Item label="Landing Location">
+                <Button
+                  content="Cargo Bay"
+                  selected={!data.usingBeacon}
+                  onClick={() => act(ref, 'LZCargo')} />
+                <Button
+                  selected={data.usingBeacon}
+                  disabled={!data.hasBeacon}
+                  onClick={() => act(ref, 'LZBeacon')}>
+                  {data.beaconzone} ({data.beaconName})
+                </Button>
+                <Button
+                  content={data.printMsg}
+                  disabled={!data.canBuyBeacon}
+                  onClick={() => act(ref, 'printBeacon')} />
+              </LabeledList.Item>
+              <LabeledList.Item label="Notice">
+                {data.message}
+              </LabeledList.Item>
+            </LabeledList>
+          </Section>
+          <Catalog state={state} supplies={supplies} />
+        </Fragment>
       )}
     </Fragment>
   );
