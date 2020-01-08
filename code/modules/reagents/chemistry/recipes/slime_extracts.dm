@@ -187,6 +187,28 @@
 /datum/chemical_reaction/slime/slimebork/drinks/getbork()
 	return get_random_drink()
 
+// honk start -- Adding reaction with lime juice to create a slime lime
+
+/datum/chemical_reaction/slime/slimelime
+	name = "Slime Lime"
+	id = "m_slimelime"
+	required_reagents = list(/datum/reagent/consumable/limejuice = 5)
+	required_container = /obj/item/slime_extract/silver
+	required_other = TRUE
+
+/datum/chemical_reaction/slime/slimelime/on_reaction(datum/reagents/holder)
+	var/turf/T = get_turf(holder.my_atom)
+
+	playsound(T, 'sound/effects/phasein.ogg', 100, TRUE)
+
+	for(var/mob/living/carbon/C in viewers(T, null))
+		C.flash_act()
+
+	for(var/i in 1 to 3)
+		new /obj/item/reagent_containers/food/snacks/grown/russ/citrus/slimelime(T)
+	..()
+//honk end
+
 //Blue
 /datum/chemical_reaction/slime/slimefrost
 	name = "Slime Frost Oil"
