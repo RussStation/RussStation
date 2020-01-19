@@ -565,7 +565,9 @@
 	density = FALSE
 	show_flavour = FALSE //Flavour only exists for spawners menu
 	short_desc = "You are a space pirate."
-	flavour_text = "The station refused to pay for your protection, protect the ship, siphon the credits from the station and raid it for even more loot."
+	flavour_text = "This station was identified as a potentially profitable target. \
+	Announcing your presence and demanding money may make the job easier but it's been known to backfire. \
+	However you decide to do it, the booty is the top priority." //honk -- update description text
 	assignedrole = "Space Pirate"
 	var/rank = "Mate"
 

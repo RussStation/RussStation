@@ -14,56 +14,21 @@
 	return ..()
 
 /datum/round_event/pirates
-	startWhen = 60 //2 minutes to answer
-	var/datum/comm_message/threat
-	var/payoff = 0
-	var/payoff_min = 20000
-	var/paid_off = FALSE
+	//honk -- remove announcement
 	var/ship_name = "Space Privateers Association"
-	var/shuttle_spawned = FALSE
+	fakeable = FALSE
 
 /datum/round_event/pirates/setup()
 	ship_name = pick(strings(PIRATE_NAMES_FILE, "ship_names"))
 
-/datum/round_event/pirates/announce(fake)
-	priority_announce("Incoming subspace communication. Secure channel opened at all communication consoles.", "Incoming Message", 'sound/ai/commandreport.ogg')
-	if(fake)
-		return
-	threat = new
-	var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
-	if(D)
-		payoff = max(payoff_min, FLOOR(D.account_balance * 0.80, 1000))
-	threat.title = "Business proposition"
-	threat.content = "This is [ship_name]. Pay up [payoff] credits or you'll walk the plank."
-	threat.possible_answers = list("We'll pay.","No way.")
-	threat.answer_callback = CALLBACK(src,.proc/answered)
-	SScommunications.send_message(threat,unique = TRUE)
-
-/datum/round_event/pirates/proc/answered()
-	if(threat && threat.answered == 1)
-		var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
-		if(D)
-			if(D.adjust_money(-payoff))
-				priority_announce("Thanks for the credits, landlubbers.",sender_override = ship_name)
-				paid_off = TRUE
-				return
-			else
-				priority_announce("Trying to cheat us? You'll regret this!",sender_override = ship_name)
-	if(!shuttle_spawned)
-		spawn_shuttle()
-	else
-		priority_announce("Too late to beg for mercy!",sender_override = ship_name)
+//honk -- remove announcement
 
 /datum/round_event/pirates/start()
-	if(threat && !threat.answered)
-		threat.possible_answers = list("Too late")
-		threat.answered = 1
-	if(!paid_off && !shuttle_spawned)
-		spawn_shuttle()
+	//honk -- remove announcement
+	spawn_shuttle()
 
 /datum/round_event/pirates/proc/spawn_shuttle()
-	shuttle_spawned = TRUE
-
+	//honk -- remove announcement
 	var/list/candidates = pollGhostCandidates("Do you wish to be considered for pirate crew?", ROLE_TRAITOR)
 	shuffle_inplace(candidates)
 
@@ -87,8 +52,7 @@
 				announce_to_ghosts(M)
 			else
 				announce_to_ghosts(spawner)
-
-	priority_announce("Unidentified armed ship detected near the station.")
+	//honk -- remove pirate announcement
 
 //Shuttle equipment
 
