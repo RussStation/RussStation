@@ -25,7 +25,7 @@
 	desc = "Authentic Marshall hair case. Now ya can protect this here homestead. Navy Model not included."
 
 /obj/item/clothing/head/cowboyhat/pink
-	name = "cowgirl hat"
+	name = "pink cowboy hat"
 	icon_state = "cowboyhat_pink"
 	item_state = "cowboyhat_pink"
 	desc = "For those buckle bunnies wanta' become a real buckaroo."
