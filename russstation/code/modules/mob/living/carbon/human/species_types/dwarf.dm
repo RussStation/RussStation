@@ -7,10 +7,9 @@
 	inherent_traits = list(TRAIT_NOBREATH)
 	mutant_bodyparts = list("tail_human","ears","wings")
 	default_features = list("mcolor" = "FFF", "tail_human" = "None", "ears" = "None", "wings" = "None")
-	limbs_id = "dwarf"
+	limbs_id = "human"
 	use_skintones = 1
 	speedmod = 1
-	damage_overlay_type = "monkey" //fits really well, so why add more icons?
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	brutemod = 0.9
 	coldmod = 0.85
@@ -18,15 +17,19 @@
 	mutanteyes = /obj/item/organ/eyes/night_vision
 
 /datum/species/dwarf/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
-	C.draw_russ_parts(FALSE)
 	. = ..()
+	C.dna.add_mutation(DWARFISM)
+	C.bubble_file = 'russstation/icons/mob/talk.dmi'
+	C.bubble_icon = "dwarf"
 	var/dwarf_hair = pick("Beard (Dwarf)", "Beard (Very Long)", "Beard (Full)")
 	C.grant_language(/datum/language/dwarvish)
 	C.facial_hairstyle = dwarf_hair
 	C.update_hair()
 
 /datum/species/dwarf/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
-	C.draw_russ_parts(TRUE)
+	C.dna.remove_mutation(DWARFISM)
+	C.bubble_file = 'icons/mob/talk.dmi'
+	C.bubble_icon = initial(C.bubble_icon)
 	. = ..()
 
 

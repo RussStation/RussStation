@@ -5,7 +5,7 @@
 	taste_description = "personal progress"
 	can_synth = FALSE
 
-/datum/reagent/diamond 
+/datum/reagent/diamond
 	name = "Diamond"
 	description = "Capital One, what's in your wallet?"
 	reagent_state = LIQUID
@@ -17,11 +17,11 @@
 	penetration_value = 25
 	sharp_result = TRUE
 
-/datum/reagent/adamantine 
+/datum/reagent/adamantine
 	name = "Adamantine"
 	description = "STRIKE THE EARTH"
 	reagent_state = LIQUID
-	color = "#00fff7" //RGB: 0, 255, 247
+	color = "#db0d0d" //RGB: 219, 13, 13
 	taste_description = "demons"
 	produce_type = /obj/item/stack/sheet/mineral/adamantine
 	attack_force = 20
@@ -29,7 +29,7 @@
 	penetration_value = 40
 	sharp_result = TRUE
 
-/datum/reagent/dorf_plasma 
+/datum/reagent/dorf_plasma
 	name = "Plasma"
 	description = "Dwarven tameable material"
 	reagent_state = LIQUID
@@ -40,7 +40,7 @@
 	pick_speed = 0.6
 	sharp_result = TRUE
 
-/datum/reagent/dorf_bananium 
+/datum/reagent/dorf_bananium
 	name = "Bananium"
 	description = "Handle with care. Or don't."
 	reagent_state = LIQUID
@@ -50,7 +50,7 @@
 	attack_force = 15
 	pick_speed = 0.5
 
-/datum/reagent/dorf_titanium 
+/datum/reagent/dorf_titanium
 	name = "Titanium"
 	description = "Bootleg adamantine."
 	reagent_state = LIQUID
