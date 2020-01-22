@@ -117,8 +117,11 @@
 			if(user && notifyAttach)
 				to_chat(user, "<span class='notice'>You attach [I] to [src].</span>")
 
+// honk start -- allow changing of the icon file for icons of attached accessories
+			var/accessory_icon = attached_accessory.icon_attached
 			var/accessory_color = attached_accessory.icon_state
-			accessory_overlay = mutable_appearance('icons/mob/clothing/accessories.dmi', "[accessory_color]")
+			accessory_overlay = mutable_appearance(accessory_icon, "[accessory_color]")
+// honk end
 			accessory_overlay.alpha = attached_accessory.alpha
 			accessory_overlay.color = attached_accessory.color
 
