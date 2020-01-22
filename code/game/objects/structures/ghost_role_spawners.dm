@@ -565,9 +565,11 @@
 	density = FALSE
 	show_flavour = FALSE //Flavour only exists for spawners menu
 	short_desc = "You are a space pirate."
+	//honk start -- update description to fit removal of the announcement
 	flavour_text = "This station was identified as a potentially profitable target. \
 	Announcing your presence and demanding money may make the job easier but it's been known to backfire. \
-	However you decide to do it, the booty is the top priority." //honk -- update description text
+	However you decide to do it, the booty is the top priority."
+	//honk end
 	assignedrole = "Space Pirate"
 	var/rank = "Mate"
 
