@@ -251,10 +251,9 @@
 		message = replacetext(message," thanks "," thank you, thank you very much ")
 		message = replacetext(message," what are you "," whatcha ")
 		message = replacetext(message," yes ",pick(" sure", "yea "))
-		message = replacetext(message," clown "," square ")
+		message = replacetext(message," clown "," square ") // honk -- removes gamer word
 		message = replacetext(message," muh valids "," my kicks ")
 		speech_args[SPEECH_MESSAGE] = trim(message)
-//		message = replacetext(message," faggot "," square ") honk contains "faggot"
 
 /datum/mutation/human/stoner
 	name = "Stoner"
