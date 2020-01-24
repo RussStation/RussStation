@@ -391,8 +391,8 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 #define STACK_CHECK_ADJACENT "adjacent" //checks if there is an object of the result type within one tile
 
 //text files
-#define BRAIN_DAMAGE_FILE "traumas.json"
-#define ION_FILE "ion_laws.json"
+#define BRAIN_DAMAGE_FILE "russ_traumas.json" // honk start -- replaced by our files
+#define ION_FILE "russ_ion_laws.json" // honk end
 #define PIRATE_NAMES_FILE "pirates.json"
 #define REDPILL_FILE "redpill.json"
 #define ARCADE_FILE "arcade.json"
