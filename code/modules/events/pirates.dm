@@ -14,17 +14,20 @@
 	return ..()
 
 /datum/round_event/pirates
+	/* honk -- remove announcement
 	startWhen = 60 //2 minutes to answer
 	var/datum/comm_message/threat
 	var/payoff = 0
 	var/payoff_min = 20000
 	var/paid_off = FALSE
+	honk end */
 	var/ship_name = "Space Privateers Association"
 	var/shuttle_spawned = FALSE
 
 /datum/round_event/pirates/setup()
 	ship_name = pick(strings(PIRATE_NAMES_FILE, "ship_names"))
 
+/* honk start -- remove announcement
 /datum/round_event/pirates/announce(fake)
 	priority_announce("Incoming subspace communication. Secure channel opened at all communication consoles.", "Incoming Message", 'sound/ai/commandreport.ogg')
 	if(fake)
@@ -53,17 +56,21 @@
 		spawn_shuttle()
 	else
 		priority_announce("Too late to beg for mercy!",sender_override = ship_name)
+honk end */
 
 /datum/round_event/pirates/start()
+	/* honk start -- remove announcement
 	if(threat && !threat.answered)
 		threat.possible_answers = list("Too late")
 		threat.answered = 1
 	if(!paid_off && !shuttle_spawned)
-		spawn_shuttle()
+	honk end */
+	spawn_shuttle() //honk -- remove tab
 
 /datum/round_event/pirates/proc/spawn_shuttle()
+	/* honk start -- remove announcement
 	shuttle_spawned = TRUE
-
+	honk end */
 	var/list/candidates = pollGhostCandidates("Do you wish to be considered for pirate crew?", ROLE_TRAITOR)
 	shuffle_inplace(candidates)
 
@@ -88,7 +95,9 @@
 			else
 				announce_to_ghosts(spawner)
 
+	/* honk start -- remove announcement
 	priority_announce("Unidentified armed ship detected near the station.")
+	honk end */
 
 //Shuttle equipment
 
