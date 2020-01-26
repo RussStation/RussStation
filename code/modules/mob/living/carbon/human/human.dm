@@ -1225,7 +1225,10 @@
 /mob/living/carbon/human/species/zombie/krokodil_addict
 	race = /datum/species/krokodil_addict
 
-// honk start -- adds diona
+// honk start -- adds russ station species
 /mob/living/carbon/human/species/diona
     race = /datum/species/diona
+
+/mob/living/carbon/human/species/dwarf
+	race = /datum/species/dwarf
 // honk end

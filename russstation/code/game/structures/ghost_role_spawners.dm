@@ -4,16 +4,17 @@
 	mob_name = "dwarf"
 	icon = 'russstation/icons/obj/device.dmi'
 	icon_state = "migrant_portal"
-	density = TRUE 
-	anchored = TRUE 
+	density = TRUE
+	anchored = TRUE
 	roundstart = FALSE
-	death = FALSE 
+	death = FALSE
 	move_resist = MOVE_FORCE_NORMAL
 	mob_species = /datum/species/dwarf
 	outfit = /datum/outfit/dorf
-	flavour_text = "<span class='big bold'>You are a dwarf.</span><b> You have arrived. After a journey from the Mountainhomes into the forbidding wilderness beyond, \
+	short_desc = "You are a dwarf."
+	flavour_text = "You have arrived. After a journey from the Mountainhomes into the forbidding wilderness beyond, \
 	your harsh trek has finally ended. Whether by bolt, plow or hook, provide for youselves, ere the local fauna get hungry. A new chapter of dwarven history begins here \
-	at this place, \"Hammerflames\". Strike the earth!</b>"
+	at this place, \"Hammerflames\". Strike the earth!"
 	assignedrole = "Dwarf"
 
 /obj/effect/mob_spawn/human/dwarf_dorm/special(mob/living/carbon/human/new_spawn)
@@ -29,10 +30,10 @@
 
 /datum/outfit/dorf
 	name = "Dwarf Standard"
-	uniform = /obj/item/clothing/under/dwarf
-	shoes = /obj/item/clothing/shoes/dwarf
+	uniform = /obj/item/clothing/under/misc/overalls
+	shoes = /obj/item/clothing/shoes/workboots/mining
 	back = /obj/item/storage/backpack/satchel/leather
-	gloves = /obj/item/clothing/gloves/dwarf
+	gloves = /obj/item/clothing/gloves/color/black
 
 /obj/item/reagent_containers/food/drinks/wooden_mug
 	name = "wooden mug"
