@@ -141,6 +141,9 @@ LOG_VIRUS
 ## log cloning actions
 LOG_CLONING
 
+# log shuttle actions
+LOG_SHUTTLE
+
 ##Log camera pictures - Must have picture logging enabled
 PICTURE_LOGGING_CAMERA
 
@@ -165,8 +168,11 @@ ID_CONSOLE_JOBSLOT_DELAY 30
 ## allow players to initiate a restart vote
 #ALLOW_VOTE_RESTART
 
-## allow players to initate a mode-change start
+## allow players to initiate a mode-change vote
 #ALLOW_VOTE_MODE
+
+## allow players to initiate a map-change vote
+#ALLOW_VOTE_MAP
 
 ## min delay (deciseconds) between voting sessions (default 10 minutes)
 VOTE_DELAY 6000
@@ -175,10 +181,10 @@ VOTE_DELAY 6000
 VOTE_PERIOD 600
 
 ## prevents dead players from voting or starting votes
-#NO_DEAD_VOTE
+# NO_DEAD_VOTE
 
 ## players' votes default to "No vote" (otherwise,  default to "No change")
-#DEFAULT_NO_VOTE
+# DEFAULT_NO_VOTE
 
 ## disable abandon mob
 NORESPAWN
@@ -191,7 +197,7 @@ HOSTEDBY RussMoney
 
 ## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
 ## Set to 1 to jobban them from those positions, set to 0 to allow them.
-#GUEST_JOBBAN
+# GUEST_JOBBAN
 
 ## Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting)
 GUEST_BAN
@@ -372,9 +378,9 @@ ANNOUNCE_ADMIN_LOGIN
 MAPROTATION
 
 ## Map voting
-## Allows players to vote for their preffered map
+## Allows players to vote with their preffered map setting
 ## When it's set to zero, the map will be randomly picked each round
-ALLOW_MAP_VOTING 1
+PREFERENCE_MAP_VOTING 1
 
 ## Map rotate chance delta
 ## This is the chance of map rotation factored to the round length.
@@ -452,7 +458,7 @@ ERROR_MSG_DELAY 50
 ## If using TGS4, the string option can be set as a chat channel tag to limit the message to channels of that tag type (case-sensitive)
 ## i.e. CHAT_ANNOUNCE_NEW_GAME chat_channel_tag
 
-## Send a message with the station name starting a new game
+## Send a message with the station name starting a new game. Also required for the notify function
 #CHAT_ANNOUNCE_NEW_GAME
 
 
@@ -497,3 +503,7 @@ DEFAULT_VIEW 15x15
 ## The alternative square viewport size if you're using a widescreen view size
 ## You probably shouldn't ever be changing this, but it's here if you want to.
 DEFAULT_VIEW_SQUARE 15x15
+
+
+## Enable automatic profiling - Byond 513.1506 and newer only.
+#AUTO_PROFILE
