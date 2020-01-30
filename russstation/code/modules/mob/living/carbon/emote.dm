@@ -22,6 +22,8 @@
 
 /datum/emote/living/carbon/fart/check_cooldown(mob/user, intentional)
 	var/mob/living/carbon/U = user
+	if(issilicon(user))
+		return
 	if (U.IsStun())
 		return FALSE
 
