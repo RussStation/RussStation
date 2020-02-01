@@ -15,6 +15,7 @@
 	coldmod = 0.85
 	punchdamagehigh = 11 //fist fighting with dorfs is very dangerous
 	mutanteyes = /obj/item/organ/eyes/night_vision
+	species_language_holder = /datum/language_holder/dwarf
 
 /datum/species/dwarf/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
 	. = ..()
@@ -22,7 +23,6 @@
 	C.bubble_file = 'russstation/icons/mob/talk.dmi'
 	C.bubble_icon = "dwarf"
 	var/dwarf_hair = pick("Beard (Dwarf)", "Beard (Very Long)", "Beard (Full)")
-	C.grant_language(/datum/language/dwarvish)
 	C.facial_hairstyle = dwarf_hair
 	C.update_hair()
 
