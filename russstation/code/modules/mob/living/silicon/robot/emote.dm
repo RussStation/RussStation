@@ -12,13 +12,6 @@
 	U.adjustFireLoss(fail_damage)
 	to_chat(U, "<span class='notice'>A clunk comes from within your shell.</span>")
 
-/datum/emote/living/scream
-	key = "scream"
-	key_third_person = "screams"
-	message = "screams."
-	emote_type = EMOTE_AUDIBLE
+/datum/emote/living/silicon/scream
 	only_forced_audio = TRUE
-
-/datum/emote/living/scream/get_sound(mob/living/user)
-	if(issilicon(user))
-		return 'russstation/sound/effects/mob_effects/robot_scream.ogg'
+	sound = 'russstation/sound/effects/mob_effects/robot_scream.ogg'
