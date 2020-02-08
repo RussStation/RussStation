@@ -24,3 +24,9 @@
 	id = /datum/reagent/consumable/ethanol/mercuryblast
 	results = list(/datum/reagent/consumable/ethanol/mercuryblast = 4)
 	required_reagents = list(/datum/reagent/consumable/ethanol/vodka = 2, /datum/reagent/consumable/spacemountainwind = 1, /datum/reagent/consumable/ice = 1)
+
+/datum/chemical_reaction/toiletwine
+	name = "Toilet Wine"
+	id = /datum/reagent/consumable/ethanol/wine/toiletwine
+	results = list(/datum/reagent/consumable/ethanol/wine/toiletwine = 10)
+	required_reagents = list(/datum/reagent/consumable/ethanol/wine = 5, /datum/reagent/water/toiletwater = 5)

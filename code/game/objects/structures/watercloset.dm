@@ -121,7 +121,7 @@
 			cube.Expand()
 			return
 		var/obj/item/reagent_containers/RG = I
-		RG.reagents.add_reagent(/datum/reagent/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
+		RG.reagents.add_reagent(/datum/reagent/water/toiletwater, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))// honk -- water in toilet is now toiletwater
 		to_chat(user, "<span class='notice'>You fill [RG] from [src]. Gross.</span>")
 	else
 		return ..()

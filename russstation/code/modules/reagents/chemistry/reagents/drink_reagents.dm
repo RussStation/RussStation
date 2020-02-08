@@ -27,4 +27,18 @@
 		M.fakevomit(0)
 	return ..()
 
+/datum/reagent/water/toiletwater
+	name = "Toilet Water"
+	taste_description = "lemonade and bleach"
+	glass_icon_state = "glass_yellow"
+	glass_name = "glass of toilet water"
+	glass_desc = "Put this back...and wash your hands..."
+	reagent_state = LIQUID
+
+/datum/reagent/water/toiletwater/on_mob_life(mob/living/M)
+	if(prob(45))
+		M.fakevomit(1)
+		M.fakevomit(0)
+	return ..()
+
 //end

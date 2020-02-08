@@ -73,3 +73,20 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /datum/reagent/consumable/ethanol/mercuryblast/on_mob_life(mob/living/carbon/M)
 	M.adjust_bodytemperature(-30 * TEMPERATURE_DAMAGE_COEFFICIENT, T0C) //310.15 is the normal bodytemp.
 	return ..()
+
+/datum/reagent/consumable/ethanol/wine/toiletwine
+	name = "Toilet Wine"
+	description = "Now with chunks!"
+	color = "#665666" // rgb: 102, 86, 102
+	boozepwr = 30
+	taste_description = "excrement...with subtle fruity notes"
+	glass_icon_state = "toiletwine"
+	glass_name = "Toilet Wine"
+	glass_desc = "Better than nothing...actually no, it's not.."
+	shot_glass_icon_state = "shotglassyellow"
+
+/datum/reagent/consumable/ethanol/wine/toiletwine/on_mob_life(mob/living/M)
+	if(prob(20))
+		M.fakevomit(1)
+		M.fakevomit(0)
+	return ..()
