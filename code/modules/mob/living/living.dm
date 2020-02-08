@@ -9,7 +9,9 @@
 		diag_hud.add_to_hud(src)
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
-	if(ishuman(src)) // honk start -- fart module
+	if (istype(src, /mob/living/carbon/human/species/corporate)) // honk start -- fart module
+		src.fart_type = new /datum/fart/living/carbon/human/species/corporate()
+	else if(ishuman(src))
 		src.fart_type = new /datum/fart/living/carbon/human()
 	else if(issilicon(src))
 		src.fart_type = new /datum/fart/living/silicon() // honk end
