@@ -86,7 +86,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	shot_glass_icon_state = "shotglassyellow"
 
 /datum/reagent/consumable/ethanol/wine/toiletwine/on_mob_life(mob/living/M)
-	if(prob(20))
+	if(prob(5))
 		M.fakevomit(1)
 		M.fakevomit(0)
 	return ..()
