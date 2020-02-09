@@ -36,7 +36,7 @@
 	reagent_state = LIQUID
 
 /datum/reagent/water/toiletwater/on_mob_life(mob/living/M)
-	if(prob(45))
+	if(prob(20))
 		M.fakevomit(1)
 		M.fakevomit(0)
 	return ..()
