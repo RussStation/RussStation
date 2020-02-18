@@ -12,8 +12,6 @@
 /turf/closed/mineral/adamantine
 	mineralType = /obj/item/stack/ore/adamantine
 	mineralAmt = 1
-	spreadChance = 0
-	spread = 0
 	scan_state = "rock_Adamantine"
 	environment_type = "basalt"
 	turf_type = /turf/open/floor/plating/asteroid/basalt/lava_land_surface

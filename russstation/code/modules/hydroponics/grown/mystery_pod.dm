@@ -296,7 +296,7 @@
 
 		if(63 to 93)
 			B = pick(/mob/living/simple_animal/butterfly,
-			/mob/living/simple_animal/cockroach,
+			/mob/living/simple_animal/hostile/cockroach,
 			/mob/living/simple_animal/pet/dog/corgi/puppy,
 			/mob/living/simple_animal/pet/dog/corgi,
 			/mob/living/simple_animal/crab,

@@ -81,9 +81,9 @@ SUBSYSTEM_DEF(vote)
 							greatest_votes = max(greatest_votes, choices[preferred_map])
 					else if(config.defaultmap)
 						if(choices[config.defaultmap]) //No votes if the map isnt in the vote.
-						var/default_map = config.defaultmap.map_name
-						choices[default_map] += 1
-						greatest_votes = max(greatest_votes, choices[default_map])
+							var/default_map = config.defaultmap.map_name
+							choices[default_map] += 1
+							greatest_votes = max(greatest_votes, choices[default_map])
 	//get all options with that many votes and return them in a list
 	. = list()
 	if(greatest_votes)
