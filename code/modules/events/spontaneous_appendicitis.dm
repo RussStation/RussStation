@@ -2,7 +2,7 @@
 	name = "Spontaneous Appendicitis"
 	typepath = /datum/round_event/spontaneous_appendicitis
 	weight = 20
-	max_occurrences = 0 // honk - 2 -> 0 disabled for low pop reasons
+	max_occurrences = 0 // honk - 4 -> 0 disabled for low pop reasons
 	earliest_start = 10 MINUTES
 	min_players = 5 // To make your chance of getting help a bit higher.
 

@@ -255,6 +255,7 @@
 		message = replacetext(message," muh valids "," my kicks ")
 		speech_args[SPEECH_MESSAGE] = trim(message)
 
+
 /datum/mutation/human/stoner
 	name = "Stoner"
 	desc = "A common mutation that severely decreases intelligence."

@@ -10,7 +10,7 @@
 	var/require_all_chems = TRUE    //any on the list or all on the list?
 	var/silicons_obey_prob = FALSE
 	/// The amount of a experience given for successfully completing the step.
-	var/experience_given = 1
+	var/experience_given = MEDICAL_SKILL_EASY
 
 /datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	var/success = FALSE
@@ -78,7 +78,7 @@
 		implement_speed_mod = implements[implement_type] / 100.0
 
 	speed_mod /= (get_location_modifier(target) * (1 + surgery.speed_modifier) * implement_speed_mod)
-	var/modded_time = time * speed_mod * user.mind.get_skill_speed_modifier(/datum/skill/medical)
+	var/modded_time = time * speed_mod * user.mind.get_skill_modifier(/datum/skill/medical, SKILL_SPEED_MODIFIER)
 
 
 	fail_prob = min(max(0, modded_time - (time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)),99)//if modded_time > time * modifier, then fail_prob = modded_time - time*modifier. starts at 0, caps at 99

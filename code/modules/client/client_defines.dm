@@ -38,6 +38,7 @@
 	var/move_delay = 0
 	///Current area of the controlled mob
 	var/area = null
+
 		///////////////
 		//SOUND STUFF//
 		///////////////
