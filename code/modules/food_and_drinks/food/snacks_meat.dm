@@ -104,7 +104,7 @@
 /* honk start -- Contains faggot
 /obj/item/reagent_containers/food/snacks/faggot
 	name = "faggot"
-	desc = "A great meal all round."
+	desc = "A great meal all round. Not a cord of wood."
 	icon_state = "faggot"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 1)
 	filling_color = "#800000"
@@ -120,12 +120,23 @@ honk end */
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/nutriment/vitamin = 1)
 	tastes = list("meat" = 1)
+	slices_num = 6
+	slice_path = /obj/item/reagent_containers/food/snacks/salami
 	foodtype = MEAT | BREAKFAST
 	var/roasted = FALSE
 
 /obj/item/reagent_containers/food/snacks/sausage/Initialize()
 	. = ..()
 	eatverb = pick("bite","chew","nibble","deep throat","gobble","chomp")
+
+/obj/item/reagent_containers/food/snacks/salami
+	name = "salami"
+	desc = "A slice of cured salami."
+	icon_state = "salami"
+	filling_color = "#CD4122"
+	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
+	tastes = list("meat" = 1, "smoke" = 1)
+	foodtype = MEAT
 
 /obj/item/reagent_containers/food/snacks/rawkhinkali
 	name = "raw khinkali"

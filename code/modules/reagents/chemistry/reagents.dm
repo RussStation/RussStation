@@ -49,6 +49,14 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/produce_type = /obj/item/stack/ore/slag // what a reagent produces if used in mold... dumbs it down so you dont add oxygen to molds making oxygen tools
 	var/blunt_damage = FALSE //if the reagen would make a good blunt weapon
 	//honk - end (These values do not effect the overall reagent, the only time these vars come into action is when smelting them into weapons! so dont panic)
+	//Are we from a material? We might wanna know that for special stuff. Like metalgen. Is replaced with a ref of the material on New()
+	var/datum/material/material
+
+/datum/reagent/New()
+	. = ..()
+
+	if(material)
+		material = SSmaterials.GetMaterialRef(material)
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	. = ..()

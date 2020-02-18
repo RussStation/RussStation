@@ -18,29 +18,29 @@
 	var/refined_type = null //What this ore defaults to being refined into
 	var/mine_experience = 5 //How much experience do you get for mining this ore?
 	novariants = TRUE // Ore stacks handle their icon updates themselves to keep the illusion that there's more going
-	mats_per_stack = MINERAL_MATERIAL_AMOUNT
 	var/list/stack_overlays
+	var/scan_state = "" //Used by mineral turfs for their scan overlay.
+	var/spreadChance = 0 //Also used by mineral turfs for spreading veins
 	var/reagent_id = null //honk - reagent ids for smelted ore
 
-/obj/item/stack/ore/update_icon()
+/obj/item/stack/ore/update_overlays()
+	. = ..()
 	var/difference = min(ORESTACK_OVERLAYS_MAX, amount) - (LAZYLEN(stack_overlays)+1)
 	if(difference == 0)
 		return
 	else if(difference < 0 && LAZYLEN(stack_overlays))			//amount < stack_overlays, remove excess.
-		cut_overlays()
 		if (LAZYLEN(stack_overlays)-difference <= 0)
-			stack_overlays = null;
+			stack_overlays = null
 		else
 			stack_overlays.len += difference
 	else if(difference > 0)			//amount > stack_overlays, add some.
-		cut_overlays()
 		for(var/i in 1 to difference)
 			var/mutable_appearance/newore = mutable_appearance(icon, icon_state)
 			newore.pixel_x = rand(-8,8)
 			newore.pixel_y = rand(-8,8)
 			LAZYADD(stack_overlays, newore)
 	if (stack_overlays)
-		add_overlay(stack_overlays)
+		. += stack_overlays
 
 /obj/item/stack/ore/welder_act(mob/living/user, obj/item/I)
 	..()
@@ -78,6 +78,8 @@
 	refined_type = /obj/item/stack/sheet/mineral/uranium
 	reagent_id = /datum/reagent/uranium //honk
 	mine_experience = 6
+	scan_state = "rock_Uranium"
+	spreadChance = 5
 
 /obj/item/stack/ore/iron
 	name = "iron ore"
@@ -89,6 +91,8 @@
 	refined_type = /obj/item/stack/sheet/metal
 	reagent_id = /datum/reagent/iron //honk
 	mine_experience = 1
+	scan_state = "rock_Iron"
+	spreadChance = 20
 
 /obj/item/stack/ore/glass
 	name = "sand pile"
@@ -145,6 +149,8 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	refined_type = /obj/item/stack/sheet/mineral/plasma
 	reagent_id = /datum/reagent/dorf_plasma //honk
 	mine_experience = 5
+	scan_state = "rock_Plasma"
+	spreadChance = 8
 
 /obj/item/stack/ore/plasma/welder_act(mob/living/user, obj/item/I)
 	to_chat(user, "<span class='warning'>You can't hit a high enough temperature to smelt [src] properly!</span>")
@@ -161,6 +167,8 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	custom_materials = list(/datum/material/silver=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/silver
 	reagent_id = /datum/reagent/silver //honk
+	scan_state = "rock_Silver"
+	spreadChance = 5
 
 /obj/item/stack/ore/gold
 	name = "gold ore"
@@ -172,6 +180,8 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	custom_materials = list(/datum/material/gold=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/gold
 	reagent_id = /datum/reagent/gold //honk
+	scan_state = "rock_Gold"
+	spreadChance = 5
 
 /obj/item/stack/ore/diamond
 	name = "diamond ore"
@@ -183,6 +193,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	refined_type = /obj/item/stack/sheet/mineral/diamond
 	mine_experience = 10
 	reagent_id = /datum/reagent/diamond //honk
+	scan_state = "rock_Diamond"
 
 /obj/item/stack/ore/bananium
 	name = "bananium ore"
@@ -194,6 +205,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	refined_type = /obj/item/stack/sheet/mineral/bananium
 	reagent_id = /datum/reagent/dorf_bananium //honk
 	mine_experience = 15
+	scan_state = "rock_Bananium"
 
 /obj/item/stack/ore/titanium
 	name = "titanium ore"
@@ -205,6 +217,8 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	refined_type = /obj/item/stack/sheet/mineral/titanium
 	reagent_id = /datum/reagent/dorf_titanium //honk
 	mine_experience = 3
+	scan_state = "rock_Titanium"
+	spreadChance = 5
 
 /obj/item/stack/ore/slag
 	name = "slag"
@@ -332,7 +346,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	throwforce = 2
 	w_class = WEIGHT_CLASS_TINY
 	custom_materials = list(/datum/material/iron = 400)
-	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR
+	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 	var/string_attached
 	var/list/sideslist = list("heads","tails")
 	var/cooldown = 0
