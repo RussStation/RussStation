@@ -127,18 +127,6 @@
 	found_amount += T.air_contents.gases[/datum/gas/plasma] ? T.air_contents.gases[/datum/gas/plasma][MOLES] : 0
 	return found_amount>=target_amount
 
-
-/datum/objective_item/steal/functionalai
-	name = "a functional AI."
-	targetitem = /obj/item/aicard
-	difficulty = 20 //beyond the impossible
-
-/datum/objective_item/steal/functionalai/check_special_completion(obj/item/aicard/C)
-	for(var/mob/living/silicon/ai/A in C)
-		if(isAI(A) && A.stat != DEAD) //See if any AI's are alive inside that card.
-			return 1
-	return 0
-
 /datum/objective_item/steal/blueprints
 	name = "the station blueprints."
 	targetitem = /obj/item/areaeditor/blueprints
