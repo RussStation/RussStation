@@ -1,4 +1,3 @@
-// honk start -- Modified the MMI check when building an AI core so that it doesn't check the ai_allowed flag.
 /obj/structure/AIcore/attackby(obj/item/P, mob/user, params)
 	if (state != CABLED_CORE)
 		return ..()
@@ -8,7 +7,7 @@
 			return
 
 		var/mob/living/brain/B = M.brainmob
-		if((is_banned_from(B.ckey, "AI") && !QDELETED(src) && !QDELETED(user) && !QDELETED(M) && !QDELETED(user) && Adjacent(user))) //honk -- modified check here
+		if((is_banned_from(B.ckey, "AI") && !QDELETED(src) && !QDELETED(user) && !QDELETED(M) && !QDELETED(user) && Adjacent(user))) //overwrote this check (removed !CONFIG_GET(flag/allow_ai))
 			if(!QDELETED(M))
 				to_chat(user, "<span class='warning'>This [M.name] does not seem to fit!</span>")
 			return
@@ -21,4 +20,3 @@
 		return
 	else
 		return ..()
-// honk end
