@@ -189,10 +189,7 @@
 						return
 
 					var/mob/living/brain/B = M.brainmob
-					/* honk start -- Remove checking for allow_ai flag (makes buildable AIs regardless of ALLOW_AI config)
-					if(!CONFIG_GET(flag/allow_ai) || (is_banned_from(B.ckey, "AI") && !QDELETED(src) && !QDELETED(user) && !QDELETED(M) && !QDELETED(user) && Adjacent(user)))
-					honk end */
-					if((is_banned_from(B.ckey, "AI") && !QDELETED(src) && !QDELETED(user) && !QDELETED(M) && !QDELETED(user) && Adjacent(user))) // honk -- removed !CONFIG_GET(flag/allow_ai)
+					if((is_banned_from(B.ckey, "AI") && !QDELETED(src) && !QDELETED(user) && !QDELETED(M) && !QDELETED(user) && Adjacent(user))) // honk -- Remove checking for allow_ai flag [removed !CONFIG_GET(flag/allow_ai)]
 						if(!QDELETED(M))
 							to_chat(user, "<span class='warning'>This [M.name] does not seem to fit!</span>")
 						return
