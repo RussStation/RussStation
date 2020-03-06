@@ -20928,6 +20928,11 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
 	dir = 6
 	},
+/obj/machinery/meter,
+/obj/machinery/airalarm{
+	dir = 4;
+	pixel_x = -24
+	},
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "aVU" = (
@@ -20959,8 +20964,10 @@
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "aVY" = (
-/obj/machinery/meter,
-/obj/machinery/atmospherics/pipe/simple/scrubbers/visible,
+/obj/machinery/atmospherics/components/binary/pump/on{
+	name = "Incinerator Output Pump";
+	target_pressure = 4500
+	},
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "aVZ" = (
@@ -21563,14 +21570,13 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
 "aXA" = (
-/obj/machinery/button/ignition{
-	id = "Incinerator";
-	pixel_x = -6;
-	pixel_y = -24
-	},
 /obj/structure/cable,
 /obj/machinery/atmospherics/components/trinary/filter{
 	dir = 1
+	},
+/obj/machinery/button/ignition/incinerator/atmos{
+	pixel_x = -6;
+	pixel_y = -24
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
@@ -21942,9 +21948,8 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
 "aYn" = (
-/obj/machinery/atmospherics/components/binary/pump{
-	dir = 8;
-	name = "Turbine to Waste"
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{
+	dir = 4
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
@@ -26310,13 +26315,10 @@
 /area/crew_quarters/heads/hop)
 "bhl" = (
 /obj/structure/lattice,
-/obj/machinery/atmospherics/components/binary/pump/on{
-	name = "Incinerator Output Pump";
-	target_pressure = 4500
-	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/visible,
 /turf/open/space,
 /area/maintenance/disposal/incinerator)
 "bhm" = (
@@ -29544,12 +29546,6 @@
 "edn" = (
 /turf/closed/wall,
 /area/maintenance/solars/starboard/aft)
-"edw" = (
-/obj/machinery/airalarm{
-	pixel_y = 24
-	},
-/turf/open/floor/plasteel,
-/area/maintenance/disposal/incinerator)
 "edU" = (
 /obj/effect/turf_decal/stripes/corner,
 /obj/effect/turf_decal/tile/purple{
@@ -62822,7 +62818,7 @@ err
 mPb
 baT
 dYm
-edw
+sRJ
 aYg
 biN
 aVV
