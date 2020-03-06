@@ -23,7 +23,7 @@
 			V.SpinAnimation(5,5)
 			playsound(L, 'sound/magic/ethereal_exit.ogg', 50, TRUE)
 			V.unbuckle_mob(L)
-			sleep(V.delay)
+			sleep(5)
 			V.visible_message("<span class='danger'>[L] executes one final trick, as [L.p_they()] flip[L.p_s()] through the air [L.p_their()] body evaporates into dust</span>", "<span class='danger'>You have successfully performed the Final Ollie, you phase out of existence with satisfaction</span>")
 			L.dust(drop_items = TRUE)
 			V.throw_at(landing_turf, 6, 3)

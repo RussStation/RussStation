@@ -60,9 +60,10 @@
 	var/board_item_type = /obj/item/melee/skateboard
 	///Stamina drain multiplier
 	var/instability = 10
+	// honk start -- vars for suicide
 	///If the board is being used to commit suicide
 	var/suicide = FALSE
-	var/delay = 5 //this is a temp var for testing, remember to delete this
+	// honk end
 
 /obj/vehicle/ridden/scooter/skateboard/Initialize()
 	. = ..()
@@ -88,6 +89,9 @@
 
 /obj/vehicle/ridden/scooter/skateboard/generate_actions()
 	. = ..()
+	/* honk start -- old action initialization removed to allow for suicide ollie
+	initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie, VEHICLE_CONTROL_DRIVE)
+	honk end */
 	// honk start -- adds a suicide for skateboards
 	if(suicide)
 		autogrant_actions_controller.Cut()
@@ -104,8 +108,11 @@
 /obj/vehicle/ridden/scooter/skateboard/post_unbuckle_mob(mob/living/M)
 	if(!has_buckled_mobs())
 		density = FALSE
-	. = ..()
+	/* honk start -- old return
+	return ..()
+	honk end */
 	// honk start -- the suicide action only lasts until the user is unbuckled to prevent others from using it
+	. = ..()
 	suicide = FALSE
 	generate_actions()
 	// honk end
