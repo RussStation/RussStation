@@ -28,6 +28,10 @@ npm install
 npm run build
 cd $root
 
+git reset -- html/changelogs
+git reset -- .github
+git reset -- config
+
 git diff --name-only --diff-filter=U | node "$SPACEMERGE_PATH/process-diffs.js"
 
 git checkout --theirs .editorconfig
