@@ -89,13 +89,10 @@
 
 /obj/vehicle/ridden/scooter/skateboard/generate_actions()
 	. = ..()
-	/* honk start -- old action initialization removed to allow for suicide ollie
-	initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie, VEHICLE_CONTROL_DRIVE)
-	honk end */
 	// honk start -- adds a suicide for skateboards
 	if(suicide)
 		autogrant_actions_controller.Cut()
-		initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie/suicide, VEHICLE_CONTROL_DRIVE)
+		initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie/suicide, VEHICLE_CONTROL_DRIVE) // honk -- moved old action initialize to here
 	else
 		autogrant_actions_controller.Cut()
 		initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie, VEHICLE_CONTROL_DRIVE)
