@@ -31,7 +31,7 @@
 	proximity_monitor = new(src, 1, 1) //initializes the proximity: (source, range, if it needs to be on a turf)
 
 /obj/item/caution/slippery/HasProximity(atom/movable/AM)
-	if (world.time < lastSlip + 200 && lastSlip && !clowningAround) //cooldown for slipping - no cooldown for clowns, honk
+	if (world.time < lastSlip + 50 && lastSlip && !clowningAround) //cooldown for slipping - no cooldown for clowns, honk
 		return
 
 	if(willSlip) //needs to be enabled, obviously
@@ -42,6 +42,7 @@
 
 			//are they running? & are they not a janitor? & are they not slipped already? & are they not being pulled?
 			if((C.m_intent != MOVE_INTENT_WALK) && !(C.mind.assigned_role == "Janitor") && !(C.IsKnockdown()) && !(C.pulledby)) 
+				lastSlip = world.time
 				if(prob(50))
 					src.visible_message(" The [src.name] broadcasts: \"Caution: Wet floor.\"")
 
