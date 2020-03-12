@@ -40,10 +40,10 @@
 			var/turf/open/T = get_turf(src)
 			var/list/adjacent_T = get_adjacent_open_turfs(T)
 
-			//are they running? & are they not a janitor? & are they not slipped already?
-			if((C.m_intent != MOVE_INTENT_WALK) && !(C.mind.assigned_role == "Janitor") && !(C.IsKnockdown())) 
-				//if(prob(50))
-				//	src.visible_message(" The [src.name] broadcasts: \"Caution: Wet floor.\"")
+			//are they running? & are they not a janitor? & are they not slipped already? & are they not being pulled?
+			if((C.m_intent != MOVE_INTENT_WALK) && !(C.mind.assigned_role == "Janitor") && !(C.IsKnockdown()) && !(C.pulledby)) 
+				if(prob(50))
+					src.visible_message(" The [src.name] broadcasts: \"Caution: Wet floor.\"")
 
 				//make own turf and all adjacent turfs lubed for a bit
 				if(clowningAround) //clowns mess things up as usual
