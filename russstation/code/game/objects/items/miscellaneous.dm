@@ -2,6 +2,8 @@
 	var/willSlip = 0 //0 - disabled || 1 - enabled 
 	var/lastSlip = 0 //last time the sign slipped someone
 	var/clowningAround = 0 //has a clown somehow gotten their hands on it?
+	var/mob/living/carbon/boss = null //used so animated signs don't attack the janitor
+	var/isEmagged = 0 //tracks if the signs are in an emagged state
 
 /obj/item/caution/slippery/examine(mob/user)
 	. = ..()
@@ -57,6 +59,16 @@
 
 				for(var/turf/open/AT in adjacent_T)
 					AT.MakeSlippery(TURF_WET_LUBE, 10)
+
+				if(isEmagged)
+					isEmagged = 0 //don't want them to get back up when they're killed
+					src.animate_atom_living(boss)
+
+
+/obj/item/caution/slippery/emag_act(mob/user)
+	isEmagged = 1
+	boss = user
+	to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")
 
 /obj/item/storage/box/syndie_kit/boxOfSigns
 
