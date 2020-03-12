@@ -6,25 +6,26 @@
 /obj/item/caution/slippery/examine(mob/user)
 	. = ..()
 	if(isobserver(user) || user.mind.assigned_role == "Janitor") //janitors and ghosts can see that it's a fake sign
-		. += "<span class='notice'>This sign is outfitted with an experimental sprayer.</span>"
+		. += "<span class='notice'>This [src.name] is outfitted with an experimental sprayer.</span>"
 		if(clowningAround)
 			. += "<span class='warning'>It's been tampered with.</span>"
 	else if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns know lube when they see it
-		. += "<span class='notice'>This sign has great potential for pranks.</span>"
+		. += "<span class='notice'>This [src.name] has great potential for pranks.</span>"
 
 
 //when used by a janitor: toggles between active and disabled, when used by a clown, pranks ensue
 /obj/item/caution/slippery/attack_self(mob/user)
 	if(user.mind.assigned_role == "Janitor") //only janitors can interact with it normally
 		willSlip = !willSlip
+		clowningAround = 0
 		if(willSlip)
-			to_chat(user, "<span class='notice'>The sign will now slip anyone moving past.<span>")
+			to_chat(user, "<span class='notice'>The [src.name] will now slip anyone running past.<span>")
 		else
-			to_chat(user, "<span class='notice'>The sign will no longer slip passerbys.<span>")
+			to_chat(user, "<span class='notice'>The [src.name] will no longer slip passerbys.<span>")
 	else if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns and janitors, enemies since the dawn of time
 		willSlip = 1 //no going back
 		clowningAround = 1
-		to_chat(user, "<span class='notice'>The sign will now slip more often.<span>")
+		to_chat(user, "<span class='warning'>The [src.name]'s lube sprayer has been overloaded.<span>")
 
 /obj/item/caution/slippery/Initialize()
 	. = ..()
@@ -44,7 +45,7 @@
 			if((C.m_intent != MOVE_INTENT_WALK) && !(C.mind.assigned_role == "Janitor") && !(C.IsKnockdown()) && !(C.pulledby)) 
 				lastSlip = world.time
 				if(prob(50))
-					src.visible_message(" The [src.name] broadcasts: \"Caution: Wet floor.\"")
+					src.visible_message(" The [src.name] beeps, <span class='boldwarning'>\"Caution: Wet floor.\" <span>")
 
 				//make own turf and all adjacent turfs lubed for a bit
 				if(clowningAround) //clowns mess things up as usual
@@ -56,6 +57,12 @@
 
 				for(var/turf/open/AT in adjacent_T)
 					AT.MakeSlippery(TURF_WET_LUBE, 10)
+
+/obj/item/storage/box/syndie_kit/boxOfSigns
+
+/obj/item/storage/box/syndie_kit/boxOfSigns/PopulateContents()
+	for(var/i = 0, i < 6, i++)
+		new /obj/item/caution/slippery(src) 
 
 
 ///obj/structure/holosign/wetsign/dangerous
