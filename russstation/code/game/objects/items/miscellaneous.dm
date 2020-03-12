@@ -1,33 +1,60 @@
-/obj/item/caution/dangerous
-	var/willSlip = 0
+/obj/item/caution/slippery
+	var/willSlip = 0 //0 - disabled || 1 - enabled 
+	var/lastSlip = 0 //last time the sign slipped someone
+	var/clowningAround = 0 //has a clown somehow gotten their hands on it?
 
-/obj/item/caution/dangerous/attack_self(mob/user)
-	if(user.mind.assigned_role == "Janitor")
+/obj/item/caution/slippery/examine(mob/user)
+	. = ..()
+	if(isobserver(user) || user.mind.assigned_role == "Janitor") //janitors and ghosts can see that it's a fake sign
+		. += "<span class='notice'>This sign is outfitted with an experimental sprayer.</span>"
+		if(clowningAround)
+			. += "<span class='warning'>It's been tampered with.</span>"
+	else if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns know lube when they see it
+		. += "<span class='notice'>This sign has great potential for pranks.</span>"
+
+
+//when used by a janitor: toggles between active and disabled, when used by a clown, pranks ensue
+/obj/item/caution/slippery/attack_self(mob/user)
+	if(user.mind.assigned_role == "Janitor") //only janitors can interact with it normally
 		willSlip = !willSlip
 		if(willSlip)
 			to_chat(user, "<span class='notice'>The sign will now slip anyone moving past.<span>")
-			START_PROCESSING(SSobj, src)
 		else
 			to_chat(user, "<span class='notice'>The sign will no longer slip passerbys.<span>")
+	else if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns and janitors, enemies since the dawn of time
+		willSlip = 1 //no going back
+		clowningAround = 1
+		to_chat(user, "<span class='notice'>The sign will now slip more often.<span>")
 
-/obj/item/caution/dangerous/process()
-	if(!willSlip)
-		STOP_PROCESSING(SSobj, src)
+/obj/item/caution/slippery/Initialize()
+	. = ..()
+	proximity_monitor = new(src, 1, 1) //initializes the proximity: (source, range, if it needs to be on a turf)
 
+/obj/item/caution/slippery/HasProximity(atom/movable/AM)
+	if (world.time < lastSlip + 200 && lastSlip && !clowningAround) //cooldown for slipping - no cooldown for clowns, honk
+		return
 
-/obj/item/caution/dangerous/HasProximity(atom/movable/AM)
-	src.visible_message("Checking.")
-	if(willSlip)
-		src.visible_message("On the prowl.")
-
-		if(istype(AM, /mob/living/carbon))
-			src.visible_message("How dare you.")
-
-			var/turf/open/T = get_turf(AM)
+	if(willSlip) //needs to be enabled, obviously
+		if(istype(AM, /mob/living/carbon)) //is it actually a thing we can slip?
+			var/mob/living/carbon/C = AM
+			var/turf/open/T = get_turf(src)
 			var/list/adjacent_T = get_adjacent_open_turfs(T)
 
-			T.MakeSlippery(TURF_WET_LUBE, 5)
-			for(var/turf/open/AT in adjacent_T)
-				AT.MakeSlippery(TURF_WET_LUBE, 5)
+			//are they running? & are they not a janitor? & are they not slipped already?
+			if((C.m_intent != MOVE_INTENT_WALK) && !(C.mind.assigned_role == "Janitor") && !(C.IsKnockdown())) 
+				//if(prob(50))
+				//	src.visible_message(" The [src.name] broadcasts: \"Caution: Wet floor.\"")
+
+				//make own turf and all adjacent turfs lubed for a bit
+				if(clowningAround) //clowns mess things up as usual
+					playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
+					T.MakeSlippery(TURF_WET_SUPERLUBE, 10)
+				else
+					playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
+					T.MakeSlippery(TURF_WET_LUBE, 10)
+
+				for(var/turf/open/AT in adjacent_T)
+					AT.MakeSlippery(TURF_WET_LUBE, 10)
+
 
 ///obj/structure/holosign/wetsign/dangerous
