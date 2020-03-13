@@ -34,10 +34,10 @@
 	proximity_monitor = new(src, 1, 1) //initializes the proximity: (source, range, if it needs to be on a turf)
 
 /obj/item/caution/slippery/HasProximity(atom/movable/AM)
-	if (world.time < lastSlip + 50 && lastSlip && !clowningAround) //cooldown for slipping - no cooldown for clowns, honk
+	if (world.time < lastSlip + 50 && lastSlip && !clowningAround) //cooldown for slipping - no cooldown for clowns, henk
 		return
 
-	if(!willSlip) //needs to be enabled, obviously
+	if(!willSlip) //needs to be enabled to slip people obviously
 		return
 
 	if(!istype(AM, /mob/living/carbon)) //is it actually a thing we can slip?
@@ -64,8 +64,10 @@
 		for(var/turf/open/AT in adjacent_T)
 			AT.MakeSlippery(TURF_WET_LUBE, 10)
 
+		//cry havoc and let slip the signs of wet
 		if(isEmagged)
 			isEmagged = 0 //don't want them to get back up when they're killed
+			willSlip = 0 //don't want them to keep slipping people when they're killed
 			src.animate_atom_living(boss)
 
 
@@ -74,10 +76,12 @@
 	boss = user
 	to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")
 
+
+//box of 6 slippery signs- for the traitor uplink
 /obj/item/storage/box/syndie_kit/boxOfSigns
 
 /obj/item/storage/box/syndie_kit/boxOfSigns/PopulateContents()
-	for(var/i = 0, i < 6, i++)
+	for(var/i = 0, i < 4, i++)
 		new /obj/item/caution/slippery(src) 
 
 
