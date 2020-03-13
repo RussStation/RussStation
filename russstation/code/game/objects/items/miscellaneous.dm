@@ -37,32 +37,36 @@
 	if (world.time < lastSlip + 50 && lastSlip && !clowningAround) //cooldown for slipping - no cooldown for clowns, honk
 		return
 
-	if(willSlip) //needs to be enabled, obviously
-		if(istype(AM, /mob/living/carbon)) //is it actually a thing we can slip?
-			var/mob/living/carbon/C = AM
-			var/turf/open/T = get_turf(src)
-			var/list/adjacent_T = get_adjacent_open_turfs(T)
+	if(!willSlip) //needs to be enabled, obviously
+		return
 
-			//are they running? & are they not a janitor? & are they not slipped already? & are they not being pulled?
-			if((C.m_intent != MOVE_INTENT_WALK) && !(C.mind.assigned_role == "Janitor") && !(C.IsKnockdown()) && !(C.pulledby)) 
-				lastSlip = world.time
-				if(prob(50))
-					src.visible_message(" The [src.name] beeps, <span class='boldwarning'>\"Caution: Wet floor.\" <span>")
+	if(!istype(AM, /mob/living/carbon)) //is it actually a thing we can slip?
+		return
+	
+	var/mob/living/carbon/C = AM
+	var/turf/open/T = get_turf(src)
+	var/list/adjacent_T = get_adjacent_open_turfs(T)
 
-				//make own turf and all adjacent turfs lubed for a bit
-				if(clowningAround) //clowns mess things up as usual
-					playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
-					T.MakeSlippery(TURF_WET_SUPERLUBE, 10)
-				else
-					playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
-					T.MakeSlippery(TURF_WET_LUBE, 10)
+	//are they running? & are they not a janitor? & are they not slipped already? & are they not being pulled?
+	if((C.m_intent != MOVE_INTENT_WALK) && !(C.mind.assigned_role == "Janitor") && !(C.IsKnockdown()) && !(C.pulledby)) 
+		lastSlip = world.time
+		if(prob(50))
+			src.visible_message(" The [src.name] beeps, <span class='boldwarning'>\"Caution: Wet floor.\" <span>")
 
-				for(var/turf/open/AT in adjacent_T)
-					AT.MakeSlippery(TURF_WET_LUBE, 10)
+		//make own turf and all adjacent turfs lubed for a bit
+		if(clowningAround) //clowns mess things up as usual
+			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
+			T.MakeSlippery(TURF_WET_SUPERLUBE, 10)
+		else
+			playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
+			T.MakeSlippery(TURF_WET_LUBE, 10)
 
-				if(isEmagged)
-					isEmagged = 0 //don't want them to get back up when they're killed
-					src.animate_atom_living(boss)
+		for(var/turf/open/AT in adjacent_T)
+			AT.MakeSlippery(TURF_WET_LUBE, 10)
+
+		if(isEmagged)
+			isEmagged = 0 //don't want them to get back up when they're killed
+			src.animate_atom_living(boss)
 
 
 /obj/item/caution/slippery/emag_act(mob/user)
