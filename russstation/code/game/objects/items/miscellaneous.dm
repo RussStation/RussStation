@@ -19,12 +19,13 @@
 /obj/item/caution/slippery/attack_self(mob/user)
 	if(user.mind.assigned_role == "Janitor") //only janitors can interact with it normally
 		willSlip = !willSlip
+		boss = user
 		clowningAround = 0
 		if(willSlip)
 			to_chat(user, "<span class='notice'>The [src.name] will now slip anyone running past.<span>")
 		else
 			to_chat(user, "<span class='notice'>The [src.name] will no longer slip passerbys.<span>")
-	else if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns and janitors, enemies since the dawn of time
+	else if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns.
 		willSlip = 1 //no going back
 		clowningAround = 1
 		to_chat(user, "<span class='warning'>The [src.name]'s lube sprayer has been overloaded.<span>")
@@ -47,8 +48,8 @@
 	var/turf/open/T = get_turf(src)
 	var/list/adjacent_T = get_adjacent_open_turfs(T)
 
-	//are they running? & are they not a janitor? & are they not slipped already? & are they not being pulled?
-	if((C.m_intent != MOVE_INTENT_WALK) && !(C.mind.assigned_role == "Janitor") && !(C.IsKnockdown()) && !(C.pulledby)) 
+	//are they running? & are they not the janitor? & are they not slipped already? & are they not being pulled?
+	if((C.m_intent != MOVE_INTENT_WALK) && (C != boss) && !(C.IsKnockdown()) && !(C.pulledby)) 
 		lastSlip = world.time
 		if(prob(50))
 			src.visible_message(" The [src.name] beeps, <span class='boldwarning'>\"Caution: Wet floor.\" <span>")
@@ -84,5 +85,3 @@
 	for(var/i = 0, i < 4, i++)
 		new /obj/item/caution/slippery(src) 
 
-
-///obj/structure/holosign/wetsign/dangerous
