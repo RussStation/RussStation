@@ -1,10 +1,67 @@
-/obj/item/caution/slippery
+//constructing a slippery sign:
+//apply floor buffer to sign
+//apply prox sensor to sign
+
+/obj/item/clothing/suit/caution/attackby(obj/item/I, mob/living/user)
+	. = ..()
+	var/atom/L = drop_location()
+
+	if(istype(I, /obj/item/janiupgrade))
+		if(name != "wet floor sign") //make sure jannies don't accidentally use their family heirlooms
+			to_chat("<span class='warning'>You wouldn't want to tamper with [src]!.<span>")
+		else
+			to_chat(user, "<span class='notice'>You add [I] to the bottom of the [src].<span>")
+			qdel(I)
+			qdel(src)
+			new /obj/item/clothing/suit/caution/incomplete(L, 1)
+
+		
+/obj/item/clothing/suit/caution/incomplete
+	name = "Incomplete wet floor sign"
+	slot_flags = null
+
+/obj/item/clothing/suit/caution/incomplete/examine(mob/user)
+	. = ..()
+	. += "<span class='notice'>The [src.name] has a floor buffer underneath. Perhaps you could <i>attach a sensor</i> to it, or <i>undo the screws</i> to remove it.</span>"
+
+/obj/item/clothing/suit/caution/incomplete/attackby(obj/item/I, mob/living/user)
+	. = ..()
+	var/atom/L = drop_location()
+
+	if(istype(I, /obj/item/screwdriver))
+		to_chat(user, "<span class='notice'>You detatch the floor buffer from the [src].<span>")
+		qdel(src)
+		new /obj/item/clothing/suit/caution(L, 1)
+		new /obj/item/janiupgrade(L, 1)
+
+	if(istype(I, /obj/item/assembly/prox_sensor))
+		to_chat(user, "<span class='notice'>You add [I] to the floor buffer on the [src].<span>")
+		qdel(I)
+		qdel(src)
+		new /obj/item/clothing/suit/caution/slippery(L, 1)
+
+//end of construction code
+
+//Slippery Sign
+//Constructable by janitors with upgrades from RND and sensors from cargo/robotics
+//Slips people who don't heed the warning
+
+//Slippery Sign (traitor item)
+//purchasable from traitor uplink by janitors (7tc for 4)
+//in addition to slipping, also animates and kicks people around
+
+/obj/item/clothing/suit/caution/slippery
+	slot_flags = null //cannot be worn- or else it breaks
 	var/willSlip = 0 //0 - disabled || 1 - enabled 
 	var/lastSlip = 0 //last time the sign slipped someone
 	var/clowningAround = 0 //has a clown somehow gotten their hands on it?
+	var/evilSign = 0 //is the sign a traitor?
 	var/mob/living/carbon/boss = null //used so animated signs don't attack the janitor
 
-/obj/item/caution/slippery/examine(mob/user)
+/obj/item/clothing/suit/caution/slippery/syndicate
+	evilSign = 1 //traitor signs - animate upon being triggered to kick people
+
+/obj/item/clothing/suit/caution/slippery/examine(mob/user)
 	. = ..()
 	if(isobserver(user) || user.mind.assigned_role == "Janitor") //janitors and ghosts can see that it's a fake sign
 		. += "<span class='notice'>This [src.name] is outfitted with an experimental sprayer.</span>"
@@ -15,7 +72,7 @@
 
 
 //when used by a janitor: toggles between active and disabled, when used by a clown, pranks ensue
-/obj/item/caution/slippery/attack_self(mob/user)
+/obj/item/clothing/suit/caution/slippery/attack_self(mob/user)
 	if(user.mind.assigned_role == "Janitor") //only janitors can interact with it normally
 		willSlip = !willSlip
 		boss = user
@@ -29,11 +86,11 @@
 		clowningAround = 1
 		to_chat(user, "<span class='warning'>The [src.name]'s lube sprayer has been overloaded.<span>")
 
-/obj/item/caution/slippery/Initialize()
+/obj/item/clothing/suit/caution/slippery/Initialize()
 	. = ..()
 	proximity_monitor = new(src, 1, 1) //initializes the proximity: (source, range, if it needs to be on a turf)
 
-/obj/item/caution/slippery/HasProximity(atom/movable/AM)
+/obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
 	if (world.time < lastSlip + 50 && lastSlip && !clowningAround) //cooldown for slipping - no cooldown for clowns, henk
 		return
 
@@ -47,11 +104,10 @@
 	var/turf/open/T = get_turf(src)
 	var/list/adjacent_T = get_adjacent_open_turfs(T)
 
-	//are they running? & are they not the janitor? & are they not slipped already? & are they not being pulled?
-	if((C.m_intent != MOVE_INTENT_WALK) && (C != boss) && !(C.IsKnockdown()) && !(C.pulledby)) 
+	//are they not walking? & are they not the janitor? & are they not being pulled? & either [is it evil or are they not already slipped]?
+	if((C.m_intent != MOVE_INTENT_WALK) && (C != boss) && !(C.pulledby) && (evilSign || !(C.IsKnockdown()))) 
 		lastSlip = world.time
-		if(prob(50))
-			src.visible_message(" The [src.name] beeps, <span class='boldwarning'>\"Caution: Wet floor.\" <span>")
+		src.visible_message(" The [src.name] beeps, <span class='boldwarning'>\"Caution: Wet floor.\" <span>")
 
 		//make own turf and all adjacent turfs lubed for a bit
 		if(clowningAround) //clowns mess things up as usual
@@ -65,21 +121,14 @@
 			AT.MakeSlippery(TURF_WET_LUBE, 10)
 
 		//cry havoc and let slip the signs of wet
-		if(EMAGGED)
+		if(evilSign)
 			willSlip = 0 //this kills the sign (until it someone gets it back up)
 			src.animate_atom_living(boss)
 
+//box of 4 slippery signs- for the traitor uplink
+/obj/item/storage/box/boxOfSigns
 
-/obj/item/caution/slippery/emag_act(mob/user)
-	obj_flags |= EMAGGED
-	boss = user
-	to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")
-
-
-//box of 6 slippery signs- for the traitor uplink
-/obj/item/storage/box/syndie_kit/boxOfSigns
-
-/obj/item/storage/box/syndie_kit/boxOfSigns/PopulateContents()
+/obj/item/storage/box/boxOfSigns/PopulateContents()
 	for(var/i = 0, i < 4, i++)
-		new /obj/item/caution/slippery(src) 
+		new /obj/item/clothing/suit/caution/slippery/syndicate(src) 
 
