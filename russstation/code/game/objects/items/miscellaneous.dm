@@ -66,13 +66,12 @@
 
 		//cry havoc and let slip the signs of wet
 		if(EMAGGED)
-			EMAGGED = 0 //don't want them to get back up when they're killed
-			willSlip = 0 //don't want them to keep slipping people when they're killed
+			willSlip = 0 //this kills the sign (until it someone gets it back up)
 			src.animate_atom_living(boss)
 
 
 /obj/item/caution/slippery/emag_act(mob/user)
-	EMAGGED = 1
+	obj_flags |= EMAGGED
 	boss = user
 	to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")
 
