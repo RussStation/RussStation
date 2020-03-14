@@ -1,6 +1,6 @@
-//constructing a slippery sign:
-//apply floor buffer to sign
-//apply prox sensor to sign
+//constructing a wetmore slippery sign:
+//apply floor buffer to sign (from RND)
+//apply prox sensor to sign (from robo/cargo)
 
 /obj/item/clothing/suit/caution/attackby(obj/item/I, mob/living/user)
 	. = ..()
@@ -8,9 +8,9 @@
 
 	if(istype(I, /obj/item/janiupgrade))
 		if(name != "wet floor sign") //make sure jannies don't accidentally use their family heirlooms
-			to_chat("<span class='warning'>You wouldn't want to tamper with [src]!.<span>")
+			to_chat("<span class='warning'>You wouldn't want to tamper with [src.name]!.<span>")
 		else
-			to_chat(user, "<span class='notice'>You add [I] to the bottom of the [src].<span>")
+			to_chat(user, "<span class='notice'>You add a [I.name] to the bottom of the [src.name].<span>")
 			qdel(I)
 			qdel(src)
 			new /obj/item/clothing/suit/caution/incomplete(L, 1)
@@ -35,18 +35,22 @@
 		new /obj/item/janiupgrade(L, 1)
 
 	if(istype(I, /obj/item/assembly/prox_sensor))
-		to_chat(user, "<span class='notice'>You add [I] to the floor buffer on the [src.name].<span>")
+		to_chat(user, "<span class='notice'>You add a [Iname] to the floor buffer on the [src.name].<span>")
 		qdel(I)
 		qdel(src)
-		new /obj/item/clothing/suit/caution/slippery(L, 1)
+		var/obj/item/S = /obj/item/clothing/suit/caution/slippery
+		if(prob(1)) //1% chance for a name
+			S.name = "Hall Monitor"
+
+		new S(L, 1)
 
 //end of construction code
 
-//Slippery Sign
+//Wetmore Slippery Sign
 //Constructable by janitors with upgrades from RND and sensors from cargo/robotics
 //Slips people who don't heed the warning
 
-//Slippery Sign (traitor item)
+//Wetmore Slippery Sign (traitor item)
 //purchasable from traitor uplink by janitors (7tc for 4)
 //in addition to slipping, also animates and kicks people around
 
@@ -87,7 +91,7 @@
 		clowningAround = 1
 		to_chat(user, "<span class='warning'>The [src.name]'s lube sprayer has been overloaded.<span>")
 	else
-		to(chat(user, "<span class = 'notice'>The [src.name] requires a janitor to activate.<span>"))
+		to_chat(user, "<span class = 'notice'>The [src.name] requires a janitor to activate.<span>")
 
 /obj/item/clothing/suit/caution/slippery/Initialize()
 	. = ..()
@@ -132,7 +136,7 @@
 	evilSign = 1
 	willSlip = 1 //bypasses the janitor requirement
 	boss = user	
-	to_chat(user, "<span class='boldwarning'>The [src] begins to shake violently.<span>")	
+	to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")	
 
 //box of 4 slippery signs- for the traitor uplink
 /obj/item/storage/box/boxOfSigns
