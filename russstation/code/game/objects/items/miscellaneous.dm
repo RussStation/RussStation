@@ -1,14 +1,22 @@
 //constructing a wetmore slippery sign:
+//obtain a wet floor sign (from cargo, chemistry(plastic), or your vendor )
 //apply floor buffer to sign (from RND)
 //apply prox sensor to sign (from robo/cargo)
 
 /obj/item/clothing/suit/caution/attackby(obj/item/I, mob/living/user)
 	. = ..()
 	var/atom/L = drop_location()
+	var/datum/quirk/family_heirloom/heirloomCheck 
+
+	//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later 
+	for(var/datum/quirk/hasQuirk in user.roundstart_quirks)
+		if(istype(hasQuirk, /datum/quirk/family_heirloom))
+			heirloomCheck = hasQuirk
+			break
 
 	if(istype(I, /obj/item/janiupgrade))
-		if(name != "wet floor sign") //make sure jannies don't accidentally use their family heirlooms
-			to_chat("<span class='warning'>You wouldn't want to tamper with [src.name]!.<span>")
+		if(src == heirloomCheck.heirloom) //make sure jannies don't accidentally use their family heirlooms
+			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom [src.name]!.<span>")
 		else
 			to_chat(user, "<span class='notice'>You add a [I.name] to the bottom of the [src.name].<span>")
 			qdel(I)
@@ -35,12 +43,12 @@
 		new /obj/item/janiupgrade(L, 1)
 
 	if(istype(I, /obj/item/assembly/prox_sensor))
-		to_chat(user, "<span class='notice'>You add a [Iname] to the floor buffer on the [src.name].<span>")
+		to_chat(user, "<span class='notice'>You add a [I.name] to the floor buffer on the [src.name].<span>")
 		qdel(I)
 		qdel(src)
 		var/obj/item/S = /obj/item/clothing/suit/caution/slippery
 		if(prob(1)) //1% chance for a name
-			S.name = "Hall Monitor"
+			S.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
 
 		new S(L, 1)
 
@@ -58,7 +66,8 @@
 	slot_flags = null //cannot be worn- or else it breaks stuff
 
 	var/willSlip = 0 //0 - disabled || 1 - enabled 
-	var/lastSlip = 0 //last time the sign slipped someone
+	var/lastSlip = 0 //last time the sign slipped someone (time)
+	var/slipCooldown = 50 //cooldown (~5 seconds default)
 	var/clowningAround = 0 //0 - untainted || 1 - clown got it
 	var/evilSign = 0 //is the sign a traitor?
 	var/mob/living/carbon/boss = null //used so animated signs don't attack the janitor
@@ -81,7 +90,10 @@
 	if(user.mind.assigned_role == "Janitor") //only janitors can interact with it normally
 		boss = user
 		willSlip = !willSlip
-		clowningAround = 0
+		if(clowningAround) //so you can reset the sign if a clown messes with it
+			clowningAround = 0
+			slipCooldown = 50 
+
 		if(willSlip)
 			to_chat(user, "<span class='notice'>The [src.name] will now slip anyone running past.<span>")
 		else
@@ -89,6 +101,7 @@
 	else if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns.
 		willSlip = 1 
 		clowningAround = 1
+		slipCooldown = 0
 		to_chat(user, "<span class='warning'>The [src.name]'s lube sprayer has been overloaded.<span>")
 	else
 		to_chat(user, "<span class = 'notice'>The [src.name] requires a janitor to activate.<span>")
@@ -98,7 +111,7 @@
 	proximity_monitor = new(src, 1, 1) //initializes the proximity: (source, range, if it needs to be on a turf)
 
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
-	if (world.time < lastSlip + 50 && lastSlip && !clowningAround) //cooldown for slipping - no cooldown for clowns
+	if (world.time < lastSlip + slipCooldown && lastSlip) //cooldown for slipping
 		return
 
 	if(!willSlip) //needs to be enabled to slip people obviously
@@ -138,7 +151,7 @@
 	boss = user	
 	to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")	
 
-//box of 4 slippery signs- for the traitor uplink
+//box of 4 wetmore slippery signs- for the traitor uplink
 /obj/item/storage/box/boxOfSigns
 
 /obj/item/storage/box/boxOfSigns/PopulateContents()
