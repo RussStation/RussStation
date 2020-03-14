@@ -21,17 +21,21 @@
 		if(mmi.brainmob)
 			mmi.brainmob.suiciding = suicide_state
 
-/mob/living/carbon/human/verb/suicide()
+/mob/living/carbon/human/verb/suicide(intentional = FALSE as num) // honk -- added arg for intentional suicide via hotkey
 	set hidden = 1
 	if(!canSuicide())
 		return
 	var/oldkey = ckey
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	// honk start - bypasses the confirmation if intentional is true
+	var/confirm = "No"
+	if(!intentional)
+		confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No") // honk -- previous confirmation alert is moved here
+	// honk end
 	if(ckey != oldkey)
 		return
 	if(!canSuicide())
 		return
-	if(confirm == "Yes")
+	if(intentional || confirm == "Yes") // honk -- intentional suicide does not require confirmation
 		set_suicide(TRUE) //need to be called before calling suicide_act as fuck knows what suicide_act will do with your suicider
 		var/obj/item/held_item = get_active_held_item()
 		if(held_item)
