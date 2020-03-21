@@ -16,7 +16,7 @@
 
 	if(istype(I, /obj/item/janiupgrade))
 		if(src == heirloomCheck.heirloom) //make sure jannies don't accidentally use their family heirlooms
-			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom [src.name]!.<span>")
+			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom [src.name]!<span>")
 		else
 			to_chat(user, "<span class='notice'>You add a [I.name] to the bottom of the [src.name].<span>")
 			qdel(I)
@@ -51,6 +51,12 @@
 			S.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
 
 		new S(L, 1)
+
+/obj/item/caution/attackby(obj/item/I, mob/living/user)
+	. = ..()
+	if(istype(I, /obj/item/janiupgrade))
+		to_chat(user, "<span class='warning'>The [src.name] is too antiquated to fit a [I.name], try a newer sign.<span>")
+
 
 //end of construction code
 
@@ -108,7 +114,7 @@
 
 /obj/item/clothing/suit/caution/slippery/Initialize()
 	. = ..()
-	proximity_monitor = new(src, 1, 1) //initializes the proximity: (source, range, if it needs to be on a turf)
+	proximity_monitor = new(src, 1) //initializes the proximity: (source, range)
 
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
 	if (world.time < lastSlip + slipCooldown && lastSlip) //cooldown for slipping
@@ -146,10 +152,14 @@
 			src.animate_atom_living(boss)
 
 /obj/item/clothing/suit/caution/slippery/emag_act(mob/user) 
-	evilSign = 1
 	willSlip = 1 //bypasses the janitor requirement
-	boss = user	
-	to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")	
+	if(!evilSign)
+		evilSign = 1
+		boss = user	
+		to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")	
+	else
+		to_chat(user, "<span class='warning'>The [src.name] is already tampered with.<span>")	
+
 
 //box of 4 wetmore slippery signs- for the traitor uplink
 /obj/item/storage/box/boxOfSigns
@@ -158,3 +168,6 @@
 	for(var/i = 0, i < 4, i++)
 		new /obj/item/clothing/suit/caution/slippery/syndicate(src) 
 
+	for(var/p in src) //if this isn't included it puts the proximity checkers in the box as well
+		if(!istype(p, /obj/item/clothing/suit/caution/slippery/syndicate))
+			qdel(p)
