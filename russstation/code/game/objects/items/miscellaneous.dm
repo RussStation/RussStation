@@ -167,7 +167,3 @@
 /obj/item/storage/box/boxOfSigns/PopulateContents()
 	for(var/i = 0, i < 4, i++)
 		new /obj/item/clothing/suit/caution/slippery/syndicate(src) 
-
-	for(var/p in src) //if this isn't included it puts the proximity checkers in the box as well
-		if(!istype(p, /obj/item/clothing/suit/caution/slippery/syndicate))
-			qdel(p)
