@@ -93,6 +93,9 @@
 
 //when used by a janitor: toggles between active and disabled, when used by a clown, pranks ensue
 /obj/item/clothing/suit/caution/slippery/attack_self(mob/user)
+	if(!proximity_monitor)
+		proximity_monitor = new(src, 1) //initializes the proximity: (source, range)
+
 	if(user.mind.assigned_role == "Janitor") //only janitors can interact with it normally
 		boss = user
 		willSlip = !willSlip
@@ -112,10 +115,6 @@
 	else
 		to_chat(user, "<span class = 'notice'>The [src.name] requires a janitor to activate.<span>")
 
-/obj/item/clothing/suit/caution/slippery/Initialize()
-	. = ..()
-	proximity_monitor = new(src, 1) //initializes the proximity: (source, range)
-
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
 	if (world.time < lastSlip + slipCooldown && lastSlip) //cooldown for slipping
 		return
@@ -133,7 +132,7 @@
 	//are they not walking? & are they not the janitor? & are they not being pulled? & either [is it evil or are they not already slipped]?
 	if((C.m_intent != MOVE_INTENT_WALK) && (C != boss) && !(C.pulledby) && (evilSign || !(C.IsKnockdown()))) 
 		lastSlip = world.time
-		src.visible_message(" The [src.name] beeps, <span class='boldwarning'>\"Caution: Wet floor.\" <span>")
+		src.visible_message(" The [src.name] beeps, \"Caution, wet floor.\"")
 
 		//make own turf and all adjacent turfs lubed for a bit
 		if(clowningAround) 
