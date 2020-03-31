@@ -30,7 +30,7 @@
 
 /obj/item/clothing/suit/caution/incomplete/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>The [src.name] has a floor buffer underneath. Perhaps you could <i>attach a sensor</i> to it, or <i>undo the screws</i> to remove it.</span>"
+	. += "<span class='notice'>The [src.name] has a floor buffer underneath. You could <i>attach a sensor</i> to it, or <i>undo the screws</i> to remove it.</span>"
 
 /obj/item/clothing/suit/caution/incomplete/attackby(obj/item/I, mob/living/user)
 	. = ..()
@@ -52,6 +52,7 @@
 
 		new S(L, 1)
 
+//old signs (only found in maint spawners)
 /obj/item/caution/attackby(obj/item/I, mob/living/user)
 	. = ..()
 	if(istype(I, /obj/item/janiupgrade))
@@ -151,6 +152,9 @@
 			src.animate_atom_living(boss)
 
 /obj/item/clothing/suit/caution/slippery/emag_act(mob/user) 
+	if(!proximity_monitor)
+		proximity_monitor = new(src, 1) 
+
 	willSlip = 1 //bypasses the janitor requirement
 	if(!evilSign)
 		evilSign = 1
