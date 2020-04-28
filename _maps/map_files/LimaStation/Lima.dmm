@@ -2707,6 +2707,13 @@
 /obj/structure/closet/secure_closet/freezer/fridge/open,
 /turf/open/floor/plasteel/cafeteria,
 /area/security/prison)
+"afR" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/turf/open/floor/plasteel,
+/area/security/prison)
 "afS" = (
 /obj/machinery/light{
 	dir = 1
@@ -3054,6 +3061,13 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/theatre)
+"agD" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on,
+/turf/open/floor/plasteel,
+/area/security/prison)
 "agE" = (
 /obj/structure/cable,
 /obj/effect/landmark/event_spawn,
@@ -3929,15 +3943,23 @@
 /obj/machinery/light,
 /turf/open/floor/plasteel/dark,
 /area/library)
-"aiR" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
+"aiQ" = (
+/obj/effect/turf_decal/delivery,
+/obj/machinery/navbeacon{
+	codes_txt = "delivery;dir=1";
+	dir = 1;
+	freq = 1400;
+	location = "QM #2"
 	},
-/obj/machinery/atmospherics/components/unary/vent_scrubber/on{
-	dir = 8
+/obj/structure/sign/poster/official/random{
+	pixel_y = -32
 	},
-/turf/open/floor/plasteel,
-/area/security/prison)
+/mob/living/simple_animal/bot/mulebot{
+	home_destination = "QM #2";
+	suffix = "#2"
+	},
+/turf/open/floor/plating,
+/area/quartermaster/storage)
 "aiS" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plasteel/white/side,
@@ -5840,23 +5862,6 @@
 /mob/living/simple_animal/bot/mulebot{
 	home_destination = "QM #1";
 	suffix = "#1"
-	},
-/turf/open/floor/plating,
-/area/quartermaster/storage)
-"anv" = (
-/obj/effect/turf_decal/delivery,
-/obj/machinery/navbeacon{
-	codes_txt = "delivery;dir=1";
-	dir = 1;
-	freq = 1400;
-	location = "QM #2"
-	},
-/mob/living/simple_animal/bot/mulebot{
-	home_destination = "QM #2";
-	suffix = "#2"
-	},
-/obj/structure/sign/poster/official/random{
-	pixel_y = -32
 	},
 /turf/open/floor/plating,
 /area/quartermaster/storage)
@@ -27892,15 +27897,6 @@
 	},
 /turf/open/floor/engine,
 /area/engine/engineering)
-"clm" = (
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/security/prison)
 "cln" = (
 /obj/docking_port/stationary{
 	dwidth = 3;
@@ -58875,7 +58871,7 @@ afq
 ayP
 ami
 afq
-clm
+afR
 alV
 fdq
 afW
@@ -59132,8 +59128,8 @@ fdq
 fdq
 fdq
 fdq
-aiR
-alT
+agD
+alV
 fdq
 nwW
 aig
@@ -68460,7 +68456,7 @@ iwN
 aGd
 aGt
 cXn
-anv
+aiQ
 olV
 cuq
 rrv
