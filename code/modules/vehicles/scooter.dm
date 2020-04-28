@@ -60,6 +60,10 @@
 	var/board_item_type = /obj/item/melee/skateboard
 	///Stamina drain multiplier
 	var/instability = 10
+	// honk start -- vars for suicide
+	///If the board is being used to commit suicide
+	var/suicide = FALSE
+	// honk end
 
 /obj/vehicle/ridden/scooter/skateboard/Initialize()
 	. = ..()
@@ -85,7 +89,14 @@
 
 /obj/vehicle/ridden/scooter/skateboard/generate_actions()
 	. = ..()
-	initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie, VEHICLE_CONTROL_DRIVE)
+	// honk start -- adds a suicide for skateboards
+	if(suicide)
+		autogrant_actions_controller.Cut()
+		initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie/suicide, VEHICLE_CONTROL_DRIVE) // honk -- moved old action initialize to here
+	else
+		autogrant_actions_controller.Cut()
+		initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie, VEHICLE_CONTROL_DRIVE)
+	// honk end
 
 /obj/vehicle/ridden/scooter/skateboard/post_buckle_mob(mob/living/M)//allows skateboards to be non-dense but still allows 2 skateboarders to collide with each other
 	density = TRUE
@@ -94,7 +105,14 @@
 /obj/vehicle/ridden/scooter/skateboard/post_unbuckle_mob(mob/living/M)
 	if(!has_buckled_mobs())
 		density = FALSE
+	/* honk start -- old return
 	return ..()
+	honk end */
+	// honk start -- the suicide action only lasts until the user is unbuckled to prevent others from using it
+	. = ..()
+	suicide = FALSE
+	generate_actions()
+	// honk end
 
 /obj/vehicle/ridden/scooter/skateboard/Bump(atom/A)
 	. = ..()
