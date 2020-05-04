@@ -27,9 +27,8 @@
 			new /obj/item/clothing/suit/caution/incomplete(L, 1)
 
 		return
-
 	. = ..()
-		
+
 /obj/item/clothing/suit/caution/incomplete
 	name = "Incomplete wet floor sign"
 	slot_flags = 0
@@ -66,7 +65,6 @@
 			S.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
 
 		return
-
 	. = ..()
 
 //old signs (only found in maint spawners)
@@ -76,7 +74,6 @@
 		return
 
 	. = ..()
-
 
 //end of construction code
 
@@ -109,7 +106,6 @@
 			. += "<span class='warning'>It's been tampered with.</span>"
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns know lube when they see it
 		. += "<span class='notice'>This [src.name] has great potential for pranks.</span>"
-
 
 //when used by a janitor: toggles between active and disabled, when used by a clown, pranks ensue
 /obj/item/clothing/suit/caution/slippery/attack_self(mob/user)
@@ -145,9 +141,8 @@
 	if(!iscarbon(AM)) //is it actually a thing we can slip?
 		return
 
-	var/mob/living/carbon/C = AM 	
+	var/mob/living/carbon/C = AM
 	var/turf/open/T = get_turf(src)
-	var/list/adjacent_t = get_adjacent_open_turfs(T)
 
 	//are they not walking? & are they not the janitor? & are they not being pulled? & either [is it evil or are they not already slipped]?
 	if(C.m_intent != MOVE_INTENT_WALK && C != boss && !(C.pulledby) && (evilSign || !(C.IsKnockdown()))) 
@@ -162,7 +157,7 @@
 			playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
 			T.MakeSlippery(TURF_WET_LUBE, 10)
 
-		for(var/turf/open/AT in adjacent_t)
+		for(var/turf/open/AT in get_adjacent_open_turfs(T))
 			AT.MakeSlippery(TURF_WET_LUBE, 10)
 
 		//cry havoc and let slip the signs of wet
@@ -185,13 +180,11 @@
 		to_chat(user, "<span class='warning'>You can't seem to detatch the mechanism from the [src.name]...<span>")
 		sleep(20)
 		to_chat(user, "<span class='boldwarning'>Wait, is it shaking?<span>")
-
 		awakenSign(user)
-
 
 	return TRUE
 
-/obj/item/clothing/suit/caution/slippery/proc/awakenSign(mob/living/victim)
+/obj/item/clothing/suit/caution/slippery/proc/awakenSign(mob/living/victim) //makes the sign shake a bit, then animate
 	willSlip = FALSE //this kills the sign
 
 	if(victim == boss) //if the owner of the sign tries to fuck with it, it'll betray them
@@ -218,10 +211,10 @@
 	addtimer(CALLBACK(src, /atom/proc/animate_atom_living, boss), 10) //animates after 1 second
 	addtimer(CALLBACK(src, .proc/stopShaking), 50) //stops the animation after 5 seconds - though while animated, it doesn't play anyways
 
-/obj/item/clothing/suit/caution/slippery/proc/stopShaking()
+/obj/item/clothing/suit/caution/slippery/proc/stopShaking() //stop sthe shaking
 	animate(src, transform=matrix())
 
-/obj/item/clothing/suit/caution/slippery/emag_act(mob/user) 
+/obj/item/clothing/suit/caution/slippery/emag_act(mob/user) //bypasses the requirement of janitor or clumsy and turns it into an evil sign 
 	if(!proximity_monitor)
 		proximity_monitor = new(src, 1) 
 
@@ -229,7 +222,7 @@
 	if(!evilSign)
 		evilSign = TRUE
 		boss = user	
-		to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake violently.<span>")	
+		to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake subtly.<span>")	
 	else
 		to_chat(user, "<span class='warning'>The [src.name] is already tampered with.<span>")	
 
