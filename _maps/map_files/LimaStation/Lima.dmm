@@ -2742,10 +2742,38 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
 "age" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on,
-/obj/structure/bookcase/random/reference,
-/turf/open/floor/wood,
-/area/medical/medbay/central)
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/machinery/camera{
+	c_tag = "Medbay Pharmacy"
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/table/glass,
+/obj/item/stack/sheet/mineral/plasma,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/dropper,
+/obj/item/reagent_containers/dropper,
+/obj/machinery/requests_console{
+	department = "Chemistry";
+	departmentType = 2;
+	pixel_y = 30;
+	receive_ore_updates = 1
+	},
+/turf/open/floor/plasteel/showroomfloor,
+/area/medical/pharmacy)
 "agf" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/closed/wall,
@@ -2793,38 +2821,12 @@
 /turf/open/floor/plasteel/showroomfloor,
 /area/medical/pharmacy)
 "agj" = (
-/obj/effect/turf_decal/tile/yellow{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/yellow{
-	dir = 1
-	},
+/obj/structure/chair/sofa/corner,
 /obj/machinery/camera{
-	c_tag = "Chemistry"
+	c_tag = "Medbay Breakroom"
 	},
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/structure/table/glass,
-/obj/item/stack/sheet/mineral/plasma,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/dropper,
-/obj/item/reagent_containers/dropper,
-/obj/machinery/requests_console{
-	department = "Chemistry";
-	departmentType = 2;
-	pixel_y = 30;
-	receive_ore_updates = 1
-	},
-/turf/open/floor/plasteel/showroomfloor,
-/area/medical/pharmacy)
+/turf/open/floor/plasteel/cafeteria,
+/area/medical/medbay/central)
 "agk" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plasteel/white/side{
@@ -18787,11 +18789,19 @@
 "aQJ" = (
 /obj/machinery/disposal/bin,
 /obj/effect/turf_decal/stripes/box,
-/obj/structure/disposalpipe/trunk{
-	dir = 8
+/obj/machinery/power/apc{
+	areastring = "/area/medical/storage";
+	dir = 1;
+	name = "Medbay Storage APC";
+	pixel_y = 23
+	},
+/obj/structure/cable,
+/obj/structure/disposalpipe/trunk,
+/obj/machinery/camera{
+	c_tag = "Medbay Storage"
 	},
 /turf/open/floor/plasteel/white,
-/area/crew_quarters/heads/cmo)
+/area/medical/storage)
 "aQK" = (
 /obj/item/radio/intercom{
 	pixel_x = -29
@@ -23599,22 +23609,31 @@
 /turf/open/floor/plasteel/cafeteria,
 /area/medical/medbay/central)
 "bcv" = (
-/obj/structure/chair/sofa/corner,
-/turf/open/floor/plasteel/cafeteria,
+/obj/machinery/atmospherics/components/unary/vent_pump/on,
+/obj/structure/bookcase/random/reference,
+/obj/machinery/camera{
+	c_tag = "Medbay Psychologist's Office";
+	dir = 8;
+	network = list("ss13","medbay")
+	},
+/turf/open/floor/wood,
 /area/medical/medbay/central)
 "bcw" = (
-/obj/machinery/disposal/bin,
-/obj/effect/turf_decal/stripes/box,
-/obj/machinery/power/apc{
-	areastring = "/area/medical/storage";
+/obj/machinery/airalarm{
 	dir = 1;
-	name = "Medbay Storage APC";
-	pixel_y = 23
+	pixel_y = -24
 	},
-/obj/structure/cable,
-/obj/structure/disposalpipe/trunk,
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/machinery/camera{
+	c_tag = "Medbay Treatment Center";
+	dir = 1;
+	network = list("ss13","medbay")
+	},
 /turf/open/floor/plasteel/white,
-/area/medical/storage)
+/area/medical/exam_room)
 "bcx" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /obj/structure/disposalpipe/segment,
@@ -26862,16 +26881,18 @@
 /turf/open/floor/plasteel/white,
 /area/medical/exam_room)
 "bjm" = (
-/obj/machinery/airalarm{
-	dir = 1;
-	pixel_y = -24
-	},
-/obj/effect/turf_decal/tile/blue,
+/obj/structure/table,
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/effect/turf_decal/tile/blue,
+/obj/machinery/camera{
+	c_tag = "Medbay Cryogenics";
+	dir = 1;
+	network = list("ss13","medbay")
+	},
 /turf/open/floor/plasteel/white,
-/area/medical/exam_room)
+/area/medical/cryo)
 "bjn" = (
 /obj/machinery/light,
 /obj/structure/cable,
@@ -26926,12 +26947,24 @@
 /area/medical/cryo)
 "bjs" = (
 /obj/structure/table,
+/obj/item/clothing/gloves/color/latex,
+/obj/item/clothing/suit/apron/surgical,
+/obj/item/clothing/mask/surgical,
+/obj/item/razor,
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
 /obj/effect/turf_decal/tile/blue,
+/obj/machinery/camera{
+	c_tag = "Medbay Surgery";
+	dir = 1;
+	network = list("ss13","medbay")
+	},
 /turf/open/floor/plasteel/white,
-/area/medical/cryo)
+/area/medical/surgery)
 "bjt" = (
 /obj/structure/table,
 /obj/machinery/power/apc{
@@ -27274,20 +27307,18 @@
 /turf/open/floor/plasteel/white,
 /area/medical/surgery)
 "bjU" = (
-/obj/structure/table,
-/obj/item/clothing/gloves/color/latex,
-/obj/item/clothing/suit/apron/surgical,
-/obj/item/clothing/mask/surgical,
-/obj/item/razor,
-/obj/effect/turf_decal/tile/blue{
+/obj/machinery/disposal/bin,
+/obj/effect/turf_decal/stripes/box,
+/obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/obj/effect/turf_decal/tile/blue{
-	dir = 1
+/obj/machinery/camera{
+	c_tag = "Medbay CMO Office";
+	dir = 1;
+	network = list("ss13","medbay")
 	},
-/obj/effect/turf_decal/tile/blue,
 /turf/open/floor/plasteel/white,
-/area/medical/surgery)
+/area/crew_quarters/heads/cmo)
 "bjV" = (
 /obj/structure/table,
 /obj/item/hemostat,
@@ -27935,6 +27966,18 @@
 /obj/item/bikehorn/airhorn,
 /turf/open/floor/plasteel,
 /area/security/brig)
+"blp" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue,
+/obj/machinery/camera{
+	c_tag = "Medbay Chemistry";
+	dir = 1;
+	network = list("ss13","medbay")
+	},
+/turf/open/floor/plasteel/white,
+/area/medical/chemistry)
 "blW" = (
 /obj/machinery/atmospherics/pipe/simple/green/visible,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
@@ -75436,7 +75479,7 @@ kje
 ayy
 aqK
 adL
-agj
+age
 agE
 aCi
 aCm
@@ -77253,7 +77296,7 @@ eYd
 bju
 bjD
 bjR
-bjU
+bjs
 eYd
 amE
 bjY
@@ -77752,7 +77795,7 @@ adq
 aam
 aam
 adO
-age
+bcv
 ajQ
 ajs
 aCM
@@ -78019,7 +78062,7 @@ aag
 brJ
 aOZ
 btq
-bjm
+bcw
 eYd
 bjC
 bjF
@@ -78033,7 +78076,7 @@ aeR
 aeR
 aeR
 aeR
-bkm
+blp
 aeP
 tso
 tso
@@ -78777,7 +78820,7 @@ aqm
 ayy
 aqK
 lBh
-bcv
+agj
 bcB
 akp
 bcH
@@ -79291,7 +79334,7 @@ aqp
 aAx
 wgm
 lBh
-bcw
+aQJ
 bcC
 bcG
 aLa
@@ -80075,7 +80118,7 @@ bsx
 bsy
 btg
 bjy
-bjs
+bjm
 ofa
 btD
 adD
@@ -80337,7 +80380,7 @@ ofa
 bsM
 bjH
 bta
-aQJ
+bjU
 brH
 tso
 bjS
