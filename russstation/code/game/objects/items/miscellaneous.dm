@@ -7,10 +7,6 @@
 	var/atom/L = drop_location()
 	var/datum/quirk/family_heirloom/heirloomCheck 
 
-	if(istype(src, /obj/item/clothing/suit/caution/slippery))
-		to_chat(user, "<span class='warning'>This [src.name] already has a device attatched to it.<span>")
-		return
-
 	if(istype(I, /obj/item/janiupgrade))
 		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later 
 		for(var/datum/quirk/hasQuirk in user.roundstart_quirks)
@@ -27,11 +23,15 @@
 			new /obj/item/clothing/suit/caution/incomplete(L, 1)
 
 		return
+
 	. = ..()
 
 /obj/item/clothing/suit/caution/incomplete
-	name = "Incomplete wet floor sign"
+	name = "\improper incomplete wet floor sign"
 	slot_flags = 0
+
+/obj/item/clothing/suit/caution/incomplete/attack_self(mob/user)
+	to_chat(user, "<span class='warning'>You spin the buffer on the [src.name] with your finger. It won't activate unless you <i>attach a sensor</i> to it.<span>")
 
 /obj/item/clothing/suit/caution/incomplete/examine(mob/user)
 	. = ..()
@@ -65,6 +65,7 @@
 			S.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
 
 		return
+
 	. = ..()
 
 //old signs (only found in maint spawners)
@@ -87,6 +88,9 @@
 
 /obj/item/clothing/suit/caution/slippery
 	slot_flags = 0 //cannot be worn- or else it breaks stuff
+	verb_say = "beeps"
+	verb_ask = "beeps"
+	verb_exclaim = "beeps"
 
 	var/willSlip = FALSE //false - disabled || true - enabled 
 	var/lastSlip = 0 //last time the sign slipped someone (time)
@@ -131,38 +135,12 @@
 	else
 		to_chat(user, "<span class = 'notice'>The [src.name] requires a janitor to activate.<span>")
 
-/obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
-	if (world.time < lastSlip + slipCooldown && lastSlip) //cooldown for slipping
+/obj/item/clothing/suit/caution/slippery/attackby(obj/item/I, mob/living/user)
+	if(istype(I, /obj/item/janiupgrade))
+		to_chat(user, "<span class='warning'>This [src.name] already has a device attatched to it.<span>")
 		return
 
-	if(!willSlip) //needs to be enabled to slip people obviously
-		return
-
-	if(!iscarbon(AM)) //is it actually a thing we can slip?
-		return
-
-	var/mob/living/carbon/C = AM
-	var/turf/open/T = get_turf(src)
-
-	//are they not walking? & are they not the janitor? & are they not being pulled? & either [is it evil or are they not already slipped]?
-	if(C.m_intent != MOVE_INTENT_WALK && C != boss && !(C.pulledby) && (evilSign || !(C.IsKnockdown()))) 
-		lastSlip = world.time
-		src.visible_message(" The [src.name] beeps, \"Caution, wet floor.\"")
-
-		//make own turf and all adjacent turfs lubed for a bit
-		if(clowningAround) 
-			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
-			T.MakeSlippery(TURF_WET_SUPERLUBE, 10)
-		else
-			playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
-			T.MakeSlippery(TURF_WET_LUBE, 10)
-
-		for(var/turf/open/AT in get_adjacent_open_turfs(T))
-			AT.MakeSlippery(TURF_WET_LUBE, 10)
-
-		//cry havoc and let slip the signs of wet
-		if(evilSign)
-			awakenSign(AM)
+	. = ..()
 
 /obj/item/clothing/suit/caution/slippery/screwdriver_act(mob/living/user, obj/item/I)
 	if(..())
@@ -183,6 +161,39 @@
 		awakenSign(user)
 
 	return TRUE
+
+/obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
+	if (world.time < lastSlip + slipCooldown && lastSlip) //cooldown for slipping
+		return
+
+	if(!willSlip) //needs to be enabled to slip people obviously
+		return
+
+	if(!iscarbon(AM)) //is it actually a thing we can slip?
+		return
+
+	var/mob/living/carbon/C = AM
+	var/turf/open/T = get_turf(src)
+
+	//are they not walking? & are they not the janitor? & are they not being pulled? & either [is it evil or are they not already slipped]?
+	if(C.m_intent != MOVE_INTENT_WALK && C != boss && !(C.pulledby) && (evilSign || !(C.IsKnockdown()))) 
+		lastSlip = world.time
+		say("Caution, wet floor.")
+
+		//make own turf and all adjacent turfs lubed for a bit
+		if(clowningAround) 
+			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
+			T.MakeSlippery(TURF_WET_SUPERLUBE, 10)
+		else
+			playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
+			T.MakeSlippery(TURF_WET_LUBE, 10)
+
+		for(var/turf/open/AT in get_adjacent_open_turfs(T))
+			AT.MakeSlippery(TURF_WET_LUBE, 10)
+
+		//cry havoc and let slip the signs of wet
+		if(evilSign)
+			awakenSign(AM)
 
 /obj/item/clothing/suit/caution/slippery/proc/awakenSign(mob/living/victim) //makes the sign shake a bit, then animate
 	willSlip = FALSE //this kills the sign
@@ -209,9 +220,9 @@
 
 	addtimer(CALLBACK(victim, /mob/proc/transferItemToLoc, src, drop_location(), TRUE, FALSE, 10)) //force it out of their bag or hands
 	addtimer(CALLBACK(src, /atom/proc/animate_atom_living, boss), 10) //animates after 1 second
-	addtimer(CALLBACK(src, .proc/stopShaking), 50) //stops the animation after 5 seconds - though while animated, it doesn't play anyways
+	addtimer(CALLBACK(src, .proc/stopShaking), 50) //stops the animation after 5 seconds 
 
-/obj/item/clothing/suit/caution/slippery/proc/stopShaking() //stop sthe shaking
+/obj/item/clothing/suit/caution/slippery/proc/stopShaking() //stop the shaking
 	animate(src, transform=matrix())
 
 /obj/item/clothing/suit/caution/slippery/emag_act(mob/user) //bypasses the requirement of janitor or clumsy and turns it into an evil sign 
@@ -233,3 +244,18 @@
 /obj/item/storage/box/syndie_kit/box_of_Signs/PopulateContents()
 	for(var/i = 0, i < 4, i++)
 		new /obj/item/clothing/suit/caution/slippery/syndicate(src) 
+
+//DIY Slippery sign kit for the janidrobe - instructions on how to build and some example signs, to get janitors started
+/obj/item/storage/box/slipperySignKit
+	name = "DIY Slippery Sign Kit"
+	desc = "Contains everything you need to build (or disassemble) two Wetmore Slippery Signs."
+	custom_price = 1000
+
+/obj/item/storage/box/slipperySignKit/PopulateContents()
+	var/static/items_inside = list(
+		/obj/item/clothing/suit/caution = 2,
+		/obj/item/janiupgrade = 2,
+		/obj/item/assembly/prox_sensor = 2,
+		/obj/item/screwdriver = 1,
+		/obj/item/paper/guides/slipperySignDIY = 1)
+	generate_items_inside(items_inside,src)

@@ -61,3 +61,6 @@
 	russ_premium = list(/obj/item/clothing/accessory/medal/russ/deputy = 2,
 						/obj/item/clothing/head/cowboyhat/clown = 2,
 						/obj/item/clothing/shoes/cowboy/clown = 2)
+
+/obj/machinery/vending/wardrobe/jani_wardrobe
+	russ_products = list(/obj/item/storage/box/slipperySignKit = 1)
