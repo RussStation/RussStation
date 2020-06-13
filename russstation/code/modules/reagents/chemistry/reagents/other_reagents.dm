@@ -60,3 +60,19 @@
 	attack_force = 20
 	pick_speed = 0.2
 	sharp_result = TRUE
+
+/datum/reagent/confettium
+	name = "Confettium"
+	description = "A sick concoction of chemistry and clownery."
+	reagent_state = LIQUID
+	color = "#e03add" //rgb 224, 58, 221
+	taste_description = "paper cuts"
+
+/datum/reagent/confettium/reaction_turf(turf/T, reac_volume)
+	if(reac_volume >= 1)
+		if(!isspaceturf(T))
+			var/obj/effect/decal/cleanable/confetti/conf = locate() in T.contents
+			if(!conf)
+				conf = new/obj/effect/decal/cleanable/confetti(T)
+			if(!QDELETED(conf))
+				conf.reagents.add_reagent(type, reac_volume)
