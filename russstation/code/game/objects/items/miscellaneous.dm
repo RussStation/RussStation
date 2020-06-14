@@ -251,7 +251,7 @@
 /obj/item/storage/box/slipperySignKit
 	name = "DIY Slippery Sign Kit"
 	desc = "Contains everything you need to build (or disassemble) two Wetmore Slippery Signs."
-	custom_price = 1000
+	custom_premium_price = 1200
 
 /obj/item/storage/box/slipperySignKit/PopulateContents()
 	var/static/items_inside = list(
