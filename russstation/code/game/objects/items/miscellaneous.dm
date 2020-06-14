@@ -14,14 +14,14 @@
 				heirloomCheck = hasQuirk
 				break
 
-		if(src == heirloomCheck.heirloom) //make sure jannies don't accidentally use their family heirlooms
+		if(heirloomCheck && src == heirloomCheck.heirloom) //make sure jannies don't accidentally use their family heirlooms
 			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom [src.name]!<span>")
-		else
-			to_chat(user, "<span class='notice'>You add a [I.name] to the bottom of the [src.name].<span>")
-			qdel(I)
-			qdel(src)
-			new /obj/item/clothing/suit/caution/incomplete(L, 1)
+			return
 
+		to_chat(user, "<span class='notice'>You add a [I.name] to the bottom of the [src.name].<span>")
+		qdel(I)
+		qdel(src)
+		new /obj/item/clothing/suit/caution/incomplete(L, 1)
 		return
 
 	. = ..()
@@ -91,6 +91,8 @@
 	verb_say = "beeps"
 	verb_ask = "beeps"
 	verb_exclaim = "beeps"
+	req_access = list(ACCESS_JANITOR)
+	req_access_txt = "26"
 
 	var/willSlip = FALSE //false - disabled || true - enabled 
 	var/lastSlip = 0 //last time the sign slipped someone (time)
@@ -121,7 +123,7 @@
 		clowningAround = TRUE
 		slipCooldown = 0
 		to_chat(user, "<span class='warning'>The [src.name]'s lube sprayer has been overloaded.<span>")
-	else if(user.mind.assigned_role == "Janitor") //only janitors can interact with it normally
+	else if((user.mind.assigned_role == "Janitor") || src.allowed(user)) //only janitors can interact with it normally
 		boss = user
 		willSlip = !willSlip
 		if(clowningAround) //so you can reset the sign if a clown messes with it
