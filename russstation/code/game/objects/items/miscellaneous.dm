@@ -198,9 +198,7 @@
 			awakenSign(AM)
 
 /obj/item/clothing/suit/caution/slippery/proc/awakenSign(mob/living/victim) //makes the sign shake a bit, then animate
-	willSlip = FALSE //this kills the sign
-
-	if(victim == boss) //if the owner of the sign tries to fuck with it, it'll betray them
+	if(victim && victim == boss) //if the owner of the sign tries to fuck with it, it'll betray them
 		boss = null
 
 	//Shaking animation from His Grace, for effect
@@ -220,8 +218,13 @@
 	animate(transform=transforms[3], time=0.2)
 	animate(transform=transforms[4], time=0.3)
 
-	addtimer(CALLBACK(victim, /mob/proc/transferItemToLoc, src, drop_location(), TRUE, FALSE, 10)) //force it out of their bag or hands
-	addtimer(CALLBACK(src, /atom/proc/animate_atom_living, boss), 10) //animates after 1 second
+	sleep(10)
+	if(victim && victim.temporarilyRemoveItemFromInventory(src) && src.forceMove(drop_location())) //forces the sign onto the ground before animating it
+		willSlip = FALSE //this kills the sign
+		src.animate_atom_living(boss)
+	else
+		to_chat(victim, "<span class='notice'>I guess it was nothing.<span>")
+
 	addtimer(CALLBACK(src, .proc/stopShaking), 50) //stops the animation after 5 seconds 
 
 /obj/item/clothing/suit/caution/slippery/proc/stopShaking() //stop the shaking
@@ -248,16 +251,15 @@
 		new /obj/item/clothing/suit/caution/slippery/syndicate(src) 
 
 //DIY Slippery sign kit for the janidrobe - instructions on how to build and some example signs, to get janitors started
-/obj/item/storage/box/slipperySignKit
-	name = "DIY Slippery Sign Kit"
-	desc = "Contains everything you need to build (or disassemble) two Wetmore Slippery Signs."
+/obj/item/storage/box/slippery_sign_kit
+	name = "\improper DIY Slippery Sign Kit"
+	desc = "Contains everything you need to build two Wetmore Slippery Signs."
 	custom_premium_price = 1200
 
-/obj/item/storage/box/slipperySignKit/PopulateContents()
+/obj/item/storage/box/slippery_sign_kit/PopulateContents()
 	var/static/items_inside = list(
 		/obj/item/clothing/suit/caution = 2,
 		/obj/item/janiupgrade = 2,
 		/obj/item/assembly/prox_sensor = 2,
-		/obj/item/screwdriver = 1,
-		/obj/item/paper/guides/slipperySignDIY = 1)
+		/obj/item/paper/guides/slippery_sign_DIY = 1)
 	generate_items_inside(items_inside,src)

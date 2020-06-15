@@ -80,4 +80,4 @@
 						/obj/item/clothing/shoes/cowboy/clown = 2)
 
 /obj/machinery/vending/wardrobe/jani_wardrobe
-	russ_premium = list(/obj/item/storage/box/slipperySignKit = 1)
+	russ_premium = list(/obj/item/storage/box/slippery_sign_kit = 1)
