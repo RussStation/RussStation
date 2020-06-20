@@ -15337,6 +15337,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/machinery/iv_drip,
 /turf/open/floor/plasteel/white,
 /area/medical/storage)
 "aJi" = (
@@ -17446,6 +17447,7 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel/white,
 /area/medical/surgery)
 "aNK" = (
@@ -26825,7 +26827,8 @@
 	dir = 8
 	},
 /obj/machinery/status_display/evac{
-	pixel_x = 32
+	pixel_x = 0;
+	pixel_y = -32
 	},
 /turf/open/floor/plasteel/showroomfloor,
 /area/science/genetics)
@@ -27291,21 +27294,9 @@
 /turf/open/floor/plating,
 /area/maintenance/central/secondary)
 "bjT" = (
-/obj/item/radio/intercom{
-	broadcasting = 1;
-	frequency = 1485;
-	listening = 0;
-	name = "Station Intercom (Medbay)";
-	pixel_x = 30;
-	pixel_y = 0
-	},
-/obj/structure/cable,
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/blue,
-/turf/open/floor/plasteel/white,
-/area/medical/surgery)
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/open/floor/grass,
+/area/science/genetics)
 "bjU" = (
 /obj/machinery/disposal/bin,
 /obj/effect/turf_decal/stripes/box,
@@ -27902,6 +27893,12 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/machinery/door/window/northleft{
+	base_state = "right";
+	icon_state = "right";
+	name = "Containment Pen #3";
+	req_access_txt = "55"
+	},
 /turf/open/floor/plasteel/dark,
 /area/science/xenobiology)
 "bli" = (
@@ -27973,6 +27970,49 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/chemistry)
+"blq" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/structure/cable,
+/obj/machinery/airalarm{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/open/floor/plasteel/white,
+/area/medical/medbay/central)
+"blr" = (
+/turf/open/floor/grass,
+/area/science/genetics)
+"bls" = (
+/obj/item/radio/intercom{
+	broadcasting = 1;
+	frequency = 1485;
+	listening = 0;
+	name = "Station Intercom (Medbay)";
+	pixel_x = 30;
+	pixel_y = 0
+	},
+/obj/structure/cable,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue,
+/obj/machinery/iv_drip,
+/turf/open/floor/plasteel/white,
+/area/medical/surgery)
+"blt" = (
+/obj/effect/turf_decal/tile/purple,
+/obj/effect/turf_decal/tile/purple{
+	dir = 1
+	},
+/obj/structure/rack,
+/obj/item/radio/intercom{
+	pixel_y = 25
+	},
+/obj/item/clothing/suit/caution/slippery,
+/obj/item/clothing/suit/caution/slippery,
+/obj/item/key/janitor,
+/turf/open/floor/plasteel/dark,
+/area/janitor)
 "blW" = (
 /obj/machinery/atmospherics/pipe/simple/green/visible,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
@@ -35428,18 +35468,6 @@
 "kdu" = (
 /turf/closed/wall,
 /area/hallway/primary/port)
-"kdv" = (
-/obj/effect/turf_decal/tile/purple,
-/obj/effect/turf_decal/tile/purple{
-	dir = 1
-	},
-/obj/structure/rack,
-/obj/item/key/janitor,
-/obj/item/radio/intercom{
-	pixel_y = 25
-	},
-/turf/open/floor/plasteel/dark,
-/area/janitor)
 "kdY" = (
 /obj/machinery/gateway,
 /obj/effect/turf_decal/bot_red,
@@ -68566,7 +68594,7 @@ fak
 vHa
 bNQ
 hli
-kdv
+blt
 jNV
 akT
 jdj
@@ -76516,7 +76544,7 @@ fVE
 btB
 btS
 bts
-bts
+blq
 aNH
 bsj
 aCK
@@ -78061,7 +78089,7 @@ bcw
 eYd
 bjC
 bjF
-bjT
+bls
 bjX
 eYd
 amE
@@ -88848,7 +88876,7 @@ aIu
 bfa
 bgf
 biY
-akF
+biY
 egU
 bjA
 aNN
@@ -89105,7 +89133,7 @@ aJa
 bfz
 biE
 bja
-akF
+bjT
 egU
 aNv
 aNO
@@ -89362,7 +89390,7 @@ aTc
 bfA
 biV
 bjb
-akF
+blr
 egU
 aNw
 aNP
