@@ -1478,11 +1478,11 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
-/obj/structure/sign/poster/official/random{
-	pixel_y = 32
-	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 8
+	},
+/obj/machinery/airalarm{
+	pixel_y = 24
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/lobby)
@@ -23811,8 +23811,14 @@
 	name = "First-Aid Supplies";
 	req_access_txt = "5"
 	},
-/obj/item/storage/firstaid/regular,
-/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/regular{
+	pixel_x = 4;
+	pixel_y = -4
+	},
+/obj/item/storage/firstaid/regular{
+	pixel_x = 4;
+	pixel_y = -4
+	},
 /obj/item/storage/firstaid/regular,
 /obj/item/storage/firstaid/regular,
 /turf/open/floor/plasteel/white,
@@ -27274,6 +27280,9 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/keycard_auth{
+	pixel_y = -24
+	},
 /turf/open/floor/plasteel/showroomfloor,
 /area/crew_quarters/heads/cmo)
 "bjR" = (
@@ -28218,8 +28227,14 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/storage/firstaid/o2,
-/obj/item/storage/firstaid/o2,
+/obj/item/storage/firstaid/o2{
+	pixel_x = 4;
+	pixel_y = -4
+	},
+/obj/item/storage/firstaid/o2{
+	pixel_x = 4;
+	pixel_y = -4
+	},
 /obj/item/storage/firstaid/toxin,
 /obj/item/storage/firstaid/toxin,
 /turf/open/floor/plasteel/white,
@@ -28251,8 +28266,14 @@
 /area/medical/storage)
 "brp" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/brute,
-/obj/item/storage/firstaid/brute,
+/obj/item/storage/firstaid/brute{
+	pixel_x = 4;
+	pixel_y = -4
+	},
+/obj/item/storage/firstaid/brute{
+	pixel_x = 4;
+	pixel_y = -4
+	},
 /obj/item/storage/firstaid/fire,
 /obj/item/storage/firstaid/fire,
 /turf/open/floor/plasteel/white,
@@ -30434,12 +30455,12 @@
 /turf/open/floor/plasteel/dark,
 /area/security/courtroom)
 "duS" = (
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10;24"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
+	},
+/obj/machinery/door/airlock/engineering/glass/critical{
+	name = "Supermatter Engine Room";
+	req_access = "10;24"
 	},
 /turf/open/floor/engine,
 /area/engine/supermatter)
@@ -38511,6 +38532,10 @@
 /obj/effect/turf_decal/bot_red,
 /turf/open/floor/plasteel/dark,
 /area/gateway)
+"obj" = (
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/open/floor/engine/air,
+/area/engine/atmos)
 "obk" = (
 /turf/closed/wall,
 /area/crew_quarters/dorms)
@@ -41260,7 +41285,9 @@
 /turf/closed/wall,
 /area/crew_quarters/heads/hop)
 "rQi" = (
-/obj/structure/closet/emcloset,
+/obj/structure/closet/emcloset{
+	anchored = 1
+	},
 /turf/open/floor/plating,
 /area/maintenance/port)
 "rRR" = (
@@ -43133,12 +43160,12 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/aft)
 "uou" = (
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Supermatter Engine Room";
-	req_access_txt = "10;24"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
+	},
+/obj/machinery/door/airlock/engineering/glass/critical{
+	name = "Supermatter Engine Room";
+	req_access = "10;24"
 	},
 /turf/open/floor/engine,
 /area/engine/supermatter)
@@ -45781,6 +45808,12 @@
 	},
 /turf/open/floor/plating,
 /area/quartermaster/sorting)
+"xBP" = (
+/obj/structure/sign/poster/official/random{
+	pixel_x = -32
+	},
+/turf/open/floor/plasteel/white,
+/area/medical/medbay/central)
 "xCc" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -60647,7 +60680,7 @@ aUm
 hmr
 aUk
 aUj
-aUr
+aWV
 aWG
 aUr
 lXJ
@@ -62450,7 +62483,7 @@ aYA
 dcJ
 vSM
 csU
-csU
+obj
 csU
 vSM
 fsz
@@ -76534,7 +76567,7 @@ kzr
 adz
 adt
 adt
-fVE
+xBP
 aDi
 aCN
 fVE
