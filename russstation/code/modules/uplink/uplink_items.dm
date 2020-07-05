@@ -7,10 +7,9 @@
 
 /datum/uplink_item/role_restricted/box_of_Signs
 	name = "Box of Wetmore Slippery Signs"
-	desc = "A box filled with 4 Waffle Co. modified slippery wet floor signs, which can be activated to attack anyone who sprints past when deployed. \
-	Can be used to set up dangerous slipping traps or simply to enforce proper safety in the hallways."
+	desc = "A box filled with 4 Waffle Co. modified slippery wet floor signs. When toggled, they will animate and attack anyone who runs past them. \
+		Can be used to set up dangerous slipping traps, distractions, or simply to enforce proper safety in the hallways."
 	item = /obj/item/storage/box/syndie_kit/box_of_Signs
 	cost = 7
 	limited_stock = 2
 	restricted_roles = list("Janitor")
-
