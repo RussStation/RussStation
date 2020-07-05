@@ -13,7 +13,7 @@
 				heirloomCheck = hasQuirk
 				break
 
-		if(heirloomCheck && src == heirloomCheck.heirloom) //make sure jannies don't accidentally use their family heirlooms (cause it'll qdel it)
+		if(heirloomCheck?.heirloom == src) //make sure jannies don't accidentally use their family heirlooms (cause it'll qdel it)
 			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom [name]!</span>")
 			return
 
@@ -23,7 +23,8 @@
 		qdel(I)
 		qdel(src)
 		if(!isturf(new_sign.loc))
-			user.put_in_hands(new_sign)
+			if(!user.put_in_inactive_hand(new_sign)) //tries to put it in the inactive hand first, and if it fails...
+				user.put_in_hands(new_sign) //tries to put it in whatever hand it can find, and if that fails, it drops to the ground
 		return
 
 	. = ..()
@@ -67,7 +68,8 @@
 		if(prob(1)) //1% chance for a name
 			new_sign.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
 		if(!isturf(new_sign.loc))
-			user.put_in_hands(new_sign)
+			if(!user.put_in_inactive_hand(new_sign)) 
+				user.put_in_hands(new_sign) 
 		return
 
 	. = ..()
