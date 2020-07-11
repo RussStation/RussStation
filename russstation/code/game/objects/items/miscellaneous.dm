@@ -4,24 +4,27 @@
 //apply prox sensor to sign (from robo/cargo)
 
 /obj/item/clothing/suit/caution/attackby(obj/item/I, mob/living/user)
-	var/atom/L = drop_location()
-	var/datum/quirk/family_heirloom/heirloomCheck 
-
 	if(istype(I, /obj/item/janiupgrade))
+		var/datum/quirk/family_heirloom/heirloomCheck 
+
 		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later 
 		for(var/datum/quirk/hasQuirk in user.roundstart_quirks)
 			if(istype(hasQuirk, /datum/quirk/family_heirloom))
 				heirloomCheck = hasQuirk
 				break
 
-		if(heirloomCheck && src == heirloomCheck.heirloom) //make sure jannies don't accidentally use their family heirlooms
-			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom [src.name]!<span>")
+		if(heirloomCheck?.heirloom == src) //make sure jannies don't accidentally use their family heirlooms (cause it'll qdel it)
+			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom [name]!</span>")
 			return
 
-		to_chat(user, "<span class='notice'>You add a [I.name] to the bottom of the [src.name].<span>")
+		user.visible_message("<span class='notice'>[user.name] adds \a [I.name] to the bottom of \the [name].</span>", \
+							"<span class='notice'>You add \the [I.name] to the bottom of \the [name].</span>")
+		var/obj/item/new_sign = new /obj/item/clothing/suit/caution/incomplete(loc, 1)
 		qdel(I)
 		qdel(src)
-		new /obj/item/clothing/suit/caution/incomplete(L, 1)
+		if(!isturf(new_sign.loc))
+			if(!user.put_in_inactive_hand(new_sign)) //tries to put it in the inactive hand first, and if it fails...
+				user.put_in_hands(new_sign) //tries to put it in whatever hand it can find, and if that fails, it drops to the ground
 		return
 
 	. = ..()
@@ -31,11 +34,11 @@
 	slot_flags = 0
 
 /obj/item/clothing/suit/caution/incomplete/attack_self(mob/user)
-	to_chat(user, "<span class='warning'>You spin the buffer on the [src.name] with your finger. It won't activate unless you <i>attach a sensor</i> to it.<span>")
+	to_chat(user, "<span class='notice'>You spin the buffer on the [name] with your finger. It won't activate unless you <i>attach a sensor</i> to it.</span>")
 
 /obj/item/clothing/suit/caution/incomplete/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>The [src.name] has a floor buffer underneath. You could <i>attach a sensor</i> to it, or <i>undo the screws</i> to remove it.</span>"
+	. += "<span class='notice'>The [name] has a floor buffer attatched underneath. You could <i>attach a sensor</i> to it, or <i>undo the screws</i> to remove it.</span>"
 
 /obj/item/clothing/suit/caution/incomplete/screwdriver_act(mob/living/user, obj/item/I)
 	if(..())
@@ -43,27 +46,30 @@
 
 	var/atom/L = drop_location()
 	I.play_tool_sound(src)
-	to_chat(user, "<span class='notice'>You detatch the floor buffer from the [src.name].<span>")
+	user.visible_message("<span class='notice'>[user.name] detatches the floor buffer from \the [name].</span>", \
+						"<span class='notice'>You detatch the floor buffer from \the [name].</span>", \
+						"<span class='hear'>You hear a screwdriver and a click.</span>")
 	qdel(src)
 	new /obj/item/clothing/suit/caution(L, 1)
 	new /obj/item/janiupgrade(L, 1)
 	return TRUE
 
 /obj/item/clothing/suit/caution/incomplete/attackby(obj/item/I, mob/living/user)
-	var/atom/L = drop_location()
-
 	if(istype(I, /obj/item/janiupgrade))
-		to_chat(user, "<span class='warning'>This [src.name] already has a device attatched to it.<span>")
+		to_chat(user, "<span class='notice'>This [name] already has a floor buffer attatched to it.</span>")
 		return
 
 	if(istype(I, /obj/item/assembly/prox_sensor))
-		to_chat(user, "<span class='notice'>You add a [I.name] to the floor buffer on the [src.name].<span>")
+		user.visible_message("<span class='notice'>[user.name] adds \a [I.name] to the floor buffer on \the [name].</span>", \
+							"<span class='notice'>You add \the [I.name] to the floor buffer on \the [name].</span>")
+		var/obj/item/new_sign = new /obj/item/clothing/suit/caution/slippery(loc, 1)
 		qdel(I)
 		qdel(src)
-		var/obj/item/S = new /obj/item/clothing/suit/caution/slippery(L,1)
 		if(prob(1)) //1% chance for a name
-			S.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
-
+			new_sign.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
+		if(!isturf(new_sign.loc))
+			if(!user.put_in_inactive_hand(new_sign)) 
+				user.put_in_hands(new_sign) 
 		return
 
 	. = ..()
@@ -71,10 +77,22 @@
 //old signs (only found in maint spawners)
 /obj/item/caution/attackby(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/janiupgrade))
-		to_chat(user, "<span class='warning'>The [src.name] is too antiquated to fit a [I.name], try a newer sign.<span>")
+		to_chat(user, "<span class='warning'>The [name] is too antiquated to fit a [I.name], try a newer model sign.</span>")
 		return
 
 	. = ..()
+
+//tablecrafting recipe option
+/datum/crafting_recipe/slippery_sign
+	name = "Wetmore Slippery Sign"
+	result = /obj/item/clothing/suit/caution/slippery
+	time = 3 SECONDS
+	reqs = list(
+		/obj/item/janiupgrade = 1,
+		/obj/item/assembly/prox_sensor = 1,
+		/obj/item/clothing/suit/caution = 1)
+	blacklist = list(/obj/item/clothing/suit/caution/incomplete, /obj/item/clothing/suit/caution/slippery)
+	category = CAT_MISC
 
 //end of construction code
 
@@ -94,52 +112,56 @@
 	req_access = list(ACCESS_JANITOR)
 	req_access_txt = "26"
 
-	var/willSlip = FALSE //false - disabled || true - enabled 
-	var/lastSlip = 0 //last time the sign slipped someone (time)
-	var/slipCooldown = 50 //cooldown (~5 seconds default)
-	var/clowningAround = FALSE //false - untainted || true - clown got it
-	var/evilSign = FALSE //false - normal sign || true - emagged or uplink
-	var/mob/living/carbon/boss = null //used so animated signs don't attack the janitor
+	// FALSE - Disabled || TRUE - Enabled
+	var/willSlip = FALSE
+	// Last time the sign slipped someone (time)
+	var/lastSlip = 0
+	// Cooldown
+	var/slipCooldown = 5 SECONDS
+	// FALSE - Untainted || TRUE - Clown got it
+	var/clowningAround = FALSE 
+	// FALSE - Normal sign || TRUE - Emagged or uplink bought
+	var/evilSign = FALSE
+	// Used so animated signs don't attack the janitor
+	var/mob/living/carbon/boss = null
 
 /obj/item/clothing/suit/caution/slippery/syndicate
 	evilSign = TRUE //signs purchased from the uplink
 
 /obj/item/clothing/suit/caution/slippery/examine(mob/user)
 	. = ..()
-	if(isobserver(user) || user.mind.assigned_role == "Janitor") //janitors and ghosts can see that it's a slippery sign
-		. += "<span class='notice'>This [src.name] is outfitted with an experimental sprayer.</span>"
+	if(isobserver(user) || user.mind.assigned_role == "Janitor") //true janitors and ghosts can see that it's a slippery sign
+		. += "<span class='notice'>This [name] is outfitted with an experimental lube sprayer. <i>Activate it in your hand to enable it.</i></span>"
 		if(clowningAround || evilSign)
 			. += "<span class='warning'>It's been tampered with.</span>"
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns know lube when they see it
-		. += "<span class='notice'>This [src.name] has great potential for pranks.</span>"
+		. += "<span class='notice'>This [name] has great potential for pranks.</span>"
 
 //when used by a janitor: toggles between active and disabled, when used by a clown, pranks ensue
 /obj/item/clothing/suit/caution/slippery/attack_self(mob/user)
 	if(!proximity_monitor)
 		proximity_monitor = new(src, 1) //initializes the proximity: (source, range)
 
-	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns.
+	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clumsy people can overload it (clowns, etc)
 		willSlip = TRUE 
 		clowningAround = TRUE
-		slipCooldown = 0
-		to_chat(user, "<span class='warning'>The [src.name]'s lube sprayer has been overloaded.<span>")
-	else if((user.mind.assigned_role == "Janitor") || src.allowed(user)) //only janitors can interact with it normally
+		slipCooldown = 1 SECONDS
+		to_chat(user, "<span class='warning'>\The [name]'s lube sprayer has been overloaded.</span>")
+	else if((user.mind.assigned_role == "Janitor") || allowed(user)) //janitors at heart and janitor access can interact wiht it
 		boss = user
 		willSlip = !willSlip
 		if(clowningAround) //so you can reset the sign if a clown messes with it
+			to_chat(user, "<span class='notice'>You repair \the [name]'s lube sprayer.</span>")
 			clowningAround = FALSE
-			slipCooldown = 50 
+			slipCooldown = 5 SECONDS
 
-		if(willSlip)
-			to_chat(user, "<span class='notice'>The [src.name] will now slip anyone running past.<span>")
-		else
-			to_chat(user, "<span class='notice'>The [src.name] will no longer slip passerbys.<span>")
+		to_chat(user, "<span class='notice'>\The [name] will [willSlip? "now" : "no longer"] slip anyone running past.</span>")
 	else
-		to_chat(user, "<span class = 'notice'>The [src.name] requires a janitor to activate.<span>")
+		to_chat(user, "<span class = 'notice'>\The [name] requires a janitor to activate.</span>")
 
 /obj/item/clothing/suit/caution/slippery/attackby(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/janiupgrade))
-		to_chat(user, "<span class='warning'>This [src.name] already has a device attatched to it.<span>")
+		to_chat(user, "<span class='notice'>This [name] already has a device attatched to it.</span>")
 		return
 
 	. = ..()
@@ -151,21 +173,22 @@
 	I.play_tool_sound(src)
 	if(!evilSign)
 		var/atom/L = drop_location()
-		to_chat(user, "<span class='notice'>You detatch the device from the [src.name].<span>")
+		user.visible_message("<span class='notice'>[user.name] detatches the a device from \the [name].</span>", \
+							"<span class='notice'>You detatch the device from \the [name].</span>", \
+							"<span class='hear'>You hear a screwdriver and a click.</span>")
 		qdel(src)
 		new /obj/item/clothing/suit/caution(L, 1)
 		new /obj/item/janiupgrade(L, 1)
 		new /obj/item/assembly/prox_sensor(L, 1)
 	else
-		to_chat(user, "<span class='warning'>You can't seem to detatch the mechanism from the [src.name]...<span>")
-		sleep(20)
-		to_chat(user, "<span class='boldwarning'>Wait, is it shaking?<span>")
+		to_chat(user, "<span class='warning'>You can't seem to detatch the mechanism from \the [name]...</span>")
+		sleep(2 SECONDS)
 		awakenSign(user)
 
 	return TRUE
 
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
-	if (world.time < lastSlip + slipCooldown && lastSlip) //cooldown for slipping
+	if (world.time < lastSlip + slipCooldown) //cooldown for slipping
 		return
 
 	if(!willSlip) //needs to be enabled to slip people obviously
@@ -174,30 +197,40 @@
 	if(!iscarbon(AM)) //is it actually a thing we can slip?
 		return
 
+	if(!isturf(loc)) //are we not on the ground?
+		return
+
+	if(pulledby) //if we're being pulled, don't slip people (it was funny for a bit)
+		return
+
 	var/mob/living/carbon/C = AM
 	var/turf/open/T = get_turf(src)
 
-	//are they not walking? & are they not the janitor? & are they not being pulled? & either [is it evil or are they not already slipped]?
-	if(C.m_intent != MOVE_INTENT_WALK && C != boss && !(C.pulledby) && (evilSign || !(C.IsKnockdown()))) 
+	//are they not walking? & are they not the activator? & are they not being pulled? & either [is it evil or are they not already slipped]?
+	if(C.m_intent != MOVE_INTENT_WALK && C != boss && !(C.pulledby) && (evilSign || !(C.IsKnockdown())))
 		lastSlip = world.time
 		say("Caution, wet floor.")
 
 		//make own turf and all adjacent turfs lubed for a bit
 		if(clowningAround) 
 			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
-			T.MakeSlippery(TURF_WET_SUPERLUBE, 10)
+			T.MakeSlippery(TURF_WET_SUPERLUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
 		else
 			playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
-			T.MakeSlippery(TURF_WET_LUBE, 10)
+			T.MakeSlippery(TURF_WET_LUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
 
 		for(var/turf/open/AT in get_adjacent_open_turfs(T))
-			AT.MakeSlippery(TURF_WET_LUBE, 10)
+			AT.MakeSlippery(TURF_WET_LUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
 
 		//cry havoc and let slip the signs of wet
 		if(evilSign)
-			awakenSign(AM)
+			awakenSign(C)
 
-/obj/item/clothing/suit/caution/slippery/proc/awakenSign(mob/living/victim) //makes the sign shake a bit, then animate
+/*
+ * makes the sign shake a bit, then animate
+ * arguments - victim is the mob triggering the sign
+ */
+/obj/item/clothing/suit/caution/slippery/proc/awakenSign(mob/living/victim)
 	if(victim && victim == boss) //if the owner of the sign tries to fuck with it, it'll betray them
 		boss = null
 
@@ -218,19 +251,28 @@
 	animate(transform=transforms[3], time=0.2)
 	animate(transform=transforms[4], time=0.3)
 
-	sleep(10)
-	if(victim && victim.temporarilyRemoveItemFromInventory(src) && src.forceMove(drop_location())) //forces the sign onto the ground before animating it
-		willSlip = FALSE //this kills the sign
-		src.animate_atom_living(boss)
-	else
-		to_chat(victim, "<span class='notice'>I guess it was nothing.<span>")
+	visible_message("<span class='boldwarning'>\The [name] begins to shake violently.</span>", \
+					"<span class='boldwarning'>\The [name] begins to shake violently.</span>", \
+					"<span class='hear'>You hear mechanical whirring.</span>")
+	willSlip = FALSE
+	sleep(1 SECONDS)
+	stopShaking()
+	if(!isturf(loc))
+		if(!victim?.temporarilyRemoveItemFromInventory(src) || !forceMove(drop_location())) //forces the sign onto the ground before animating it
+			to_chat(victim, "<span class='notice'>I guess it was nothing.</span>")
+			return
+	src.animate_atom_living(boss)
 
-	addtimer(CALLBACK(src, .proc/stopShaking), 50) //stops the animation after 5 seconds 
-
-/obj/item/clothing/suit/caution/slippery/proc/stopShaking() //stop the shaking
+/* 
+ * stop the shaking animation
+ */ 
+/obj/item/clothing/suit/caution/slippery/proc/stopShaking()
 	animate(src, transform=matrix())
 
-/obj/item/clothing/suit/caution/slippery/emag_act(mob/user) //bypasses the requirement of janitor or clumsy and turns it into an evil sign 
+/* 
+ * bypasses the requirement of janitor or clumsy and turns it into an evil sign
+ */
+/obj/item/clothing/suit/caution/slippery/emag_act(mob/user)
 	if(!proximity_monitor)
 		proximity_monitor = new(src, 1) 
 
@@ -238,9 +280,11 @@
 	if(!evilSign)
 		evilSign = TRUE
 		boss = user	
-		to_chat(user, "<span class='boldwarning'>The [src.name] begins to shake subtly.<span>")	
+		visible_message("<span class='warning'>\The [name] begins to shake subtly.</span>", \
+						"<span class='warning'>\The [name] begins to shake subtly.</span>", \
+						"<span class='hear'>You hear mechanical whirring.</span>")
 	else
-		to_chat(user, "<span class='warning'>The [src.name] is already tampered with.<span>")	
+		to_chat(user, "<span class='warning'>\The [name] is already tampered with.</span>")
 
 
 //box of 4 wetmore slippery signs- for the traitor uplink
