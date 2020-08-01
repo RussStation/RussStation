@@ -3708,10 +3708,6 @@
 /obj/item/stack/cable_coil,
 /turf/open/floor/plating,
 /area/maintenance/solars/port/fore)
-"aiy" = (
-/obj/effect/turf_decal/tile/blue,
-/turf/closed/wall,
-/area/chapel/main)
 "aiz" = (
 /obj/machinery/computer/pod/old{
 	density = 0;
@@ -26466,8 +26462,10 @@
 /area/maintenance/port/aft)
 "bis" = (
 /obj/structure/cable,
-/obj/structure/disposalpipe/junction/flip{
-	dir = 8
+/obj/structure/disposalpipe/sorting/mail/flip{
+	dir = 8;
+	name = "disposals sorting disposal pipe";
+	sortType = 1
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
@@ -26546,7 +26544,9 @@
 /area/maintenance/port/aft)
 "biD" = (
 /obj/effect/spawner/lootdrop/grille_or_trash,
-/obj/structure/disposalpipe/segment,
+/obj/structure/disposalpipe/segment{
+	dir = 6
+	},
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "biE" = (
@@ -29625,6 +29625,22 @@
 /obj/item/stack/rods/fifty,
 /turf/open/floor/plasteel,
 /area/quartermaster/warehouse)
+"cvX" = (
+/obj/machinery/disposal/deliveryChute{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/disposalpipe/trunk{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/maintenance/disposal)
 "cwc" = (
 /obj/structure/fireaxecabinet{
 	pixel_x = -32
@@ -30033,9 +30049,6 @@
 "dax" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/open/floor/plating,
 /area/maintenance/disposal)
@@ -31042,6 +31055,12 @@
 "edn" = (
 /turf/closed/wall,
 /area/maintenance/solars/starboard/aft)
+"edM" = (
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
+/turf/closed/wall,
+/area/maintenance/disposal)
 "edU" = (
 /obj/effect/turf_decal/stripes/corner,
 /obj/effect/turf_decal/tile/purple{
@@ -31971,8 +31990,8 @@
 	name = "disposals sorting disposal pipe";
 	sortType = 1
 	},
-/turf/open/floor/plating,
-/area/maintenance/port/aft)
+/turf/open/space/basic,
+/area/space)
 "fua" = (
 /obj/structure/tank_dispenser,
 /obj/machinery/light{
@@ -32600,6 +32619,11 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
+"gft" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/plating,
+/area/maintenance/port/aft)
 "gfJ" = (
 /obj/machinery/suit_storage_unit/engine,
 /obj/structure/cable,
@@ -34248,18 +34272,9 @@
 /turf/open/floor/plasteel,
 /area/hallway/secondary/entry)
 "ips" = (
-/obj/machinery/disposal/deliveryChute{
-	dir = 4
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/disposalpipe/trunk{
-	dir = 2
+/obj/machinery/mineral/stacking_machine{
+	input_dir = 1;
+	stack_amt = 10
 	},
 /turf/open/floor/plating,
 /area/maintenance/disposal)
@@ -34301,19 +34316,6 @@
 "ist" = (
 /turf/open/floor/plasteel/sepia,
 /area/chapel/office)
-"isO" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/machinery/mineral/stacking_unit_console{
-	machinedir = 8;
-	pixel_y = 28
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/maintenance/disposal)
 "ita" = (
 /obj/effect/spawner/lootdrop/donkpockets,
 /turf/open/floor/plating,
@@ -35963,9 +35965,9 @@
 /turf/closed/wall,
 /area/maintenance/port/aft)
 "kJd" = (
-/obj/machinery/mineral/stacking_machine{
-	input_dir = 1;
-	stack_amt = 10
+/obj/machinery/mineral/stacking_unit_console{
+	machinedir = 8;
+	pixel_x = 32
 	},
 /turf/open/floor/plating,
 /area/maintenance/disposal)
@@ -40015,6 +40017,15 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/prison)
+"qhc" = (
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/plating{
+	icon_state = "platingdmg1"
+	},
+/area/maintenance/port/aft)
 "qhf" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -40076,8 +40087,9 @@
 /turf/open/floor/plasteel,
 /area/engine/atmos)
 "qiT" = (
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment,
+/obj/structure/disposalpipe/junction/flip{
+	dir = 8
+	},
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "qiW" = (
@@ -40987,7 +40999,6 @@
 	pixel_x = -25
 	},
 /obj/structure/cable,
-/obj/structure/disposalpipe/segment,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "ryU" = (
@@ -42457,15 +42468,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
-"tyv" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 9
-	},
-/turf/open/floor/plasteel,
-/area/maintenance/disposal)
 "tyx" = (
 /obj/machinery/door/airlock/public/glass{
 	name = "Hydroponics";
@@ -42756,7 +42758,6 @@
 	name = "Disposal Access";
 	req_access_txt = "12"
 	},
-/obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel,
 /area/maintenance/port/aft)
 "tRX" = (
@@ -44257,15 +44258,6 @@
 /obj/structure/closet/firecloset,
 /turf/open/floor/plating,
 /area/maintenance/central)
-"vJi" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/maintenance/disposal)
 "vJx" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /obj/machinery/camera{
@@ -44555,6 +44547,15 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/plasteel,
 /area/hallway/secondary/entry)
+"weO" = (
+/obj/machinery/conveyor{
+	id = "garbage"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/maintenance/disposal)
 "wfE" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /obj/effect/turf_decal/tile/purple{
@@ -44825,6 +44826,11 @@
 	},
 /turf/open/floor/plating,
 /area/tcommsat/computer)
+"wuA" = (
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/plating,
+/area/maintenance/port/aft)
 "wvq" = (
 /obj/structure/closet/radiation,
 /obj/machinery/power/apc{
@@ -44852,9 +44858,6 @@
 "wwK" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 5
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/disposal)
@@ -64794,15 +64797,15 @@ gfQ
 gfQ
 gfQ
 cBV
-bhx
-sAF
-qXt
-cBV
-cBV
-lfx
-lfx
-lfx
-lfx
+qiT
+bix
+wuA
+gft
+gft
+moq
+moq
+moq
+edM
 lfx
 lfx
 lfx
@@ -65051,15 +65054,15 @@ gfQ
 gfQ
 gfQ
 cBV
-ftQ
-bin
-qiT
-bin
+bhx
+epW
+qXt
+epW
 biD
 moq
 wTA
 sga
-idL
+weO
 idL
 idL
 epn
@@ -65312,11 +65315,11 @@ bii
 rVJ
 sbJ
 fjO
-qXt
+bit
 lfx
 mgy
 dTo
-lfx
+cvX
 snK
 bMQ
 bMQ
@@ -65562,18 +65565,18 @@ gfQ
 gfQ
 gfQ
 gfQ
-gfQ
+ftQ
 gfQ
 cBV
 bhx
 eAi
 eAi
 eAi
-qXt
+bit
 lfx
 cQT
 dTo
-ips
+dTo
 wwK
 aoi
 nmN
@@ -65826,11 +65829,11 @@ bhx
 fFl
 eAi
 cKC
-nqZ
+qhc
 lfx
 iub
 dTo
-mgy
+ips
 dax
 alk
 bYp
@@ -66083,12 +66086,12 @@ bij
 bin
 biq
 sAF
-qXt
+bit
 lfx
 uFr
 uHP
 kJd
-vJi
+wwK
 wzY
 nhk
 lfx
@@ -66340,12 +66343,12 @@ qXt
 qXt
 bir
 qXt
-qXt
+bit
 lfx
 lfx
 lfx
 lfx
-isO
+wwK
 wUN
 rgq
 lfx
@@ -66597,12 +66600,12 @@ qXt
 epW
 bis
 bix
-qiT
+biu
 ryI
-bin
-bix
+epW
+sAF
 tRP
-tyv
+wwK
 ygm
 osN
 lfx
@@ -66768,7 +66771,7 @@ gfQ
 gfQ
 npo
 aiv
-aiy
+heA
 heA
 heA
 aiz
