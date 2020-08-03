@@ -7353,6 +7353,8 @@
 "awh" = (
 /obj/structure/closet/toolcloset,
 /obj/structure/cable,
+/obj/structure/cable/layer3,
+/obj/structure/cable_bridge,
 /turf/open/floor/plasteel,
 /area/engine/engineering)
 "awk" = (
@@ -10749,15 +10751,15 @@
 /turf/open/floor/wood,
 /area/library)
 "aIM" = (
-/obj/machinery/power/terminal,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
 	dir = 8
 	},
-/obj/structure/cable,
-/obj/structure/cable/layer1,
+/obj/structure/cable/layer3,
+/obj/machinery/power/terminal,
+/obj/structure/cable_bridge,
 /turf/open/floor/plasteel/showroomfloor,
 /area/engine/gravity_generator)
 "aIN" = (
@@ -24841,7 +24843,11 @@
 /turf/open/floor/plasteel,
 /area/security/prison)
 "dNN" = (
-/obj/machinery/power/smes/engineering,
+/obj/machinery/power/smes/engineering{
+	charge = 2e+006;
+	input_level = 75000;
+	output_level = 75000
+	},
 /obj/structure/sign/poster/official/random{
 	pixel_x = 32
 	},
@@ -32946,10 +32952,10 @@
 /turf/open/floor/plating,
 /area/maintenance/aft)
 "lYM" = (
+/obj/structure/cable,
 /obj/machinery/power/emitter/welded{
 	dir = 1
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/engine/engineering)
 "lZk" = (
@@ -34875,7 +34881,7 @@
 /area/science/mixing)
 "nRg" = (
 /obj/effect/spawner/structure/window/plasma/reinforced,
-/obj/structure/cable/layer1,
+/obj/structure/cable/layer3,
 /turf/open/floor/plating,
 /area/engine/gravity_generator)
 "nRl" = (
@@ -38897,8 +38903,12 @@
 /turf/open/floor/plasteel,
 /area/quartermaster/storage)
 "rUN" = (
-/obj/machinery/power/smes/engineering,
 /obj/structure/cable,
+/obj/machinery/power/smes/engineering{
+	charge = 2e+006;
+	input_level = 75000;
+	output_level = 75000
+	},
 /turf/open/floor/plasteel/dark,
 /area/engine/engine_smes)
 "rVs" = (
@@ -40213,12 +40223,12 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
 "tsz" = (
-/obj/machinery/power/smes{
-	charge = 5e+006
-	},
 /obj/machinery/airalarm{
 	dir = 1;
 	pixel_y = -24
+	},
+/obj/machinery/power/smes/engineering{
+	charge = 5e+006
 	},
 /obj/structure/cable,
 /turf/open/floor/plasteel/showroomfloor,
@@ -43404,14 +43414,12 @@
 /turf/open/floor/plasteel/dark/telecomms,
 /area/tcommsat/computer)
 "wvq" = (
-/obj/structure/closet/radiation,
+/obj/structure/cable,
 /obj/machinery/power/apc{
 	areastring = "/area/engine/gravity_generator";
-	dir = 8;
 	name = "Gravity Generator APC";
 	pixel_y = -25
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel/showroomfloor,
 /area/engine/gravity_generator)
 "wwa" = (
@@ -57695,7 +57703,7 @@ qoc
 iEq
 xlm
 iEq
-mXL
+lYM
 sps
 ayu
 uWF
@@ -58723,7 +58731,7 @@ qoc
 iEq
 vAe
 iEq
-lYM
+mXL
 pVl
 gas
 avJ
@@ -59754,7 +59762,7 @@ ayo
 ayo
 lRA
 vkU
-nRg
+rHu
 awE
 wvq
 bZw
