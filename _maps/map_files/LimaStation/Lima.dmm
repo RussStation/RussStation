@@ -2954,7 +2954,6 @@
 	},
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
 "ahl" = (
@@ -3278,7 +3277,6 @@
 	dir = 1;
 	pixel_y = 1
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
 "aii" = (
@@ -5129,7 +5127,7 @@
 /area/engine/atmos)
 "anV" = (
 /obj/machinery/door/airlock/atmos{
-	name = "AtmosphericsSM";
+	name = "Atmospherics-Engine";
 	req_access_txt = "24"
 	},
 /obj/machinery/door/firedoor,
@@ -7793,7 +7791,6 @@
 /obj/structure/sign/warning/securearea{
 	pixel_x = 32
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/hallway/primary/starboard)
 "axs" = (
@@ -7841,7 +7838,6 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3{
 	dir = 10
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/bridge)
 "axA" = (
@@ -17195,9 +17191,6 @@
 /obj/machinery/light_switch{
 	pixel_y = 28
 	},
-/obj/machinery/atmospherics/components/unary/vent_pump/on{
-	dir = 8
-	},
 /turf/open/floor/plasteel/dark,
 /area/science/mixing)
 "bbt" = (
@@ -24076,7 +24069,7 @@
 "cYZ" = (
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Engineering-Atmospherics";
-	req_access_txt = "11;24"
+	req_access_txt = "10;24"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
@@ -24878,7 +24871,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/security/prison)
 "dNN" = (
@@ -28003,7 +27995,6 @@
 "gGt" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
 "gJB" = (
@@ -28106,7 +28097,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/security/prison)
 "gPA" = (
@@ -28991,16 +28981,17 @@
 /turf/open/floor/plasteel,
 /area/science/storage)
 "hHQ" = (
-/obj/structure/chair{
-	dir = 4
+/obj/machinery/door/airlock/command/glass{
+	name = "Bridge";
+	req_access_txt = "19"
 	},
-/obj/structure/window/reinforced{
-	dir = 1;
-	pixel_y = 1
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
 	},
-/obj/structure/cable,
-/turf/open/floor/plasteel/dark,
-/area/security/prison)
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
+/turf/open/floor/plasteel,
+/area/bridge)
 "hHX" = (
 /obj/structure/lattice/catwalk,
 /turf/open/space,
@@ -30439,7 +30430,6 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
 "jmh" = (
@@ -34549,7 +34539,6 @@
 	name = "Perma Camera";
 	network = list("ss13","prison")
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
 "nxK" = (
@@ -35552,7 +35541,6 @@
 	name = "bridge blast door"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "oyM" = (
@@ -36705,7 +36693,6 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
 	dir = 10
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/bridge)
 "pEl" = (
@@ -40137,7 +40124,6 @@
 "tgo" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
-/obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
 "thj" = (
@@ -41003,7 +40989,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/security/prison)
 "tZa" = (
@@ -41333,16 +41318,11 @@
 /turf/open/floor/engine,
 /area/engine/supermatter)
 "uoC" = (
-/obj/effect/turf_decal/tile/blue{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
-	},
-/obj/structure/cable,
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /turf/open/floor/plasteel,
-/area/hallway/primary/starboard)
+/area/bridge)
 "uoG" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer3{
 	dir = 8
@@ -43753,15 +43733,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/quartermaster/warehouse)
-"wGu" = (
-/obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/bridge)
 "wGX" = (
 /obj/structure/girder,
 /turf/open/floor/plating,
@@ -45047,17 +45018,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/hydroponics)
-"xNB" = (
-/obj/structure/chair{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1;
-	pixel_y = 1
-	},
-/obj/structure/cable,
-/turf/open/floor/plasteel/dark,
-/area/security/prison)
 "xOo" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
@@ -58276,7 +58236,7 @@ iaO
 yeE
 fdq
 afW
-hHQ
+aid
 aid
 fdq
 aky
@@ -58790,7 +58750,7 @@ wWY
 vlW
 fdq
 ekL
-xNB
+xQD
 xQD
 fdq
 aeA
@@ -80180,14 +80140,14 @@ ayF
 sEy
 gaZ
 aAk
-uoC
+aTs
 axp
-wGu
+axv
 axz
 oyc
 pEc
-jdd
-jSa
+hHQ
+uoC
 jym
 aRb
 hxz
