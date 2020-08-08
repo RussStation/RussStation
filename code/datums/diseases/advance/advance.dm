@@ -33,7 +33,7 @@
 	var/mutable = TRUE //set to FALSE to prevent most in-game methods of altering the disease via virology
 	var/oldres	//To prevent setting new cures unless resistance changes.
 
-	// The order goes from easy to cure to hard to cure. Keep in mind that sentient diseases pick two cures from tier 6 and up, ensure they wont react away in bodies.
+	// The order goes from easy to cure to hard to cure. Keep in mind that sentient diseases pick two cures from tier 6 and up, ensure they won't react away in bodies.
 	var/static/list/advance_cures = 	list(
 									list(	// level 1
 										/datum/reagent/copper, /datum/reagent/silver, /datum/reagent/iodine, /datum/reagent/iron, /datum/reagent/carbon
@@ -248,7 +248,7 @@
 			SetSpread(DISEASE_SPREAD_BLOOD)
 
 		permeability_mod = max(CEILING(0.4 * properties["transmittable"], 1), 1)
-		cure_chance = 15 - CLAMP(properties["resistance"], -5, 5) // can be between 10 and 20
+		cure_chance = 15 - clamp(properties["resistance"], -5, 5) // can be between 10 and 20
 		stage_prob = max(properties["stage_rate"], 2)
 		SetSeverity(properties["severity"])
 		GenerateCure(properties)
@@ -303,7 +303,7 @@
 // Will generate a random cure, the more resistance the symptoms have, the harder the cure.
 /datum/disease/advance/proc/GenerateCure()
 	if(properties && properties.len)
-		var/res = CLAMP(properties["resistance"] - (symptoms.len / 2), 1, advance_cures.len)
+		var/res = clamp(properties["resistance"] - (symptoms.len / 2), 1, advance_cures.len)
 		if(res == oldres)
 			return
 		cures = list(pick(advance_cures[res]))

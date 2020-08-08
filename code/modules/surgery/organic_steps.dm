@@ -24,7 +24,9 @@
 			display_results(user, target, "<span class='notice'>Blood pools around the incision in [H]'s [parse_zone(target_zone)].</span>",
 				"<span class='notice'>Blood pools around the incision in [H]'s [parse_zone(target_zone)].</span>",
 				"")
-			H.bleed_rate += 3
+			var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
+			if(BP)
+				BP.generic_bleedstacks += 10
 	return ..()
 
 /datum/surgery_step/incise/nobleed //silly friendly!
@@ -36,7 +38,7 @@
 		"<span class='notice'>[user] begins to <i>carefully</i> make an incision in [target]'s [parse_zone(target_zone)].</span>")
 
 /datum/surgery_step/incise/nobleed/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results)
-	user?.mind.adjust_experience(/datum/skill/medical, experience_given)
+	user?.mind.adjust_experience(/datum/skill/healing, experience_given)
 	return TRUE
 
 //clamp bleeders
@@ -55,13 +57,15 @@
 		target.heal_bodypart_damage(20,0)
 	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
-		H.bleed_rate = max( (H.bleed_rate - 3), 0)
+		var/obj/item/bodypart/BP = H.get_bodypart(target_zone)
+		if(BP)
+			BP.generic_bleedstacks -= 3
 	return ..()
 
 //retract skin
 /datum/surgery_step/retract_skin
 	name = "retract skin"
-	implements = list(TOOL_RETRACTOR = 100, TOOL_SCREWDRIVER = 45, TOOL_WIRECUTTER = 35)
+	implements = list(TOOL_RETRACTOR = 100, TOOL_SCREWDRIVER = 45, TOOL_WIRECUTTER = 35, /obj/item/stack/rods = 35)
 	time = 24
 
 /datum/surgery_step/retract_skin/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -94,7 +98,9 @@
 		target.heal_bodypart_damage(45,0)
 	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
-		H.bleed_rate = max( (H.bleed_rate - 3), 0)
+		var/obj/item/bodypart/BP = H.get_bodypart(target_zone)
+		if(BP)
+			BP.generic_bleedstacks -= 3
 	return ..()
 
 
@@ -103,7 +109,7 @@
 /datum/surgery_step/saw
 	name = "saw bone"
 	implements = list(TOOL_SAW = 100,/obj/item/melee/arm_blade = 75,
-	/obj/item/twohanded/fireaxe = 50, /obj/item/hatchet = 35, /obj/item/kitchen/knife/butcher = 25)
+	/obj/item/fireaxe = 50, /obj/item/hatchet = 35, /obj/item/kitchen/knife/butcher = 25, /obj/item = 20) //20% success (sort of) with any sharp item with a force>=10
 	time = 54
 
 /datum/surgery_step/saw/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -111,8 +117,13 @@
 		"<span class='notice'>[user] begins to saw through the bone in [target]'s [parse_zone(target_zone)].</span>",
 		"<span class='notice'>[user] begins to saw through the bone in [target]'s [parse_zone(target_zone)].</span>")
 
-/datum/surgery_step/saw/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
-	target.apply_damage(50, BRUTE, "[target_zone]")
+/datum/surgery_step/saw/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !(tool.get_sharpness() && (tool.force >= 10)))
+		return FALSE
+	return TRUE
+
+/datum/surgery_step/saw/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results)
+	target.apply_damage(50, BRUTE, "[target_zone]", wound_bonus=CANT_WOUND)
 	display_results(user, target, "<span class='notice'>You saw [target]'s [parse_zone(target_zone)] open.</span>",
 		"<span class='notice'>[user] saws [target]'s [parse_zone(target_zone)] open!</span>",
 		"<span class='notice'>[user] saws [target]'s [parse_zone(target_zone)] open!</span>")
@@ -121,7 +132,7 @@
 //drill bone
 /datum/surgery_step/drill
 	name = "drill bone"
-	implements = list(TOOL_DRILL = 100, /obj/item/screwdriver/power = 80, /obj/item/pickaxe/drill = 60, TOOL_SCREWDRIVER = 20)
+	implements = list(TOOL_DRILL = 100, /obj/item/screwdriver/power = 80, /obj/item/pickaxe/drill = 60, TOOL_SCREWDRIVER = 25, /obj/item/kitchen/spoon = 20)
 	time = 30
 
 /datum/surgery_step/drill/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)

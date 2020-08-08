@@ -8,7 +8,7 @@
 	anchored = TRUE
 	light_range = 3
 	var/movechance = 70
-	var/obj/item/assembly/signaler/anomaly/aSignal
+	var/obj/item/assembly/signaler/anomaly/aSignal = /obj/item/assembly/signaler/anomaly
 	var/area/impact_area
 
 	var/lifespan = 990
@@ -26,8 +26,7 @@
 	if (!impact_area)
 		return INITIALIZE_HINT_QDEL
 
-	aSignal = new(src)
-	aSignal.name = "[name] core"
+	aSignal = new aSignal(src)
 	aSignal.code = rand(1,100)
 	aSignal.anomaly_type = type
 
@@ -88,6 +87,7 @@
 	icon_state = "shield2"
 	density = FALSE
 	var/boing = 0
+	aSignal = /obj/item/assembly/signaler/anomaly/grav
 
 /obj/effect/anomaly/grav/anomalyEffect()
 	..()
@@ -107,6 +107,7 @@
 				O.throw_at(target, 5, 10)
 
 /obj/effect/anomaly/grav/Crossed(atom/movable/AM)
+	. = ..()
 	gravShock(AM)
 
 /obj/effect/anomaly/grav/Bump(atom/A)
@@ -142,6 +143,7 @@
 	name = "flux wave anomaly"
 	icon_state = "electricity2"
 	density = TRUE
+	aSignal = /obj/item/assembly/signaler/anomaly/flux
 	var/canshock = FALSE
 	var/shockdamage = 20
 	var/explosive = TRUE
@@ -153,6 +155,7 @@
 		mobShock(M)
 
 /obj/effect/anomaly/flux/Crossed(atom/movable/AM)
+	. = ..()
 	mobShock(AM)
 
 /obj/effect/anomaly/flux/Bump(atom/A)
@@ -180,6 +183,7 @@
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "bluespace"
 	density = TRUE
+	aSignal = /obj/item/assembly/signaler/anomaly/bluespace
 
 /obj/effect/anomaly/bluespace/anomalyEffect()
 	..()
@@ -252,6 +256,7 @@
 	name = "pyroclastic anomaly"
 	icon_state = "mustard"
 	var/ticks = 0
+	aSignal = /obj/item/assembly/signaler/anomaly/pyro
 
 /obj/effect/anomaly/pyro/anomalyEffect()
 	..()
@@ -295,6 +300,7 @@
 	name = "vortex anomaly"
 	icon_state = "bhole3"
 	desc = "That's a nice station you have there. It'd be a shame if something happened to it."
+	aSignal = /obj/item/assembly/signaler/anomaly/vortex
 
 /obj/effect/anomaly/bhole/anomalyEffect()
 	..()
@@ -313,7 +319,7 @@
 			if(target && !target.stat)
 				O.throw_at(target, 7, 5)
 		else
-			O.ex_act(EXPLODE_HEAVY)
+			SSexplosions.medobj += O
 
 /obj/effect/anomaly/bhole/proc/grav(r, ex_act_force, pull_chance, turf_removal_chance)
 	for(var/t = -r, t < r, t++)
@@ -332,7 +338,13 @@
 	if(prob(pull_chance))
 		for(var/obj/O in T.contents)
 			if(O.anchored)
-				O.ex_act(ex_act_force)
+				switch(ex_act_force)
+					if(EXPLODE_DEVASTATE)
+						SSexplosions.highobj += O
+					if(EXPLODE_HEAVY)
+						SSexplosions.medobj += O
+					if(EXPLODE_LIGHT)
+						SSexplosions.lowobj += O
 			else
 				step_towards(O,src)
 		for(var/mob/living/M in T.contents)
@@ -340,4 +352,10 @@
 
 	//Damaging the turf
 	if( T && prob(turf_removal_chance) )
-		T.ex_act(ex_act_force)
+		switch(ex_act_force)
+			if(EXPLODE_DEVASTATE)
+				SSexplosions.highturf += T
+			if(EXPLODE_HEAVY)
+				SSexplosions.medturf += T
+			if(EXPLODE_LIGHT)
+				SSexplosions.lowturf += T

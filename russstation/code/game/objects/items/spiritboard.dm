@@ -3,7 +3,7 @@
 	desc = "A wooden board that allows for communication with spirits and such things. Or that's what the company that makes them claims, at least."
 	icon = 'russstation/icons/obj/spiritboard.dmi'
 	icon_state = "lboard"
-	item_state = "clipboard"
+	inhand_icon_state = "clipboard"
 	w_class = 3.0
 	var/ready = 1
 	var/list/users = list()

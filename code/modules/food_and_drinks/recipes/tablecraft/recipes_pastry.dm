@@ -317,17 +317,15 @@ datum/crafting_recipe/food/donut/meat
 
 ////////////////////////////////////////////////DONKPOCCKETS////////////////////////////////////////////////
 
-/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/donkpocket
 	time = 15
 	name = "Donk-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 1
+		/obj/item/reagent_containers/food/snacks/meatball = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket
 	subcategory = CAT_PASTRY
-honk end */
 
 /datum/crafting_recipe/food/dankpocket
 	time = 15
@@ -344,7 +342,7 @@ honk end */
 	name = "Spicy-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 1, // honk -- meatball name change
+		/obj/item/reagent_containers/food/snacks/meatball = 1,
 		/obj/item/reagent_containers/food/snacks/grown/chili
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket/spicy
@@ -355,7 +353,7 @@ honk end */
 	name = "Teriyaki-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 1, // honk -- meatball name change
+		/obj/item/reagent_containers/food/snacks/meatball = 1,
 		/datum/reagent/consumable/soysauce = 3
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket/teriyaki
@@ -366,7 +364,7 @@ honk end */
 	name = "Pizza-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 1, // honk -- meatball name change
+		/obj/item/reagent_containers/food/snacks/meatball = 1,
 		/obj/item/reagent_containers/food/snacks/grown/tomato = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket/pizza
@@ -398,7 +396,7 @@ honk end */
 	name = "Gondola-pocket"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 1, // honk -- meatball name change
+		/obj/item/reagent_containers/food/snacks/meatball = 1,
 		/datum/reagent/tranquility = 5
 	)
 	result = /obj/item/reagent_containers/food/snacks/donkpocket/gondola
@@ -460,18 +458,16 @@ honk end */
 	result = /obj/item/reagent_containers/food/snacks/hotdog
 	subcategory = CAT_PASTRY
 
-/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/meatbun
 	name = "Meat bun"
 	reqs = list(
 		/datum/reagent/consumable/soysauce = 5,
 		/obj/item/reagent_containers/food/snacks/bun = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 1,
+		/obj/item/reagent_containers/food/snacks/meatball = 1,
 		/obj/item/reagent_containers/food/snacks/grown/cabbage = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/meatbun
 	subcategory = CAT_PASTRY
-honk end */
 
 /datum/crafting_recipe/food/khachapuri
 	name = "Khachapuri"
@@ -590,4 +586,14 @@ honk end */
 		/datum/reagent/consumable/honey = 5
 	)
 	result = /obj/item/reagent_containers/food/snacks/honeybun
+	subcategory = CAT_PASTRY
+
+/datum/crafting_recipe/food/cannoli
+	name = "Cannoli"
+	reqs = list(
+		/obj/item/reagent_containers/food/snacks/pastrybase = 1,
+		/datum/reagent/consumable/milk = 1,
+		/datum/reagent/consumable/sugar = 3,
+	)
+	result = /obj/item/reagent_containers/food/snacks/cannoli
 	subcategory = CAT_PASTRY
