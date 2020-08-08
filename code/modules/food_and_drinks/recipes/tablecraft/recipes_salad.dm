@@ -23,18 +23,16 @@
 	result = /obj/item/reagent_containers/food/snacks/salad/aesirsalad
 	subcategory = CAT_SALAD
 
-/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/validsalad
 	name = "Valid salad"
 	reqs = list(
 		/obj/item/reagent_containers/glass/bowl = 1,
 		/obj/item/reagent_containers/food/snacks/grown/ambrosia/vulgaris = 3,
 		/obj/item/reagent_containers/food/snacks/grown/potato = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 1
+		/obj/item/reagent_containers/food/snacks/meatball = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/salad/validsalad
 	subcategory = CAT_SALAD
-honk end */
 
 /datum/crafting_recipe/food/monkeysdelight
 	name = "Monkeys delight"

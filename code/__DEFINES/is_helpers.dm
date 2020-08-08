@@ -1,16 +1,6 @@
 // simple is_type and similar inline helpers
 
-#if DM_VERSION < 513
-#define islist(L) (istype(L, /list))
-#endif
-
 #define in_range(source, user) (get_dist(source, user) <= 1 && (get_step(source, 0)?:z) == (get_step(user, 0)?:z))
-
-#if DM_VERSION < 513
-#define ismovableatom(A) (istype(A, /atom/movable))
-#else
-#define ismovableatom(A) ismovable(A)
-#endif
 
 #define isatom(A) (isloc(A))
 
@@ -24,7 +14,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 	/turf/open/chasm,
 	/turf/open/lava,
 	/turf/open/water,
-	/turf/open/openspace
+	/turf/open/transparent/openspace
 	)))
 
 #define isgroundlessturf(A) (is_type_in_typecache(A, GLOB.turfs_without_ground))
@@ -50,6 +40,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define ischasm(A) (istype(A, /turf/open/chasm))
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
+
+#define istransparentturf(A) (istype(A, /turf/open/transparent))
 
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
@@ -163,6 +155,12 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isobj(A) istype(A, /obj) //override the byond proc because it returns true on children of /atom/movable that aren't objs
 
 #define isitem(A) (istype(A, /obj/item))
+
+#define isgrenade(A) (istype(A, /obj/item/grenade))
+
+#define islandmine(A) (istype(A, /obj/effect/mine))
+
+#define isammocasing(A) (istype(A, /obj/item/ammo_casing))
 
 #define isidcard(I) (istype(I, /obj/item/card/id))
 

@@ -486,7 +486,7 @@
 		oldT.change_area(old_area, underlying_area)
 		oldT.empty(FALSE)
 
-		// Here we locate the bottomost shuttle boundary and remove all turfs above it
+		// Here we locate the bottommost shuttle boundary and remove all turfs above it
 		var/list/baseturf_cache = oldT.baseturfs
 		for(var/k in 1 to length(baseturf_cache))
 			if(ispath(baseturf_cache[k], /turf/baseturf_skipover/shuttle))
@@ -832,13 +832,13 @@
 		var/change_per_engine = (1 - ENGINE_COEFF_MIN) / ENGINE_DEFAULT_MAXSPEED_ENGINES // 5 by default
 		if(initial_engines > 0)
 			change_per_engine = (1 - ENGINE_COEFF_MIN) / initial_engines // or however many it had
-		return CLAMP(1 - delta * change_per_engine,ENGINE_COEFF_MIN,ENGINE_COEFF_MAX)
+		return clamp(1 - delta * change_per_engine,ENGINE_COEFF_MIN,ENGINE_COEFF_MAX)
 	if(new_value < initial_engines)
 		var/delta = initial_engines - new_value
 		var/change_per_engine = 1 //doesn't really matter should not be happening for 0 engine shuttles
 		if(initial_engines > 0)
 			change_per_engine = (ENGINE_COEFF_MAX -  1) / initial_engines //just linear drop to max delay
-		return CLAMP(1 + delta * change_per_engine,ENGINE_COEFF_MIN,ENGINE_COEFF_MAX)
+		return clamp(1 + delta * change_per_engine,ENGINE_COEFF_MIN,ENGINE_COEFF_MAX)
 
 
 /obj/docking_port/mobile/proc/in_flight()

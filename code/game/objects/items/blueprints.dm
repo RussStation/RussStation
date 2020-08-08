@@ -33,6 +33,10 @@
 	if(href_list["create_area"])
 		if(in_use)
 			return
+		var/area/A = get_area(usr)
+		if(A.noteleport)
+			to_chat(usr, "<span class='warning'>You cannot edit restricted areas.</span>")
+			return
 		in_use = TRUE
 		create_area(usr)
 		in_use = FALSE
@@ -186,7 +190,7 @@
 	if(!str || !length(str) || str==prevname) //cancel
 		return
 	if(length(str) > 50)
-		to_chat(usr, "<span class='warning'>The given name is too long.  The area's name is unchanged.</span>")
+		to_chat(usr, "<span class='warning'>The given name is too long. The area's name is unchanged.</span>")
 		return
 
 	rename_area(A, str)

@@ -395,7 +395,7 @@ Difficulty: Medium
 	desc = "A glowing giant heavy blade that grows and slightly shrinks in size depending on the wielder's strength."
 	icon = 'russstation/icons/obj/items_and_weapons.dmi'
 	icon_state = "sword_of_the_forsaken"
-	item_state = "sword_of_the_forsaken"
+	inhand_icon_state = "sword_of_the_forsaken"
 	lefthand_file = 'russstation/icons/mob/inhands/item_lefthand.dmi'
 	righthand_file = 'russstation/icons/mob/inhands/item_righthand.dmi'
 	w_class = WEIGHT_CLASS_HUGE

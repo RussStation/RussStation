@@ -52,7 +52,7 @@
 		if(light_amount > 0.2) //if there's enough light, heal
 			H.heal_overall_damage(2,1, 0, BODYPART_ORGANIC)
 		if(H.radiation > 0)
-			var/rads = CLAMP(H.radiation, 0, 1000)
+			var/rads = clamp(H.radiation, 0, 1000)
 			rads = rads/250
 			H.heal_overall_damage(rads, 0, 0, BODYPART_ORGANIC)
 			H.adjustToxLoss(-rads)

@@ -5,7 +5,7 @@
 /obj/item/stack/ore/adamantine
 	name = "adamantine ore"
 	icon_state = "ore"
-	item_state = "ore"
+	inhand_icon_state = "ore"
 	singular_name = "adamantine ore chunk"
 	points = 40
 	mine_experience = 10

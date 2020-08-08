@@ -13,6 +13,9 @@
 	px_y = -8
 	stam_damage_coeff = 1
 	max_stamina_damage = 100
+	wound_resistance = 10
+	specific_locations = list("left eyebrow", "cheekbone", "neck", "throat", "jawline", "entire face")
+	scars_covered_by_clothes = FALSE
 
 	var/mob/living/brain/brainmob = null //The current occupant.
 	var/obj/item/organ/brain/brain = null //The brain organ
@@ -147,6 +150,8 @@
 			if(S.hair_color)
 				if(S.hair_color == "mutcolor")
 					facial_hair_color = H.dna.features["mcolor"]
+				else if(hair_color == "fixedmutcolor")
+					facial_hair_color = "#[S.fixed_mut_color]"
 				else
 					facial_hair_color = S.hair_color
 			else
@@ -162,6 +167,8 @@
 			if(S.hair_color)
 				if(S.hair_color == "mutcolor")
 					hair_color = H.dna.features["mcolor"]
+				else if(hair_color == "fixedmutcolor")
+					hair_color = "#[S.fixed_mut_color]"
 				else
 					hair_color = S.hair_color
 			else

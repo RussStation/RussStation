@@ -39,7 +39,7 @@
 	name = "wooden mug"
 	desc = "A mug for serving hearty brews."
 	icon_state = "manlydorfglass"
-	item_state = "coffee"
+	inhand_icon_state = "coffee"
 	spillable = 1
 	isGlass = FALSE
 

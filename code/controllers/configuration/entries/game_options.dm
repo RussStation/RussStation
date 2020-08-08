@@ -85,6 +85,11 @@
 	integer = FALSE
 	min_val = 1
 
+/datum/config_entry/number/ecult_scaling_coeff	//how much does the amount of players get divided by to determine e_cult
+	config_entry_value = 6
+	integer = FALSE
+	min_val = 1
+
 /datum/config_entry/number/security_scaling_coeff	//how much does the amount of players get divided by to determine open security officer positions
 	config_entry_value = 8
 	integer = FALSE
@@ -204,6 +209,9 @@
 
 /datum/config_entry/flag/ooc_during_round
 
+/datum/config_entry/number/commendations
+	integer = FALSE
+
 /datum/config_entry/flag/emojis
 
 /datum/config_entry/keyed_list/multiplicative_movespeed
@@ -243,8 +251,18 @@
 /datum/config_entry/number/movedelay/run_delay
 	integer = FALSE
 
+/datum/config_entry/number/movedelay/run_delay/ValidateAndSet()
+	. = ..()
+	var/datum/movespeed_modifier/config_walk_run/M = get_cached_movespeed_modifier(/datum/movespeed_modifier/config_walk_run/run)
+	M.sync()
+
 /datum/config_entry/number/movedelay/walk_delay
 	integer = FALSE
+
+/datum/config_entry/number/movedelay/walk_delay/ValidateAndSet()
+	. = ..()
+	var/datum/movespeed_modifier/config_walk_run/M = get_cached_movespeed_modifier(/datum/movespeed_modifier/config_walk_run/walk)
+	M.sync()
 
 /////////////////////////////////////////////////Outdated move delay
 /datum/config_entry/number/outdated_movedelay
@@ -321,6 +339,11 @@
 
 /datum/config_entry/number/lavaland_budget
 	config_entry_value = 60
+	integer = FALSE
+	min_val = 0
+
+/datum/config_entry/number/icemoon_budget
+	config_entry_value = 90
 	integer = FALSE
 	min_val = 0
 

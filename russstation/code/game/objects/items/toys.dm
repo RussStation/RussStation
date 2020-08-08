@@ -3,7 +3,7 @@
 	desc = "Keep it on yer hip."
 	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "russianrevolver"
-	item_state = "gun"
+	inhand_icon_state = "gun"
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
 	flags_1 =  CONDUCT_1

@@ -8,7 +8,7 @@
 	parts = list(/obj/item/mold_result/blade = 1)
 	time = 40
 	category = CAT_SMITH
-	
+
 
 /datum/crafting_recipe/pickaxe
 	name = "Forged Pickaxe"
@@ -22,7 +22,7 @@
 /datum/crafting_recipe/shovel
 	name = "Forged Shovel"
 	result = /obj/item/shovel/smithed_shovel
-	reqs = list(/obj/item/grown/log = 1, 
+	reqs = list(/obj/item/grown/log = 1,
 				/obj/item/mold_result/shovel_head = 1)
 	parts = list(/obj/item/mold_result/shovel_head = 1)
 	time = 40
@@ -31,7 +31,7 @@
 /datum/crafting_recipe/knife
 	name = "Forged Knife"
 	result = /obj/item/kitchen/knife/smelted_knife
-	reqs = list(/obj/item/grown/log = 1, 
+	reqs = list(/obj/item/grown/log = 1,
 				/obj/item/mold_result/knife_head = 1)
 	parts = list(/obj/item/mold_result/knife_head = 1)
 	time = 40
@@ -39,8 +39,8 @@
 
 /datum/crafting_recipe/war_hammer
 	name = "Forged War Hammer"
-	result = /obj/item/twohanded/smithed_war_hammer
-	reqs = list(/obj/item/grown/log = 1, 
+	result = /obj/item/smithed_war_hammer
+	reqs = list(/obj/item/grown/log = 1,
 				/obj/item/mold_result/war_hammer_head = 1)
 	parts = list(/obj/item/mold_result/war_hammer_head = 1)
 	time = 40

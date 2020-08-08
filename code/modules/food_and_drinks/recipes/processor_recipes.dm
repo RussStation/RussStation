@@ -5,11 +5,9 @@
 	var/required_machine = /obj/machinery/processor
 	var/multiplier = 1 //This multiplies the number of products produced per object processed.
 
-/* honk start -- Contains "faggot"
 /datum/food_processor_process/meat
 	input = /obj/item/reagent_containers/food/snacks/meat/slab
-	output = /obj/item/reagent_containers/food/snacks/faggot
-honk end */
+	output = /obj/item/reagent_containers/food/snacks/meatball
 
 /datum/food_processor_process/bacon
 	input = /obj/item/reagent_containers/food/snacks/meat/rawcutlet

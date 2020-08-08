@@ -65,7 +65,7 @@
 		return
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "roulette", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, ui_key, "Roulette", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 /obj/machinery/roulette/ui_data(mob/user)
@@ -95,7 +95,7 @@
 			anchored = !anchored
 			. = TRUE
 		if("ChangeBetAmount")
-			chosen_bet_amount = CLAMP(text2num(params["amount"]), 10, 500)
+			chosen_bet_amount = clamp(text2num(params["amount"]), 10, 500)
 			. = TRUE
 		if("ChangeBetType")
 			chosen_bet_type = params["type"]
@@ -289,7 +289,7 @@
 		if(ROULETTE_BET_1TO18)
 			return (rolled_number >= 1 && rolled_number <= 18) //between 1 to 18
 		if(ROULETTE_BET_19TO36)
-			return rolled_number > 18 //between 19 to 36, no need to check bounds because we wont go higher anyways
+			return rolled_number > 18 //between 19 to 36, no need to check bounds because we won't go higher anyways
 		if(ROULETTE_BET_BLACK)
 			return "black" == numbers["[rolled_number]"]//Check if our number is black in the numbers dict
 		if(ROULETTE_BET_RED)

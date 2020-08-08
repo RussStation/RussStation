@@ -1,13 +1,13 @@
 /obj/item/clothing/shoes/cowboy/pink
 	name = "pink cowboy boots"
 	icon = 'russstation/icons/obj/clothing/shoes.dmi'
-	mob_overlay_icon = 'russstation/icons/mob/feet.dmi'
+	worn_icon = 'russstation/icons/mob/feet.dmi'
 	icon_state = "cowboy_pink"
 
 /obj/item/clothing/shoes/cowboy/clown
 	name = "clownboy boots"
 	icon = 'russstation/icons/obj/clothing/shoes.dmi'
-	mob_overlay_icon = 'russstation/icons/mob/feet.dmi'
+	worn_icon = 'russstation/icons/mob/feet.dmi'
 	icon_state = "cowboy_clown"
 	slowdown = SHOES_SLOWDOWN+1
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes/clown
