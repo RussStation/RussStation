@@ -14,5 +14,5 @@
 			if(!istype(contents, /datum/reagent/consumable/ethanol))
 				reagents.clear_reagents()
 				playsound(src,'sound/weapons/sear.ogg',50)
-				visible_message("<span class='warning'>The [name] purges the contents of its chamber!"</span>)
+				visible_message("<span class='warning'>The [name] purges the contents of its chamber!</span>")
 				return
