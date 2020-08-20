@@ -6,7 +6,7 @@
 				/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass = 1,
 				/obj/item/reagent_containers/syringe = 1)
 	parts = list(/obj/item/gun/ballistic/shotgun = 1)
-	time = 40
+	time = 4 SECONDS
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
 	
