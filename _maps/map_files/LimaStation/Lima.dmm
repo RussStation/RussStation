@@ -1511,9 +1511,6 @@
 /turf/open/floor/plasteel,
 /area/construction/mining/aux_base)
 "adF" = (
-/obj/machinery/airalarm{
-	pixel_y = 24
-	},
 /obj/structure/chair/sofa/left{
 	dir = 2
 	},
@@ -29991,13 +29988,13 @@
 "iJz" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
-/obj/structure/cable,
 /obj/machinery/power/apc{
-	areastring = "/area/medical/psychology;
+	areastring = "/area/medical/psychology";
 	dir = 8;
-	name = "Psychologist's Office APC";
-	pixel_x = -25
+	name = "Psychology APC";
+	pixel_x = -28
 	},
+/obj/structure/cable,
 /turf/open/floor/wood,
 /area/medical/psychology)
 "iJR" = (
@@ -32029,9 +32026,11 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/aft)
 "kUd" = (
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/quartermaster/qm)
+/obj/structure/closet,
+/obj/effect/spawner/lootdrop/maintenance/three,
+/obj/item/toy/plush/moth,
+/turf/open/floor/plating,
+/area/maintenance/starboard/aft)
 "kUl" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
 	dir = 10
@@ -33125,16 +33124,6 @@
 	},
 /turf/open/floor/engine/co2,
 /area/engine/atmos)
-"mdn" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/sink/kitchen{
-	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
-	dir = 4;
-	name = "old sink";
-	pixel_x = -12
-	},
-/turf/open/floor/plasteel,
-/area/maintenance/disposal/incinerator)
 "mdr" = (
 /obj/structure/chair{
 	dir = 8
@@ -36374,6 +36363,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/heads/chief)
+"pmJ" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating{
+	icon_state = "panelscorched"
+	},
+/area/maintenance/port/aft)
 "pmM" = (
 /obj/effect/turf_decal/delivery,
 /obj/structure/closet/wardrobe/miner,
@@ -36626,6 +36621,16 @@
 /obj/structure/rack,
 /turf/open/floor/plasteel,
 /area/engine/atmos)
+"pwM" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sink/kitchen{
+	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
+	dir = 4;
+	name = "old sink";
+	pixel_x = -12
+	},
+/turf/open/floor/plasteel,
+/area/maintenance/disposal/incinerator)
 "pwN" = (
 /obj/effect/spawner/lootdrop/grille_or_trash,
 /turf/open/floor/plating,
@@ -36865,12 +36870,9 @@
 /turf/open/floor/plasteel/showroomfloor,
 /area/science/lab)
 "pJH" = (
-/obj/structure/disposalpipe/segment,
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating,
-/area/maintenance/port/aft)
+/turf/open/floor/plasteel,
+/area/quartermaster/qm)
 "pJK" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer3{
 	dir = 1
@@ -40114,6 +40116,9 @@
 /turf/open/floor/plasteel/dark,
 /area/science/robotics/lab)
 "tcD" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
@@ -40218,9 +40223,7 @@
 /area/science/xenobiology)
 "tiJ" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating{
-	icon_state = "panelscorched"
-	},
+/turf/open/floor/plating,
 /area/maintenance/port/aft)
 "tkv" = (
 /obj/machinery/light{
@@ -61692,7 +61695,7 @@ myA
 dYm
 aYa
 niL
-mdn
+pwM
 aVT
 aVY
 aYr
@@ -61945,7 +61948,7 @@ vSM
 fsz
 err
 eLR
-tiJ
+pmJ
 dYm
 aYb
 sRJ
@@ -62712,7 +62715,7 @@ epW
 epW
 uVB
 hwE
-pJH
+tcD
 tPk
 tPk
 biC
@@ -63226,8 +63229,8 @@ hwE
 hwE
 bib
 xbN
-tcD
-tcD
+tiJ
+tiJ
 cBV
 gfQ
 gfQ
@@ -63484,7 +63487,7 @@ cBV
 cBV
 cxU
 sAF
-tcD
+tiJ
 cBV
 gfQ
 gfQ
@@ -68620,7 +68623,7 @@ cXn
 biT
 acm
 aGR
-kUd
+pJH
 bid
 bim
 iPv
@@ -69134,7 +69137,7 @@ eXu
 gmw
 oTw
 qjs
-kUd
+pJH
 bif
 nZJ
 ebN
@@ -88407,7 +88410,7 @@ ioj
 rNE
 qEC
 qEC
-uze
+kUd
 fbP
 fbP
 fsz
