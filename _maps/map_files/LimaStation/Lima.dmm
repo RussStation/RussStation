@@ -15075,8 +15075,8 @@
 "aVS" = (
 /obj/machinery/portable_atmospherics/canister,
 /obj/machinery/atmospherics/components/unary/portables_connector/visible,
-/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/layer1,
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "aVT" = (
@@ -15119,8 +15119,8 @@
 /obj/item/radio/intercom{
 	pixel_x = 29
 	},
-/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/layer1,
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "aVY" = (
@@ -15152,8 +15152,8 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -32
 	},
-/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/layer1,
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "aWc" = (
@@ -15703,8 +15703,8 @@
 	pixel_x = -6;
 	pixel_y = -24
 	},
-/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/layer1,
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "aXB" = (
@@ -16099,8 +16099,8 @@
 /obj/machinery/atmospherics/pipe/simple/general/visible{
 	dir = 4
 	},
-/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/layer1,
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "aYr" = (
@@ -24398,7 +24398,7 @@
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/incinerator_atmos{
 	dir = 8
 	},
-/obj/structure/cable,
+/obj/structure/cable/layer1,
 /turf/open/floor/engine,
 /area/maintenance/disposal/incinerator)
 "dpb" = (
@@ -26419,7 +26419,7 @@
 	pixel_x = 38;
 	pixel_y = 6
 	},
-/obj/structure/cable,
+/obj/structure/cable/layer1,
 /turf/open/floor/engine,
 /area/maintenance/disposal/incinerator)
 "fpB" = (
@@ -31764,7 +31764,9 @@
 	dir = 4;
 	network = list("turbine")
 	},
-/obj/structure/cable,
+/obj/structure/cable/multilayer{
+	cable_layer = 3
+	},
 /turf/open/floor/engine/vacuum,
 /area/maintenance/disposal/incinerator)
 "kCB" = (
@@ -34269,8 +34271,8 @@
 	pixel_x = -32;
 	pixel_y = -32
 	},
-/obj/structure/cable,
 /obj/machinery/igniter/incinerator_atmos,
+/obj/structure/cable/layer1,
 /turf/open/floor/engine/vacuum,
 /area/maintenance/disposal/incinerator)
 "nkv" = (
@@ -36181,8 +36183,10 @@
 /obj/machinery/power/terminal{
 	dir = 1
 	},
-/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/multilayer{
+	cable_layer = 3
+	},
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "pfj" = (
@@ -38224,7 +38228,9 @@
 /obj/machinery/power/turbine{
 	luminosity = 2
 	},
-/obj/structure/cable,
+/obj/structure/cable/multilayer{
+	cable_layer = 3
+	},
 /turf/open/floor/engine/vacuum,
 /area/maintenance/disposal/incinerator)
 "rhH" = (
@@ -40157,7 +40163,7 @@
 "thj" = (
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/machinery/door/airlock/public/glass/incinerator/atmos_exterior,
-/obj/structure/cable,
+/obj/structure/cable/layer1,
 /turf/open/floor/engine,
 /area/maintenance/disposal/incinerator)
 "thl" = (
@@ -42152,8 +42158,8 @@
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
 "uXS" = (
-/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/layer1,
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
 "uYh" = (
@@ -42292,6 +42298,16 @@
 /obj/machinery/space_heater,
 /turf/open/floor/plating,
 /area/maintenance/starboard)
+"vhZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sink/kitchen{
+	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
+	dir = 4;
+	name = "old sink";
+	pixel_x = -12
+	},
+/turf/open/floor/plasteel,
+/area/maintenance/disposal/incinerator)
 "vit" = (
 /obj/machinery/portable_atmospherics/canister,
 /turf/open/floor/plasteel,
@@ -45468,16 +45484,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/security/courtroom)
-"yhv" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/sink/kitchen{
-	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
-	dir = 4;
-	name = "old sink";
-	pixel_x = -12
-	},
-/turf/open/floor/plasteel,
-/area/maintenance/disposal/incinerator)
 "yhG" = (
 /turf/closed/wall/r_wall,
 /area/ai_monitored/security/armory)
@@ -61670,7 +61676,7 @@ myA
 dYm
 aYa
 niL
-yhv
+vhZ
 aVT
 aVY
 aYr
