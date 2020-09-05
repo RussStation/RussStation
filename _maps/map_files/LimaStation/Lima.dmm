@@ -102,7 +102,7 @@
 /area/hydroponics)
 "aam" = (
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "aan" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/southleft{
@@ -711,7 +711,7 @@
 /obj/structure/chair/sofa/right,
 /obj/item/toy/plush/beeplushie,
 /turf/open/floor/carpet,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "abI" = (
 /obj/structure/window,
 /obj/structure/window{
@@ -1413,10 +1413,10 @@
 "adq" = (
 /obj/machinery/door/airlock/medical{
 	name = "Psychologist's Office";
-	req_access_txt = "5"
+	req_access_txt = "70"
 	},
 /turf/open/floor/plasteel,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "adr" = (
 /obj/structure/chair{
 	dir = 4
@@ -1517,8 +1517,9 @@
 /obj/structure/chair/sofa/left{
 	dir = 2
 	},
+/obj/item/toy/plush/moth,
 /turf/open/floor/carpet,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "adG" = (
 /obj/machinery/camera{
 	c_tag = "Ian's Room";
@@ -1547,13 +1548,14 @@
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
 /turf/open/floor/carpet,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "adL" = (
 /turf/closed/wall,
 /area/medical/pharmacy)
 "adM" = (
+/obj/effect/landmark/start/psychologist,
 /turf/open/floor/carpet,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "adN" = (
 /obj/item/radio/intercom{
 	pixel_x = -29
@@ -1568,7 +1570,7 @@
 	dir = 9
 	},
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "adP" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
@@ -2017,7 +2019,7 @@
 /obj/structure/table/wood,
 /obj/item/toy/plush/slimeplushie,
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "aeC" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -3889,12 +3891,13 @@
 "akf" = (
 /obj/machinery/door/airlock/medical{
 	name = "Psychologist's Office";
-	req_access_txt = "5"
+	req_access_txt = "70"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
+/obj/structure/cable,
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "akg" = (
 /obj/structure/bed/dogbed{
 	name = "Rabbit Bed"
@@ -17635,7 +17638,7 @@
 	network = list("ss13","medbay")
 	},
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "bcw" = (
 /obj/machinery/airalarm{
 	dir = 1;
@@ -22787,6 +22790,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
+/obj/structure/cable,
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
 "bFK" = (
@@ -23600,7 +23604,7 @@
 	dir = 6
 	},
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "cyP" = (
 /obj/machinery/camera{
 	c_tag = "Bridge";
@@ -29983,8 +29987,15 @@
 "iJz" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
+/obj/structure/cable,
+/obj/machinery/power/apc{
+	areastring = "/area/medical/psychology;
+	dir = 8;
+	name = "Psychologist's Office APC";
+	pixel_x = -25
+	},
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "iJR" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden/layer1{
 	dir = 1
@@ -30616,7 +30627,7 @@
 "jtk" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer3,
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "jtv" = (
 /obj/machinery/power/emitter,
 /turf/open/floor/plating,
@@ -35231,8 +35242,9 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3{
 	dir = 4
 	},
+/obj/effect/landmark/start/psychologist,
 /turf/open/floor/wood,
-/area/medical/medbay/central)
+/area/medical/psychology)
 "ocw" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
@@ -41013,6 +41025,16 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
+"tYi" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sink/kitchen{
+	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
+	dir = 4;
+	name = "old sink";
+	pixel_x = -12
+	},
+/turf/open/floor/plasteel,
+/area/maintenance/disposal/incinerator)
 "tYJ" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
 	dir = 8
@@ -42298,16 +42320,6 @@
 /obj/machinery/space_heater,
 /turf/open/floor/plating,
 /area/maintenance/starboard)
-"vhZ" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/sink/kitchen{
-	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
-	dir = 4;
-	name = "old sink";
-	pixel_x = -12
-	},
-/turf/open/floor/plasteel,
-/area/maintenance/disposal/incinerator)
 "vit" = (
 /obj/machinery/portable_atmospherics/canister,
 /turf/open/floor/plasteel,
@@ -61676,7 +61688,7 @@ myA
 dYm
 aYa
 niL
-vhZ
+tYi
 aVT
 aVY
 aYr
