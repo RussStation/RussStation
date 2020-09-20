@@ -422,6 +422,10 @@ SUBSYSTEM_DEF(ticker)
 				living.client.init_verbs()
 			livings += living
 	if(livings.len)
+		//honk - start egalitarian mode if low pop
+		if(livings.len < LOWPOP_THRESHOLD)
+			activate_egalitarian()
+		//honk end
 		addtimer(CALLBACK(src, .proc/release_characters, livings), 30, TIMER_CLIENT_TIME)
 
 /datum/controller/subsystem/ticker/proc/release_characters(list/livings)

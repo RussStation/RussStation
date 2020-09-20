@@ -359,6 +359,11 @@
 
 	GLOB.joined_player_list += character.ckey
 
+	//honk disable egalitarian mode if player count is high enough now
+	if(GLOB.joined_player_list.len >= LOWPOP_THRESHOLD && GLOB.egalitarian_mode_active)
+		SSticker.deactivate_egalitarian()
+	//honk end
+
 	if(CONFIG_GET(flag/allow_latejoin_antagonists) && humanc)	//Borgs aren't allowed to be antags. Will need to be tweaked if we get true latejoin ais.
 		if(SSshuttle.emergency)
 			switch(SSshuttle.emergency.mode)
