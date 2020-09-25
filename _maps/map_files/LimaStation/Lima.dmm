@@ -14704,8 +14704,8 @@
 /turf/open/floor/engine/o2,
 /area/engine/atmos)
 "aUj" = (
-/obj/machinery/atmospherics/pipe/simple/orange/visible{
-	dir = 6
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "O2 to Mix"
 	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
@@ -15098,7 +15098,10 @@
 	},
 /area/maintenance/port/aft)
 "aVP" = (
-/obj/machinery/atmospherics/pipe/simple/supply/visible,
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 1;
+	name = "Process to Waste"
+	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
 "aVQ" = (
@@ -15218,14 +15221,6 @@
 "aWq" = (
 /obj/machinery/atmospherics/pipe/simple/orange/visible,
 /obj/machinery/meter,
-/turf/open/floor/plasteel,
-/area/engine/atmos)
-"aWr" = (
-/obj/machinery/atmospherics/pipe/simple/green/visible,
-/obj/machinery/atmospherics/components/binary/pump{
-	dir = 8;
-	name = "O2 to Mix"
-	},
 /turf/open/floor/plasteel,
 /area/engine/atmos)
 "aWs" = (
@@ -15450,9 +15445,6 @@
 /turf/open/floor/plasteel,
 /area/engine/atmos)
 "aXl" = (
-/obj/machinery/atmospherics/pipe/manifold/cyan/visible{
-	dir = 1
-	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
 	},
@@ -15461,6 +15453,9 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/cyan/visible{
 	dir = 4
 	},
 /turf/open/floor/plasteel,
@@ -16755,13 +16750,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/ai_monitored/storage/eva)
-"baI" = (
-/obj/machinery/atmospherics/components/binary/pump{
-	dir = 1;
-	name = "Process to Waste"
-	},
-/turf/open/floor/plasteel,
-/area/engine/atmos)
 "baJ" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
@@ -60370,8 +60358,8 @@ fLc
 eqw
 fZe
 biN
-fZe
-baI
+aVP
+rnb
 aVd
 fLc
 hmf
@@ -60627,8 +60615,8 @@ aTV
 tpz
 kzA
 bby
-aVP
 aTV
+rnb
 vgb
 dKv
 vgb
@@ -61397,7 +61385,7 @@ kUA
 fLc
 aVJ
 fLc
-kUA
+aWN
 aUj
 aWw
 aXc
@@ -61655,7 +61643,7 @@ fLc
 aWg
 aUf
 hSQ
-aWr
+oQV
 hFH
 aWH
 aWM
@@ -61912,7 +61900,7 @@ fLc
 aWz
 aWf
 aXl
-aWV
+fLc
 aXI
 aZd
 err
