@@ -2,9 +2,6 @@
 	name = "dwarven"
 	icon = 'russstation/icons/misc/language.dmi'
 	desc = "The secret language of the Dwarves."
-	speech_verb = "says"
-	ask_verb = "inquires"
-	exclaim_verb = "tantrums"
 	key = "5"
 	flags = TONGUELESS_SPEECH
 	space_chance = 30

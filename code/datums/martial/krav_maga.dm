@@ -106,7 +106,7 @@
 	to_chat(A, "<span class='danger'>You pound [D] on the chest!</span>")
 	playsound(get_turf(A), 'sound/effects/hit_punch.ogg', 50, TRUE, -1)
 	if(D.losebreath <= 10)
-		D.losebreath = CLAMP(D.losebreath + 5, 0, 10)
+		D.losebreath = clamp(D.losebreath + 5, 0, 10)
 	D.adjustOxyLoss(10)
 	log_combat(A, D, "quickchoked")
 	return 1
@@ -118,7 +118,7 @@
 	playsound(get_turf(A), 'sound/effects/hit_punch.ogg', 50, TRUE, -1)
 	D.apply_damage(5, A.dna.species.attack_type)
 	if(D.silent <= 10)
-		D.silent = CLAMP(D.silent + 10, 0, 10)
+		D.silent = clamp(D.silent + 10, 0, 10)
 	log_combat(A, D, "neck chopped")
 	return 1
 
@@ -203,7 +203,7 @@
 	name = "krav maga gloves"
 	desc = "These gloves can teach you to perform Krav Maga using nanochips."
 	icon_state = "fightgloves"
-	item_state = "fightgloves"
+	inhand_icon_state = "fightgloves"
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
 	heat_protection = HANDS
@@ -214,7 +214,7 @@
 	name = "combat gloves plus"
 	desc = "These tactical gloves are fireproof and electrically insulated, and through the use of nanochip technology will teach you the martial art of krav maga."
 	icon_state = "black"
-	item_state = "blackgloves"
+	inhand_icon_state = "blackgloves"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	strip_delay = 80

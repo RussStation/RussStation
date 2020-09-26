@@ -3,19 +3,17 @@
 
 ////////////////////////////////////////////////SOUP////////////////////////////////////////////////
 
-/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/meatballsoup
 	name = "Meatball soup"
 	reqs = list(
 		/datum/reagent/water = 10,
 		/obj/item/reagent_containers/glass/bowl = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 1,
+		/obj/item/reagent_containers/food/snacks/meatball = 1,
 		/obj/item/reagent_containers/food/snacks/grown/carrot = 1,
 		/obj/item/reagent_containers/food/snacks/grown/potato = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/soup/meatball
 	subcategory = CAT_SOUP
-honk end */
 
 /datum/crafting_recipe/food/vegetablesoup
 	name = "Vegetable soup"

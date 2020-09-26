@@ -53,9 +53,21 @@
 /obj/machinery/chem_master/contents_explosion(severity, target)
 	..()
 	if(beaker)
-		beaker.ex_act(severity, target)
+		switch(severity)
+			if(EXPLODE_DEVASTATE)
+				SSexplosions.highobj += beaker
+			if(EXPLODE_HEAVY)
+				SSexplosions.medobj += beaker
+			if(EXPLODE_LIGHT)
+				SSexplosions.lowobj += beaker
 	if(bottle)
-		bottle.ex_act(severity, target)
+		switch(severity)
+			if(EXPLODE_DEVASTATE)
+				SSexplosions.highobj += bottle
+			if(EXPLODE_HEAVY)
+				SSexplosions.medobj += bottle
+			if(EXPLODE_LIGHT)
+				SSexplosions.lowobj += bottle
 
 /obj/machinery/chem_master/handle_atom_del(atom/A)
 	..()
@@ -147,7 +159,7 @@
 		var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
 		assets.send(user)
 
-		ui = new(user, src, ui_key, "chem_master", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, ui_key, "ChemMaster", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 //Insert our custom spritesheet css link into the html
@@ -246,7 +258,7 @@
 			amount = text2num(input(usr,
 				"Max 10. Buffer content will be split evenly.",
 				"How many to make?", 1))
-		amount = CLAMP(round(amount), 0, 10)
+		amount = clamp(round(amount), 0, 10)
 		if (amount <= 0)
 			return FALSE
 		// Get units per item
@@ -272,7 +284,7 @@
 				"Maximum [vol_each_max] units per item.",
 				"How many units to fill?",
 				vol_each_max))
-		vol_each = CLAMP(vol_each, 0, vol_each_max)
+		vol_each = clamp(vol_each, 0, vol_each_max)
 		if(vol_each <= 0)
 			return FALSE
 		// Get item name

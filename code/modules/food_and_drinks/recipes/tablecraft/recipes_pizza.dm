@@ -79,18 +79,16 @@
 	result = /obj/item/reagent_containers/food/snacks/pizza/dank
 	subcategory = CAT_PIZZA
 
-/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/sassysagepizza
 	name = "Sassysage pizza"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/pizzabread = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 3,
+		/obj/item/reagent_containers/food/snacks/meatball = 3,
 		/obj/item/reagent_containers/food/snacks/cheesewedge = 1,
 		/obj/item/reagent_containers/food/snacks/grown/tomato = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/pizza/sassysage
 	subcategory = CAT_PIZZA
-end honk */
 
 /datum/crafting_recipe/food/pineapplepizza
 	name = "Hawaiian pizza"

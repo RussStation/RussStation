@@ -24,21 +24,19 @@
 	name = "Spaghetti meatball"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 2 // honk -- Contains "faggot"
+		/obj/item/reagent_containers/food/snacks/meatball = 2
 	)
 	result = /obj/item/reagent_containers/food/snacks/spaghetti/meatballspaghetti
 	subcategory = CAT_SPAGHETTI
 
-/* honk start -- Contains "faggot"
 /datum/crafting_recipe/food/spesslaw
 	name = "Spesslaw"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti = 1,
-		/obj/item/reagent_containers/food/snacks/faggot = 4
+		/obj/item/reagent_containers/food/snacks/meatball = 4
 	)
 	result = /obj/item/reagent_containers/food/snacks/spaghetti/spesslaw
 	subcategory = CAT_SPAGHETTI
-honk end */
 
 /datum/crafting_recipe/food/beefnoodle
 	name = "Beef noodle"

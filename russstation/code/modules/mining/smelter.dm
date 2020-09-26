@@ -218,7 +218,7 @@
 	desc = "BONK."
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "hammer"
-	item_state = "sledgehammer"
+	inhand_icon_state = "sledgehammer"
 	force = 10
 	w_class = WEIGHT_CLASS_TINY
 
@@ -229,7 +229,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "claymore"
-	item_state = "claymore"
+	inhand_icon_state = "claymore"
 
 /obj/item/melee/smithed_sword/CheckParts(list/parts_list)
 	..()
@@ -251,7 +251,7 @@
 	desc = "A pickaxe made of unobtanium, you probably shouldn't be seeing this."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "spickaxe"
-	item_state = "spickaxe"
+	inhand_icon_state = "spickaxe"
 
 /obj/item/pickaxe/smithed_pickaxe/CheckParts(list/parts_list)
 	..()
@@ -274,7 +274,7 @@
 	desc = "A shovel made of unobtanium, you probably shouldn't be seeing this."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "shovel"
-	item_state = "shovel"
+	inhand_icon_state = "shovel"
 
 /obj/item/shovel/smithed_shovel/CheckParts(list/parts_list)
 	..()
@@ -300,7 +300,7 @@
 	desc = "A knife made of unobtainum, you probably shouldn't be seeing this."
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "knife_base"
-	item_state = "knife"
+	inhand_icon_state = "knife"
 
 /obj/item/kitchen/knife/smelted_knife/CheckParts(list/parts_list)
 	..()
@@ -317,19 +317,19 @@
 		sharpness = K.sharpness * 1
 
 //Forged War Hammer
-/obj/item/twohanded/smithed_war_hammer
+/obj/item/smithed_war_hammer
 	name = "unobtanium warhammer"
 	desc = "A warhammer made of unobtainium, you probably shouldn't be seeing this."
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "pickaxe_base"
-	item_state = "spickaxe"
+	inhand_icon_state = "spickaxe"
 	force = 11
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	throw_speed = 4
 	attack_verb = list("attacked","bludgeoned","pulped","gored","torn")
 
-/obj/item/twohanded/smithed_war_hammer/CheckParts(list/parts_list)
+/obj/item/smithed_war_hammer/CheckParts(list/parts_list)
 	..()
 	var/obj/item/mold_result/war_hammer_head/W = locate() in contents
 	if(W)
@@ -338,26 +338,25 @@
 		add_overlay(I)
 		smelted_material = new W.smelted_material.type()
 		name = "[W.material_type] warhammer"
-		if(W.blunt_bonus == TRUE)
-			force = W.attack_amt * 2
-			force_unwielded = W.attack_amt * 2
-			force_wielded = W.attack_amt * 4
-		else
-			force = W.attack_amt * 0.75
-			force_unwielded = W.attack_amt * 0.75
-			force_wielded = W.attack_amt * 2
+		var/mult = W.blunt_bonus ? 2 : 0.75
+		force = W.attack_amt * mult
 		desc = "A warhammer made of [W.material_type]."
 		armour_penetration = W.armour_penetration * 3
 		sharpness = W.sharpness
+
+/obj/item/smithed_war_hammer/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/two_handed, require_twohands=TRUE, force_multiplier=2)
+
 
 //Forged Armour
 /obj/item/clothing/suit/armor/vest/dwarf
 	name = "dwarfven armour"
 	desc = "Great for stopping sponges."
-	mob_overlay_icon = 'russstation/icons/mob/suit.dmi'
+	worn_icon = 'russstation/icons/mob/suit.dmi'
 	icon = 'russstation/icons/obj/clothing/suits.dmi'
 	icon_state = "dwarf"
-	item_state = "dwarf"
+	inhand_icon_state = "dwarf"
 	body_parts_covered = CHEST|GROIN|ARMS
 	cold_protection = CHEST|GROIN|ARMS
 	heat_protection = CHEST|GROIN|ARMS
@@ -383,10 +382,10 @@
 /obj/item/clothing/head/helmet/dwarf
 	name = "dwarven helm"
 	desc = "Protects the head from tantrums."
-	mob_overlay_icon = 'russstation/icons/mob/head.dmi'
+	worn_icon= 'russstation/icons/mob/head.dmi'
 	icon = 'russstation/icons/obj/clothing/hats.dmi'
 	icon_state = "dwarf"
-	item_state = "dwarf"
+	inhand_icon_state = "dwarf"
 	body_parts_covered = HEAD
 	species_exception = list(/datum/species/dwarf)
 
