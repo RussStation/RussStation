@@ -6158,17 +6158,13 @@
 /turf/open/floor/plasteel/showroomfloor,
 /area/security/warden)
 "arf" = (
-/obj/structure/disposalpipe/segment{
-	dir = 10
+/obj/structure/disposalpipe/sorting/mail/flip{
+	dir = 2;
+	name = "qm sorting disposal pipe";
+	sortType = 3
 	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
-	dir = 8
-	},
-/turf/open/floor/wood,
-/area/crew_quarters/bar)
+/turf/open/floor/plating,
+/area/maintenance/port/aft)
 "arg" = (
 /obj/structure/falsewall,
 /turf/open/floor/wood,
@@ -6306,7 +6302,6 @@
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
 "arx" = (
-/obj/structure/disposalpipe/segment,
 /obj/machinery/airalarm{
 	dir = 4;
 	pixel_x = -24
@@ -6371,6 +6366,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
 "arM" = (
@@ -6381,7 +6377,6 @@
 /turf/open/floor/plasteel,
 /area/security/courtroom)
 "arN" = (
-/obj/structure/disposalpipe/segment,
 /obj/machinery/vending/coffee,
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
@@ -6526,9 +6521,6 @@
 /turf/open/floor/plasteel,
 /area/storage/primary)
 "asr" = (
-/obj/structure/disposalpipe/segment{
-	dir = 5
-	},
 /obj/structure/closet/secure_closet/bar{
 	req_access_txt = "25"
 	},
@@ -6629,7 +6621,7 @@
 /area/security/brig)
 "asK" = (
 /obj/structure/disposalpipe/segment{
-	dir = 4
+	dir = 5
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
@@ -20160,28 +20152,24 @@
 	name = "Port Quarter Maintenance APC";
 	pixel_x = -25
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 5
-	},
 /obj/structure/cable,
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "bir" = (
 /obj/effect/landmark/event_spawn,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "bis" = (
+/obj/structure/cable,
 /obj/structure/disposalpipe/sorting/mail/flip{
 	dir = 8;
 	name = "disposals sorting disposal pipe";
 	sortType = 1
 	},
-/obj/structure/cable,
-/turf/open/floor/plating,
+/turf/open/floor/plating{
+	icon_state = "platingdmg1"
+	},
 /area/maintenance/port/aft)
 "biw" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer1{
@@ -20198,7 +20186,7 @@
 "biy" = (
 /obj/structure/grille/broken,
 /obj/structure/disposalpipe/segment{
-	dir = 5
+	dir = 4
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
@@ -27890,6 +27878,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3{
 	dir = 9
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 10
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
@@ -43136,6 +43127,7 @@
 	dir = 1
 	},
 /obj/effect/landmark/start/bartender,
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
 "uGd" = (
@@ -45832,19 +45824,6 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/hallway/primary/port)
-"xaw" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/disposalpipe/sorting/mail/flip{
-	dir = 8;
-	name = "qm sorting disposal pipe";
-	sortType = 3
-	},
-/turf/open/floor/plating{
-	icon_state = "platingdmg1"
-	},
-/area/maintenance/port/aft)
 "xaC" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
@@ -66968,9 +66947,9 @@ gfQ
 gfQ
 cBV
 bij
-bin
+iPv
 biq
-sAF
+xbN
 bhx
 lfx
 uFr
@@ -67227,7 +67206,7 @@ cBV
 bmp
 epW
 bir
-epW
+cxU
 bhx
 lfx
 lfx
@@ -67482,9 +67461,9 @@ gfQ
 gfQ
 cBV
 bmp
-bmp
+epW
+epW
 bis
-flV
 uYh
 ryI
 epW
@@ -67740,8 +67719,8 @@ olV
 olV
 fAM
 tVM
-bhx
 epW
+bhx
 fAC
 sAF
 kJU
@@ -67997,7 +67976,7 @@ fZQ
 olV
 olV
 olV
-xaw
+sAF
 biy
 eAi
 eAi
@@ -68254,8 +68233,8 @@ aGL
 aGX
 bik
 bio
+arf
 biz
-bhx
 awl
 eAi
 jhq
@@ -68511,8 +68490,8 @@ bhZ
 bic
 bil
 olV
-bho
-biz
+bhx
+epW
 epW
 eAi
 eAi
@@ -84889,7 +84868,7 @@ jJS
 kjH
 akL
 ihy
-arf
+tSN
 arx
 arN
 asr
