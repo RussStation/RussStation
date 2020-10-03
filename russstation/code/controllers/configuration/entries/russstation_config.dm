@@ -9,3 +9,8 @@
 	config_entry_value = 18000
 	integer = FALSE
 	min_val = 0
+
+/datum/config_entry/number/lowpop_threshold
+	config_entry_value = 8
+	integer = TRUE
+	min_val = 0

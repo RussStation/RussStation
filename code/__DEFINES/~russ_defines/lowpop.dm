@@ -1,1 +1,0 @@
-#define LOWPOP_THRESHOLD 8 // how many players are needed to disable egalitarian mode

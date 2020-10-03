@@ -360,7 +360,7 @@
 	GLOB.joined_player_list += character.ckey
 
 	//honk disable egalitarian mode if player count is high enough now
-	if(GLOB.joined_player_list.len >= LOWPOP_THRESHOLD && GLOB.egalitarian_mode_active)
+	if(GLOB.joined_player_list.len >= CONFIG_GET(number/lowpop_threshold) && GLOB.egalitarian_mode_active)
 		SSticker.deactivate_egalitarian()
 	//honk end
 

@@ -36,5 +36,7 @@
 	if(GLOB.captains_spare)
 		var/obj/item/card/id/captains_spare/bait = GLOB.captains_spare
 		GLOB.captains_spare = null
-		if(!istype(get_area(bait), /area/crew_quarters/heads/captain))
-			bait.anti_tide()
+		if(!(istype(get_area(bait), /area/crew_quarters/heads/captain) || istype(get_area(bait), /area/crew_quarters/heads/hop)))
+			var/mob/living/carbon/human/holder = bait.loc
+			if (!(holder && (holder.mind in SSjob.get_living_heads())))
+				bait.anti_tide()

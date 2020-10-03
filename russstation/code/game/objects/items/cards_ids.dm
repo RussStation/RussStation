@@ -6,9 +6,8 @@
 
 /obj/item/card/id/captains_spare/proc/anti_tide()
 	say("Anti-Tide mechanism activating...")
-	QDEL_IN(src, 50)
-	return list()
+	addtimer(CALLBACK(src, .proc/explode), 50)
 
-/obj/item/card/id/captains_spare/Destroy()
+/obj/item/card/id/captains_spare/proc/explode()
 	explosion(src, 0, 0, 2, 2)
-	return ..()
+	qdel()
