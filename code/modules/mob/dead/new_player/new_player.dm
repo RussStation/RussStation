@@ -310,7 +310,7 @@
 		if(!arrivals_docked)
 			var/obj/screen/splash/Spl = new(character.client, TRUE)
 			Spl.Fade(TRUE)
-			character.playsound_local(get_turf(character), 'sound/voice/ApproachingTG.ogg', 25)
+			character.playsound_local(get_turf(character), 'sound/voice/ApproachingRuss.ogg', 25) // honk - we're not tg
 
 		character.update_parallax_teleport()
 
