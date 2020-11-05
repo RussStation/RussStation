@@ -404,8 +404,9 @@ Difficulty: Medium
 	block_chance = 10
 	armour_penetration = 80
 	hitsound = 'russstation/sound/effects/sif_slash.ogg'
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut", "gutted", "gored")
-	sharpness = IS_SHARP
+	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "rips", "dices", "cuts", "guts", "gores")
+	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "rip", "dice", "cut", "gut", "gore")
+	sharpness = SHARP_EDGED
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 //Enables the sword to butcher bodies

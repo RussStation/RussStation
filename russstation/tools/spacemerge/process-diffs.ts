@@ -76,5 +76,5 @@ function makeCheckHandler(path: string) {
 function checkout(path: string, isOurs: boolean) {
 	const side = isOurs ? "ours" : "theirs";
 
-    execSync(`git checkout --${side} ${path}`, { cwd: process.cwd(), encoding: "utf8", stdio: ["ignore", process.stdout, process.stderr] });
+    execSync(`git checkout --${side} "${path}"`, { cwd: process.cwd(), encoding: "utf8", stdio: ["ignore", process.stdout, process.stderr] });
 }

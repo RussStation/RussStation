@@ -205,10 +205,11 @@
 	attack_amt = smelted_material.attack_force
 	force = smelted_material.attack_force * 0.6 //stabbing people with the resulting piece, build the full tool for full force
 	desc += "[smelted_material.name]."
+	if(smelted_material.sharp_result)
+		sharpness = SHARP_EDGED
 	if(mold_type == "digging")
 		pickaxe_speed = smelted_material.pick_speed
-	if(smelted_material.sharp_result)
-		sharpness = IS_SHARP
+		sharpness = SHARP_POINTY
 	if(smelted_material.blunt_damage)
 		blunt_bonus = TRUE
 
@@ -226,7 +227,8 @@
 /obj/item/melee/smithed_sword
 	name = "unobtanium broadsword"
 	desc = "A broadsword made of unobtanium, you probably shouldn't be seeing this."
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	attack_verb_continuous = list("attacks", "slashs", "stabs", "slices", "tears", "rips", "dices", "cuts")
+	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "rip", "dice", "cut")
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "claymore"
 	inhand_icon_state = "claymore"
@@ -327,7 +329,8 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	throw_speed = 4
-	attack_verb = list("attacked","bludgeoned","pulped","gored","torn")
+	attack_verb_continuous = list("attacks","bludgeons","pulps","gores","tears")
+	attack_verb_simple = list("attack","bludgeon","pulp","gore","tear")
 
 /obj/item/smithed_war_hammer/CheckParts(list/parts_list)
 	..()

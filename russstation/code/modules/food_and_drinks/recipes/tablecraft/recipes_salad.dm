@@ -6,5 +6,5 @@
 		/obj/item/reagent_containers/food/snacks/grown/potato = 1,
 		/obj/item/reagent_containers/food/snacks/meatball = 1
 	)
-	result = /obj/item/reagent_containers/food/snacks/salad/validsalad
+	result = /obj/item/food/salad/validsalad
 	subcategory = CAT_SALAD

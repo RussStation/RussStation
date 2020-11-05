@@ -52,11 +52,13 @@
 #define MC_HDD "HDD"
 #define MC_SDD "SDD"
 #define MC_CARD "CARD"
+#define MC_CARD2 "CARD2"
 #define MC_NET "NET"
 #define MC_PRINT "PRINT"
 #define MC_CELL "CELL"
 #define MC_CHARGE "CHARGE"
 #define MC_AI "AI"
+#define MC_SENSORS "SENSORS"
 
 //NTNet stuff, for modular computers
 									// NTNet module-configuration values. Do not change these. If you need to add another use larger number (5..6..7 etc)
@@ -126,3 +128,8 @@
 //these flags are used to tell the DNA modifier if a plant gene cannot be extracted or modified.
 #define PLANT_GENE_REMOVABLE	(1<<0)
 #define PLANT_GENE_EXTRACTABLE	(1<<1)
+
+//mass drivers and related machinery
+#define MASSDRIVER_TOXINS "toxinsdriver"
+#define MASSDRIVER_CHAPEL "chapelgun"
+#define MASSDRIVER_DISPOSALS "trash"

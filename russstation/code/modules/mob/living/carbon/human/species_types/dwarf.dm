@@ -5,8 +5,7 @@
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS)
 	inherent_traits = list(TRAIT_NOBREATH)
-	mutant_bodyparts = list("tail_human","ears","wings")
-	default_features = list("mcolor" = "FFF", "tail_human" = "None", "ears" = "None", "wings" = "None")
+	mutant_bodyparts = list("tail_human","ears","wings","mcolor" = "FFF", "tail_human" = "None", "ears" = "None", "wings" = "None")
 	limbs_id = "human"
 	use_skintones = 1
 	speedmod = 1

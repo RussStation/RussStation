@@ -63,7 +63,7 @@
 // Or autotator someone
 
 // IMPORTANT, since /datum/dynamic_ruleset/midround may accept candidates from both living, dead, and even antag players, you need to manually check whether there are enough candidates
-// (see /datum/dynamic_ruleset/midround/autotraitor/ready(var/forced = FALSE) for example)
+// (see /datum/dynamic_ruleset/midround/autotraitor/ready(forced = FALSE) for example)
 /datum/dynamic_ruleset/midround/ready(forced = FALSE)
 	if (!forced)
 		var/job_check = 0
@@ -187,11 +187,9 @@
 	for(var/mob/living/player in living_players)
 		if(issilicon(player)) // Your assigned role doesn't change when you are turned into a silicon.
 			living_players -= player
-			continue
-		if(is_centcom_level(player.z))
+		else if(is_centcom_level(player.z))
 			living_players -= player // We don't autotator people in CentCom
-			continue
-		if(player.mind && (player.mind.special_role || player.mind.antag_datums?.len > 0))
+		else if(player.mind && (player.mind.special_role || player.mind.antag_datums?.len > 0))
 			living_players -= player // We don't autotator people with roles already
 
 /datum/dynamic_ruleset/midround/autotraitor/ready(forced = FALSE)
@@ -236,11 +234,11 @@
 	for(var/mob/living/player in candidates)
 		if(issilicon(player))
 			candidates -= player
-			continue
-		if(is_centcom_level(player.z))
+		else if(is_centcom_level(player.z))
 			candidates -= player
-			continue
-		if(player.mind && (player.mind.special_role || player.mind.antag_datums?.len > 0))
+		else if(player.mind && (player.mind.special_role || player.mind.antag_datums?.len > 0))
+			candidates -= player
+		else if(HAS_TRAIT(player, TRAIT_MINDSHIELD))
 			candidates -= player
 
 /datum/dynamic_ruleset/midround/families/acceptable(population = 0, threat_level = 0)
@@ -260,6 +258,7 @@
 	handler.gangs_to_generate = (antag_cap[indice_pop] / 2)
 	handler.gang_balance_cap = clamp((indice_pop - 3), 2, 5) // gang_balance_cap by indice_pop: (2,2,2,2,2,3,4,5,5,5)
 	handler.midround_ruleset = TRUE
+	handler.use_dynamic_timing = TRUE
 	return handler.pre_setup_analogue()
 
 /datum/dynamic_ruleset/midround/families/execute()
@@ -302,11 +301,9 @@
 	for(var/mob/living/player in candidates)
 		if(!isAI(player))
 			candidates -= player
-			continue
-		if(is_centcom_level(player.z))
+		else if(is_centcom_level(player.z))
 			candidates -= player
-			continue
-		if(player.mind && (player.mind.special_role || player.mind.antag_datums?.len > 0))
+		else if(player.mind && (player.mind.special_role || player.mind.antag_datums?.len > 0))
 			candidates -= player
 
 /datum/dynamic_ruleset/midround/malf/execute()
@@ -554,3 +551,41 @@
 	log_game("DYNAMIC: [key_name(S)] was spawned as a Space Dragon by the midround ruleset.")
 	priority_announce("A large organic energy flux has been recorded near of [station_name()], please stand-by.", "Lifesign Alert")
 	return S
+	
+//////////////////////////////////////////////
+//                                          //
+//           ABDUCTORS    (GHOST)           //
+//                                          //
+//////////////////////////////////////////////
+#define ABDUCTOR_MAX_TEAMS 4
+
+/datum/dynamic_ruleset/midround/from_ghosts/abductors
+	name = "Abductors"
+	antag_flag = "Abductor"
+	antag_flag_override = ROLE_ABDUCTOR
+	enemy_roles = list("Security Officer", "Detective", "Head of Security", "Captain")
+	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_candidates = 2
+	weight = 4
+	cost = 10
+	requirements = list(101,101,101,80,60,50,30,20,10,10)
+	repeatable = TRUE
+	var/datum/team/abductor_team/new_team
+
+/datum/dynamic_ruleset/midround/from_ghosts/abductors/ready(forced = FALSE)
+	if (required_candidates > (dead_players.len + list_observers.len))
+		return FALSE
+	new_team = new
+	if(new_team.team_number > ABDUCTOR_MAX_TEAMS)
+		return MAP_ERROR
+	return ..()
+
+/datum/dynamic_ruleset/midround/from_ghosts/abductors/finish_setup(mob/new_character, index)
+	if (index == 1) // Our first guy is the scientist.
+		var/datum/antagonist/abductor/scientist/new_role = new
+		new_character.mind.add_antag_datum(new_role, new_team)
+	else // Our second guy is the agent
+		var/datum/antagonist/abductor/agent/new_role = new
+		new_character.mind.add_antag_datum(new_role, new_team)
+
+#undef ABDUCTOR_MAX_TEAMS

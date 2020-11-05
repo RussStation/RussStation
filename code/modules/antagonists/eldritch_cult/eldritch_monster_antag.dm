@@ -7,7 +7,7 @@
 	job_rank = ROLE_HERETIC
 	antag_hud_type = ANTAG_HUD_HERETIC
 	antag_hud_name = "heretic_beast"
-	var/datum/antagonist/heretic/master
+	var/datum/antagonist/master
 
 /datum/antagonist/heretic_monster/admin_add(datum/mind/new_owner,mob/admin)
 	new_owner.add_antag_datum(src)
@@ -19,12 +19,12 @@
 	to_chat(owner, "<span class='boldannounce'>You became an Eldritch Horror!</span>")
 
 /datum/antagonist/heretic_monster/on_removal()
-	if(owner)
-		to_chat(owner, "<span class='boldannounce'>Your master is no longer [master.owner.current.real_name]</span>")
-		owner = null
+	if(master)
+		to_chat(master, "<span class='boldannounce'>Your master is no longer [master.owner.current.real_name]</span>")
+		master = null
 	return ..()
 
-/datum/antagonist/heretic_monster/proc/set_owner(datum/antagonist/heretic/_master)
+/datum/antagonist/heretic_monster/proc/set_owner(datum/antagonist/_master)
 	master = _master
 	var/datum/objective/master_obj = new
 	master_obj.owner = src
@@ -40,4 +40,4 @@
 
 /datum/antagonist/heretic_monster/remove_innate_effects(mob/living/mob_override)
 	. = ..()
-	remove_antag_hud(antag_hud_type, antag_hud_name, owner.current)
+	remove_antag_hud(antag_hud_type, owner.current)

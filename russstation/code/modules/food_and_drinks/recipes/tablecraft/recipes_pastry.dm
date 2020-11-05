@@ -16,5 +16,5 @@
 		/obj/item/reagent_containers/food/snacks/meatball = 1,
 		/obj/item/reagent_containers/food/snacks/grown/cabbage = 1
 	)
-	result = /obj/item/reagent_containers/food/snacks/meatbun
+	result = /obj/item/food/meatbun
 	subcategory = CAT_PASTRY

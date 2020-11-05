@@ -18,7 +18,9 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	pixel_x = -16
+	base_pixel_x = -16
 	pixel_y = -14
+	base_pixel_y = -14
 	minimum_distance = 3
 	move_to_delay = 20
 	vision_range = 9
@@ -28,7 +30,7 @@
 	projectiletype = /obj/projectile/seedling
 	projectilesound = 'sound/weapons/pierce.ogg'
 	robust_searching = TRUE
-	stat_attack = UNCONSCIOUS
+	stat_attack = HARD_CRIT
 	move_resist = MOVE_FORCE_EXTREMELY_STRONG
 	var/combatant_state = SEEDLING_STATE_NEUTRAL
 	var/obj/seedling_weakpoint/weak_point
@@ -41,7 +43,7 @@
 	damage = 10
 	damage_type = BURN
 	light_range = 2
-	flag = "energy"
+	flag = ENERGY
 	light_color = LIGHT_COLOR_YELLOW
 	hitsound = 'sound/weapons/sear.ogg'
 	hitsound_wall = 'sound/weapons/effects/searwall.ogg'
