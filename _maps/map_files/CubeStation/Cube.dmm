@@ -46,7 +46,7 @@
 "aaH" = (
 /obj/machinery/power/apc{
 	areastring = "/area/tcommsat/computer";
-	dir = 8;
+	dir = 4;
 	name = "Telecomms Monitoring APC";
 	pixel_x = 28
 	},
@@ -3089,6 +3089,14 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/wood,
 /area/library)
+"bGX" = (
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "cargodelivery2";
+	name = "Cargo Belt"
+	},
+/turf/open/floor/plasteel/dark,
+/area/quartermaster/storage)
 "bGZ" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -18939,6 +18947,13 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
+"kyP" = (
+/obj/machinery/door/window/northleft{
+	name = "Theatre Stage";
+	req_access_txt = "46"
+	},
+/turf/open/floor/carpet/green,
+/area/crew_quarters/theatre)
 "kzl" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
@@ -20016,8 +20031,8 @@
 	},
 /obj/machinery/conveyor{
 	dir = 4;
-	id = "Cargo Belt";
-	name = "Cargo Belt 2"
+	id = "cargodelivery2";
+	name = "Cargo Belt"
 	},
 /turf/open/floor/plasteel/dark,
 /area/quartermaster/warehouse)
@@ -23373,14 +23388,14 @@
 /turf/open/floor/carpet/green,
 /area/hallway/secondary/entry)
 "mVo" = (
-/obj/machinery/door/poddoor{
-	id = "QMLoaddoor";
-	name = "supply dock loading door"
-	},
 /obj/machinery/conveyor{
 	dir = 1;
 	id = "Cargo Belt";
 	name = "Cargo Belt 2"
+	},
+/obj/machinery/door/poddoor{
+	id = "QMLoaddoor2";
+	name = "supply dock loading door"
 	},
 /turf/open/floor/plating,
 /area/quartermaster/storage)
@@ -29831,8 +29846,8 @@
 "qwG" = (
 /obj/machinery/power/apc{
 	areastring = "/area/maintenance/disposal";
+	dir = 1;
 	name = "Disposal APC";
-	pixel_x = null;
 	pixel_y = 25
 	},
 /obj/structure/disposalpipe/segment{
@@ -32221,13 +32236,13 @@
 /turf/open/floor/plasteel/showroomfloor,
 /area/science/xenobiology)
 "ryW" = (
-/obj/machinery/conveyor{
-	dir = 6;
-	id = "Cargo Belt";
-	name = "Cargo Belt 2"
-	},
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/machinery/conveyor{
+	dir = 6;
+	id = "cargodelivery2";
+	name = "Cargo Belt"
 	},
 /turf/open/floor/plasteel/dark,
 /area/quartermaster/storage)
@@ -35501,6 +35516,17 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/department/electrical)
+"tqk" = (
+/obj/structure/sign/warning/vacuum{
+	pixel_y = 32
+	},
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "cargodelivery2";
+	name = "Cargo Belt"
+	},
+/turf/open/floor/plasteel/dark,
+/area/quartermaster/storage)
 "trn" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/extinguisher_cabinet{
@@ -42106,7 +42132,6 @@
 	},
 /obj/machinery/power/apc{
 	areastring = "/area/medical/chemistry";
-	dir = 1;
 	name = "Chemistry APC";
 	pixel_y = -25
 	},
@@ -42371,13 +42396,13 @@
 /turf/open/floor/plasteel,
 /area/crew_quarters/heads/chief)
 "wPC" = (
-/obj/machinery/door/poddoor{
-	id = "QMLoaddoor2";
-	name = "supply dock loading door"
-	},
 /obj/machinery/conveyor{
 	id = "cargodelivery2";
 	name = "Cargo Belt"
+	},
+/obj/machinery/door/poddoor{
+	id = "QMLoaddoor";
+	name = "supply dock loading door"
 	},
 /turf/open/floor/plating,
 /area/quartermaster/storage)
@@ -76789,7 +76814,7 @@ kko
 lyZ
 pAc
 pAc
-kAO
+kyP
 dpZ
 dpZ
 dpZ
@@ -84929,7 +84954,7 @@ bXj
 aWw
 aWw
 aWw
-twR
+tqk
 aIW
 dmj
 dmj
@@ -85156,7 +85181,7 @@ bXj
 bXj
 bXj
 aWw
-uBo
+bGX
 gNr
 dmj
 kwz
@@ -85383,7 +85408,7 @@ bXj
 bXj
 bXj
 aWw
-uBo
+bGX
 nZh
 itx
 wYi
