@@ -15,12 +15,12 @@
 		if(is_station_level(W.z) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security) && !istype(get_area(W), /area/ai_monitored))
 			W.req_access = list()
 			W.req_one_access = list()
-	priority_announce("Airlock control override activated due to low staff. Please use this allowance responsibly to set up the station.", "Central Command", 'sound/ai/commandreport.ogg')
+	priority_announce("Airlock control override activated due to limited crew. Please use this responsibly to set up the station.", "Central Command", 'sound/ai/commandreport.ogg')
 	GLOB.egalitarian_mode_active = TRUE
 
 // enough crew has joined, disable egalitarian with a warning time
 /datum/controller/subsystem/ticker/proc/deactivate_egalitarian()
-	priority_announce("Sufficient crew has joined the station. Airlock control override will deactivate soon. Please return to your assigned work area.", "Central Command", 'sound/ai/commandreport.ogg')
+	priority_announce("The crew is now at sufficient capacity. Airlock control override will deactivate soon. Please return to your assigned work area.", "Central Command", 'sound/ai/commandreport.ogg')
 	GLOB.egalitarian_mode_active = FALSE
 	addtimer(CALLBACK(src, .proc/finish_deactivate_egalitarian), 1000)
 

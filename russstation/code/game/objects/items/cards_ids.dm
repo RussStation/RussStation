@@ -6,6 +6,7 @@
 
 /obj/item/card/id/captains_spare/proc/anti_tide()
 	say("Anti-Tide mechanism activating...")
+	playsound(src, 'sound/machines/triple_beep.ogg', 50, TRUE)
 	addtimer(CALLBACK(src, .proc/explode), 50)
 
 /obj/item/card/id/captains_spare/proc/explode()

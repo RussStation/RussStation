@@ -424,7 +424,7 @@ SUBSYSTEM_DEF(ticker)
 	if(livings.len)
 		//honk - start egalitarian mode if low pop
 		if(livings.len < CONFIG_GET(number/lowpop_threshold))
-			activate_egalitarian()
+			addtimer(CALLBACK(src, .proc/activate_egalitarian), 60, TIMER_CLIENT_TIME)
 		//honk end
 		addtimer(CALLBACK(src, .proc/release_characters, livings), 30, TIMER_CLIENT_TIME)
 
