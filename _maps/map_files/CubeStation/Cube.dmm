@@ -5565,15 +5565,15 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
+/obj/structure/closet/l3closet,
+/obj/item/clothing/gloves/color/latex,
 /obj/machinery/doorButtons/access_button{
-	idDoor = "Virology_Airlock_Interior";
+	idDoor = "Virology_Airlock_Exterior";
 	idSelf = "virology_airlock_control";
 	name = "Virology Access Button";
 	pixel_x = -25;
 	req_access_txt = "39"
 	},
-/obj/structure/closet/l3closet,
-/obj/item/clothing/gloves/color/latex,
 /turf/open/floor/plasteel/white,
 /area/medical/virology)
 "ddX" = (
@@ -6342,6 +6342,7 @@
 	name = "Research Lab APC";
 	pixel_y = 26
 	},
+/obj/structure/cable,
 /turf/open/floor/plasteel/showroomfloor,
 /area/science/lab)
 "dzo" = (
@@ -8574,12 +8575,9 @@
 	},
 /area/maintenance/starboard/fore)
 "eFW" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/science/lab)
+/obj/machinery/smartfridge/chemistry/virology/preloaded,
+/turf/closed/wall/r_wall,
+/area/medical/virology)
 "eGA" = (
 /obj/effect/landmark/blobstart,
 /turf/open/floor/plating{
@@ -9952,16 +9950,16 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
+/obj/structure/closet/l3closet,
+/obj/item/clothing/gloves/color/latex,
+/obj/machinery/camera/autoname,
 /obj/machinery/doorButtons/access_button{
-	idDoor = "Virology_Airlock_Exterior";
+	idDoor = "Virology_Airlock_Interior";
 	idSelf = "virology_airlock_control";
 	name = "Virology Access Button";
 	pixel_x = 25;
 	req_access_txt = "39"
 	},
-/obj/structure/closet/l3closet,
-/obj/item/clothing/gloves/color/latex,
-/obj/machinery/camera/autoname,
 /turf/open/floor/plasteel/white,
 /area/medical/virology)
 "fwe" = (
@@ -15711,10 +15709,9 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/fore)
 "iFK" = (
-/obj/machinery/door/window/northright{
-	dir = 8;
+/obj/machinery/door/window/northleft{
+	dir = 4;
 	name = "Library Desk Door";
-	pixel_x = 25;
 	req_access_txt = "37"
 	},
 /turf/open/floor/wood,
@@ -20509,7 +20506,6 @@
 	name = "Mech Bay Maintenance";
 	req_access_txt = "29"
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/maintenance/port)
 "luf" = (
@@ -23625,10 +23621,15 @@
 /turf/open/floor/plasteel,
 /area/engine/break_room)
 "nbq" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/lattice/catwalk,
-/turf/open/space/basic,
-/area/space/nearstation)
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "rnd2";
+	name = "research lab shutters"
+	},
+/obj/machinery/door/firedoor/heavy,
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable,
+/turf/open/floor/plasteel/showroomfloor,
+/area/science/lab)
 "nbw" = (
 /obj/machinery/button/door{
 	id = "kitchen";
@@ -34293,7 +34294,6 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "sEC" = (
-/obj/structure/cable,
 /obj/machinery/door/firedoor/heavy,
 /obj/machinery/door/airlock/research{
 	name = "Research Break Room";
@@ -41728,20 +41728,12 @@
 /turf/open/floor/plating,
 /area/janitor)
 "wAv" = (
-/obj/machinery/smartfridge/chemistry/virology/preloaded{
-	pixel_x = 32
-	},
-/obj/effect/turf_decal/stripes/corner{
+/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/green{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/green{
-	dir = 1
-	},
+/obj/structure/cable,
 /turf/open/floor/plasteel/showroomfloor,
-/area/medical/virology)
+/area/science/research)
 "wAz" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/sign/poster/contraband/random{
@@ -65006,8 +64998,8 @@ qBb
 rPL
 wLd
 xok
-eBk
-nYV
+nbq
+wAv
 pYW
 hDJ
 xeX
@@ -65225,7 +65217,7 @@ rMJ
 xEa
 scc
 rzJ
-eFW
+pSq
 xwc
 tuo
 xDY
@@ -80884,7 +80876,7 @@ fVU
 yeg
 fWv
 kSd
-wAv
+fVU
 qNg
 fAd
 mrd
@@ -81111,7 +81103,7 @@ bBM
 fzf
 pkv
 eud
-fAd
+eFW
 fAd
 fAd
 mrd
@@ -90441,7 +90433,7 @@ bXj
 bXj
 bXj
 wMU
-nbq
+wMU
 wMU
 wMU
 bXj
