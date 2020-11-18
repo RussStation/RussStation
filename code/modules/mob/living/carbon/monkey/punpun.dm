@@ -16,7 +16,7 @@
 		if(ancestor_chain > 1)
 			name += " \Roman[ancestor_chain]"
 	else if(prob(10))
-		name = pick(list("Professor Bobo", "Deempisi's Revenge", "Furious George", "King Louie", "Dr. Zaius", "Jimmy Rustles", "Dinner", "Lanky"))
+		name = pick(list("Russ","Father Knees","Fluff","Lily","Yerikk","Wah","Ari","Conx","Fami")) // honk - rare monkey names live here, hard coded...
 		if(name == "Furious George")
 			aggressive = TRUE // Furious George is PISSED
 	. = ..()
