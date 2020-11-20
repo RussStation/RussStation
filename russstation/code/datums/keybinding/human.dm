@@ -6,6 +6,10 @@
 	keybind_signal = COMSIG_KB_HUMAN_SUICIDE_DOWN
 
 /datum/keybinding/human/suicide/down(client/user)
+	. = ..()
+	if(.)
+		return
+
 	var/mob/living/carbon/human/H = user.mob
 	H.suicide(intentional = TRUE)
 	return TRUE

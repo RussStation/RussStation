@@ -381,12 +381,12 @@
 	if (!CAN_SUCCUMB(src))
 		to_chat(src, text="You are unable to succumb to death! This life continues.", type=MESSAGE_TYPE_INFO)
 		return
-		log_message("Has [whispered ? "whispered his final words" : "succumbed to death"] with [round(health, 0.1)] points of health!", LOG_ATTACK)
-		adjustOxyLoss(health - HEALTH_THRESHOLD_DEAD)
-		updatehealth()
-		if(!whispered)
-			to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
-		death()
+	log_message("Has [whispered ? "whispered his final words" : "succumbed to death"] with [round(health, 0.1)] points of health!", LOG_ATTACK)
+	adjustOxyLoss(health - HEALTH_THRESHOLD_DEAD)
+	updatehealth()
+	if(!whispered)
+		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
+	death()
 
 /mob/living/incapacitated(ignore_restraints = FALSE, ignore_grab = FALSE, ignore_stasis = FALSE)
 	if(HAS_TRAIT(src, TRAIT_INCAPACITATED) || (!ignore_restraints && (HAS_TRAIT(src, TRAIT_RESTRAINED) || (!ignore_grab && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE))) || (!ignore_stasis && IS_IN_STASIS(src)))

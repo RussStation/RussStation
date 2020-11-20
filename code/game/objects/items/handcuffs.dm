@@ -243,9 +243,9 @@
 	. = ..()
 	if(!ishuman(user) || user.stat != CONSCIOUS || HAS_TRAIT(user, TRAIT_HANDS_BLOCKED))
 		return
-		armed = !armed
-		update_icon()
-		to_chat(user, "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>")
+	armed = !armed
+	update_icon()
+	to_chat(user, "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>")
 
 /obj/item/restraints/legcuffs/beartrap/proc/close_trap()
 	armed = FALSE
