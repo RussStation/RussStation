@@ -1,6 +1,19 @@
-# merger hooks, run tools/hooks/install.bat or install.sh to set up
-*.dmm merge=dmm
-*.dmi merge=dmi
+* text=auto
+* -crlf
 
-# force changelog merging to use union
-html/changelog.html merge=union
+## Enforce binary mode
+*.bmp binary
+*.dll binary
+*.dmb binary
+*.exe binary
+*.gif binary
+*.jpg binary
+*.png binary
+*.so binary
+
+## Merger hooks, run tools/hooks/install.bat or install.sh to set up
+*.dmm text merge=dmm
+*.dmi binary merge=dmi
+
+## Force changelog merging to use union
+html/changelog.html text merge=union

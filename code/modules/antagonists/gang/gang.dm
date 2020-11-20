@@ -86,8 +86,8 @@
 
 	to_chat(owner.current, "<B><font size=3 color=red>[gang_name] for life!</font></B>")
 	to_chat(owner.current, "<B><font size=2 color=red>You're a member of the [gang_name] now!<br>Tag turf with a spraycan, wear your group's colors, and recruit more gangsters with the Induction Packages!</font></B>")
-	to_chat(owner.current, "<B><font size=4 color=red>Don't fuck with non-gangsters unless they fuck with you first.</font></B>")
-	to_chat(owner.current, "<B><font size=4 color=red>Don't blow shit up or make the station uninhabitable.</font></B>")
+	to_chat(owner.current, "<B><font size=6 color=red>You are still a team-oriented antagonist! Do what is best for your gang.</font></B>")
+	to_chat(owner.current, "<B><font size=4 color=red>Beware, killing innocents will result in a stronger police response.</font></B>")
 	to_chat(owner.current, "<B><font size=4 color=red>Family's Objective:</B> [gang_objective]</font>")
 
 /datum/antagonist/gang/apply_innate_effects(mob/living/mob_override)
@@ -169,7 +169,7 @@
 	return "<div class='panel redborder'>[report.Join("<br>")]</div>"
 
 /// Adds points to the points var.
-/datum/team/gang/proc/adjust_points(var/points_to_adjust)
+/datum/team/gang/proc/adjust_points(points_to_adjust)
 	points += points_to_adjust
 
 /datum/action/cooldown/spawn_induction_package
@@ -423,7 +423,8 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			people_on_station++
-			for(var/R in H.reagents.addiction_list)
+			var/list/addictions = H.get_addiction_list()
+			for(var/R in addictions)
 				if(istype(R, /datum/reagent/drug/methamphetamine))
 					people_on_crack++
 	if(0.25*people_on_station > people_on_crack)

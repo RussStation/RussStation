@@ -50,9 +50,8 @@
 //grafts a coronary bypass onto the individual's heart, success chance is 90% base again
 /datum/surgery_step/coronary_bypass
 	name = "graft coronary bypass"
-	implements = list(TOOL_HEMOSTAT = 90, TOOL_WIRECUTTER = 35, /obj/item/stack/packageWrap = 15, /obj/item/stack/cable_coil = 5)
+	implements = list(TOOL_HEMOSTAT = 90, TOOL_WIRECUTTER = 35, /obj/item/stack/package_wrap = 15, /obj/item/stack/cable_coil = 5)
 	time = 90
-	experience_given = MEDICAL_SKILL_ORGAN_FIX
 
 /datum/surgery_step/coronary_bypass/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, "<span class='notice'>You begin to graft a bypass onto [target]'s heart...</span>",

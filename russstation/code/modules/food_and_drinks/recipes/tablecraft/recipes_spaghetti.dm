@@ -1,8 +1,8 @@
 /datum/crafting_recipe/food/spesslaw
 	name = "Spesslaw"
 	reqs = list(
-		/obj/item/reagent_containers/food/snacks/spaghetti/boiledspaghetti = 1,
-		/obj/item/reagent_containers/food/snacks/meatball = 4
+		/obj/item/food/spaghetti/boiledspaghetti = 1,
+		/obj/item/food/meatball = 4
 	)
-	result = /obj/item/reagent_containers/food/snacks/spaghetti/spesslaw
+	result = /obj/item/food/spaghetti/spesslaw
 	subcategory = CAT_SPAGHETTI

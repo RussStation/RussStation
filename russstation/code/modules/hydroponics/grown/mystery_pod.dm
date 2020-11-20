@@ -52,7 +52,7 @@
 			if(86 to 88)
 				B = /obj/effect/spawner/lootdrop/snowdin/dungeonlite
 			if(89)
-				B = /obj/item/toy/windupToolbox
+				B = /obj/item/toy/windup_toolbox
 			if(90 to 94)
 				B = /obj/structure/closet/crate/secure/loot
 			if(95)
@@ -471,7 +471,7 @@
 			/obj/effect/decal/cleanable/blood/gibs,
 			/obj/item/toy/plush/carpplushie,
 			/obj/item/toy/plush/bubbleplush,
-			/obj/item/toy/plush/plushvar,
+			/obj/item/toy/plush/ratplush,
 			/obj/item/toy/plush/narplush,
 			/obj/item/toy/plush/lizardplushie,
 			/obj/item/toy/plush/snakeplushie,
