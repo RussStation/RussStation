@@ -13,17 +13,17 @@ if ! git remote | grep tgstation > /dev/null; then
     git remote add tgstation https://github.com/tgstation/tgstation.git
 fi
 
-#git fetch --all
-#git checkout master
-#git reset --hard master
-#git clean -f
+git fetch --all
+git checkout master
+git reset --hard master
+git clean -f
 
-#git branch --track "$BASE_BRANCH_NAME$(date +%y%m%d)" tgstation/master
-#git checkout -b "$BASE_BRANCH_NAME$(date +%y%m%d)"
-#rm config/dbconfig.txt
-#rm config/in_character_filter.txt
+git branch --track "$BASE_BRANCH_NAME$(date +%y%m%d)" tgstation/master
+git checkout -b "$BASE_BRANCH_NAME$(date +%y%m%d)"
+rm config/dbconfig.txt
+rm config/in_character_filter.txt
 
-#git merge tgstation/master -Xignore-space-change -Xdiff-algorithm=minimal --squash --allow-unrelated-histories
+git merge tgstation/master -Xignore-space-at-eol -Xdiff-algorithm=minimal --squash --allow-unrelated-histories
 
 root=$(pwd)
 cd $SPACEMERGE_PATH
@@ -31,10 +31,10 @@ npm install
 npm run build
 cd $root
 
-#git reset -- html/changelogs
-#git checkout --theirs .gitattributes
-#git reset -- .github
-#git reset -- config
+git reset -- html/changelogs
+git checkout --theirs .gitattributes
+git reset -- .github
+git reset -- config
 
 git diff --name-only --diff-filter=U | node "$SPACEMERGE_PATH/process-diffs.js"
 
