@@ -1,0 +1,1 @@
+#define COMSIG_KB_HUMAN_SUICIDE_DOWN "keybinding_human_suicide_down"
