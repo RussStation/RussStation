@@ -8,3 +8,8 @@
 
 #include "..\..\..\..\_maps\map_files\IceBoxStation\job_changes.dm"
 #undef JOB_MODIFICATION_MAP_NAME
+
+// honk start - apparently this is needed in addition to the json?
+#include "..\..\..\..\_maps\map_files\ShitStation\job_changes.dm"
+#undef JOB_MODIFICATION_MAP_NAME
+// honk end
