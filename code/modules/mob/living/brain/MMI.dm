@@ -93,9 +93,9 @@
 			braintype = "Cyborg"
 
 		// honk start - damaged brains get ion laws; check id so we don't keep adding more laws every time the brain is put in
-		if(brain.damage > BRAIN_DAMAGE_MILD && laws.id == DEFAULT_AI_LAWID)
+		if(brain.damage > BRAIN_DAMAGE_MILD && laws.id != BRAIN_DAMAGE_LAWID)
 			laws.replace_random_law(generate_ion_law(), list(LAW_INHERENT))
-			laws.id = "brain_damage" // id has to change or ion laws won't copy into borgs
+			laws.id = BRAIN_DAMAGE_LAWID // id has to change or ion laws won't copy into borgs
 			log_game("Damaged brain of [key_name(B)] inserted into MMI with the laws [english_list(laws.get_law_list(TRUE, TRUE))]")
 		// honk end
 
