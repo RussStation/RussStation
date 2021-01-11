@@ -92,6 +92,13 @@
 		else
 			braintype = "Cyborg"
 
+		// honk start - damaged brains get ion laws; check id so we don't keep adding more laws every time the brain is put in
+		if(brain.damage > BRAIN_DAMAGE_MILD && laws.id != BRAIN_DAMAGE_LAWID)
+			laws.replace_random_law(generate_ion_law(), list(LAW_INHERENT))
+			laws.id = BRAIN_DAMAGE_LAWID // id has to change or ion laws won't copy into borgs
+			log_game("Damaged brain of [key_name(B)] inserted into MMI with the laws [english_list(laws.get_law_list(TRUE, TRUE))]")
+		// honk end
+
 		SSblackbox.record_feedback("amount", "mmis_filled", 1)
 
 		log_game("[key_name(user)] has put the brain of [key_name(brainmob)] into an MMI at [AREACOORD(src)]")

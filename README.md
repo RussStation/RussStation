@@ -9,7 +9,7 @@ https://github.com/tgstation/tgstation
 
 **Website:** http://cluwn.strangled.net/
 **Code:** https://github.com/RussStation/RussStation
-**Wiki** https://tgstation13.org/wiki/Main_Page
+**Wiki** https://github.com/RussStation/RussStation/wiki and https://tgstation13.org/wiki/Main_Page
 **Discord:** https://discord.gg/TYqJZAy
 
  
@@ -95,9 +95,11 @@ https://github.com/tgstation/tgstation-server
 
 ## MAPS
 
-RussStation currently comes equipped with four maps.
+RussStation currently comes equipped with six maps.
 
-* [BoxStation (default)](https://tgstation13.org/wiki/Boxstation)
+* [LimaStation](https://github.com/RussStation/RussStation/wiki/Lima-Station)
+* [CubeStation](https://github.com/RussStation/RussStation/wiki/Cube-Station)
+* [IceBoxStation](https://tgstation13.org/wiki/IceboxStation)
 * [MetaStation](https://tgstation13.org/wiki/MetaStation)
 * [DeltaStation](https://tgstation13.org/wiki/DeltaStation)
 * [PubbyStation](https://tgstation13.org/wiki/PubbyStation)
