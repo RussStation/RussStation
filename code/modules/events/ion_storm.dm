@@ -28,7 +28,7 @@
 
 /datum/round_event/ion_storm/start()
 	//AI laws
-	for(var/mob/living/silicon/ai/M in GLOB.alive_mob_list)
+	for(var/mob/living/silicon/M in GLOB.alive_mob_list) // honk - apply ion storm to borgs too
 		M.laws_sanity_check()
 		if(M.stat != DEAD && M.see_in_dark != 0)
 			if(prob(replaceLawsetChance))

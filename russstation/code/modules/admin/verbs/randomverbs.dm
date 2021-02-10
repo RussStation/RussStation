@@ -17,7 +17,7 @@
 				var/mob/living/carbon/human/H = target
 				if(H.head)
 					var/obj/item/I = H.get_item_by_slot(ITEM_SLOT_HEAD)
-					H.doUnEquip(I, TRUE, H.loc, FALSE)
+					H.dropItemToGround(I, force = TRUE)
 
 				var/obj/item/clothing/head/sombrero/shamebrero/S = new /obj/item/clothing/head/sombrero/shamebrero(H.loc)
 				H.equip_to_slot_or_del(S, ITEM_SLOT_HEAD)
@@ -28,7 +28,7 @@
 				var/mob/living/carbon/human/H = target
 				if(H.head)
 					var/obj/item/I = H.get_item_by_slot(ITEM_SLOT_OCLOTHING)
-					H.doUnEquip(I, TRUE, H.loc, FALSE)
+					H.dropItemToGround(I, force = TRUE)
 
 				var/obj/item/clothing/suit/poncho/ponchoshame/S = new /obj/item/clothing/suit/poncho/ponchoshame(H.loc)
 				H.equip_to_slot_or_del(S, ITEM_SLOT_OCLOTHING)

@@ -6,5 +6,5 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge = 1,
 		/obj/item/reagent_containers/food/snacks/grown/tomato = 1
 	)
-	result = /obj/item/reagent_containers/food/snacks/pizza/sassysage
+	result = /obj/item/food/pizza/sassysage
 	subcategory = CAT_PIZZA

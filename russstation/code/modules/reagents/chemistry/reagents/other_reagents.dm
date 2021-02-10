@@ -68,7 +68,8 @@
 	color = "#e03add" //rgb 224, 58, 221
 	taste_description = "paper cuts"
 
-/datum/reagent/confettium/reaction_turf(turf/T, reac_volume)
+/datum/reagent/confettium/expose_turf(turf/T, reac_volume)
+	. = ..()
 	if(reac_volume >= 1)
 		if(!isspaceturf(T))
 			var/obj/effect/decal/cleanable/confetti/conf = locate() in T.contents

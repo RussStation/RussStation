@@ -21,9 +21,8 @@ require only minor tweaks.
 */
 
 // helpers for modifying jobs, used in various job_changes.dm files
-#define MAP_JOB_CHECK if(SSmapping.config.map_name != JOB_MODIFICATION_MAP_NAME) { return; }
-#define MAP_JOB_CHECK_BASE if(SSmapping.config.map_name != JOB_MODIFICATION_MAP_NAME) { return ..(); }
-#define MAP_REMOVE_JOB(jobpath) /datum/job/##jobpath/map_check() { return (SSmapping.config.map_name != JOB_MODIFICATION_MAP_NAME) && ..() }
+
+#define MAP_CURRENT_VERSION 1
 
 #define SPACERUIN_MAP_EDGE_PAD 15
 
@@ -105,3 +104,19 @@ require only minor tweaks.
 #define PLACE_LAVA_RUIN "lavaland" //On lavaland ruin z levels(s)
 #define PLACE_BELOW "below" //On z levl below - centered on same tile
 #define PLACE_ISOLATED "isolated" //On isolated ruin z level
+
+
+///Map generation defines
+#define PERLIN_LAYER_HEIGHT "perlin_height"
+#define PERLIN_LAYER_HUMIDITY "perlin_humidity"
+#define PERLIN_LAYER_HEAT "perlin_heat"
+
+#define BIOME_LOW_HEAT "low_heat"
+#define BIOME_LOWMEDIUM_HEAT "lowmedium_heat"
+#define BIOME_HIGHMEDIUM_HEAT "highmedium_heat"
+#define BIOME_HIGH_HEAT "high_heat"
+
+#define BIOME_LOW_HUMIDITY "low_humidity"
+#define BIOME_LOWMEDIUM_HUMIDITY "lowmedium_humidity"
+#define BIOME_HIGHMEDIUM_HUMIDITY "highmedium_humidity"
+#define BIOME_HIGH_HUMIDITY "high_humidity"

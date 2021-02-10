@@ -67,8 +67,7 @@ GENE SCANNER
 		return
 	var/list/t_ray_images = list()
 	for(var/obj/O in orange(distance, viewer) )
-
-		if(O.invisibility == INVISIBILITY_MAXIMUM || HAS_TRAIT(O, TRAIT_T_RAY_VISIBLE))
+		if(HAS_TRAIT(O, TRAIT_T_RAY_VISIBLE))
 			var/image/I = new(loc = get_turf(O))
 			var/mutable_appearance/MA = new(O)
 			MA.alpha = 128
@@ -127,6 +126,10 @@ GENE SCANNER
 					 \n<span class='info'>Body temperature: ???</span>")
 		return
 
+	if(ispodperson(M)&& !advanced)
+		to_chat(user, "<span class='info'>[M]'s biologal structure is too complex for the health analyzer.")
+		return
+
 	user.visible_message("<span class='notice'>[user] analyzes [M]'s vitals.</span>", \
 						"<span class='notice'>You analyze [M]'s vitals.</span>")
 
@@ -142,7 +145,11 @@ GENE SCANNER
 
 // Used by the PDA medical scanner too
 /proc/healthscan(mob/user, mob/living/M, mode = SCANNER_VERBOSE, advanced = FALSE)
-	if(isliving(user) && (user.incapacitated() || user.is_blind()))
+	if(user.incapacitated())
+		return
+
+	if(user.is_blind())
+		to_chat(user, "<span class='warning'>You realize that your scanner has no accessibility support for the blind!</span>")
 		return
 
 	// the final list of strings to render
@@ -166,6 +173,14 @@ GENE SCANNER
 
 	render_list += "<span class='info'>Analyzing results for [M]:</span>\n<span class='info ml-1'>Overall status: [mob_status]</span>\n"
 
+	// Husk detection
+	if(advanced && HAS_TRAIT_FROM(M, TRAIT_HUSK, BURN))
+		render_list += "<span class='alert ml-1'>Subject has been husked by severe burns.</span>\n"
+	else if (advanced && HAS_TRAIT_FROM(M, TRAIT_HUSK, CHANGELING_DRAIN))
+		render_list += "<span class='alert ml-1'>Subject has been husked by dessication.</span>\n"
+	else if(HAS_TRAIT(M, TRAIT_HUSK))
+		render_list += "<span class='alert ml-1'>Subject has been husked.</span>\n"
+
 	// Damage descriptions
 	if(brute_loss > 10)
 		render_list += "<span class='alert ml-1'>[brute_loss > 50 ? "Severe" : "Minor"] tissue damage detected.</span>\n"
@@ -183,8 +198,20 @@ GENE SCANNER
 		render_list += "<span class='alert ml-1'>Subject appears to have [M.getCloneLoss() > 30 ? "Severe" : "Minor"] cellular damage.</span>\n"
 		if(advanced)
 			render_list += "<span class='info ml-1'>Cellular Damage Level: [M.getCloneLoss()].</span>\n"
-	if (!M.getorgan(/obj/item/organ/brain))
+	if (!M.getorganslot(ORGAN_SLOT_BRAIN)) // brain not added to carbon/human check because it's funny to get to bully simple mobs
 		render_list += "<span class='alert ml-1'>Subject lacks a brain.</span>\n"
+	if(ishuman(M))
+		var/mob/living/carbon/human/the_dude = M
+		var/datum/species/the_dudes_species = the_dude.dna.species
+		if (!(NOBLOOD in the_dudes_species.species_traits) && !the_dude.getorganslot(ORGAN_SLOT_HEART))
+			render_list += "<span class='alert ml-1'>Subject lacks a heart.</span>\n"
+		if (!(TRAIT_NOBREATH in the_dudes_species.species_traits) && !the_dude.getorganslot(ORGAN_SLOT_LUNGS))
+			render_list += "<span class='alert ml-1'>Subject lacks lungs.</span>\n"
+		if (!(TRAIT_NOMETABOLISM in the_dudes_species.species_traits) && !the_dude.getorganslot(ORGAN_SLOT_LIVER))
+			render_list += "<span class='alert ml-1'>Subject lacks a liver.</span>\n"
+		if (!(NOSTOMACH in the_dudes_species.species_traits) && !the_dude.getorganslot(ORGAN_SLOT_STOMACH))
+			render_list += "<span class='alert ml-1'>Subject lacks a stomach.</span>\n"
+
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(LAZYLEN(C.get_traumas()))
@@ -204,9 +231,9 @@ GENE SCANNER
 				trauma_text += trauma_desc
 			render_list += "<span class='alert ml-1'>Cerebral traumas detected: subject appears to be suffering from [english_list(trauma_text)].</span>\n"
 		if(C.roundstart_quirks.len)
-			render_list += "<span class='info ml-1'>Subject Major Disabilities: [C.get_trait_string(FALSE, CAT_QUIRK_MAJOR_DISABILITY)].</span>\n"
+			render_list += "<span class='info ml-1'>Subject Major Disabilities: [C.get_quirk_string(FALSE, CAT_QUIRK_MAJOR_DISABILITY)].</span>\n"
 			if(advanced)
-				render_list += "<span class='info ml-1'>Subject Minor Disabilities: [C.get_trait_string(FALSE, CAT_QUIRK_MINOR_DISABILITY)].</span>\n"
+				render_list += "<span class='info ml-1'>Subject Minor Disabilities: [C.get_quirk_string(FALSE, CAT_QUIRK_MINOR_DISABILITY)].</span>\n"
 	if(advanced)
 		render_list += "<span class='info ml-1'>Brain Activity Level: [(200 - M.getOrganLoss(ORGAN_SLOT_BRAIN))/2]%.</span>\n"
 
@@ -255,6 +282,8 @@ GENE SCANNER
 			message = ""
 			if(HAS_TRAIT_FROM(C, TRAIT_DEAF, GENETIC_MUTATION))
 				message = "\n<span class='alert ml-2'>Subject is genetically deaf.</span>"
+			else if(HAS_TRAIT_FROM(C, TRAIT_DEAF, EAR_DAMAGE))
+				message = "\n<span class='alert ml-2'>Subject is deaf from ear damage.</span>"
 			else if(HAS_TRAIT(C, TRAIT_DEAF))
 				message = "\n<span class='alert ml-2'>Subject is deaf.</span>"
 			else
@@ -387,18 +416,36 @@ GENE SCANNER
 	to_chat(user, jointext(render_list, ""), trailing_newline = FALSE) // we handled the last <br> so we don't need handholding
 
 /proc/chemscan(mob/living/user, mob/living/M)
+	if(user.incapacitated())
+		return
+
+	if(user.is_blind())
+		to_chat(user, "<span class='warning'>You realize that your scanner has no accessibility support for the blind!</span>")
+		return
+
 	if(istype(M) && M.reagents)
 		var/render_list = list()
 		if(M.reagents.reagent_list.len)
-			render_list += "<span class='notice ml-1'>Subject contains the following reagents:</span>\n"
+			render_list += "<span class='notice ml-1'>Subject contains the following reagents in their blood:</span>\n"
 			for(var/datum/reagent/R in M.reagents.reagent_list)
-				render_list += "<span class='notice ml-2'>[round(R.volume, 0.001)] units of [R.name][R.overdosed == 1 ? "</span> - <span class='boldannounce'>OVERDOSING</span>" : ".</span>"]\n"
+				render_list += "<span class='notice ml-2'>[round(R.volume, 0.001)] units of [R.name][R.overdosed ? "</span> - <span class='boldannounce'>OVERDOSING</span>" : ".</span>"]\n"
 		else
-			render_list += "<span class='notice ml-1'>Subject contains no reagents.</span>\n"
-		if(M.reagents.addiction_list.len)
+			render_list += "<span class='notice ml-1'>Subject contains no reagents in their blood.</span>\n"
+		var/obj/item/organ/stomach/belly = M.getorganslot(ORGAN_SLOT_STOMACH)
+		if(belly)
+			if(belly.reagents.reagent_list.len)
+				render_list += "<span class='notice ml-1'>Subject contains the following reagents in their stomach:</span>\n"
+				for(var/bile in belly.reagents.reagent_list)
+					var/datum/reagent/bit = bile
+					render_list += "<span class='notice ml-2'>[round(bit.volume, 0.001)] units of [bit.name][bit.overdosed ? "</span> - <span class='boldannounce'>OVERDOSING</span>" : ".</span>"]\n"
+			else
+				render_list += "<span class='notice ml-1'>Subject contains no reagents in their stomach.</span>\n"
+
+		var/list/addictions = M.get_addiction_list()
+		if(addictions.len)
 			render_list += "<span class='boldannounce ml-1'>Subject is addicted to the following reagents:</span>\n"
-			for(var/datum/reagent/R in M.reagents.addiction_list)
-				render_list += "<span class='alert ml-2'>[R.name]</span>\n"
+			for(var/datum/reagent/reagent in addictions)
+				render_list += "<span class='alert ml-2'>[reagent.name]</span>\n"
 		else
 			render_list += "<span class='notice ml-1'>Subject is not addicted to any reagents.</span>\n"
 
@@ -422,7 +469,11 @@ GENE SCANNER
 
 /// Displays wounds with extended information on their status vs medscanners
 /proc/woundscan(mob/user, mob/living/carbon/patient, obj/item/healthanalyzer/wound/scanner)
-	if(!istype(patient))
+	if(!istype(patient) || user.incapacitated())
+		return
+
+	if(user.is_blind())
+		to_chat(user, "<span class='warning'>You realize that your scanner has no accessibility support for the blind!</span>")
 		return
 
 	var/render_list = ""
@@ -435,8 +486,12 @@ GENE SCANNER
 		render_list += "</span>"
 
 	if(render_list == "")
-		playsound(scanner, 'sound/machines/ping.ogg', 50, FALSE)
-		to_chat(user, "<span class='notice'>\The [scanner] makes a happy ping and briefly displays a smiley face with several exclamation points! It's really excited to report that [patient] has no wounds!</span>")
+		if(istype(scanner))
+			// Only emit the cheerful scanner message if this scan came from a scanner
+			playsound(scanner, 'sound/machines/ping.ogg', 50, FALSE)
+			to_chat(user, "<span class='notice'>\The [scanner] makes a happy ping and briefly displays a smiley face with several exclamation points! It's really excited to report that [patient] has no wounds!</span>")
+		else
+			to_chat(user, "<span class='notice ml-1'>No wounds detected in subject.</span>")
 	else
 		to_chat(user, jointext(render_list, ""))
 
@@ -716,7 +771,8 @@ GENE SCANNER
 	name = "nanite scanner"
 	icon = 'icons/obj/device.dmi'
 	icon_state = "nanite_scanner"
-	inhand_icon_state = "nanite_remote"
+	inhand_icon_state = "electronic"
+	worn_icon_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	desc = "A hand-held body scanner able to detect nanites and their programming."
@@ -744,6 +800,7 @@ GENE SCANNER
 	icon = 'icons/obj/device.dmi'
 	icon_state = "gene"
 	inhand_icon_state = "healthanalyzer"
+	worn_icon_state = "healthanalyzer"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	desc = "A hand-held scanner for analyzing someones gene sequence on the fly. Hold near a DNA console to update the internal database."
@@ -762,7 +819,7 @@ GENE SCANNER
 
 /obj/item/sequence_scanner/attack(mob/living/M, mob/living/carbon/human/user)
 	add_fingerprint(user)
-	if (!HAS_TRAIT(M, TRAIT_RADIMMUNE) && !HAS_TRAIT(M, TRAIT_BADDNA)) //no scanning if its a husk or DNA-less Species
+	if (!HAS_TRAIT(M, TRAIT_GENELESS) && !HAS_TRAIT(M, TRAIT_BADDNA)) //no scanning if its a husk or DNA-less Species
 		user.visible_message("<span class='notice'>[user] analyzes [M]'s genetic sequence.</span>", \
 							"<span class='notice'>You analyze [M]'s genetic sequence.</span>")
 		gene_scan(M, user)
