@@ -27,4 +27,16 @@
 		M.fakevomit(0)
 	return ..()
 
+
+/datum/reagent/consumable/superlaughter/traitor_pen_variant
+	name = "Super Laughter"
+	description = "Funny until you're the one laughing."
+	metabolization_rate = 1.5 * REAGENTS_METABOLISM
+	color = "#FF4DD2"
+	taste_description = "laughter"
+
+/datum/reagent/consumable/superlaughter/on_mob_life(mob/living/carbon/M)
+	M.emote("laugh")
+	..()
+
 //end
