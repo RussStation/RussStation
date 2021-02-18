@@ -21,5 +21,5 @@
 			The pen holds one dose of the mixture, and can be refilled with any chemicals. Note that before the target \
 			falls asleep, they will be able to move and act."
 	item =  /obj/item/pen/laughter
-	cost = 4
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
+	cost = 6
+	restricted_roles = list("Clown")

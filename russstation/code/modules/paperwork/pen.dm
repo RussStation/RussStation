@@ -12,6 +12,6 @@
 
 /obj/item/pen/laughter/Initialize()
 	. = ..()
-	create_reagents(45, OPENCONTAINER)
+	create_reagents(25, OPENCONTAINER)
 	reagents.add_reagent(/datum/reagent/toxin/lexorin, 5)
-	reagents.add_reagent(/datum/reagent/consumable/superlaughter/traitor_pen_variant, 20)
+	reagents.add_reagent(/datum/reagent/consumable/superlaughter/traitor_pen, 20)
