@@ -13,3 +13,13 @@
 	cost = 7
 	limited_stock = 2
 	restricted_roles = list("Janitor")
+
+/datum/uplink_item/role_restricted/laughter_pen
+	name = "Deadly Laughter Pen"
+	desc = "A syringe disguised as a functional pen, filled with a potent mix of drugs, including a \
+			chemical that causes uncontrollable laughter and a toxin that deprives the body of oxygen. \
+			The pen holds one dose of the mixture, and can be refilled with any chemicals. Note that before the target \
+			falls asleep, they will be able to move and act."
+	item =  /obj/item/pen/laughter
+	cost = 6
+	restricted_roles = list("Clown")
