@@ -743,13 +743,19 @@ SUBSYSTEM_DEF(ticker)
 		'sound/roundend/newroundsexy.ogg',
 		'sound/roundend/apcdestroyed.ogg',
 		'sound/roundend/bangindonk.ogg',
-		'sound/roundend/leavingtg.ogg',
 		'sound/roundend/its_only_game.ogg',
 		'sound/roundend/yeehaw.ogg',
 		'sound/roundend/disappointed.ogg',
 		'sound/roundend/scrunglartiy.ogg',
 		'sound/roundend/petersondisappointed.ogg',
-		'sound/roundend/bully2.ogg'\
+		'sound/roundend/bully2.ogg',
+		// honk start - based Tyrone voice clips
+		'russstation/sound/roundend/allAccess.ogg',
+		'russstation/sound/roundend/greenText.ogg',
+		'russstation/sound/roundend/honk.ogg',
+		'russstation/sound/roundend/leavingRuss.ogg',
+		'russstation/sound/roundend/plantGang.ogg'\
+		// honk end
 		)
 	///The reference to the end of round sound that we have chosen.
 	var/sound/end_of_round_sound_ref = sound(round_end_sound)

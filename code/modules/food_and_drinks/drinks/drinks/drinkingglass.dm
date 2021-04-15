@@ -42,6 +42,11 @@
 	var/datum/reagent/largest_reagent = reagents.get_master_reagent()
 	if(largest_reagent?.glass_icon_state)
 		icon_state = largest_reagent.glass_icon_state
+	
+	// honk start -- check for the icon states. Thanks to hippie for the pattern.
+	if(largest_reagent.glass_icon_state)
+		check_full_icon_state(largest_reagent)
+	// honk end
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/update_overlays()
@@ -49,14 +54,9 @@
 	if(icon_state != initial(icon_state))
 		return
 
-	// honk start -- check for the icon states. Thanks to hippie for the pattern.
-	if(R.glass_icon_state)
-		check_full_icon_state(R)
-	else
-	// honk end -- watch the indent
-		var/mutable_appearance/reagent_overlay = mutable_appearance(icon, "glassoverlay")
-		reagent_overlay.color = mix_color_from_reagents(reagents.reagent_list)
-		. += reagent_overlay
+	var/mutable_appearance/reagent_overlay = mutable_appearance(icon, "glassoverlay")
+	reagent_overlay.color = mix_color_from_reagents(reagents.reagent_list)
+	. += reagent_overlay
 
 //Shot glasses!//
 //  This lets us add shots in here instead of lumping them in with drinks because >logic  //

@@ -180,7 +180,7 @@
 		C.flash_act()
 
 	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/food/snacks/grown/russ/citrus/slimelime(T)
+		new /obj/item/food/grown/russ/citrus/slimelime(T)
 	..()
 //honk end
 //Blue

@@ -116,4 +116,4 @@
 	turns_per_move = 1
 
 	del_on_death = TRUE
-	loot = list(/obj/item/reagent_containers/food/snacks/grown/russ/citrus/white)
+	loot = list(/obj/item/food/grown/russ/citrus/white)

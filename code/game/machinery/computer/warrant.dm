@@ -93,7 +93,7 @@
 /obj/machinery/computer/warrant/Topic(href, href_list)
 	if(..())
 		return
-	var/mob/M = usr
+	var/mob/living/M = usr
 	switch(href_list["choice"])
 		if("Login")
 			var/obj/item/card/id/scan = M.get_idcard(TRUE)

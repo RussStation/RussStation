@@ -993,7 +993,7 @@
 	taste_description = "iron"
 	material = /datum/material/iron
 	//honk - start
-	produce_type = /obj/item/stack/sheet/metal
+	produce_type = /obj/item/stack/sheet/iron
 	attack_force = 15
 	pick_speed = 1
 	blunt_damage = TRUE

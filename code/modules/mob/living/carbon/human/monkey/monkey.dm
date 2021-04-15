@@ -50,7 +50,7 @@
 		if(ancestor_chain > 1)
 			name_to_use += " \Roman[ancestor_chain]"
 	else if(prob(10))
-		name_to_use = pick(list("Professor Bobo", "Deempisi's Revenge", "Furious George", "King Louie", "Dr. Zaius", "Jimmy Rustles", "Dinner", "Lanky"))
+		name_to_use = pick(list("Russ","Father Knees","Fluff","Lily","Yerikk","Wah","Ari","Conx","Fami")) // honk - rare monkey names live here, hard coded...
 		if(name_to_use == "Furious George")
 			ai_controller = /datum/ai_controller/monkey/angry //hes always mad
 	. = ..()

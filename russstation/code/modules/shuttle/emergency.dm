@@ -5,4 +5,4 @@
 	invertTimer()
 	mode = SHUTTLE_RECALL
 
-	priority_announce("The emergency shuttle has been recalled.", null, 'sound/ai/shuttlerecalled.ogg', "Priority")
+	priority_announce("The emergency shuttle has been recalled.", null, 'sound/ai/default/shuttlerecalled.ogg', "Priority")

@@ -336,7 +336,7 @@
 		if(!arrivals_docked)
 			var/atom/movable/screen/splash/Spl = new(character.client, TRUE)
 			Spl.Fade(TRUE)
-			character.playsound_local(get_turf(character), 'sound/voice/ApproachingRuss.ogg', 25) // honk - we're not tg
+			character.playsound_local(get_turf(character), 'russstation/sound/voice/ApproachingRuss.ogg', 25) // honk - we're not tg
 
 		character.update_parallax_teleport()
 

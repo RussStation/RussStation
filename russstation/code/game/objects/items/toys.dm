@@ -1,7 +1,7 @@
 /obj/item/toy/gun/bigiron
 	name = "Big Iron"
 	desc = "Keep it on yer hip."
-	icon = 'icons/obj/guns/projectile.dmi'
+	icon = 'icons/obj/guns/ballistic.dmi'
 	icon_state = "russianrevolver"
 	inhand_icon_state = "gun"
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
