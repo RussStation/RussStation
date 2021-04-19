@@ -90,7 +90,7 @@
 /obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)
 	if(!istype(W, /obj/item/melee/smith_hammer))
 		..()
-	if(user.a_intent == INTENT_HARM)
+	if(user.combat_mode)
 		to_chat(user, "Be careful! You'll spill hot metal on the anvil with that intent!")
 		return //spill that shit if it has reagents in it
 	if(!current_mold && istype(W, /obj/item/reagent_containers/glass/mold))

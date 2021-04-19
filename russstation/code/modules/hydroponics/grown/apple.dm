@@ -10,13 +10,13 @@
 	icon_harvest = "bungapple-harvest"
 	icon_dead = "apple-dead"
 	plantname = "Bung Apple Tree"
-	product = /obj/item/reagent_containers/food/snacks/grown/russ/bung
+	product = /obj/item/food/grown/russ/bung
 	mutatelist = list()
 	genes = list(/datum/plant_gene/trait/squash, /datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/smoke)
 	reagents_add = list(/datum/reagent/consumable/bungwater = 0.4)
 	rarity = 40
 
-/obj/item/reagent_containers/food/snacks/grown/russ/bung
+/obj/item/food/grown/russ/bung
 	seed = /obj/item/seeds/russ/bung
 	name = "bung apple"
 	desc = "Smells horrendous. Give it to the clown."

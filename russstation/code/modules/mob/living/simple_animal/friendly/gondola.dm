@@ -8,5 +8,5 @@
     turns_per_move = 15 // Extra slow
     icon_state = "camdola"
     icon_living = "camdola"
-    loot = list(/obj/effect/decal/cleanable/blood/gibs, /obj/item/stack/sheet/animalhide/gondola = 1, /obj/item/reagent_containers/food/snacks/meat/slab/gondola/russ/camdola = 1)
+    loot = list(/obj/effect/decal/cleanable/blood/gibs, /obj/item/stack/sheet/animalhide/gondola = 1, /obj/item/food/meat/slab/gondola/russ/camdola = 1)
 	

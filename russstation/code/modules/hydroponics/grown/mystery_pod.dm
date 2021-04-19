@@ -6,7 +6,7 @@
 	icon_state = "seed-mysterypod"
 	species = "mysterypod"
 	plantname = "Mystery Pod"
-	product = /obj/item/reagent_containers/food/snacks/grown/russ/mystery_pod
+	product = /obj/item/food/grown/russ/mystery_pod
 	lifespan = 40
 	endurance = 20
 	production = 1
@@ -15,7 +15,7 @@
 	icon_dead = "mysterypod-dead"
 	reagents_add = list(/datum/reagent/consumable/nothing = 0.5)
 
-/obj/item/reagent_containers/food/snacks/grown/russ/mystery_pod
+/obj/item/food/grown/russ/mystery_pod
 	seed = /obj/item/seeds/russ/mystery
 	name = "mystery pod"
 	desc = "Feels extremely heavy. Whats inside this thing?"
@@ -23,7 +23,7 @@
 	filling_color = "#000000"
 
 
-/obj/item/reagent_containers/food/snacks/grown/russ/mystery_pod/attack_self(mob/user)
+/obj/item/food/grown/russ/mystery_pod/attack_self(mob/user)
 	var/B
 	var/num = 25
 
@@ -64,7 +64,7 @@
 			if(100 to 103)
 				B = pick(/obj/item/gun/ballistic/automatic/l6_saw/toy/unrestricted/riot,
 				/obj/item/gun/ballistic/automatic/c20r/toy/unrestricted/riot,
-				/obj/item/gun/ballistic/automatic/toy/pistol/riot/unrestricted)
+				/obj/item/gun/ballistic/automatic/toy/unrestricted)
 			if(104)
 				B = /obj/item/storage/box/syndie_kit/chemical
 			if(105)
@@ -335,7 +335,7 @@
 			/mob/living/simple_animal/hostile/bear/snow)
 
 		if (110 to 120)
-			B = /obj/item/storage/pill_bottle/floorpill/full
+			B = /obj/item/storage/pill_bottle/maintenance_pill/full
 
 		if (121 to 148)
 			B = pick(/obj/item/reagent_containers/food/drinks/bottle/gin,
@@ -457,7 +457,7 @@
 			/obj/item/stack/sheet/animalhide/ashdrake,
 			/obj/machinery/vending/donksofttoyvendor,
 			/obj/item/gun/ballistic/automatic/c20r/toy/unrestricted,
-			/obj/item/gun/ballistic/automatic/toy/pistol/unrestricted,
+			/obj/item/gun/ballistic/automatic/toy/unrestricted,
 			/obj/item/gun/ballistic/automatic/toy/unrestricted,
 			/obj/item/gun/ballistic/automatic/l6_saw/toy/unrestricted,
 			/obj/item/toy/crayon/rainbow,
@@ -535,11 +535,11 @@
 			new /obj/item/bikehorn(get_turf(user), num)
 			new /obj/structure/statue/bananium/clown(get_turf(user), num)
 			new /obj/item/reagent_containers/food/drinks/soda_cans/canned_laughter(get_turf(user), num)
-			new /obj/item/reagent_containers/food/snacks/pie/cream(get_turf(user), num)
-			new /obj/item/reagent_containers/food/snacks/pie/cream(get_turf(user), num)
-			new /obj/item/reagent_containers/food/snacks/pie/cream(get_turf(user), num)
-			new /obj/item/reagent_containers/food/snacks/pie/cream(get_turf(user), num)
-			new /obj/item/reagent_containers/food/snacks/pie/cream(get_turf(user), num)
+			new /obj/item/food/pie/cream(get_turf(user), num)
+			new /obj/item/food/pie/cream(get_turf(user), num)
+			new /obj/item/food/pie/cream(get_turf(user), num)
+			new /obj/item/food/pie/cream(get_turf(user), num)
+			new /obj/item/food/pie/cream(get_turf(user), num)
 			new /obj/item/reagent_containers/spray/waterflower(get_turf(user), num)
 			new /obj/item/storage/backpack/clown(get_turf(user), num)
 			new /obj/item/seeds/banana(get_turf(user), num)

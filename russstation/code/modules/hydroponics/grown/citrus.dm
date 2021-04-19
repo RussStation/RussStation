@@ -7,7 +7,7 @@
 	icon_state = "seed-white"
 	species = "white"
 	plantname = "White Tree"
-	product = /obj/item/reagent_containers/food/snacks/grown/russ/citrus/white
+	product = /obj/item/food/grown/russ/citrus/white
 	lifespan = 70
 	endurance = 20
 	potency = 40
@@ -18,7 +18,7 @@
 	mutatelist = list(/obj/item/seeds/russ/goblin)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.05, /datum/reagent/sodium = 0.5, /datum/reagent/consumable/sugar = 0.1)
 
-/obj/item/reagent_containers/food/snacks/grown/russ/citrus/white
+/obj/item/food/grown/russ/citrus/white
 	seed = /obj/item/seeds/russ/white
 	name = "white"
 	desc = "It's a very sweet fruit. The color white was named after the fruit of this tree."
@@ -33,7 +33,7 @@
 	icon_state = "seed-goblin"
 	species = "gnorange"
 	plantname = "Gnorange Tree"
-	product = /obj/item/reagent_containers/food/snacks/grown/russ/citrus/goblin
+	product = /obj/item/food/grown/russ/citrus/goblin
 	lifespan = 70
 	endurance = 20
 	icon_grow = "lime-grow"
@@ -43,7 +43,7 @@
 	reagents_add = list(/datum/reagent/potassium = 0.1, /datum/reagent/consumable/sugar = 0.3, /datum/reagent/sodium = 0.4, /datum/reagent/toxin/cyanide = 0.1, /datum/reagent/blood/ = 0.1)
 	rarity = 50
 
-/obj/item/reagent_containers/food/snacks/grown/russ/citrus/goblin
+/obj/item/food/grown/russ/citrus/goblin
 	seed = /obj/item/seeds/russ/goblin
 	name = "gnorange"
 	desc = "You think you hear a faint honk coming from within the fruit. That or the clown is stuck in the vents again."
@@ -52,13 +52,13 @@
 	filling_color = "#FFFFFF"
 	distill_reagent = "demonsblood"
 
-/obj/item/reagent_containers/food/snacks/grown/russ/citrus/goblin/attack(mob/M, mob/user, def_zone)
+/obj/item/food/grown/russ/citrus/goblin/attack(mob/M, mob/user, def_zone)
 	if(awakening)
 		to_chat(user, "<span class='warning'>The goblin is twitching and shaking, preventing you from eating it.</span>")
 		return
 	..()
 
-/obj/item/reagent_containers/food/snacks/grown/russ/citrus/goblin/attack_self(mob/user)
+/obj/item/food/grown/russ/citrus/goblin/attack_self(mob/user)
 	if(awakening || istype(user.loc, /turf/open/space))
 		return
 	to_chat(user, "<span class='notice'>You begin to awaken the goblin...</span>")
@@ -82,7 +82,7 @@
 	icon_state = "seed-slimelime"
 	species = "slimelime"
 	plantname = "Slime Lime Tree"
-	product = /obj/item/reagent_containers/food/snacks/grown/russ/citrus/slimelime
+	product = /obj/item/food/grown/russ/citrus/slimelime
 	lifespan = 25
 	endurance = 25
 	production = 2
@@ -93,7 +93,7 @@
 	reagents_add = list(/datum/reagent/toxin/slimejelly = 0.05, /datum/reagent/consumable/nutriment/vitamin = 0.09, /datum/reagent/consumable/limejuice = 0.1)
 	rarity = 80
 
-/obj/item/reagent_containers/food/snacks/grown/russ/citrus/slimelime
+/obj/item/food/grown/russ/citrus/slimelime
 	seed = /obj/item/seeds/russ/slimelime
 	name = "slime lime"
 	desc = "A sticky and transparent lime, made of slime!."

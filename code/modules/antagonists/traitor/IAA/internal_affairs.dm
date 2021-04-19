@@ -13,6 +13,9 @@
 	var/last_man_standing = FALSE
 	var/list/datum/mind/targets_stolen
 
+/datum/antagonist/traitor/internal_affairs/New()
+	. = ..()
+	LAZYADD(targets_stolen, src)
 
 /datum/antagonist/traitor/internal_affairs/proc/give_pinpointer()
 	if(!owner)
@@ -52,14 +55,14 @@
 	id = "agent_pinpointer"
 	duration = -1
 	tick_interval = PINPOINTER_PING_TIME
-	alert_type = /obj/screen/alert/status_effect/agent_pinpointer
+	alert_type = /atom/movable/screen/alert/status_effect/agent_pinpointer
 	var/minimum_range = PINPOINTER_MINIMUM_RANGE
 	var/range_fuzz_factor = PINPOINTER_EXTRA_RANDOM_RANGE
 	var/mob/scan_target = null
 	var/range_mid = 8
 	var/range_far = 16
 
-/obj/screen/alert/status_effect/agent_pinpointer
+/atom/movable/screen/alert/status_effect/agent_pinpointer
 	name = "Internal Affairs Integrated Pinpointer"
 	desc = "Even stealthier than a normal implant."
 	icon = 'icons/obj/device.dmi'
@@ -116,7 +119,7 @@
 	if(!objectives.len)
 		return
 	for (var/objective_ in objectives)
-		if(!(istype(objective_, /datum/objective/escape)||istype(objective_, /datum/objective/survive)))
+		if(!(istype(objective_, /datum/objective/escape)||istype(objective_, /datum/objective/survive/malf)))
 			continue
 		remove_objective(objective_)
 
@@ -136,7 +139,7 @@
 
 /datum/antagonist/traitor/internal_affairs/reinstate_escape_objective()
 	..()
-	var/objtype = traitor_kind == TRAITOR_HUMAN ? /datum/objective/escape : /datum/objective/survive
+	var/objtype = traitor_kind == TRAITOR_HUMAN ? /datum/objective/escape : /datum/objective/survive/malf
 	var/datum/objective/escape_objective = new objtype
 	escape_objective.owner = owner
 	add_objective(escape_objective)
@@ -244,7 +247,7 @@
 /datum/antagonist/traitor/internal_affairs/forge_traitor_objectives()
 	forge_iaa_objectives()
 
-	var/objtype = traitor_kind == TRAITOR_HUMAN ? /datum/objective/escape : /datum/objective/survive
+	var/objtype = traitor_kind == TRAITOR_HUMAN ? /datum/objective/escape : /datum/objective/survive/malf
 	var/datum/objective/escape_objective = new objtype
 	escape_objective.owner = owner
 	add_objective(escape_objective)
