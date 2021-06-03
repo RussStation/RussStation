@@ -102,6 +102,11 @@ def get_args():
 		"-f", "--file",
 		help="Process a single file (mostly for testing)"
 	)
+	parser.add_argument(
+		"--dme",
+		action="store_true",
+		help="Fix DME includes in case file changes weren't handled by VS Code extension"
+	)
 	return parser.parse_args()
 
 # get a clean master to branch from
@@ -528,11 +533,12 @@ def fix_build_script(repo):
 	with open(build_path, "r") as build_file:
 		build_content = build_file.read()
 	# replace the dme var definition so it uses ours
-	build_content.replace("DME_NAME = '" + their_dme[:their_dme.find(".dme")], "DME_NAME = '" + our_dme[:our_dme.find(".dme")])
+	build_content = build_content.replace("DME_NAME = '" + their_dme[:their_dme.find(".dme")], "DME_NAME = '" + our_dme[:our_dme.find(".dme")])
 	# add russstation folder to dm dependency list (ensures build retries if only our files change)
-	build_content.replace(".depends('code/**')", ".depends('code/**')\n  .depends('russstation/**')")
+	build_content = build_content.replace(".depends('code/**')", ".depends('code/**')\n  .depends('russstation/**')")
 	with open(build_path, "w") as build_file:
 		build_file.write(build_content)
+    repo.git.add(build_path)
 	printv("Replaced build script vars")
 
 # say anything that still needs said
@@ -562,6 +568,9 @@ if __name__ == "__main__":
 	elif args.file:
 		# single file testing
 		resolve_conflicts(repo, args.file)
+	elif args.dme:
+		# just fix dme includes
+		update_includes(repo)
 	else:
 		start = time.perf_counter()
 		clean_state(repo)

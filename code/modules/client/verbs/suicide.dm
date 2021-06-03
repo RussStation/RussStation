@@ -36,6 +36,9 @@
 	if(!canSuicide())
 		return
 	if(intentional || confirm == "Yes") // honk -- intentional suicide does not require confirmation
+		if(suiciding)
+			to_chat(src, "<span class='warning'>You're already trying to commit suicide!</span>")
+			return
 		set_suicide(TRUE) //need to be called before calling suicide_act as fuck knows what suicide_act will do with your suicider
 		var/obj/item/held_item = get_active_held_item()
 		if(held_item)
@@ -116,7 +119,7 @@
 	set hidden = TRUE
 	if(!canSuicide())
 		return
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	var/confirm = tgui_alert(usr,"Are you sure you want to commit suicide?", "Confirm Suicide", list("Yes", "No"))
 	if(!canSuicide())
 		return
 	if(confirm == "Yes")
@@ -133,7 +136,7 @@
 	set hidden = TRUE
 	if(!canSuicide())
 		return
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	var/confirm = tgui_alert(usr,"Are you sure you want to commit suicide?", "Confirm Suicide", list("Yes", "No"))
 	if(!canSuicide())
 		return
 	if(confirm == "Yes")
@@ -152,7 +155,7 @@
 	set hidden = TRUE
 	if(!canSuicide())
 		return
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	var/confirm = tgui_alert(usr,"Are you sure you want to commit suicide?", "Confirm Suicide", list("Yes", "No"))
 	if(!canSuicide())
 		return
 	if(confirm == "Yes")
@@ -169,7 +172,7 @@
 
 /mob/living/silicon/pai/verb/suicide()
 	set hidden = TRUE
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	var/confirm = tgui_alert(usr,"Are you sure you want to commit suicide?", "Confirm Suicide", list("Yes", "No"))
 	if(confirm == "Yes")
 		var/turf/T = get_turf(src.loc)
 		T.visible_message("<span class='notice'>[src] flashes a message across its screen, \"Wiping core files. Please acquire a new personality to continue using pAI device functions.\"</span>", null, \
@@ -186,7 +189,7 @@
 	set hidden = TRUE
 	if(!canSuicide())
 		return
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	var/confirm = tgui_alert(usr,"Are you sure you want to commit suicide?", "Confirm Suicide", list("Yes", "No"))
 	if(!canSuicide())
 		return
 	if(confirm == "Yes")
@@ -206,7 +209,7 @@
 	set hidden = TRUE
 	if(!canSuicide())
 		return
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	var/confirm = tgui_alert(usr,"Are you sure you want to commit suicide?", "Confirm Suicide", list("Yes", "No"))
 	if(!canSuicide())
 		return
 	if(confirm == "Yes")
