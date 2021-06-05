@@ -442,15 +442,20 @@ def dme_sort_compare(left, right):
 				return -1 if left_ext < right_ext else 1
 			# else fall down to the full name compare
 		# directory/filename compare - _ should be before letters but python doesn't do that
-		return -1 if l < r else 1#
-		_left = l.startswith("_")
-		_right = r.startswith("_")
-		if _left and not _right:
-			return -1
-		elif _right and not _left:
-			return 1
-		else:
-			return -1 if l < r else 1
+		return string_compare(l, r)
+
+# string compare where _ is first
+def string_compare(left, right):
+	_left = left.startswith("_")
+	_right = right.startswith("_")
+	if _left and not _right:
+		return -1
+	elif not _left and _right:
+		return 1
+	elif _left and _right:
+		return string_compare(left[1:], right[1:])
+	else:
+		return -1 if left < right else 1
 
 # get unique includes from both dmes, combine
 def update_includes(repo):
@@ -538,7 +543,7 @@ def fix_build_script(repo):
 	build_content = build_content.replace(".depends('code/**')", ".depends('code/**')\n  .depends('russstation/**')")
 	with open(build_path, "w") as build_file:
 		build_file.write(build_content)
-    repo.git.add(build_path)
+	repo.git.add(build_path)
 	printv("Replaced build script vars")
 
 # say anything that still needs said
