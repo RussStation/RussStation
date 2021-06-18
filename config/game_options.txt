@@ -79,118 +79,6 @@ ALERT_RED_DOWNTO The station's destruction has been averted. There is still howe
 ALERT_DELTA Destruction of the station is imminent. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
 
 
-
-## GAME MODES ###
-
-## Uncomment to not send a roundstart intercept report. Gamemodes may override this.
-#NO_INTERCEPT_REPORT
-
-## Probablities for game modes chosen in 'secret' and 'random' modes.
-## Default probablity is 1, increase to make that mode more likely to be picked.
-## Set to 0 to disable that mode.
-
-PROBABILITY TRAITOR 10
-PROBABILITY TRAITORBRO 10
-PROBABILITY TRAITORCHAN 10
-PROBABILITY INTERNAL_AFFAIRS 5
-PROBABILITY NUCLEAR 5
-PROBABILITY REVOLUTION 5
-PROBABILITY CULT 5
-PROBABILITY CHANGELING 10
-PROBABILITY WIZARD 5
-PROBABILITY MONKEY 0
-PROBABILITY METEOR 0
-PROBABILITY EXTENDED 0
-PROBABILITY SECRET_EXTENDED 0
-PROBABILITY CLOWNOPS 4
-
-## You probably want to keep sandbox off by default for secret and random.
-PROBABILITY SANDBOX 0
-
-## Percent weight reductions for three of the most recent modes
-
-REPEATED_MODE_ADJUST 45 30 10
-
-## Toggles for continuous modes.
-## Modes that aren't continuous will end the instant all antagonists are dead.
-
-CONTINUOUS TRAITOR
-CONTINUOUS TRAITORBRO
-CONTINUOUS TRAITORCHAN
-CONTINUOUS INTERNAL_AFFAIRS
-#CONTINUOUS NUCLEAR
-#CONTINUOUS REVOLUTION
-CONTINUOUS CULT
-CONTINUOUS CHANGELING
-#CONTINUOUS WIZARD
-#CONTINUOUS MONKEY
-
-##Note: do not toggle continuous off for these modes, as they have no antagonists and would thus end immediately!
-
-CONTINUOUS METEOR
-CONTINUOUS EXTENDED
-CONTINUOUS SECRET_EXTENDED
-
-
-## Toggles for allowing midround antagonists (aka mulligan antagonists).
-## In modes that are continuous, if all antagonists should die then a new set of antagonists will be created.
-
-MIDROUND_ANTAG TRAITOR
-#MIDROUND_ANTAG TRAITORBRO
-MIDROUND_ANTAG TRAITORCHAN
-MIDROUND_ANTAG INTERNAL_AFFAIRS
-#MIDROUND_ANTAG  NUCLEAR
-MIDROUND_ANTAG  REVOLUTION
-MIDROUND_ANTAG CULT
-MIDROUND_ANTAG CHANGELING
-MIDROUND_ANTAG WIZARD
-#MIDROUND_ANTAG  MONKEY
-
-## Uncomment these for overrides of the minimum / maximum number of players in a round type.
-## If you set any of these occasionally check to see if you still need them as the modes
-## will still be actively rebalanced around the SUGGESTED populations, not your overrides.
-## Notes: For maximum number of players a value of -1 means no maximum. Setting minimums to
-## VERY low numbers (< 5) can lead to errors if the roundtypes were not designed for that.
-
-MIN_POP TRAITOR 0
-MAX_POP TRAITOR -1
-
-MIN_POP TRAITORBRO 0
-MAX_POP TRAITORBRO -1
-
-MIN_POP TRAITORCHAN 15
-MAX_POP TRAITORCHAN -1
-
-#MIN_POP DOUBLE_AGENTS 25
-#MAX_POP DOUBLE_AGENTS -1
-
-MIN_POP NUCLEAR 0
-MAX_POP NUCLEAR -1
-
-MIN_POP REVOLUTION 20
-MAX_POP REVOLUTION -1
-
-MIN_POP CULT 24
-MAX_POP CULT -1
-
-MIN_POP CHANGELING 15
-MAX_POP CHANGELING -1
-
-MIN_POP WIZARD 20
-MAX_POP WIZARD -1
-
-MIN_POP MONKEY 20
-MAX_POP MONKEY -1
-
-MIN_POP METEOR 0
-MAX_POP METEOR -1
-
-## Setting at least one mode to be playable at 0/1 players is required.
-#MIN_POP EXTENDED 0
-#MAX_POP EXTENDED -1
-
-
-
 ## The amount of time it takes for the emergency shuttle to be called, from round start.
 SHUTTLE_REFUEL_DELAY 12000
 
@@ -223,12 +111,6 @@ ENFORCE_HUMAN_AUTHORITY
 
 ## If late-joining players have a chance to become a traitor/changeling
 ALLOW_LATEJOIN_ANTAGONISTS
-
-## The maximum amount of extra tickets a user may use from their ticket bank in addition to the default tickets
-MAX_TICKETS_PER_ROLL 100
-
-## Uncomment to allow players to see the set odds of different rounds in secret/random in the get server revision screen. This will NOT tell the current roundtype.
-SHOW_GAME_TYPE_ODDS
 
 ## Uncomment to prevent the nuclear operative leader from getting the war declaration item
 #DISABLE_WAROPS
@@ -466,14 +348,6 @@ STARLIGHT
 
 ## Uncomment to bring back old grey suit assistants instead of the now default rainbow colored assistants.
 GREY_ASSISTANTS
-
-## Midround Antag (aka Mulligan antag) config options ###
-
-## A time, in minutes, after which the midround antag system stops attempting to run and continuous rounds end immediately upon completion.
-MIDROUND_ANTAG_TIME_CHECK 60
-
-## A ratio of living to total crew members, the lower this is, the more people will have to die in order for midround antag to be skipped
-MIDROUND_ANTAG_LIFE_CHECK 0.7
 
 ##Limit Spell Choices##
 ## Uncomment to disallow wizards from using certain spells that may be too chaotic/fun for your playerbase
