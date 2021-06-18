@@ -61,11 +61,6 @@ SUBSYSTEM_DEF(vote)
 				choices["Continue Playing"] += non_voters.len
 				if(choices["Continue Playing"] >= greatest_votes)
 					greatest_votes = choices["Continue Playing"]
-			else if(mode == "gamemode")
-				if(GLOB.master_mode in choices)
-					choices[GLOB.master_mode] += non_voters.len
-					if(choices[GLOB.master_mode] >= greatest_votes)
-						greatest_votes = choices[GLOB.master_mode]
 			else if(mode == "map")
 				for (var/non_voter_ckey in non_voters)
 					var/client/C = non_voters[non_voter_ckey]
@@ -114,7 +109,7 @@ SUBSYSTEM_DEF(vote)
 		text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 	log_vote(text)
 	remove_action_buttons()
-	to_chat(world, "\n<font color='purple'>[text]</font>")
+	to_chat(world, "\n<span class='infoplain'><font color='purple'>[text]</font></span>")
 	return .
 
 /datum/controller/subsystem/vote/proc/result()
@@ -125,13 +120,6 @@ SUBSYSTEM_DEF(vote)
 			if("restart")
 				if(. == "Restart Round")
 					restart = TRUE
-			if("gamemode")
-				if(GLOB.master_mode != .)
-					SSticker.save_mode(.)
-					if(SSticker.HasRoundStarted())
-						restart = TRUE
-					else
-						GLOB.master_mode = .
 			if("map")
 				SSmapping.changemap(global.config.maplist[.])
 				SSmapping.map_voted = TRUE
@@ -195,8 +183,6 @@ SUBSYSTEM_DEF(vote)
 		switch(vote_type)
 			if("restart")
 				choices.Add("Restart Round","Continue Playing")
-			if("gamemode")
-				choices.Add(config.votable_modes)
 			if("map")
 				if(!lower_admin && SSmapping.map_voted)
 					to_chat(usr, "<span class='warning'>The next map has already been selected.</span>")
@@ -234,7 +220,7 @@ SUBSYSTEM_DEF(vote)
 			text += "\n[question]"
 		log_vote(text)
 		var/vp = CONFIG_GET(number/vote_period)
-		to_chat(world, "\n<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='byond://winset?command=vote'>here</a> to place your votes.\nYou have [DisplayTimeText(vp)] to vote.</font>")
+		to_chat(world, "\n<span class='infoplain'><font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='byond://winset?command=vote'>here</a> to place your votes.\nYou have [DisplayTimeText(vp)] to vote.</font></span>")
 		time_remaining = round(vp/10)
 		for(var/c in GLOB.clients)
 			var/client/C = c
@@ -269,7 +255,6 @@ SUBSYSTEM_DEF(vote)
 /datum/controller/subsystem/vote/ui_data(mob/user)
 	var/list/data = list(
 		"allow_vote_map" = CONFIG_GET(flag/allow_vote_map),
-		"allow_vote_mode" = CONFIG_GET(flag/allow_vote_mode),
 		"allow_vote_restart" = CONFIG_GET(flag/allow_vote_restart),
 		"choices" = list(),
 		"lower_admin" = !!user.client?.holder,
@@ -282,7 +267,7 @@ SUBSYSTEM_DEF(vote)
 	)
 
 	if(!!user.client?.holder)
-		data["voting"] += list(voting)
+		data["voting"] = voting
 
 	for(var/key in choices)
 		data["choices"] += list(list(
@@ -311,9 +296,6 @@ SUBSYSTEM_DEF(vote)
 		if("toggle_restart")
 			if(usr.client.holder && upper_admin)
 				CONFIG_SET(flag/allow_vote_restart, !CONFIG_GET(flag/allow_vote_restart))
-		if("toggle_gamemode")
-			if(usr.client.holder && upper_admin)
-				CONFIG_SET(flag/allow_vote_mode, !CONFIG_GET(flag/allow_vote_mode))
 		if("toggle_map")
 			if(usr.client.holder && upper_admin)
 				CONFIG_SET(flag/allow_vote_map, !CONFIG_GET(flag/allow_vote_map))
@@ -328,9 +310,6 @@ SUBSYSTEM_DEF(vote)
 				else
 					to_chat(usr, "<span style='boldannounce'>Shuttle call can only initiate after [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))].</span>")
 		// honk end
-		if("gamemode")
-			if(CONFIG_GET(flag/allow_vote_mode) || usr.client.holder)
-				initiate_vote("gamemode",usr.key)
 		if("map")
 			if(CONFIG_GET(flag/allow_vote_map) || usr.client.holder)
 				initiate_vote("map",usr.key)

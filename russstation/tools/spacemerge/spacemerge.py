@@ -36,7 +36,7 @@ ours = ["html/changelog.html",
 	"html/changelogs/.all_changelog.yml",
 	"html/templates/header.html",
 	"README.md",
-	".travis.yml",
+	#".travis.yml",
 	".github/ISSUE_TEMPLATE/bug_report.md",
 	".github/ISSUE_TEMPLATE/feature_request.md"]
 # .gitattributes is theirs but handled special to avoid git problems
@@ -102,10 +102,15 @@ def get_args():
 		"-f", "--file",
 		help="Process a single file (mostly for testing)"
 	)
+	parser.add_argument(
+		"--dme",
+		action="store_true",
+		help="Fix DME includes in case file changes weren't handled by VS Code extension"
+	)
 	return parser.parse_args()
 
 # get a clean master to branch from
-def clean_state(repo, target_time):
+def clean_state(repo):
 	print("Cleaning working tree...")
 	repo.head.reset(working_tree=True)
 	repo.git.clean("-f", "-d", "-x")
@@ -192,14 +197,14 @@ def remove_deleted_files(repo, delete_all):
 	# if any honk files would get deleted, we will warn the user
 	honk_paths = get_honk_files(repo)
 	# we want files that exist in our index but not upstream
-	extra_paths = our_extant_paths - their_extant_paths - honk_paths
+	deleted_paths = our_extant_paths - their_extant_paths - honk_paths
 	deleted_honk_paths = (our_extant_paths - their_extant_paths).intersection(honk_paths)
 	# upstream will delete files in dirs that are not safe to blindly delete all from (eg _maps has our maps too)
 	if delete_all:
 		# inform user of how delete-all behavior works so i can use y/n prompts
 		print("Delete all enabled. Files outside of their dirs will each prompt for deletion")
 		print("Type y for yes, n (or nothing) for no, q to quit deleting all; then enter")
-	for path in extra_paths:
+	for path in deleted_paths:
 		is_theirs = False
 		for dir in their_dirs:
 			if path.startswith(dir + "/"):
@@ -336,14 +341,15 @@ def process_conflicts(repo, upstream_paths):
 	modified_honk_paths = true_modified_paths.intersection(honk_paths)
 	modified_their_paths = true_modified_paths - honk_paths
 	for path in modified_honk_paths:
-		resolve_diffs(repo, path)
+		# don't keep conflict sections during resolution
+		resolve_conflicts(repo, path, keep_conflicts = False)
 	for path in modified_their_paths:
 		repo.git.checkout("--theirs", path)
 		repo.git.add(path)
 		printvv("Checked out their", path)
 
 # find conflict section, inspect section based on rules, modify file, stage in git
-def resolve_conflicts(repo, filename):
+def resolve_conflicts(repo, filename, keep_conflicts = True):
 	stage = True
 	temp_filename = filename + ".temp"
 	with open(filename, "r") as conflict_file, open(temp_filename, "w") as processed_file:
@@ -370,12 +376,17 @@ def resolve_conflicts(repo, filename):
 					if not upstream_honk and honk_check.search(text_line):
 						upstream_honk = True
 					text_line = conflict_file.readline()
-				# take theirs unless only our side has honk
+				# conflict resolution:
+				# take theirs if they have a honk comment or we do not
 				if upstream_honk or not contains_honk:
 					for line in theirs_buffer:
 						processed_file.write(line)
+				# keep ours if no upstream code or we don't care about conflicts in this file
+				elif len(theirs_buffer) == 0 or not keep_conflicts:
+					for line in ours_buffer:
+						processed_file.write(line)
+				# keep both sides for review and print entire conflict section
 				else:
-					# print entire conflict section
 					processed_file.write("<<<<<<< HEAD\n")
 					for line in ours_buffer:
 						processed_file.write(line)
@@ -397,53 +408,6 @@ def resolve_conflicts(repo, filename):
 		printvv("Staged", filename)
 	else:
 		printvv("Conflict found in", filename)
-
-# simpler resolve_conflicts (yay copypaste), just take one side or the other depending on if honk found
-# maybe combine the two functions if it isn't a mess
-def resolve_diffs(repo, filename):
-	temp_filename = filename + ".temp"
-	with open(filename, "r") as modified_file, open(temp_filename, "w") as processed_file:
-		text_line = modified_file.readline()
-		while text_line:
-			# parse for diff section
-			if text_line.startswith("<<<<<<<"):
-				ours_buffer = [] # hold our lines until processed
-				# found head of diff, grab until diff divider
-				contains_honk = False
-				text_line = modified_file.readline() # toss <<< line
-				while not text_line.startswith("======="):
-					ours_buffer.append(text_line)
-					# check for honk comment presence in this section - re.search instead of .match to check entire string
-					if not contains_honk and honk_check.search(text_line):
-						contains_honk = True
-					text_line = modified_file.readline()
-				text_line = modified_file.readline() # dispose === line
-				# if we found a match, take ours unless theirs has a honk (upstream honk comment)
-				theirs_buffer = [] # now hold theirs uwu
-				upstream_honk = False
-				while not text_line.startswith(">>>>>>>"):
-					theirs_buffer.append(text_line)
-					if not upstream_honk and honk_check.search(text_line):
-						upstream_honk = True
-					text_line = modified_file.readline()
-				# take theirs unless only our side has honk
-				if upstream_honk or not contains_honk:
-					for line in theirs_buffer:
-						processed_file.write(line)
-				else:
-					for line in ours_buffer:
-						processed_file.write(line)
-				# manually continue loop, skipping the >>> line
-				text_line = modified_file.readline()
-				continue
-			# parsing finished, add line to file and continue
-			processed_file.write(text_line)
-			text_line = modified_file.readline()
-	# replace file with processed
-	os.replace(temp_filename, filename)
-	# mark staged in git
-	repo.git.add(filename)
-	printvv("Staged", filename)
 
 # dme wants filesystem sort instead of raw string sort
 def dme_sort_compare(left, right):
@@ -478,15 +442,20 @@ def dme_sort_compare(left, right):
 				return -1 if left_ext < right_ext else 1
 			# else fall down to the full name compare
 		# directory/filename compare - _ should be before letters but python doesn't do that
-		return -1 if l < r else 1#
-		_left = l.startswith("_")
-		_right = r.startswith("_")
-		if _left and not _right:
-			return -1
-		elif _right and not _left:
-			return 1
-		else:
-			return -1 if l < r else 1
+		return string_compare(l, r)
+
+# string compare where _ is first
+def string_compare(left, right):
+	_left = left.startswith("_")
+	_right = right.startswith("_")
+	if _left and not _right:
+		return -1
+	elif not _left and _right:
+		return 1
+	elif _left and _right:
+		return string_compare(left[1:], right[1:])
+	else:
+		return -1 if left < right else 1
 
 # get unique includes from both dmes, combine
 def update_includes(repo):
@@ -569,9 +538,12 @@ def fix_build_script(repo):
 	with open(build_path, "r") as build_file:
 		build_content = build_file.read()
 	# replace the dme var definition so it uses ours
-	build_content.replace("DME_NAME = '" + their_dme[:their_dme.find(".dme")], "DME_NAME = '" + our_dme[:our_dme.find(".dme")])
+	build_content = build_content.replace("DME_NAME = '" + their_dme[:their_dme.find(".dme")], "DME_NAME = '" + our_dme[:our_dme.find(".dme")])
+	# add russstation folder to dm dependency list (ensures build retries if only our files change)
+	build_content = build_content.replace(".depends('code/**')", ".depends('code/**')\n  .depends('russstation/**')")
 	with open(build_path, "w") as build_file:
 		build_file.write(build_content)
+	repo.git.add(build_path)
 	printv("Replaced build script vars")
 
 # say anything that still needs said
@@ -601,10 +573,14 @@ if __name__ == "__main__":
 	elif args.file:
 		# single file testing
 		resolve_conflicts(repo, args.file)
+	elif args.dme:
+		# just fix dme includes
+		update_includes(repo)
 	else:
 		start = time.perf_counter()
-		clean_state(repo, args.target_time)
+		clean_state(repo)
 		last_merge, current_merge = get_merge_times(repo, args.target_time) # grab time before merge for accuracy
+		create_branch(repo, args.target_time)
 		merge_upstream(repo, args.target_time)
 		prepare_git_files(repo) # best to do immediately after merge to stop git complaints
 		deleted_honks = remove_deleted_files(repo, args.delete_all)

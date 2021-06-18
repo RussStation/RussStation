@@ -140,6 +140,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PACIFISM "pacifism"
 #define TRAIT_IGNORESLOWDOWN "ignoreslow"
 #define TRAIT_IGNOREDAMAGESLOWDOWN "ignoredamageslowdown"
+/// Makes it so the mob can use guns regardless of tool user status
+#define TRAIT_GUN_NATURAL "gunnatural"
 /// Causes death-like unconsciousness
 #define TRAIT_DEATHCOMA "deathcoma"
 /// Makes the owner appear as dead to most forms of medical examination
@@ -185,6 +187,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HARDLY_WOUNDED "hard_limb_wound"
 #define TRAIT_NEVER_WOUNDED "never_wounded"
 #define TRAIT_TOXINLOVER "toxinlover"
+/// reduces the use time of syringes, pills, patches and medigels but only when using on someone
+#define TRAIT_FASTMED "fast_med_use"
 #define TRAIT_NOBREATH "no_breath"
 #define TRAIT_ANTIMAGIC "anti_magic"
 #define TRAIT_HOLY "holy"
@@ -211,6 +215,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DISK_VERIFIER "disk-verifier"
 #define TRAIT_NOMOBSWAP "no-mob-swap"
 #define TRAIT_XRAY_VISION "xray_vision"
+/// Can weave webs into cloth
+#define TRAIT_WEB_WEAVER "web_weaver"
 #define TRAIT_THERMAL_VISION "thermal_vision"
 #define TRAIT_ABDUCTOR_TRAINING "abductor-training"
 #define TRAIT_ABDUCTOR_SCIENTIST_TRAINING "abductor-scientist-training"
@@ -224,6 +230,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// We place people into a fireman carry especially quickly compared to quick_carry
 #define TRAIT_QUICKER_CARRY "quicker-carry"
 #define TRAIT_QUICK_BUILD "quick-build"
+/// We can handle 'dangerous' plants in botany safely
+#define TRAIT_PLANT_SAFE "plant_safe"
 #define TRAIT_UNINTELLIGIBLE_SPEECH "unintelligible-speech"
 #define TRAIT_UNSTABLE "unstable"
 #define TRAIT_OIL_FRIED "oil_fried"
@@ -266,7 +274,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// nobody can use martial arts on this mob
 #define TRAIT_MARTIAL_ARTS_IMMUNE "martial_arts_immune"
 /// You've been cursed with a living duffelbag, and can't have more added
-#define TRAIT_DUFFEL_CURSED "duffel_cursed"
+#define TRAIT_DUFFEL_CURSE_PROOF "duffel_cursed"
 /// Revenants draining you only get a very small benefit.
 #define TRAIT_WEAK_SOUL "weak_soul"
 /// Prevents mob from riding mobs when buckled onto something
@@ -283,6 +291,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_KISS_OF_DEATH "kiss_of_death"
 /// Used on limbs in the process of turning a human into a plasmaman while in plasma lava
 #define TRAIT_PLASMABURNT "plasma_burnt"
+/// Addictions don't tick down, basically they're permanently addicted
+#define TRAIT_HOPELESSLY_ADDICTED "hopelessly_addicted"
+/// Special examine if eyes are visible
+#define CULT_EYES "cult_eyes"
 /// This mob should never close UI even if it doesn't have a client
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
 
@@ -323,6 +335,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ENGINEER_METABOLISM "engineer_metabolism"
 #define TRAIT_ROYAL_METABOLISM "royal_metabolism"
 #define TRAIT_PRETENDER_ROYAL_METABOLISM "pretender_royal_metabolism"
+
+/// This mob can strip other mobs.
+#define TRAIT_CAN_STRIP "can_strip"
 
 // If present on a mob or mobmind, allows them to "suplex" an immovable rod
 // turning it into a glorified potted plant, and giving them an
@@ -386,8 +401,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PLANT_WILDMUTATE "wildmutation"
 /// If you hit an APC with exposed internals with this item it will try to shock you
 #define TRAIT_APC_SHOCKING "apc_shocking"
-///Properly wielded two handed item
+/// Properly wielded two handed item
 #define TRAIT_WIELDED "wielded"
+/// Buckling yourself to objects with this trait won't immobilize you
+#define TRAIT_NO_IMMOBILIZE "no_immobilize"
 
 //quirk traits
 #define TRAIT_ALCOHOL_TOLERANCE "alcohol_tolerance"
@@ -418,6 +435,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EXTROVERT "extrovert"
 #define TRAIT_INTROVERT "introvert"
 #define TRAIT_ANXIOUS "anxious"
+#define TRAIT_INSANITY "insanity"
+
 ///Trait for dryable items
 #define TRAIT_DRYABLE "trait_dryable"
 ///Trait for dried items
@@ -435,6 +454,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Minor trait used for beakers, or beaker-ishes. [/obj/item/reagent_containers], to show that they've been used in a reagent grinder.
 #define TRAIT_MAY_CONTAIN_BLENDED_DUST "may_contain_blended_dust"
+
+///Trait applied to turfs when an atmos holosign is placed on them. It will stop firedoors from closing.
+#define TRAIT_FIREDOOR_STOP "firedoor_stop"
 
 //Medical Categories for quirks
 #define CAT_QUIRK_ALL 0
@@ -466,7 +488,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define CHANGELING_TRAIT "changeling"
 #define CULT_TRAIT "cult"
 /// The item is magically cursed
-#define CURSED_ITEM_TRAIT "cursed-item"
+#define CURSED_ITEM_TRAIT(item_type) "cursed_item_[item_type]"
 #define ABSTRACT_ITEM_TRAIT "abstract-item"
 #define STATUS_EFFECT_TRAIT "status-effect"
 #define CLOTHING_TRAIT "clothing"
@@ -520,7 +542,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define STASIS_MUTE "stasis"
 #define GENETICS_SPELL "genetics_spell"
 #define EYES_COVERED "eyes_covered"
-#define CULT_EYES "cult_eyes"
 #define TRAIT_SANTA "santa"
 #define SCRYING_ORB "scrying-orb"
 #define ABDUCTOR_ANTAGONIST "abductor-antagonist"
@@ -591,6 +612,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Self-explainatory.
 #define BEAUTY_ELEMENT_TRAIT "beauty_element"
 #define MOOD_COMPONENT_TRAIT "mood_component"
+#define DRONE_SHY_TRAIT "drone_shy"
+/// Pacifism trait given by stabilized light pink extracts.
+#define STABILIZED_LIGHT_PINK_TRAIT "stabilized_light_pink"
 
 /**
 * Trait granted by [/mob/living/carbon/Initialize] and

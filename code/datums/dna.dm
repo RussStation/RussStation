@@ -68,9 +68,11 @@
 		mutation_type = HM.type
 	if(get_mutation(mutation_type))
 		return
+	SEND_SIGNAL(holder, COMSIG_CARBON_GAIN_MUTATION, mutation_type, class)
 	return force_give(new mutation_type (class, time, copymut = mutation))
 
 /datum/dna/proc/remove_mutation(mutation_type)
+	SEND_SIGNAL(holder, COMSIG_CARBON_LOSE_MUTATION, mutation_type)
 	return force_lose(get_mutation(mutation_type))
 
 /datum/dna/proc/check_mutation(mutation_type)
@@ -298,6 +300,8 @@
 
 
 /mob/living/carbon/set_species(datum/species/mrace, icon_update = TRUE, pref_load = FALSE)
+	if(QDELETED(src))
+		CRASH("You're trying to change your species post deletion, this is a recipe for madness")
 	if(mrace && has_dna())
 		var/datum/species/new_race
 		if(ispath(mrace))

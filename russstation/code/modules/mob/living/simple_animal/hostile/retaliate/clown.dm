@@ -59,11 +59,6 @@
 	environment_smash = ENVIRONMENT_SMASH_WALLS
 	small_sprite_type = /datum/action/small_sprite/clown/honcmunculus
 
-/mob/living/simple_animal/hostile/retaliate/clown/clownhulk/honcmunculus/AttackingTarget()
-	SEND_SIGNAL(src, COMSIG_HOSTILE_ATTACKINGTARGET, target)
-	in_melee = TRUE
-	return target.attack_animal(src)
-
 //The Destroyer
 /mob/living/simple_animal/hostile/retaliate/clown/clownhulk/destroyer
 	small_sprite_type = /datum/action/small_sprite/clown/destroyer
