@@ -3,7 +3,6 @@
 $include game_options.txt
 $include dbconfig.txt
 $include comms.txt
-$include antag_rep.txt
 $include resources.txt
 $include interviews.txt
 $include russstation_config.txt
@@ -26,7 +25,7 @@ SERVERSQLNAME RussStationSQL
 #STATIONNAME Russ Station
 
 ## Put on byond hub: Uncomment this to put your server on the byond hub.
-HUB
+#HUB
 
 ## Lobby time: This is the amount of time between rounds that players have to setup their characters and be ready.
 LOBBY_COUNTDOWN 240
@@ -75,6 +74,10 @@ USE_EXP_TRACKING
 #USE_EXP_RESTRICTIONS_OTHER
 ## Allows admins to bypass job playtime requirements.
 USE_EXP_RESTRICTIONS_ADMIN_BYPASS
+## Unhash this to have intern tags automatically added to ID cards for station roles depending on the living hours of the player holding them.
+#USE_LOW_LIVING_HOUR_INTERN
+## If USE_LOW_LIVING_HOUR_INTERN is unhashed, players under this number of living hours have [Intern] added to their ID card. If this isn't set, uses USE_EXP_RESTRICTIONS_HEADS_HOURS instead. If that isn't set, it finally defaults to a hardcoded fallback of 15 hours.
+#USE_LOW_LIVING_HOUR_INTERN_HOURS 50
 
 ## log OOC channel
 LOG_OOC
@@ -235,7 +238,7 @@ CHECK_RANDOMIZER
 FORUMURL https://discord.gg/honk
 
 ## Wiki address
-WIKIURL http://www.tgstation13.org/wiki
+WIKIURL https://github.com/RussStation/RussStation/wiki
 
 ## Rules address
 RULESURL https://honksquad.com/ss13/
@@ -494,7 +497,7 @@ DISABLE_HIGH_POP_MC_MODE_AMOUNT 47
 ##  15x15 would be the standard square view. 21x15 is what goonstation uses for widescreen.
 ##  Setting this to something different from DEFAULT_VIEW_SQUARE will enable widescreen toggles
 ##	Do note that changing this value will affect the title screen. The title screen will have to be updated manually if this is changed.
-DEFAULT_VIEW 15x15
+DEFAULT_VIEW 19x15
 
 ##Default view size, in tiles. Should *always* be square.
 ## The alternative square viewport size if you're using a widescreen view size

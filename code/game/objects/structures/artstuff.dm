@@ -52,6 +52,8 @@
 	var/author_ckey
 	var/icon_generated = FALSE
 	var/icon/generated_icon
+	///boolean that blocks persistence from saving it. enabled from printing copies, because we do not want to save copies.
+	var/no_save = FALSE
 
 	// Painting overlay offset when framed
 	var/framed_offset_x = 11
@@ -343,7 +345,7 @@
 			return //aborts loading anything this category has no usable paintings
 		var/list/chosen = pick(painting_category)
 		if(!fexists("data/paintings/[persistence_id]/[chosen["md5"]].png")) //shitmin deleted this art, lets remove json entry to avoid errors
-			painting_category.Remove(chosen)
+			painting_category -= list(chosen)
 			continue //and try again
 		painting = chosen
 	var/title = painting["title"]
@@ -372,7 +374,7 @@
 	update_appearance()
 
 /obj/structure/sign/painting/proc/save_persistent()
-	if(!persistence_id || !current_canvas)
+	if(!persistence_id || !current_canvas || current_canvas.no_save)
 		return
 	if(sanitize_filename(persistence_id) != persistence_id)
 		stack_trace("Invalid persistence_id - [persistence_id]")

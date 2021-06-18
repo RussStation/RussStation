@@ -208,7 +208,10 @@
 	loc.handle_fall(src)//it's loc so it doesn't call the mob's handle_fall which does nothing
 
 /mob/living/carbon/is_muzzled()
-	return(istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
+	for (var/obj/item/clothing/clothing in get_equipped_items())
+		if(clothing.clothing_flags & BLOCKS_SPEECH)
+			return TRUE
+	return FALSE
 
 /mob/living/carbon/hallucinating()
 	if(hallucination)
@@ -268,7 +271,7 @@
 		cuff_resist(I)
 
 
-/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 600, cuff_break = 0)
+/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0)
 	if(I.item_flags & BEING_REMOVED)
 		to_chat(src, "<span class='warning'>You're already attempting to remove [I]!</span>")
 		return
@@ -1008,7 +1011,7 @@
 	if(href_list[VV_HK_MAKE_AI])
 		if(!check_rights(R_SPAWN))
 			return
-		if(alert("Confirm mob type change?",,"Transform","Cancel") != "Transform")
+		if(tgui_alert(usr,"Confirm mob type change?",,list("Transform","Cancel")) != "Transform")
 			return
 		usr.client.holder.Topic("vv_override", list("makeai"=href_list[VV_HK_TARGET]))
 	if(href_list[VV_HK_MODIFY_ORGANS])
@@ -1272,4 +1275,5 @@
 
 
 /mob/living/carbon/proc/attach_rot(mapload)
-	AddComponent(/datum/component/rot, 6 MINUTES, 1)
+	SIGNAL_HANDLER
+	AddComponent(/datum/component/rot, 6 MINUTES, 10 MINUTES, 1)
