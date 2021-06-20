@@ -1,7 +1,3 @@
-/obj/item/stack/ore/on_smelt()
-	if(reagent_id)
-		return reagent_id
-
 /obj/item/stack/ore/adamantine
 	name = "adamantine ore"
 	icon_state = "ore"
