@@ -1,1 +1,1 @@
-#define CAT_SMITH "Blacksmithing"
+#define CAT_DWARF "Dwarven"
