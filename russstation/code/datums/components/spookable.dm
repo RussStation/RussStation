@@ -20,6 +20,8 @@
 	return ..()
 
 /datum/component/spookable/proc/ghost_check()
+	if(QDELETED(src))
+		return
 	// is this the best way to check for a mob in view?
 	var/near_ghost = FALSE
 	for(var/mob/dead/observer/ghost in view(7, parent))
