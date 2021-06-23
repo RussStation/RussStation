@@ -64,10 +64,17 @@
 		add_overlay(Q)
 		smelted_material = new S.smelted_material.type()
 		name = "[S.material_type] armour"
-		desc = "Armour forged from [S.material_type]."
-		var/list/defenses = armor
-		for(var/A in defenses)
-			A = S.attack_amt/100
+		desc += " Armour forged from [S.material_type]."
+
+		armor.melee += S.attack_amt
+		armor.bullet += S.attack_amt
+		armor.laser += S.attack_amt
+		armor.energy += S.attack_amt
+		armor.bomb += S.attack_amt
+		armor.bio += S.attack_amt
+		armor.rad += S.attack_amt
+		armor.fire += S.attack_amt
+		armor.acid += S.attack_amt
 
 //Forged Helmet
 /obj/item/clothing/head/helmet/dwarf
@@ -92,7 +99,15 @@
 		add_overlay(Q)
 		smelted_material = new S.smelted_material.type()
 		name = "[S.material_type] helmet."
-		desc = "Helmet forged from [S.material_type]"
-		var/list/defenses = armor
-		for(var/A in defenses)
-			A = S.attack_amt/100
+		desc += " Helmet forged from [S.material_type]."
+
+		armor.melee += S.attack_amt
+		armor.bullet += S.attack_amt
+		armor.laser += S.attack_amt
+		armor.energy += S.attack_amt
+		armor.bomb += S.attack_amt
+		armor.bio += S.attack_amt
+		armor.rad += S.attack_amt
+		armor.fire += S.attack_amt
+		armor.acid += S.attack_amt
+
