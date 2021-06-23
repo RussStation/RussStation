@@ -23,14 +23,14 @@ Mineral Sheets
 /*
  * Sandstone
  */
-
+//honk start -- new way to make clay
 GLOBAL_LIST_INIT(sandstone_recipes, list ( \
 	new/datum/stack_recipe("pile of dirt", /obj/machinery/hydroponics/soil, 3, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("sandstone door", /obj/structure/mineral_door/sandstone, 10, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("Breakdown into sand", /obj/item/stack/ore/glass, 1, one_per_turf = FALSE, on_floor = TRUE), \
 	new/datum/stack_recipe("Breakdown into clay", /obj/item/stack/sheet/mineral/clay, 1, one_per_turf = FALSE, on_floor = TRUE) \
 	))
-	// honk - new way to make clay; comment BREAKS if it's betwixt the run \ on \ line stuff
+// honk end
 
 /obj/item/stack/sheet/mineral/sandstone
 	name = "sandstone brick"
@@ -143,7 +143,6 @@ GLOBAL_LIST_INIT(uranium_recipes, list ( \
 /obj/item/stack/sheet/mineral/uranium/get_main_recipes()
 	. = ..()
 	. += GLOB.uranium_recipes
-	
 /obj/item/stack/sheet/mineral/uranium/five
 	amount = 5
 
@@ -190,7 +189,6 @@ GLOBAL_LIST_INIT(plasma_recipes, list ( \
 /obj/item/stack/sheet/mineral/plasma/fire_act(exposed_temperature, exposed_volume)
 	atmos_spawn_air("plasma=[amount*10];TEMP=[exposed_temperature]")
 	qdel(src)
-	
 /obj/item/stack/sheet/mineral/plasma/five
 	amount = 5
 
