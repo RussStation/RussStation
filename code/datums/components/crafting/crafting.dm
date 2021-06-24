@@ -24,7 +24,7 @@
 				CAT_ROBOT = CAT_NONE,
 				CAT_MISC = CAT_NONE,
 				CAT_PRIMAL = CAT_NONE,
-				CAT_SMITH = CAT_NONE, //honk
+				CAT_DWARF = CAT_NONE, //honk
 				CAT_FOOD = list(
 					CAT_BREAD,
 					CAT_BURGER,
