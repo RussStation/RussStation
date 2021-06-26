@@ -49,7 +49,7 @@
 				current_hide.amount--
 
 			if(current_hide.amount == 0)
-				del(W)
+				qdel(W)
 
 	else if(istype(W, /obj/item/reagent_containers/molten_container/crucible))
 		if(!crucible) //load in bucket
