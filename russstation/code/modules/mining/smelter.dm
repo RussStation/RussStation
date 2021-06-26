@@ -37,6 +37,20 @@
 		else
 			to_chat(user, "No more fuel will fit in \the [src.name].")
 
+	else if(istype(W, /obj/item/stack/sheet/wethide))//you can dry wet hide with the smelter
+		if(fuel == 0)
+			to_chat(user, "\The [src.name] needs fuel before it can dry hide.")
+		else
+			var/obj/item/stack/sheet/current_hide = W
+
+			while (fuel > 0 && current_hide.amount > 0 && do_after(user, 5, target = src)) //doesnt use up any fuel but requires there to be fuel
+				user.visible_message("[user] puts \the [W] next to \the [src.name] and it dries.", "You put \the [W.name] next to \the [src.name] and it dries.")
+				new /obj/item/stack/sheet/leather(user.loc)
+				current_hide.amount--
+
+			if(current_hide.amount == 0)
+				qdel(W)
+
 	else if(istype(W, /obj/item/reagent_containers/molten_container/crucible))
 		if(!crucible) //load in bucket
 			crucible = W
