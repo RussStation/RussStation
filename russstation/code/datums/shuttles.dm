@@ -24,3 +24,16 @@
 	suffix = "shit"
 	name = "Shit Station emergency shuttle"
 	description = "Why would you do this?"
+
+/datum/map_template/shuttle/emergency/echo
+	suffix = "echo"
+	name = "Echo Station emergency shuttle"
+	description = "An ordinary shuttle, a little worn and cramped."
+
+/datum/map_template/shuttle/mining/echo
+	suffix = "echo"
+	name = "mining shuttle (Echo)"
+
+/datum/map_template/shuttle/cargo/echo
+	suffix = "echo"
+	name = "supply shuttle (Echo)"

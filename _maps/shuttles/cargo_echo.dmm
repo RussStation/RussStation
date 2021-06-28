@@ -98,6 +98,17 @@
 /obj/effect/decal/cleanable/vomit,
 /turf/open/floor/mineral/titanium/airless,
 /area/shuttle/supply)
+"B" = (
+/obj/machinery/door/poddoor{
+	id = "QMLoaddoor";
+	name = "supply dock loading door"
+	},
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "CargoLoad"
+	},
+/turf/open/floor/mineral/titanium/airless,
+/area/shuttle/supply)
 "C" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/trash/popcorn,
@@ -165,7 +176,8 @@
 	anchored = 5;
 	dir = 4;
 	dwidth = 4;
-	height = 8
+	height = 8;
+	port_direction = 8
 	},
 /turf/open/floor/mineral/titanium/airless,
 /area/shuttle/supply)
@@ -197,10 +209,12 @@
 	dir = 8
 	},
 /obj/machinery/button/door{
-	id = "QMLoaddoor2";
-	name = "Loading Doors South";
+	id = "QMLoaddoor";
+	layer = 4;
+	name = "Loading Doors North";
 	pixel_x = -23;
-	pixel_y = -8
+	pixel_y = -8;
+	req_access_txt = "31"
 	},
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/supply)
@@ -223,13 +237,13 @@
 F
 i
 Z
-K
+i
 V
 a
 a
 Q
-K
-Z
+i
+B
 i
 F
 "}
@@ -245,10 +259,10 @@ p
 X
 p
 K
-K
+i
 "}
 (3,1,1) = {"
-K
+i
 E
 A
 C
@@ -262,7 +276,7 @@ P
 T
 "}
 (4,1,1) = {"
-K
+i
 v
 p
 v
@@ -276,7 +290,7 @@ h
 T
 "}
 (5,1,1) = {"
-K
+i
 c
 p
 v
@@ -290,7 +304,7 @@ h
 T
 "}
 (6,1,1) = {"
-K
+i
 S
 p
 v
@@ -315,19 +329,19 @@ t
 v
 Y
 K
-K
+i
 "}
 (8,1,1) = {"
 F
 i
-K
+i
 a
-K
+i
 a
 a
-K
+i
 a
-K
+i
 i
 F
 "}
