@@ -202,7 +202,10 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
 /*
  * Wood
  */
+
+//honk start - adds compost bins to the wood recipes list
 GLOBAL_LIST_INIT(wood_recipes, list ( \
+	new/datum/stack_recipe("compost bin", /obj/machinery/portable_atmospherics/canister/compost_bin, 10, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("wooden sandals", /obj/item/clothing/shoes/sandal, 1), \
 	new/datum/stack_recipe("wood floor tile", /obj/item/stack/tile/wood, 1, 4, 20), \
 	new/datum/stack_recipe("wood table frame", /obj/structure/table_frame/wood, 2, time = 10), \
@@ -240,7 +243,7 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 		)),
 	null, \
 	))
-
+//honk end
 /obj/item/stack/sheet/mineral/wood
 	name = "wooden plank"
 	desc = "One can only guess that this is a bunch of wood."
