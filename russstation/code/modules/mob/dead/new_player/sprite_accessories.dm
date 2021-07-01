@@ -57,3 +57,47 @@
 /datum/sprite_accessory/diona_hair/diona_wildflow
 	name = "Wildflowers"
 	icon_state = "wildflower"
+
+//Skaven tails
+/datum/sprite_accessory/tails/skaven
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	color_src = 0
+
+/datum/sprite_accessory/tails_animated/skaven
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	color_src = 0
+
+/datum/sprite_accessory/tails/skaven/normal
+	name = "Skaven"
+	icon_state = "skaven"
+
+/datum/sprite_accessory/tails_animated/skaven/normal
+	name = "Skaven"
+	icon_state = "skaven"
+
+//Skaven ears
+/datum/sprite_accessory/ears/skaven
+	name = "Skaven"
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "skaven"
+
+//More horns (the tg ones are pretty lackluster for skaven)
+/datum/sprite_accessory/horns/seer
+	name = "Seer"
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "seer"
+
+/datum/sprite_accessory/horns/long
+	name = "Long"
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "long"
+
+/datum/sprite_accessory/horns/quad
+	name = "Quad"
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "quad"
+
+/datum/sprite_accessory/horns/damaged
+	name = "Damaged"
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "damaged"
