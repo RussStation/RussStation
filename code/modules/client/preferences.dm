@@ -80,7 +80,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/skin_tone = "caucasian1" //Skin color
 	var/eye_color = "000" //Eye color
 	var/datum/species/pref_species = new /datum/species/human() //Mutant race
-	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain", "moth_antennae" = "Plain", "moth_markings" = "None")
+	//honk start - adds tail_skaven and skavencolors to features list
+	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "skavencolor" = "080808", "tail_skaven" = "Skaven", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain", "moth_antennae" = "Plain", "moth_markings" = "None")
+	//honk end
 	var/list/randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SOCKS = TRUE, RANDOM_BACKPACK = TRUE, RANDOM_JUMPSUIT_STYLE = TRUE, RANDOM_HAIRSTYLE = TRUE, RANDOM_HAIR_COLOR = TRUE, RANDOM_FACIAL_HAIRSTYLE = TRUE, RANDOM_FACIAL_HAIR_COLOR = TRUE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
 	var/phobia = "spiders"
 
@@ -348,6 +350,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "<span style='border: 1px solid #161616; background-color: #[features["ethcolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=color_ethereal;task=input'>Change</a><BR>"
 
+			//honk start - skaven color html
+			if(istype(pref_species, /datum/species/skaven))
+
+				if(!use_skintones)
+					dat += APPEARANCE_CATEGORY_COLUMN
+
+				dat += "<h3>Skaven Color</h3>"
+
+				dat += "<span style='border: 1px solid #161616; background-color: #[features["skavencolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=color_skaven;task=input'>Change</a><BR>"
+			//honk end
+
 
 			if((EYECOLOR in pref_species.species_traits) && !(NOEYESPRITES in pref_species.species_traits))
 
@@ -400,6 +413,21 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(mutant_category >= MAX_MUTANT_ROWS)
 					dat += "</td>"
 					mutant_category = 0
+
+			//honk start - Adds skaven tail
+			if(pref_species.mutant_bodyparts["tail_skaven"])
+				if(!mutant_category)
+					dat += APPEARANCE_CATEGORY_COLUMN
+
+				dat += "<h3>Tail</h3>"
+
+				dat += "<a href='?_src_=prefs;preference=tail_skaven;task=input'>[features["tail_skaven"]]</a><BR>"
+
+				mutant_category++
+				if(mutant_category >= MAX_MUTANT_ROWS)
+					dat += "</td>"
+					mutant_category = 0
+			//honk end
 
 			if(pref_species.mutant_bodyparts["snout"])
 				if(!mutant_category)
@@ -1407,12 +1435,27 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_etherealcolor)
 						features["ethcolor"] = GLOB.color_list_ethereal[new_etherealcolor]
 
+				//honk start - skaven colors
+				if("color_skaven")
+					var/new_skavencolor = input(user, "Choose your skaven color", "Character Preference") as null|anything in GLOB.color_list_skaven
+					if(new_skavencolor)
+						features["skavencolor"] = GLOB.color_list_skaven[new_skavencolor]//for nose
+						features["mcolor"] = GLOB.color_list_skaven[new_skavencolor]//for body
+				//honk end
 
 				if("tail_lizard")
 					var/new_tail
 					new_tail = input(user, "Choose your character's tail:", "Character Preference") as null|anything in GLOB.tails_list_lizard
 					if(new_tail)
 						features["tail_lizard"] = new_tail
+
+				//honk start - adds skaven tail options
+				if("tail_skaven")
+					var/new_tail
+					new_tail = input(user, "Choose your character's tail:", "Character Preference") as null|anything in GLOB.tails_list_skaven
+					if(new_tail)
+						features["tail_skaven"] = new_tail
+				//honk end
 
 				if("tail_human")
 					var/new_tail
@@ -1965,6 +2008,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.dna.species.mutant_bodyparts["tail_lizard"] = pref_species.mutant_bodyparts["tail_lizard"]
 	if(pref_species.mutant_bodyparts["spines"])
 		character.dna.species.mutant_bodyparts["spines"] = pref_species.mutant_bodyparts["spines"]
+
+	//honk start - skaven tail pref
+	if(pref_species.mutant_bodyparts["tail_skaven"])
+		character.dna.species.mutant_bodyparts["tail_skaven"] = pref_species.mutant_bodyparts["tail_skaven"]
+	//honk end
 
 	if(icon_updates)
 		character.update_body()
