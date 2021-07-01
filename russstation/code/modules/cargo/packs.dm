@@ -50,3 +50,16 @@
     				/obj/item/toy/gun/bigiron)
 	crate_name = "wild west crate"
 	crate_type = /obj/structure/closet/crate/wooden
+
+
+//////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Canisters & Materials ////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/datum/supply_pack/materials/miasma_canister
+	name = "Miasma Canister"
+	desc = "Contains a canister of Miasma. Repulsive."
+	cost = CARGO_CRATE_VALUE * 1
+	contains = list(/obj/machinery/portable_atmospherics/canister/miasma)
+	crate_type =  "miasma canister crate"
+	crate_type = /obj/structure/closet/crate/large
