@@ -708,7 +708,12 @@
 
 	if(change_icon_to_default)
 		if(status == BODYPART_ORGANIC)
-			icon = DEFAULT_BODYPART_ICON_ORGANIC
+		//honk start - redirect to russstation icons
+			if(isskaven(owner))
+				icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
+			else
+				icon = DEFAULT_BODYPART_ICON_ORGANIC
+		//honk end
 		else if(status == BODYPART_ROBOTIC)
 			icon = DEFAULT_BODYPART_ICON_ROBOTIC
 
@@ -773,7 +778,12 @@
 			if(owner_species.fixed_mut_color)
 				species_color = owner_species.fixed_mut_color
 			else
-				species_color = human_owner.dna.features["mcolor"]
+				//honk start - skaven unique colors
+				if(isskaven(human_owner))
+					species_color = human_owner.dna.features["skavencolor"]
+				else
+					species_color = human_owner.dna.features["mcolor"]
+				//honk end
 			should_draw_greyscale = TRUE
 		else
 			species_color = ""
@@ -844,7 +854,12 @@
 
 	if(is_organic_limb())
 		if(should_draw_greyscale)
-			limb.icon = 'icons/mob/human_parts_greyscale.dmi'
+			//honk start - this is necessary so we dont have conflicts in the future with tg icons
+			if(isskaven(owner))
+				limb.icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
+			else
+				limb.icon = 'icons/mob/human_parts_greyscale.dmi'
+			//honk end
 			if(should_draw_gender)
 				limb.icon_state = "[species_id]_[body_zone]_[icon_gender]"
 			else if(use_digitigrade)
@@ -852,7 +867,12 @@
 			else
 				limb.icon_state = "[species_id]_[body_zone]"
 		else
-			limb.icon = 'icons/mob/human_parts.dmi'
+			//honk start - this is necessary so we dont have conflicts in the future with tg icons
+			if(isskaven(owner))
+				limb.icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
+			else
+				limb.icon = 'icons/mob/human_parts.dmi'
+			//honk end
 			if(should_draw_gender)
 				limb.icon_state = "[species_id]_[body_zone]_[icon_gender]"
 			else
