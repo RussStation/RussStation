@@ -17,6 +17,10 @@
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/body_markings, GLOB.body_markings_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/lizard, GLOB.tails_list_lizard)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails_animated/lizard, GLOB.animated_tails_list_lizard)
+	//honk start - skaven subtype inits
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/skaven, GLOB.tails_list_skaven)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails_animated/skaven, GLOB.animated_tails_list_skaven)
+	//honk end
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/human, GLOB.tails_list_human)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails_animated/human, GLOB.animated_tails_list_human)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/snouts, GLOB.snouts_list)
