@@ -9,6 +9,7 @@
 	mutant_bodyparts = list("tail_skaven" = "Skaven", "snout" = "Round", "horns" = "None")
 	mutantears = /obj/item/organ/ears/skaven
 	mutantlungs = /obj/item/organ/lungs/skaven
+	mutanttongue = /obj/item/organ/tongue/skaven
 	mutant_organs = list(/obj/item/organ/tail/skaven)
 	payday_modifier = 0.25 //Might as well be a slave
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
