@@ -2,7 +2,6 @@
 	name = "Skaven"
 	id = "skaven"
 	say_mod = "jitters"
-	sexes = FALSE
 	default_color = "2E2E2E"
 	species_traits = list(DYNCOLORS,AGENDER,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
