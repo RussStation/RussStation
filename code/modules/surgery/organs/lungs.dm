@@ -42,6 +42,10 @@
 	///Minimum amount of healium to knock you down for good
 	var/healium_sleep_min = 6
 
+	//honk start - skaven breathing variables
+	var/safe_miasma_min = 0
+	//honk end
+
 	var/oxy_breath_dam_min = MIN_TOXIC_GAS_DAMAGE
 	var/oxy_breath_dam_max = MAX_TOXIC_GAS_DAMAGE
 	var/oxy_damage_type = OXY
@@ -100,6 +104,10 @@
 			breather.throw_alert("not_enough_co2", /atom/movable/screen/alert/not_enough_co2)
 		else if(safe_nitro_min)
 			breather.throw_alert("not_enough_nitro", /atom/movable/screen/alert/not_enough_nitro)
+		//honk start - alert for skaven
+		else if(safe_miasma_min)
+			breather.throw_alert("not_enough_miasma", /atom/movable/screen/alert/not_enough_miasma)
+		//honk end
 		return FALSE
 
 	var/gas_breathed = 0
@@ -113,6 +121,9 @@
 						/datum/gas/bz,
 						/datum/gas/nitrogen,
 						/datum/gas/tritium,
+						//honk start - adds miasma to the list of gasses
+						/datum/gas/miasma,
+						//honk end
 						/datum/gas/nitryl,
 						/datum/gas/pluoxium,
 						/datum/gas/stimulum,
@@ -129,6 +140,11 @@
 	var/N2_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/nitrogen][MOLES])
 	var/Toxins_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/plasma][MOLES])
 	var/CO2_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/carbon_dioxide][MOLES])
+
+	//honk start - partial pressure of miasma in our breath
+	var/Mmiasma_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/miasma][MOLES])
+	//honk end
+
 	//Vars for n2o and healium induced euphorias.
 	var/n2o_euphoria = EUPHORIA_LAST_FLAG
 	var/healium_euphoria = EUPHORIA_LAST_FLAG
@@ -255,6 +271,26 @@
 	breath_gases[/datum/gas/carbon_dioxide][MOLES] += gas_breathed
 	gas_breathed = 0
 
+//honk start - For Skaven breathing in miasma. Note: Breathing too much miasma is already handled, giving negative moods instead of damaging the breather (kinda)
+	//-- MIASMA --//
+
+	//Too little miasma!
+	if(safe_miasma_min)
+		if(Mmiasma_pp < safe_miasma_min)
+			gas_breathed = handle_too_little_breath(breather, Mmiasma_pp, safe_miasma_min, breath_gases[/datum/gas/miasma][MOLES])
+			breather.throw_alert("not_enough_miasma", /atom/movable/screen/alert/not_enough_miasma)
+		else
+			breather.failed_last_breath = FALSE
+			if(breather.health >= breather.crit_threshold)
+				breather.adjustOxyLoss(-5)
+			gas_breathed = breath_gases[/datum/gas/miasma][MOLES]
+			breather.clear_alert("not_enough_miasma")
+
+	//Exhale
+	breath_gases[/datum/gas/miasma][MOLES] -= gas_breathed
+	breath_gases[/datum/gas/carbon_dioxide][MOLES] += gas_breathed
+	gas_breathed = 0
+//honk end
 
 	//-- TRACES --//
 
@@ -378,8 +414,10 @@
 			breather.reagents.add_reagent(/datum/reagent/hypernoblium,max(0, 1 - existing))
 		breath_gases[/datum/gas/hypernoblium][MOLES]-=gas_breathed
 
+//honk start - removes skaven from the negative effects of breathing miasma
 	// Miasma
-		if (breath_gases[/datum/gas/miasma])
+		if (breath_gases[/datum/gas/miasma] && !isskaven(breather))
+//honk end
 			var/miasma_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/miasma][MOLES])
 
 			//Miasma sickness

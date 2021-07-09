@@ -773,6 +773,18 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	var/obj/item/bodypart/head/HD = H.get_bodypart(BODY_ZONE_HEAD)
 
+	//honk start - tail handling for skaven
+	if(mutant_bodyparts["tail_skaven"])
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "tail_skaven"
+
+	if(mutant_bodyparts["waggingtail_skaven"])
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "waggingtail_skaven"
+		else if (mutant_bodyparts["tail_skaven"])
+			bodyparts_to_add -= "waggingtail_skaven"
+	//honk end
+
 	if(mutant_bodyparts["tail_lizard"])
 		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
 			bodyparts_to_add -= "tail_lizard"
@@ -877,6 +889,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		for(var/bodypart in bodyparts_to_add)
 			var/datum/sprite_accessory/S
 			switch(bodypart)
+			//honk start - tail for skaven
+				if("tail_skaven")
+					S = GLOB.tails_list_skaven[H.dna.features["tail_skaven"]]
+				if("waggingtail_skaven")
+					S = GLOB.animated_tails_list_skaven[H.dna.features["tail_skaven"]]
+			//honk end
 				if("tail_lizard")
 					S = GLOB.tails_list_lizard[H.dna.features["tail_lizard"]]
 				if("waggingtail_lizard")
@@ -921,10 +939,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			var/mutable_appearance/accessory_overlay = mutable_appearance(S.icon, layer = -layer)
 
 			//A little rename so we don't have to use tail_lizard or tail_human when naming the sprites.
-			if(bodypart == "tail_lizard" || bodypart == "tail_human" || bodypart == "tail_monkey")
+			//honk start - adds skaven to rename if statements
+			if(bodypart == "tail_lizard" || bodypart == "tail_human" || bodypart == "tail_monkey" || bodypart == "tail_skaven")
 				bodypart = "tail"
-			else if(bodypart == "waggingtail_lizard" || bodypart == "waggingtail_human")
+			else if(bodypart == "waggingtail_lizard" || bodypart == "waggingtail_human" || bodypart == "waggingtail_skaven")
 				bodypart = "waggingtail"
+			//honk end
 
 			if(S.gender_specific)
 				accessory_overlay.icon_state = "[g]_[bodypart]_[S.icon_state]_[layertext]"
@@ -941,7 +961,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 							if(fixed_mut_color)
 								accessory_overlay.color = "#[fixed_mut_color]"
 							else
-								accessory_overlay.color = "#[H.dna.features["mcolor"]]"
+							//honk start - skaven colors
+								if(isskaven(H))
+									accessory_overlay.color = "#[H.dna.features["skavencolor"]]"
+								else
+									accessory_overlay.color = "#[H.dna.features["mcolor"]]"
+							//honk end
 						if(HAIR)
 							if(hair_color == "mutcolor")
 								accessory_overlay.color = "#[H.dna.features["mcolor"]]"

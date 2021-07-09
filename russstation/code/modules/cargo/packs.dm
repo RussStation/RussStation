@@ -50,3 +50,4 @@
     				/obj/item/toy/gun/bigiron)
 	crate_name = "wild west crate"
 	crate_type = /obj/structure/closet/crate/wooden
+

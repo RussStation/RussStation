@@ -278,6 +278,9 @@
 		"Fly" = /datum/species/fly,
 		"Felinid" = /datum/species/human/felinid,
 		"Jelly" = /datum/species/jelly,
+		//honk start - allows skaven to use nanite sensors
+		"Skaven" = /datum/species/skaven,
+		//honk end
 	)
 
 /datum/nanite_program/sensor/species/register_extra_settings()
