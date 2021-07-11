@@ -13,7 +13,6 @@
 	worn_icon = 'russstation/icons/mob/clothing/belt.dmi'
 	worn_icon_state = "skaven_tank"
 	tank_holder_icon_state = null
-	slot_flags = null
 	force = 10
 	distribute_pressure = TANK_DEFAULT_RELEASE_PRESSURE //Start with the valve open
 

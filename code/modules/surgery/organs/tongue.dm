@@ -24,7 +24,8 @@
 		/datum/language/beachbum,
 		/datum/language/aphasia,
 		/datum/language/piratespeak,
-		/datum/language/dwarvish, //honk
+		/datum/language/dwarvish, //honk - dwarf language
+		/datum/language/queekish, // honk - allows things to switch to it if they know it
 		/datum/language/moffic,
 		/datum/language/sylvan,
 		/datum/language/shadowtongue,
