@@ -6,6 +6,7 @@
 "c" = (
 /obj/item/trash/bee,
 /obj/effect/decal/cleanable/wrapping,
+/obj/structure/closet/crate/secure/loot,
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/supply)
 "f" = (
@@ -24,8 +25,8 @@
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/supply)
 "j" = (
-/obj/effect/decal/cleanable/glass,
-/turf/open/floor/mineral/titanium/white,
+/obj/structure/closet/crate,
+/turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/supply)
 "k" = (
 /turf/open/floor/mineral/titanium/white,
@@ -39,11 +40,12 @@
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/supply)
 "n" = (
-/obj/machinery/light{
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/cobweb/cobweb2,
-/turf/open/floor/mineral/titanium/airless,
+/obj/structure/closet/crate/secure/loot,
+/turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/supply)
 "o" = (
 /obj/effect/decal/cleanable/xenoblood/xgibs,
@@ -70,9 +72,12 @@
 /turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/supply)
 "t" = (
-/obj/structure/closet/crate/trashcart,
-/obj/item/trash/candy,
-/turf/open/floor/mineral/titanium/airless,
+/obj/structure/window/reinforced{
+	dir = 1;
+	layer = 2.9
+	},
+/obj/structure/shuttle/engine/heater,
+/turf/open/floor/plating/airless,
 /area/shuttle/supply)
 "v" = (
 /turf/open/floor/mineral/titanium/yellow,
@@ -87,6 +92,8 @@
 /area/shuttle/supply)
 "y" = (
 /obj/item/trash/bee,
+/obj/structure/closet/crate/trashcart,
+/obj/item/trash/candy,
 /turf/open/floor/mineral/titanium/airless,
 /area/shuttle/supply)
 "z" = (
@@ -96,17 +103,6 @@
 "A" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/vomit,
-/turf/open/floor/mineral/titanium/airless,
-/area/shuttle/supply)
-"B" = (
-/obj/machinery/door/poddoor{
-	id = "QMLoaddoor";
-	name = "supply dock loading door"
-	},
-/obj/machinery/conveyor{
-	dir = 4;
-	id = "CargoLoad"
-	},
 /turf/open/floor/mineral/titanium/airless,
 /area/shuttle/supply)
 "C" = (
@@ -155,39 +151,21 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/mineral/titanium/airless,
 /area/shuttle/supply)
-"O" = (
-/obj/structure/closet/crate,
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/supply)
-"P" = (
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/closet/crate/secure/loot,
-/turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/supply)
 "Q" = (
 /obj/machinery/door/airlock/titanium{
 	name = "Supply Shuttle Airlock";
 	req_access_txt = "31"
 	},
 /obj/docking_port/mobile/supply{
-	anchored = 5;
 	dir = 4;
-	dwidth = 4;
 	height = 8;
-	port_direction = 8
+	width = 7
 	},
 /turf/open/floor/mineral/titanium/airless,
 /area/shuttle/supply)
 "R" = (
 /obj/effect/decal/cleanable/wrapping,
 /turf/open/floor/mineral/titanium/white,
-/area/shuttle/supply)
-"S" = (
-/obj/structure/closet/crate/secure/loot,
-/turf/open/floor/mineral/titanium/yellow,
 /area/shuttle/supply)
 "T" = (
 /obj/structure/shuttle/engine/propulsion/burst/cargo,
@@ -209,21 +187,12 @@
 	dir = 8
 	},
 /obj/machinery/button/door{
-	id = "QMLoaddoor";
-	layer = 4;
-	name = "Loading Doors North";
+	id = "QMLoaddoor2";
+	name = "Loading Doors South";
 	pixel_x = -23;
-	pixel_y = -8;
-	req_access_txt = "31"
+	pixel_y = -8
 	},
 /turf/open/floor/mineral/titanium/yellow,
-/area/shuttle/supply)
-"Y" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/mineral/titanium/airless,
 /area/shuttle/supply)
 "Z" = (
 /obj/machinery/door/poddoor{
@@ -237,15 +206,15 @@
 F
 i
 Z
-i
+K
 V
 a
 a
 Q
+K
+Z
 i
-B
-i
-F
+K
 "}
 (2,1,1) = {"
 i
@@ -258,11 +227,11 @@ R
 p
 X
 p
-K
-i
+n
+T
 "}
 (3,1,1) = {"
-i
+K
 E
 A
 C
@@ -272,11 +241,11 @@ k
 l
 v
 f
-P
+h
 T
 "}
 (4,1,1) = {"
-i
+K
 v
 p
 v
@@ -286,11 +255,11 @@ k
 N
 v
 p
-h
+t
 T
 "}
 (5,1,1) = {"
-i
+K
 c
 p
 v
@@ -305,9 +274,9 @@ T
 "}
 (6,1,1) = {"
 i
-S
+K
 p
-v
+j
 q
 k
 k
@@ -318,30 +287,16 @@ s
 T
 "}
 (7,1,1) = {"
-i
-K
-n
-O
-p
-k
-j
-t
-v
-Y
-K
-i
-"}
-(8,1,1) = {"
 F
 i
-i
+K
 a
-i
+K
 a
 a
-i
+K
 a
+K
 i
-i
-F
+K
 "}
