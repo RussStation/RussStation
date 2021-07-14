@@ -28,7 +28,7 @@
 /datum/map_template/shuttle/emergency/echo
 	suffix = "echo"
 	name = "Echo Station emergency shuttle"
-	description = "An ordinary shuttle, a little worn and cramped."
+	description = "Compact and Cramped."
 
 /datum/map_template/shuttle/mining/echo
 	suffix = "echo"
@@ -38,6 +38,6 @@
 	suffix = "echo"
 	name = "supply shuttle (Echo)"
 
-/datum/map_template/shuttle/arrival/Echo
+/datum/map_template/shuttle/arrival/echo
 	suffix = "echo"
-	name = "arrival shuttle (Echo)"
+	name = "arrival shuttle (echo)"

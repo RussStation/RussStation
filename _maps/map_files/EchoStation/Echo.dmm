@@ -201,6 +201,9 @@
 /obj/machinery/camera/autoname{
 	dir = 4
 	},
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
 "afH" = (
@@ -310,6 +313,9 @@
 	},
 /obj/machinery/camera/autoname{
 	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8
 	},
 /turf/open/floor/iron,
 /area/hallway/secondary/exit)
@@ -433,6 +439,9 @@
 	pixel_x = -8;
 	pixel_y = 8
 	},
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/hallway/secondary/exit)
 "amO" = (
@@ -472,6 +481,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 6
 	},
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
 "anR" = (
@@ -480,6 +492,7 @@
 	height = 5;
 	id = "arrivals_stationary";
 	name = "Echo Arrivals Dock";
+	roundstart_template = /datum/map_template/shuttle/arrival/echo;
 	width = 20
 	},
 /turf/open/space/basic,
@@ -774,6 +787,9 @@
 	},
 /obj/machinery/camera/autoname{
 	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8
 	},
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
@@ -1337,7 +1353,6 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
 	},
-/mob/living/simple_animal/hostile/gorilla,
 /turf/open/floor/grass,
 /area/maintenance/starboard/fore)
 "aME" = (
@@ -2226,6 +2241,16 @@
 /obj/effect/spawner/lootdrop/garbage_spawner,
 /turf/open/floor/plating,
 /area/commons/locker)
+"btA" = (
+/obj/effect/turf_decal/tile/red{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/red,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/hallway/secondary/entry)
 "btG" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -3055,6 +3080,12 @@
 	},
 /turf/open/floor/iron,
 /area/hallway/secondary/exit)
+"bWe" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/hallway/primary/fore)
 "bWz" = (
 /obj/structure/table,
 /obj/item/paper_bin,
@@ -3836,17 +3867,9 @@
 /turf/open/floor/iron/white,
 /area/medical/medbay/central)
 "cwS" = (
-/obj/docking_port/stationary{
-	dir = 4;
-	dwidth = 5;
-	height = 8;
-	id = "supply_home";
-	name = "Echo Cargo Bay";
-	roundstart_template = null;
-	width = 7
-	},
-/turf/open/space/basic,
-/area/space)
+/obj/effect/landmark/observer_start,
+/turf/open/floor/iron,
+/area/hallway/primary/fore)
 "cxa" = (
 /obj/machinery/power/emitter/welded{
 	dir = 1
@@ -4245,6 +4268,10 @@
 /obj/item/stack/cable_coil/cut,
 /turf/open/space/basic,
 /area/solars/starboard/fore)
+"cJp" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/cargo/miningdock)
 "cJD" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 8
@@ -10460,6 +10487,17 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/showroomfloor,
 /area/medical/medbay/central)
+"ggf" = (
+/obj/docking_port/stationary{
+	dir = 4;
+	dwidth = 8;
+	height = 6;
+	id = "supply_home";
+	name = "Echo Cargo Bay";
+	width = 6
+	},
+/turf/open/space/basic,
+/area/space)
 "ggs" = (
 /obj/machinery/door/airlock/external{
 	name = "Escape Pod D"
@@ -17326,6 +17364,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/engineering/engine_smes)
+"jSZ" = (
+/obj/machinery/status_display/supply,
+/turf/closed/wall,
+/area/cargo/storage)
 "jTA" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -17376,6 +17418,9 @@
 	},
 /obj/effect/spawner/lootdrop/garbage_spawner,
 /obj/effect/spawner/lootdrop/garbage_spawner,
+/obj/machinery/status_display/supply{
+	pixel_y = -30
+	},
 /turf/open/floor/plating,
 /area/cargo/storage)
 "jUB" = (
@@ -18613,7 +18658,9 @@
 /obj/effect/turf_decal/stripes/end{
 	dir = 1
 	},
-/obj/machinery/mineral/equipment_vendor,
+/obj/machinery/computer/security/mining{
+	dir = 8
+	},
 /turf/open/floor/iron/dark,
 /area/cargo/miningdock)
 "kHO" = (
@@ -19352,6 +19399,9 @@
 /obj/item/stack/ore/iron,
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 5
+	},
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/open/floor/iron/dark,
 /area/cargo/miningdock)
@@ -20102,7 +20152,6 @@
 /area/cargo/storage)
 "lBi" = (
 /obj/effect/turf_decal/stripes/line,
-/obj/machinery/light,
 /turf/open/floor/plating,
 /area/cargo/miningdock)
 "lBw" = (
@@ -21380,6 +21429,10 @@
 	dir = 1
 	},
 /obj/structure/closet/secure_closet/miner,
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
 /turf/open/floor/iron/dark,
 /area/cargo/miningdock)
 "mtj" = (
@@ -21437,10 +21490,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -24
-	},
+/obj/machinery/mineral/equipment_vendor,
 /turf/open/floor/iron/dark,
 /area/cargo/miningdock)
 "muq" = (
@@ -30023,6 +30073,18 @@
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/science/xenobiology)
+"qRS" = (
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/hallway/secondary/exit)
 "qSK" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -40184,6 +40246,9 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
 "wAj" = (
@@ -73548,7 +73613,7 @@ pLw
 lsR
 lsR
 lsR
-lsR
+btA
 dQs
 dXB
 kVm
@@ -74066,7 +74131,7 @@ eWf
 dQW
 aCz
 rGJ
-rGJ
+bWe
 mbt
 rGJ
 kgV
@@ -74321,7 +74386,7 @@ rUq
 dBs
 eWf
 sHL
-rGJ
+cwS
 mTx
 aCz
 rGJ
@@ -74331,7 +74396,7 @@ rGJ
 rGJ
 rGJ
 rGJ
-rGJ
+bWe
 rGJ
 aqz
 unF
@@ -75347,7 +75412,7 @@ dgR
 qLc
 dic
 dic
-dic
+qRS
 dRK
 acJ
 abk
@@ -89248,9 +89313,9 @@ sDr
 kKx
 jMP
 loH
-loH
+cJp
 lft
-loH
+cJp
 loH
 jjW
 jjW
@@ -89508,7 +89573,7 @@ loH
 kHS
 lfw
 lAH
-loH
+cJp
 jjW
 jjW
 jjW
@@ -89765,7 +89830,7 @@ loH
 kIV
 lfZ
 lBi
-loH
+cJp
 jjW
 jjW
 jjW
@@ -90011,7 +90076,7 @@ gVj
 gVj
 gVj
 tIa
-tIa
+jSZ
 tIa
 irH
 iRY
@@ -92068,10 +92133,10 @@ jjW
 jjW
 jjW
 jjW
+ggf
 jjW
 jjW
 jjW
-cwS
 jjW
 jjW
 jjW
