@@ -488,11 +488,12 @@
 /area/hallway/secondary/entry)
 "anR" = (
 /obj/docking_port/stationary{
-	dwidth = 4;
-	height = 20;
+	dwidth = 5;
+	height = 5;
 	id = "arrivals_stationary";
 	name = "Echo Arrivals Dock";
-	width = 9
+	roundstart_template = /datum/map_template/shuttle/arrival/echo;
+	width = 20
 	},
 /turf/open/space/basic,
 /area/space)
@@ -3925,6 +3926,11 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port)
+"czO" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron,
+/area/engineering/main)
 "czS" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
@@ -6644,7 +6650,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/engineering/main)
 "dZV" = (
@@ -9176,7 +9181,6 @@
 	dir = 8
 	},
 /obj/structure/cable,
-/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/engineering/gravity_generator)
 "fto" = (
@@ -10490,7 +10494,6 @@
 	height = 5;
 	id = "supply_home";
 	name = "Echo Cargo Bay";
-	roundstart_template = /datum/map_template/shuttle/supply/echo;
 	width = 12
 	},
 /turf/open/space/basic,
@@ -14534,7 +14537,6 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/engineering/main)
 "ill" = (
@@ -18251,7 +18253,6 @@
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/engineering/main)
 "kxu" = (
@@ -22315,10 +22316,6 @@
 	},
 /obj/item/radio/intercom{
 	pixel_x = -27
-	},
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = -12
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/medical/cryo)
@@ -30574,7 +30571,6 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/engineering/gravity_generator)
 "rem" = (
@@ -31748,10 +31744,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/machinery/power/terminal{
-	dir = 8
-	},
 /turf/open/floor/iron,
 /area/engineering/gravity_generator)
 "rJo" = (
@@ -32067,7 +32059,6 @@
 	network = list("ss13","rd")
 	},
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
-/obj/structure/closet/emcloset,
 /turf/open/floor/iron/white,
 /area/science/research)
 "rSQ" = (
@@ -32088,10 +32079,6 @@
 	},
 /obj/machinery/light/small{
 	dir = 1
-	},
-/obj/structure/sink{
-	dir = 8;
-	pixel_x = 12
 	},
 /turf/open/floor/iron/white,
 /area/science/research)
@@ -34009,7 +33996,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
-/obj/structure/closet/firecloset/full,
 /turf/open/floor/iron/white,
 /area/science/research)
 "thP" = (
@@ -37078,9 +37064,6 @@
 /area/hallway/primary/port)
 "uNu" = (
 /obj/item/bodybag,
-/obj/structure/sink{
-	pixel_y = 25
-	},
 /turf/open/floor/iron/dark,
 /area/science/robotics/lab)
 "uNJ" = (
@@ -76021,7 +76004,7 @@ mqN
 oZG
 ikZ
 dZI
-oZG
+czO
 kwY
 rdm
 rJc
