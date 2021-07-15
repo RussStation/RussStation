@@ -6,10 +6,7 @@
 /turf/open/floor/iron,
 /area/shuttle/supply)
 "b" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 6
-	},
-/turf/open/floor/iron,
+/turf/template_noop,
 /area/shuttle/supply)
 "c" = (
 /obj/effect/decal/cleanable/dirt,
@@ -19,9 +16,24 @@
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/iron,
 /area/shuttle/supply)
+"d" = (
+/turf/open/floor/iron,
+/area/shuttle/supply)
+"e" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/shuttle/supply)
 "f" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/delivery,
+/turf/open/floor/iron,
+/area/shuttle/supply)
+"g" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
 /turf/open/floor/iron,
 /area/shuttle/supply)
 "h" = (
@@ -52,9 +64,9 @@
 /turf/open/floor/iron,
 /area/shuttle/supply)
 "u" = (
-/obj/structure/shuttle/engine/propulsion,
+/obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line,
-/turf/open/floor/plating/airless,
+/turf/open/floor/iron,
 /area/shuttle/supply)
 "v" = (
 /obj/effect/decal/cleanable/dirt,
@@ -67,11 +79,6 @@
 	},
 /obj/machinery/light{
 	dir = 8
-	},
-/obj/machinery/button/door/directional/west{
-	id = "cargoload";
-	name = "Loading Doors";
-	pixel_y = -8
 	},
 /obj/machinery/button/door/directional/west{
 	id = "cargounload";
@@ -106,7 +113,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/item/trash/can/food/beans,
+/obj/machinery/light/directional/east,
 /turf/open/floor/iron,
 /area/shuttle/supply)
 "C" = (
@@ -139,15 +146,17 @@
 	},
 /turf/open/floor/iron,
 /area/shuttle/supply)
-"J" = (
-/turf/template_noop,
-/area/shuttle/supply)
 "K" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
 /turf/open/floor/iron,
+/area/shuttle/supply)
+"L" = (
+/obj/structure/shuttle/engine/propulsion,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/airless,
 /area/shuttle/supply)
 "M" = (
 /obj/effect/turf_decal/bot,
@@ -161,11 +170,30 @@
 /turf/open/floor/iron,
 /area/shuttle/supply)
 "P" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/structure/shuttle/engine/propulsion/burst/right,
 /obj/effect/turf_decal/stripes/line,
-/turf/open/floor/iron,
+/turf/open/floor/plating/airless,
 /area/shuttle/supply)
 "Q" = (
+/obj/machinery/door/airlock/shuttle{
+	name = "Supply Shuttle Airlock";
+	req_access_txt = "31"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/shuttle/supply)
+"R" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/machinery/button/door/directional/west{
+	id = "cargoload";
+	name = "Loading Doors";
+	pixel_y = -8
+	},
+/turf/open/floor/iron,
+/area/shuttle/supply)
+"S" = (
 /obj/machinery/door/poddoor{
 	id = "cargoload";
 	name = "supply dock loading door"
@@ -176,28 +204,17 @@
 	},
 /turf/open/floor/plating,
 /area/shuttle/supply)
-"R" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/shuttle/supply)
-"S" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/machinery/light/directional/east,
-/turf/open/floor/iron,
-/area/shuttle/supply)
 "T" = (
 /obj/structure/shuttle/engine/propulsion/burst/left,
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plating/airless,
 /area/shuttle/supply)
 "U" = (
-/obj/structure/shuttle/engine/propulsion/burst/right,
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/plating/airless,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/item/trash/can/food/beans,
+/turf/open/floor/iron,
 /area/shuttle/supply)
 "V" = (
 /obj/machinery/door/airlock/shuttle{
@@ -222,14 +239,6 @@
 	},
 /turf/open/floor/iron,
 /area/shuttle/supply)
-"Y" = (
-/obj/machinery/door/airlock/shuttle{
-	name = "Supply Shuttle Airlock";
-	req_access_txt = "31"
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating,
-/area/shuttle/supply)
 "Z" = (
 /obj/machinery/door/poddoor{
 	id = "cargounload";
@@ -245,28 +254,28 @@
 (1,1,1) = {"
 i
 i
-i
 Z
+i
 V
 i
-Y
+i
 Q
 i
+S
 i
-i
-J
+b
 "}
 (2,1,1) = {"
 i
 z
 G
 G
-R
+e
 w
 R
-R
+e
 X
-i
+d
 i
 T
 "}
@@ -279,10 +288,10 @@ W
 W
 W
 v
-P
+u
 f
 h
-u
+L
 "}
 (4,1,1) = {"
 i
@@ -296,7 +305,7 @@ N
 m
 f
 y
-u
+L
 "}
 (5,1,1) = {"
 i
@@ -310,7 +319,7 @@ x
 m
 D
 y
-u
+L
 "}
 (6,1,1) = {"
 i
@@ -318,13 +327,13 @@ n
 F
 a
 F
-S
 B
-F
-b
-i
-i
 U
+F
+g
+d
+i
+P
 "}
 (7,1,1) = {"
 i
@@ -338,5 +347,5 @@ i
 i
 i
 i
-J
+b
 "}

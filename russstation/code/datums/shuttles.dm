@@ -40,4 +40,4 @@
 
 /datum/map_template/shuttle/arrival/echo
 	suffix = "echo"
-	name = "arrival shuttle (echo)"
+	name = "arrival shuttle (Echo)"
