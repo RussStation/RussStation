@@ -406,6 +406,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["feature_mcolor"], features["mcolor"])
 	READ_FILE(S["feature_ethcolor"], features["ethcolor"])
 	READ_FILE(S["feature_lizard_tail"], features["tail_lizard"])
+	//honk start - read skaven tail and color prefs
+	READ_FILE(S["feature_skaven_tail"], features["tail_skaven"])
+	READ_FILE(S["feature_skavencolor"], features["skavencolor"])
+	//honk end
 	READ_FILE(S["feature_lizard_snout"], features["snout"])
 	READ_FILE(S["feature_lizard_horns"], features["horns"])
 	READ_FILE(S["feature_lizard_frills"], features["frills"])
@@ -473,6 +477,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!features["ethcolor"] || features["ethcolor"] == "#000")
 		features["ethcolor"] = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
 
+	//honk start - get skaven colors
+	if(!features["skavencolor"] || features["skavencolor"] == "#000")
+		features["skavencolor"] = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)]
+	//honk end
+
 	randomise = SANITIZE_LIST(randomise)
 
 	hairstyle = sanitize_inlist(hairstyle, GLOB.hairstyles_list)
@@ -492,6 +501,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	playtime_reward_cloak = sanitize_integer(playtime_reward_cloak)
 	features["mcolor"] = sanitize_hexcolor(features["mcolor"], 3, 0)
 	features["ethcolor"] = copytext_char(features["ethcolor"], 1, 7)
+	//honk start - skaven features
+	features["tail_skaven"] = sanitize_inlist(features["tail_skaven"], GLOB.tails_list_skaven)
+	features["skavencolor"] = copytext_char(features["skavencolor"], 1, 7)
+	//honk end
 	features["tail_lizard"] = sanitize_inlist(features["tail_lizard"], GLOB.tails_list_lizard)
 	features["tail_human"] = sanitize_inlist(features["tail_human"], GLOB.tails_list_human, "None")
 	features["snout"] = sanitize_inlist(features["snout"], GLOB.snouts_list)
@@ -554,6 +567,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_mcolor"] , features["mcolor"])
 	WRITE_FILE(S["feature_ethcolor"] , features["ethcolor"])
 	WRITE_FILE(S["feature_lizard_tail"] , features["tail_lizard"])
+	//honk start - write skaven tail and color prefs to file
+	WRITE_FILE(S["feature_skaven_tail"] , features["tail_skaven"])
+	WRITE_FILE(S["feature_skavencolor"] , features["skavencolor"])
+	//honk end
 	WRITE_FILE(S["feature_human_tail"] , features["tail_human"])
 	WRITE_FILE(S["feature_lizard_snout"] , features["snout"])
 	WRITE_FILE(S["feature_lizard_horns"] , features["horns"])

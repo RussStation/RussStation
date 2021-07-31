@@ -76,3 +76,12 @@
 				conf = new/obj/effect/decal/cleanable/confetti(T)
 			if(!QDELETED(conf))
 				conf.reagents.add_reagent(type, reac_volume)
+
+//Mutation toxin that turns you into a skaven
+/datum/reagent/mutationtoxin/skaven
+	name = "Warpstone Mutation Toxin"
+	description = "A sickly glowing toxin."
+	color = "#5EFF3B" //RGB: 94, 255, 59
+	race = /datum/species/skaven
+	taste_description = "tingling"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED

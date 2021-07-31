@@ -17,6 +17,9 @@
 #define SCANGATE_POD "pod"
 #define SCANGATE_GOLEM "golem"
 #define SCANGATE_ZOMBIE "zombie"
+//honk start - skaven define
+#define SCANGATE_SKAVEN "skaven"
+//honk end
 
 /obj/machinery/scanner_gate
 	name = "scanner gate"
@@ -152,6 +155,10 @@
 				var/mob/living/carbon/human/H = M
 				var/datum/species/scan_species = /datum/species/human
 				switch(detect_species)
+					//honk start - allows skaven to be scanned by the gate
+					if(SCANGATE_SKAVEN)
+						scan_species = /datum/species/skaven
+					//honk end
 					if(SCANGATE_LIZARD)
 						scan_species = /datum/species/lizard
 					if(SCANGATE_FLY)
@@ -296,3 +303,6 @@
 #undef SCANGATE_POD
 #undef SCANGATE_GOLEM
 #undef SCANGATE_ZOMBIE
+//honk start - undefine skaven
+#undef SCANGATE_SKAVEN
+//honk end

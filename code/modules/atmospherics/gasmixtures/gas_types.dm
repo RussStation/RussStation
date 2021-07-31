@@ -174,7 +174,10 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 	gas_overlay = "miasma"
 	moles_visible = MOLES_GAS_VISIBLE * 60
 	rarity = 250
-	base_value = 2
+	//honk start - allowed miasma to be purchaseable from cargo, brought down cost also
+	purchaseable = TRUE
+	base_value = 1
+	//honk end
 
 /datum/gas/freon
 	id = "freon"
