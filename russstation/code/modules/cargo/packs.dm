@@ -10,6 +10,14 @@
     crate_name = "The Hotrod"
     crate_type = /obj/structure/closet/crate/large
 
+/datum/supply_pack/emergency/sportschair
+    name = "Sportschair"
+    desc = "A lightweight model wheelchair."
+    cost = 1500
+    contains = list(/obj/vehicle/ridden/wheelchair/russ/sportschair)
+    crate_name = "Sportschair"
+    crate_type = /obj/structure/closet/crate/large
+
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Security ////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
