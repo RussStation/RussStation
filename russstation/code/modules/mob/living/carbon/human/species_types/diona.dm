@@ -10,14 +10,10 @@
 		TRAIT_RESISTLOWPRESSURE,
 	)
 	mutant_bodyparts = list("diona_hair" = "diona_bracket")
-	//diona don't have blood
-	damage_overlay_type = ""
-	//take more damage from lasers
-	burnmod = 1.5
-	//take more damage from fire
-	heatmod = 2
-	//very slow
-	speedmod = 5
+	damage_overlay_type = "" // dionas don't have blood
+	burnmod = 1.5 // take more damage from lasers
+	heatmod = 2 // take more damage from fire
+	speedmod = 5 // very slow
 	meat = /obj/item/food/meat/slab/human/mutant/plant
 	disliked_food = MEAT | DAIRY
 	liked_food = VEGETABLES | FRUIT | GRAIN
