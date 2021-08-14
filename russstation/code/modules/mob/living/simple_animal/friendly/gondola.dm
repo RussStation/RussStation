@@ -15,8 +15,7 @@
 	return
 
 // Delete Runtime and replace with Camdola
-/mob/living/simple_animal/pet/cat/Runtime/Initialize(mapload)
+/mob/living/simple_animal/pet/cat/runtime/Initialize()
 	. = ..()
-	var/turf/T = get_turf(src)
-	new /mob/living/simple_animal/pet/gondola/russ/camdola(T)
+	new /mob/living/simple_animal/pet/gondola/russ/camdola(src.loc)
 	return INITIALIZE_HINT_QDEL
