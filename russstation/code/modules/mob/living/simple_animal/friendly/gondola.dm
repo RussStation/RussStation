@@ -14,8 +14,10 @@
 /mob/living/simple_animal/pet/gondola/russ/camdola/CreateGondola()
 	return
 
-// Delete Runtime and replace with Camdola
+// Uncomment this to replace Runtime with Camdola on all maps (Including TG ones)
+/*
 /mob/living/simple_animal/pet/cat/runtime/Initialize()
 	. = ..()
 	new /mob/living/simple_animal/pet/gondola/russ/camdola(src.loc)
 	return INITIALIZE_HINT_QDEL
+*/
