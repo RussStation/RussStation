@@ -15,7 +15,7 @@
 	. = ..()
 
 /obj/machinery/vending/autodrobe/Initialize()
-	products += list(
+	premium += list(
 		/obj/item/clothing/accessory/medal/russ/deputy = 2,
 		/obj/item/clothing/head/cowboyhat/clown = 2,
 		/obj/item/clothing/shoes/cowboy/clown = 2,
@@ -23,5 +23,5 @@
 	. = ..()
 
 /obj/machinery/vending/wardrobe/jani_wardrobe/Initialize()
-	products += list(/obj/item/storage/box/slippery_sign_kit = 1)
+	premium += list(/obj/item/storage/box/slippery_sign_kit = 1)
 	. = ..()
