@@ -9,4 +9,14 @@
     icon_state = "camdola"
     icon_living = "camdola"
     loot = list(/obj/effect/decal/cleanable/blood/gibs, /obj/item/stack/sheet/animalhide/gondola = 1, /obj/item/food/meat/slab/gondola/russ/camdola = 1)
-	
+
+// Gondola's Initialize() calls this, which we don't want here, so we return it.
+/mob/living/simple_animal/pet/gondola/russ/camdola/CreateGondola()
+	return
+
+// Delete Runtime and replace with Camdola
+/mob/living/simple_animal/pet/cat/Runtime/Initialize(mapload)
+	. = ..()
+	var/turf/T = get_turf(src)
+	new /mob/living/simple_animal/pet/gondola/russ/camdola(T)
+	return INITIALIZE_HINT_QDEL

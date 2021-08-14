@@ -10,8 +10,8 @@
 
 /datum/fart/living/carbon/human/species/corporate/hard_fail(mob/living/user)
 	user.visible_message("<span class='danger'>[user]'s ass is going supercritical!</span>")
-	user.Jitter(28)
-	user.Knockdown(28)
+	user.Jitter(2.8 SECONDS)
+	user.Knockdown(2.8 SECONDS)
 	playsound(user, 'sound/effects/huuu.ogg', 75)
 	sleep(2.4 SECONDS)
 	playsound(user, 'russstation/sound/effects/poo_thermonuclear.ogg', 100)
@@ -19,4 +19,4 @@
 	user.visible_message("<span class='userdanger'>[user] rips a thermonuclear fart!</span>")
 	explosion(user, 0, 0, 4, 2, flame_range = 5, silent = TRUE)
 	user.atmos_spawn_air("miasma=[10000];TEMP=[user.bodytemperature]")
-	user.gib(TRUE)
+	user.gib(TRUE, FALSE, FALSE)

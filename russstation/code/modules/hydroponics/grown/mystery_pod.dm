@@ -1,4 +1,4 @@
-//Mystery Pod
+//Mystery Pod - Currently not in game, meant to be in replicapod.dm but was removed overtime due to TG edits.
 /obj/item/seeds/russ/mystery
 	name = "pack of mystery pod seeds"
 	desc = "These seeds grow into mystery pods. These seeds are said to have come from a dead singuloth."

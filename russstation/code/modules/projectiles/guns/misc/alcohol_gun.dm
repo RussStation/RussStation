@@ -22,9 +22,6 @@
 /obj/item/gun/chem/alcohol_gun/emag_act()
 	if(obj_flags & EMAGGED)
 		return
-	Emag()
-
-/obj/item/gun/chem/alcohol_gun/proc/Emag()
-	obj_flags ^= EMAGGED
-	playsound(src.loc,"sparks",100,TRUE)
+	obj_flags |= EMAGGED
+	playsound(src.loc, "sparks", 100, TRUE)
 	loc.visible_message("You hear a sparking sound","<span class='warning'>You scramble the [name]'s purge sensor</span>")

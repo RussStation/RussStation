@@ -13,6 +13,7 @@
 
 // reagent_containers hardcodes an icon file; copypaste so we can point at our own file. not necessarily the best long term
 /obj/item/reagent_containers/molten_container/update_overlays()
+	. = ..()
 	if(!fill_icon_thresholds)
 		return
 	if(!reagents.total_volume)
@@ -111,7 +112,7 @@
 	name = "bar mold"
 	desc = "A clay mold of a bar."
 	icon_state = "mold_bar"
-	//produce_type = handled when smithing
+//	produce_type = handled when smithing
 
 /obj/item/reagent_containers/molten_container/smelt_mold/helmet
 	name = "helmet mold"

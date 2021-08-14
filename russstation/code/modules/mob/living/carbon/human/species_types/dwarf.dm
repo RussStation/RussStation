@@ -3,8 +3,13 @@
 	name = "Dwarf"
 	id = "dwarf"
 	default_color = "FFFFFF"
-	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS)
-	inherent_traits = list(TRAIT_NOBREATH,TRAIT_ADVANCEDTOOLUSER,TRAIT_CAN_STRIP) // tool use for areaeditor; is this too much power?
+	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS)
+	// tool use for areaeditor; is this too much power?
+	inherent_traits = list(
+		TRAIT_NOBREATH,
+		TRAIT_ADVANCEDTOOLUSER,
+		TRAIT_CAN_STRIP,
+		)
 	mutant_bodyparts = list("wings" = "None")
 	limbs_id = "human"
 	use_skintones = 1

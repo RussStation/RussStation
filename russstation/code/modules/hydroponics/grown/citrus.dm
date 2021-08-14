@@ -48,7 +48,7 @@
 	name = "gnorange"
 	desc = "You think you hear a faint honk coming from within the fruit. That or the clown is stuck in the vents again."
 	icon_state = "gnorange"
-	var/awakening = 0
+	var/awakening = FALSE
 	filling_color = "#FFFFFF"
 	distill_reagent = "demonsblood"
 
@@ -56,13 +56,13 @@
 	if(awakening)
 		to_chat(user, "<span class='warning'>The goblin is twitching and shaking, preventing you from eating it.</span>")
 		return
-	..()
+	. = ..()
 
 /obj/item/food/grown/russ/citrus/goblin/attack_self(mob/user)
 	if(awakening || istype(user.loc, /turf/open/space))
 		return
 	to_chat(user, "<span class='notice'>You begin to awaken the goblin...</span>")
-	awakening = 1
+	awakening = TRUE
 
 	spawn(30)
 		if(!QDELETED(src))
@@ -101,8 +101,3 @@
 	filling_color = "#00FF00"
 	juice_results = list(/datum/reagent/consumable/limejuice = 0)
 	distill_reagent = /datum/reagent/consumable/ethanol/booger
-
-
-
-
-//end
