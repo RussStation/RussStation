@@ -32,7 +32,7 @@
 
 /datum/emote/living/fart/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
-
-	if (.)
-		var/mob/living/U = user
-		U.fart_type.make_gas(U)
+	if (!.)
+		return
+	var/mob/living/U = user
+	U.fart_type.make_gas(U)

@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/molten_container
-	name = "Molten container"
-	desc = "Container for holding molten metal."
+	name = "molten container"
+	desc = "A container for holding molten metal."
 	amount_per_transfer_from_this = 25
 	volume = 25
 	fill_icon_thresholds = list(25)
@@ -32,6 +32,7 @@
 	. += filling
 
 /obj/item/reagent_containers/molten_container/update_icon_state()
+	. = ..()
 	if(src.reagents.total_volume > 0)
 		src.icon_state = (src.base_icon_state + "25")
 	else
@@ -39,7 +40,7 @@
 
 
 /obj/item/reagent_containers/molten_container/crucible
-	name = "Iron crucible"
+	name = "iron crucible"
 	desc = "A crucible used to hold smelted ore."
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "iron_crucible"
@@ -49,7 +50,7 @@
 
 // Smelting molds - make from clay, pour in molten ore, whack into shape
 /obj/item/reagent_containers/molten_container/smelt_mold
-	name = "Smelting mold"
+	name = "smelting mold"
 	desc = "A clay mold for casting metal."
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "mold_bar"

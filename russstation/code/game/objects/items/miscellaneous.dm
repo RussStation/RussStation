@@ -5,9 +5,9 @@
 
 /obj/item/clothing/suit/caution/attackby(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/janiupgrade))
-		var/datum/quirk/family_heirloom/heirloomCheck 
+		var/datum/quirk/family_heirloom/heirloomCheck
 
-		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later 
+		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later
 		for(var/datum/quirk/hasQuirk in user.roundstart_quirks)
 			if(istype(hasQuirk, /datum/quirk/family_heirloom))
 				heirloomCheck = hasQuirk
@@ -68,8 +68,8 @@
 		if(prob(1)) //1% chance for a name
 			new_sign.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
 		if(!isturf(new_sign.loc))
-			if(!user.put_in_inactive_hand(new_sign)) 
-				user.put_in_hands(new_sign) 
+			if(!user.put_in_inactive_hand(new_sign))
+				user.put_in_hands(new_sign)
 		return
 
 	. = ..()
@@ -96,13 +96,15 @@
 
 //end of construction code
 
-//Wetmore Slippery Sign
-//Constructable by janitors with upgrades from RND and sensors from cargo/robotics
-//Slips people who don't heed the warning
-
-//Wetmore Slippery Sign (traitor item)
-//purchasable from traitor uplink by janitors (7tc for 4)
-//in addition to slipping, also animates and kicks people around
+/*
+ *	Wetmore Slippery Sign
+ *
+ *	Constructable by janitors with upgrades from RND and sensors from cargo/robotics
+ *	Slips people who don't heed the warning
+ *
+ *	-- Traitor version purchasable from Janitor Traitor uplinks (7 TC for 4)
+ *	In addition to slipping, also animates and kicks people around.
+ */
 
 /obj/item/clothing/suit/caution/slippery
 	slot_flags = 0 //cannot be worn- or else it breaks stuff
@@ -112,27 +114,27 @@
 	req_access = list(ACCESS_JANITOR)
 	req_access_txt = "26"
 
-	// FALSE - Disabled || TRUE - Enabled
-	var/willSlip = FALSE
-	// Last time the sign slipped someone (time)
-	var/lastSlip = 0
-	// Cooldown
+	///Will we slip?
+	var/will_slip = FALSE
+	///Last time the sign slipped someone (time)
+	var/last_slip = 0
+	///Cooldown timer
 	var/slipCooldown = 5 SECONDS
-	// FALSE - Untainted || TRUE - Clown got it
-	var/clowningAround = FALSE 
-	// FALSE - Normal sign || TRUE - Emagged or uplink bought
-	var/evilSign = FALSE
-	// Used so animated signs don't attack the janitor
+	///If this is set to True, the clown has gotten their hands on this.
+	var/clowningAround = FALSE
+	///Are we an evil sign? Emagged/Uplink purchased ones are.
+	var/evil_sign = FALSE
+	///Used so animated signs don't attack the janitor
 	var/mob/living/carbon/boss = null
 
 /obj/item/clothing/suit/caution/slippery/syndicate
-	evilSign = TRUE //signs purchased from the uplink
+	evil_sign = TRUE //signs purchased from the uplink
 
 /obj/item/clothing/suit/caution/slippery/examine(mob/user)
 	. = ..()
 	if(isobserver(user) || user.mind.assigned_role == "Janitor") //true janitors and ghosts can see that it's a slippery sign
 		. += "<span class='notice'>This [name] is outfitted with an experimental lube sprayer. <i>Activate it in your hand to enable it.</i></span>"
-		if(clowningAround || evilSign)
+		if(clowningAround || evil_sign)
 			. += "<span class='warning'>It's been tampered with.</span>"
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns know lube when they see it
 		. += "<span class='notice'>This [name] has great potential for pranks.</span>"
@@ -143,19 +145,19 @@
 		proximity_monitor = new(src, 1) //initializes the proximity: (source, range)
 
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clumsy people can overload it (clowns, etc)
-		willSlip = TRUE 
+		will_slip = TRUE
 		clowningAround = TRUE
 		slipCooldown = 1 SECONDS
 		to_chat(user, "<span class='warning'>\The [name]'s lube sprayer has been overloaded.</span>")
 	else if((user.mind.assigned_role == "Janitor") || allowed(user)) //janitors at heart and janitor access can interact wiht it
 		boss = user
-		willSlip = !willSlip
+		will_slip = !will_slip
 		if(clowningAround) //so you can reset the sign if a clown messes with it
 			to_chat(user, "<span class='notice'>You repair \the [name]'s lube sprayer.</span>")
 			clowningAround = FALSE
 			slipCooldown = 5 SECONDS
 
-		to_chat(user, "<span class='notice'>\The [name] will [willSlip? "now" : "no longer"] slip anyone running past.</span>")
+		to_chat(user, "<span class='notice'>\The [name] will [will_slip? "now" : "no longer"] slip anyone running past.</span>")
 	else
 		to_chat(user, "<span class = 'notice'>\The [name] requires a janitor to activate.</span>")
 
@@ -171,7 +173,7 @@
 		return TRUE
 
 	I.play_tool_sound(src)
-	if(!evilSign)
+	if(!evil_sign)
 		var/atom/L = drop_location()
 		user.visible_message("<span class='notice'>[user.name] detatches the a device from \the [name].</span>", \
 							"<span class='notice'>You detatch the device from \the [name].</span>", \
@@ -183,15 +185,15 @@
 	else
 		to_chat(user, "<span class='warning'>You can't seem to detatch the mechanism from \the [name]...</span>")
 		sleep(2 SECONDS)
-		awakenSign(user)
+		awaken_sign(user)
 
 	return TRUE
 
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
-	if (world.time < lastSlip + slipCooldown) //cooldown for slipping
+	if(world.time < last_slip + slipCooldown) //cooldown for slipping
 		return
 
-	if(!willSlip) //needs to be enabled to slip people obviously
+	if(!will_slip) //needs to be enabled to slip people obviously
 		return
 
 	if(!iscarbon(AM)) //is it actually a thing we can slip?
@@ -207,12 +209,12 @@
 	var/turf/open/T = get_turf(src)
 
 	//are they not walking? & are they not the activator? & are they not being pulled? & either [is it evil or are they not already slipped]?
-	if(C.m_intent != MOVE_INTENT_WALK && C != boss && !(C.pulledby) && (evilSign || !(C.IsKnockdown())))
-		lastSlip = world.time
+	if(C.m_intent != MOVE_INTENT_WALK && C != boss && !(C.pulledby) && (evil_sign || !(C.IsKnockdown())))
+		last_slip = world.time
 		say("Caution, wet floor.")
 
 		//make own turf and all adjacent turfs lubed for a bit
-		if(clowningAround) 
+		if(clowningAround)
 			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
 			T.MakeSlippery(TURF_WET_SUPERLUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
 		else
@@ -223,14 +225,14 @@
 			AT.MakeSlippery(TURF_WET_LUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
 
 		//cry havoc and let slip the signs of wet
-		if(evilSign)
-			awakenSign(C)
+		if(evil_sign)
+			awaken_sign(C)
 
 /*
  * makes the sign shake a bit, then animate
  * arguments - victim is the mob triggering the sign
  */
-/obj/item/clothing/suit/caution/slippery/proc/awakenSign(mob/living/victim)
+/obj/item/clothing/suit/caution/slippery/proc/awaken_sign(mob/living/victim)
 	if(victim && victim == boss) //if the owner of the sign tries to fuck with it, it'll betray them
 		boss = null
 
@@ -254,7 +256,7 @@
 	visible_message("<span class='boldwarning'>\The [name] begins to shake violently.</span>", \
 					"<span class='boldwarning'>\The [name] begins to shake violently.</span>", \
 					"<span class='hear'>You hear mechanical whirring.</span>")
-	willSlip = FALSE
+	will_slip = FALSE
 	sleep(1 SECONDS)
 	stopShaking()
 	if(!isturf(loc))
@@ -263,23 +265,23 @@
 			return
 	src.animate_atom_living(boss)
 
-/* 
+/*
  * stop the shaking animation
- */ 
+ */
 /obj/item/clothing/suit/caution/slippery/proc/stopShaking()
 	animate(src, transform=matrix())
 
-/* 
+/*
  * bypasses the requirement of janitor or clumsy and turns it into an evil sign
  */
 /obj/item/clothing/suit/caution/slippery/emag_act(mob/user)
 	if(!proximity_monitor)
-		proximity_monitor = new(src, 1) 
+		proximity_monitor = new(src, 1)
 
-	willSlip = TRUE //bypasses the janitor requirement
-	if(!evilSign)
-		evilSign = TRUE
-		boss = user	
+	will_slip = TRUE //bypasses the janitor requirement
+	if(!evil_sign)
+		evil_sign = TRUE
+		boss = user
 		visible_message("<span class='warning'>\The [name] begins to shake subtly.</span>", \
 						"<span class='warning'>\The [name] begins to shake subtly.</span>", \
 						"<span class='hear'>You hear mechanical whirring.</span>")
@@ -288,11 +290,10 @@
 
 
 //box of 4 wetmore slippery signs- for the traitor uplink
-/obj/item/storage/box/syndie_kit/box_of_Signs
-
-/obj/item/storage/box/syndie_kit/box_of_Signs/PopulateContents()
-	for(var/i = 0, i < 4, i++)
-		new /obj/item/clothing/suit/caution/slippery/syndicate(src) 
+/obj/item/storage/box/syndie_kit/box_of_signs/PopulateContents()
+	new /obj/item/book/granter/action/origami(src)
+	for(var/i in 1 to 4)
+		new /obj/item/clothing/suit/caution/slippery/syndicate(src)
 
 //DIY Slippery sign kit for the janidrobe - instructions on how to build and some example signs, to get janitors started
 /obj/item/storage/box/slippery_sign_kit
