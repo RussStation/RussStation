@@ -22,8 +22,8 @@
 
 /datum/map_template/shuttle/emergency/shit
 	suffix = "shit"
-	name = "Shit Station emergency shuttle"
-	description = "Why would you do this?"
+	name = "Perfectly Normal Emergency Shuttle"
+	description = "This is bad and you should feel bad."
 
 /datum/map_template/shuttle/emergency/echo
 	suffix = "echo"
