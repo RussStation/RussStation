@@ -7,19 +7,14 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/obj/structure/window,
-/obj/structure/window{
-	dir = 1
-	},
 /turf/open/floor/mineral/plastitanium/red/brig,
 /area/shuttle/escape)
 "aS" = (
-/obj/item/radio/intercom/directional/north,
-/obj/structure/chair/comfy/shuttle{
-	dir = 8
+/obj/structure/disposalpipe/trunk{
+	dir = 1
 	},
 /obj/machinery/light/dim/directional/north,
-/turf/open/floor/mineral/titanium/white,
+/turf/open/floor/plating,
 /area/shuttle/escape)
 "eg" = (
 /obj/structure/disposalpipe/segment{
@@ -32,8 +27,11 @@
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/escape)
 "gc" = (
-/obj/structure/chair/comfy/shuttle{
+/obj/machinery/disposal/delivery_chute{
 	dir = 1
+	},
+/obj/structure/disposalpipe/trunk{
+	dir = 8
 	},
 /turf/open/floor/mineral/plastitanium/red/brig,
 /area/shuttle/escape)
@@ -56,22 +54,38 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
 	},
-/turf/template_noop,
+/obj/machinery/atmospherics/components/unary/outlet_injector/on{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/shuttle/escape)
+"jl" = (
+/obj/machinery/conveyor/auto/random{
+	activation_chance = 30;
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on,
+/turf/open/floor/engine,
 /area/shuttle/escape)
 "kZ" = (
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "lk" = (
-/obj/machinery/conveyor/auto{
+/obj/machinery/conveyor/auto/random{
 	dir = 4
 	},
 /obj/machinery/status_display/evac/directional/south,
 /obj/machinery/light/dim/directional/south,
-/turf/open/floor/engine,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/turf/open/floor/plating,
 /area/shuttle/escape)
 "mb" = (
-/turf/open/floor/engine/miasma,
+/turf/open/floor/engine/miasma{
+	initial_gas_mix = "miasma=500;TEMP=293.15"
+	},
 /area/shuttle/escape)
 "nz" = (
 /obj/structure/disposalpipe/junction/flip{
@@ -80,11 +94,9 @@
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "op" = (
-/obj/structure/disposalpipe/trunk{
-	dir = 1
-	},
-/obj/structure/disposaloutlet,
-/turf/open/floor/engine,
+/obj/structure/disposalpipe/trunk,
+/obj/machinery/status_display/evac/directional/east,
+/turf/open/floor/plating,
 /area/shuttle/escape)
 "oJ" = (
 /obj/machinery/disposal/delivery_chute{
@@ -94,16 +106,16 @@
 /obj/machinery/light/dim/directional/south,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
+"pH" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/escape)
 "qd" = (
 /obj/machinery/disposal/delivery_chute{
 	dir = 4
 	},
 /obj/machinery/status_display/evac/directional/west,
 /obj/structure/disposalpipe/trunk,
-/obj/structure/window,
-/obj/structure/window{
-	dir = 1
-	},
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "qh" = (
@@ -126,7 +138,7 @@
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/escape)
 "qF" = (
-/obj/machinery/conveyor/auto{
+/obj/machinery/conveyor/auto/random{
 	dir = 4
 	},
 /turf/open/floor/engine,
@@ -139,27 +151,29 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/obj/structure/window,
-/obj/structure/window{
+/turf/open/floor/engine,
+/area/shuttle/escape)
+"su" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/chair/comfy/shuttle{
 	dir = 1
 	},
 /turf/open/floor/engine,
 /area/shuttle/escape)
-"su" = (
-/obj/effect/spawner/structure/window/shuttle,
-/turf/open/floor/mineral/plastitanium,
-/area/template_noop)
 "ta" = (
 /obj/structure/disposalpipe/junction{
 	dir = 4
 	},
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/escape)
-"uY" = (
-/turf/closed/wall/mineral/titanium,
-/area/template_noop)
 "vl" = (
 /turf/open/floor/engine,
+/area/shuttle/escape)
+"vn" = (
+/obj/structure/sign/warning/radiation,
+/turf/closed/wall/mineral/titanium,
 /area/shuttle/escape)
 "wH" = (
 /obj/structure/disposalpipe/segment{
@@ -183,18 +197,17 @@
 /turf/open/floor/mineral/plastitanium/red/brig,
 /area/shuttle/escape)
 "xO" = (
-/obj/machinery/conveyor/auto{
+/obj/machinery/conveyor/auto/random{
 	dir = 4
 	},
 /obj/machinery/light/dim/directional/north,
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "ya" = (
-/obj/machinery/conveyor/auto{
+/obj/structure/fans/tiny/invisible,
+/obj/machinery/conveyor/auto/random{
+	activation_chance = 30;
 	dir = 4
-	},
-/obj/structure/sign/warning/radiation{
-	pixel_y = 32
 	},
 /turf/open/floor/engine,
 /area/shuttle/escape)
@@ -205,6 +218,7 @@
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/escape)
 "yC" = (
+/obj/item/radio/intercom/directional/east,
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/escape)
 "zE" = (
@@ -255,8 +269,10 @@
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "DC" = (
-/obj/structure/chair/comfy/shuttle,
-/turf/open/floor/engine,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/turf/open/floor/plating,
 /area/shuttle/escape)
 "DF" = (
 /obj/item/greentext,
@@ -270,35 +286,31 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "ED" = (
-/obj/machinery/door/airlock/titanium{
-	name = "Emergency Shuttle Airlock"
-	},
-/obj/structure/fans/tiny/invisible,
-/turf/open/floor/mineral/plastitanium,
+/obj/machinery/light/dim/directional/east,
+/turf/open/floor/mineral/titanium/white,
+/area/shuttle/escape)
+"Fn" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
+/turf/closed/wall/mineral/titanium/interior,
 /area/shuttle/escape)
 "Fx" = (
 /turf/closed/wall/mineral/titanium/interior,
 /area/shuttle/escape)
 "FR" = (
-/obj/structure/disposaloutlet,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /obj/machinery/light/dim/directional/north,
-/turf/open/floor/engine,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/turf/open/floor/plating,
 /area/shuttle/escape)
 "FU" = (
 /obj/structure/disposalpipe/segment{
 	dir = 5
 	},
 /turf/open/floor/engine,
-/area/shuttle/escape)
-"Ga" = (
-/obj/structure/disposaloutlet{
-	dir = 1
-	},
-/obj/structure/disposalpipe/trunk,
-/turf/closed/wall/mineral/titanium,
 /area/shuttle/escape)
 "GJ" = (
 /obj/structure/chair/comfy/shuttle,
@@ -321,10 +333,6 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/obj/structure/window,
-/obj/structure/window{
-	dir = 1
-	},
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "HO" = (
@@ -336,7 +344,7 @@
 "Jt" = (
 /mob/living/simple_animal/pet/dog/corgi/narsie,
 /turf/open/floor/cult,
-/area/template_noop)
+/area/shuttle/escape)
 "JR" = (
 /obj/structure/chair/comfy/shuttle,
 /obj/structure/disposalpipe/segment{
@@ -345,20 +353,16 @@
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "KL" = (
-/obj/machinery/status_display/evac/directional/south,
-/obj/structure/chair/comfy/shuttle{
-	dir = 8
-	},
-/obj/machinery/light/dim/directional/south,
-/turf/open/floor/mineral/titanium/white,
+/obj/effect/spawner/structure/window/shuttle,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "KY" = (
+/obj/machinery/light/dim/directional/north,
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/obj/structure/disposaloutlet,
-/obj/machinery/light/dim/directional/north,
-/turf/open/floor/mineral/plastitanium/red/brig,
+/turf/open/floor/plating,
 /area/shuttle/escape)
 "Lh" = (
 /obj/structure/disposalpipe/segment{
@@ -367,19 +371,13 @@
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "Mu" = (
-/obj/machinery/disposal/delivery_chute{
-	dir = 1
-	},
-/obj/structure/disposalpipe/trunk{
-	dir = 8
-	},
-/obj/structure/window{
-	dir = 8
-	},
-/obj/structure/window{
+/obj/machinery/light/dim/directional/south,
+/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/light/dim/directional/south,
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
 /turf/open/floor/mineral/plastitanium/red/brig,
 /area/shuttle/escape)
 "Mw" = (
@@ -415,6 +413,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "Rp" = (
@@ -422,6 +421,16 @@
 	dir = 8
 	},
 /turf/closed/wall/mineral/titanium,
+/area/shuttle/escape)
+"TX" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/machinery/light/dim/directional/south,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/engine,
 /area/shuttle/escape)
 "Uy" = (
 /obj/machinery/power/supermatter_crystal/shard/engine,
@@ -452,11 +461,8 @@
 /turf/template_noop,
 /area/template_noop)
 "YR" = (
-/obj/structure/disposaloutlet,
-/obj/structure/disposalpipe/trunk{
-	dir = 1
-	},
 /obj/machinery/light/dim/directional/north,
+/obj/structure/chair/comfy/shuttle,
 /turf/open/floor/engine,
 /area/shuttle/escape)
 
@@ -491,29 +497,29 @@ XU
 Wu
 Wu
 Wu
-aS
 HO
-KL
+HO
+HO
 Wu
 Wu
 Wu
 XU
 "}
 (4,1,1) = {"
-uY
+Wu
 yl
 Bk
 zI
 yC
-yC
-yC
-Ga
+ED
+op
+Bk
 Bk
 XJ
 Wu
 "}
 (5,1,1) = {"
-uY
+Wu
 DF
 Wu
 Wu
@@ -526,7 +532,7 @@ Qh
 Wu
 "}
 (6,1,1) = {"
-uY
+Wu
 Vr
 Bk
 qw
@@ -541,7 +547,7 @@ Wu
 (7,1,1) = {"
 Wu
 Wu
-yl
+Wu
 YR
 eg
 vl
@@ -554,7 +560,7 @@ Ei
 (8,1,1) = {"
 xx
 oJ
-BL
+Bk
 DC
 eg
 vl
@@ -594,30 +600,30 @@ Wu
 Wu
 yl
 qD
-YR
+aS
 vl
 eg
 vl
-DB
+TX
 Ei
 qF
 Ei
 "}
 (12,1,1) = {"
-uY
+Wu
 Vr
 qD
 qw
 FU
 eg
 vl
-wH
+su
 Wu
 qF
 Wu
 "}
 (13,1,1) = {"
-su
+Ei
 Jt
 ta
 Bk
@@ -625,19 +631,19 @@ qD
 BL
 Wu
 fy
-op
+Bk
 lk
 Wu
 "}
 (14,1,1) = {"
-uY
+Wu
 yl
 qD
 JR
 nz
 rf
 vl
-wH
+su
 Wu
 qF
 Wu
@@ -692,7 +698,7 @@ xH
 GQ
 Wu
 ya
-ED
+xx
 "}
 (19,1,1) = {"
 Fx
@@ -703,9 +709,9 @@ xH
 xH
 xH
 Mu
-Wu
-qF
-Wu
+Ei
+jl
+pH
 "}
 (20,1,1) = {"
 XU
@@ -716,9 +722,9 @@ xH
 xH
 xH
 gc
-Wu
+vn
 Uy
-Wu
+pH
 "}
 (21,1,1) = {"
 XU
@@ -727,11 +733,11 @@ Wu
 Fx
 Ei
 Rh
-Ei
-Fx
-Wu
-Wu
-Wu
+KL
+Fn
+pH
+pH
+pH
 "}
 (22,1,1) = {"
 XU
