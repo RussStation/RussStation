@@ -1,19 +1,19 @@
 /** A datum representing customizable farts */
 /datum/fart
 
-	///possible fart sounds
+	/** possible fart sounds */
 	var/list/sounds = list()
-	///time to wait to fart without risk
+	/** time to wait to fart without risk */
 	var/soft_cooldown = 2 SECONDS
-	///minimum wait time for farting
+	/** minimum wait time for farting */
 	var/hard_cooldown = 0.5 SECONDS
-	///chance of triggering a soft fail when under the safe cooldown
+	/** chance of triggering a soft fail when under the safe cooldown */
 	var/fail_chance = 20
-	///the damage to be taken when failing
+	/** the damage to be taken when failing */
 	var/fail_damage = 5
-	///volume of gas to spawn in make_gas
+	/** volume of gas to spawn in make_gas */
 	var/gas_volume = 2.5
-	///gas id as defined in code\modules\atmospherics\gasmixtures\gas_types.dm
+	/** gas id as defined in code\modules\atmospherics\gasmixtures\gas_types.dm */
 	var/gas_id = null
 
 /**

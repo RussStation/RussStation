@@ -1,9 +1,9 @@
-/*
- *	Spirit Board
- *
- *	Allows Ghosts to spell words out, starting a cooldown.
- *	In the future, it might be good to move this into a component given to the spiritboard.
- */
+/**
+  * Spirit Board
+  *
+  * Allows Ghosts to spell words out, starting a cooldown.
+  * In the future, it might be good to move this into a component given to the spiritboard.
+  */
 
 /obj/item/spiritboard
 	name = "Spirit board"
