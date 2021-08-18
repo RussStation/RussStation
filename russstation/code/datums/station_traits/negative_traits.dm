@@ -33,7 +33,8 @@
 	// absolutely devious
 	for(var/obj/machinery/telecomms/T in GLOB.telecomms_list)
 		if(istype(T))
-			T.freq_listening = list(new_frequency)
+			T.freq_listening -= last_frequency
+			T.freq_listening += new_frequency
 	// update intercoms as well since they're wired
 	// (mostly to keep the parrot room active)
 	for(var/obj/item/radio/intercom/I in GLOB.intercom_list)
