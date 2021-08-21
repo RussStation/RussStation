@@ -59,3 +59,13 @@
 	crate_name = "wild west crate"
 	crate_type = /obj/structure/closet/crate/wooden
 
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////// Vending /////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/datum/supply_pack/vending/monkey
+	name = "Monkey Supply Crate"
+	desc = "There's always more science to be done!"
+	cost = CARGO_CRATE_VALUE * 3
+	contains = list(/obj/item/vending_refill/monkey)
+	crate_name = "monkey supply crate"
