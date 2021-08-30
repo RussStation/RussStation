@@ -1701,6 +1701,14 @@
 /obj/effect/spawner/lootdrop/grille_or_trash,
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
+"anR" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/components/binary/pump/on/yellow/visible{
+	dir = 4;
+	name = "N2O"
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "anU" = (
 /obj/structure/closet/emcloset,
 /turf/open/floor/plating,
@@ -3155,6 +3163,14 @@
 	},
 /turf/open/floor/wood,
 /area/service/bar)
+"aCO" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/components/binary/pump/on/yellow/visible{
+	dir = 4;
+	name = "CO2"
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "aCT" = (
 /turf/open/floor/plating,
 /area/service/chapel)
@@ -4320,6 +4336,14 @@
 	},
 /turf/open/floor/iron,
 /area/service/theater)
+"aRz" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/components/binary/pump/on/yellow/visible{
+	dir = 1;
+	name = "Plasma"
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "aRM" = (
 /obj/machinery/navbeacon{
 	codes_txt = "patrol;next_patrol=6";
@@ -7114,6 +7138,13 @@
 /obj/machinery/atmospherics/components/trinary/filter/critical,
 /turf/open/floor/engine,
 /area/engineering/supermatter/room)
+"bDJ" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/table,
+/obj/machinery/cell_charger,
+/obj/item/stock_parts/cell/high,
+/turf/open/floor/iron/dark,
+/area/science/nanite)
 "bDO" = (
 /obj/machinery/light/directional/south,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -9613,6 +9644,9 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/obj/structure/chair/office/light{
+	dir = 8
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/science/nanite)
 "dcK" = (
@@ -9663,7 +9697,11 @@
 	receive_ore_updates = 1
 	},
 /obj/structure/table,
-/obj/item/storage/box/disks_nanite,
+/obj/item/storage/box/disks_nanite{
+	pixel_y = 10
+	},
+/obj/item/nanite_remote,
+/obj/item/nanite_scanner,
 /turf/open/floor/iron/dark,
 /area/science/nanite)
 "ddx" = (
@@ -12430,7 +12468,7 @@
 /area/hallway/primary/starboard)
 "ezR" = (
 /obj/machinery/mech_bay_recharge_port{
-	dir = 1
+	dir = 8
 	},
 /turf/open/floor/iron/dark,
 /area/science/robotics/mechbay)
@@ -15305,6 +15343,11 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /turf/open/floor/iron/dark,
 /area/engineering/storage/tech)
+"ggR" = (
+/obj/effect/turf_decal/bot,
+/obj/machinery/component_printer,
+/turf/open/floor/iron/dark,
+/area/science/nanite)
 "ggV" = (
 /obj/machinery/firealarm{
 	pixel_y = 24
@@ -15866,10 +15909,11 @@
 /turf/open/floor/iron,
 /area/cargo/miningoffice)
 "gwt" = (
-/obj/effect/turf_decal/bot,
 /obj/structure/table,
-/obj/item/nanite_scanner,
-/obj/item/nanite_remote,
+/obj/item/controller,
+/obj/item/compact_remote,
+/obj/item/compact_remote,
+/obj/effect/turf_decal/bot,
 /turf/open/floor/iron/dark,
 /area/science/nanite)
 "gwv" = (
@@ -16601,10 +16645,18 @@
 /turf/open/floor/iron,
 /area/medical/storage)
 "gTa" = (
-/obj/effect/turf_decal/bot,
-/obj/machinery/computer/nanite_chamber_control{
-	dir = 4
+/obj/structure/table,
+/obj/item/storage/toolbox/electrical{
+	pixel_y = 11
 	},
+/obj/item/multitool/circuit{
+	pixel_x = 7
+	},
+/obj/item/multitool/circuit,
+/obj/item/multitool/circuit{
+	pixel_x = -8
+	},
+/obj/effect/turf_decal/bot,
 /turf/open/floor/iron/dark,
 /area/science/nanite)
 "gTv" = (
@@ -16765,6 +16817,14 @@
 /obj/structure/tank_holder/extinguisher,
 /turf/open/floor/iron/dark,
 /area/cargo/miningoffice)
+"gWT" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/components/binary/pump/on/cyan/visible{
+	dir = 8;
+	name = "Air"
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "gWU" = (
 /obj/effect/spawner/structure/window/plasma/reinforced,
 /turf/open/floor/plating/airless,
@@ -17517,8 +17577,10 @@
 /turf/open/floor/iron/cafeteria,
 /area/security/prison)
 "hvb" = (
+/obj/structure/rack,
+/obj/item/integrated_circuit/loaded/speech_relay,
+/obj/item/integrated_circuit/loaded/hello_world,
 /obj/effect/turf_decal/bot,
-/obj/machinery/nanite_chamber,
 /turf/open/floor/iron/dark,
 /area/science/nanite)
 "hvp" = (
@@ -17722,8 +17784,11 @@
 /turf/open/floor/iron,
 /area/hallway/primary/aft)
 "hAj" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
 /obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/components/binary/pump/on/dark/visible{
+	dir = 4;
+	name = "Mix to Engine"
+	},
 /turf/open/space/basic,
 /area/space/nearstation)
 "hAH" = (
@@ -18606,9 +18671,6 @@
 /turf/open/floor/iron/dark,
 /area/science/lab)
 "ibZ" = (
-/obj/effect/turf_decal/loading_area{
-	dir = 1
-	},
 /obj/machinery/camera{
 	c_tag = "Nanite Lab";
 	dir = 4;
@@ -24502,6 +24564,14 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
 /turf/open/floor/iron/checker,
 /area/command/heads_quarters/ce)
+"ldB" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/components/binary/pump/on/yellow/visible{
+	dir = 8;
+	name = "O2"
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "ldU" = (
 /obj/machinery/camera{
 	c_tag = "Dormitory North"
@@ -28961,9 +29031,6 @@
 /area/security/interrogation)
 "nrj" = (
 /obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/structure/chair/office/light{
 	dir = 8
 	},
 /turf/open/floor/iron/showroomfloor,
@@ -35056,7 +35123,10 @@
 /obj/structure/sign/poster/official/random{
 	pixel_x = 32
 	},
-/turf/open/floor/mech_bay_recharge_floor,
+/obj/machinery/computer/mech_bay_power_console{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
 /area/science/robotics/mechbay)
 "rgq" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
@@ -35627,12 +35697,14 @@
 /turf/open/floor/iron/white,
 /area/maintenance/central/secondary)
 "rxU" = (
-/obj/machinery/recharge_station,
 /obj/machinery/button/door{
 	id = "Skynet_launch";
 	name = "Mech Bay Door Control";
 	pixel_x = -26;
 	pixel_y = 6
+	},
+/obj/machinery/computer/mech_bay_power_console{
+	dir = 1
 	},
 /turf/open/floor/iron/dark,
 /area/science/robotics/mechbay)
@@ -36513,7 +36585,6 @@
 /turf/open/floor/iron,
 /area/hallway/primary/aft)
 "seE" = (
-/obj/item/stack/sheet/mineral/plasma,
 /obj/machinery/camera{
 	c_tag = "Medbay Chemistry";
 	dir = 1;
@@ -36524,6 +36595,13 @@
 	},
 /obj/effect/turf_decal/tile/yellow,
 /obj/structure/table/glass,
+/obj/item/clothing/glasses/science{
+	pixel_y = 9
+	},
+/obj/item/clothing/glasses/science{
+	pixel_y = 5
+	},
+/obj/item/stack/sheet/mineral/plasma,
 /turf/open/floor/iron/showroomfloor,
 /area/medical/pharmacy)
 "seI" = (
@@ -37069,6 +37147,14 @@
 "suz" = (
 /turf/open/floor/iron,
 /area/engineering/engine_smes)
+"suJ" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/components/binary/pump/on/yellow/visible{
+	dir = 8;
+	name = "N2"
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "suQ" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
@@ -38418,9 +38504,7 @@
 /turf/open/floor/iron,
 /area/maintenance/central)
 "tmj" = (
-/obj/machinery/mech_bay_recharge_port{
-	dir = 2
-	},
+/obj/machinery/recharge_station,
 /turf/open/floor/iron/dark,
 /area/science/robotics/mechbay)
 "tmU" = (
@@ -39532,7 +39616,8 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/open/floor/mech_bay_recharge_floor,
+/obj/machinery/recharge_station,
+/turf/open/floor/iron/dark,
 /area/science/robotics/mechbay)
 "tVL" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line{
@@ -39646,8 +39731,11 @@
 /turf/open/floor/wood,
 /area/command/heads_quarters/captain)
 "tXN" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/purple/visible,
 /obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/components/binary/pump/on/purple/visible{
+	dir = 1;
+	name = "Mix to Turbine"
+	},
 /turf/open/space/basic,
 /area/space/nearstation)
 "tYT" = (
@@ -42038,9 +42126,6 @@
 /turf/open/floor/wood,
 /area/command/heads_quarters/hop)
 "vlW" = (
-/obj/machinery/computer/mech_bay_power_console{
-	dir = 1
-	},
 /obj/item/radio/intercom{
 	pixel_y = -30
 	},
@@ -42048,6 +42133,7 @@
 	pixel_x = -10;
 	pixel_y = -22
 	},
+/obj/machinery/mech_bay_recharge_port,
 /turf/open/floor/iron/dark,
 /area/science/robotics/mechbay)
 "vmq" = (
@@ -42087,11 +42173,8 @@
 /turf/open/floor/iron/dark,
 /area/science/xenobiology)
 "vnA" = (
-/obj/machinery/computer/mech_bay_power_console{
-	dir = 1
-	},
 /obj/machinery/light/directional/south,
-/turf/open/floor/iron/dark,
+/turf/open/floor/mech_bay_recharge_floor,
 /area/science/robotics/mechbay)
 "vnF" = (
 /turf/closed/wall,
@@ -42108,8 +42191,7 @@
 /turf/open/floor/engine/vacuum,
 /area/engineering/atmos)
 "vnX" = (
-/obj/machinery/recharge_station,
-/turf/open/floor/iron/dark,
+/turf/open/floor/mech_bay_recharge_floor,
 /area/science/robotics/mechbay)
 "vow" = (
 /obj/machinery/door/poddoor/preopen{
@@ -62325,11 +62407,11 @@ fGy
 fsz
 hAj
 iUQ
-fGy
+anR
 fsz
 kKD
 fsz
-fGy
+aCO
 fsz
 kKD
 fsz
@@ -64907,7 +64989,7 @@ pyJ
 pZu
 qYs
 ssQ
-fGy
+aRz
 fBN
 vqo
 vUk
@@ -66947,17 +67029,17 @@ jsP
 oRd
 fsz
 fsz
-gmQ
+gWT
 fsz
 gmQ
 fsz
 kKD
 fsz
-fGy
+ldB
 fsz
 kKD
 fsz
-fGy
+suJ
 fsz
 fsz
 oRd
@@ -68502,7 +68584,7 @@ fsz
 fsz
 fsz
 fsz
-oRd
+lib
 rsF
 sIA
 ugs
@@ -68759,7 +68841,7 @@ gfQ
 gfQ
 gfQ
 gfQ
-oRd
+lib
 rsF
 sIR
 ugI
@@ -91057,8 +91139,8 @@ boN
 ecC
 eCc
 sLI
-fyr
-fXs
+bDJ
+ggR
 gwt
 gTa
 hvb
