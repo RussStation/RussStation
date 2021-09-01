@@ -67,5 +67,8 @@
 	name = "Monkey Supply Crate"
 	desc = "There's always more science to be done!"
 	cost = CARGO_CRATE_VALUE * 3
-	contains = list(/obj/item/vending_refill/monkey)
+	contains = list(
+		/obj/item/vending_refill/monkey,
+		/obj/item/circuitboard/machine/vending/monkey
+	)
 	crate_name = "monkey supply crate"

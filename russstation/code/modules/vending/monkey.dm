@@ -13,6 +13,7 @@
 					/obj/item/dnainjector/h2m = 3)
 	premium = list(/obj/item/storage/box/monkeycubes = 2)
 	refill_canister = /obj/item/vending_refill/monkey
+	circuit = /obj/item/circuitboard/machine/vending/monkey
 	default_price = PAYCHECK_MEDIUM
 	extra_price = PAYCHECK_COMMAND
 	payment_department = ACCOUNT_SCI
@@ -22,3 +23,10 @@
 	machine_name = "MonkeeVendr"
 	icon = 'russstation/icons/obj/vending_restock.dmi'
 	icon_state = "refill_monkey"
+
+/obj/item/circuitboard/machine/vending/monkey
+	name = "\improper MonkeeVendr (Machine Board)"
+	build_path = /obj/machinery/vending/monkey
+	req_components = list(
+		/obj/item/stack/sheet/glass = 1,
+		/obj/item/vending_refill/monkey = 1)
