@@ -5,3 +5,4 @@
 	icon_state = "lungs-skaven"
 	safe_oxygen_min = 0
 	safe_miasma_min = 10 //what skaven breath
+	suffers_miasma = FALSE

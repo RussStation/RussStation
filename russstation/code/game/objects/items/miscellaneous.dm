@@ -4,12 +4,12 @@
 //apply prox sensor to sign (from robo/cargo)
 
 /obj/item/clothing/suit/caution/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/janiupgrade))
-		var/datum/quirk/family_heirloom/heirloomCheck 
+	if(istype(I, /obj/item/janicart_upgrade))
+		var/datum/quirk/item_quirk/family_heirloom/heirloomCheck
 
-		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later 
-		for(var/datum/quirk/hasQuirk in user.roundstart_quirks)
-			if(istype(hasQuirk, /datum/quirk/family_heirloom))
+		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later
+		for(var/datum/quirk/hasQuirk in user.quirks)
+			if(istype(hasQuirk, /datum/quirk/item_quirk/family_heirloom))
 				heirloomCheck = hasQuirk
 				break
 
@@ -51,11 +51,11 @@
 						"<span class='hear'>You hear a screwdriver and a click.</span>")
 	qdel(src)
 	new /obj/item/clothing/suit/caution(L, 1)
-	new /obj/item/janiupgrade(L, 1)
+	new /obj/item/janicart_upgrade(L, 1)
 	return TRUE
 
 /obj/item/clothing/suit/caution/incomplete/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/janiupgrade))
+	if(istype(I, /obj/item/janicart_upgrade))
 		to_chat(user, "<span class='notice'>This [name] already has a floor buffer attatched to it.</span>")
 		return
 
@@ -68,15 +68,15 @@
 		if(prob(1)) //1% chance for a name
 			new_sign.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
 		if(!isturf(new_sign.loc))
-			if(!user.put_in_inactive_hand(new_sign)) 
-				user.put_in_hands(new_sign) 
+			if(!user.put_in_inactive_hand(new_sign))
+				user.put_in_hands(new_sign)
 		return
 
 	. = ..()
 
 //old signs (only found in maint spawners)
 /obj/item/caution/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/janiupgrade))
+	if(istype(I, /obj/item/janicart_upgrade))
 		to_chat(user, "<span class='warning'>The [name] is too antiquated to fit a [I.name], try a newer model sign.</span>")
 		return
 
@@ -88,7 +88,7 @@
 	result = /obj/item/clothing/suit/caution/slippery
 	time = 3 SECONDS
 	reqs = list(
-		/obj/item/janiupgrade = 1,
+		/obj/item/janicart_upgrade = 1,
 		/obj/item/assembly/prox_sensor = 1,
 		/obj/item/clothing/suit/caution = 1)
 	blacklist = list(/obj/item/clothing/suit/caution/incomplete, /obj/item/clothing/suit/caution/slippery)
@@ -119,7 +119,7 @@
 	// Cooldown
 	var/slipCooldown = 5 SECONDS
 	// FALSE - Untainted || TRUE - Clown got it
-	var/clowningAround = FALSE 
+	var/clowningAround = FALSE
 	// FALSE - Normal sign || TRUE - Emagged or uplink bought
 	var/evilSign = FALSE
 	// Used so animated signs don't attack the janitor
@@ -143,7 +143,7 @@
 		proximity_monitor = new(src, 1) //initializes the proximity: (source, range)
 
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clumsy people can overload it (clowns, etc)
-		willSlip = TRUE 
+		willSlip = TRUE
 		clowningAround = TRUE
 		slipCooldown = 1 SECONDS
 		to_chat(user, "<span class='warning'>\The [name]'s lube sprayer has been overloaded.</span>")
@@ -160,7 +160,7 @@
 		to_chat(user, "<span class = 'notice'>\The [name] requires a janitor to activate.</span>")
 
 /obj/item/clothing/suit/caution/slippery/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/janiupgrade))
+	if(istype(I, /obj/item/janicart_upgrade))
 		to_chat(user, "<span class='notice'>This [name] already has a device attatched to it.</span>")
 		return
 
@@ -178,7 +178,7 @@
 							"<span class='hear'>You hear a screwdriver and a click.</span>")
 		qdel(src)
 		new /obj/item/clothing/suit/caution(L, 1)
-		new /obj/item/janiupgrade(L, 1)
+		new /obj/item/janicart_upgrade(L, 1)
 		new /obj/item/assembly/prox_sensor(L, 1)
 	else
 		to_chat(user, "<span class='warning'>You can't seem to detatch the mechanism from \the [name]...</span>")
@@ -212,7 +212,7 @@
 		say("Caution, wet floor.")
 
 		//make own turf and all adjacent turfs lubed for a bit
-		if(clowningAround) 
+		if(clowningAround)
 			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
 			T.MakeSlippery(TURF_WET_SUPERLUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
 		else
@@ -263,23 +263,23 @@
 			return
 	src.animate_atom_living(boss)
 
-/* 
+/*
  * stop the shaking animation
- */ 
+ */
 /obj/item/clothing/suit/caution/slippery/proc/stopShaking()
 	animate(src, transform=matrix())
 
-/* 
+/*
  * bypasses the requirement of janitor or clumsy and turns it into an evil sign
  */
 /obj/item/clothing/suit/caution/slippery/emag_act(mob/user)
 	if(!proximity_monitor)
-		proximity_monitor = new(src, 1) 
+		proximity_monitor = new(src, 1)
 
 	willSlip = TRUE //bypasses the janitor requirement
 	if(!evilSign)
 		evilSign = TRUE
-		boss = user	
+		boss = user
 		visible_message("<span class='warning'>\The [name] begins to shake subtly.</span>", \
 						"<span class='warning'>\The [name] begins to shake subtly.</span>", \
 						"<span class='hear'>You hear mechanical whirring.</span>")
@@ -292,7 +292,7 @@
 
 /obj/item/storage/box/syndie_kit/box_of_Signs/PopulateContents()
 	for(var/i = 0, i < 4, i++)
-		new /obj/item/clothing/suit/caution/slippery/syndicate(src) 
+		new /obj/item/clothing/suit/caution/slippery/syndicate(src)
 
 //DIY Slippery sign kit for the janidrobe - instructions on how to build and some example signs, to get janitors started
 /obj/item/storage/box/slippery_sign_kit
@@ -303,7 +303,7 @@
 /obj/item/storage/box/slippery_sign_kit/PopulateContents()
 	var/static/items_inside = list(
 		/obj/item/clothing/suit/caution = 2,
-		/obj/item/janiupgrade = 2,
+		/obj/item/janicart_upgrade = 2,
 		/obj/item/assembly/prox_sensor = 2,
 		/obj/item/paper/guides/slippery_sign_DIY = 1)
 	generate_items_inside(items_inside,src)
