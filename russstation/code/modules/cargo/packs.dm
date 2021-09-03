@@ -38,24 +38,26 @@
 	name = "Wild West Crate"
 	desc = "Yeehaw pardner!"
 	cost = 4000
-	contains = list(/obj/item/clothing/head/cowboyhat,
-    				/obj/item/clothing/head/cowboyhat/tan,
-    				/obj/item/clothing/head/cowboyhat/white,
-    				/obj/item/clothing/head/cowboyhat/black,
-    				/obj/item/clothing/head/cowboyhat/pink,
-    				/obj/item/clothing/shoes/cowboy,
-    				/obj/item/clothing/shoes/cowboy,
-    				/obj/item/clothing/shoes/cowboy/white,
-    				/obj/item/clothing/shoes/cowboy/black,
-    				/obj/item/clothing/shoes/cowboy/pink,
-    				/obj/item/clothing/accessory/medal/russ/deputy,
-    				/obj/item/clothing/accessory/medal/russ/deputy,
-    				/obj/item/toy/gun,
-    				/obj/item/toy/gun,
-    				/obj/item/toy/gun,
-    				/obj/item/toy/gun,
-    				/obj/item/toy/gun,
-    				/obj/item/toy/gun/bigiron)
+	contains = list(
+		/obj/item/clothing/head/cowboyhat,
+    	/obj/item/clothing/head/cowboyhat/tan,
+    	/obj/item/clothing/head/cowboyhat/white,
+    	/obj/item/clothing/head/cowboyhat/black,
+    	/obj/item/clothing/head/cowboyhat/pink,
+    	/obj/item/clothing/shoes/cowboy,
+    	/obj/item/clothing/shoes/cowboy,
+    	/obj/item/clothing/shoes/cowboy/white,
+    	/obj/item/clothing/shoes/cowboy/black,
+    	/obj/item/clothing/shoes/cowboy/pink,
+    	/obj/item/clothing/accessory/medal/russ/deputy,
+    	/obj/item/clothing/accessory/medal/russ/deputy,
+    	/obj/item/toy/gun,
+    	/obj/item/toy/gun,
+    	/obj/item/toy/gun,
+    	/obj/item/toy/gun,
+    	/obj/item/toy/gun,
+    	/obj/item/toy/gun/bigiron,
+	)
 	crate_name = "wild west crate"
 	crate_type = /obj/structure/closet/crate/wooden
 

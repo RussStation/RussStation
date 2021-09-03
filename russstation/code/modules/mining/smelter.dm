@@ -9,8 +9,9 @@
 	var/obj/item/reagent_containers/molten_container/crucible/crucible = null
 	var/fuel = 0
 	var/volume = 20
-	// stack/ore includes glass and slag, which we don't want?
-	var/list/allowed_ores = list(/obj/item/stack/ore/iron,
+	/// stack/ore includes glass and slag, which we don't want?
+	var/list/allowed_ores = list(
+		/obj/item/stack/ore/iron,
 		/obj/item/stack/ore/adamantine,
 		/obj/item/stack/ore/silver,
 		/obj/item/stack/ore/gold,
@@ -18,7 +19,8 @@
 		/obj/item/stack/ore/diamond,
 		/obj/item/stack/ore/plasma,
 		/obj/item/stack/ore/bananium,
-		/obj/item/stack/ore/titanium)
+		/obj/item/stack/ore/titanium,
+	)
 	var/glow_brightness = 4
 	var/glow_power = 0.6
 	var/glow_color = "#FF5500"
@@ -26,7 +28,11 @@
 /obj/machinery/smelter/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/grown/log) || istype(W, /obj/item/stack/sheet/mineral/wood))
 		if(!(fuel >= volume)) //add fuel
-			user.visible_message("[user] adds the [W.name] to \the [src.name].", "You add the [W.name] to the fuel supply of \the [src.name].", "<span class='hear'>You hear the roar of a fire.</span>")
+			user.visible_message(
+				"[user] adds the [W.name] to \the [src.name].",
+				"You add the [W.name] to the fuel supply of \the [src.name].",
+				"<span class='hear'>You hear the roar of a fire.</span>",
+			)
 			fuel += 5
 			if(fuel > volume) //adjust fuel if it goes over the max
 				fuel = volume
@@ -43,7 +49,7 @@
 		else
 			var/obj/item/stack/sheet/current_hide = W
 
-			while (fuel > 0 && current_hide.amount > 0 && do_after(user, 5, target = src)) //doesnt use up any fuel but requires there to be fuel
+			while(fuel > 0 && current_hide.amount > 0 && do_after(user, 5, target = src)) //doesnt use up any fuel but requires there to be fuel
 				user.visible_message("[user] puts \the [W] next to \the [src.name] and it dries.", "You put \the [W.name] next to \the [src.name] and it dries.")
 				new /obj/item/stack/sheet/leather(user.loc)
 				current_hide.amount--
@@ -135,7 +141,7 @@
 		/datum/reagent/silver,
 		/datum/reagent/gold,
 		/datum/reagent/iron,
-		/datum/reagent/uranium
+		/datum/reagent/uranium,
 	)
 
 /obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)

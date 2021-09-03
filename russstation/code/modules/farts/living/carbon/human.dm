@@ -6,8 +6,8 @@
 				'russstation/sound/effects/mob_effects/poo4.ogg')
 
 /datum/fart/living/carbon/human/make_gas(mob/living/user)
-	..() // returns nothing so collect nothing
-	if(user.mind.assigned_role == "Clown" && prob(25)) //clowns have a chance to fart confetti
+	. = ..() // returns nothing so collect nothing
+	if(HAS_TRAIT(user, TRAIT_NAIVE) && prob(25)) // naive people (like clowns) have a chance to fart confetti
 		var/turf/T = get_turf(user)
 		new /obj/effect/gibspawner/confetti(T, user)
 		user.atmos_spawn_air("n2o=[gas_volume / 5];TEMP=[user.bodytemperature]") // release some laughing gas, but heavily reduce the amount so the clown isn't a walking sleep bomb

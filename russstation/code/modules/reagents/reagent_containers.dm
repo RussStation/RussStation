@@ -3,5 +3,5 @@
 	desc = "A mug for serving hearty brews."
 	icon_state = "manlydorfglass"
 	inhand_icon_state = "coffee"
-	spillable = 1
+	spillable = TRUE
 	isGlass = FALSE

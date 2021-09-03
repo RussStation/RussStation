@@ -1,5 +1,6 @@
 /** A datum representing customizable farts */
 /datum/fart
+
 	/** possible fart sounds */
 	var/list/sounds = list()
 	/** time to wait to fart without risk */
@@ -19,7 +20,7 @@
   * Produce side effects when a fart successfully happens
   */
 /datum/fart/proc/make_gas(mob/living/user)
-	if (gas_id) // by deafult is null and therefore no gas is spawned
+	if(gas_id) // by deafult is null and therefore no gas is spawned
 		user.atmos_spawn_air("[gas_id]=[gas_volume];TEMP=[user.bodytemperature]") // spawn the defined gas at it's defined volume at the temperature of the user
 
 /**

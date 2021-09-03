@@ -34,7 +34,7 @@
 /mob/living/simple_animal/pet/gondola/Initialize()
 	. = ..()
 	AddElement(/datum/element/pet_bonus, "smiles!")
-	if (!(istype(src, /mob/living/simple_animal/pet/gondola/gondolapod)) && !(istype(src, /mob/living/simple_animal/pet/gondola/russ/camdola))) // honk -- camdola needs to be an exception
+	if (!(istype(src, /mob/living/simple_animal/pet/gondola/gondolapod)))
 		CreateGondola()
 
 /mob/living/simple_animal/pet/gondola/proc/CreateGondola()

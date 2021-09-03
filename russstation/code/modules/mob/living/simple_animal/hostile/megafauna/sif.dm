@@ -77,16 +77,22 @@ Difficulty: Medium
 
 	deathmessage = "falls into the abyss."
 	deathsound = 'russstation/sound/effects/death_howl.ogg'
-	var/can_special = 1 //Enables sif to do what he does best, spin and charge
-	var/spinIntervals = 0 //Counts how many spins Sif does before setting spinning status to false
-	var/spinning = FALSE //AOE spin special attack status
-	var/charging = FALSE //dashing special attack status
-	var/angered = FALSE //active at < 50% health
-	var/enraged = FALSE //active at < 20% health
+	///Can he spin and charge?
+	var/can_special = TRUE
+	///Counted number of spins Sif does before setting spinning status to FALSE
+	var/spinIntervals = 0
+	///AOE spin special attack status
+	var/spinning = FALSE
+	///dashing special attack status
+	var/charging = FALSE
+	///Is he angered? - Activates at < 50% health
+	var/angered = FALSE
+	///Is he enraged? - Activates at < 20% health
+	var/enraged = FALSE
 	var/stageTwo = FALSE
 	var/stageThree = FALSE
-	var/currentPower = 0 //Every few seconds this variable gets higher, when it gets high
-						 //enough it will use a special attack then reset the variable to 0
+	///Every few seconds this variable gets higher - When it gets high enough, it will use a special attack then reset the variable to 0
+	var/currentPower = 0
 
 //A living beacon for the sif ruins (hard to find sif considering the GPS only shows when sif is summoned)
 //Spawns on a really small enclosed lava island that is hard to reach in Sifs ruins
@@ -117,7 +123,7 @@ Difficulty: Medium
 	gps_name = "Infinity Signal"
 	deathmessage = "moans as the sound of its power begins to wind down."
 	deathsound = 'sound/voice/borg_deathsound.ogg'
-	can_special = 0
+	can_special = FALSE
 	true_spawn = TRUE
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	sentience_type = SENTIENCE_ARTIFICIAL
@@ -192,40 +198,41 @@ Difficulty: Medium
 	..()
 
 	//Can they perform these tasks?
-	if(can_special == 1)
+	if(can_special != TRUE)
+		return
 
-		//Charging currentPower every step
-		if(!charging || !spinning)
-			src.currentPower += 2
+	//Charging currentPower every step
+	if(!charging || !spinning)
+		src.currentPower += 2
 
-		//Sets sif's anger status.
-		if(src.health <= 1000 && src.stageTwo == FALSE)
-			angered()
+	//Sets sif's anger status.
+	if(src.health <= 1000 && src.stageTwo == FALSE)
+		angered()
 
-		//Sets sifs enrage status.
-		if(src.health <= 400 && src.stageThree == FALSE)
-			enraged()
+	//Sets sifs enrage status.
+	if(src.health <= 400 && src.stageThree == FALSE)
+		enraged()
 
-		//Whenever Sif moves he destroys walls in his way.
-		if(src.angered == TRUE || src.enraged == TRUE)
-			DestroySurroundings()
+	//Whenever Sif moves he destroys walls in his way.
+	if(src.angered == TRUE || src.enraged == TRUE)
+		DestroySurroundings()
 
-		//Normally Sif will do a special when he has 100 currentPower.
-		if(src.angered == FALSE && src.currentPower >= 100)
-			special()
+	//Normally Sif will do a special when he has 100 currentPower.
+	if(src.angered == FALSE && src.currentPower >= 100)
+		special()
 
-		//Now requires 50 power when angery
-		if(src.angered == TRUE && src.currentPower >= 50 && src.enraged == FALSE)
-			special()
+	//Now requires 50 power when angery
+	if(src.angered == TRUE && src.currentPower >= 50 && src.enraged == FALSE)
+		special()
 
-		//Now requires 30 power when enraged
-		if(src.enraged == TRUE && src.currentPower >= 30)
-			special()
+	//Now requires 30 power when enraged
+	if(src.enraged == TRUE && src.currentPower >= 30)
+		special()
 
-		//visual effect
-		if(src.charging == TRUE)
-			new /obj/effect/temp_visual/decoy/fading(loc,src)
-			DestroySurroundings()
+	//visual effect
+	if(src.charging == TRUE)
+		new /obj/effect/temp_visual/decoy/fading(loc,src)
+		DestroySurroundings()
 
 //Sif's AOE spin attack
 /mob/living/simple_animal/hostile/megafauna/sif/proc/spinAttack()
@@ -234,22 +241,22 @@ Difficulty: Medium
 
 //Chance to dodge projectiles when angered or enraged
 /mob/living/simple_animal/hostile/megafauna/sif/bullet_act(obj/projectile/P)
-	var/passed = 0
+	var/passed = FALSE
 
 	if(angered)
 		switch(rand(0,100))
 			if(0 to 1)
-				passed = 1
+				passed = TRUE
 
 	if(enraged)
 		switch(rand(0,100))
 			if(0 to 5)
-				passed = 1
+				passed = TRUE
 
-	if(passed == 1)
+	if(passed == TRUE)
 		visible_message("<span class='danger'>[src] dodged the projectile!</span>", "<span class='userdanger'>You dodge the projectile!</span>")
 		playsound(src, pick('sound/weapons/bulletflyby.ogg', 'sound/weapons/bulletflyby2.ogg', 'sound/weapons/bulletflyby3.ogg'), 300, 1)
-		return 0
+		return FALSE
 
 	return ..()
 
@@ -308,22 +315,26 @@ Difficulty: Medium
 
 //Attack speed delay
 /mob/living/simple_animal/hostile/megafauna/sif/AttackingTarget()
-	if(charging == FALSE)
-		. = ..()
-		if(.)
-			recovery_time = world.time + 7
+	if(charging != FALSE)
+		return
+	. = ..()
+	if(!.)
+		return
+	recovery_time = world.time + 7
 
 /mob/living/simple_animal/hostile/megafauna/sif/Goto(target, delay, minimum_distance)
-	if(charging == FALSE)
-		..()
+	if(charging != FALSE)
+		return
+	. = ..()
 
 /mob/living/simple_animal/hostile/megafauna/sif/MoveToTarget(list/possible_targets)
-	if(charging == FALSE)
-		..()
+	if(charging != FALSE)
+		return
+	. = ..()
 
 //Immune to explosions when spinning or charging
 /mob/living/simple_animal/hostile/megafauna/sif/ex_act(severity, target)
-	return 0
+	return FALSE
 
 //stop spinning if you lose the target
 /mob/living/simple_animal/hostile/megafauna/sif/LoseTarget()
@@ -336,48 +347,50 @@ Difficulty: Medium
 
 /mob/living/simple_animal/hostile/megafauna/sif/Moved()
 
-	if(can_special == 1)
+	if(can_special != TRUE)
+		return
 
-		if(charging == TRUE)
-			DestroySurroundings()
+	if(charging == TRUE)
+		DestroySurroundings()
 
-		//Stop spinning
-		if(src.spinIntervals == 5)
-			icon_state = "Great_Brown_Wolf"
-			src.spinIntervals = 0
-			spinning = FALSE
-			src.speed = default_attackspeed()
+	//Stop spinning
+	if(src.spinIntervals == 5)
+		icon_state = "Great_Brown_Wolf"
+		src.spinIntervals = 0
+		spinning = FALSE
+		src.speed = default_attackspeed()
 
-		//Start spinning
-		if(spinning == TRUE)
-			icon_state = "Great_Brown_Wolf_Spin"
-			src.spinIntervals += 1
-			if(isturf(src.loc) || isobj(src.loc) && src.loc.density)
-				src.ex_act(EXPLODE_HEAVY)
-				explosion(get_turf(src), 0, 0, 4, 0, adminlog = FALSE, ignorecap = FALSE, flame_range = 0, silent = TRUE, smoke = FALSE)
-				playsound(src, pick('russstation/sound/effects/whoosh1.ogg', 'russstation/sound/effects/whoosh2.ogg', 'russstation/sound/effects/whoosh3.ogg'), 300, 1)
-				playsound(src, 'russstation/sound/effects/blade_spin.ogg', 400, 1)
-				if(angered)
-					src.speed = 8
-					src.move_to_delay = 2
+	//Start spinning
+	if(spinning == TRUE)
+		icon_state = "Great_Brown_Wolf_Spin"
+		src.spinIntervals += 1
+		if(isturf(src.loc) || isobj(src.loc) && src.loc.density)
+			src.ex_act(EXPLODE_HEAVY)
+			explosion(get_turf(src), 0, 0, 4, 0, adminlog = FALSE, ignorecap = FALSE, flame_range = 0, silent = TRUE, smoke = FALSE)
+			playsound(src, pick('russstation/sound/effects/whoosh1.ogg', 'russstation/sound/effects/whoosh2.ogg', 'russstation/sound/effects/whoosh3.ogg'), 300, 1)
+			playsound(src, 'russstation/sound/effects/blade_spin.ogg', 400, 1)
+			if(angered)
+				src.speed = 8
+				src.move_to_delay = 2
 
 	playsound(src, 'sound/effects/meteorimpact.ogg', 200, 1, 2, 1)
 	..()
 
 //Activated when sif collides with target when charging.
 /mob/living/simple_animal/hostile/megafauna/sif/Bump(atom/A)
-	if(charging == TRUE)
-		if(isturf(A) || isobj(A) && A.density)
-			A.ex_act(EXPLODE_HEAVY)
-		DestroySurroundings()
-		if(isliving(A))
-			var/mob/living/L = A
-			L.visible_message("<span class='danger'>[src] stomps on [L]!</span>", "<span class='userdanger'>[src] stomps on you!</span>")
-			src.forceMove(get_turf(L))
-			L.apply_damage(20, BRUTE)
-			playsound(get_turf(L), 'russstation/sound/effects/sif_stomp.ogg', 400, 1)
-			shake_camera(L, 4, 3)
-			shake_camera(src, 2, 3)
+	if(charging != TRUE)
+		return
+	if(isturf(A) || isobj(A) && A.density)
+		A.ex_act(EXPLODE_HEAVY)
+	DestroySurroundings()
+	if(isliving(A))
+		var/mob/living/L = A
+		L.visible_message("<span class='danger'>[src] stomps on [L]!</span>", "<span class='userdanger'>[src] stomps on you!</span>")
+		src.forceMove(get_turf(L))
+		L.apply_damage(20, BRUTE)
+		playsound(get_turf(L), 'russstation/sound/effects/sif_stomp.ogg', 400, 1)
+		shake_camera(L, 4, 3)
+		shake_camera(src, 2, 3)
 	..()
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=Sword Of The Forsaken=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
@@ -453,10 +466,12 @@ Difficulty: Medium
 //Apply a temp buff until the necklace is used
 /obj/item/clothing/neck/necklace/necklace_of_the_forsaken/proc/temp_buff(mob/living/carbon/human/user)
 	to_chat(user, "<span class='warning'>You feel as if you have a second chance at something, but you're not sure what.</span>")
-	if(do_after(user, 40, target = user))
-		to_chat(user, "<span class='notice'>The ember warms you...</span>")
-		ADD_TRAIT(user, TRAIT_NOHARDCRIT, "necklace_of_the_forsaken")//less chance of being gibbed
-		active_owner = user
+	if(!do_after(user, 4 SECONDS, user))
+		to_chat(user, "<span class='notice'>The feeling seems to pass away.</span>")
+		return
+	to_chat(user, "<span class='notice'>The ember warms you...</span>")
+	ADD_TRAIT(user, TRAIT_NOHARDCRIT, CLOTHING_TRAIT) //less chance of being gibbed
+	active_owner = user
 
 //Revive the user and remove buffs
 /obj/item/clothing/neck/necklace/necklace_of_the_forsaken/proc/second_chance()
@@ -474,7 +489,7 @@ Difficulty: Medium
 	icon_state = "necklace_forsaken_active"
 	if(!active_owner)
 		return
-	REMOVE_TRAIT(active_owner, TRAIT_NOHARDCRIT, "necklace_of_the_forsaken")
+	REMOVE_TRAIT(active_owner, TRAIT_NOHARDCRIT, CLOTHING_TRAIT)
 	active_owner = null //just in case
 
 //Add action

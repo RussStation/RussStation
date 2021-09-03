@@ -10,13 +10,17 @@
 
 /datum/fart/living/carbon/human/species/corporate/hard_fail(mob/living/user)
 	user.visible_message("<span class='danger'>[user]'s ass is going supercritical!</span>")
-	user.Jitter(28)
-	user.Knockdown(28)
+	user.Jitter(2.8 SECONDS)
+	user.Knockdown(2.8 SECONDS)
 	playsound(user, 'sound/effects/huuu.ogg', 75)
-	sleep(2.4 SECONDS)
-	playsound(user, 'russstation/sound/effects/poo_thermonuclear.ogg', 100)
-	sleep(0.4 SECONDS)
+	addtimer(CALLBACK(src, .proc/hard_fail_timer, user), 2.4 SECONDS)
+
+/datum/fart/living/carbon/human/species/corporate/proc/hard_fail_timer(mob/living/user)
+	playsound(user, 'russstation/sound/effects/poo_thermonuclear.ogg', 75)
+	addtimer(CALLBACK(src, .proc/end_hard_fail, user), 0.4 SECONDS)
+
+/datum/fart/living/carbon/human/species/corporate/proc/end_hard_fail(mob/living/user)
 	user.visible_message("<span class='userdanger'>[user] rips a thermonuclear fart!</span>")
 	explosion(user, 0, 0, 4, 2, flame_range = 5, silent = TRUE)
-	user.atmos_spawn_air("miasma=[10000];TEMP=[user.bodytemperature]")
-	user.gib(TRUE)
+	user.atmos_spawn_air("miasma=[1000];TEMP=[user.bodytemperature]") // This shouldn't be making that much Miasma, otherwise the server will cry.
+	user.gib(TRUE, FALSE, FALSE)
