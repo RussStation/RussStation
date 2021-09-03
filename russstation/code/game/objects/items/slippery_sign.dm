@@ -126,7 +126,7 @@
 	///Last time the sign slipped someone (time)
 	var/last_slip = 0
 	///Cooldown timer
-	var/slipCooldown = 5 SECONDS
+	var/slip_cooldown = 5 SECONDS
 	///If this is set to True, the clown has gotten their hands on this.
 	var/clowning_around = FALSE
 	///Are we an evil sign? Emagged/Uplink purchased ones are.
@@ -154,7 +154,7 @@
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clumsy people can overload it (clowns, etc)
 		will_slip = TRUE
 		clowning_around = TRUE
-		slipCooldown = 1 SECONDS
+		slip_cooldown = 1 SECONDS
 		to_chat(user, "<span class='warning'>\The [name]'s lube sprayer has been overloaded.</span>")
 	else if((user.mind.assigned_role == "Janitor") || allowed(user)) //janitors at heart and janitor access can interact wiht it
 		boss = user
@@ -162,7 +162,7 @@
 		if(clowning_around) //so you can reset the sign if a clown messes with it
 			to_chat(user, "<span class='notice'>You repair \the [name]'s lube sprayer.</span>")
 			clowning_around = FALSE
-			slipCooldown = 5 SECONDS
+			slip_cooldown = 5 SECONDS
 
 		to_chat(user, "<span class='notice'>\The [name] will [will_slip? "now" : "no longer"] slip anyone running past.</span>")
 	else
@@ -196,7 +196,7 @@
 	return TRUE
 
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
-	if(world.time < last_slip + slipCooldown) //cooldown for slipping
+	if(world.time < last_slip + slip_cooldown) //cooldown for slipping
 		return
 
 	if(!will_slip) //needs to be enabled to slip people obviously
