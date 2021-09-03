@@ -1,26 +1,29 @@
-//constructing a wetmore slippery sign:
-//obtain a wet floor sign (from cargo, chemistry(plastic), or your vendor )
-//apply floor buffer to sign (from RND)
-//apply prox sensor to sign (from robo/cargo)
+/**
+ * Construction of a Wetmore slippery sign:
+ *
+ * 1) Obtain a wet floor sign (Cargo, Plastic [Chemistry/Cargo] or JaniDrobe)
+ * 2) Apply floor buffer to sign (Service Techfab)
+ * 3) Apply Proximity Sensor to sign (Robotics/Cargo)
+ */
 
-/obj/item/clothing/suit/caution/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/janiupgrade))
-		var/datum/quirk/family_heirloom/heirloomCheck
+/obj/item/clothing/suit/caution/attackby(obj/item/item, mob/living/user)
+	if(istype(item, /obj/item/janiupgrade))
+		var/datum/quirk/family_heirloom/heirloom_check
 
 		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later
-		for(var/datum/quirk/hasQuirk in user.roundstart_quirks)
-			if(istype(hasQuirk, /datum/quirk/family_heirloom))
-				heirloomCheck = hasQuirk
+		for(var/datum/quirk/has_quirk in user.roundstart_quirks)
+			if(istype(has_quirk, /datum/quirk/family_heirloom))
+				heirloom_check = has_quirk
 				break
 
-		if(heirloomCheck?.heirloom == src) //make sure jannies don't accidentally use their family heirlooms (cause it'll qdel it)
-			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom [name]!</span>")
+		if(heirloom_check?.heirloom == src) //make sure jannies don't accidentally use their family heirlooms (cause it'll qdel it)
+			to_chat(user, "<span class='warning'>You wouldn't want to tamper with your heirloom!</span>")
 			return
 
-		user.visible_message("<span class='notice'>[user.name] adds \a [I.name] to the bottom of \the [name].</span>", \
-							"<span class='notice'>You add \the [I.name] to the bottom of \the [name].</span>")
+		user.visible_message("<span class='notice'>[user.name] adds \a [item.name] to the bottom of \the [name].</span>", \
+							"<span class='notice'>You add \the [item.name] to the bottom of \the [name].</span>")
 		var/obj/item/new_sign = new /obj/item/clothing/suit/caution/incomplete(loc, 1)
-		qdel(I)
+		qdel(item)
 		qdel(src)
 		if(!isturf(new_sign.loc))
 			if(!user.put_in_inactive_hand(new_sign)) //tries to put it in the inactive hand first, and if it fails...
@@ -40,12 +43,12 @@
 	. = ..()
 	. += "<span class='notice'>The [name] has a floor buffer attatched underneath. You could <i>attach a sensor</i> to it, or <i>undo the screws</i> to remove it.</span>"
 
-/obj/item/clothing/suit/caution/incomplete/screwdriver_act(mob/living/user, obj/item/I)
+/obj/item/clothing/suit/caution/incomplete/screwdriver_act(mob/living/user, obj/item/item)
 	if(..())
 		return TRUE
 
 	var/atom/L = drop_location()
-	I.play_tool_sound(src)
+	item.play_tool_sound(src)
 	user.visible_message("<span class='notice'>[user.name] detatches the floor buffer from \the [name].</span>", \
 						"<span class='notice'>You detatch the floor buffer from \the [name].</span>", \
 						"<span class='hear'>You hear a screwdriver and a click.</span>")
@@ -54,16 +57,16 @@
 	new /obj/item/janiupgrade(L, 1)
 	return TRUE
 
-/obj/item/clothing/suit/caution/incomplete/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/janiupgrade))
+/obj/item/clothing/suit/caution/incomplete/attackby(obj/item/item, mob/living/user)
+	if(istype(item, /obj/item/janiupgrade))
 		to_chat(user, "<span class='notice'>This [name] already has a floor buffer attatched to it.</span>")
 		return
 
-	if(istype(I, /obj/item/assembly/prox_sensor))
-		user.visible_message("<span class='notice'>[user.name] adds \a [I.name] to the floor buffer on \the [name].</span>", \
-							"<span class='notice'>You add \the [I.name] to the floor buffer on \the [name].</span>")
+	if(istype(item, /obj/item/assembly/prox_sensor))
+		user.visible_message("<span class='notice'>[user.name] adds \a [item.name] to the floor buffer on \the [name].</span>", \
+							"<span class='notice'>You add \the [item.name] to the floor buffer on \the [name].</span>")
 		var/obj/item/new_sign = new /obj/item/clothing/suit/caution/slippery(loc, 1)
-		qdel(I)
+		qdel(item)
 		qdel(src)
 		if(prob(1)) //1% chance for a name
 			new_sign.name = pick("Ms. Lippy", "Mr. Walky", "Monitor Hallsky")
@@ -75,9 +78,9 @@
 	. = ..()
 
 //old signs (only found in maint spawners)
-/obj/item/caution/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/janiupgrade))
-		to_chat(user, "<span class='warning'>The [name] is too antiquated to fit a [I.name], try a newer model sign.</span>")
+/obj/item/caution/attackby(obj/item/item, mob/living/user)
+	if(istype(item, /obj/item/janiupgrade))
+		to_chat(user, "<span class='warning'>The [name] is too antiquated to fit a [item.name], try a newer model sign.</span>")
 		return
 
 	. = ..()
@@ -90,13 +93,17 @@
 	reqs = list(
 		/obj/item/janiupgrade = 1,
 		/obj/item/assembly/prox_sensor = 1,
-		/obj/item/clothing/suit/caution = 1)
-	blacklist = list(/obj/item/clothing/suit/caution/incomplete, /obj/item/clothing/suit/caution/slippery)
+		/obj/item/clothing/suit/caution = 1,
+	)
+	blacklist = list(
+		/obj/item/clothing/suit/caution/incomplete,
+		/obj/item/clothing/suit/caution/slippery,
+	)
 	category = CAT_MISC
 
 //end of construction code
 
-/*
+/**
  *	Wetmore Slippery Sign
  *
  *	Constructable by janitors with upgrades from RND and sensors from cargo/robotics
@@ -121,7 +128,7 @@
 	///Cooldown timer
 	var/slipCooldown = 5 SECONDS
 	///If this is set to True, the clown has gotten their hands on this.
-	var/clowningAround = FALSE
+	var/clowning_around = FALSE
 	///Are we an evil sign? Emagged/Uplink purchased ones are.
 	var/evil_sign = FALSE
 	///Used so animated signs don't attack the janitor
@@ -134,7 +141,7 @@
 	. = ..()
 	if(isobserver(user) || user.mind.assigned_role == "Janitor") //true janitors and ghosts can see that it's a slippery sign
 		. += "<span class='notice'>This [name] is outfitted with an experimental lube sprayer. <i>Activate it in your hand to enable it.</i></span>"
-		if(clowningAround || evil_sign)
+		if(clowning_around || evil_sign)
 			. += "<span class='warning'>It's been tampered with.</span>"
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clowns know lube when they see it
 		. += "<span class='notice'>This [name] has great potential for pranks.</span>"
@@ -146,33 +153,33 @@
 
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clumsy people can overload it (clowns, etc)
 		will_slip = TRUE
-		clowningAround = TRUE
+		clowning_around = TRUE
 		slipCooldown = 1 SECONDS
 		to_chat(user, "<span class='warning'>\The [name]'s lube sprayer has been overloaded.</span>")
 	else if((user.mind.assigned_role == "Janitor") || allowed(user)) //janitors at heart and janitor access can interact wiht it
 		boss = user
 		will_slip = !will_slip
-		if(clowningAround) //so you can reset the sign if a clown messes with it
+		if(clowning_around) //so you can reset the sign if a clown messes with it
 			to_chat(user, "<span class='notice'>You repair \the [name]'s lube sprayer.</span>")
-			clowningAround = FALSE
+			clowning_around = FALSE
 			slipCooldown = 5 SECONDS
 
 		to_chat(user, "<span class='notice'>\The [name] will [will_slip? "now" : "no longer"] slip anyone running past.</span>")
 	else
 		to_chat(user, "<span class = 'notice'>\The [name] requires a janitor to activate.</span>")
 
-/obj/item/clothing/suit/caution/slippery/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/janiupgrade))
+/obj/item/clothing/suit/caution/slippery/attackby(obj/item/item, mob/living/user)
+	if(istype(item, /obj/item/janiupgrade))
 		to_chat(user, "<span class='notice'>This [name] already has a device attatched to it.</span>")
 		return
-
 	. = ..()
 
-/obj/item/clothing/suit/caution/slippery/screwdriver_act(mob/living/user, obj/item/I)
-	if(..())
+/obj/item/clothing/suit/caution/slippery/screwdriver_act(mob/living/user, obj/item/item)
+	. = ..()
+	if(.)
 		return TRUE
 
-	I.play_tool_sound(src)
+	item.play_tool_sound(src)
 	if(!evil_sign)
 		var/atom/L = drop_location()
 		user.visible_message("<span class='notice'>[user.name] detatches the a device from \the [name].</span>", \
@@ -186,7 +193,6 @@
 		to_chat(user, "<span class='warning'>You can't seem to detatch the mechanism from \the [name]...</span>")
 		sleep(2 SECONDS)
 		awaken_sign(user)
-
 	return TRUE
 
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
@@ -214,7 +220,7 @@
 		say("Caution, wet floor.")
 
 		//make own turf and all adjacent turfs lubed for a bit
-		if(clowningAround)
+		if(clowning_around)
 			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
 			T.MakeSlippery(TURF_WET_SUPERLUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
 		else

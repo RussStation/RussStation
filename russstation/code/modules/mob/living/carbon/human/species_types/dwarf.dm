@@ -9,10 +9,10 @@
 		TRAIT_NOBREATH,
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
-		)
+	)
 	mutant_bodyparts = list("wings" = "None")
 	limbs_id = "human"
-	use_skintones = 1
+	use_skintones = TRUE
 	speedmod = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	brutemod = 0.9
@@ -24,6 +24,8 @@
 /datum/species/dwarf/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
 	. = ..()
 	C.dna.add_mutation(DWARFISM)
+	for(var/datum/mutation/human/dwarfism/dwarf_mutation in C.dna.mutations)
+		dwarf_mutation.mutadone_proof = TRUE
 	C.bubble_file = 'russstation/icons/mob/talk.dmi'
 	C.bubble_icon = "dwarf"
 	var/dwarf_hair = pick("Beard (Dwarf)", "Beard (Very Long)", "Beard (Full)")

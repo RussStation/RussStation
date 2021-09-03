@@ -56,4 +56,4 @@
 		if(location)
 			location.hotspot_expose(1000,1000)
 		sparks.start() //the most radical way to start plasma fires
-	addtimer(CALLBACK(src, .proc/grind), 0.1 SECONDS)
+	addtimer(CALLBACK(src, .proc/grind), 1)
