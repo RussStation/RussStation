@@ -8,11 +8,11 @@
 
 /obj/item/clothing/suit/caution/attackby(obj/item/item, mob/living/user)
 	if(istype(item, /obj/item/janicart_upgrade))
-		var/datum/quirk/family_heirloom/heirloom_check
+		var/datum/quirk/item_quirk/family_heirloom/heirloom_check
 
 		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later
-		for(var/datum/quirk/has_quirk in user.roundstart_quirks)
-			if(istype(has_quirk, /datum/quirk/family_heirloom))
+		for(var/datum/quirk/has_quirk in user.quirks)
+			if(istype(has_quirk, /datum/quirk/item_quirk/family_heirloom))
 				heirloom_check = has_quirk
 				break
 
@@ -58,7 +58,7 @@
 	return TRUE
 
 /obj/item/clothing/suit/caution/incomplete/attackby(obj/item/item, mob/living/user)
-	if(istype(item, /obj/item/janicart_upgradee))
+	if(istype(item, /obj/item/janicart_upgrade))
 		to_chat(user, "<span class='notice'>This [name] already has a floor buffer attatched to it.</span>")
 		return
 
