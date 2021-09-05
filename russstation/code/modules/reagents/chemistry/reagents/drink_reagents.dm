@@ -21,11 +21,11 @@
 	glass_desc = "Why does this even exist?"
 	reagent_state = LIQUID
 
-/datum/reagent/consumable/bungwater/on_mob_life(mob/living/M)
-	if(prob(70))
+/datum/reagent/consumable/bungwater/on_mob_life(mob/living/M, delta_time, times_fired)
+	if(DT_PROB(70, delta_time))
 		M.fakevomit(1)
 		M.fakevomit(0)
-	return ..()
+	..()
 
 
 /datum/reagent/consumable/superlaughter/traitor_pen
@@ -35,9 +35,7 @@
 	color = "#FF4DD2"
 	taste_description = "laughter"
 
-/datum/reagent/consumable/superlaughter/traitor_pen/on_mob_life(mob/living/carbon/M)
-	if(prob(30))
+/datum/reagent/consumable/superlaughter/traitor_pen/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	if(DT_PROB(30, delta_time))
 		M.emote("laugh")
 	..()
-
-//end

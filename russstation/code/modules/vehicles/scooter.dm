@@ -11,9 +11,10 @@
 
 /obj/vehicle/ridden/wheelchair/russ/sportschair/generate_actions()
 	. = ..()
-		initialize_controller_action_type(/datum/action/vehicle/ridden/wheelchair/russ/sportschair/ollie, VEHICLE_CONTROL_DRIVE)
+	initialize_controller_action_type(/datum/action/vehicle/ridden/wheelchair/russ/sportschair/ollie, VEHICLE_CONTROL_DRIVE)
 
-/obj/vehicle/ridden/wheelchair/russ/sportschair/post_buckle_mob(mob/living/M)//allows skateboards to be non-dense but still allows 2 skateboarders to collide with each other
+//allows skateboards to be non-dense but still allows 2 skateboarders to collide with each other
+/obj/vehicle/ridden/wheelchair/russ/sportschair/post_buckle_mob(mob/living/M)
 	density = TRUE
 	return ..()
 
@@ -38,14 +39,14 @@
 
 	var/mob/living/L = buckled_mobs[1]
 	L.adjustStaminaLoss(instability*0.5)
-	if (L.getStaminaLoss() >= 100)
+	if(L.getStaminaLoss() >= 100)
 		obj_flags = CAN_BE_HIT
 		playsound(src, 'sound/effects/bang.ogg', 20, TRUE)
 		unbuckle_mob(L)
 		var/atom/throw_target = get_edge_target_turf(src, pick(GLOB.cardinals))
 		L.throw_at(throw_target, 2, 2)
 		visible_message("<span class='danger'>[L] loses [L.p_their()] footing and slams on the ground!</span>")
-		L.Paralyze(40)
+		L.Paralyze(4 SECONDS)
 		grinding = FALSE
 		icon_state = "[initial(icon_state)]"
 		return

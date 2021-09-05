@@ -1,33 +1,27 @@
-<!-- Write **BELOW** The Headers and **ABOVE** The comments else it may not be viewable. -->
-<!-- You can view Contributing.MD for a detailed description of the pull request process. -->
+<!-- Fill out each section with text below the header. 
+ You can view https://github.com/RussStation/RussStation/wiki/Contributing for a detailed description of the pull request process. -->
 
-## About The Pull Request
+## What is changing?
 
-<!-- Describe The Pull Request. Please be sure every change is documented or this can delay review and even discourage maintainers from merging your PR! -->
+<!-- Briefly describe the Pull Request. Screenshots are recommended for new content.
+ Include descriptions of interactions (such as new recipes or interfaces) so we know what the experience will be like.
+ Example: Adds a new gas called "fartium". It is like miasma but doesn't make you as sick. It can be created by mixing super heated miasma with hydrogen in a 5:1 ratio. It degrades slowly when exposed to nitrogen. -->
 
-## Why It's Good For The Game
+### Changes
 
-<!-- Please add a short description of why you think these changes would benefit the game. If you can't justify it in words, it might not be worth adding. -->
+<!-- Itemized list of what was changed/added/removed. They should generally represent how a player might be affected by the changes so everyone understands the impact. 
+ Example:
+ * Added fartium gas
+ * Added fartium gas containers to our maps as maint loot
+ * Farts release fartium instead of miasma now -->
 
-## Changelog
-:cl:
-add: Added new things
-add: Added more things
-del: Removed old things
-tweak: tweaked a few things
-balance: rebalanced something
-fix: fixed a few things
-soundadd: added a new sound thingy
-sounddel: removed an old sound thingy
-imageadd: added some icons and images
-imagedel: deleted some icons and images
-spellcheck: fixed a few typos
-code: changed some code
-refactor: refactored some code
-config: changed some config setting
-admin: messed with admin stuff
-server: something server ops should know
-/:cl:
+<!-- ### Wiki -->
 
-<!-- Both :cl:'s are required for the changelog to work! You can put your name to the right of the first :cl: if you want to overwrite your GitHub username as author ingame. -->
-<!-- You can use multiple of the same prefix (they're only used for the icon ingame) and delete the unneeded ones. Despite some of the tags, changelogs should generally represent how a player might be affected by the changes rather than a summary of the PR's contents. -->
+<!-- If our wiki needs updated to document the changed content, uncomment this header and provide text that can be used on the wiki to help players learn more about this content. Use the our wiki and the tg wiki as references for how you might describe your content. -->
+
+## Why these changes?
+
+<!-- Please add a short description of why you think these changes would benefit the game.
+ If you can't justify it in words, it might not be worth adding.
+ If code is modified in tg files (outside russstation/ folder) explain why that is necessary.
+ Example: I like smelling my farts but I don't want my character to get so ill from it. This lets us fart more without poisoning everyone. -->

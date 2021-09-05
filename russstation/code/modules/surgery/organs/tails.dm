@@ -5,7 +5,7 @@
 	tail_type = "Skaven"
 
 /obj/item/organ/tail/skaven/Insert(mob/living/carbon/human/tail_owner, special, drop_if_replaced)
-	..()
+	. = ..()
 	if(istype(tail_owner))
 		var/default_part = tail_owner.dna.species.mutant_bodyparts["tail_skaven"]
 		if(!default_part || default_part == "None")
@@ -14,7 +14,7 @@
 		tail_owner.update_body()
 
 /obj/item/organ/tail/skaven/Remove(mob/living/carbon/human/tail_owner, special = FALSE)
-	..()
+	. = ..()
 	if(istype(tail_owner))
 		tail_owner.dna.species.mutant_bodyparts -= "tail_skaven"
 		tail_type = tail_owner.dna.features["tail_skaven"]

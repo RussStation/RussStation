@@ -3,7 +3,7 @@
 	id = "skaven"
 	say_mod = "jitters"
 	default_color = "2E2E2E"
-	species_traits = list(DYNCOLORS,AGENDER,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE)
+	species_traits = list(DYNCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	mutant_bodyparts = list("tail_skaven" = "Skaven", "snout" = "Round", "horns" = "None")
 	mutantears = /obj/item/organ/ears/skaven
