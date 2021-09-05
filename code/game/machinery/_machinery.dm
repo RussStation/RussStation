@@ -95,6 +95,7 @@
 
 	anchored = TRUE
 	interaction_flags_atom = INTERACT_ATOM_ATTACK_HAND | INTERACT_ATOM_UI_INTERACT
+	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 
 	var/machine_stat = NONE
 	var/use_power = IDLE_POWER_USE
@@ -226,7 +227,7 @@
  */
 /obj/machinery/proc/open_machine(drop = TRUE)
 	state_open = TRUE
-	density = FALSE
+	set_density(FALSE)
 	if(drop)
 		dump_inventory_contents()
 	update_appearance()
@@ -293,7 +294,7 @@
 
 /obj/machinery/proc/close_machine(atom/movable/target = null)
 	state_open = FALSE
-	density = TRUE
+	set_density(TRUE)
 	if(!target)
 		for(var/am in loc)
 			if (!(can_be_occupant(am)))
@@ -317,9 +318,9 @@
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
 		return FALSE
-	if(use_power == 1)
+	if(use_power == IDLE_POWER_USE)
 		use_power(idle_power_usage,power_channel)
-	else if(use_power >= 2)
+	else if(use_power >= ACTIVE_POWER_USE)
 		use_power(active_power_usage,power_channel)
 	return TRUE
 
@@ -342,16 +343,11 @@
 	if((machine_stat & (NOPOWER|BROKEN)) && !(interaction_flags_machine & INTERACT_MACHINE_OFFLINE)) // Check if the machine is broken, and if we can still interact with it if so
 		return FALSE
 
-	if(isAdminGhostAI(user))
-		return TRUE //if you're an admin, you probably know what you're doing (or at least have permission to do what you're doing)
-
-	if(!isliving(user))
-		return FALSE //no ghosts in the machine allowed, sorry
-
 	if(SEND_SIGNAL(user, COMSIG_TRY_USE_MACHINE, src) & COMPONENT_CANT_USE_MACHINE_INTERACT)
 		return FALSE
 
-	var/mob/living/living_user = user
+	if(!isliving(user))
+		return FALSE //no ghosts allowed, sorry
 
 	var/is_dextrous = FALSE
 	if(isanimal(user))
@@ -369,13 +365,12 @@
 		if(panel_open && !(interaction_flags_machine & INTERACT_MACHINE_OPEN) && !(interaction_flags_machine & INTERACT_MACHINE_OPEN_SILICON))
 			return FALSE
 
-		return TRUE //silicons don't care about petty mortal concerns like needing to be next to a machine to use it
+		return user.can_interact_with(src) //AIs don't care about petty mortal concerns like needing to be next to a machine to use it, but borgs do care somewhat
 
-	if(living_user.incapacitated()) //idk why silicons aren't supposed to care about incapacitation when interacting with machines, but it was apparently like this before
-		return FALSE
+	. = ..()
 
 	if((interaction_flags_machine & INTERACT_MACHINE_REQUIRES_SIGHT) && user.is_blind())
-		to_chat(user, "<span class='warning'>This machine requires sight to use.</span>")
+		to_chat(user, span_warning("This machine requires sight to use."))
 		return FALSE
 
 	if(panel_open && !(interaction_flags_machine & INTERACT_MACHINE_OPEN))
@@ -383,11 +378,6 @@
 
 	if(interaction_flags_machine & INTERACT_MACHINE_REQUIRES_SILICON) //if the user was a silicon, we'd have returned out earlier, so the user must not be a silicon
 		return FALSE
-
-	if(!Adjacent(user)) // Next make sure we are next to the machine unless we have telekinesis
-		var/mob/living/carbon/carbon_user = living_user
-		if(!istype(carbon_user) || !carbon_user.has_dna() || !carbon_user.dna.check_mutation(TK))
-			return FALSE
 
 	return TRUE // If we passed all of those checks, woohoo! We can interact with this machine.
 
@@ -452,7 +442,7 @@
 	else
 		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
-		user.visible_message("<span class='danger'>[user.name] smashes against \the [src.name] with its paws.</span>", null, null, COMBAT_MESSAGE_RANGE)
+		user.visible_message(span_danger("[user.name] smashes against \the [src.name] with its paws."), null, null, COMBAT_MESSAGE_RANGE)
 		take_damage(4, BRUTE, MELEE, 1)
 
 /obj/machinery/attack_hulk(mob/living/carbon/user)
@@ -524,7 +514,7 @@
 	. = !(state_open || panel_open || is_operational || (flags_1 & NODECONSTRUCT_1)) && I.tool_behaviour == TOOL_CROWBAR
 	if(.)
 		I.play_tool_sound(src, 50)
-		visible_message("<span class='notice'>[usr] pries open \the [src].</span>", "<span class='notice'>You pry open \the [src].</span>")
+		visible_message(span_notice("[usr] pries open \the [src]."), span_notice("You pry open \the [src]."))
 		open_machine()
 
 /obj/machinery/proc/default_deconstruction_crowbar(obj/item/I, ignore_panel = 0, custom_deconstruct = FALSE)
@@ -568,7 +558,7 @@
 	. = new_frame
 	new_frame.set_anchored(anchored)
 	if(!disassembled)
-		new_frame.obj_integrity = new_frame.max_integrity * 0.5 //the frame is already half broken
+		new_frame.update_integrity(new_frame.max_integrity * 0.5) //the frame is already half broken
 	transfer_fingerprints_to(new_frame)
 
 
@@ -614,11 +604,11 @@
 		if(!panel_open)
 			panel_open = TRUE
 			icon_state = icon_state_open
-			to_chat(user, "<span class='notice'>You open the maintenance hatch of [src].</span>")
+			to_chat(user, span_notice("You open the maintenance hatch of [src]."))
 		else
 			panel_open = FALSE
 			icon_state = icon_state_closed
-			to_chat(user, "<span class='notice'>You close the maintenance hatch of [src].</span>")
+			to_chat(user, span_notice("You close the maintenance hatch of [src]."))
 		return TRUE
 	return FALSE
 
@@ -626,13 +616,13 @@
 	if(panel_open && I.tool_behaviour == TOOL_WRENCH)
 		I.play_tool_sound(src, 50)
 		setDir(turn(dir,-90))
-		to_chat(user, "<span class='notice'>You rotate [src].</span>")
+		to_chat(user, span_notice("You rotate [src]."))
 		return TRUE
 	return FALSE
 
 /obj/proc/can_be_unfasten_wrench(mob/user, silent) //if we can unwrench this object; returns SUCCESSFUL_UNFASTEN and FAILED_UNFASTEN, which are both TRUE, or CANT_UNFASTEN, which isn't.
 	if(!(isfloorturf(loc) || istype(loc, /turf/open/indestructible)) && !anchored)
-		to_chat(user, "<span class='warning'>[src] needs to be on the floor to be secured!</span>")
+		to_chat(user, span_warning("[src] needs to be on the floor to be secured!"))
 		return FAILED_UNFASTEN
 	return SUCCESSFUL_UNFASTEN
 
@@ -640,21 +630,21 @@
 	if(!(flags_1 & NODECONSTRUCT_1) && I.tool_behaviour == TOOL_WRENCH)
 		var/turf/ground = get_turf(src)
 		if(!anchored && ground.is_blocked_turf(exclude_mobs = TRUE, source_atom = src))
-			to_chat(user, "<span class='notice'>You fail to secure [src].</span>")
+			to_chat(user, span_notice("You fail to secure [src]."))
 			return CANT_UNFASTEN
 		var/can_be_unfasten = can_be_unfasten_wrench(user)
 		if(!can_be_unfasten || can_be_unfasten == FAILED_UNFASTEN)
 			return can_be_unfasten
 		if(time)
-			to_chat(user, "<span class='notice'>You begin [anchored ? "un" : ""]securing [src]...</span>")
+			to_chat(user, span_notice("You begin [anchored ? "un" : ""]securing [src]..."))
 		I.play_tool_sound(src, 50)
 		var/prev_anchored = anchored
 		//as long as we're the same anchored state and we're either on a floor or are anchored, toggle our anchored state
 		if(I.use_tool(src, user, time, extra_checks = CALLBACK(src, .proc/unfasten_wrench_check, prev_anchored, user)))
 			if(!anchored && ground.is_blocked_turf(exclude_mobs = TRUE, source_atom = src))
-				to_chat(user, "<span class='notice'>You fail to secure [src].</span>")
+				to_chat(user, span_notice("You fail to secure [src]."))
 				return CANT_UNFASTEN
-			to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]secure [src].</span>")
+			to_chat(user, span_notice("You [anchored ? "un" : ""]secure [src]."))
 			set_anchored(!anchored)
 			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
 			SEND_SIGNAL(src, COMSIG_OBJ_DEFAULT_UNFASTEN_WRENCH, anchored)
@@ -712,7 +702,7 @@
 									B.forceMove(src)
 							SEND_SIGNAL(W, COMSIG_TRY_STORAGE_INSERT, A, null, null, TRUE)
 							component_parts -= A
-							to_chat(user, "<span class='notice'>[capitalize(A.name)] replaced with [B.name].</span>")
+							to_chat(user, span_notice("[capitalize(A.name)] replaced with [B.name]."))
 							shouldplaysound = 1 //Only play the sound when parts are actually replaced!
 							break
 			RefreshParts()
@@ -725,18 +715,18 @@
 
 /obj/machinery/proc/display_parts(mob/user)
 	. = list()
-	. += "<span class='notice'>It contains the following parts:</span>"
+	. += span_notice("It contains the following parts:")
 	for(var/obj/item/C in component_parts)
-		. += "<span class='notice'>[icon2html(C, user)] \A [C].</span>"
+		. += span_notice("[icon2html(C, user)] \A [C].")
 	. = jointext(., "")
 
 /obj/machinery/examine(mob/user)
 	. = ..()
 	if(machine_stat & BROKEN)
-		. += "<span class='notice'>It looks broken and non-functional.</span>"
+		. += span_notice("It looks broken and non-functional.")
 	if(!(resistance_flags & INDESTRUCTIBLE))
 		if(resistance_flags & ON_FIRE)
-			. += "<span class='warning'>It's on fire!</span>"
+			. += span_warning("It's on fire!")
 		var/healthpercent = (obj_integrity/max_integrity) * 100
 		switch(healthpercent)
 			if(50 to 99)
@@ -744,7 +734,7 @@
 			if(25 to 50)
 				. += "It appears heavily damaged."
 			if(0 to 25)
-				. += "<span class='warning'>It's falling apart!</span>"
+				. += span_warning("It's falling apart!")
 	if(user.research_scanner && component_parts)
 		. += display_parts(user, TRUE)
 
@@ -769,12 +759,12 @@
 		power -= power * 0.0005
 	return ..()
 
-/obj/machinery/Exited(atom/movable/AM, atom/newloc)
+/obj/machinery/Exited(atom/movable/gone, direction)
 	. = ..()
-	if(AM == occupant)
+	if(gone == occupant)
 		set_occupant(null)
-	if(AM == circuit)
-		LAZYREMOVE(component_parts, AM)
+	if(gone == circuit)
+		LAZYREMOVE(component_parts, gone)
 		circuit = null
 
 /obj/machinery/proc/adjust_item_drop_location(atom/movable/AM) // Adjust item drop location to a 3x3 grid inside the tile, returns slot id from 0 to 8
@@ -802,7 +792,7 @@
  * However, the proc may also be used elsewhere.
  */
 /obj/machinery/proc/AI_notify_hack()
-	var/alertstr = "<span class='userdanger'>Network Alert: Hacking attempt detected[get_area(src)?" in [get_area_name(src, TRUE)]":". Unable to pinpoint location"].</span>"
+	var/alertstr = span_userdanger("Network Alert: Hacking attempt detected[get_area(src)?" in [get_area_name(src, TRUE)]":". Unable to pinpoint location"].")
 	for(var/mob/living/silicon/ai/AI in GLOB.player_list)
 		to_chat(AI, alertstr)
 

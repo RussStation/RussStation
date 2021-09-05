@@ -309,7 +309,7 @@
 		if(63 to 93)
 			harvested_item = pick(
 				/mob/living/simple_animal/butterfly,
-				/mob/living/simple_animal/hostile/cockroach,
+				/mob/living/basic/cockroach/glockroach,
 				/mob/living/simple_animal/pet/dog/corgi/puppy,
 				/mob/living/simple_animal/pet/dog/corgi,
 				/mob/living/simple_animal/crab,

@@ -38,7 +38,7 @@
 	C.dna.remove_mutation(DWARFISM)
 	C.bubble_file = 'icons/mob/talk.dmi'
 	C.bubble_icon = initial(C.bubble_icon)
-	C.GetComponent(/datum/component/spookable).RemoveComponent()
+	qdel(C.GetComponent(/datum/component/spookable))
 	. = ..()
 
 /datum/species/dwarf/random_name(gender, unique, lastname)

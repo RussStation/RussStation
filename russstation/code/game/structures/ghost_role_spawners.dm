@@ -15,7 +15,6 @@
 	flavour_text = "You have arrived. After a journey from the Mountainhomes into the forbidding wilderness beyond, \
 	your harsh trek has finally ended. Whether by bolt, plow or hook, provide for youselves, ere the local fauna get hungry. A new chapter of dwarven history begins here \
 	at this place, \"Hammerflames\". Strike the earth!"
-	assignedrole = "Dwarf"
 
 /obj/effect/mob_spawn/human/dwarf_dorm/special(mob/living/carbon/human/new_spawn)
 	new_spawn.fully_replace_character_name(null,dwarf_name())
