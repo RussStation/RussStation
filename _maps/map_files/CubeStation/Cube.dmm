@@ -990,10 +990,10 @@
 /turf/open/floor/wood,
 /area/medical/psychology)
 "ayx" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/effect/turf_decal/stripes/line{
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
 /turf/open/floor/iron,
@@ -2392,6 +2392,10 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 4
 	},
+/obj/item/storage/secure/safe/caps_spare{
+	pixel_x = 5;
+	pixel_y = 32
+	},
 /turf/open/floor/iron/dark,
 /area/command/bridge)
 "bmM" = (
@@ -3634,7 +3638,7 @@
 	},
 /obj/structure/disposaloutlet,
 /turf/open/floor/plating,
-/area/space/nearstation)
+/area/maintenance/starboard/aft)
 "bTK" = (
 /obj/machinery/bounty_board{
 	pixel_y = 32
@@ -4047,9 +4051,10 @@
 /turf/open/floor/iron,
 /area/security/brig)
 "cgb" = (
-/obj/structure/lattice/catwalk,
-/turf/open/space/basic,
-/area/maintenance/starboard/aft)
+/obj/effect/turf_decal/stripes/full,
+/obj/machinery/destructive_scanner,
+/turf/open/floor/iron,
+/area/science/lab)
 "cgc" = (
 /obj/structure/sign/poster/random{
 	pixel_x = 32
@@ -6898,8 +6903,9 @@
 /turf/open/floor/iron,
 /area/cargo/warehouse)
 "dIs" = (
-/obj/effect/turf_decal/stripes/full,
-/obj/machinery/destructive_scanner,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/hallway/primary/central)
 "dIE" = (
@@ -9899,10 +9905,10 @@
 /area/medical/chemistry)
 "fjL" = (
 /obj/structure/table,
+/obj/item/stock_parts/cell/high,
 /obj/machinery/cell_charger{
 	pixel_y = 13
 	},
-/obj/item/stock_parts/cell/high,
 /turf/open/floor/iron/showroomfloor,
 /area/science/lab)
 "fkc" = (
@@ -11716,13 +11722,8 @@
 /obj/machinery/atmospherics/components/binary/valve{
 	name = "port to mix"
 	},
-/obj/machinery/power/apc{
-	areastring = "/area/science/mixing/chamber";
-	dir = 8;
-	name = "Toxins Chamber APC";
-	pixel_x = -25
-	},
 /obj/structure/cable,
+/obj/machinery/power/apc/auto_name/west,
 /turf/open/floor/iron/dark,
 /area/science/mixing/chamber)
 "gln" = (
@@ -12669,12 +12670,8 @@
 /turf/open/floor/iron,
 /area/security/brig)
 "gHF" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/effect/landmark/start/hangover,
-/obj/effect/turf_decal/stripes/corner{
-	dir = 1
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/open/floor/iron,
 /area/hallway/primary/central)
@@ -13980,14 +13977,7 @@
 /turf/open/floor/plating,
 /area/maintenance/department/electrical)
 "hsm" = (
-/obj/machinery/light/small{
-	dir = 4
-	},
-/obj/structure/table,
-/obj/machinery/recharger{
-	pixel_x = 4;
-	pixel_y = 8
-	},
+/obj/structure/chair/stool/directional/west,
 /turf/open/floor/iron/showroomfloor,
 /area/science/lab)
 "hsF" = (
@@ -14306,9 +14296,20 @@
 /turf/open/floor/plating,
 /area/maintenance/fore)
 "hze" = (
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/iron,
-/area/hallway/primary/central)
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "rnd";
+	name = "research lab shutters"
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/door/window/southright{
+	dir = 8;
+	name = "Research and Development Desk";
+	req_access_txt = "7;29";
+	req_one_access_txt = null
+	},
+/obj/machinery/door/firedoor/heavy,
+/turf/open/floor/plating,
+/area/science/lab)
 "hzf" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 4
@@ -14572,7 +14573,6 @@
 /turf/closed/wall/r_wall,
 /area/engineering/atmos)
 "hGM" = (
-/obj/structure/chair/stool,
 /obj/machinery/button/door{
 	id = "rnd";
 	name = "Shutters Control Button";
@@ -18532,15 +18532,6 @@
 /obj/item/bedsheet/random,
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
-"jQl" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/effect/turf_decal/stripes/corner{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/hallway/primary/central)
 "jQo" = (
 /obj/structure/table,
 /obj/item/paper_bin/construction,
@@ -21659,21 +21650,6 @@
 /obj/structure/sign/warning/enginesafety,
 /turf/closed/wall,
 /area/engineering/main)
-"lBk" = (
-/obj/structure/table/reinforced,
-/obj/machinery/door/poddoor/shutters/preopen{
-	id = "rnd";
-	name = "research lab shutters"
-	},
-/obj/machinery/door/firedoor/heavy,
-/obj/machinery/door/window/southright{
-	dir = 8;
-	name = "Research and Development Desk";
-	req_access_txt = "7;29";
-	req_one_access_txt = null
-	},
-/turf/open/floor/plating,
-/area/science/lab)
 "lBu" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -22335,9 +22311,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
 	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
+/obj/effect/turf_decal/bot,
 /turf/open/floor/iron,
 /area/hallway/primary/central)
 "lWC" = (
@@ -22347,6 +22321,9 @@
 "lWG" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
+	},
+/obj/machinery/light/small{
+	dir = 4
 	},
 /turf/open/floor/iron/dark,
 /area/science/lab)
@@ -26146,7 +26123,7 @@
 	dir = 1
 	},
 /turf/open/space/basic,
-/area/engineering/atmos)
+/area/space/nearstation)
 "nNo" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 4
@@ -28062,7 +28039,7 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/space/nearstation)
+/area/maintenance/starboard/aft)
 "oMc" = (
 /obj/machinery/light{
 	dir = 1
@@ -28969,7 +28946,7 @@
 	},
 /obj/structure/lattice/catwalk,
 /turf/open/space/basic,
-/area/engineering/atmos)
+/area/space/nearstation)
 "piX" = (
 /obj/structure/table,
 /obj/item/book/manual/wiki/cooking_to_serve_man,
@@ -34738,9 +34715,6 @@
 /obj/structure/table/reinforced,
 /obj/item/assembly/flash/handheld,
 /obj/item/assembly/flash/handheld,
-/obj/item/storage/secure/safe/caps_spare{
-	pixel_x = -27
-	},
 /turf/open/floor/iron,
 /area/command/bridge)
 "rNG" = (
@@ -34859,6 +34833,11 @@
 /obj/machinery/airalarm{
 	dir = 4;
 	pixel_x = -24
+	},
+/obj/structure/table,
+/obj/machinery/recharger{
+	pixel_x = 4;
+	pixel_y = 8
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/science/lab)
@@ -37120,15 +37099,10 @@
 /turf/open/floor/iron,
 /area/cargo/miningdock)
 "teh" = (
-/obj/machinery/power/apc{
-	areastring = "/area/science/mixing";
-	dir = 4;
-	name = "Toxins Lab APC";
-	pixel_x = 24
-	},
 /obj/structure/cable,
 /obj/machinery/portable_atmospherics/canister/plasma,
 /obj/effect/turf_decal/delivery,
+/obj/machinery/power/apc/auto_name/east,
 /turf/open/floor/iron/dark,
 /area/science/mixing)
 "tes" = (
@@ -43281,7 +43255,7 @@
 	dir = 4
 	},
 /turf/open/floor/plating,
-/area/space/nearstation)
+/area/maintenance/starboard/aft)
 "weo" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -69122,10 +69096,10 @@ jRs
 rcD
 uYx
 xwc
+wbq
+wbq
 fjL
 hsm
-tuo
-tuo
 jGz
 hGM
 xwc
@@ -69349,12 +69323,12 @@ xEa
 xEa
 xEa
 xwc
-xwc
-xwc
+cgb
+wbq
 lZU
+hze
 wbq
-wbq
-lBk
+lZU
 xwc
 xfK
 fkc
@@ -69575,13 +69549,13 @@ ggy
 ggy
 ggy
 oYy
-ggy
-pWa
-hze
+ayx
 dIs
+cKj
+ggy
 lWs
 wpQ
-nXg
+ggy
 xYo
 ire
 epO
@@ -69804,9 +69778,9 @@ lRW
 cKT
 fLs
 tCd
-jQl
-ayx
-gHF
+tCd
+tCd
+dBW
 tCd
 tCd
 tCd
@@ -70032,7 +70006,7 @@ ygN
 ggy
 ggy
 ggy
-ggy
+gHF
 ggy
 dzo
 xxu
@@ -83005,7 +82979,7 @@ rRr
 hVG
 wMU
 wMU
-cgb
+wMU
 bXj
 bXj
 bXj
@@ -83231,8 +83205,8 @@ ewG
 hNj
 hVG
 bTt
-sjE
-cgb
+bXj
+bXj
 bXj
 bXj
 bXj
@@ -83458,8 +83432,8 @@ ewG
 cnL
 hVG
 wem
-cgb
-cgb
+wMU
+wMU
 bXj
 bXj
 bXj
