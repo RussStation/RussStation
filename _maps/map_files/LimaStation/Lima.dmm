@@ -26622,14 +26622,12 @@
 /area/security/execution/education)
 "mat" = (
 /obj/machinery/light/small/directional/west,
-/obj/machinery/camera{
-	c_tag = "Toxins Launch Chamber";
-	dir = 4;
-	network = list("ss13","rd")
-	},
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /obj/item/radio/intercom/directional/north{
 	broadcasting = 1
+	},
+/obj/machinery/camera/autoname{
+	dir = 4
 	},
 /turf/open/floor/iron,
 /area/science/mixing)
@@ -26720,7 +26718,10 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
-/obj/machinery/computer/security/telescreen/ordnance,
+/obj/machinery/computer/security/telescreen/ordnance{
+	dir = 8;
+	pixel_x = 28
+	},
 /turf/open/floor/iron,
 /area/science/mixing)
 "mcO" = (
@@ -28209,7 +28210,7 @@
 	dir = 4
 	},
 /turf/closed/wall/r_wall,
-/area/science/mixing)
+/area/science/mixing/chamber)
 "mTa" = (
 /obj/effect/landmark/event_spawn,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -29399,7 +29400,7 @@
 /obj/structure/fans/tiny,
 /obj/machinery/door/poddoor{
 	id = "toxinsdriver";
-	name = "toxins launcher bay door"
+	name = "Ordinance Launcher Door"
 	},
 /turf/open/floor/plating,
 /area/science/mixing)
@@ -29976,6 +29977,8 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
+/obj/machinery/power/apc/auto_name/north,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/science/mixing/chamber)
 "nRr" = (
@@ -32819,6 +32822,11 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
 	},
+/obj/machinery/camera{
+	c_tag = "Science Hallway - Xeno Entrancce";
+	dir = 4;
+	network = list("ss13","rd")
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/science/research)
 "pGW" = (
@@ -32845,7 +32853,7 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
-/area/science/mixing)
+/area/science/mixing/chamber)
 "pHD" = (
 /turf/closed/wall/r_wall,
 /area/tcommsat/server)
@@ -32992,7 +33000,7 @@
 /area/security/courtroom)
 "pKk" = (
 /obj/machinery/camera{
-	c_tag = "Toxins Chamber";
+	c_tag = "Ordinance Chamber";
 	dir = 8;
 	network = list("ss13","rd")
 	},
@@ -36540,14 +36548,6 @@
 	},
 /turf/open/floor/carpet/black,
 /area/commons/dorms)
-"rYp" = (
-/obj/machinery/camera{
-	c_tag = "Robotics Lab";
-	dir = 1;
-	network = list("ss13","rd")
-	},
-/turf/open/floor/iron/showroomfloor,
-/area/science/research)
 "rYC" = (
 /obj/structure/chair/stool/bar,
 /obj/effect/landmark/start/hangover,
@@ -38002,7 +38002,7 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
-/area/science/mixing)
+/area/science/mixing/chamber)
 "sQb" = (
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment{
@@ -38891,17 +38891,12 @@
 /turf/open/floor/iron,
 /area/hallway/primary/port)
 "tsG" = (
-/obj/machinery/power/apc{
-	areastring = "/area/science/mixing/chamber";
-	dir = 8;
-	name = "Toxins Chamber APC";
-	pixel_x = -25
-	},
 /obj/structure/cable,
 /obj/machinery/light_switch{
 	pixel_x = -20;
 	pixel_y = 11
 	},
+/obj/machinery/power/apc/auto_name/west,
 /turf/open/floor/iron/showroomfloor,
 /area/science/mixing)
 "tsN" = (
@@ -41003,11 +40998,6 @@
 /area/maintenance/central)
 "uEP" = (
 /obj/effect/turf_decal/stripes/line,
-/obj/machinery/camera{
-	c_tag = "Science Hallway - Xeno Entrancce";
-	dir = 4;
-	network = list("ss13","rd")
-	},
 /obj/item/radio/intercom{
 	pixel_x = -29
 	},
@@ -92188,7 +92178,7 @@ ijC
 rfF
 rfF
 rfF
-rYp
+rfF
 pGN
 qvK
 kri
