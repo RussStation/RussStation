@@ -9,6 +9,7 @@
 		TRAIT_NOBREATH,
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
+		TRAIT_VIRUSIMMUNE, // lavaland has miasma
 	)
 	mutant_bodyparts = list("wings" = "None")
 	limbs_id = "human"
