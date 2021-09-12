@@ -272,7 +272,10 @@
  * bypasses the requirement of janitor or clumsy and turns it into an evil sign
  */
 /obj/item/clothing/suit/caution/slippery/emag_act(mob/user)
-	will_slip = TRUE //bypasses the janitor requirement
+	// Only add the component if it isn't already set to slip - This bypasses the Janitor requirement.
+	if(!will_slip)
+		AddComponent(/datum/component/slippery, 80, NO_SLIP_WHEN_WALKING, CALLBACK(src, .proc/AfterSlip))
+		will_slip = TRUE
 	if(!evil_sign)
 		evil_sign = TRUE
 		boss = user
