@@ -7,7 +7,7 @@
  */
 
 /obj/item/clothing/suit/caution/attackby(obj/item/item, mob/living/user)
-	if(istype(item, /obj/item/janicart_upgrade))
+	if(istype(item, /obj/item/janicart_upgrade/buffer))
 		var/datum/quirk/item_quirk/family_heirloom/heirloom_check
 
 		//checks all their quirks for the family heirloom quirk- so we can check if they have a wet floor sign heirloom later
@@ -54,11 +54,11 @@
 						"<span class='hear'>You hear a screwdriver and a click.</span>")
 	qdel(src)
 	new /obj/item/clothing/suit/caution(L, 1)
-	new /obj/item/janicart_upgrade(L, 1)
+	new /obj/item/janicart_upgrade/buffer(L, 1)
 	return TRUE
 
 /obj/item/clothing/suit/caution/incomplete/attackby(obj/item/item, mob/living/user)
-	if(istype(item, /obj/item/janicart_upgrade))
+	if(istype(item, /obj/item/janicart_upgrade/buffer))
 		to_chat(user, "<span class='notice'>This [name] already has a floor buffer attatched to it.</span>")
 		return
 
@@ -79,7 +79,7 @@
 
 //old signs (only found in maint spawners)
 /obj/item/caution/attackby(obj/item/item, mob/living/user)
-	if(istype(item, /obj/item/janicart_upgrade))
+	if(istype(item, /obj/item/janicart_upgrade/buffer))
 		to_chat(user, "<span class='warning'>The [name] is too antiquated to fit a [item.name], try a newer model sign.</span>")
 		return
 
@@ -91,7 +91,7 @@
 	result = /obj/item/clothing/suit/caution/slippery
 	time = 3 SECONDS
 	reqs = list(
-		/obj/item/janicart_upgrade = 1,
+		/obj/item/janicart_upgrade/buffer = 1,
 		/obj/item/assembly/prox_sensor = 1,
 		/obj/item/clothing/suit/caution = 1,
 	)
@@ -169,7 +169,7 @@
 		to_chat(user, "<span class = 'notice'>\The [name] requires a janitor to activate.</span>")
 
 /obj/item/clothing/suit/caution/slippery/attackby(obj/item/item, mob/living/user)
-	if(istype(item, /obj/item/janicart_upgrade))
+	if(istype(item, /obj/item/janicart_upgrade/buffer))
 		to_chat(user, "<span class='notice'>This [name] already has a device attatched to it.</span>")
 		return
 	. = ..()
@@ -187,11 +187,11 @@
 							"<span class='hear'>You hear a screwdriver and a click.</span>")
 		qdel(src)
 		new /obj/item/clothing/suit/caution(L, 1)
-		new /obj/item/janicart_upgrade(L, 1)
+		new /obj/item/janicart_upgrade/buffer(L, 1)
 		new /obj/item/assembly/prox_sensor(L, 1)
 	else
 		to_chat(user, span_warning("You can't seem to detatch the mechanism from \the [name]..."))
-		addtimer(CALLBACK(src, .proc/awaken_sign), 2 SECONDS)
+		addtimer(CALLBACK(src, .proc/awaken_sign, user), 2 SECONDS)
 	return TRUE
 
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
@@ -314,7 +314,7 @@
 /obj/item/storage/box/slippery_sign_kit/PopulateContents()
 	var/static/items_inside = list(
 		/obj/item/clothing/suit/caution = 2,
-		/obj/item/janicart_upgrade = 2,
+		/obj/item/janicart_upgrade/buffer = 2,
 		/obj/item/assembly/prox_sensor = 2,
 		/obj/item/paper/guides/slippery_sign_DIY = 1)
 	generate_items_inside(items_inside,src)
