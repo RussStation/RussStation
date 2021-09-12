@@ -64,17 +64,21 @@
 		// pour if there's enough in the crucible - easier to handle this as all-or-nothing
 		var/obj/item/reagent_containers/molten_container/crucible/crucible = W
 		if(reagents.total_volume >= volume)
-			to_chat(user, "<span class='notice'>[src] is already filled.</span>")
+			to_chat(user, span_notice("[src] is already filled."))
 		else if(crucible.reagents.total_volume < volume)
-			to_chat(user, "<span class='notice'>[crucible] needs [volume] units of molten metal all at once to fill [src].</span>")
+			to_chat(user, span_notice("[crucible] needs [volume] units of molten metal all at once to fill [src]."))
 		else if(do_after(user, 10, src))
 			crucible.reagents.trans_to(src, volume)
-			user.visible_message("[user] pours the contents of [crucible] into \the [src].", "You pour the contents of [crucible] into \the [src].", "<span class='hear'>You hear a sizzling sound.</span>")
+			user.visible_message(
+				span_notice("[user] pours the contents of [crucible] into \the [src]."),
+				span_notice("You pour the contents of [crucible] into \the [src]."),
+				span_hear("You hear a sizzling sound."),
+			)
 			src.update_appearance()
 			crucible.update_appearance()
 	else if(istype(W, /obj/item/melee/smith_hammer))
 		// mold placed on an anvil becomes "part of" the anvil, so this code only occurs if the mold is elsewhere
-		to_chat(user, "<span class='notice'>[src] needs to be placed on an anvil to smith it.</span>")
+		to_chat(user, span_notice("[src] needs to be placed on an anvil to smith it."))
 	else
 		..()
 

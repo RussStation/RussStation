@@ -154,7 +154,9 @@ Difficulty: Medium
 	spawn(30)
 		if(!QDELETED(src))
 			new /mob/living/simple_animal/hostile/megafauna/sif(get_turf(src.loc))
-			visible_message("<span class='notice'>The ground shakes.</span>")
+			visible_message(
+				span_notice("The ground shakes."),
+			)
 			playsound(get_turf(src.loc), 'sound/effects/curse3.ogg', 100, 1)
 			playsound(get_turf(src.loc), 'sound/effects/meteorimpact.ogg', 100, 1)
 			qdel(src)
@@ -254,7 +256,10 @@ Difficulty: Medium
 				passed = TRUE
 
 	if(passed == TRUE)
-		visible_message("<span class='danger'>[src] dodged the projectile!</span>", "<span class='userdanger'>You dodge the projectile!</span>")
+		visible_message(
+			span_danger("[src] dodged the projectile!"),
+			span_userdanger("You dodge the projectile!"),
+		)
 		playsound(src, pick('sound/weapons/bulletflyby.ogg', 'sound/weapons/bulletflyby2.ogg', 'sound/weapons/bulletflyby3.ogg'), 300, 1)
 		return FALSE
 
@@ -264,7 +269,10 @@ Difficulty: Medium
 /mob/living/simple_animal/hostile/megafauna/sif/proc/angered()
 	src.angered = TRUE
 	src.stageTwo = TRUE
-	src.visible_message("<span class='userdanger'>[src] lets out a ear ripping howl!</span>", "<span class='userdanger'>[src] lets out an ear ripping roar!</span>")
+	src.visible_message(
+		span_userdanger("[src] lets out a ear ripping howl!"),
+		span_userdanger("[src] lets out an ear ripping roar!"),
+	)
 	playsound(src, 'russstation/sound/effects/howl.ogg', 100, 1)
 	var/mob/living/L = target
 	shake_camera(L, 4, 3)
@@ -278,7 +286,10 @@ Difficulty: Medium
 /mob/living/simple_animal/hostile/megafauna/sif/proc/enraged()
 	src.stageThree = TRUE
 	src.enraged = TRUE
-	src.visible_message("<span class='userdanger'>[src] lets out a ear ripping yelp!</span>", "<span class='userdanger'>[src] lets out an ear ripping yelp!</span>")
+	src.visible_message(
+		span_userdanger("[src] lets out a ear ripping yelp!"),
+		span_userdanger("[src] lets out an ear ripping yelp!"),
+	)
 	playsound(src, 'russstation/sound/effects/howl.ogg', 100, 1)
 	var/mob/living/L = target
 	shake_camera(L, 8, 6)
@@ -385,7 +396,10 @@ Difficulty: Medium
 	DestroySurroundings()
 	if(isliving(A))
 		var/mob/living/L = A
-		L.visible_message("<span class='danger'>[src] stomps on [L]!</span>", "<span class='userdanger'>[src] stomps on you!</span>")
+		L.visible_message(
+			span_danger("[src] stomps on [L]!</span>"),
+			span_userdanger("[src] stomps on you!</span>"),
+		)
 		src.forceMove(get_turf(L))
 		L.apply_damage(20, BRUTE)
 		playsound(get_turf(L), 'russstation/sound/effects/sif_stomp.ogg', 400, 1)
@@ -465,11 +479,11 @@ Difficulty: Medium
 
 //Apply a temp buff until the necklace is used
 /obj/item/clothing/neck/necklace/necklace_of_the_forsaken/proc/temp_buff(mob/living/carbon/human/user)
-	to_chat(user, "<span class='warning'>You feel as if you have a second chance at something, but you're not sure what.</span>")
+	to_chat(user, span_warning("You feel as if you have a second chance at something, but you're not sure what."))
 	if(!do_after(user, 4 SECONDS, user))
-		to_chat(user, "<span class='notice'>The feeling seems to pass away.</span>")
+		to_chat(user, span_notice("The feeling seems to pass away."))
 		return
-	to_chat(user, "<span class='notice'>The ember warms you...</span>")
+	to_chat(user, span_notice("The ember warms you..."))
 	ADD_TRAIT(user, TRAIT_NOHARDCRIT, CLOTHING_TRAIT) //less chance of being gibbed
 	active_owner = user
 
@@ -480,7 +494,7 @@ Difficulty: Medium
 		return
 	var/mob/living/carbon/human/H = active_owner
 	active_owner = null
-	to_chat(H, "<span class='userdanger'>You feel a scorching burn fill your body and limbs!</span>")
+	to_chat(H, span_userdanger("You feel a scorching burn fill your body and limbs!"))
 	H.revive(TRUE, FALSE)
 	remove_necklace() //remove buffs
 
@@ -507,7 +521,7 @@ Difficulty: Medium
 		if(ishuman(owner))
 			MM.temp_buff(owner)
 		src.desc = "Revive or fully heal yourself, but you can only do this once! Can be used when knocked out or dead."
-		to_chat(MM.active_owner, "<span class='userdanger'>You have binded the ember to yourself! The next time you use the necklace it will heal you!</span>")
+		to_chat(MM.active_owner, span_userdanger("You have binded the ember to yourself! The next time you use the necklace it will heal you!"))
 	else if(MM.numUses == 1 && MM.active_owner)//revive / heal then remove usage
 		MM.second_chance()
 		MM.numUses = 0

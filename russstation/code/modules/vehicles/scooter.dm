@@ -45,7 +45,9 @@
 		unbuckle_mob(L)
 		var/atom/throw_target = get_edge_target_turf(src, pick(GLOB.cardinals))
 		L.throw_at(throw_target, 2, 2)
-		visible_message("<span class='danger'>[L] loses [L.p_their()] footing and slams on the ground!</span>")
+		visible_message(
+			span_danger("[L] loses [L.p_their()] footing and slams on the ground!"),
+		)
 		L.Paralyze(4 SECONDS)
 		grinding = FALSE
 		icon_state = "[initial(icon_state)]"

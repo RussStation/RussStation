@@ -14,9 +14,9 @@
 
 /datum/fart/living/carbon/human/soft_fail(mob/living/user)
 	user.adjustToxLoss(fail_damage)
-	to_chat(user, "<span class='notice'>You let out some gas, but it felt like something came with it.</span>")
+	to_chat(user, span_notice("You let out some gas, but it felt like something came with it."))
 
 /datum/fart/living/carbon/human/hard_fail(mob/living/user)
 	user.adjustToxLoss(fail_damage)
 	user.Stun(1 SECONDS)
-	to_chat(user, "<span class='notice'>You feel a sharp pain in your stomach and fail to produce any flatulence.</span>")
+	to_chat(user, span_notice("You feel a sharp pain in your stomach and fail to produce any flatulence."))

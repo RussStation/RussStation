@@ -14,7 +14,9 @@
 			V.unbuckle_mob(L)
 			L.throw_at(landing_turf, 6, 3)
 			L.Paralyze(100)
-			V.visible_message("<span class='danger'>[L] attempts an incredible trick! Embarassingly [L.p_they()] fail[L.p_s()] miserably and fall on [L.p_their()] face.</span>")
+			V.visible_message(
+				span_danger("[L] attempts an incredible trick! Embarassingly [L.p_they()] fail[L.p_s()] miserably and fall on [L.p_their()] face."),
+			)
 		else
 			L.spin(20, 1)
 			animate(L, pixel_y = -6, time = 8)
@@ -24,7 +26,10 @@
 			playsound(L, 'sound/magic/ethereal_exit.ogg', 50, TRUE)
 			V.unbuckle_mob(L)
 			sleep(5)
-			V.visible_message("<span class='danger'>[L] executes one final trick, as [L.p_they()] flip[L.p_s()] through the air [L.p_their()] body evaporates into dust</span>", "<span class='danger'>You have successfully performed the Final Ollie, you phase out of existence with satisfaction</span>")
+			V.visible_message(
+				span_danger("[L] executes one final trick, as [L.p_they()] flip[L.p_s()] through the air [L.p_their()] body evaporates into dust"),
+				span_danger("You have successfully performed the Final Ollie, you phase out of existence with satisfaction"),
+			)
 			L.dust(drop_items = TRUE)
 			V.throw_at(landing_turf, 6, 3)
 
@@ -50,7 +55,9 @@
 			vehicle.unbuckle_mob(rider)
 			rider.throw_at(landing_turf, 2, 2)
 			rider.Paralyze(40)
-			vehicle.visible_message("<span class='danger'>[rider] misses the landing and falls on [rider.p_their()] face!</span>")
+			vehicle.visible_message(
+				span_danger("[rider] misses the landing and falls on [rider.p_their()] face!"),
+			)
 		else
 			rider.spin(4, 1)
 			animate(rider, pixel_y = -6, time = 4)

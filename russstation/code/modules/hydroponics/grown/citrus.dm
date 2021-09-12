@@ -54,14 +54,14 @@
 
 /obj/item/food/grown/russ/citrus/goblin/attack(mob/M, mob/user, def_zone)
 	if(awakening)
-		to_chat(user, "<span class='warning'>The goblin is twitching and shaking, preventing you from eating it.</span>")
+		to_chat(user, span_warning("The goblin is twitching and shaking, preventing you from eating it."))
 		return
 	. = ..()
 
 /obj/item/food/grown/russ/citrus/goblin/attack_self(mob/user)
 	if(awakening || istype(user.loc, /turf/open/space))
 		return
-	to_chat(user, "<span class='notice'>You begin to awaken the goblin...</span>")
+	to_chat(user, span_notice("You begin to awaken the goblin..."))
 	awakening = TRUE
 
 	spawn(30)
@@ -72,7 +72,9 @@
 			G.melee_damage_upper += round(seed.potency / 15)
 			G.move_to_delay -= round(seed.production / 35)
 			G.health = G.maxHealth
-			G.visible_message("<span class='notice'>The goblin starts shaking it's feet viciously as it opens it's eyes.</span>")
+			G.visible_message(
+				span_notice("The goblin starts shaking it's feet viciously as it opens it's eyes."),
+			)
 			qdel(src)
 
 //slime limes!
