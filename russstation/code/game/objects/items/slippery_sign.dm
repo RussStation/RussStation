@@ -148,9 +148,6 @@
 
 //when used by a janitor: toggles between active and disabled, when used by a clown, pranks ensue
 /obj/item/clothing/suit/caution/slippery/attack_self(mob/user)
-	if(!proximity_monitor)
-		proximity_monitor = new(src, 1) //initializes the proximity: (source, range)
-
 	if(HAS_TRAIT(user, TRAIT_CLUMSY)) //clumsy people can overload it (clowns, etc)
 		will_slip = TRUE
 		clowning_around = TRUE
@@ -164,9 +161,38 @@
 			clowning_around = FALSE
 			slip_cooldown = 5 SECONDS
 
-		to_chat(user, "<span class='notice'>\The [name] will [will_slip? "now" : "no longer"] slip anyone running past.</span>")
+		// Check if we're set to slip, if so, make us slippery. If not, remove it.
+		if(will_slip)
+			AddComponent(/datum/component/slippery, 80, NO_SLIP_WHEN_WALKING, CALLBACK(src, .proc/AfterSlip))
+		else
+			qdel(GetComponent(/datum/component/slippery))
+		to_chat(user, "<span class='notice'>\The [name] will [will_slip ? "now" : "no longer"] slip anyone running past.</span>")
 	else
 		to_chat(user, "<span class = 'notice'>\The [name] requires a janitor to activate.</span>")
+
+/obj/item/clothing/suit/caution/slippery/proc/AfterSlip(mob/living/carbon/human/victim)
+	if(world.time < last_slip + slip_cooldown) //cooldown for slipping
+		return
+
+	last_slip = world.time
+	say("Caution, wet floor.")
+
+	var/turf/open/current_turf = get_turf(src)
+
+	//make own turf and all adjacent turfs lubed for a bit
+	if(clowning_around)
+		playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
+		current_turf.MakeSlippery(TURF_WET_SUPERLUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
+	else
+		playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
+		current_turf.MakeSlippery(TURF_WET_LUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
+
+	for(var/turf/open/adjacent_turfs in get_adjacent_open_turfs(current_turf))
+		adjacent_turfs.MakeSlippery(TURF_WET_LUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
+
+	//cry havoc and let slip the signs of wet
+	if(evil_sign)
+		awaken_sign(victim)
 
 /obj/item/clothing/suit/caution/slippery/attackby(obj/item/item, mob/living/user)
 	if(istype(item, /obj/item/janicart_upgrade/buffer))
@@ -193,45 +219,6 @@
 		to_chat(user, span_warning("You can't seem to detatch the mechanism from \the [name]..."))
 		addtimer(CALLBACK(src, .proc/awaken_sign, user), 2 SECONDS)
 	return TRUE
-
-/obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
-	if(world.time < last_slip + slip_cooldown) //cooldown for slipping
-		return
-
-	if(!will_slip) //needs to be enabled to slip people obviously
-		return
-
-	if(!iscarbon(AM)) //is it actually a thing we can slip?
-		return
-
-	if(!isturf(loc)) //are we not on the ground?
-		return
-
-	if(pulledby) //if we're being pulled, don't slip people (it was funny for a bit)
-		return
-
-	var/mob/living/carbon/C = AM
-	var/turf/open/T = get_turf(src)
-
-	//are they not walking? & are they not the activator? & are they not being pulled? & either [is it evil or are they not already slipped]?
-	if(C.m_intent != MOVE_INTENT_WALK && C != boss && !(C.pulledby) && (evil_sign || !(C.IsKnockdown())))
-		last_slip = world.time
-		say("Caution, wet floor.")
-
-		//make own turf and all adjacent turfs lubed for a bit
-		if(clowning_around)
-			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE, -1)
-			T.MakeSlippery(TURF_WET_SUPERLUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
-		else
-			playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
-			T.MakeSlippery(TURF_WET_LUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
-
-		for(var/turf/open/AT in get_adjacent_open_turfs(T))
-			AT.MakeSlippery(TURF_WET_LUBE, 1 SECONDS, 1 SECONDS, 3 SECONDS)
-
-		//cry havoc and let slip the signs of wet
-		if(evil_sign)
-			awaken_sign(C)
 
 /*
  * makes the sign shake a bit, then animate
@@ -285,9 +272,6 @@
  * bypasses the requirement of janitor or clumsy and turns it into an evil sign
  */
 /obj/item/clothing/suit/caution/slippery/emag_act(mob/user)
-	if(!proximity_monitor)
-		proximity_monitor = new(src, 1)
-
 	will_slip = TRUE //bypasses the janitor requirement
 	if(!evil_sign)
 		evil_sign = TRUE
