@@ -190,9 +190,8 @@
 		new /obj/item/janicart_upgrade(L, 1)
 		new /obj/item/assembly/prox_sensor(L, 1)
 	else
-		to_chat(user, "<span class='warning'>You can't seem to detatch the mechanism from \the [name]...</span>")
-		sleep(2 SECONDS)
-		awaken_sign(user)
+		to_chat(user, span_warning("You can't seem to detatch the mechanism from \the [name]..."))
+		addtimer(CALLBACK(src, .proc/awaken_sign), 2 SECONDS)
 	return TRUE
 
 /obj/item/clothing/suit/caution/slippery/HasProximity(atom/movable/AM)
@@ -263,8 +262,13 @@
 					"<span class='boldwarning'>\The [name] begins to shake violently.</span>", \
 					"<span class='hear'>You hear mechanical whirring.</span>")
 	will_slip = FALSE
-	sleep(1 SECONDS)
-	stopShaking()
+	addtimer(CALLBACK(src, .proc/end_awaken, victim), 1 SECONDS)
+
+/*
+ * called at the end of an awakening
+ */
+/obj/item/clothing/suit/caution/slippery/proc/end_awaken(mob/living/victim)
+	stop_shaking()
 	if(!isturf(loc))
 		if(!victim?.temporarilyRemoveItemFromInventory(src) || !forceMove(drop_location())) //forces the sign onto the ground before animating it
 			to_chat(victim, "<span class='notice'>I guess it was nothing.</span>")
@@ -274,7 +278,7 @@
 /*
  * stop the shaking animation
  */
-/obj/item/clothing/suit/caution/slippery/proc/stopShaking()
+/obj/item/clothing/suit/caution/slippery/proc/stop_shaking()
 	animate(src, transform=matrix())
 
 /*
