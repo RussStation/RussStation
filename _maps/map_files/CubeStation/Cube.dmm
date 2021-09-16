@@ -216,13 +216,6 @@
 	},
 /turf/open/floor/wood,
 /area/command/heads_quarters/hop)
-"adV" = (
-/obj/machinery/door/airlock/maintenance,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/maintenance/starboard/aft)
 "adY" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 4
@@ -2035,7 +2028,7 @@
 /area/engineering/atmos)
 "bct" = (
 /obj/machinery/atmospherics/components/binary/thermomachine/heater/on{
-	dir = 4
+	dir = 8
 	},
 /turf/open/floor/iron,
 /area/engineering/atmos)
@@ -2512,7 +2505,7 @@
 /turf/open/floor/iron/showroomfloor,
 /area/engineering/break_room)
 "bqK" = (
-/obj/machinery/atmospherics/pipe/layer_manifold{
+/obj/machinery/atmospherics/pipe/layer_manifold/supply{
 	dir = 4
 	},
 /turf/open/floor/plating,
@@ -7808,7 +7801,7 @@
 	},
 /obj/machinery/door/firedoor/heavy,
 /obj/machinery/door/airlock/research{
-	name = "Ordinance";
+	name = "Ordnance";
 	req_access_txt = "7"
 	},
 /obj/structure/cable,
@@ -15288,7 +15281,7 @@
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Engineering Foyer";
 	normalspeed = 0;
-	req_one_access_txt = "32;19"
+	req_one_access_txt = "10;32;19"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -25342,7 +25335,7 @@
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Engineering Foyer";
 	normalspeed = 0;
-	req_one_access_txt = "32;19"
+	req_one_access_txt = "10;32;19"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -31259,13 +31252,12 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Engineering Foyer";
-	normalspeed = 0;
-	req_one_access_txt = "32;19"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Engine Room";
+	req_access_txt = "10"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -31797,7 +31789,7 @@
 "qBc" = (
 /obj/structure/cable,
 /obj/machinery/door/airlock/research{
-	name = "Ordinance Storage Closet";
+	name = "Ordnance Storage Closet";
 	req_access_txt = "8"
 	},
 /turf/open/floor/iron,
@@ -37403,9 +37395,6 @@
 	req_access_txt = "12"
 	},
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "medbay-passthrough"
-	},
 /turf/open/floor/plating,
 /area/maintenance/starboard/central)
 "tlc" = (
@@ -39297,7 +39286,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/firedoor/heavy,
 /obj/machinery/door/airlock/research{
-	name = "Toxins Storage";
+	name = "Ordnance Storage";
 	req_access_txt = "8"
 	},
 /obj/structure/cable,
@@ -41213,12 +41202,13 @@
 /turf/open/floor/iron/dark,
 /area/science/xenobiology)
 "vfl" = (
-/obj/machinery/door/airlock/external{
-	name = "Engineering External Access";
-	req_access_txt = "10;13"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
+	},
+/obj/machinery/door/airlock/external{
+	name = "Engineering External Access";
+	req_access_txt = "13";
+	req_one_access_txt = "10;24"
 	},
 /turf/open/floor/plating,
 /area/engineering/main)
@@ -42443,15 +42433,15 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/machinery/door/airlock/engineering{
-	name = "Engine Room";
-	req_access_txt = "10"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Engineering Foyer";
+	req_one_access_txt = "32;19;10"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -43745,11 +43735,12 @@
 /turf/open/floor/engine/co2,
 /area/engineering/atmos)
 "wol" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/machinery/door/airlock/external{
 	name = "Engineering External Access";
-	req_access_txt = "10;13"
+	req_access_txt = "13";
+	req_one_access_txt = "10;24"
 	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /turf/open/floor/iron/dark,
 /area/engineering/main)
 "woA" = (
@@ -84132,7 +84123,7 @@ urt
 qHN
 eHs
 pFh
-adV
+lbY
 lAx
 xpK
 hVG
