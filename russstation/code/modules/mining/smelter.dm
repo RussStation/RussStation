@@ -29,9 +29,9 @@
 	if(istype(W, /obj/item/grown/log) || istype(W, /obj/item/stack/sheet/mineral/wood))
 		if(!(fuel >= volume)) //add fuel
 			user.visible_message(
-				"[user] adds the [W.name] to \the [src.name].",
-				"You add the [W.name] to the fuel supply of \the [src.name].",
-				"<span class='hear'>You hear the roar of a fire.</span>",
+				span_notice("[user] adds the [W.name] to \the [src.name]."),
+				span_notice("You add the [W.name] to the fuel supply of \the [src.name]."),
+				span_hear("You hear the roar of a fire."),
 			)
 			fuel += 5
 			if(fuel > volume) //adjust fuel if it goes over the max
@@ -60,12 +60,15 @@
 	else if(istype(W, /obj/item/reagent_containers/molten_container/crucible))
 		if(!crucible) //load in bucket
 			crucible = W
-			user.visible_message("[user] loads \the [src.name] with a [crucible]", "You load \the [src.name] with \a [crucible].")
+			user.visible_message(
+				span_notice("[user] loads \the [src.name] with a [crucible]"),
+				span_notice("You load \the [src.name] with \a [crucible]."),
+			)
 			user.dropItemToGround(W)
 			W.loc = src
 			update_desc()
 		else
-			to_chat(user, "<span class='notice'>\The [src.name] already has a [crucible].</span>")
+			to_chat(user, span_notice("\The [src.name] already has a [crucible]."))
 
 	else if(istype(W, /obj/item/stack/ore))
 		if(!crucible || fuel == 0) //need ore and bucket loaded
@@ -80,7 +83,10 @@
 				var/smelting_result = current_ore.reagent_id
 				// keep adding ore, small do_after so user can stop putting it all in
 				while (smelting_result && current_ore.amount > 0 && fuel > 0 && crucible.reagents.total_volume < crucible.volume && do_after(user, 5, target = src))
-					user.visible_message("[user] puts \the [W] in \the [src.name] and it melts.", "You put \the [W.name] in \the [src.name] and it melts.")
+					user.visible_message(
+						span_notice("[user] puts \the [W] in \the [src.name] and it melts."),
+						span_notice("You put \the [W.name] in \the [src.name] and it melts."),
+					)
 					crucible.reagents.add_reagent(smelting_result, (5))
 					crucible.reagents.chem_temp = 1000
 					crucible.reagents.handle_reactions()
@@ -95,7 +101,10 @@
 /obj/machinery/smelter/attack_hand(mob/user)
 	if(crucible)
 		crucible.forceMove(drop_location())
-		user.visible_message("[user] takes \the [crucible] out of \the [src.name].", "You take \the [crucible] out of \the [src.name].")
+		user.visible_message(
+			span_notice("[user] takes \the [crucible] out of \the [src.name]."),
+			span_notice("You take \the [crucible] out of \the [src.name]."),
+		)
 		if(Adjacent(user) && !issilicon(user))
 			user.put_in_hands(crucible)
 		crucible.update_appearance()
@@ -157,7 +166,11 @@
 			to_chat(user, "There's already a mold on the anvil.")
 		else
 			var/obj/item/reagent_containers/molten_container/smelt_mold/M = W
-			user.visible_message("[user] places [M] on \the [src.name].", "You place [M] on \the [src.name].", "<span class='hear'>You hear something being set on a hard surface.</span>")
+			user.visible_message(
+				span_notice("[user] places [M] on \the [src.name]."),
+				span_notice("You place [M] on \the [src.name]."),
+				span_hear("You hear something being set on a hard surface."),
+			)
 			user.dropItemToGround(M)
 			M.loc = src
 			current_mold = M
@@ -168,14 +181,18 @@
 		if(!current_mold)
 			..()
 		else if(current_mold.reagents.total_volume < current_mold.volume)
-			to_chat(user, "<span class='notice'>\The [current_mold] needs to be filled with molten metal first.</span>")
+			to_chat(user, span_notice("\The [current_mold] needs to be filled with molten metal first.")
 		else if(user.combat_mode)
 			current_mold.SplashReagents(user) // splash on self for idiocy
 		else
 			// if(!(current_mold.reagents.get_master_reagent() in workable_metals))
-			// 	to_chat(user, "<span class='notice'>\The [current_mold] contains too many non-metal materials that prevent smithing.</span>")
+			// 	to_chat(user, span_notice("\The [current_mold] contains too many non-metal materials that prevent smithing."))
 			// 	return
-			user.visible_message("[user] breaks the result out of \the [current_mold] and starts to hammer it into shape.", "You break the result out of \the [current_mold] and start to hammer it into shape.", "<span class='hear'>You hear the hammering of metal.</span>")
+			user.visible_message(
+				span_notice("[user] breaks the result out of \the [current_mold] and starts to hammer it into shape."),
+				span_notice("You break the result out of \the [current_mold] and start to hammer it into shape."),
+				span_hear("You hear the hammering of metal."),
+			)
 			playsound(loc, 'sound/items/gavel.ogg', 50, TRUE, -1)
 			if(do_after(user, 80, target = src))
 				var/datum/reagent/R = current_mold.reagents.get_master_reagent() // future idea: check all reagents, make alloys?
@@ -196,17 +213,21 @@
 		// allow pouring onto a mold on the anvil (copied from smelt_mold's code)
 		var/obj/item/reagent_containers/molten_container/crucible/crucible = W
 		if(!current_mold)
-			to_chat(user, "<span class='notice'>Use [crucible] to fill a mold first.</span>")
+			to_chat(user, span_notice("Use [crucible] to fill a mold first."))
 		else if(current_mold.reagents.total_volume >= current_mold.volume)
-			to_chat(user, "<span class='notice'>[current_mold] is already filled.</span>")
+			to_chat(user, span_notice("[current_mold] is already filled."))
 		else if(crucible.reagents.total_volume < current_mold.volume)
-			to_chat(user, "<span class='notice'>[crucible] needs [current_mold.volume] units of molten metal all at once to fill [current_mold].</span>")
+			to_chat(user, span_notice("[crucible] needs [current_mold.volume] units of molten metal all at once to fill [current_mold]."))
 		else if(do_after(user, 10, target = src))
 			crucible.reagents.trans_to(current_mold, current_mold.volume)
 			cut_overlay(my_mold)
 			my_mold = mutable_appearance('russstation/icons/obj/blacksmithing.dmi', current_mold.icon_state)
 			add_overlay(my_mold)
-			user.visible_message("[user] pours the contents of [crucible] into [current_mold].", "You pour the contents of [crucible] into [current_mold].", "<span class='hear'>You hear a sizzling sound.</span>")
+			user.visible_message(
+				span_notice("[user] pours the contents of [crucible] into [current_mold]."),
+				span_notice("You pour the contents of [crucible] into [current_mold]."),
+				span_hear("You hear a sizzling sound."),
+			)
 	else
 		..()
 

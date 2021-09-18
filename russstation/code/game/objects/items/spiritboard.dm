@@ -27,7 +27,7 @@
 		users[usr] = 0
 
 	if((world.time - users[usr]) < use_delay)
-		to_chat(user, "<span class='notice'>Please wait a moment before using the board again.</span>")
+		to_chat(user, span_notice("Please wait a moment before using the board again."))
 		return
 
 	var/list/words = list()
@@ -39,10 +39,10 @@
 		var/selected = input(usr, "Select a word:", src.name) as null|anything in words
 		if(!selected) return
 		if((world.time - users[usr]) < use_delay)
-			to_chat(user, "<span class='notice'>Please wait a moment before using the board again.</span>")
+			to_chat(user, span_notice("Please wait a moment before using the board again."))
 			return
 
 		users[usr] = world.time
 		if(src && selected)
 			for(var/mob/O in range(7, src))
-				visible_message("<B><span style=\"color:blue font-family:Impact\">The board spells out a message ... \"[selected]\"</span></B>")
+				visible_message(span_blue("<B><span style=\"font-family:Impact\">The board spells out a message ... \"[selected]\"</B>"))

@@ -19,7 +19,7 @@
 /obj/effect/mob_spawn/human/dwarf_dorm/special(mob/living/carbon/human/new_spawn)
 	new_spawn.fully_replace_character_name(null,dwarf_name())
 	new_spawn.gender = pick(list(MALE, FEMALE))
-	to_chat(new_spawn, "<b>Claim these lands to the dwarven race and purge the hostile creatures of these lands, all the while encouraging migrants with dorm rooms!</b>")
+	to_chat(new_spawn, span_notice("<b>Claim these lands to the dwarven race and purge the hostile creatures of these lands, all the while encouraging migrants with dorm rooms!</b>"))
 
 /obj/effect/mob_spawn/human/dwarf_dorm/Initialize()
 	. = ..()

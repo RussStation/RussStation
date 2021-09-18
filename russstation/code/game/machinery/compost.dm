@@ -23,13 +23,21 @@
 
 /obj/machinery/portable_atmospherics/canister/compost_bin/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/food/grown))
-		user.visible_message("[user] puts \the [W.name] into \the [src.name].", "You add \the [W.name] to \the [src.name].", "<span class='hear'>You hear a plop sound.</span>")
+		user.visible_message(
+			span_notice("[user] puts \the [W.name] into \the [src.name]."),
+			span_notice("You add \the [W.name] to \the [src.name]."),
+			span_hear("You hear a plop sound."),
+		)
 		addtimer(CALLBACK(src, .proc/decompose), rand(100, 150))
 		qdel(W)
 	else if(istype(W, /obj/item/storage/bag/plants))
 		var/obj/item/storage/bag/plants/bag = W
 		if(bag.contents.len > 0)
-			user.visible_message("[user] empties their [W.name] into \the [src.name].", "You empty \the [W.name] into \the [src.name].", "<span class='hear'>You hear a plopping sound.</span>")
+			user.visible_message(
+				span_notice("[user] empties their [W.name] into \the [src.name]."),
+				span_notice("You empty \the [W.name] into \the [src.name]."),
+				span_hear("You hear a plopping sound."),
+			)
 		for(var/obj/item/food/grown/food_item in bag.contents)
 			addtimer(CALLBACK(src, .proc/decompose), rand(100, 150))
 			qdel(food_item)

@@ -10,7 +10,7 @@
 	overlay_icon = "hotrod_overlay"
 
 /obj/vehicle/ridden/wheelchair/russ/hotrod/wrench_act(mob/living/user, obj/item/I)
-	to_chat(user, "<span class='notice'>You feel deep shame for trying to dismantle such a glorious symbol of freedom</span>")
+	to_chat(user, span_notice("You feel deep shame for trying to dismantle such a glorious symbol of freedom"))
 	return TRUE // Return without dismantling. There isn't a way to build The Hotrod so dismantling it would be a bad time.
 
 /obj/vehicle/ridden/wheelchair/russ/sportschair

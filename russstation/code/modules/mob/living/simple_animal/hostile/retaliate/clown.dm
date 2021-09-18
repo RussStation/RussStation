@@ -45,7 +45,9 @@
 			L.throw_at(throw_target, rand(1,2), 7, src)
 		else
 			L.Paralyze(20)
-			visible_message("<span class='danger'>[src] knocks [L] down!</span>")
+			visible_message(
+				span_danger("[src] knocks [L] down!"),
+			)
 
 //Chlown
 /mob/living/simple_animal/hostile/retaliate/clown/clownhulk/chlown
