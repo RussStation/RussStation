@@ -5,7 +5,8 @@
 	default_color = "2E2E2E"
 	species_traits = list(DYNCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	mutant_bodyparts = list("tail_skaven" = "Skaven", "snout" = "Round", "horns" = "None")
+	mutant_bodyparts = list("tail_skaven" = "Skaven")
+	external_organs = list(/obj/item/organ/external/horns = "None", /obj/item/organ/external/snout = "Round")
 	mutantears = /obj/item/organ/ears/skaven
 	mutantlungs = /obj/item/organ/lungs/skaven
 	mutanttongue = /obj/item/organ/tongue/skaven
