@@ -181,7 +181,7 @@
 		if(!current_mold)
 			..()
 		else if(current_mold.reagents.total_volume < current_mold.volume)
-			to_chat(user, span_notice("\The [current_mold] needs to be filled with molten metal first.")
+			to_chat(user, span_notice("\The [current_mold] needs to be filled with molten metal first."))
 		else if(user.combat_mode)
 			current_mold.SplashReagents(user) // splash on self for idiocy
 		else
