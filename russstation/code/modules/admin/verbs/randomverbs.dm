@@ -49,6 +49,6 @@
 	SSshuttle.emergency.forcecancel()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Force Cancel Shuttle") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] admin-force-recalled the emergency shuttle.")
-	message_admins("<span class='adminnotice'>[key_name_admin(usr)] admin-force-recalled the emergency shuttle.</span>")
+	message_admins(span_adminnotice("[key_name_admin(usr)] admin-force-recalled the emergency shuttle."))
 
 	return

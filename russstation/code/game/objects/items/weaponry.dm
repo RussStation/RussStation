@@ -4,12 +4,15 @@
 		var/obj/vehicle/ridden/scooter/skateboard/S = new board_item_type(get_turf(L))
 		S.suicide = TRUE
 		S.generate_actions()
-		L.visible_message("<span class='warning'>[user] prepares for [L.p_their()] final trick.</span>", "<span class='warning'>You prepare yourself for the ultimate ollie, it shall be your last.</span>")
+		L.visible_message(
+			span_warning("[user] prepares for [L.p_their()] final trick."),
+			span_warning("You prepare yourself for the ultimate ollie, it shall be your last."),
+		)
 		S.buckle_mob(L)
 		qdel(src)
 		return MANUAL_SUICIDE_NONLETHAL
 	else
-		to_chat(user, "<span class='warning'>You are not capable of doing the ultimate trick!</span>")
+		to_chat(user, span_warning("You are not capable of doing the ultimate trick!"))
 		return SHAME
 
 //Forging anvil hammer

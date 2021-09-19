@@ -217,12 +217,21 @@
 /turf/open/floor/wood,
 /area/command/heads_quarters/hop)
 "adV" = (
-/obj/machinery/door/airlock/maintenance,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
+	},
 /obj/structure/cable,
+/obj/machinery/power/apc{
+	areastring = "/area/maintenance/fore/secondary";
+	dir = 1;
+	name = "Fore Maintenance APC";
+	pixel_y = 23
+	},
 /turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/area/maintenance/fore/secondary)
 "adY" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 4
@@ -2035,7 +2044,7 @@
 /area/engineering/atmos)
 "bct" = (
 /obj/machinery/atmospherics/components/binary/thermomachine/heater/on{
-	dir = 4
+	dir = 8
 	},
 /turf/open/floor/iron,
 /area/engineering/atmos)
@@ -2512,7 +2521,7 @@
 /turf/open/floor/iron/showroomfloor,
 /area/engineering/break_room)
 "bqK" = (
-/obj/machinery/atmospherics/pipe/layer_manifold{
+/obj/machinery/atmospherics/pipe/layer_manifold/supply{
 	dir = 4
 	},
 /turf/open/floor/plating,
@@ -4491,8 +4500,8 @@
 /turf/open/floor/iron/showroomfloor,
 /area/science/robotics/lab)
 "cro" = (
-/obj/structure/table/wood,
 /obj/item/holosign_creator/robot_seat/bar,
+/obj/structure/table/wood,
 /turf/open/floor/wood,
 /area/service/bar)
 "csj" = (
@@ -7552,12 +7561,6 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/machinery/power/apc{
-	areastring = "/area/maintenance/fore/secondary";
-	dir = 1;
-	name = "Fore Maintenance APC";
-	pixel_y = 23
-	},
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -7808,7 +7811,7 @@
 	},
 /obj/machinery/door/firedoor/heavy,
 /obj/machinery/door/airlock/research{
-	name = "Ordinance";
+	name = "Ordnance";
 	req_access_txt = "7"
 	},
 /obj/structure/cable,
@@ -10506,14 +10509,14 @@
 /turf/open/floor/iron/white,
 /area/medical/storage)
 "fBR" = (
-/obj/machinery/door/airlock/medical{
-	name = "Psychologist's Office";
-	req_access_txt = "5"
-	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 1
+	},
+/obj/machinery/door/airlock/medical{
+	name = "Psychologist's Office";
+	req_access_txt = "70"
 	},
 /turf/open/floor/wood,
 /area/medical/psychology)
@@ -15288,7 +15291,7 @@
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Engineering Foyer";
 	normalspeed = 0;
-	req_one_access_txt = "32;19"
+	req_one_access_txt = "10;32;19"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -18563,7 +18566,6 @@
 /turf/open/floor/iron,
 /area/commons/storage/art)
 "jQt" = (
-/obj/structure/table/wood,
 /obj/item/reagent_containers/food/drinks/bottle/absinthe{
 	pixel_y = 3
 	},
@@ -18578,6 +18580,7 @@
 	pixel_x = 8;
 	pixel_y = 18
 	},
+/obj/structure/table/wood,
 /turf/open/floor/wood,
 /area/service/bar)
 "jQx" = (
@@ -21514,7 +21517,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/command/heads_quarters/rd)
 "lwV" = (
-/obj/structure/table/wood,
+/obj/structure/table/wood/shuttle_bar,
 /turf/open/floor/wood,
 /area/service/bar)
 "lwW" = (
@@ -25342,7 +25345,7 @@
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Engineering Foyer";
 	normalspeed = 0;
-	req_one_access_txt = "32;19"
+	req_one_access_txt = "10;32;19"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -26144,7 +26147,7 @@
 	dir = 1
 	},
 /turf/open/space/basic,
-/area/space/nearstation)
+/area/engineering/atmos)
 "nNo" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 4
@@ -28967,7 +28970,7 @@
 	},
 /obj/structure/lattice/catwalk,
 /turf/open/space/basic,
-/area/space/nearstation)
+/area/engineering/atmos)
 "piX" = (
 /obj/structure/table,
 /obj/item/book/manual/wiki/cooking_to_serve_man,
@@ -30331,7 +30334,7 @@
 /area/maintenance/central)
 "pRq" = (
 /obj/item/reagent_containers/food/drinks/drinkingglass,
-/obj/structure/table/wood,
+/obj/structure/table/wood/shuttle_bar,
 /turf/open/floor/wood,
 /area/service/bar)
 "pRy" = (
@@ -31259,13 +31262,12 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Engineering Foyer";
-	normalspeed = 0;
-	req_one_access_txt = "32;19"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Engine Room";
+	req_access_txt = "10"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -31797,7 +31799,7 @@
 "qBc" = (
 /obj/structure/cable,
 /obj/machinery/door/airlock/research{
-	name = "Ordinance Storage Closet";
+	name = "Ordnance Storage Closet";
 	req_access_txt = "8"
 	},
 /turf/open/floor/iron,
@@ -33766,14 +33768,14 @@
 /turf/open/floor/iron,
 /area/command/gateway)
 "rsa" = (
-/obj/machinery/door/window/southright{
-	dir = 8;
-	name = "Bar Door";
-	pixel_x = 3;
-	req_access_txt = "25"
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/door/window/southleft{
+	dir = 4;
+	name = "Bar Door";
+	pixel_x = -3;
+	req_access_txt = "25"
 	},
 /turf/open/floor/wood,
 /area/service/bar)
@@ -36741,7 +36743,7 @@
 	},
 /obj/structure/cable,
 /obj/machinery/door/airlock/research{
-	name = "Ordinance Launch Room";
+	name = "Ordnance Launch Room";
 	req_access_txt = "7"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
@@ -36849,10 +36851,10 @@
 /turf/open/floor/iron,
 /area/engineering/main)
 "sXg" = (
-/obj/structure/table/wood/shuttle_bar,
 /obj/item/reagent_containers/glass/rag{
 	pixel_y = 7
 	},
+/obj/structure/table/wood,
 /turf/open/floor/wood,
 /area/service/bar)
 "sXx" = (
@@ -37403,9 +37405,6 @@
 	req_access_txt = "12"
 	},
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "medbay-passthrough"
-	},
 /turf/open/floor/plating,
 /area/maintenance/starboard/central)
 "tlc" = (
@@ -38165,7 +38164,7 @@
 	cycle_id = "sci-toxins-passthrough"
 	},
 /obj/machinery/door/airlock/research{
-	name = "Ordinance Launch Room";
+	name = "Ordnance Launch Room";
 	req_access_txt = "7"
 	},
 /turf/open/floor/iron/dark,
@@ -39297,7 +39296,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/firedoor/heavy,
 /obj/machinery/door/airlock/research{
-	name = "Toxins Storage";
+	name = "Ordnance Storage";
 	req_access_txt = "8"
 	},
 /obj/structure/cable,
@@ -41213,12 +41212,13 @@
 /turf/open/floor/iron/dark,
 /area/science/xenobiology)
 "vfl" = (
-/obj/machinery/door/airlock/external{
-	name = "Engineering External Access";
-	req_access_txt = "10;13"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
+	},
+/obj/machinery/door/airlock/external{
+	name = "Engineering External Access";
+	req_access_txt = "13";
+	req_one_access_txt = "10;24"
 	},
 /turf/open/floor/plating,
 /area/engineering/main)
@@ -41464,13 +41464,13 @@
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "vkE" = (
-/obj/structure/table/wood/shuttle_bar,
 /obj/machinery/status_display/evac{
 	pixel_y = -32
 	},
 /obj/structure/displaycase/forsale/kitchen{
 	pixel_y = 8
 	},
+/obj/structure/table/wood,
 /turf/open/floor/wood,
 /area/service/bar)
 "vkK" = (
@@ -42443,15 +42443,15 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/machinery/door/airlock/engineering{
-	name = "Engine Room";
-	req_access_txt = "10"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Engineering Foyer";
+	req_one_access_txt = "32;19;10"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -43611,14 +43611,9 @@
 /turf/open/floor/plating,
 /area/science/misc_lab)
 "wlf" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/sign/barsign{
-	pixel_y = -32
-	},
-/turf/open/floor/iron,
-/area/hallway/primary/starboard)
+/obj/structure/sign/barsign,
+/turf/closed/wall,
+/area/service/bar)
 "wlh" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/plating,
@@ -43745,11 +43740,12 @@
 /turf/open/floor/engine/co2,
 /area/engineering/atmos)
 "wol" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/machinery/door/airlock/external{
 	name = "Engineering External Access";
-	req_access_txt = "10;13"
+	req_access_txt = "13";
+	req_one_access_txt = "10;24"
 	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /turf/open/floor/iron/dark,
 /area/engineering/main)
 "woA" = (
@@ -77759,8 +77755,8 @@ juF
 kjd
 mda
 yfc
+jrr
 wlf
-mms
 jjQ
 sjs
 jjQ
@@ -78409,7 +78405,7 @@ hVv
 uQJ
 hVv
 hVv
-woI
+adV
 iSG
 xbQ
 cUT
@@ -84132,7 +84128,7 @@ urt
 qHN
 eHs
 pFh
-adV
+lbY
 lAx
 xpK
 hVG

@@ -17,12 +17,18 @@
 			continue
 		reagents.clear_reagents()
 		playsound(src,'sound/weapons/sear.ogg', 50)
-		loc.visible_message("<span class='warning'>The [name] purges the contents of its chamber!</span>", null, "<span class='hear'>You hear a sizzling sound!</span>")
-//		to_chat(loc.visible_message,"The [name] purges the contents of its chamber!")
+		loc.visible_message(
+			span_warning("The [name] purges the contents of its chamber!"),
+			span_warning("The [name] purges the contents of its chamber!"),
+			span_hear("You hear a sizzling sound!"),
+		)
 
 /obj/item/gun/chem/alcohol_gun/emag_act()
 	if(obj_flags & EMAGGED)
 		return
 	obj_flags |= EMAGGED
 	playsound(src.loc, "sparks", 100, TRUE)
-	loc.visible_message("You hear a sparking sound","<span class='warning'>You scramble the [name]'s purge sensor</span>")
+	loc.visible_message(
+		span_notice("You hear a sparking sound"),
+		span_warning("You scramble the [name]'s purge sensor"),
+	)

@@ -9,7 +9,7 @@
 	add_fingerprint(user)
 	// only dwarves can use them
 	if(!is_species(usr, /datum/species/dwarf))
-		to_chat(usr, "You can't seem to make sense of the dwarven property laws or their handwriting.")
+		to_chat(usr, span_warning("You can't seem to make sense of the dwarven property laws or their handwriting."))
 	else
 		// don't call ..() as it inserts information the dwarves won't know.
 		. = "<BODY><HTML><head><title>[src]</title></head> \

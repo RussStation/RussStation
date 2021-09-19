@@ -53,9 +53,9 @@
 			if(78)
 				harvested_item = pick(
 					/obj/machinery/computer/arcade/amputation,
-				    /obj/machinery/computer/arcade/orion_trail,
-				    /obj/machinery/computer/arcade/orion_trail/kobayashi,
-				    /obj/machinery/computer/arcade/battle,
+					/obj/machinery/computer/arcade/orion_trail,
+					/obj/machinery/computer/arcade/orion_trail/kobayashi,
+					/obj/machinery/computer/arcade/battle,
 				)
 			if(79)
 				harvested_item = /obj/machinery/vending/donksofttoyvendor
@@ -86,7 +86,7 @@
 			if(106)
 				harvested_item = /obj/machinery/autolathe/hacked
 
-	to_chat(user, "<span class='notice'>You forcefully crack open the purple pod.</span>")
+	to_chat(user, span_notice("You forcefully crack open the purple pod."))
 	new harvested_item(get_turf(user))
 	qdel(src)
 

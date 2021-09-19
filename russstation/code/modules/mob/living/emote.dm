@@ -13,10 +13,10 @@
 /datum/emote/living/fart/check_cooldown(mob/user, intentional)
 	var/mob/living/U = user
 	if (U.IsStun())
-		to_chat(user, "<span class='notice'>You cannot fart while stunned!</span>")
+		to_chat(user, span_notice("You cannot fart while stunned!"))
 		return FALSE
 	if (!U.fart_type)
-		to_chat(user, "<span class='notice'>You try to fart but don't know how!</span>")
+		to_chat(user, span_notice(">You try to fart but don't know how!"))
 		return FALSE
 
 	var/previous_usage = user.emotes_used && user.emotes_used[src] // the base version changes user.emotes_used, so store it for later

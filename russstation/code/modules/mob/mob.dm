@@ -10,11 +10,17 @@
 		return
 	if(green)
 		if(!no_text)
-			visible_message("<span class='warning'>[src] vomits up some yellow goo!</span>","<span class='warning'>You vomit up some yellow goo!</span>")
+			visible_message(
+				span_warning("[src] vomits up some yellow goo!"),
+				span_warning("You vomit up some yellow goo!"),
+			)
 		new /obj/effect/decal/cleanable/vomit(location)
 	else
 		if(!no_text)
-			visible_message("<span class='warning'>[src] pukes all over [p_them()]self!</span>","<span class='warning'>You puke all over yourself!</span>")
+			visible_message(
+				span_warning("[src] pukes all over [p_them()]self!"),
+				span_warning("You puke all over yourself!"),
+			)
 		location.add_vomit_floor(src, 1)
 
 	playsound(location, 'sound/effects/splat.ogg', 50, 1)
