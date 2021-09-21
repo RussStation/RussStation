@@ -102,6 +102,11 @@ def get_args():
 		action="store_true",
 		help="Fix DME includes in case file changes weren't handled by VS Code extension"
 	)
+	parser.add_argument(
+		"--build",
+		action="store_true",
+		help="Fix build script"
+	)
 	return parser.parse_args()
 
 # get a clean master to branch from
@@ -535,7 +540,10 @@ def fix_build_script(repo):
 	# replace the dme var definition so it uses ours
 	build_content = build_content.replace("DME_NAME = '" + their_dme[:their_dme.find(".dme")], "DME_NAME = '" + our_dme[:our_dme.find(".dme")])
 	# add russstation folder to dm dependency list (ensures build retries if only our files change)
-	build_content = build_content.replace(".depends('code/**')", ".depends('code/**')\n  .depends('russstation/**')")
+	code_line = re.compile("(.*?)(?:code/\*\*)(.*)", re.MULTILINE).search(build_content)
+	russ_line = "\n" + code_line.group(1) + "russstation/**" + code_line.group(2)
+	insertion_point = code_line.end()
+	build_content = build_content[:insertion_point] + russ_line + build_content[insertion_point:]
 	with open(build_path, "w") as build_file:
 		build_file.write(build_content)
 	repo.git.add(build_path)
@@ -584,6 +592,9 @@ if __name__ == "__main__":
 	elif args.dme:
 		# just fix dme includes
 		update_includes(repo)
+	elif args.build:
+		# just fix build script
+		fix_build_script(repo)
 	else:
 		start = time.perf_counter()
 		clean_state(repo)
