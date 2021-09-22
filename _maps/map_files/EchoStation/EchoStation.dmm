@@ -6305,11 +6305,6 @@
 /area/engineering/atmos)
 "dqA" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/food/monkeycube/gorilla{
-	desc = "It's a standard issue monkey cube.";
-	name = "monkey cube";
-	pixel_x = 5
-	},
 /turf/open/floor/iron/showroomfloor,
 /area/science/genetics)
 "dqF" = (
@@ -10731,6 +10726,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/item/relic,
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
 "fGs" = (
@@ -11868,6 +11864,7 @@
 	dir = 10
 	},
 /obj/structure/closet/crate,
+/obj/item/relic,
 /turf/open/floor/grass,
 /area/maintenance/starboard/fore)
 "gqx" = (
@@ -15186,6 +15183,11 @@
 /obj/structure/window/reinforced,
 /turf/open/floor/grass,
 /area/science/xenobiology)
+"iem" = (
+/obj/effect/decal/cleanable/confetti,
+/obj/item/relic,
+/turf/open/floor/plating,
+/area/maintenance/starboard/central)
 "ieA" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 4
@@ -19498,7 +19500,6 @@
 "kso" = (
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance/eight,
-/obj/item/relic,
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "ksw" = (
@@ -20022,13 +20023,12 @@
 /turf/open/floor/iron/showroomfloor,
 /area/engineering/atmos)
 "kFf" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/chem_heater/withbuffer,
+/obj/effect/turf_decal/stripes/box,
 /turf/open/floor/iron/showroomfloor,
 /area/medical/chemistry)
 "kFv" = (
@@ -21226,7 +21226,7 @@
 	pixel_y = -10
 	},
 /obj/structure/sign/directions/evac{
-	dir = 1;
+	dir = 8;
 	pixel_y = 4
 	},
 /turf/closed/wall,
@@ -22506,7 +22506,6 @@
 /area/medical/storage)
 "lZi" = (
 /obj/structure/frame/machine,
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/engineering/engine_smes)
 "lZL" = (
@@ -23939,7 +23938,6 @@
 /area/commons/toilet/locker)
 "mRa" = (
 /obj/structure/closet,
-/obj/item/relic,
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
 "mRd" = (
@@ -29147,6 +29145,15 @@
 /obj/structure/cable,
 /turf/open/floor/iron/checker,
 /area/command/heads_quarters/cmo)
+"psA" = (
+/obj/structure/sign/directions/command{
+	pixel_y = 10
+	},
+/obj/structure/sign/directions/engineering{
+	pixel_y = -10
+	},
+/turf/closed/wall,
+/area/hallway/primary/starboard)
 "psO" = (
 /obj/structure/closet/emcloset,
 /obj/effect/landmark/start/hangover/closet,
@@ -30957,6 +30964,11 @@
 /obj/effect/gibspawner,
 /turf/open/floor/plating,
 /area/maintenance/fore)
+"qmO" = (
+/obj/structure/table/wood/shuttle_bar,
+/obj/item/relic,
+/turf/open/floor/plating,
+/area/maintenance/port)
 "qmW" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 9
@@ -34032,6 +34044,14 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
+/obj/structure/sign/directions/supply{
+	dir = 4;
+	pixel_y = 35
+	},
+/obj/structure/sign/directions/security{
+	dir = 4;
+	pixel_y = 29
+	},
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
 "rNW" = (
@@ -36273,14 +36293,10 @@
 /turf/open/floor/iron/dark,
 /area/maintenance/port/aft)
 "tcG" = (
-/obj/structure/sign/directions/engineering{
-	pixel_y = -10
-	},
-/obj/structure/sign/directions/command{
-	pixel_y = 10
-	},
-/turf/closed/wall,
-/area/service/bar)
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/pinpointer_dispenser,
+/turf/open/floor/plating,
+/area/security/checkpoint/auxiliary)
 "tcN" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
@@ -36909,9 +36925,6 @@
 "tra" = (
 /obj/structure/sink/kitchen{
 	pixel_y = 28
-	},
-/obj/item/food/monkeycube/bee{
-	name = "monkey cube"
 	},
 /turf/open/floor/iron/cafeteria,
 /area/service/kitchen)
@@ -39033,16 +39046,10 @@
 /turf/closed/wall/rust,
 /area/maintenance/port/aft)
 "upL" = (
-/obj/structure/sign/directions/security{
-	dir = 4;
-	pixel_y = 29
-	},
-/obj/structure/sign/directions/supply{
-	dir = 4;
-	pixel_y = 35
-	},
-/turf/closed/wall,
-/area/service/bar)
+/obj/effect/gibspawner,
+/obj/item/relic,
+/turf/open/floor/plating,
+/area/maintenance/port/fore)
 "uqa" = (
 /obj/machinery/door/airlock/grunge{
 	name = "Atmospherics Maintenance";
@@ -40309,6 +40316,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
 	},
+/obj/item/food/grown/banana,
 /turf/open/floor/grass,
 /area/science/genetics)
 "uUP" = (
@@ -40849,6 +40857,7 @@
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/effect/turf_decal/weather/dirt,
+/obj/item/food/grown/banana,
 /turf/open/floor/grass,
 /area/science/genetics)
 "viz" = (
@@ -40856,6 +40865,8 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
 	},
+/obj/structure/frame/machine,
+/obj/item/circuitboard/machine/vending/monkey,
 /turf/open/floor/grass,
 /area/science/genetics)
 "viO" = (
@@ -46735,6 +46746,7 @@
 /obj/item/screwdriver{
 	pixel_y = 10
 	},
+/obj/item/relic,
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
 "xNO" = (
@@ -46818,6 +46830,7 @@
 "xOZ" = (
 /obj/structure/closet/lasertag/red,
 /obj/effect/spawner/lootdrop/maintenance_carpet,
+/obj/item/relic,
 /turf/open/floor/plating{
 	icon_state = "platingdmg1"
 	},
@@ -63844,7 +63857,7 @@ pFv
 pFv
 igF
 mYT
-smV
+qmO
 bIT
 ddt
 cgK
@@ -78726,7 +78739,7 @@ tkS
 hXl
 xOa
 ygd
-iVj
+upL
 uUW
 wDM
 sGv
@@ -80523,7 +80536,7 @@ hXl
 oBm
 aDO
 pBU
-pBU
+tcG
 pBU
 sIx
 sIx
@@ -81808,7 +81821,7 @@ abk
 rkz
 cjm
 pBU
-pBU
+tcG
 pBU
 sIx
 sIx
@@ -85690,8 +85703,8 @@ mwt
 xsO
 xsO
 nGN
-tcG
-upL
+xgn
+xgn
 xgn
 xgn
 xgn
@@ -85940,7 +85953,7 @@ xCh
 xCh
 xCh
 xCh
-lvT
+psA
 rNs
 oDi
 gHN
@@ -92894,7 +92907,7 @@ xEP
 knh
 mRL
 nMd
-jjN
+iem
 nMd
 xUj
 wmf
