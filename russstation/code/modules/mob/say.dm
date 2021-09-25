@@ -4,10 +4,11 @@
 	set name = ".say"
 	set hidden = TRUE
 
-	var/image/typing_indicator = image('icons/mob/talk.dmi', src, "default0", FLY_LAYER)
+	var/image/typing_indicator = image('icons/mob/talk.dmi', src, "default0", ABOVE_HUD_PLANE)
 	if(isliving(src)) //only living mobs have the bubble_icon var
 		var/mob/living/L = src
-		typing_indicator = image(L.bubble_file, src, L.bubble_icon + "0", FLY_LAYER) //get unique speech bubble icons for different species
+		//get unique speech bubble icons for different species
+		typing_indicator = image(L.bubble_file, src, L.bubble_icon + "0", ABOVE_HUD_PLANE)
 
 	typing_indicator.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 
