@@ -11,13 +11,13 @@
 	icon = 'russstation/icons/obj/spiritboard.dmi'
 	icon_state = "lboard"
 	inhand_icon_state = "clipboard"
-	w_class = 3.0
+	w_class = WEIGHT_CLASS_NORMAL
 	///Is the board ready for use? - Unused.
 	var/ready = TRUE
 	///How many users are nearby?
 	var/list/users = list()
 	///Delay between each use
-	var/use_delay = 30
+	var/use_delay = 3 SECONDS
 
 /obj/item/spiritboard/attack_ghost(mob/dead/observer/user)
 	if(!isobserver(user))
@@ -44,5 +44,8 @@
 
 		users[usr] = world.time
 		if(src && selected)
-			for(var/mob/O in range(7, src))
-				visible_message(span_blue("<B><span style=\"font-family:Impact\">The board spells out a message ... \"[selected]\"</B>"))
+			for(var/mob/M in view(7, src))
+				if(M.client)
+					// display descriptive message in chat, but just the selected word in runechat
+					to_chat(M, span_blue("<B>The board spells out a message ... \"[selected]\"</B>"))
+					M.create_chat_message(src, raw_message = selected)
