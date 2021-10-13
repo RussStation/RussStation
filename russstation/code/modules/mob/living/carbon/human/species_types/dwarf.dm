@@ -4,10 +4,8 @@
 	id = "dwarf"
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS)
-	// tool use for areaeditor; is this too much power?
 	inherent_traits = list(
 		TRAIT_NOBREATH,
-		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
 		TRAIT_VIRUSIMMUNE, // lavaland has miasma
 	)
