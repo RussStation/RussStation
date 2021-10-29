@@ -260,7 +260,15 @@
 		if(heart.target && heart.target.stat == DEAD)
 			to_chat(carbon_user,span_danger("Your patrons accepts your offer.."))
 			var/mob/living/carbon/human/current_target = heart.target
-			current_target.gib()
+			// honk start -- Replaces regular current_target.gib() code with code that qdels the heart if available, gibs if not.
+			var/obj/item/organ/heart/target_heart = current_target.getorganslot(ORGAN_SLOT_HEART)
+			if (!target_heart) {
+				current_target.gib()
+			} else {
+				qdel(target_heart)
+				current_target.visible_message(span_boldwarning("[current_target]'s heart is consumed!"))
+			}
+			// honk end
 			heart.target = null
 			var/datum/antagonist/heretic/heretic_datum = carbon_user.mind.has_antag_datum(/datum/antagonist/heretic)
 
