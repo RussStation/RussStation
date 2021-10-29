@@ -29,8 +29,8 @@
 	if(istype(W, /obj/item/grown/log) || istype(W, /obj/item/stack/sheet/mineral/wood))
 		if(!(fuel >= volume)) //add fuel
 			user.visible_message(
-				span_notice("[user] adds the [W.name] to \the [src.name]."),
-				span_notice("You add the [W.name] to the fuel supply of \the [src.name]."),
+				span_notice("[user] adds \the [W.name] to \the [src.name]."),
+				span_notice("You add \the [W.name] to the fuel supply of \the [src.name]."),
 				span_hear("You hear the roar of a fire."),
 			)
 			fuel += 5
@@ -61,20 +61,20 @@
 		if(!crucible) //load in bucket
 			crucible = W
 			user.visible_message(
-				span_notice("[user] loads \the [src.name] with a [crucible]"),
+				span_notice("[user] loads \the [src.name] with \a [crucible]"),
 				span_notice("You load \the [src.name] with \a [crucible]."),
 			)
 			user.dropItemToGround(W)
 			W.loc = src
 			update_desc()
 		else
-			to_chat(user, span_notice("\The [src.name] already has a [crucible]."))
+			to_chat(user, span_notice("\The [src.name] already has \a [crucible]."))
 
 	else if(istype(W, /obj/item/stack/ore))
 		if(!crucible || fuel == 0) //need ore and bucket loaded
 			to_chat(user, "\The [src.name] needs fuel and a crucible before it can smelt ore.")
 		else if(!is_type_in_list(W, allowed_ores))
-			to_chat(user, "[src.name] cannot smelt the [W.name].")
+			to_chat(user, "[src.name] cannot smelt \the [W.name].")
 		else
 			if(crucible.reagents.total_volume >= crucible.volume)
 				to_chat(user, "\The [crucible] is full.")
@@ -86,6 +86,7 @@
 					user.visible_message(
 						span_notice("[user] puts \the [W] in \the [src.name] and it melts."),
 						span_notice("You put \the [W.name] in \the [src.name] and it melts."),
+						span_notice("You hear a sizzling sound.")
 					)
 					crucible.reagents.add_reagent(smelting_result, (5))
 					crucible.reagents.chem_temp = 1000
@@ -94,6 +95,7 @@
 					fuel--
 					update_desc()
 					update_icon()
+					new /obj/item/stack/ore/stone(src.loc)
 
 				if(current_ore.amount == 0)
 					qdel(W)

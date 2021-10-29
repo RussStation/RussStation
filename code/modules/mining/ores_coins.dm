@@ -22,7 +22,6 @@
 	var/list/stack_overlays
 	var/scan_state = "" //Used by mineral turfs for their scan overlay.
 	var/spreadChance = 0 //Also used by mineral turfs for spreading veins
-	var/reagent_id = null //honk - reagent ids for smelted ore
 
 /obj/item/stack/ore/update_overlays()
 	. = ..()
@@ -80,7 +79,6 @@
 	material_flags = NONE
 	mats_per_unit = list(/datum/material/uranium=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/uranium
-	reagent_id = /datum/reagent/uranium //honk
 	mine_experience = 6
 	scan_state = "rock_Uranium"
 	spreadChance = 5
@@ -94,7 +92,6 @@
 	points = 1
 	mats_per_unit = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/iron
-	reagent_id = /datum/reagent/iron //honk
 	mine_experience = 1
 	scan_state = "rock_Iron"
 	spreadChance = 20
@@ -155,7 +152,6 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 15
 	mats_per_unit = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/plasma
-	reagent_id = /datum/reagent/dorf_plasma //honk
 	mine_experience = 5
 	scan_state = "rock_Plasma"
 	spreadChance = 8
@@ -174,7 +170,6 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	mine_experience = 3
 	mats_per_unit = list(/datum/material/silver=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/silver
-	reagent_id = /datum/reagent/silver //honk
 	scan_state = "rock_Silver"
 	spreadChance = 5
 	merge_type = /obj/item/stack/ore/silver
@@ -188,7 +183,6 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	mine_experience = 5
 	mats_per_unit = list(/datum/material/gold=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/gold
-	reagent_id = /datum/reagent/gold //honk
 	scan_state = "rock_Gold"
 	spreadChance = 5
 	merge_type = /obj/item/stack/ore/gold
@@ -201,7 +195,6 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 50
 	mats_per_unit = list(/datum/material/diamond=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/diamond
-	reagent_id = /datum/reagent/diamond //honk
 	mine_experience = 10
 	scan_state = "rock_Diamond"
 	merge_type = /obj/item/stack/ore/diamond
@@ -214,7 +207,6 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 60
 	mats_per_unit = list(/datum/material/bananium=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/bananium
-	reagent_id = /datum/reagent/dorf_bananium //honk
 	mine_experience = 15
 	scan_state = "rock_Bananium"
 	merge_type = /obj/item/stack/ore/bananium
@@ -227,7 +219,6 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	points = 50
 	mats_per_unit = list(/datum/material/titanium=MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/titanium
-	reagent_id = /datum/reagent/dorf_titanium //honk
 	mine_experience = 3
 	scan_state = "rock_Titanium"
 	spreadChance = 5
