@@ -1225,7 +1225,7 @@
 "aju" = (
 /obj/structure/fans/tiny,
 /obj/machinery/door/poddoor{
-	id = "chapelgun2";
+	id = "chapelgun";
 	name = "Chapel Launcher Door"
 	},
 /turf/open/floor/plating,
@@ -2392,20 +2392,11 @@
 /turf/open/floor/iron/sepia,
 /area/service/chapel)
 "axs" = (
-/obj/machinery/computer/pod/old{
-	density = 0;
-	icon = 'icons/obj/airlock_machines.dmi';
-	icon_state = "airlock_control_standby";
+/obj/machinery/button/massdriver{
 	id = "chapelgun";
-	name = "Mass Driver Controller";
-	pixel_x = 4;
-	pixel_y = 30
-	},
-/obj/machinery/button/door{
-	id = "chapelgun2";
-	name = "Exterior Chapel Launcher";
+	name = "Chapel Mass Driver";
 	pixel_x = -8;
-	pixel_y = 30
+	pixel_y = 28
 	},
 /turf/open/floor/iron/sepia,
 /area/service/chapel)
@@ -5271,6 +5262,14 @@
 /obj/item/beacon,
 /turf/open/floor/iron,
 /area/command/bridge)
+"bjF" = (
+/obj/structure/table,
+/obj/item/storage/box/beakers{
+	pixel_x = 2;
+	pixel_y = 7
+	},
+/turf/open/floor/iron,
+/area/science/xenobiology)
 "bjL" = (
 /obj/structure/disposalpipe/sorting/mail{
 	dir = 4;
@@ -5323,7 +5322,7 @@
 "bjT" = (
 /obj/machinery/door/airlock/external{
 	name = "Tcoms External Access";
-	req_access_txt = "65;13"
+	req_one_access = "65;61;13"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
@@ -5345,8 +5344,8 @@
 /turf/open/floor/iron,
 /area/security/brig)
 "bkr" = (
-/obj/structure/closet/crate/solarpanel_small,
 /obj/machinery/light/directional/north,
+/obj/machinery/power/port_gen/pacman,
 /turf/open/floor/iron,
 /area/engineering/main)
 "bkt" = (
@@ -5446,10 +5445,6 @@
 /turf/open/floor/iron/cafeteria,
 /area/security/prison)
 "bmh" = (
-/obj/machinery/door/airlock/external{
-	name = "Tcoms External Access";
-	req_access_txt = "65;13"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
@@ -5458,6 +5453,10 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 8
+	},
+/obj/machinery/door/airlock/external{
+	name = "Tcoms External Access";
+	req_one_access = "65;61;13"
 	},
 /turf/open/floor/plating,
 /area/tcommsat/computer)
@@ -5737,6 +5736,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
+/obj/structure/closet/crate/solarpanel_small,
 /turf/open/floor/iron,
 /area/engineering/main)
 "btn" = (
@@ -7320,6 +7320,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/general/visible,
 /obj/structure/table,
 /obj/effect/turf_decal/stripes/line,
+/obj/item/clothing/glasses/science,
 /turf/open/floor/iron,
 /area/science/xenobiology)
 "cgt" = (
@@ -8541,6 +8542,12 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron,
 /area/engineering/gravity_generator)
+"cOs" = (
+/obj/structure/window{
+	dir = 1
+	},
+/turf/open/floor/plating/beach/sand,
+/area/hallway/secondary/exit)
 "cOP" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -8741,6 +8748,7 @@
 /obj/item/stack/sheet/glass/fifty,
 /obj/item/stack/sheet/glass/fifty,
 /obj/item/stack/sheet/glass/fifty,
+/obj/item/stack/sheet/mineral/plasma/five,
 /turf/open/floor/iron,
 /area/engineering/main)
 "cTM" = (
@@ -13505,6 +13513,12 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
+"fcF" = (
+/obj/structure/table,
+/obj/item/scalpel,
+/obj/item/hemostat,
+/turf/open/floor/engine,
+/area/science/xenobiology)
 "fcM" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/sign/poster/official/random{
@@ -16019,9 +16033,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/structure/closet{
-	name = "Mining Storage Closet"
-	},
+/obj/structure/closet/wardrobe/miner,
 /turf/open/floor/iron/dark,
 /area/cargo/miningoffice)
 "guG" = (
@@ -17535,6 +17547,7 @@
 /area/science/xenobiology)
 "hiL" = (
 /obj/structure/disposalpipe/segment,
+/obj/machinery/skill_station,
 /turf/open/floor/wood,
 /area/service/library)
 "hiO" = (
@@ -18684,6 +18697,15 @@
 /obj/structure/extinguisher_cabinet/directional/south,
 /turf/open/floor/wood/large,
 /area/service/bar)
+"hOE" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/item/clothing/gloves/color/latex,
+/obj/item/clothing/mask/surgical,
+/turf/open/floor/engine,
+/area/science/xenobiology)
 "hOF" = (
 /turf/open/floor/iron,
 /area/science/xenobiology)
@@ -18697,12 +18719,8 @@
 /turf/open/floor/iron/dark,
 /area/cargo/warehouse)
 "hOZ" = (
-/obj/machinery/power/solar_control{
-	dir = 8;
-	id = "starboardsolar";
-	name = "Starboard Quarter Solar Control"
-	},
 /obj/structure/cable,
+/obj/machinery/power/smes,
 /turf/open/floor/plating,
 /area/maintenance/solars/starboard/aft)
 "hPr" = (
@@ -19318,8 +19336,12 @@
 /turf/open/floor/iron/dark,
 /area/science/research)
 "iji" = (
-/obj/machinery/power/smes,
 /obj/structure/cable,
+/obj/machinery/power/solar_control{
+	dir = 8;
+	id = "starboardsolar";
+	name = "Starboard Quarter Solar Control"
+	},
 /turf/open/floor/plating,
 /area/maintenance/solars/starboard/aft)
 "ijm" = (
@@ -20117,10 +20139,6 @@
 /turf/open/floor/iron,
 /area/medical/storage)
 "iFL" = (
-/obj/machinery/door/airlock/external{
-	name = "Tcoms External Access";
-	req_access_txt = "65;13"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
@@ -20129,6 +20147,10 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 8
+	},
+/obj/machinery/door/airlock/external{
+	name = "Tcoms External Access";
+	req_one_access = "65;61;13"
 	},
 /turf/open/floor/iron,
 /area/tcommsat/computer)
@@ -23317,7 +23339,6 @@
 /area/engineering/atmos/upper)
 "kye" = (
 /obj/machinery/mechpad,
-/obj/machinery/airalarm/directional/north,
 /turf/open/floor/iron/dark,
 /area/science/robotics/lab)
 "kyH" = (
@@ -24309,6 +24330,11 @@
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/medical/pharmacy)
+"lcd" = (
+/obj/structure/table,
+/obj/item/clothing/suit/apron/surgical,
+/turf/open/floor/engine,
+/area/science/xenobiology)
 "lcH" = (
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron/freezer,
@@ -28844,6 +28870,7 @@
 	dir = 1
 	},
 /obj/structure/table,
+/obj/item/surgical_drapes,
 /turf/open/floor/engine,
 /area/science/xenobiology)
 "nLr" = (
@@ -30109,7 +30136,6 @@
 /turf/open/floor/iron/checker,
 /area/command/heads_quarters/rd)
 "oAF" = (
-/obj/machinery/power/apc/auto_name/north,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -31952,6 +31978,13 @@
 "pCS" = (
 /turf/closed/wall,
 /area/command/heads_quarters/hos)
+"pDy" = (
+/obj/structure/window{
+	dir = 1
+	},
+/obj/structure/flora/tree/palm,
+/turf/open/floor/plating/beach/sand,
+/area/hallway/secondary/exit)
 "pDT" = (
 /obj/effect/decal/cleanable/food/pie_smudge,
 /obj/effect/landmark/xeno_spawn,
@@ -35574,10 +35607,6 @@
 /turf/open/floor/plating,
 /area/maintenance/fore/secondary)
 "rLh" = (
-/obj/machinery/door/airlock/external{
-	name = "Tcoms External Access";
-	req_access_txt = "65;13"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
@@ -35586,6 +35615,10 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 8
+	},
+/obj/machinery/door/airlock/external{
+	name = "Tcoms External Access";
+	req_one_access = "65;61;13"
 	},
 /turf/open/floor/plating,
 /area/tcommsat/computer)
@@ -37570,6 +37603,11 @@
 	},
 /turf/open/floor/plating,
 /area/commons/dorms)
+"sVF" = (
+/obj/structure/table,
+/obj/item/retractor,
+/turf/open/floor/engine,
+/area/science/xenobiology)
 "sVQ" = (
 /obj/machinery/door/airlock/glass_large{
 	name = "Dormitories"
@@ -39135,6 +39173,9 @@
 /area/hallway/primary/aft)
 "tOr" = (
 /obj/structure/table,
+/obj/item/stack/sheet/mineral/plasma{
+	pixel_y = 4
+	},
 /turf/open/floor/engine,
 /area/science/xenobiology)
 "tOF" = (
@@ -39406,6 +39447,10 @@
 	},
 /turf/open/floor/wood,
 /area/commons/dorms)
+"tUL" = (
+/obj/structure/water_source/puddle,
+/turf/open/floor/plating/beach/sand,
+/area/hallway/secondary/exit)
 "tUN" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 1
@@ -39993,6 +40038,10 @@
 	},
 /obj/effect/turf_decal/tile/red,
 /obj/structure/table,
+/obj/item/inspector,
+/obj/item/inspector{
+	pixel_y = 5
+	},
 /turf/open/floor/iron,
 /area/security/brig)
 "ulS" = (
@@ -44180,6 +44229,9 @@
 "wMZ" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
+	},
+/obj/structure/closet{
+	name = "Mining Storage Closet"
 	},
 /turf/open/floor/iron/dark,
 /area/cargo/miningoffice)
@@ -76761,7 +76813,7 @@ qwt
 yla
 lxN
 evj
-ffL
+vtp
 gfQ
 gfQ
 gfQ
@@ -77017,9 +77069,9 @@ vAK
 yfc
 yla
 lxN
-weZ
-ffL
-gfQ
+vtp
+vtp
+vtp
 gfQ
 gfQ
 gfQ
@@ -77273,10 +77325,10 @@ oim
 wHU
 yfc
 tev
-lxN
-evj
-vtp
-gfQ
+yla
+lLl
+czm
+jmZ
 gfQ
 gfQ
 gfQ
@@ -77530,7 +77582,7 @@ lku
 lku
 yfc
 vdC
-lxN
+uJr
 vtp
 vtp
 vtp
@@ -77787,10 +77839,10 @@ ykR
 ykR
 qwt
 vdC
-yla
-lLl
-czm
-jmZ
+lxN
+cOs
+tUL
+vtp
 gfQ
 gfQ
 gfQ
@@ -78044,9 +78096,9 @@ vAK
 vAK
 yfc
 hLt
-uJr
-vtp
-vtp
+lxN
+pDy
+lNF
 vtp
 gfQ
 gfQ
@@ -80102,7 +80154,7 @@ yfc
 yla
 lxN
 weZ
-weZ
+evj
 vtp
 gfQ
 gfQ
@@ -93962,9 +94014,9 @@ djn
 gkD
 gkD
 hCA
-hIE
-iai
 ryG
+iai
+hIE
 iqQ
 hIE
 iuT
@@ -94940,7 +94992,7 @@ iKS
 rDW
 nKW
 tOr
-tOr
+lcd
 evu
 bbb
 nyk
@@ -96216,7 +96268,7 @@ aHJ
 cfA
 eOw
 evu
-hcS
+bjF
 wIw
 lRm
 cUr
@@ -96994,9 +97046,9 @@ cUr
 yjR
 iKS
 rDW
-nKW
-tOr
-tOr
+hOE
+sVF
+fcF
 evu
 fnM
 fnM
