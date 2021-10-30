@@ -13,13 +13,13 @@
 	max_integrity = 100
 	integrity_failure = 0.35
 	buildstacktype = /obj/item/stack/sheet/mineral/stone
-	bolts = FALSE
+
+/obj/structure/bed/stone/examine(mob/user)
+	. = ..()
+	. += span_notice("A <b>Dwarven tool</b> could easily dismantle it.")
 
 /obj/structure/bed/stone/attackby(obj/item/I, mob/user, params)
-	// override for wrench to prevent deconstructing with wrong tool
-	if(I.tool_behaviour == TOOL_WRENCH)
-		to_chat(user, span_notice("This tool is completely inadequate for deconstructing \the [src]."))
-	else if(I.tool_behaviour == TOOL_DWARF)
+	if(I.tool_behaviour == TOOL_DWARF)
 		to_chat(user, span_notice("You start disassembling [src]..."))
 		I.play_tool_sound(src)
 		if(I.use_tool(src, user, 3 SECONDS))
@@ -40,13 +40,8 @@
 	framestack = /obj/item/stack/sheet/mineral/stone
 	framestackamount = 2
 
-/obj/structure/table_frame/stone/wrench_act(mob/living/user, obj/item/I)
-	return FALSE
-
 /obj/structure/table_frame/stone/attackby(obj/item/I, mob/user, params)
-	if(I.tool_behaviour == TOOL_WRENCH)
-		to_chat(user, span_notice("How is \a [I] going to deconstruct \a [src]?"))
-	else if(I.tool_behaviour == TOOL_DWARF)
+	if(I.tool_behaviour == TOOL_DWARF)
 		to_chat(user, span_notice("You start disassembling [src]..."))
 		I.play_tool_sound(src)
 		if(!I.use_tool(src, user, 3 SECONDS))
@@ -80,14 +75,13 @@
 	canSmoothWith = list(SMOOTH_GROUP_TABLES)
 
 /obj/structure/table/stone/deconstruction_hints(mob/user)
-	return "\The [src] would require some kind of <b>Dwarven tool</b> to deconstruct."
+	. = ..()
+	. += span_notice("Some kind of <b>Dwarven tool</b> could also deconstruct it.")
 
 /obj/structure/table/stone/attackby(obj/item/I, mob/living/user, params)
 	var/list/modifiers = params2list(params)
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
-		if(I.tool_behaviour == TOOL_SCREWDRIVER || I.tool_behaviour == TOOL_WRENCH)
-			to_chat(user, span_notice("You stare in bewilderment as [I] does nothing to [src]."))
-		else if (I.tool_behaviour == TOOL_DWARF)
+		if (I.tool_behaviour == TOOL_DWARF)
 			to_chat(user, span_notice("You start deconstructing [src]..."))
 			I.play_tool_sound(src)
 			if(I.use_tool(src, user, 2 SECONDS, volume=50))
@@ -95,8 +89,8 @@
 				user.visible_message(span_notice("[user] tears apart \the [src]."),
 					span_notice("You successfully disassemble \the [src]."),
 					span_hear("You hear stones dropping to the ground."))
-	else
-		return ..()
+			return
+	return ..()
 
 /obj/structure/chair/stone
 	name = "stone throne"
@@ -112,10 +106,6 @@
 	buildstackamount = 1
 	item_chair = null
 
-/obj/structure/chair/stone/wrench_act(mob/living/user, obj/item/I)
-	to_chat(user, span_notice("You try using \the [I] but \the [src] says 'no'."))
-	return FALSE
-
 /obj/structure/chair/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_DWARF)
 		to_chat(user, span_notice("You begin deconstructing \the [src]..."))
@@ -125,6 +115,8 @@
 			user.visible_message(span_notice("[user] tears apart \the [src]."),
 				span_notice("You successfully disassemble \the [src]."),
 				span_hear("You hear stones dropping to the ground."))
+	else
+		return ..()
 
 /obj/structure/mineral_door/stone
 	name = "stone door"
@@ -145,19 +137,6 @@
 				span_hear("You hear stones dropping to the ground."))
 	else
 		return ..()
-
-// wrong tools to deconstruct stone door
-/obj/structure/mineral_door/stone/wrench_act(mob/living/user, obj/item/I)
-	to_chat(user, span_notice("There doesn't appear to be anywhere on [src] to use \a [I]."))
-	return FALSE
-
-/obj/structure/mineral_door/stone/welder_act(mob/living/user, obj/item/I)
-	to_chat(user, span_notice("There doesn't appear to be anywhere on [src] to use \a [I]."))
-	return FALSE
-
-/obj/structure/mineral_door/stone/crowbar_door(mob/living/user, obj/item/I)
-	to_chat(user, span_notice("There doesn't appear to be anywhere on [src] to use \a [I]."))
-	return FALSE
 
 /obj/structure/closet/crate/stone
 	name = "stone coffer"
@@ -252,9 +231,6 @@
 				span_hear("You hear stones dropping to the ground."))
 			qdel(src)
 		return
-	else if(I.tool_behaviour == TOOL_WRENCH)
-		to_chat(user, span_notice("\The [src] and \the [I] have a conversation about modern engineering. \The [src] is not impressed."))
-		return
 	else
 		return ..()
 
@@ -280,10 +256,14 @@
 	receive_ricochet_chance_mod = 0
 	var/sheet_amount = 2
 
+/obj/structure/stone_window/examine(mob/user)
+	. = ..()
+	. += span_notice("It is held together by <b>Dwarven engineering</b>, although it could probably be <b>pried</b> apart.")
+
 /obj/structure/stone_window/attackby(obj/item/I, mob/living/user, params)
 	add_fingerprint(user)
 
-	if(I.tool_behaviour == TOOL_DWARF)
+	if(I.tool_behaviour == TOOL_DWARF || I.tool_behaviour == TOOL_CROWBAR)
 		to_chat(user, span_notice("You begin to disassemble [src]..."))
 		I.play_tool_sound(src)
 		if(I.use_tool(src, user, 3 SECONDS, volume = 75))
@@ -295,8 +275,6 @@
 				span_hear("You hear stones dropping to the ground."))
 			qdel(src)
 		return
-	else if(I.tool_behaviour == TOOL_WRENCH)
-		to_chat(user, span_notice("Here is \a [I] and \a [src]. \The [src] looks triumphant. \The [I] is making a plaintive gesture."))
 	else
 		return ..()
 

@@ -16,26 +16,17 @@
 	decon_type = /turf/open/floor/stone/russ
 
 /turf/closed/wall/mineral/stone/deconstruction_hints(mob/user)
-	return span_notice("The outer stones are firmly attached by <b>Dwarven engineering</b>.")
+	return span_notice("The outer stones are firmly attached by <b>Dwarven engineering</b>, although <b>welding</b> could loosen them.")
 
 /turf/closed/wall/mineral/stone/attackby(obj/item/I, mob/user, params)
-	// copied from parent, but removed advanced tool check
-	user.changeNext_move(CLICK_CD_MELEE)
+	// allow some interaction for dorfs
+	if(!ISADVANCEDTOOLUSER(user))
+		var/turf/T = user.loc
+		// no wall mounting for dorfs right now
+		if(try_clean(I, user, T) || try_decon(I, user, T))
+			return
+	return ..()
 
-	//get the user's location
-	if(!isturf(user.loc))
-		return //can't do this stuff whilst inside objects and such
-
-	add_fingerprint(user)
-
-	var/turf/T = user.loc //get user's location for delay checks
-
-	//the istype cascade has been spread among various procs for easy overriding
-	// no wall mounting for dorfs right now
-	if(try_clean(I, user, T) || try_decon(I, user, T))
-		return
-
-	return // no parent call
 
 /turf/closed/wall/mineral/stone/try_clean(obj/item/I, mob/living/user, turf/T)
 	// copied from parent, but dwarf tool

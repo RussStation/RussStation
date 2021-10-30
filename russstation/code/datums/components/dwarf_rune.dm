@@ -40,7 +40,7 @@
 	// for some reason these aren't always the right types?? why tg why
 	if(istype(user))
 		return checkAttack(user)
-	else if(istype(target, /mob/living))
+	else if(isliving(target))
 		return checkAttack(target)
 
 /datum/component/dwarf_rune/proc/checkAttack(mob/living/user)
