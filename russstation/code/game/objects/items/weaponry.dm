@@ -31,6 +31,15 @@
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 
+/datum/crafting_recipe/smith_hammer
+	name = "smith's hammer"
+	result = /obj/item/melee/smith_hammer
+	tool_paths = list(/obj/item/melee/smith_hammer)
+	reqs = list(/obj/item/stack/sheet/iron = 1)
+	time = 2 SECONDS
+	category = CAT_DWARF
+	always_available = FALSE
+
 //Forged Broadsword
 /obj/item/melee/smithed_sword
 	name = "unobtanium broadsword"
