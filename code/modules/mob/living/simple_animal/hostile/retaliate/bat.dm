@@ -70,3 +70,4 @@
 /mob/living/simple_animal/hostile/retaliate/bat/sgt_araneus/Initialize()
 	. = ..()
 	AddElement(/datum/element/pet_bonus, "chitters proudly!")
+	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT) // honk -- add ventcrawler to araneus subtype so it can still ventcrawl
