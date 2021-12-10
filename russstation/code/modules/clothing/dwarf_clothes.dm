@@ -106,7 +106,6 @@
 		armor.energy += S.attack_amt
 		armor.bomb += S.attack_amt
 		armor.bio += S.attack_amt
-		armor.rad += S.attack_amt
 		armor.fire += S.attack_amt
 		armor.acid += S.attack_amt
 
