@@ -111,7 +111,7 @@ the new instance inside the host to be updated to the template's stats.
 		for(var/datum/disease_ability/ability in purchased_abilities)
 			. += span_notice("[ability.name]")
 
-/mob/camera/disease/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
+/mob/camera/disease/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, filterproof = null)
 	if(!message)
 		return
 	if(sanitize)
@@ -134,6 +134,9 @@ the new instance inside the host to be updated to the template's stats.
 			follow_next(Dir & NORTHWEST)
 			last_move_tick = world.time
 
+/mob/camera/disease/can_z_move(direction, turf/start, turf/destination, z_move_flags = NONE, mob/living/rider)
+	return FALSE
+
 /mob/camera/disease/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
 	. = ..()
 	var/atom/movable/to_follow = speaker
@@ -146,7 +149,7 @@ the new instance inside the host to be updated to the template's stats.
 	else
 		link = ""
 	// Create map text prior to modifying message for goonchat
-	if (client?.prefs.chat_on_map && (client.prefs.see_chat_non_mob || ismob(speaker)))
+	if (client?.prefs.read_preference(/datum/preference/toggle/enable_runechat) && (client.prefs.read_preference(/datum/preference/toggle/enable_runechat_non_mobs) || ismob(speaker)))
 		create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose the message, because it's scrambled by default
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)

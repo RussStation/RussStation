@@ -60,17 +60,17 @@
 			if(79)
 				harvested_item = /obj/machinery/vending/donksofttoyvendor
 			if(80 to 85)
-				harvested_item = /obj/effect/spawner/lootdrop/maintenance/eight
+				harvested_item = /obj/effect/spawner/random/maintenance/eight
 			if(86 to 88)
-				harvested_item = /obj/effect/spawner/lootdrop/snowdin/dungeonlite
+				harvested_item = /obj/effect/spawner/random/exotic/antag_gear_weak
 			if(89)
 				harvested_item = /obj/item/toy/windup_toolbox
 			if(90 to 94)
 				harvested_item = /obj/structure/closet/crate/secure/loot
 			if(95)
-				harvested_item = /obj/effect/spawner/lootdrop/seed_vault
+				harvested_item = /obj/effect/spawner/random/food_or_drink/seed_vault
 			if(96)
-				harvested_item = /obj/effect/spawner/lootdrop/organ_spawner
+				harvested_item = /obj/effect/spawner/random/medical/organs
 			if(97 to 99)
 				harvested_item = /obj/item/gun/energy/laser/retro/old
 			if(100 to 103)
@@ -82,7 +82,7 @@
 			if(104)
 				harvested_item = /obj/item/storage/box/syndie_kit/chemical
 			if(105)
-				harvested_item = /obj/item/kitchen/knife/rainbowknife
+				harvested_item = /obj/item/knife/rainbowknife
 			if(106)
 				harvested_item = /obj/machinery/autolathe/hacked
 

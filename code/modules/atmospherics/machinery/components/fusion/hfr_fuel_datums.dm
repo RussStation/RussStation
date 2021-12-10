@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(hfr_fuels_list, hfr_fuels_create_list())
 	var/fuel_consumption_multiplier = 1
 	///Multiplier for the gas production (min 0.01)
 	var/gas_production_multiplier = 1
-	///Max allowed temperature multiplier, don't go overboard with this (mix 0.5, max 0.3)
+	///Max allowed temperature multiplier, scales the max temperature we can hit, see FUSION_MAXIMUM_TEMPERATURE (Maxed at 1, don't go getting any ideas)
 	var/temperature_change_multiplier = 1
 	///These are the main fuels, only 2 gases that are the ones being consumed by the fusion reaction (eg. H2 and trit)
 	var/requirements = list()
@@ -37,19 +37,23 @@ GLOBAL_LIST_INIT(hfr_fuels_list, hfr_fuels_create_list())
 	///Flags to decide what behaviour the meltdown will have depending on the fuel mix used
 	var/meltdown_flags = HYPERTORUS_FLAG_BASE_EXPLOSION
 
-/datum/hfr_fuel/hydrogen_tritium_fuel
-	id = "h2_t2_fuel"
-	name = "Hydrogen + Tritium fuel"
-	negative_temperature_multiplier = 1
-	positive_temperature_multiplier = 1
-	energy_concentration_multiplier = 1
-	fuel_consumption_multiplier = 1
-	gas_production_multiplier = 1
-	temperature_change_multiplier = 0.85
-	requirements = list(/datum/gas/hydrogen, /datum/gas/tritium)
-	primary_products = list(/datum/gas/helium)
-	secondary_products = list(/datum/gas/helium, /datum/gas/plasma, /datum/gas/oxygen, /datum/gas/nitrogen, /datum/gas/bz, /datum/gas/hypernoblium)
-	meltdown_flags = HYPERTORUS_FLAG_MEDIUM_EXPLOSION | HYPERTORUS_FLAG_RADIATION_PULSE | HYPERTORUS_FLAG_EMP | HYPERTORUS_FLAG_MEDIUM_SPREAD
+/datum/hfr_fuel/New()
+	. = ..()
+	temperature_change_multiplier = min(temperature_change_multiplier, 1)
+
+/datum/hfr_fuel/plasma_oxy_fuel
+	id = "plasma_o2_fuel"
+	name = "Plasma + Oxygen fuel"
+	negative_temperature_multiplier = 2.5
+	positive_temperature_multiplier = 0.1
+	energy_concentration_multiplier = 10
+	fuel_consumption_multiplier = 3.3
+	gas_production_multiplier = 1.4
+	temperature_change_multiplier = 0.6
+	requirements = list(/datum/gas/plasma, /datum/gas/oxygen)
+	primary_products = list(/datum/gas/carbon_dioxide, /datum/gas/water_vapor)
+	secondary_products = list(/datum/gas/carbon_dioxide, /datum/gas/water_vapor, /datum/gas/freon, /datum/gas/nitrous_oxide, /datum/gas/pluoxium, /datum/gas/halon)
+	meltdown_flags = HYPERTORUS_FLAG_BASE_EXPLOSION | HYPERTORUS_FLAG_MINIMUM_SPREAD
 
 /datum/hfr_fuel/hydrogen_oxy_fuel
 	id = "h2_o2_fuel"
@@ -79,19 +83,19 @@ GLOBAL_LIST_INIT(hfr_fuels_list, hfr_fuels_create_list())
 	secondary_products = list(/datum/gas/helium, /datum/gas/plasma, /datum/gas/oxygen, /datum/gas/nitrogen, /datum/gas/bz, /datum/gas/hypernoblium)
 	meltdown_flags = HYPERTORUS_FLAG_BASE_EXPLOSION | HYPERTORUS_FLAG_RADIATION_PULSE | HYPERTORUS_FLAG_MEDIUM_SPREAD
 
-/datum/hfr_fuel/plasma_oxy_fuel
-	id = "plasma_o2_fuel"
-	name = "Plasma + Oxygen fuel"
-	negative_temperature_multiplier = 2.5
-	positive_temperature_multiplier = 0.1
-	energy_concentration_multiplier = 10
-	fuel_consumption_multiplier = 3.3
-	gas_production_multiplier = 1.4
-	temperature_change_multiplier = 0.6
-	requirements = list(/datum/gas/plasma, /datum/gas/oxygen)
-	primary_products = list(/datum/gas/carbon_dioxide, /datum/gas/water_vapor)
-	secondary_products = list(/datum/gas/carbon_dioxide, /datum/gas/water_vapor, /datum/gas/freon, /datum/gas/nitrous_oxide, /datum/gas/pluoxium, /datum/gas/halon)
-	meltdown_flags = HYPERTORUS_FLAG_BASE_EXPLOSION | HYPERTORUS_FLAG_MINIMUM_SPREAD
+/datum/hfr_fuel/hydrogen_tritium_fuel
+	id = "h2_t2_fuel"
+	name = "Hydrogen + Tritium fuel"
+	negative_temperature_multiplier = 1
+	positive_temperature_multiplier = 1
+	energy_concentration_multiplier = 1
+	fuel_consumption_multiplier = 1
+	gas_production_multiplier = 1
+	temperature_change_multiplier = 0.85
+	requirements = list(/datum/gas/hydrogen, /datum/gas/tritium)
+	primary_products = list(/datum/gas/helium)
+	secondary_products = list(/datum/gas/helium, /datum/gas/plasma, /datum/gas/oxygen, /datum/gas/nitrogen, /datum/gas/bz, /datum/gas/hypernoblium)
+	meltdown_flags = HYPERTORUS_FLAG_MEDIUM_EXPLOSION | HYPERTORUS_FLAG_RADIATION_PULSE | HYPERTORUS_FLAG_EMP | HYPERTORUS_FLAG_MEDIUM_SPREAD
 
 /datum/hfr_fuel/hypernob_hydrogen_fuel
 	id = "hypernob_hydrogen_fuel"
@@ -129,8 +133,8 @@ GLOBAL_LIST_INIT(hfr_fuels_list, hfr_fuels_create_list())
 	energy_concentration_multiplier = 2
 	fuel_consumption_multiplier = 0.01
 	gas_production_multiplier = 3
-	temperature_change_multiplier = 1.2
+	temperature_change_multiplier = 1
 	requirements = list(/datum/gas/hypernoblium, /datum/gas/antinoblium)
 	primary_products = list(/datum/gas/helium)
-	secondary_products = list(/datum/gas/plasma, /datum/gas/oxygen, /datum/gas/nitrogen, /datum/gas/proto_nitrate, /datum/gas/stimulum, /datum/gas/miasma)
+	secondary_products = list(/datum/gas/plasma, /datum/gas/oxygen, /datum/gas/nitrogen, /datum/gas/proto_nitrate, /datum/gas/nitrium, /datum/gas/miasma)
 	meltdown_flags = HYPERTORUS_FLAG_DEVASTATING_EXPLOSION | HYPERTORUS_FLAG_RADIATION_PULSE | HYPERTORUS_FLAG_EMP | HYPERTORUS_FLAG_MASSIVE_SPREAD | HYPERTORUS_FLAG_CRITICAL_MELTDOWN

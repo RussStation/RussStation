@@ -6,10 +6,10 @@
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
 	w_class = WEIGHT_CLASS_NORMAL
 	inhand_icon_state = "gas_alt"
-	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	flags_cover = MASKCOVERSEYES | MASKCOVERSMOUTH | PEPPERPROOF
 	resistance_flags = NONE
+	tint = 1.5
 	///Max numbers of installable filters
 	var/max_filters = 1
 	///List to keep track of each filter
@@ -17,7 +17,7 @@
 	///Type of filter that spawns on roundstart
 	var/starting_filter_type = /obj/item/gas_filter
 
-/obj/item/clothing/mask/gas/Initialize()
+/obj/item/clothing/mask/gas/Initialize(mapload)
 	. = ..()
 	if(!max_filters || !starting_filter_type)
 		return
@@ -92,9 +92,8 @@
 	desc = "Improved gas mask utilized by atmospheric technicians. It's flameproof!"
 	icon_state = "gas_atmos"
 	inhand_icon_state = "gas_atmos"
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 0, RAD = 10, FIRE = 20, ACID = 10)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 20, ACID = 10)
 	w_class = WEIGHT_CLASS_SMALL
-	gas_transfer_coefficient = 0.001 //cargo cult time, this var does nothing but just in case someone actually makes it do something
 	permeability_coefficient = 0.001
 	resistance_flags = FIRE_PROOF
 	max_filters = 3
@@ -106,6 +105,16 @@
 	inhand_icon_state = "gas_cap"
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 
+/obj/item/clothing/mask/gas/atmos/centcom
+	name = "\improper CentCom gas mask"
+	desc = "Oooh, gold and green. Fancy! This should help as you sit in your office."
+	icon = 'icons/obj/clothing/masks.dmi'
+	worn_icon = 'icons/mob/clothing/mask.dmi'
+	worn_icon_state = "centcomspace"
+	icon_state = "gas_centcom"
+	inhand_icon_state = "gas_centcom"
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+
 // **** Welding gas mask ****
 
 /obj/item/clothing/mask/gas/welding
@@ -114,8 +123,8 @@
 	icon_state = "weldingmask"
 	flash_protect = FLASH_PROTECTION_WELDER
 	custom_materials = list(/datum/material/iron=4000, /datum/material/glass=2000)
-	tint = 2
-	armor = list(MELEE = 10, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 55)
+	tint = 2.75
+	armor = list(MELEE = 10, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 100, ACID = 55)
 	actions_types = list(/datum/action/item_action/toggle)
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE|HIDESNOUT
 	flags_cover = MASKCOVERSEYES
@@ -128,7 +137,7 @@
 
 /obj/item/clothing/mask/gas/welding/up
 
-/obj/item/clothing/mask/gas/welding/up/Initialize()
+/obj/item/clothing/mask/gas/welding/up/Initialize(mapload)
 	. = ..()
 	visor_toggling()
 
@@ -140,14 +149,18 @@
 	desc = "A modernised version of the classic design, this mask will not only filter out toxins but it can also be connected to an air supply."
 	icon_state = "plaguedoctor"
 	inhand_icon_state = "gas_mask"
-	armor = list(MELEE = 0, BULLET = 0, LASER = 2,ENERGY = 2, BOMB = 0, BIO = 75, RAD = 0, FIRE = 0, ACID = 0)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 2,ENERGY = 2, BOMB = 0, BIO = 75, FIRE = 0, ACID = 0)
+	flags_cover = MASKCOVERSEYES
+	tint = 0
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "syndicate mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "syndicate"
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 	strip_delay = 60
 	w_class = WEIGHT_CLASS_SMALL
+	tint = 0.25
 
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
@@ -162,6 +175,7 @@
 	actions_types = list(/datum/action/item_action/adjust)
 	dog_fashion = /datum/dog_fashion/head/clown
 	species_exception = list(/datum/species/golem/bananium)
+	tint = 0
 	var/list/clownmask_designs = list()
 
 /obj/item/clothing/mask/gas/clown_hat/plasmaman
@@ -207,6 +221,7 @@
 	icon_state = "sexyclown"
 	inhand_icon_state = "sexyclown"
 	flags_cover = MASKCOVERSEYES
+	tint = 0
 	resistance_flags = FLAMMABLE
 	species_exception = list(/datum/species/golem/bananium)
 
@@ -218,6 +233,7 @@
 	inhand_icon_state = "mime"
 	w_class = WEIGHT_CLASS_SMALL
 	flags_cover = MASKCOVERSEYES
+	tint = 0
 	resistance_flags = FLAMMABLE
 	actions_types = list(/datum/action/item_action/adjust)
 	species_exception = list(/datum/species/golem)
@@ -263,6 +279,7 @@
 	icon_state = "monkeymask"
 	inhand_icon_state = "monkeymask"
 	flags_cover = MASKCOVERSEYES
+	tint = 0
 	resistance_flags = FLAMMABLE
 
 /obj/item/clothing/mask/gas/sexymime
@@ -272,6 +289,7 @@
 	icon_state = "sexymime"
 	inhand_icon_state = "sexymime"
 	flags_cover = MASKCOVERSEYES
+	tint = 0
 	resistance_flags = FLAMMABLE
 	species_exception = list(/datum/species/golem)
 
@@ -280,6 +298,8 @@
 	desc = "Beep boop."
 	icon_state = "death"
 	resistance_flags = FLAMMABLE
+	flags_cover = MASKCOVERSEYES
+	tint = 0
 
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
@@ -287,12 +307,15 @@
 	icon_state = "owl"
 	clothing_flags = MASKINTERNALS
 	flags_cover = MASKCOVERSEYES
+	tint = 0
 	resistance_flags = FLAMMABLE
 
 /obj/item/clothing/mask/gas/carp
 	name = "carp mask"
 	desc = "Gnash gnash."
 	icon_state = "carp_mask"
+	flags_cover = MASKCOVERSEYES
+	tint = 0
 
 /obj/item/clothing/mask/gas/tiki_mask
 	name = "tiki mask"
@@ -305,6 +328,8 @@
 	actions_types = list(/datum/action/item_action/adjust)
 	dog_fashion = null
 	species_exception = list(/datum/species/golem/wood)
+	flags_cover = MASKCOVERSEYES
+	tint = 0
 	var/list/tikimask_designs = list()
 
 /obj/item/clothing/mask/gas/tiki_mask/Initialize(mapload)
@@ -346,3 +371,15 @@
 	inhand_icon_state = "hunter"
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	flags_inv = HIDEFACIALHAIR|HIDEFACE|HIDEEYES|HIDEEARS|HIDEHAIR|HIDESNOUT
+	flags_cover = MASKCOVERSEYES
+	tint = 0
+
+/obj/item/clothing/mask/gas/driscoll
+	name = "driscoll mask"
+	desc = "Great for train hijackings. Works like a normal full face gas mask, but won't conceal your identity."
+	icon_state = "driscoll_mask"
+	flags_inv = HIDEFACIALHAIR
+	w_class = WEIGHT_CLASS_NORMAL
+	inhand_icon_state = "driscoll_mask"
+	flags_cover = MASKCOVERSEYES
+	tint = 0

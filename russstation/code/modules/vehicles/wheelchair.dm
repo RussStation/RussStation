@@ -5,7 +5,7 @@
 	name = "The Hotrod"
 	desc = "A rugged display of two-wheeled freedom."
 	icon_state = "hotrod"
-	armor = list(MELEE = 20, BULLET = 20, LASER = 20, ENERGY = 0, BOMB = 20, BIO = 0, RAD = 0, FIRE = 30, ACID = 40) // American Engineering
+	armor = list(MELEE = 20, BULLET = 20, LASER = 20, ENERGY = 0, BOMB = 20, BIO = 0, FIRE = 30, ACID = 40) // American Engineering
 	delay_multiplier = 2 // roughly full running speed
 	overlay_icon = "hotrod_overlay"
 
@@ -17,7 +17,7 @@
 	name = "Sportschair"
 	desc = "A lightweight model wheelchair."
 	icon_state = "sportschair"
-	armor = list(MELEE = 10, BULLET = 10, LASER = 10, ENERGY = 0, BOMB = 10, BIO = 0, RAD = 0, FIRE = 20, ACID = 30)
+	armor = list(MELEE = 10, BULLET = 10, LASER = 10, ENERGY = 0, BOMB = 10, BIO = 0, FIRE = 20, ACID = 30)
 	overlay_icon = "sportschair_overlay"
 	var/datum/effect_system/spark_spread/sparks
 	var/grinding = FALSE

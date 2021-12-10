@@ -1,14 +1,12 @@
 /mob/living/simple_animal/bot/secbot/bearsky
 	name = "Officer Bearsky"
 	desc = "Has the right to bear arms."
-	auto_patrol = TRUE
 	icon =  'russstation/icons/mob/aibots.dmi'
 	icon_state = "bearsky"
 	health = 60 // he's a beefy boy
 	maxHealth = 60
-
-	idcheck = TRUE
-	weaponscheck = TRUE
+	bot_mode_flags = BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED
+	security_mode_flags = SECBOT_DECLARE_ARRESTS | SECBOT_CHECK_IDS | SECBOT_CHECK_RECORDS | SECBOT_CHECK_WEAPONS
 
 /mob/living/simple_animal/bot/secbot/bearsky/stun_attack(mob/living/carbon/C)
 	var/judgement_criteria = judgement_criteria()
@@ -19,9 +17,9 @@
 	threat = C.assess_threat(judgement_criteria, weaponcheck=CALLBACK(src, .proc/check_for_weapons))
 
 	log_combat(src,C,"tackled")
-	if(declare_arrests)
+	if(security_mode_flags & SECBOT_DECLARE_ARRESTS)
 		var/area/location = get_area(src)
-		speak("[arrest_type ? "Hunting" : "Mauling"] level [threat] scumbag <b>[C]</b> in [location].", radio_channel)
+		speak("[security_mode_flags & SECBOT_HANDCUFF_TARGET ? "Hunting" : "Mauling"] level [threat] scumbag <b>[C]</b> in [location].", radio_channel)
 	C.visible_message(
 		span_danger("[src] has tackled [C]!"),
 		span_userdanger("[src] has tackled you!"),
@@ -68,10 +66,10 @@
 
 /mob/living/simple_animal/bot/secbot/emag_act(mob/user)
 	..()
-	if(emagged == 2)
+	if(bot_cover_flags & BOT_COVER_EMAGGED)
 		if(user)
 			to_chat(user, span_danger("You enrage [src]"))
 			oldtarget_name = user.name
 		audible_message(span_danger("[src] growls angrily!"))
-		declare_arrests = FALSE
+		security_mode_flags &= ~SECBOT_DECLARE_ARRESTS
 		update_icon()

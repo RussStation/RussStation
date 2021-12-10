@@ -108,13 +108,15 @@
 	w_class = WEIGHT_CLASS_TINY
 	mine_experience = 0 //its sand
 	merge_type = /obj/item/stack/ore/glass
-//honk start -- added clay to sand recipes
+
 GLOBAL_LIST_INIT(sand_recipes, list(\
-		new /datum/stack_recipe("sandstone", /obj/item/stack/sheet/mineral/sandstone, 1, 1, 50),\
-		new /datum/stack_recipe("aesthetic volcanic floor tile", /obj/item/stack/tile/basalt, 2, 1, 50),\
-		new /datum/stack_recipe("clay", /obj/item/stack/sheet/mineral/clay, 1, 1, 50)\
-))
+//honk start -- added clay to sand recipes
+		new /datum/stack_recipe("clay", /obj/item/stack/sheet/mineral/clay, 1, 1, 50),\
 //honk end
+		new /datum/stack_recipe("sandstone", /obj/item/stack/sheet/mineral/sandstone, 1, 1, 50),\
+		new /datum/stack_recipe("aesthetic volcanic floor tile", /obj/item/stack/tile/basalt, 2, 1, 50)\
+))
+
 /obj/item/stack/ore/glass/get_main_recipes()
 	. = ..()
 	. += GLOB.sand_recipes
@@ -362,7 +364,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	var/coinflip
 	item_flags = NO_MAT_REDEMPTION //You know, it's kind of a problem that money is worth more extrinsicly than intrinsically in this universe.
 
-/obj/item/coin/Initialize()
+/obj/item/coin/Initialize(mapload)
 	. = ..()
 	coinflip = pick(sideslist)
 	icon_state = "coin_[coinflip]"

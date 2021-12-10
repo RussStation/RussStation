@@ -4,7 +4,7 @@
 	icon_state = "scooter"
 	are_legs_exposed = TRUE
 
-/obj/vehicle/ridden/scooter/Initialize()
+/obj/vehicle/ridden/scooter/Initialize(mapload)
 	. = ..()
 	make_ridable()
 
@@ -54,7 +54,7 @@
 	var/suicide = FALSE
 	// honk end
 
-/obj/vehicle/ridden/scooter/skateboard/Initialize()
+/obj/vehicle/ridden/scooter/skateboard/Initialize(mapload)
 	. = ..()
 	sparks = new
 	sparks.set_up(1, 0, src)

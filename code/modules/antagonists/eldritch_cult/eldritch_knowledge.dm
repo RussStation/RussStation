@@ -146,7 +146,7 @@
 	fingerprints = list()
 	for(var/atom/requirements as anything in atoms)
 		fingerprints |= requirements.return_fingerprints()
-	listclearnulls(fingerprints)
+	list_clear_nulls(fingerprints)
 	if(fingerprints.len == 0)
 		return FALSE
 	return TRUE
@@ -164,7 +164,7 @@
 		to_chat(user, span_warning("These items don't possess the required fingerprints or DNA."))
 		return FALSE
 
-	var/chosen_mob = input("Select the person you wish to curse","Your target") as null|anything in sortList(compiled_list, /proc/cmp_mob_realname_dsc)
+	var/chosen_mob = input("Select the person you wish to curse","Your target") as null|anything in sort_list(compiled_list, /proc/cmp_mob_realname_dsc)
 	if(!chosen_mob)
 		return FALSE
 	curse(compiled_list[chosen_mob])
@@ -260,15 +260,9 @@
 		if(heart.target && heart.target.stat == DEAD)
 			to_chat(carbon_user,span_danger("Your patrons accepts your offer.."))
 			var/mob/living/carbon/human/current_target = heart.target
-			// honk start -- Replaces regular current_target.gib() code with code that qdels the heart if available, gibs if not.
-			var/obj/item/organ/heart/target_heart = current_target.getorganslot(ORGAN_SLOT_HEART)
-			if (target_heart)
-				qdel(target_heart)
-				current_target.visible_message(span_boldwarning("[current_target]'s heart is consumed!"))
-			else
-				current_target.gib()
-				current_target.visible_message(span_boldwarning("[current_target]'s body is consumed!"))
-			// honk end
+			current_target.spill_organs()
+			current_target.adjustBruteLoss(250)
+			new /obj/effect/gibspawner/generic(get_turf(current_target))
 			heart.target = null
 			var/datum/antagonist/heretic/heretic_datum = carbon_user.mind.has_antag_datum(/datum/antagonist/heretic)
 
@@ -289,7 +283,7 @@
 					teams |= team
 			var/list/targets = list()
 			for(var/i in 0 to 3)
-				var/datum/mind/targeted =  temp_objective.find_target()//easy way, i dont feel like copy pasting that entire block of code
+				var/datum/mind/targeted = temp_objective.find_target()//easy way, i dont feel like copy pasting that entire block of code
 				var/is_teammate = FALSE
 				for(var/datum/team/team as anything in teams)
 					if(targeted in team.members)

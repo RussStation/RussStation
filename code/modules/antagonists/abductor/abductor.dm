@@ -6,7 +6,6 @@ GLOBAL_LIST_INIT(possible_abductor_names, list("Alpha","Beta","Gamma","Delta","E
 	roundend_category = "abductors"
 	antagpanel_category = "Abductor"
 	job_rank = ROLE_ABDUCTOR
-	antag_hud_type = ANTAG_HUD_ABDUCTOR
 	antag_hud_name = "abductor"
 	show_in_antagpanel = FALSE //should only show subtypes
 	show_to_ghosts = TRUE
@@ -19,6 +18,26 @@ GLOBAL_LIST_INIT(possible_abductor_names, list("Alpha","Beta","Gamma","Delta","E
 	/// Type path for the associated job datum.
 	var/role_job = /datum/job/abductor_agent
 
+/datum/antagonist/abductor/get_preview_icon()
+	var/mob/living/carbon/human/dummy/consistent/scientist = new
+	var/mob/living/carbon/human/dummy/consistent/agent = new
+
+	scientist.set_species(/datum/species/abductor)
+	agent.set_species(/datum/species/abductor)
+
+	var/icon/scientist_icon = render_preview_outfit(/datum/outfit/abductor/scientist, scientist)
+	scientist_icon.Shift(WEST, 8)
+
+	var/icon/agent_icon = render_preview_outfit(/datum/outfit/abductor/agent, agent)
+	agent_icon.Shift(EAST, 8)
+
+	var/icon/final_icon = scientist_icon
+	final_icon.Blend(agent_icon, ICON_OVERLAY)
+
+	qdel(scientist)
+	qdel(agent)
+
+	return finish_preview_icon(final_icon)
 
 /datum/antagonist/abductor/agent
 	name = "Abductor Agent"
@@ -88,8 +107,6 @@ GLOBAL_LIST_INIT(possible_abductor_names, list("Alpha","Beta","Gamma","Delta","E
 		if(istype(LM, landmark_type) && LM.team_number == team.team_number)
 			H.forceMove(LM.loc)
 			break
-
-	add_antag_hud(antag_hud_type, antag_hud_name, owner.current)
 
 /datum/antagonist/abductor/scientist/on_gain()
 	ADD_TRAIT(owner, TRAIT_ABDUCTOR_SCIENTIST_TRAINING, ABDUCTOR_ANTAGONIST)

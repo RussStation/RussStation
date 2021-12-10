@@ -91,6 +91,23 @@
 	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCKED, TRAIT_STATUS_EFFECT(id))
 	return ..()
 
+//INCAPACITATED
+/// This status effect represents anything that leaves a character unable to perform basic tasks (interrupting do-afters, for example), but doesn't incapacitate them further than that (no stuns etc..)
+/datum/status_effect/incapacitating/incapacitated
+	id = "incapacitated"
+
+// What happens when you get the incapacitated status. You get TRAIT_INCAPACITATED added to you for the duration of the status effect.
+/datum/status_effect/incapacitating/incapacitated/on_apply()
+	. = ..()
+	if(!.)
+		return
+	ADD_TRAIT(owner, TRAIT_INCAPACITATED, TRAIT_STATUS_EFFECT(id))
+
+// When the status effect runs out, your TRAIT_INCAPACITATED is removed.
+/datum/status_effect/incapacitating/incapacitated/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_INCAPACITATED, TRAIT_STATUS_EFFECT(id))
+	return ..()
+
 
 //UNCONSCIOUS
 /datum/status_effect/incapacitating/unconscious
@@ -183,11 +200,10 @@
 		owner.adjustStaminaLoss(healing)
 	if(human_owner?.drunkenness)
 		human_owner.drunkenness *= 0.997 //reduce drunkenness by 0.3% per tick, 6% per 2 seconds
-	if(prob(20))
-		if(carbon_owner)
-			carbon_owner.handle_dreams()
-		if(prob(10) && owner.health > owner.crit_threshold)
-			owner.emote("snore")
+	if(carbon_owner)
+		carbon_owner.handle_dreams()
+	if(prob(2) && owner.health > owner.crit_threshold)
+		owner.emote("snore")
 
 /atom/movable/screen/alert/status_effect/asleep
 	name = "Asleep"
@@ -624,7 +640,7 @@
 /obj/effect/temp_visual/curse
 	icon_state = "curse"
 
-/obj/effect/temp_visual/curse/Initialize()
+/obj/effect/temp_visual/curse/Initialize(mapload)
 	. = ..()
 	deltimer(timerid)
 
@@ -981,19 +997,21 @@
 	var/ants_remaining = 0
 
 /datum/status_effect/ants/on_creation(mob/living/new_owner, amount_left)
-	if(isnum(amount_left))
-		to_chat(new_owner, "<span class='userdanger'>You're covered in ants!</span>")
+	if(isnum(amount_left) && new_owner.stat < HARD_CRIT)
+		if(new_owner.stat < UNCONSCIOUS) // Unconcious people won't get messages
+			to_chat(new_owner, "<span class='userdanger'>You're covered in ants!</span>")
 		ants_remaining += amount_left
 		RegisterSignal(new_owner, COMSIG_COMPONENT_CLEAN_ACT, .proc/ants_washed)
 	. = ..()
 
 /datum/status_effect/ants/refresh(effect, amount_left)
 	var/mob/living/carbon/human/victim = owner
-	if(isnum(amount_left) && ants_remaining >= 1)
-		if(!prob(1)) // 99%
-			to_chat(victim, "<span class='userdanger'>You're covered in MORE ants!</span>")
-		else // 1%
-			victim.say("AAHH! THIS SITUATION HAS ONLY BEEN MADE WORSE WITH THE ADDITION OF YET MORE ANTS!!", forced = /datum/status_effect/ants)
+	if(isnum(amount_left) && ants_remaining >= 1 && victim.stat < HARD_CRIT)
+		if(victim.stat < UNCONSCIOUS) // Unconcious people won't get messages
+			if(!prob(1)) // 99%
+				to_chat(victim, "<span class='userdanger'>You're covered in MORE ants!</span>")
+			else // 1%
+				victim.say("AAHH! THIS SITUATION HAS ONLY BEEN MADE WORSE WITH THE ADDITION OF YET MORE ANTS!!", forced = /datum/status_effect/ants)
 		ants_remaining += amount_left
 	. = ..()
 
@@ -1011,7 +1029,7 @@
 /datum/status_effect/ants/tick()
 	var/mob/living/carbon/human/victim = owner
 	victim.adjustBruteLoss(max(0.1, round((ants_remaining * 0.004),0.1))) //Scales with # of ants (lowers with time). Roughly 10 brute over 50 seconds.
-	if(victim.stat <= SOFT_CRIT) //Makes sure people don't scratch at themselves while they're unconcious
+	if(victim.stat <= SOFT_CRIT) //Makes sure people don't scratch at themselves while they're in a critical condition
 		if(prob(15))
 			switch(rand(1,2))
 				if(1)

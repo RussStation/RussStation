@@ -100,7 +100,7 @@ honk end */
 
 /proc/send_pirate_threat()
 	// honk start -- just do the spawn_pirates code + the ship choice from original send_pirate_threat
-	var/list/candidates = pollGhostCandidates("Do you wish to be considered for pirate crew?", ROLE_TRAITOR)
+	var/list/candidates = poll_ghost_candidates("Do you wish to be considered for pirate crew?", ROLE_TRAITOR)
 	shuffle_inplace(candidates)
 
 	var/pirate_type = pick(PIRATES_ROGUES, PIRATES_SILVERSCALES, PIRATES_DUTCHMAN)
@@ -310,7 +310,7 @@ honk end */
 	var/sending_timer
 	var/cargo_hold_id
 
-/obj/machinery/computer/piratepad_control/Initialize()
+/obj/machinery/computer/piratepad_control/Initialize(mapload)
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
