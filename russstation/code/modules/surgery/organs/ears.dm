@@ -6,7 +6,7 @@
 /obj/item/organ/ears/skaven/Insert(mob/living/carbon/human/ear_owner, special = 0, drop_if_replaced = TRUE)
 	. = ..()
 	if(istype(ear_owner))
-		color = "#[ear_owner.dna.features["skavencolor"]]"
+		color = "#[ear_owner.dna.features["skaven_color"]]"
 		ear_owner.dna.features["ears"] = ear_owner.dna.species.mutant_bodyparts["ears"] = "Skaven"
 		ear_owner.update_body()
 

@@ -991,7 +991,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 							else
 								//honk start - skaven colors
 								if(isskaven(source))
-									accessory_overlay.color = source.dna.features["skavencolor"]
+									accessory_overlay.color = source.dna.features["skaven_color"]
 								else
 									accessory_overlay.color = source.dna.features["mcolor"]
 								//honk end

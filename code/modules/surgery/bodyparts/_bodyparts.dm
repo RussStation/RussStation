@@ -795,7 +795,7 @@
 			else
 				//honk start - skaven unique colors
 				if(isskaven(human_owner))
-					species_color = human_owner.dna.features["skavencolor"]
+					species_color = human_owner.dna.features["skaven_color"]
 				else
 					species_color = human_owner.dna.features["mcolor"]
 				//honk end

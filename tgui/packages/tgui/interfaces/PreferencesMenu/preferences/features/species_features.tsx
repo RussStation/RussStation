@@ -75,3 +75,17 @@ export const feature_vampire_status: Feature<string> = {
   name: "Vampire status",
   component: FeatureDropdownInput,
 };
+
+// honk start -- skaven features
+
+export const feature_skavencolor: FeatureChoiced = {
+  name: "Fur color",
+  component: FeatureDropdownInput,
+};
+
+export const feature_skaven_tail: FeatureChoiced = {
+  name: "Tail",
+  component: FeatureDropdownInput,
+};
+
+// honk end

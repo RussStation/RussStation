@@ -25,6 +25,13 @@
 	species_language_holder = /datum/language_holder/skaven
 	sexes = FALSE //ever heard of female skaven? didnt think so
 
+/datum/species/skaven/get_features()
+	. = ..()
+	// skaven color is a DNA property which get_features doesn't retrieve; add it manually if missing
+	if (!("feature_skavencolor" in GLOB.features_by_species[type]))
+		GLOB.features_by_species[type] += "feature_skavencolor"
+		. += "feature_skavencolor"
+
 /datum/species/skaven/pre_equip_species_outfit(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE)
 	H.equipOutfit(/datum/outfit/skaven, visualsOnly)
 	H.internal = H.get_item_for_held_index(2)
@@ -91,7 +98,7 @@
 		new_tail.tail_type = C.dna.features["tail_skaven"]
 		new_tail.Insert(C, TRUE, FALSE)
 
-	default_color = "#[skaven.dna.features["skavencolor"]]"
+	default_color = "#[skaven.dna.features["skaven_color"]]"
 
 /datum/species/skaven/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
 	var/tail = pick(GLOB.tails_list_skaven)
