@@ -36,18 +36,20 @@
 	target.dna.features["skaven_color"] = GLOB.color_list_skaven[value]
 	target.dna.features["mcolor"] = GLOB.color_list_skaven[value]
 
-/datum/preference/choiced/skaven_tail
-	savefile_key = "feature_skaven_tail"
-	savefile_identifier = PREFERENCE_CHARACTER
-	category = PREFERENCE_CATEGORY_FEATURES
-	relevant_mutant_bodypart = "tail_skaven"
+// skaven tail selection not working- there's only one choice though, fix later please
 
-/datum/preference/choiced/skaven_tail/init_possible_values()
-	return assoc_to_keys(GLOB.tails_list_skaven)
+// /datum/preference/choiced/skaven_tail
+// 	savefile_key = "feature_skaven_tail"
+// 	savefile_identifier = PREFERENCE_CHARACTER
+// 	category = PREFERENCE_CATEGORY_FEATURES
+// 	relevant_mutant_bodypart = "tail_skaven"
 
-/datum/preference/choiced/skaven_tail/apply_to_human(mob/living/carbon/human/target, value)
-	target.dna.features["tail_skaven"] = value
+// /datum/preference/choiced/skaven_tail/init_possible_values()
+// 	return assoc_to_keys(GLOB.tails_list_skaven)
 
-/datum/preference/choiced/skaven_tail/create_default_value()
-	var/datum/sprite_accessory/tails/skaven/tail = /datum/sprite_accessory/tails/skaven
-	return initial(tail.name)
+// /datum/preference/choiced/skaven_tail/apply_to_human(mob/living/carbon/human/target, value)
+// 	target.dna.features["tail_skaven"] = value
+
+// /datum/preference/choiced/skaven_tail/create_default_value()
+// 	var/datum/sprite_accessory/tails/skaven/tail = /datum/sprite_accessory/tails/skaven
+// 	return initial(tail.name)

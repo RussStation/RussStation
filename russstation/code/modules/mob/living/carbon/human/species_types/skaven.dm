@@ -98,7 +98,7 @@
 		new_tail.tail_type = C.dna.features["tail_skaven"]
 		new_tail.Insert(C, TRUE, FALSE)
 
-	default_color = "#[skaven.dna.features["skaven_color"]]"
+	default_color = skaven.dna.features["skaven_color"]
 
 /datum/species/skaven/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
 	var/tail = pick(GLOB.tails_list_skaven)
