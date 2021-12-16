@@ -14,3 +14,4 @@
 	flags_cover = NONE
 	visor_flags_cover = NONE
 	resistance_flags = NONE
+	tint = 0
