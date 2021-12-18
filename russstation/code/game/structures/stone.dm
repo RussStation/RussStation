@@ -249,7 +249,7 @@
 	max_integrity = 70
 	can_be_unanchored = FALSE
 	resistance_flags = FIRE_PROOF
-	CanAtmosPass = ATMOS_PASS_YES
+	can_atmos_pass = ATMOS_PASS_YES
 	rad_insulation = RAD_NO_INSULATION
 	pass_flags_self = PASSGRILLE
 	set_dir_on_move = FALSE

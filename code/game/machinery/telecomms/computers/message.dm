@@ -64,7 +64,7 @@
 	else
 		to_chat(user, span_notice("A no server error appears on the screen."))
 
-/obj/machinery/computer/message_monitor/Initialize()
+/obj/machinery/computer/message_monitor/Initialize(mapload)
 	..()
 	GLOB.telecomms_list += src
 	return INITIALIZE_HINT_LATELOAD
@@ -293,7 +293,7 @@
 				message = span_alert("NOTICE: Server selected.")
 			else if(message_servers.len > 0)
 				linkedServer = message_servers[1]
-				message =  span_notice("NOTICE: Only Single Server Detected - Server selected.")
+				message = span_notice("NOTICE: Only Single Server Detected - Server selected.")
 			else
 				message = noserver
 
@@ -420,7 +420,7 @@
 							"name" = "[customsender]",
 							"job" = "[customjob]",
 							"message" = custommessage,
-							"targets" = list("[customrecepient.owner] ([customrecepient.ownjob])")
+							"targets" = list(STRINGIFY_PDA_TARGET(customrecepient.owner, customrecepient.ownjob))
 						))
 						// this will log the signal and transmit it to the target
 						linkedServer.receive_information(signal, null)

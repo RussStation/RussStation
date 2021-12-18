@@ -3,7 +3,7 @@
 	id = "skaven"
 	say_mod = "jitters"
 	default_color = "2E2E2E"
-	species_traits = list(DYNCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
+	species_traits = list(MUTCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	mutant_bodyparts = list("tail_skaven" = "Skaven")
 	external_organs = list(/obj/item/organ/external/horns = "None", /obj/item/organ/external/snout = "Round")
@@ -24,6 +24,13 @@
 	outfit_important_for_life = /datum/outfit/skaven
 	species_language_holder = /datum/language_holder/skaven
 	sexes = FALSE //ever heard of female skaven? didnt think so
+
+/datum/species/skaven/get_features()
+	. = ..()
+	// skaven color is a DNA property which get_features doesn't retrieve; add it manually if missing
+	if (!("feature_skavencolor" in GLOB.features_by_species[type]))
+		GLOB.features_by_species[type] += "feature_skavencolor"
+		. += "feature_skavencolor"
 
 /datum/species/skaven/pre_equip_species_outfit(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE)
 	H.equipOutfit(/datum/outfit/skaven, visualsOnly)
@@ -70,8 +77,8 @@
 	H.update_body()
 
 /datum/species/skaven/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
-	var/real_tail_type = C.dna.features["tail_skaven"]
 	var/mob/living/carbon/human/skaven = C
+	var/real_tail_type = skaven.dna.features["tail_skaven"] // hold onto tail until parent proc finished?
 
 	if(!pref_load)
 		if(skaven.dna.features["ears"] == "None")
@@ -84,14 +91,18 @@
 
 	//Loads tail preferences.
 	if(pref_load)
-		C.dna.features["tail_skaven"] = real_tail_type
+		if(!real_tail_type || real_tail_type == "None")
+			skaven.dna.features["tail_skaven"] = "Skaven"
+		else
+			skaven.dna.features["tail_skaven"] = real_tail_type
 
 		var/obj/item/organ/tail/skaven/new_tail = new /obj/item/organ/tail/skaven()
 
-		new_tail.tail_type = C.dna.features["tail_skaven"]
-		new_tail.Insert(C, TRUE, FALSE)
+		new_tail.tail_type = skaven.dna.features["tail_skaven"]
+		new_tail.Insert(skaven, TRUE, FALSE)
 
-	default_color = "#[skaven.dna.features["skavencolor"]]"
+	// ensure colors are synchronized
+	default_color = skaven.dna.features["mcolor"] = skaven.dna.features["skaven_color"]
 
 /datum/species/skaven/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
 	var/tail = pick(GLOB.tails_list_skaven)

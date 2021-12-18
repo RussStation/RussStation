@@ -54,11 +54,6 @@
 			H.set_nutrition(NUTRITION_LEVEL_ALMOST_FULL)
 		if(light_amount > 0.2) //if there's enough light, heal
 			H.heal_overall_damage(2,1, 0, BODYPART_ORGANIC)
-		if(H.radiation > 0)
-			var/rads = clamp(H.radiation, 0, 1000)
-			rads = rads/250
-			H.heal_overall_damage(rads, 0, 0, BODYPART_ORGANIC)
-			H.adjustToxLoss(-rads)
 
 	if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
 		H.take_overall_damage(2,0)
@@ -73,7 +68,7 @@
 	switch(P.type)
 		if(/obj/projectile/energy/floramut)
 			if(prob(15))
-				H.rad_act(rand(30,80))
+				H.AddComponent(/datum/component/irradiated)
 				H.Paralyze(100)
 				H.visible_message(
 					span_warning("[H] writhes in pain as [H.p_their()] vacuoles boil."),

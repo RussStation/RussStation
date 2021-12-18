@@ -5,7 +5,7 @@
 	icon_state = "compost"
 	anchored = FALSE
 	volume = 500
-	armor = list(MELEE = 10, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, RAD = 100, FIRE = 10, ACID = 0)
+	armor = list(MELEE = 10, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, FIRE = 10, ACID = 0)
 	max_integrity = 100
 	canister_overlay_file = null //no overlay
 	gas_type = /datum/gas/miasma

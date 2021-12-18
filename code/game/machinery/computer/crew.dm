@@ -33,12 +33,12 @@
 /obj/item/circuit_component/medical_console_data/populate_ports()
 	records = add_output_port("Crew Monitoring Data", PORT_TYPE_TABLE)
 
-/obj/item/circuit_component/medical_console_data/register_usb_parent(atom/movable/parent)
+/obj/item/circuit_component/medical_console_data/register_usb_parent(atom/movable/shell)
 	. = ..()
-	if(istype(parent, /obj/machinery/computer/crew))
-		attached_console = parent
+	if(istype(shell, /obj/machinery/computer/crew))
+		attached_console = shell
 
-/obj/item/circuit_component/medical_console_data/unregister_usb_parent(atom/movable/parent)
+/obj/item/circuit_component/medical_console_data/unregister_usb_parent(atom/movable/shell)
 	attached_console = null
 	return ..()
 
@@ -53,6 +53,7 @@
 		"burn",
 		"brute",
 		"location",
+		"health",
 	))
 
 
@@ -72,7 +73,7 @@
 		entry["burn"] = player_record["burndam"]
 		entry["brute"] = player_record["brutedam"]
 		entry["location"] = player_record["area"]
-
+		entry["health"] = player_record["health"]
 		new_table += list(entry)
 
 	records.set_output(new_table)
@@ -231,7 +232,9 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 		if (id_card)
 			entry["name"] = id_card.registered_name
 			entry["assignment"] = id_card.assignment
-			entry["ijob"] = jobs[id_card.assignment]
+			var/trim_assignment = id_card.get_trim_assignment()
+			if (jobs[trim_assignment] != null)
+				entry["ijob"] = jobs[trim_assignment]
 
 		// Binary living/dead status
 		if (sensor_mode >= SENSOR_LIVING)
@@ -243,7 +246,8 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 				"oxydam" = round(tracked_living_mob.getOxyLoss(), 1),
 				"toxdam" = round(tracked_living_mob.getToxLoss(), 1),
 				"burndam" = round(tracked_living_mob.getFireLoss(), 1),
-				"brutedam" = round(tracked_living_mob.getBruteLoss(), 1)
+				"brutedam" = round(tracked_living_mob.getBruteLoss(), 1),
+				"health" = round(tracked_living_mob.health, 1),
 			)
 
 		// Location

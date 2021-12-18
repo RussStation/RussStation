@@ -8,7 +8,6 @@
 	name = "donut"
 	desc = "Goes great with robust coffee."
 	icon = 'icons/obj/food/donuts.dmi'
-	icon_state = "donut"
 	bite_consumption = 5
 	food_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/consumable/sugar = 3)
 	tastes = list("donut" = 1)
@@ -20,7 +19,7 @@
 	var/extra_reagent = null
 	var/decorated_adjective = "sprinkled"
 
-/obj/item/food/donut/Initialize()
+/obj/item/food/donut/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/dunkable, amount_per_dunk = 10)
 	if(prob(DONUT_SPRINKLE_CHANCE))
@@ -61,6 +60,7 @@
 
 //Use this donut ingame
 /obj/item/food/donut/plain
+	icon_state = "donut"
 
 /obj/item/food/donut/chaos
 	name = "chaos donut"
@@ -70,7 +70,7 @@
 	tastes = list("donut" = 3, "chaos" = 1)
 	is_decorated = TRUE
 
-/obj/item/food/donut/chaos/Initialize()
+/obj/item/food/donut/chaos/Initialize(mapload)
 	. = ..()
 	extra_reagent = pick(/datum/reagent/consumable/nutriment, /datum/reagent/consumable/capsaicin, /datum/reagent/consumable/frostoil, /datum/reagent/drug/krokodil, /datum/reagent/toxin/plasma, /datum/reagent/consumable/coco, /datum/reagent/toxin/slimejelly, /datum/reagent/consumable/banana, /datum/reagent/consumable/berryjuice, /datum/reagent/medicine/omnizine)
 	reagents.add_reagent(extra_reagent, 3)
@@ -161,7 +161,6 @@
 	name = "jelly donut"
 	desc = "You jelly?"
 	icon_state = "jelly"
-	decorated_icon = "jelly_homer"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/consumable/sugar = 3, /datum/reagent/consumable/sugar = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
 	extra_reagent = /datum/reagent/consumable/berryjuice
 	tastes = list("jelly" = 1, "donut" = 3)
@@ -171,12 +170,13 @@
 /obj/item/food/donut/jelly/in_box_sprite()
 	return "[replacetext(icon_state, "jelly", "donut")]_inbox"
 
-/obj/item/food/donut/jelly/Initialize()
+/obj/item/food/donut/jelly/Initialize(mapload)
 	. = ..()
 	if(extra_reagent)
 		reagents.add_reagent(extra_reagent, 3)
 
 /obj/item/food/donut/jelly/plain //use this ingame to avoid inheritance related crafting issues.
+	decorated_icon = "jelly_homer"
 
 /obj/item/food/donut/jelly/berry
 	name = "pink jelly donut"
@@ -254,11 +254,11 @@
 /obj/item/food/donut/jelly/slimejelly
 	name = "jelly donut"
 	desc = "You jelly?"
-	icon_state = "jelly"
 	extra_reagent = /datum/reagent/toxin/slimejelly
 	foodtypes = JUNKFOOD | GRAIN | FRIED | TOXIC | SUGAR | BREAKFAST
 
 /obj/item/food/donut/jelly/slimejelly/plain
+	icon_state = "jelly"
 
 /obj/item/food/donut/jelly/slimejelly/berry
 	name = "pink jelly donut"
@@ -574,7 +574,7 @@
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 
-/obj/item/food/cookie/Initialize()
+/obj/item/food/cookie/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/dunkable, 10)
 
@@ -611,7 +611,7 @@
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 
-/obj/item/food/plumphelmetbiscuit/Initialize()
+/obj/item/food/plumphelmetbiscuit/Initialize(mapload)
 	var/fey = prob(10)
 	if(fey)
 		name = "exceptional plump helmet biscuit"
@@ -649,7 +649,7 @@
 	tastes = list("sweetness" = 1)
 	foodtypes = GRAIN | JUNKFOOD | SUGAR
 
-/obj/item/food/cookie/sugar/Initialize()
+/obj/item/food/cookie/sugar/Initialize(mapload)
 	. = ..()
 	if(SSevents.holidays && SSevents.holidays[FESTIVE_SEASON])
 		var/shape = pick("tree", "bear", "santa", "stocking", "present", "cane")
@@ -777,7 +777,7 @@
 	food_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/nutriment/vitamin = 5)
 	tastes = list("pancakes" = 1, "chocolate" = 1)
 
-/obj/item/food/pancakes/Initialize()
+/obj/item/food/pancakes/Initialize(mapload)
 	. = ..()
 	update_appearance()
 

@@ -32,7 +32,7 @@
 		new_frequency = rand(MIN_FREQ, MAX_FREQ)
 	// absolutely devious
 	for(var/obj/machinery/telecomms/T in GLOB.telecomms_list)
-		if(istype(T) && last_frequency in T.freq_listening)
+		if(istype(T) && (last_frequency in T.freq_listening))
 			T.freq_listening -= last_frequency
 			// remove new freq too so it's not duped
 			T.freq_listening -= new_frequency

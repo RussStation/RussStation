@@ -50,7 +50,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	cold_protection = CHEST|GROIN|ARMS
 	heat_protection = CHEST|GROIN|ARMS
-	armor = list(MELEE = 50, BULLET = 10, LASER = 10, ENERGY = 10, BOMB = 0, BIO = 0, RAD = 0, FIRE = 80, ACID = 80)
+	armor = list(MELEE = 50, BULLET = 10, LASER = 10, ENERGY = 10, BOMB = 0, BIO = 0, FIRE = 80, ACID = 80)
 	strip_delay = 80
 	equip_delay_self = 60
 	species_exception = list(/datum/species/dwarf)
@@ -72,7 +72,6 @@
 		armor.energy += S.attack_amt
 		armor.bomb += S.attack_amt
 		armor.bio += S.attack_amt
-		armor.rad += S.attack_amt
 		armor.fire += S.attack_amt
 		armor.acid += S.attack_amt
 
@@ -107,7 +106,6 @@
 		armor.energy += S.attack_amt
 		armor.bomb += S.attack_amt
 		armor.bio += S.attack_amt
-		armor.rad += S.attack_amt
 		armor.fire += S.attack_amt
 		armor.acid += S.attack_amt
 
