@@ -313,7 +313,7 @@
 				/mob/living/simple_animal/pet/dog/corgi/puppy,
 				/mob/living/simple_animal/pet/dog/corgi,
 				/mob/living/simple_animal/crab,
-				/mob/living/simple_animal/cow,
+				/mob/living/basic/cow,
 				/mob/living/simple_animal/chicken,
 				/mob/living/simple_animal/hostile/retaliate/goat,
 				/mob/living/simple_animal/pet/fox,
