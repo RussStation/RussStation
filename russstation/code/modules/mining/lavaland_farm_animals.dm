@@ -1,6 +1,7 @@
-/mob/living/simple_animal/cow/lavaland
+/mob/living/basic/cow/lavaland
 	name = "\improper lavaland cow"
 	desc = "Milk em or tip em. We don't judge here."
+	color = "#CC9900"
 	mob_biotypes = MOB_BEAST
 	butcher_results = list(
 		/obj/item/food/meat/slab = 6,
