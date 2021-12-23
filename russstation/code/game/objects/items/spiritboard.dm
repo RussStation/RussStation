@@ -48,4 +48,4 @@
 				if(M.client)
 					// display descriptive message in chat, but just the selected word in runechat
 					to_chat(M, span_blue("<B>The board spells out a message ... \"[selected]\"</B>"))
-					M.create_chat_message(src, raw_message = selected)
+					M.create_chat_message(src, M.get_random_understood_language(), selected)
