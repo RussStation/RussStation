@@ -1,0 +1,42 @@
+{
+	"version": 1,
+    "map_name": "IceCube Station",
+    "map_path": "map_files/IceCubeStation",
+    "map_file": "IceCube.dmm",
+    "shuttles": {
+        "cargo": "cargo_lima",
+        "ferry": "ferry_fancy",
+        "whiteship": "whiteship_box",
+        "emergency": "emergency_box"
+    },
+	"traits": [
+		{
+			"Up": 1,
+			"Baseturf": "/turf/open/lava/plasma/ice_moon",
+			"Linkage": "Cross",
+			"Mining": true,
+			"Gravity": true,
+			"Ice Ruins Underground": true,
+			"Ice Ruins": true
+		},
+		{
+			"Down": -1,
+			"Baseturf": "/turf/open/openspace/icemoon/keep_below",
+			"Linkage": "Cross",
+			"Mining": true,
+			"Gravity": true,
+			"Ice Ruins": true,
+			"Ice Ruins Underground": true,
+			"Weather_Snowstorm": true
+		}
+	],
+	"minetype": "none",
+	"job_changes": {
+		"cook": {
+			"additional_cqc_areas": ["/area/service/kitchen/diner"]
+		},
+		"captain": {
+			"special_charter": "moon"
+		}
+	}
+}
