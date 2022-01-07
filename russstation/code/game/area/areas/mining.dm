@@ -6,10 +6,10 @@
 
 // cave generator options for surface for more interest
 /area/icemoon/surface/outdoors/unexplored/caves
-	map_generator = /datum/map_generator/cave_generator/icemoon
+	map_generator = /datum/map_generator/cave_generator/icemoon/surface/caves
 
 /area/icemoon/surface/outdoors/unexplored/caves/deep
-	map_generator = /datum/map_generator/cave_generator/icemoon/deep
+	map_generator = /datum/map_generator/cave_generator/icemoon/surface/caves/deep
 
 // no megafauna on lower level
 /area/icemoon/underground/unexplored
