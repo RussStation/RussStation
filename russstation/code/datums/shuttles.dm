@@ -26,7 +26,7 @@
 	description = "For when you only want a few crew surviving evacuation."
 	admin_notes = "A lot of people will die from getting spaced. Very funny."
 	emag_only = TRUE
-	credit_cost = EMAG_LOCKED_SHUTTLE_COST
+	credit_cost = CARGO_CRATE_VALUE * 50
 
 /datum/map_template/shuttle/emergency/echo
 	suffix = "echo"
