@@ -923,7 +923,6 @@
 		aux = image(limb.icon, "[species_id]_[aux_zone]", -aux_layer, image_dir)
 		. += aux
 
-	var/draw_color
 	if(should_draw_greyscale)
 		draw_color = mutation_color || species_color || (skin_tone && skintone2hex(skin_tone))
 		if(draw_color)
