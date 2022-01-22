@@ -197,7 +197,6 @@ SUBSYSTEM_DEF(vote)
 					shuffle_inplace(maps)
 				for(var/valid_map in maps)
 					choices.Add(valid_map)
-<<<<<<< HEAD
 			//honk start -- adds the options for a crew transfer vote
 			if("crew transfer")
 				choices.Add("Initiate Crew Transfer","Continue The Round")
@@ -211,17 +210,6 @@ SUBSYSTEM_DEF(vote)
 					if(!option || mode || !usr.client)
 						break
 					choices.Add(option)
-=======
-			if("custom")
-				question = tgui_input_text(usr, "What is the vote for?", "Custom Vote")
-				if(!question)
-					return FALSE
-				for(var/i in 1 to 10)
-					var/option = tgui_input_text(usr, "Please enter an option or hit cancel to finish", "Options", max_length = MAX_NAME_LEN)
-					if(!option || mode || !usr.client)
-						break
-					choices.Add(capitalize(option))
->>>>>>> tgstation/master
 			else
 				return FALSE
 		mode = vote_type
