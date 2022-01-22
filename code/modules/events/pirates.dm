@@ -96,7 +96,6 @@
 /proc/spawn_pirates(datum/comm_message/threat, ship_template, skip_answer_check)
 	if(!skip_answer_check && threat?.answered == 1)
 		return
-<<<<<<< HEAD
 honk end */
 
 /proc/send_pirate_threat()
@@ -114,12 +113,6 @@ honk end */
 		if(PIRATES_DUTCHMAN)
 			ship_template = /datum/map_template/shuttle/pirate/dutchman
 	// honk end
-=======
-
-	var/list/candidates = poll_ghost_candidates("Do you wish to be considered for pirate crew?", ROLE_TRAITOR)
-	shuffle_inplace(candidates)
-
->>>>>>> tgstation/master
 	var/datum/map_template/shuttle/pirate/ship = new ship_template
 	var/x = rand(TRANSITIONEDGE,world.maxx - TRANSITIONEDGE - ship.width)
 	var/y = rand(TRANSITIONEDGE,world.maxy - TRANSITIONEDGE - ship.height)
@@ -141,13 +134,9 @@ honk end */
 			else
 				notify_ghosts("The pirate ship has an object of interest: [spawner]!", source=spawner, action=NOTIFY_ORBIT, header="Something's Interesting!")
 
-<<<<<<< HEAD
 	/* honk start -- remove announcement
 	priority_announce("Unidentified armed ship detected near the station.")
 	honk end */
-=======
-	priority_announce("Unidentified armed ship detected near the station.")
->>>>>>> tgstation/master
 
 //Shuttle equipment
 
