@@ -83,14 +83,6 @@
 
 	. = ..()
 
-//old signs (only found in maint spawners)
-/obj/item/caution/attackby(obj/item/item, mob/living/user)
-	if(istype(item, /obj/item/janicart_upgrade/buffer))
-		to_chat(user, span_warning("The [name] is too antiquated to fit a [item.name], try a newer model sign."))
-		return
-
-	. = ..()
-
 //tablecrafting recipe option
 /datum/crafting_recipe/slippery_sign
 	name = "Wetmore Slippery Sign"

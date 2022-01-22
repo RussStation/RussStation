@@ -22,8 +22,11 @@
 
 /datum/map_template/shuttle/emergency/shit
 	suffix = "shit"
-	name = "Perfectly Normal Emergency Shuttle"
-	description = "This is bad and you should feel bad."
+	name = "That Emergency Shuttle"
+	description = "For when you only want a few crew surviving evacuation."
+	admin_notes = "A lot of people will die from getting spaced. Very funny."
+	emag_only = TRUE
+	credit_cost = CARGO_CRATE_VALUE * 50
 
 /datum/map_template/shuttle/emergency/echo
 	suffix = "echo"

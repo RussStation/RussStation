@@ -32,7 +32,7 @@
 
 /datum/crafting_recipe/knife
 	name = "Forged Knife"
-	result = /obj/item/kitchen/knife/smithed_knife
+	result = /obj/item/knife/smithed_knife
 	reqs = list(/obj/item/grown/log = 1,
 				/obj/item/mold_result/knife_head = 1)
 	parts = list(/obj/item/mold_result/knife_head = 1)

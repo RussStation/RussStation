@@ -128,18 +128,18 @@
 		sharpness = S.sharpness
 
 //Forged Knife
-/obj/item/kitchen/knife/smithed_knife
+/obj/item/knife/smithed_knife
 	name = "unobtanium knife"
 	desc = "A knife made of unobtainum, you probably shouldn't be seeing this."
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "knife_base"
 	inhand_icon_state = "knife"
 
-/obj/item/kitchen/knife/smithed_knife/ComponentInitialize()
+/obj/item/knife/smithed_knife/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 
-/obj/item/kitchen/knife/smithed_knife/CheckParts(list/parts_list)
+/obj/item/knife/smithed_knife/CheckParts(list/parts_list)
 	..()
 	var/obj/item/mold_result/knife_head/K = locate() in contents
 	if(K)
