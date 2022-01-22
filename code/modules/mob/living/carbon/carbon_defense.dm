@@ -425,8 +425,7 @@
 		to_chat(src, span_notice("[M] pulls on your tail!"))
 		if(HAS_TRAIT(src, TRAIT_BADTOUCH)) //How dare they!
 			to_chat(M, span_warning("[src] makes a grumbling noise as you pull on [p_their()] tail."))
-		else
-			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "tailpulled", /datum/mood_event/tailpulled)
+		// honk - DON'T activate the weird tail fetish moodlet, please!
 
 	else
 		SEND_SIGNAL(src, COMSIG_CARBON_HUGGED, M)
