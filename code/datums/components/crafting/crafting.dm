@@ -35,6 +35,7 @@
 					CAT_MEAT,
 					CAT_SEAFOOD,
 					CAT_MISCFOOD,
+					CAT_MOTH,
 					CAT_PASTRY,
 					CAT_PIE,
 					CAT_PIZZA,
