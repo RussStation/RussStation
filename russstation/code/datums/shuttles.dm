@@ -44,3 +44,7 @@
 /datum/map_template/shuttle/arrival/echo
 	suffix = "echo"
 	name = "arrival shuttle (Echo)"
+
+/datum/map_template/shuttle/cargo/icecube
+	suffix = "icecube"
+	name = "supply shuttle (IceCube)"
