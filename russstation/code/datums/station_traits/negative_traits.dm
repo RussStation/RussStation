@@ -1,5 +1,6 @@
 #define FREQ_CHANGE_COOLDOWN_LENGTH_MIN 15 MINUTES
 #define FREQ_CHANGE_COOLDOWN_LENGTH_MAX 25 MINUTES
+#define FREQ_CHANGE_COOLDOWN_MULTIPLIER_INCREMENT 1.2
 
 /datum/station_trait/frequency_change
 	name = "Radio frequency change"
@@ -14,6 +15,8 @@
 		/datum/station_trait/announcement_intern,
 	)
 	COOLDOWN_DECLARE(change_cooldown)
+	// cooldown should get longer so long rounds aren't punished as badly
+	var/cooldown_multiplier = 1
 	var/last_frequency = FREQ_COMMON
 
 /datum/station_trait/frequency_change/on_round_start()
@@ -21,10 +24,12 @@
 	COOLDOWN_START(src, change_cooldown, rand(FREQ_CHANGE_COOLDOWN_LENGTH_MIN, FREQ_CHANGE_COOLDOWN_LENGTH_MAX))
 
 /datum/station_trait/frequency_change/process(delta_time)
-	if(!COOLDOWN_FINISHED(src, change_cooldown))
+	if(change_cooldown == 0 || !COOLDOWN_FINISHED(src, change_cooldown))
 		return
 
-	COOLDOWN_START(src, change_cooldown, rand(FREQ_CHANGE_COOLDOWN_LENGTH_MIN, FREQ_CHANGE_COOLDOWN_LENGTH_MAX))
+	cooldown_multiplier *= FREQ_CHANGE_COOLDOWN_MULTIPLIER_INCREMENT
+	var/cooldown_time = cooldown_multiplier * rand(FREQ_CHANGE_COOLDOWN_LENGTH_MIN, FREQ_CHANGE_COOLDOWN_LENGTH_MAX)
+	COOLDOWN_START(src, change_cooldown, cooldown_time)
 
 	// radio freqs must be odd and within a range
 	var/new_frequency = rand(MIN_FREQ, MAX_FREQ)
@@ -53,4 +58,7 @@
 		if(istype(M) && M.radio_channel == last_frequency)
 			M.radio_channel = new_frequency
 	last_frequency = new_frequency
-	priority_announce("The common radio frequency has been changed to [format_frequency(new_frequency)] for security purposes. Please adjust your headsets accordingly.", "Radio Frequency Change", SSstation.announcer.get_rand_report_sound())
+	var/msg = "The common radio frequency has been changed to [format_frequency(new_frequency)] for security purposes. Please adjust your headsets accordingly."
+	priority_announce(msg, "Radio Frequency Change", SSstation.announcer.get_rand_report_sound())
+	// send report since there's otherwise no record of this event occurring
+	print_command_report(msg, "Radio Frequency Change", FALSE)

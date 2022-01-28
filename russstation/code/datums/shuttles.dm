@@ -28,6 +28,10 @@
 	emag_only = TRUE
 	credit_cost = CARGO_CRATE_VALUE * 50
 
+/datum/map_template/shuttle/cargo/shit
+	suffix = "shit"
+	name = "supply shuttle (Shit)"
+
 /datum/map_template/shuttle/emergency/echo
 	suffix = "echo"
 	name = "Echo Station emergency shuttle"
