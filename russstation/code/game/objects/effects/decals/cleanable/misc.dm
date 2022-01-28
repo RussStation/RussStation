@@ -1,6 +1,7 @@
 //makes changes to tg's default confetti
 /obj/effect/decal/cleanable/confetti //see 'code\game\objects\effects\decals\cleanable\misc.dm'
 	icon = 'russstation/icons/turf/decals.dmi'
+	icon_state = "confetti1"
 	random_icon_states = list("confetti1", "confetti2", "confetti3")
 	mergeable_decal = FALSE //allows more than one on a tile at a time, important for the gibspawner
 	beauty = 5
