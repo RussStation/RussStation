@@ -505,10 +505,11 @@ GLOBAL_LIST_INIT(phobia_species, list(
 		/datum/species/plasmaman,
 		/datum/species/skeleton,
 	)),
+	//honk start - adds skaven to the supernatural phobia
 	"the supernatural" = typecacheof(list(
 		/datum/species/golem/runic,
-		/datum/species/skaven
-	)),
+		/datum/species/skaven)),
+	//honk end
 ))
 
 /// Creates a regular expression to match against the given phobia
