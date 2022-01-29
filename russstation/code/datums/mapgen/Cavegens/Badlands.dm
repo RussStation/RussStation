@@ -11,9 +11,9 @@
 	// this hodgepodge of mobs have a lot of conflicting factions so they kinda kill each other...
 	mob_spawn_list = list(/mob/living/simple_animal/hostile/skeleton = 6, \
 		/mob/living/simple_animal/hostile/carp = 6, \
-		/mob/living/simple_animal/hostile/carp/megacarp = 3, \
-		/mob/living/simple_animal/hostile/carp/ranged/chaos = 3, \
-		/mob/living/simple_animal/hostile/space_dragon = 1, \
+		/mob/living/simple_animal/hostile/carp/megacarp = 4, \
+		/mob/living/simple_animal/hostile/carp/ranged/chaos = 4, \
+		/mob/living/simple_animal/hostile/space_dragon = 2, \
 		/mob/living/simple_animal/hostile/asteroid/elite/legionnaire = 1, \
 		/mob/living/simple_animal/hostile/asteroid/elite/herald = 1, \
 		/mob/living/simple_animal/hostile/asteroid/elite/pandora = 1, \
@@ -36,15 +36,14 @@
 		/obj/structure/flora/ash/tall_shroom = 1, \
 		/obj/structure/flora/ash/seraka = 1, \
 		/obj/structure/flora/tree/dead = 6)
-	feature_spawn_list = list(/obj/structure/statue/bone = 60, \
-		/obj/structure/statue/bone/rib = 50, \
-		/obj/structure/statue/bone/skull = 15, \
-		/obj/structure/statue/bone/skull/half = 15, \
-		/obj/effect/decal/remains/human = 10, \
-		/obj/structure/punji_sticks/spikes = 50, \
-		/obj/structure/trap/damage = 15, \
-		/obj/structure/trap/fire = 15, \
-		/obj/structure/trap/stun = 15, \
+	feature_spawn_list = list(/obj/structure/statue/bone/rib = 15, \
+		/obj/structure/statue/bone/skull = 6, \
+		/obj/structure/statue/bone/skull/half = 6, \
+		/obj/effect/decal/remains/human = 3, \
+		/obj/structure/punji_sticks/spikes = 20, \
+		/obj/structure/trap/damage = 5, \
+		/obj/structure/trap/fire = 5, \
+		/obj/structure/trap/stun = 5, \
 		/obj/structure/closet/crate/necropolis/tendril = 1)
 	initial_closed_chance = 40
 	smoothing_iterations = 30
