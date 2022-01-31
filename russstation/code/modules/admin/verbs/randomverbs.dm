@@ -1,6 +1,6 @@
 /client/proc/honk_smite(mob/living/target as mob)
 	set name = "Honk"
-	set category = "Fun"
+	set category = "Admin.Fun"
 	if(!check_rights(R_ADMIN) || !check_rights(R_FUN))
 		return
 
