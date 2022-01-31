@@ -23,11 +23,11 @@
 	// naïve estimate based on average instead of checking active states
 	var/target_power_usage = (total_idle_power_usage + total_active_power_usage) / 2
 	// hopefully good estimates of appropriate cells
-	if(target_power_usage < 800)
+	if(target_power_usage < 600)
 		cell_type = /obj/item/stock_parts/cell/upgraded
-	else if(target_power_usage < 1600)
+	else if(target_power_usage < 1200)
 		cell_type = /obj/item/stock_parts/cell/upgraded/plus
-	else if(target_power_usage < 2400)
+	else if(target_power_usage < 2000)
 		cell_type = /obj/item/stock_parts/cell/high
 	else
 		cell_type = /obj/item/stock_parts/cell/high/plus
