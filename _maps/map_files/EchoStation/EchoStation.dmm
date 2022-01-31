@@ -11147,6 +11147,8 @@
 	pixel_x = 24
 	},
 /obj/structure/disposalpipe/segment,
+/obj/item/stack/sheet/iron/twenty,
+/obj/item/construction/plumbing,
 /turf/open/floor/iron/showroomfloor,
 /area/medical/chemistry)
 "fWl" = (
@@ -15616,7 +15618,9 @@
 /turf/open/floor/iron/dark,
 /area/security/courtroom)
 "ioj" = (
-/obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/layer2,
+/obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/layer2{
+	id = "ordmix_airlock_pump"
+	},
 /turf/open/floor/engine/vacuum,
 /area/science/mixing/chamber)
 "ior" = (
@@ -18294,10 +18298,10 @@
 /turf/open/floor/iron,
 /area/cargo/warehouse)
 "jOB" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
 /turf/open/floor/iron,
 /area/command/teleporter)
 "jOC" = (
@@ -20699,8 +20703,11 @@
 	dir = 9
 	},
 /obj/machinery/airalarm/mixingchamber{
-	dir = 4;
+	dir = 8;
 	pixel_x = -22
+	},
+/obj/machinery/computer/atmos_control/ordnancemix{
+	dir = 4
 	},
 /turf/open/floor/iron,
 /area/science/mixing/chamber)
@@ -21184,6 +21191,9 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
 	},
 /turf/open/floor/iron,
 /area/command/teleporter)
@@ -23755,7 +23765,8 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/open/floor/iron,
+/obj/machinery/teleport/station,
+/turf/open/floor/iron/dark,
 /area/command/teleporter)
 "mOe" = (
 /obj/item/paper/crumpled,
@@ -26853,7 +26864,12 @@
 /area/command/bridge)
 "okw" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/teleport/hub,
+/obj/structure/table,
+/obj/item/beacon{
+	pixel_x = -4;
+	pixel_y = 3
+	},
+/obj/item/hand_tele,
 /turf/open/floor/iron/dark,
 /area/command/teleporter)
 "okx" = (
@@ -28181,7 +28197,7 @@
 /turf/open/indestructible,
 /area/science/test_area)
 "oPw" = (
-/obj/machinery/teleport/station,
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/command/teleporter)
 "oPF" = (
@@ -29120,9 +29136,9 @@
 "pth" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/computer/teleporter{
-	dir = 1
+	dir = 8
 	},
-/turf/open/floor/iron,
+/turf/open/floor/iron/dark,
 /area/command/teleporter)
 "ptz" = (
 /obj/structure/disposalpipe/segment{
@@ -30438,10 +30454,8 @@
 /turf/open/floor/iron/dark,
 /area/service/lawoffice)
 "pZM" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/iron,
+/obj/machinery/teleport/hub,
+/turf/open/floor/iron/dark,
 /area/command/teleporter)
 "pZO" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -40597,6 +40611,7 @@
 	pixel_y = -25
 	},
 /obj/machinery/light/small,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/science/server)
 "vec" = (
@@ -44932,6 +44947,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
+/obj/item/radio/intercom/directional/south,
 /turf/open/floor/plating,
 /area/science/mixing)
 "xaP" = (
@@ -46118,7 +46134,7 @@
 	name = "Gateway Access Shutter Control";
 	pixel_x = 25;
 	pixel_y = 6;
-	req_access_txt = "31"
+	req_access_txt = "62"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -47050,7 +47066,6 @@
 /area/maintenance/starboard/central)
 "xVU" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/rack,
 /obj/machinery/light/small/broken,
 /turf/open/floor/iron,
 /area/command/teleporter)
@@ -47088,12 +47103,9 @@
 /turf/open/floor/iron,
 /area/engineering/atmos)
 "xXj" = (
-/obj/structure/table,
-/obj/item/beacon{
-	pixel_x = -4;
-	pixel_y = 3
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
 	},
-/obj/item/hand_tele,
 /turf/open/floor/iron,
 /area/command/teleporter)
 "xYd" = (

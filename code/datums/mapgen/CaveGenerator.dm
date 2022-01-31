@@ -125,9 +125,11 @@
 					if((ispath(picked_mob, /mob/living/simple_animal/hostile/megafauna) || ismegafauna(thing)) && get_dist(new_open_turf, thing) <= 7)
 						can_spawn = FALSE //if there's a megafauna within standard view don't spawn anything at all
 						break
-					if(ispath(picked_mob, /mob/living/simple_animal/hostile/asteroid) || istype(thing, /mob/living/simple_animal/hostile/asteroid))
+					// honk start - don't restrict mob check to asteroid mob subtypes so badlands get clump protection too
+					if(ispath(picked_mob, /mob/living/simple_animal/hostile) || istype(thing, /mob/living/simple_animal/hostile))
 						can_spawn = FALSE //if the random is a standard mob, avoid spawning if there's another one within 12 tiles
 						break
+					// honk end
 					if((ispath(picked_mob, /obj/structure/spawner/lavaland) || istype(thing, /obj/structure/spawner/lavaland)) && get_dist(new_open_turf, thing) <= 2)
 						can_spawn = FALSE //prevents tendrils spawning in each other's collapse range
 						break
