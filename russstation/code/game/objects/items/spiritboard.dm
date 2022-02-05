@@ -19,6 +19,16 @@
 	///Delay between each use
 	var/use_delay = 3 SECONDS
 
+/obj/item/spiritboard/Initialize(mapload)
+	. = ..()
+	// allow ghosts to orbit for easier haunting
+	SSpoints_of_interest.make_point_of_interest(src)
+
+/obj/item/spiritboard/ComponentInitialize()
+	. = ..()
+	// keep it on station so ghosts can keep using it
+	AddComponent(/datum/component/stationloving, TRUE, FALSE)
+
 /obj/item/spiritboard/attack_ghost(mob/dead/observer/user)
 	if(!isobserver(user))
 		return
