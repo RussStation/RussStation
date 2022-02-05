@@ -364,11 +364,6 @@
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron,
 /area/security/brig)
-"acE" = (
-/obj/structure/lattice,
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/space/nearstation)
 "acH" = (
 /obj/docking_port/stationary{
 	dwidth = 2;
@@ -5768,6 +5763,8 @@
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/gun/syringe,
+/obj/item/blood_filter,
+/obj/item/blood_filter,
 /turf/open/floor/iron,
 /area/medical/storage)
 "bub" = (
@@ -10780,21 +10777,6 @@
 /obj/machinery/light/directional/north,
 /turf/open/floor/carpet/executive,
 /area/medical/psychology)
-"dRi" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
-/obj/structure/cable,
-/obj/effect/turf_decal/tile/red{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/red,
-/turf/open/floor/iron,
-/area/security/prison)
 "dRp" = (
 /obj/machinery/airalarm/directional/east,
 /obj/machinery/navbeacon{
@@ -15970,9 +15952,7 @@
 /turf/open/floor/carpet/orange,
 /area/service/theater)
 "gsO" = (
-/obj/structure/table,
-/obj/item/blood_filter,
-/obj/item/blood_filter,
+/obj/machinery/suit_storage_unit/medical,
 /turf/open/floor/iron,
 /area/medical/storage)
 "gtl" = (
@@ -21306,9 +21286,6 @@
 /obj/effect/landmark/event_spawn,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
-	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 5
@@ -27765,7 +27742,6 @@
 /turf/closed/wall,
 /area/medical/exam_room)
 "ndK" = (
-/obj/machinery/iv_drip,
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
@@ -27775,6 +27751,7 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
 	},
+/obj/machinery/recharge_station,
 /turf/open/floor/iron/white,
 /area/medical/exam_room)
 "ndS" = (
@@ -29194,6 +29171,17 @@
 	},
 /turf/open/floor/iron,
 /area/science/xenobiology)
+"nXQ" = (
+/obj/machinery/iv_drip,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/machinery/iv_drip,
+/turf/open/floor/iron/white,
+/area/medical/exam_room)
 "nXY" = (
 /obj/machinery/door/airlock/public/glass{
 	name = "Kitchen Freezer"
@@ -30429,15 +30417,6 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron,
 /area/ai_monitored/command/storage/eva)
-"oIL" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
-/turf/open/floor/iron/cafeteria,
-/area/security/prison)
 "oIN" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 1
@@ -37717,7 +37696,7 @@
 "taa" = (
 /obj/machinery/atmospherics/components/trinary/filter{
 	dir = 1;
-	filter_type = "n2";
+	filter_type = list(/datum/gas/nitrogen);
 	name = "N2 Filter"
 	},
 /turf/open/floor/engine,
@@ -38180,7 +38159,7 @@
 /turf/open/floor/iron,
 /area/maintenance/aft)
 "tlS" = (
-/obj/structure/destructible/cult/tome,
+/obj/structure/destructible/cult/item_dispenser/archives,
 /turf/open/floor/iron/dark,
 /area/service/library)
 "tmc" = (
@@ -43461,9 +43440,6 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/layer1,
-/obj/machinery/atmospherics/pipe/smart/simple/general/visible{
-	dir = 6
-	},
 /turf/open/floor/iron,
 /area/maintenance/disposal/incinerator)
 "wpG" = (
@@ -45538,6 +45514,14 @@
 	},
 /turf/open/floor/iron,
 /area/maintenance/central)
+"xve" = (
+/obj/machinery/door/poddoor/preopen{
+	id = "atmos";
+	name = "Atmospherics Blast Door"
+	},
+/obj/machinery/recharge_station,
+/turf/open/floor/iron/dark,
+/area/engineering/main)
 "xvi" = (
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
@@ -59217,7 +59201,7 @@ dwp
 uiU
 uiU
 uiU
-dRi
+uiU
 uiU
 uiU
 uiU
@@ -60748,7 +60732,7 @@ tfI
 yhG
 mDD
 oXx
-oIL
+mZS
 adt
 abi
 pnk
@@ -67751,7 +67735,7 @@ xyK
 kVH
 sgv
 gvm
-xqz
+xve
 xEh
 uNr
 mKw
@@ -82887,7 +82871,7 @@ bgo
 jND
 pXA
 mbb
-ndS
+nXQ
 rcF
 oLz
 pGW
@@ -84646,7 +84630,7 @@ gfQ
 gfQ
 gfQ
 gfQ
-acE
+fsz
 gfQ
 yeH
 vKx
