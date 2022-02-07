@@ -22,7 +22,7 @@
 
 /datum/species/dwarf/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
 	. = ..()
-	C.dna.add_mutation(DWARFISM)
+	C.dna.add_mutation(/datum/mutation/human/dwarfism)
 	for(var/datum/mutation/human/dwarfism/dwarf_mutation in C.dna.mutations)
 		dwarf_mutation.mutadone_proof = TRUE
 	C.bubble_file = 'russstation/icons/mob/talk.dmi'
@@ -34,7 +34,7 @@
 	C.AddComponent(/datum/component/spookable)
 
 /datum/species/dwarf/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
-	C.dna.remove_mutation(DWARFISM)
+	C.dna.remove_mutation(/datum/mutation/human/dwarfism)
 	C.bubble_file = 'icons/mob/talk.dmi'
 	C.bubble_icon = initial(C.bubble_icon)
 	qdel(C.GetComponent(/datum/component/spookable))
