@@ -24,7 +24,7 @@
 	COOLDOWN_START(src, change_cooldown, rand(FREQ_CHANGE_COOLDOWN_LENGTH_MIN, FREQ_CHANGE_COOLDOWN_LENGTH_MAX))
 
 /datum/station_trait/frequency_change/process(delta_time)
-	if(change_cooldown == 0 || !COOLDOWN_FINISHED(src, change_cooldown))
+	if(!COOLDOWN_FINISHED(src, change_cooldown))
 		return
 
 	cooldown_multiplier *= FREQ_CHANGE_COOLDOWN_MULTIPLIER_INCREMENT
@@ -49,7 +49,7 @@
 	// update intercoms as well since they're wired
 	// (mostly to keep the parrot room active)
 	for(var/obj/item/radio/intercom/I in GLOB.intercom_list)
-		if(istype(I) && I.frequency == last_frequency)
+		if(istype(I) && I.get_frequency() == last_frequency)
 			I.set_frequency(new_frequency)
 	// other machines and bots speak through internal radios that don't get caught by the intercom check,
 	// only need to correct those that speak over common freq.

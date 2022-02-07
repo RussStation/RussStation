@@ -2,7 +2,7 @@
 	name = "The Final Ollie"
 	desc = "This may be your last trick, better make it radical."
 
-/datum/action/vehicle/ridden/scooter/skateboard/ollie/suicide/Trigger()
+/datum/action/vehicle/ridden/scooter/skateboard/ollie/suicide/Trigger(trigger_flags)
 	if(world.time > next_ollie)
 		var/obj/vehicle/ridden/scooter/skateboard/V = vehicle_target
 		if (V.grinding)
@@ -40,7 +40,7 @@
 	///Cooldown to next jump
 	var/next_ollie
 
-/datum/action/vehicle/ridden/wheelchair/russ/sportschair/ollie/Trigger()
+/datum/action/vehicle/ridden/wheelchair/russ/sportschair/ollie/Trigger(trigger_flags)
 	if(world.time > next_ollie)
 		var/obj/vehicle/ridden/wheelchair/russ/sportschair/vehicle = vehicle_target
 		vehicle.obj_flags |= BLOCK_Z_OUT_DOWN
