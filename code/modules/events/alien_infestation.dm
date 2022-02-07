@@ -68,7 +68,9 @@
 	while(spawncount > 0 && vents.len && candidates.len)
 		var/obj/vent = pick_n_take(vents)
 		var/client/candidate_client = pick_n_take(candidates)
-		var/datum/mind/candidate_mind = candidate_client.mob.mind
+		var/datum/mind/candidate_mind = new /datum/mind(candidate_client.key)
+		candidate_mind.active = TRUE
+
 		if(!candidate_mind)
 			continue
 		var/mob/living/carbon/alien/larva/new_xeno = new(vent.loc)
