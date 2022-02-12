@@ -17,7 +17,7 @@
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 
-		if(H.dna.check_mutation(MUT_MUTE) || H.silent) //Check for mute or silent, remove the overlay if true
+		if(H.dna.check_mutation(/datum/mutation/human/mute) || H.silent) //Check for mute or silent, remove the overlay if true
 			overlays -= typing_indicator
 			return
 

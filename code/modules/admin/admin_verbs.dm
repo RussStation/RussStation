@@ -109,6 +109,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/smite,
 	/client/proc/honk_smite, // honk -- new smites
 	/client/proc/admin_away,
+	/client/proc/add_mob_ability,
 	/datum/admins/proc/station_traits_panel,
 	))
 GLOBAL_PROTECT(admin_verbs_fun)
@@ -727,9 +728,6 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 	if(!holder)
 		return
-
-	if(combo_hud_enabled)
-		toggle_combo_hud()
 
 	holder.deactivate()
 
