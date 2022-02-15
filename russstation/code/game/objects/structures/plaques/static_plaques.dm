@@ -14,3 +14,7 @@
 /obj/structure/plaque/static_plaque/golden/commission/echo
 	// Lily requested a deviation from the typical commission format
 	desc = "<i>Painted over and defiled, the plaque now reads</i> 'This station is ass and everyone knows it, nobody fucking cleans shit up'"
+
+// IceCube Station: added January 3, 2022 (#265)
+/obj/structure/plaque/static_plaque/golden/commission/icecube
+	desc = "Spinward Sector Station SS-13\n'Box' Class Outpost (Revision 4.0: 'IceCube')\nCommissioned 01/03/2562\n'Deja vu, I've been in this place before'"
