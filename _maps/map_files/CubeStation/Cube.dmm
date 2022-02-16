@@ -33,11 +33,8 @@
 	name = "Atmospherics";
 	req_access_txt = "24"
 	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "engineering-entrance"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -3915,6 +3912,14 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/science/mixing/chamber)
+"caw" = (
+/obj/docking_port/stationary/random{
+	dir = 4;
+	id = "pod_lavaland";
+	name = "lavaland"
+	},
+/turf/open/space/basic,
+/area/space)
 "cax" = (
 /obj/structure/table,
 /obj/item/paper_bin{
@@ -8337,7 +8342,7 @@
 /area/cargo/storage)
 "erU" = (
 /obj/docking_port/stationary/random{
-	id = "pod_lavaland1";
+	id = "pod_4_lavaland";
 	name = "lavaland"
 	},
 /turf/open/space/basic,
@@ -8895,14 +8900,14 @@
 	name = "Testing Chamber";
 	req_access_txt = "47"
 	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 8
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "experimentation-lab"
 	},
 /turf/open/floor/iron,
 /area/science/explab)
@@ -11161,9 +11166,8 @@
 	name = "Command Tool Storage";
 	req_access_txt = "19"
 	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "EVA"
 	},
 /turf/open/floor/iron,
 /area/ai_monitored/command/storage/eva)
@@ -13689,7 +13693,9 @@
 	name = "Bridge";
 	req_access_txt = "19"
 	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "EVA"
+	},
 /turf/open/floor/iron,
 /area/ai_monitored/command/storage/eva)
 "hgK" = (
@@ -14393,6 +14399,19 @@
 /obj/machinery/light,
 /turf/open/floor/iron/dark,
 /area/engineering/main)
+"hxa" = (
+/obj/docking_port/stationary{
+	dheight = 4;
+	dir = 2;
+	dwidth = 4;
+	height = 9;
+	id = "aux_base_zone";
+	name = "aux base zone";
+	roundstart_template = /datum/map_template/shuttle/aux_base/default;
+	width = 9
+	},
+/turf/open/floor/plating,
+/area/construction/mining/aux_base)
 "hxR" = (
 /obj/structure/weightmachine/stacklifter,
 /obj/machinery/firealarm{
@@ -16985,6 +17004,9 @@
 	req_access_txt = "24"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "engineering-entrance"
+	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
 "iSR" = (
@@ -17329,6 +17351,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/security/checkpoint/medical)
+"jai" = (
+/obj/docking_port/stationary/random{
+	dir = 8;
+	id = "pod_4_lavaland";
+	name = "lavaland"
+	},
+/turf/open/space/basic,
+/area/space)
 "jaD" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -25639,6 +25669,9 @@
 	normalspeed = 0;
 	req_one_access_txt = "10;32;19"
 	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "engineering-entrance"
+	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
 "nqq" = (
@@ -26502,6 +26535,9 @@
 /obj/machinery/computer/shuttle/mining/common{
 	dir = 4
 	},
+/obj/structure/sign/warning/pods{
+	pixel_x = -32
+	},
 /turf/open/floor/iron,
 /area/hallway/secondary/entry)
 "nNG" = (
@@ -27186,13 +27222,10 @@
 /turf/open/floor/iron,
 /area/engineering/atmos)
 "ogf" = (
-/obj/docking_port/stationary{
+/obj/docking_port/stationary/random{
 	dir = 8;
-	dwidth = 11;
-	height = 22;
-	id = "whiteship_home";
-	name = "SS13: Auxiliary Dock, Station-Port";
-	width = 35
+	id = "pod_2_lavaland";
+	name = "lavaland"
 	},
 /turf/open/space/basic,
 /area/space)
@@ -29684,6 +29717,9 @@
 	name = "test chamber blast door"
 	},
 /obj/effect/turf_decal/stripes/full,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "experimentation-lab"
+	},
 /turf/open/floor/engine,
 /area/science/explab)
 "prl" = (
@@ -31654,14 +31690,14 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
 /obj/machinery/door/airlock/engineering{
 	name = "Engine Room";
 	req_access_txt = "10"
 	},
 /obj/machinery/navbeacon/wayfinding/engineering,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "engineering-entrance"
+	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
 "qqa" = (
@@ -33324,8 +33360,8 @@
 	req_access_txt = "57"
 	},
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "EVA"
 	},
 /turf/open/floor/iron,
 /area/ai_monitored/command/storage/eva)
@@ -42934,15 +42970,12 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
 /obj/machinery/door/airlock/engineering{
 	name = "Engineering Foyer";
 	req_one_access_txt = "32;19;10"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "engineering-entrance"
 	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
@@ -43915,6 +43948,14 @@
 	},
 /turf/open/space/basic,
 /area/space/nearstation)
+"wgT" = (
+/obj/docking_port/stationary/random{
+	dir = 8;
+	id = "pod_lavaland1";
+	name = "lavaland"
+	},
+/turf/open/space/basic,
+/area/space)
 "wgV" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 8
@@ -44639,10 +44680,10 @@
 	name = "Atmospherics";
 	req_access_txt = "24"
 	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
 /obj/machinery/navbeacon/wayfinding/atmos,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
+	cycle_id = "engineering-entrance"
+	},
 /turf/open/floor/iron,
 /area/engineering/break_room)
 "wxC" = (
@@ -46771,7 +46812,7 @@
 	dwidth = 2;
 	height = 13;
 	id = "ferry_home";
-	name = "port bay 2";
+	name = "Station Ferry Dock";
 	width = 5
 	},
 /turf/open/space/basic,
@@ -55134,6 +55175,7 @@ bXj
 bXj
 bXj
 bXj
+ogf
 bXj
 bXj
 bXj
@@ -55158,8 +55200,7 @@ bXj
 bXj
 bXj
 bXj
-bXj
-bXj
+wgT
 bXj
 bXj
 bXj
@@ -56057,7 +56098,7 @@ bXj
 bXj
 bXj
 bXj
-ogf
+bXj
 bXj
 bXj
 bXj
@@ -57168,7 +57209,7 @@ bXj
 bXj
 bXj
 bXj
-erU
+bXj
 bXj
 bXj
 bXj
@@ -60192,7 +60233,7 @@ rlX
 afq
 jjS
 bXj
-bXj
+jai
 bXj
 bXj
 bXj
@@ -78025,7 +78066,7 @@ bXj
 bXj
 bXj
 bXj
-bXj
+erU
 bXj
 bXj
 bXj
@@ -83575,7 +83616,7 @@ wMU
 bXj
 bXj
 bXj
-bXj
+caw
 bXj
 bXj
 bXj
@@ -90361,7 +90402,7 @@ gBp
 bZp
 bZp
 bZp
-gBp
+hxa
 bZp
 bZp
 bZp
