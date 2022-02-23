@@ -200,6 +200,7 @@ distance_multiplier - Can be used to multiply the distance at which the sound is
 	UNTIL(SSticker.login_music) //wait for SSticker init to set the login music
 
 	if(prefs && (prefs.toggles & SOUND_LOBBY))
+		vol = prefs.read_preference(/datum/preference/numeric/lobby_music_volume) // honk: allow control of lobby music volume
 		SEND_SOUND(src, sound(SSticker.login_music, repeat = 0, wait = 0, volume = vol, channel = CHANNEL_LOBBYMUSIC)) // MAD JAMS
 
 /proc/get_rand_frequency()
