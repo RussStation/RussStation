@@ -7,6 +7,5 @@
 	name = "Hierophant's Arena"
 	id = "hierophant"
 	description = "A strange, square chunk of metal of massive size. Inside awaits only death and many, many squares."
-	prefix = "_maps/RandomRuins/LavaRuins/"
-	suffix = "lavaland_surface_hierophant.dmm"
+	suffix = "icemoon_underground_hierophant.dmm"
 	always_place = TRUE
