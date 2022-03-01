@@ -5367,8 +5367,10 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /obj/effect/turf_decal/trimline/purple/filled/line,
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/structure/disposalpipe/sorting/mail{
+	dir = 4;
+	name = "cmo sorting disposal pipe";
+	sortType = 10
 	},
 /turf/open/floor/iron,
 /area/hallway/primary/fore)
@@ -6066,16 +6068,16 @@
 /turf/open/floor/iron,
 /area/maintenance/fore)
 "bAi" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
-	dir = 8
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment{
-	dir = 10
+	dir = 9
 	},
-/turf/open/floor/iron,
-/area/hallway/primary/fore)
+/turf/open/floor/iron/white,
+/area/medical/medbay/central)
 "bAw" = (
 /obj/machinery/status_display/evac{
 	pixel_x = 0;
@@ -10294,9 +10296,6 @@
 /area/tcommsat/server)
 "dCM" = (
 /obj/effect/landmark/start/paramedic,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/open/floor/iron,
 /area/medical/storage)
 "dCN" = (
@@ -10374,13 +10373,8 @@
 /turf/open/floor/iron/dark,
 /area/cargo/warehouse)
 "dEU" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/structure/disposalpipe/sorting/mail{
-	dir = 2;
-	name = "cmo sorting disposal pipe";
-	sortType = 10
+/obj/structure/sign/poster/official/random{
+	pixel_x = -32
 	},
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
@@ -10597,6 +10591,10 @@
 	dir = 1
 	},
 /obj/machinery/light/directional/south,
+/obj/machinery/light_switch{
+	pixel_x = -10;
+	pixel_y = -22
+	},
 /turf/open/floor/iron/dark,
 /area/medical/storage)
 "dLv" = (
@@ -11608,9 +11606,7 @@
 "ekh" = (
 /obj/machinery/disposal/bin,
 /obj/effect/turf_decal/stripes/box,
-/obj/structure/disposalpipe/trunk{
-	dir = 1
-	},
+/obj/structure/disposalpipe/trunk,
 /turf/open/floor/iron/dark,
 /area/medical/storage)
 "ekj" = (
@@ -12095,11 +12091,12 @@
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "evM" = (
-/obj/structure/sink{
-	dir = 8;
-	pixel_x = 11
+/obj/machinery/modular_computer/console/preset/cargochat/security{
+	dir = 8
 	},
-/obj/item/radio/intercom/directional/east,
+/obj/machinery/newscaster{
+	pixel_x = 32
+	},
 /obj/structure/window/reinforced/tinted{
 	dir = 1
 	},
@@ -13197,11 +13194,6 @@
 /turf/closed/wall,
 /area/security/processing)
 "eTl" = (
-/obj/structure/disposalpipe/sorting/mail{
-	dir = 4;
-	name = "medical sorting disposal pipe";
-	sortType = 9
-	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 4
 	},
@@ -13210,6 +13202,9 @@
 	},
 /obj/structure/cable,
 /obj/effect/turf_decal/trimline/purple/filled/line,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/hallway/primary/fore)
 "eTn" = (
@@ -14130,9 +14125,6 @@
 /turf/open/floor/iron/showroomfloor,
 /area/hallway/primary/aft)
 "fqC" = (
-/obj/structure/disposalpipe/segment{
-	dir = 5
-	},
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
@@ -14167,9 +14159,6 @@
 "frl" = (
 /obj/structure/sign/poster/official/random{
 	pixel_y = -32
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/open/floor/iron,
 /area/hallway/primary/fore)
@@ -15844,6 +15833,7 @@
 /area/maintenance/starboard/aft)
 "goG" = (
 /obj/machinery/vending/wardrobe/medi_wardrobe,
+/obj/item/radio/intercom/directional/east,
 /turf/open/floor/iron,
 /area/medical/storage)
 "goK" = (
@@ -16765,16 +16755,17 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
 "gNZ" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
+/obj/structure/plasticflaps/opaque,
+/obj/machinery/navbeacon{
+	codes_txt = "delivery;dir=8";
+	freq = 1400;
+	location = "Medbay"
+	},
+/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 5
-	},
-/turf/open/floor/iron/white,
-/area/medical/medbay/central)
+/turf/open/floor/plating,
+/area/medical/storage)
 "gOp" = (
 /obj/structure/table,
 /obj/item/stamp/cmo{
@@ -16897,11 +16888,16 @@
 /turf/open/floor/iron/dark,
 /area/security/interrogation)
 "gPR" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/structure/disposalpipe/sorting/mail{
+	dir = 2;
+	name = "medical sorting disposal pipe";
+	sortType = 9
 	},
-/turf/open/floor/iron/white,
-/area/medical/medbay/central)
+/turf/open/floor/iron,
+/area/hallway/primary/starboard)
 "gQf" = (
 /turf/closed/wall,
 /area/engineering/supermatter/room)
@@ -16917,9 +16913,6 @@
 /obj/machinery/door/airlock/medical/glass{
 	name = "Medbay";
 	req_access_txt = "5"
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/open/floor/iron,
 /area/medical/storage)
@@ -16984,12 +16977,6 @@
 	initial_gas_mix = "TEMP=2.7"
 	},
 /area/science/test_area)
-"gSL" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/medical/storage)
 "gSY" = (
 /obj/effect/spawner/structure/window,
 /obj/machinery/door/poddoor/shutters/preopen{
@@ -16998,15 +16985,6 @@
 	},
 /turf/open/floor/plating,
 /area/science/robotics/lab)
-"gSZ" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/medical/storage)
 "gTv" = (
 /turf/open/floor/stone,
 /area/service/bar)
@@ -17027,22 +17005,11 @@
 /turf/open/floor/circuit,
 /area/ai_monitored/turret_protected/ai_upload)
 "gTM" = (
-/obj/machinery/door/window/southright{
-	name = "Medbay Delivery";
-	req_one_access_txt = "5"
+/obj/structure/sink{
+	dir = 8;
+	pixel_x = 11
 	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/effect/turf_decal/delivery,
-/obj/machinery/door/firedoor/heavy,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/plating,
+/turf/open/floor/iron,
 /area/medical/storage)
 "gUl" = (
 /obj/machinery/air_sensor/atmos/mix_tank,
@@ -17067,18 +17034,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/maintenance/central)
-"gVf" = (
-/obj/structure/plasticflaps/opaque,
-/obj/machinery/navbeacon{
-	codes_txt = "delivery;dir=8";
-	freq = 1400;
-	location = "Medbay"
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/medical/storage)
 "gVi" = (
 /obj/item/toy/sprayoncan,
 /turf/open/floor/plating,
@@ -17106,12 +17061,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/medical/storage)
-"gWD" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/hallway/primary/starboard)
 "gWJ" = (
 /obj/machinery/firealarm{
 	dir = 1;
@@ -18430,25 +18379,11 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/open/floor/iron,
 /area/medical/storage)
 "hFe" = (
 /turf/open/floor/iron/dark,
 /area/security/interrogation)
-"hFp" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/medical/storage)
 "hFy" = (
 /obj/machinery/atmospherics/components/binary/pump/on{
 	dir = 1;
@@ -18493,9 +18428,6 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/effect/landmark/start/paramedic,
 /turf/open/floor/iron,
 /area/medical/storage)
@@ -18561,17 +18493,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/command/heads_quarters/hos)
-"hIA" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
-	dir = 4
-	},
-/obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 10
-	},
-/turf/open/floor/iron,
-/area/medical/storage)
 "hIE" = (
 /obj/structure/cable,
 /turf/open/floor/plating,
@@ -18666,6 +18587,7 @@
 /area/service/library)
 "hLr" = (
 /obj/machinery/firealarm/directional/east,
+/obj/structure/closet/crate/freezer/surplus_limbs,
 /turf/open/floor/iron,
 /area/medical/storage)
 "hLt" = (
@@ -20959,13 +20881,6 @@
 	icon_state = "panelscorched"
 	},
 /area/maintenance/central)
-"jdE" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/medical/storage)
 "jeh" = (
 /obj/structure/closet,
 /obj/effect/spawner/random/entertainment/drugs,
@@ -22329,9 +22244,6 @@
 /obj/machinery/computer/cargo/request{
 	dir = 8
 	},
-/obj/machinery/newscaster{
-	pixel_x = 32
-	},
 /turf/open/floor/iron/dark,
 /area/medical/storage)
 "jSj" = (
@@ -22750,10 +22662,6 @@
 /obj/effect/spawner/atmos_canister/nitrogen,
 /turf/open/floor/iron,
 /area/engineering/break_room)
-"kdu" = (
-/obj/structure/disposalpipe/segment,
-/turf/open/floor/iron/dark,
-/area/medical/storage)
 "kdS" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 4
@@ -24214,6 +24122,9 @@
 	name = "Medbay RC";
 	pixel_y = -30
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
 /turf/open/floor/iron/dark,
 /area/medical/storage)
 "kXT" = (
@@ -24242,6 +24153,9 @@
 /area/security/prison)
 "kYp" = (
 /obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/iron/dark,
 /area/medical/storage)
 "kYt" = (
@@ -24287,12 +24201,17 @@
 /turf/open/floor/iron/dark,
 /area/medical/storage)
 "kZx" = (
-/obj/machinery/modular_computer/console/preset/cargochat/security{
-	dir = 8
+/obj/effect/turf_decal/delivery,
+/obj/machinery/door/firedoor/heavy,
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
-/obj/machinery/light_switch{
-	pixel_x = -10;
-	pixel_y = -22
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/door/window/westleft{
+	name = "Medbay Deliveries";
+	req_access_txt = "5"
 	},
 /turf/open/floor/iron/dark,
 /area/medical/storage)
@@ -33664,8 +33583,8 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "qxV" = (
-/obj/structure/sign/poster/official/random{
-	pixel_x = -32
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/open/floor/iron,
 /area/hallway/primary/starboard)
@@ -35979,9 +35898,6 @@
 /turf/open/floor/iron/white/telecomms,
 /area/tcommsat/server)
 "rRp" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/structure/extinguisher_cabinet/directional/north,
 /turf/open/floor/iron,
 /area/medical/storage)
@@ -42554,12 +42470,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/engineering/break_room)
-"vGO" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/iron,
-/area/hallway/primary/fore)
 "vGS" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Engineering Foyer";
@@ -82341,7 +82251,7 @@ anF
 reF
 asN
 cjv
-vGO
+wnQ
 fUL
 fuo
 gKR
@@ -82598,7 +82508,7 @@ mKl
 deL
 aul
 cjv
-vGO
+wnQ
 fVA
 fuo
 dRc
@@ -82855,7 +82765,7 @@ deL
 deL
 auK
 bkY
-bAi
+fWh
 fWh
 fFu
 xfi
@@ -84661,8 +84571,8 @@ bOs
 cwJ
 fpB
 dto
-gNZ
-hEK
+lOI
+bAi
 eyA
 wVB
 kSy
@@ -84918,8 +84828,8 @@ gOp
 exn
 fnW
 ygp
-gPR
-hEK
+muH
+hzx
 pAx
 kuF
 kWh
@@ -85175,8 +85085,8 @@ gOr
 exn
 fnW
 ygp
-gPR
-hEK
+muH
+hzx
 pjH
 sXv
 kXm
@@ -85690,7 +85600,7 @@ xjj
 xjj
 xjj
 rRp
-hFp
+hKj
 euy
 gWb
 kZn
@@ -85946,8 +85856,8 @@ gPJ
 hoT
 hYB
 iFy
-gSL
-hFp
+ofC
+hKj
 kal
 kvd
 kVB
@@ -86203,7 +86113,7 @@ ofC
 eyn
 wec
 wec
-gSZ
+wec
 hHn
 kbe
 kbe
@@ -86461,8 +86371,8 @@ hqj
 lQX
 ofC
 dCM
-hIA
-kdu
+hKj
+kVB
 ekh
 kXR
 iDn
@@ -86717,7 +86627,7 @@ hqX
 gmE
 gmE
 gmE
-jdE
+gmE
 hKj
 kdS
 dnm
@@ -87231,11 +87141,11 @@ tcf
 tcf
 tcf
 tcf
-gVf
 tcf
 tcf
 tcf
 tcf
+gNZ
 wPB
 wPB
 wPB
@@ -87488,10 +87398,10 @@ bYo
 hrf
 tfB
 grn
-gWD
+xbT
 fJi
 xbT
-xbT
+dEU
 qxV
 tlE
 xbT
@@ -87745,11 +87655,11 @@ cfu
 uRM
 uRM
 ydj
-dEU
+ydj
 uRM
-uRM
+ydj
 fcD
-uRM
+gPR
 lEb
 uRM
 woE
