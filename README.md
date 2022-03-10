@@ -1,16 +1,15 @@
 ## RussStation
 
-A codebase built from /tg/station codebase
+A codebase built from the /tg/station codebase
 https://github.com/tgstation/tgstation
 
-[![Build Status](https://travis-ci.org/tgstation/tgstation.png)](https://travis-ci.org/tgstation/tgstation) [![Krihelimeter](https://www.krihelinator.xyz/badge/tgstation/tgstation)](https://www.krihelinator.xyz)  
-[![Percentage of issues still open](https://isitmaintained.com/badge/open/tgstation/tgstation.svg)](https://isitmaintained.com/project/tgstation/tgstation "Percentage of issues still open") [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/tgstation/tgstation.svg)](https://isitmaintained.com/project/tgstation/tgstation "Average time to resolve an issue") ![Coverage](https://img.shields.io/badge/coverage---2%25-red.svg)  
+![Coverage](https://img.shields.io/badge/coverage---2%25-red.svg)  
 [![forthebadge](https://forthebadge.com/images/badges/built-with-resentment.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/contains-technical-debt.svg)](https://user-images.githubusercontent.com/8171642/50290880-ffef5500-043a-11e9-8270-a2e5b697c86c.png) [![forinfinityandbyond](https://user-images.githubusercontent.com/5211576/29499758-4efff304-85e6-11e7-8267-62919c3688a9.gif)](https://www.reddit.com/r/SS13/comments/5oplxp/what_is_the_main_problem_with_byond_as_an_engine/dclbu1a)
 
 **Website:** http://honksquad.com/ss13/
 **Code:** https://github.com/RussStation/RussStation
 **Wiki** https://github.com/RussStation/RussStation/wiki and https://tgstation13.org/wiki/Main_Page
-**Discord:** https://discord.gg/TYqJZAy
+**Discord:** https://discord.gg/honk
 
  
 ## DOWNLOADING
@@ -30,40 +29,12 @@ hassle if you want to make any changes at all, so it's not recommended.)
 First-time installation should be fairly straightforward. First, you'll need
 BYOND installed. You can get it from https://www.byond.com/download. Once you've done
 that, extract the game files to wherever you want to keep them. This is a
-sourcecode-only release, so the next step is to compile the server files.
-Open RussStation.dme by double-clicking it, open the Build menu, and click
-compile. This'll take a little while, and if everything's done right you'll get
-a message like this:
-
-```
-saving RussStation.dmb (DEBUG mode)
-RussStation.dmb - 0 errors, 0 warnings
-```
+sourcecode-only release, so the next step is to compile the server files by
+running build.cmd
 
 If you see any errors or warnings, something has gone wrong - possibly a corrupt
 download or the files extracted wrong. If problems persist, ask for assistance
-in http://discord.gg/TYqJZAy
-
-Once that's done, open up the config folder. You'll want to edit config.txt to
-set the probabilities for different gamemodes in Secret and to set your server
-location so that all your players don't get disconnected at the end of each
-round. It's recommended you don't turn on the gamemodes with probability 0,
-except Extended, as they have various issues and aren't currently being tested,
-so they may have unknown and bizarre bugs. Extended is essentially no mode, and
-isn't in the Secret rotation by default as it's just not very fun.
-
-You'll also want to edit config/admins.txt to remove the default admins and add
-your own. "Game Master" is the highest level of access, and probably the one
-you'll want to use for now. You can set up your own ranks and find out more in
-config/admin_ranks.txt
-
-The format is
-
-```
-byondkey = Rank
-```
-
-where the admin rank must be properly capitalised.
+in http://discord.gg/honk
 
 This codebase also depends on a native library called rust-g. A precompiled
 Windows DLL is included in this repository, but Linux users will need to build
@@ -72,14 +43,15 @@ repo](https://github.com/tgstation/rust-g).
 
 Finally, to start the server, run Dream Daemon and enter the path to your
 compiled RussStation.dmb file. Make sure to set the port to the one you
-specified in the config.txt, and set the Security box to 'Safe'. Then press GO
+specified in the config.txt, and set the Security box to 'Trusted'. Then press GO
 and the server should start up and be ready to join. It is also recommended that
 you set up the SQL backend (see below).
 
 ## UPDATING
 
-To update an existing installation, first back up your /config and /data folders
-as these store your server configuration, player preferences and banlist.
+If you're using git, just run `git pull`, otherwise, first back up your /config
+and /data folders as these store your server configuration, player preferences
+and banlist.
 
 Then, extract the new files (preferably into a clean directory, but updating in
 place should work fine), copy your /config and /data folders back into the new
@@ -99,10 +71,9 @@ RussStation currently comes equipped with six maps.
 
 * [LimaStation](https://github.com/RussStation/RussStation/wiki/Lima-Station)
 * [CubeStation](https://github.com/RussStation/RussStation/wiki/Cube-Station)
-* [IceBoxStation](https://tgstation13.org/wiki/IceboxStation)
+* [IceCubeStation](https://github.com/RussStation/RussStation/wiki/IceCube-Station)
+* [EchoStation](https://github.com/RussStation/RussStation/wiki/Echo-Station)
 * [MetaStation](https://tgstation13.org/wiki/MetaStation)
-* [DeltaStation](https://tgstation13.org/wiki/DeltaStation)
-* [PubbyStation](https://tgstation13.org/wiki/PubbyStation)
 
 
 All maps have their own code file that is in the base of the _maps directory. Maps are loaded dynamically when the game starts. Follow this guideline when adding your own map, to your fork, for easy compatibility.
