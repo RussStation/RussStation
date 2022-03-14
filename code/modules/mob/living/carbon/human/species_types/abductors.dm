@@ -27,3 +27,9 @@
 	. = ..()
 	var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
 	abductor_hud.remove_hud_from(C)
+
+/datum/species/abductor/get_species_description()
+	return "The enigmatic Rat-folk, hailing from deep underground on many \
+			planets. Having travelled amongst the stars through few feats of their \
+			own, yet are industrious enough to have earned a spot among Nanotrasen's \
+			less-than-finest."
