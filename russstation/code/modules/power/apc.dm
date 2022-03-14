@@ -30,7 +30,7 @@
 	else if(target_power_usage < 2000)
 		cell_type = /obj/item/stock_parts/cell/high
 	else
-		cell_type = /obj/item/stock_parts/cell/high/plus
+		cell_type = /obj/item/stock_parts/cell/super
 	// finally finish init now that cell_type is set
 	. = ..()
 

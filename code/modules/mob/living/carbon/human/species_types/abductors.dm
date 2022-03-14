@@ -27,3 +27,62 @@
 	. = ..()
 	var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
 	abductor_hud.remove_hud_from(C)
+
+/datum/species/abductor/get_species_description()
+	return "These scientifically minded Abductors come \
+	from an undiscovered system, where discovery \
+	and innovation is the driver of society."
+
+/datum/species/abductor/get_species_lore()
+	return list(
+		"Not much is known about the enigmatic Abductors; \
+		those who deign to work with other groups are often \
+		tight lipped about their home system, and no explorer has stumbled upon it yet.",
+		"What little is known indicates that their society is driven \
+		by the pursuit of knowledge, an endeavor which has taken the \
+		Abductors technology several leagues beyond that of the other groups \
+		traveling the stars. It is also an endeavor which has led several \
+		groups of Abductors to go on ‘scientific expeditions’ where the goal \
+		is to experiment on whatever unfortunate organism crosses their path. \
+		Why other Abductors seem inclined to work with said organisms remains to be seen…"
+	)
+
+/datum/species/abductor/create_pref_unique_perks()
+	var/list/to_add = list()
+
+	to_add += list(
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_ICON = "gun",
+			SPECIES_PERK_NAME = "Chunky fingers",
+			SPECIES_PERK_DESC = "Abductors are unable to use normal (non-abductor) guns"
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+			SPECIES_PERK_ICON = "headset",
+			SPECIES_PERK_NAME = "Abductor communication",
+			SPECIES_PERK_DESC = "Abductors cannot speak normally, \
+				however when they do speak all other abductors \
+				can hear them regardless of radio status.",
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "bacteria",
+			SPECIES_PERK_NAME = "Virus immune",
+			SPECIES_PERK_DESC = "Abductors are immune to all forms of disease"
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "utensils",
+			SPECIES_PERK_NAME = "Alien stomach",
+			SPECIES_PERK_DESC = "Abductors do not need to eat"
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "wind",
+			SPECIES_PERK_NAME = "Breathless",
+			SPECIES_PERK_DESC = "Abductors do not need to breathe"
+		),
+	)
+
+	return to_add

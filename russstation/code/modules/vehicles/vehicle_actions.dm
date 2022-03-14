@@ -1,6 +1,8 @@
 /datum/action/vehicle/ridden/scooter/skateboard/ollie/suicide
 	name = "The Final Ollie"
 	desc = "This may be your last trick, better make it radical."
+	///Cooldown to next jump
+	var/next_ollie
 
 /datum/action/vehicle/ridden/scooter/skateboard/ollie/suicide/Trigger(trigger_flags)
 	if(world.time > next_ollie)
