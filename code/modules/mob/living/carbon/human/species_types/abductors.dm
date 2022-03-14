@@ -29,7 +29,51 @@
 	abductor_hud.remove_hud_from(C)
 
 /datum/species/abductor/get_species_description()
-	return "The enigmatic Rat-folk, hailing from deep underground on many \
-			planets. Having travelled amongst the stars through few feats of their \
-			own, yet are industrious enough to have earned a spot among Nanotrasen's \
-			less-than-finest."
+	return "Alien beings sent here to probe the station's crew. \
+			These abductors quit their job and started working for \
+			Nanotrasen for unknown reasons."
+
+/datum/species/abductor/get_species_lore()
+	return list(
+		"Obsessed with probing other lifeforms, very little is known about their background as they cannot speak verbally to crewmembers of other species.",
+	)
+
+/datum/species/abductor/create_pref_unique_perks()
+	var/list/to_add = list()
+
+	to_add += list(
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_ICON = "gun",
+			SPECIES_PERK_NAME = "Chunky fingers",
+			SPECIES_PERK_DESC = "Abductors are unable to use normal (non-abductor) guns"
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+			SPECIES_PERK_ICON = "headset",
+			SPECIES_PERK_NAME = "Abductor communication",
+			SPECIES_PERK_DESC = "Abductors cannot speak normally, \
+				however when they do speak all other abductors \
+				can hear them regardless of radio status.",
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "bacteria",
+			SPECIES_PERK_NAME = "Virus immune",
+			SPECIES_PERK_DESC = "Abductors are immune to all forms of disease"
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "utensils",
+			SPECIES_PERK_NAME = "Alien stomach",
+			SPECIES_PERK_DESC = "Abductors do not need to eat"
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "wind",
+			SPECIES_PERK_NAME = "Breathless",
+			SPECIES_PERK_DESC = "Abductors do not need to breathe"
+		),
+	)
+
+	return to_add
