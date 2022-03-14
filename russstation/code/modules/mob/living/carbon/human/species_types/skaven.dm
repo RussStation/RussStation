@@ -4,6 +4,10 @@
 	say_mod = "jitters"
 	default_color = "2E2E2E"
 	species_traits = list(MUTCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
+	inherent_traits = list(
+		TRAIT_ADVANCEDTOOLUSER,
+		TRAIT_CAN_STRIP,
+	)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	mutant_bodyparts = list("tail_skaven" = "Skaven")
 	external_organs = list(/obj/item/organ/external/horns = "None", /obj/item/organ/external/snout = "Round")
@@ -109,6 +113,41 @@
 	human_mob.dna.features["tail_skaven"] = tail
 	mutant_bodyparts["tail_skaven"] = tail
 	human_mob.update_body()
+
+/datum/species/skaven/get_species_description()
+	return "The enigmatic Rat-folk, hailing from deep underground on many \
+		planets. Having travelled amongst the stars through few feats of their \
+		own, yet are industrious enough to have earned a spot among Nanotrasen's \
+		less-than-finest."
+
+/datum/species/skaven/get_species_lore()
+	return list(
+		"The Skaven have made homes and hovels underground on many planets, but poor recordkeeping and countless civil wars between numerous clans have lost their origin planet to time. What little records remain hint of a mysterious substance known as warpstone, but any accounts beyond being a source of great power have been chewed beyond recognition.",
+    	"Accustomed to depths far below most races would go, Skaven being among the surface dwellers are a relatively recent development. The clans united in an effort to seek the warpstone once more, so they might one day understand where they came from, and what drove their clans to such violence.",
+	)
+
+/datum/species/skaven/create_pref_unique_perks()
+	var/list/to_add = list()
+
+	to_add += list(
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_ICON = "wind",
+			SPECIES_PERK_NAME = "Miasma Breathing",
+			SPECIES_PERK_DESC = "Skaven must breathe miasma to survive. You receive a \
+				tank when you arrive. Additional miasma can be created via compost \
+				bins or ordered from cargo.",
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_ICON = "hand-holding-usd",
+			SPECIES_PERK_NAME = "Reduced Salary",
+			SPECIES_PERK_DESC = "Skaven are not held in high regard. Your salary will be \
+        		significantly less than other species.",
+		),
+	)
+
+	return to_add
 
 //Skaven mob define
 /mob/living/carbon/human/species/skaven
