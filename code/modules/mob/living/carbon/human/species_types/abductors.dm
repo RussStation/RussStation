@@ -29,13 +29,22 @@
 	abductor_hud.remove_hud_from(C)
 
 /datum/species/abductor/get_species_description()
-	return "Alien beings sent here to probe the station's crew. \
-			These abductors quit their job and started working for \
-			Nanotrasen for unknown reasons."
+	return "These scientifically minded Abductors come \
+	from an undiscovered system, where discovery \
+	and innovation is the driver of society."
 
 /datum/species/abductor/get_species_lore()
 	return list(
-		"Obsessed with probing other lifeforms, very little is known about their background as they cannot speak verbally to crewmembers of other species.",
+		"Not much is known about the enigmatic Abductors; \
+		those who deign to work with other groups are often \
+		tight lipped about their home system, and no explorer has stumbled upon it yet.",
+		"What little is known indicates that their society is driven \
+		by the pursuit of knowledge, an endeavor which has taken the \
+		Abductors technology several leagues beyond that of the other groups \
+		traveling the stars. It is also an endeavor which has led several \
+		groups of Abductors to go on ‘scientific expeditions’ where the goal \
+		is to experiment on whatever unfortunate organism crosses their path. \
+		Why other Abductors seem inclined to work with said organisms remains to be seen…"
 	)
 
 /datum/species/abductor/create_pref_unique_perks()
