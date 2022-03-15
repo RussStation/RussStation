@@ -224,12 +224,12 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/effect/turf_decal/box/corners{
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer2{
 	dir = 8
+	},
+/obj/effect/turf_decal/box/corners{
+	dir = 4
 	},
 /turf/open/floor/iron/dark,
 /area/science/explab)
@@ -4016,11 +4016,11 @@
 /turf/open/floor/iron/white,
 /area/security/brig)
 "akC" = (
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/regular{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/regular,
+/obj/item/storage/medkit/regular,
 /obj/structure/table/glass,
 /obj/machinery/airalarm/directional/north{
 	pixel_y = 22
@@ -8679,7 +8679,7 @@
 /area/command/bridge)
 "avW" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/regular,
+/obj/item/storage/medkit/regular,
 /turf/open/floor/iron/dark,
 /area/command/bridge)
 "avX" = (
@@ -11103,7 +11103,7 @@
 "aCu" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high,
 /obj/item/radio/intercom{
 	pixel_y = 26
 	},
@@ -11509,7 +11509,7 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
-/area/commons/toilet/restrooms)
+/area/maintenance/department/cargo)
 "aDm" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer4,
@@ -13997,7 +13997,7 @@
 /turf/open/floor/plating{
 	icon_state = "panelscorched"
 	},
-/area/cargo/warehouse)
+/area/maintenance/department/cargo)
 "aKo" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer2,
@@ -14654,11 +14654,16 @@
 /obj/effect/mapping_helpers/airlock/abandoned,
 /obj/structure/cable,
 /turf/open/floor/plating,
-/area/cargo/warehouse)
+/area/maintenance/department/cargo)
 "aMv" = (
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/cargo/warehouse)
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/binary/tank_compressor{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/science/explab)
 "aMw" = (
 /obj/structure/cable,
 /obj/machinery/firealarm{
@@ -15066,17 +15071,17 @@
 	req_access_txt = "41"
 	},
 /turf/open/floor/plating,
-/area/cargo/qm)
+/area/maintenance/department/cargo)
 "aNQ" = (
 /obj/structure/closet/crate/freezer,
 /turf/open/floor/plating,
-/area/cargo/warehouse)
+/area/maintenance/department/cargo)
 "aNT" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 27
 	},
 /turf/closed/wall,
-/area/cargo/warehouse)
+/area/maintenance/department/cargo)
 "aNU" = (
 /obj/structure/cable,
 /obj/machinery/door/airlock/maintenance{
@@ -15085,7 +15090,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/plating,
-/area/cargo/warehouse)
+/area/maintenance/department/cargo)
 "aNV" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/toy/figure/lawyer,
@@ -15515,7 +15520,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/abandoned,
 /turf/open/floor/iron,
-/area/cargo/warehouse)
+/area/maintenance/department/cargo)
 "aPh" = (
 /obj/structure/cable,
 /turf/open/floor/iron,
@@ -15803,7 +15808,7 @@
 	dir = 8
 	},
 /turf/open/floor/plating,
-/area/cargo/warehouse)
+/area/maintenance/department/cargo)
 "aQo" = (
 /obj/machinery/button/door{
 	id = "qm_warehouse";
@@ -22944,11 +22949,11 @@
 /area/medical/paramedic)
 "bka" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/regular{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/regular,
+/obj/item/storage/medkit/regular,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -23421,7 +23426,7 @@
 "blw" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high,
 /obj/effect/turf_decal/tile/green{
 	dir = 1
 	},
@@ -24558,7 +24563,7 @@
 "boZ" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -25615,8 +25620,8 @@
 	pixel_x = -8;
 	pixel_y = 4
 	},
-/obj/item/stock_parts/cell/high/plus,
-/obj/item/stock_parts/cell/high/plus{
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high{
 	pixel_x = 5;
 	pixel_y = -5
 	},
@@ -26170,15 +26175,15 @@
 /turf/open/floor/iron,
 /area/science/robotics/lab)
 "bsZ" = (
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/regular{
 	empty = 1;
 	name = "First-Aid (empty)"
 	},
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/regular{
 	empty = 1;
 	name = "First-Aid (empty)"
 	},
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/regular{
 	empty = 1;
 	name = "First-Aid (empty)"
 	},
@@ -27232,6 +27237,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
+/obj/machinery/atmospherics/components/trinary/filter,
 /turf/open/floor/iron,
 /area/science/explab)
 "bvZ" = (
@@ -27315,12 +27321,12 @@
 /area/maintenance/department/engine)
 "bwu" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire{
+/obj/item/storage/medkit/fire{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/fire,
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/fire,
+/obj/item/storage/medkit/regular{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -27779,6 +27785,9 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 4
+	},
 /turf/open/floor/iron/dark,
 /area/science/explab)
 "bxJ" = (
@@ -28147,8 +28156,8 @@
 "byI" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high/plus,
-/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
 /obj/effect/turf_decal/tile/purple,
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
@@ -30659,7 +30668,21 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/obj/machinery/computer/pod/old/mass_driver_controller/ordnancedriver/longrange,
+/obj/machinery/computer/pod/old/mass_driver_controller/ordnancedriver/longrange{
+	pixel_x = 25
+	},
+/obj/structure/table,
+/obj/item/computer_hardware/hard_drive/portable{
+	pixel_x = 7;
+	pixel_y = 2
+	},
+/obj/item/computer_hardware/hard_drive/portable{
+	pixel_x = -5;
+	pixel_y = 8
+	},
+/obj/item/computer_hardware/hard_drive/portable{
+	pixel_x = -2
+	},
 /turf/open/floor/iron,
 /area/science/mixing)
 "bFx" = (
@@ -31561,7 +31584,7 @@
 /area/science/mixing)
 "bHE" = (
 /obj/structure/window/reinforced,
-/obj/machinery/doppler_array/research/science,
+/obj/machinery/doppler_array,
 /obj/effect/turf_decal/bot,
 /obj/effect/turf_decal/tile/purple,
 /obj/effect/turf_decal/tile/purple{
@@ -34368,7 +34391,7 @@
 /obj/machinery/cell_charger{
 	pixel_y = 5
 	},
-/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = 29
@@ -36573,7 +36596,7 @@
 /obj/item/clipboard,
 /obj/item/lighter,
 /obj/item/stamp/ce,
-/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high,
 /obj/machinery/keycard_auth{
 	pixel_x = 26;
 	pixel_y = 26
@@ -38316,8 +38339,8 @@
 /obj/item/electronics/airlock,
 /obj/item/electronics/airlock,
 /obj/item/electronics/apc,
-/obj/item/stock_parts/cell/high/plus,
-/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
 /turf/open/floor/iron,
 /area/engineering/main)
 "caz" = (
@@ -38913,7 +38936,7 @@
 /obj/item/stack/sheet/glass/fifty,
 /obj/item/electronics/airlock,
 /obj/item/electronics/airlock,
-/obj/item/stock_parts/cell/high/plus,
+/obj/item/stock_parts/cell/high,
 /obj/item/stack/sheet/mineral/plasma{
 	amount = 30
 	},
@@ -39741,7 +39764,7 @@
 /obj/machinery/airalarm/directional/north{
 	pixel_y = 22
 	},
-/obj/item/storage/firstaid/regular,
+/obj/item/storage/medkit/regular,
 /turf/open/floor/iron,
 /area/service/chapel/monastery)
 "cgd" = (
@@ -39879,8 +39902,8 @@
 /area/service/chapel/monastery)
 "cgM" = (
 /obj/structure/dresser,
-/obj/structure/sign/plaques{
-	pixel_y = 28
+/obj/structure/sign/picture_frame/portrait{
+	pixel_y = 30
 	},
 /turf/open/floor/iron/grimy,
 /area/service/chapel/monastery)
@@ -43792,7 +43815,7 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/box/corners{
-	dir = 4
+	dir = 8
 	},
 /turf/open/floor/iron/dark,
 /area/science/explab)
@@ -44751,6 +44774,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer2{
 	dir = 8
 	},
+/obj/machinery/atmospherics/components/unary/portables_connector/visible,
 /turf/open/floor/iron,
 /area/science/explab)
 "cKF" = (
@@ -44825,7 +44849,8 @@
 /area/maintenance/department/crew_quarters/dorms)
 "cPT" = (
 /obj/machinery/power/apc/auto_name/directional/east{
-	pixel_y = 24
+	pixel_y = 24;
+	pixel_x = 0
 	},
 /obj/structure/cable,
 /obj/structure/table/glass,
@@ -46316,12 +46341,12 @@
 /area/medical/psychology)
 "feU" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/o2{
+/obj/item/storage/medkit/o2{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/o2,
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/o2,
+/obj/item/storage/medkit/regular{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -46454,6 +46479,9 @@
 /obj/machinery/camera/directional/south{
 	c_tag = "Experimentation Lab Testing Zone";
 	network = list("ss13","rd")
+	},
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 1
 	},
 /turf/open/floor/iron,
 /area/science/explab)
@@ -47351,7 +47379,7 @@
 "guS" = (
 /obj/structure/table/reinforced,
 /obj/item/folder/blue,
-/obj/item/storage/firstaid/regular,
+/obj/item/storage/medkit/regular,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -47520,9 +47548,6 @@
 /turf/open/floor/iron/white,
 /area/medical/storage)
 "gDZ" = (
-/obj/effect/turf_decal/box/corners{
-	dir = 8
-	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -47537,6 +47562,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/box/corners{
+	dir = 1
+	},
 /turf/open/floor/iron/dark,
 /area/science/explab)
 "gEI" = (
@@ -49360,12 +49388,12 @@
 /turf/open/floor/iron/white,
 /area/command/heads_quarters/cmo)
 "jsD" = (
-/obj/structure/sign/plaques{
-	pixel_y = 28
-	},
 /obj/item/kirbyplants{
 	icon_state = "plant-21";
 	pixel_y = 3
+	},
+/obj/structure/sign/picture_frame/portrait{
+	pixel_y = 30
 	},
 /turf/open/floor/iron/dark,
 /area/service/chapel/office)
@@ -52018,10 +52046,10 @@
 /turf/open/floor/iron,
 /area/engineering/lobby)
 "noM" = (
-/obj/machinery/research/explosive_compressor,
 /obj/item/radio/intercom{
 	pixel_x = 28
 	},
+/obj/machinery/research/anomaly_refinery,
 /turf/open/floor/iron,
 /area/science/mixing)
 "noT" = (
@@ -55367,12 +55395,12 @@
 /area/maintenance/department/engine)
 "rMZ" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/toxin{
+/obj/item/storage/medkit/toxin{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/toxin,
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/toxin,
+/obj/item/storage/medkit/regular{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -55569,7 +55597,7 @@
 /turf/open/floor/plating,
 /area/construction/mining/aux_base)
 "scz" = (
-/obj/machinery/power/apc/highcap/fifteen_k{
+/obj/machinery/power/apc/highcap/ten_k{
 	dir = 8;
 	name = "Engineering APC";
 	pixel_x = -25
@@ -58675,12 +58703,12 @@
 /area/maintenance/disposal/incinerator)
 "wiy" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/brute{
+/obj/item/storage/medkit/brute{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/brute,
-/obj/item/storage/firstaid/regular{
+/obj/item/storage/medkit/brute,
+/obj/item/storage/medkit/regular{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -99424,7 +99452,7 @@ alp
 aKf
 aNY
 bcI
-wDZ
+aEj
 wDZ
 wDZ
 wDZ
@@ -99681,7 +99709,7 @@ aJm
 aKg
 aEj
 bcI
-wDZ
+aEj
 aUm
 bcN
 abi
@@ -99936,9 +99964,9 @@ aEd
 aEd
 aJn
 aEd
-aEd
+aEj
 bcI
-wDZ
+aEj
 abh
 aRn
 abe
@@ -100193,7 +100221,7 @@ ahB
 ahB
 alx
 aKh
-aEd
+aEj
 bcI
 aNO
 aOZ
@@ -100450,9 +100478,9 @@ aHo
 aIk
 aJo
 aGF
-aEd
+aEj
 bcI
-wDZ
+aEj
 aPa
 aRp
 abg
@@ -100707,9 +100735,9 @@ aEd
 aEd
 aEd
 aKi
-aEd
+aEj
 bcI
-wDZ
+aEj
 aPb
 bcS
 aaJ
@@ -100964,9 +100992,9 @@ aHp
 aIl
 aEd
 aKj
-aEd
+aEj
 aMt
-wDZ
+aEj
 wDZ
 aTo
 aTo
@@ -101219,12 +101247,12 @@ aFJ
 aGF
 aEd
 aEd
-aEd
-aEd
-aEd
-aMv
+aEj
+aEj
+aEj
+bcI
 aQk
-cDa
+aEj
 aQf
 aRq
 tYu
@@ -101476,12 +101504,12 @@ aFI
 aGF
 aHq
 aIl
-aEd
+aEj
 aKk
-cCY
-aMv
+aFi
+bcI
 aNQ
-cDa
+aEj
 aQg
 aTq
 aTq
@@ -101732,13 +101760,13 @@ aEd
 aFK
 aEd
 aEd
-aEd
-aEd
-cCY
-cDa
+aEj
+aEj
+aFi
+aEj
 aPg
-cDa
-cDa
+aEj
+aEj
 coL
 aTr
 mSB
@@ -101989,10 +102017,10 @@ aEd
 aFL
 aGI
 aHr
-aEd
+aEj
 aFi
-cCY
-cDa
+aFi
+aEj
 aMw
 aQo
 aXC
@@ -102026,7 +102054,7 @@ nBL
 bqs
 xgG
 cKA
-bvY
+aMv
 bvY
 fkH
 bAF
@@ -102248,8 +102276,8 @@ aGJ
 aGJ
 aDl
 aMF
-cDa
-cDa
+aEj
+aEj
 aMx
 aQp
 bbJ
@@ -102500,10 +102528,10 @@ aur
 aur
 aur
 atn
-aEd
-aEd
-aEd
-aEd
+aEj
+aEj
+aEj
+aEj
 hSe
 aNT
 aOO
@@ -102762,7 +102790,7 @@ aGK
 aHs
 aEj
 hSe
-cDa
+aEj
 aOP
 aMy
 aSd
@@ -103276,7 +103304,7 @@ aGM
 aFi
 bfu
 aJs
-cDa
+aEj
 aLl
 cCY
 aTv
@@ -103533,7 +103561,7 @@ aGN
 aGN
 aEj
 aJs
-cDa
+aEj
 aPc
 aPU
 aPY
@@ -103790,7 +103818,7 @@ aEj
 aEj
 aEj
 aJs
-cDa
+aEj
 cDa
 cDa
 cDa
