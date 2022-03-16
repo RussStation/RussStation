@@ -153,7 +153,7 @@
 
 	var/slowed_by_drag = TRUE ///Whether the mob is slowed down when dragging another prone mob
 
-	var/datum/fart/fart_type = null // honk -- a diverse fart system
+	var/datum/fart/fart // honk -- a diverse fart system
 
 	/// List of changes to body temperature, used by desease symtoms like fever
 	var/list/body_temp_changes = list()

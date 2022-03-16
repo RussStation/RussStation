@@ -10,9 +10,9 @@
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
 	if(ishuman(src)) // honk start -- fart module
-		src.fart_type = new /datum/fart/living/carbon/human()
+		src.fart = new /datum/fart/human()
 	else if(issilicon(src))
-		src.fart_type = new /datum/fart/living/silicon() // honk end
+		src.fart = new /datum/fart/silicon() // honk end
 	SSpoints_of_interest.make_point_of_interest(src)
 	update_fov()
 

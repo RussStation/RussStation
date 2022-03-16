@@ -8,7 +8,7 @@
 	cooldown = 0.1 SECONDS // the absolute limit of farting
 
 /datum/emote/living/fart/get_sound(mob/living/user)
-	return pick(user.fart_type.sounds)
+	return pick(user.fart.sounds)
 
 /datum/emote/living/fart/check_cooldown(mob/user, intentional)
 	// store before calling super
@@ -17,12 +17,15 @@
 	if(!.)
 		return FALSE
 	var/mob/living/U = user
+	if(!U.fart)
+		to_chat(user, span_notice("You try to fart but don't know how!"))
+		return FALSE
 	var/last_used = world.time - previous_usage
-	return U.fart_type.try_fart(U, last_used)
+	return U.fart.try_fart(U, last_used)
 
 /datum/emote/living/fart/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
 	if (!.)
 		return FALSE
 	var/mob/living/U = user
-	U.fart_type.make_gas(U)
+	U.fart.make_gas(U)

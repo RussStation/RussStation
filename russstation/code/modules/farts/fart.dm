@@ -63,8 +63,6 @@
 /datum/fart/proc/try_fart(mob/living/user, last_used)
 	if(user.IsStun())
 		to_chat(user, span_notice("You cannot fart while stunned!"))
-	else if(!user.fart_type)
-		to_chat(user, span_notice("You try to fart but don't know how!"))
 	else if(last_used < hard_cooldown)
 		hard_fail(user)
 	else if(last_used < soft_cooldown)

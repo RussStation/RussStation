@@ -1,4 +1,4 @@
-/datum/fart/living/carbon/human
+/datum/fart/human
 	gas_id = "miasma"
 	sounds = list('russstation/sound/effects/mob_effects/poo1.ogg',
 				'russstation/sound/effects/mob_effects/poo2.ogg',

@@ -1,4 +1,4 @@
-/datum/fart/living/carbon/human/species/corporate
+/datum/fart/human/thermonuclear
 	gas_id = "bz"
 	gas_volume = 10
 	hard_cooldown = 0.2 SECONDS
