@@ -8,7 +8,7 @@
 	soft_fail_message = "You let out some gas, but it felt like something came with it."
 	hard_fail_message = "You feel a sharp pain in your stomach and fail to produce any flatulence."
 
-/datum/fart/living/carbon/human/make_gas(mob/living/user)
+/datum/fart/human/make_gas(mob/living/user)
 	..()
 	if(HAS_TRAIT(user, TRAIT_NAIVE) && prob(25)) // naive people (like clowns) have a chance to fart confetti
 		var/turf/T = get_turf(user)
