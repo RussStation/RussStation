@@ -28,5 +28,5 @@
 		span_userdanger("[user] rips a thermonuclear fart!"),
 	)
 	explosion(user, 0, 0, 4, 2, flame_range = 5, silent = TRUE)
-	user.atmos_spawn_air("miasma=[1000];TEMP=[user.bodytemperature]") // This shouldn't be making that much Miasma, otherwise the server will cry.
+	user.atmos_spawn_air("miasma=[1000];TEMP=[user.bodytemperature]")
 	user.gib(TRUE, FALSE, FALSE)

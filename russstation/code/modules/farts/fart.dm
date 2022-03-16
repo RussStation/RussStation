@@ -14,7 +14,13 @@
 	/** volume of gas to spawn in make_gas */
 	var/gas_volume = 2.5
 	/** gas id as defined in code\modules\atmospherics\gasmixtures\gas_types.dm */
-	var/gas_id = null
+	var/gas_id
+	/** type of damage to do when the fart fails */
+	var/fail_damage_type
+	/** message to send to user on soft fails */
+	var/soft_fail_message
+	/** message to send to user on hard fails */
+	var/hard_fail_message
 
 /**
   * Produce side effects when a fart successfully happens
@@ -27,10 +33,42 @@
   * Gets called when the user is under the safe cooldown and failed the chance
   */
 /datum/fart/proc/soft_fail(mob/living/user)
-	return
+	if(prob(fail_chance))
+		do_fail_damage(user)
+		if(soft_fail_message)
+			to_chat(user, span_notice(soft_fail_message))
 
 /**
   * Gets called when the user goes under the hard cooldown
   */
 /datum/fart/proc/hard_fail(mob/living/user)
-	return
+	do_fail_damage(user)
+	user.Stun(1 SECONDS)
+	if(hard_fail_message)
+		to_chat(user, span_notice(hard_fail_message))
+
+/**
+ * Apply damage to user on fail
+ */
+/datum/fart/proc/do_fail_damage(mob/living/user)
+	switch(fail_damage_type)
+		if(FIRE)
+			user.adjustFireLoss(fail_damage)
+		if(TOX)
+			user.adjustToxLoss(fail_damage)
+
+/**
+ * Attempt to fart, possibly causing a fail
+ */
+/datum/fart/proc/try_fart(mob/living/user, last_used)
+	if(user.IsStun())
+		to_chat(user, span_notice("You cannot fart while stunned!"))
+	else if(!user.fart_type)
+		to_chat(user, span_notice("You try to fart but don't know how!"))
+	else if(last_used < hard_cooldown)
+		hard_fail(user)
+	else if(last_used < soft_cooldown)
+		soft_fail(user)
+		return TRUE
+	else
+		return TRUE
