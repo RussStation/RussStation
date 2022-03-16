@@ -12,6 +12,7 @@
 	buckle_lying = 0
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	can_be_shoved_into = TRUE
+	fart = new /datum/fart/human() // honk -- human farts
 
 	//Hair colour and style
 	var/hair_color = "#000000"
