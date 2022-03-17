@@ -13,10 +13,10 @@
 	var/fail_damage = 5
 	/** volume of gas to spawn in make_gas */
 	var/gas_volume = 2.5
+	/** type of damage to do when the fart fails */
+	var/fail_damage_type = BRUTE
 	/** gas id as defined in code\modules\atmospherics\gasmixtures\gas_types.dm */
 	var/gas_id
-	/** type of damage to do when the fart fails */
-	var/fail_damage_type
 	/** message to send to user on soft fails */
 	var/soft_fail_message
 	/** message to send to user on hard fails */
