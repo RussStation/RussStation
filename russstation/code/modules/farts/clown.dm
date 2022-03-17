@@ -10,4 +10,6 @@
 		var/turf/T = get_turf(user)
 		new /obj/effect/gibspawner/confetti(T, user)
 
+/datum/fart/human/mime/sounds = list() // mime farts are silent
+
 #undef CONFETTI_CHANCE
