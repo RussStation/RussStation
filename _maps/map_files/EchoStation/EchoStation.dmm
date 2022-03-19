@@ -3093,8 +3093,6 @@
 /turf/open/floor/iron/showroomfloor,
 /area/science/robotics/lab)
 "bDz" = (
-/obj/machinery/power/apc/auto_name/directional/south,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/maintenance/solars/port/fore)
 "bEA" = (
@@ -16670,9 +16668,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -27
 	},
-/obj/machinery/atmospherics/components/trinary/filter{
-	dir = 1
-	},
+/obj/machinery/atmospherics/components/binary/tank_compressor,
 /turf/open/floor/iron,
 /area/science/mixing)
 "iMF" = (
@@ -17400,7 +17396,7 @@
 /turf/open/floor/plating,
 /area/commons/storage/primary)
 "jkH" = (
-/obj/machinery/atmospherics/components/binary/tank_compressor,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/brown/visible,
 /turf/open/floor/iron,
 /area/science/mixing)
 "jkM" = (
@@ -20944,6 +20940,14 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/start/assistant,
+/obj/machinery/button/door{
+	id = "BathroomBolt1";
+	name = "Bathroom Lock";
+	normaldoorcontrol = 1;
+	pixel_x = -25;
+	pixel_y = -8;
+	specialfunctions = 4
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/commons/toilet/locker)
 "ldp" = (
@@ -20975,11 +20979,27 @@
 /obj/effect/decal/cleanable/vomit/old,
 /obj/effect/landmark/start/hangover,
 /obj/item/newspaper,
+/obj/machinery/button/door{
+	id = "BathroomBolt2";
+	name = "Bathroom Lock";
+	normaldoorcontrol = 1;
+	pixel_x = -25;
+	pixel_y = -8;
+	specialfunctions = 4
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/commons/toilet/locker)
 "ldI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/recharge_station,
+/obj/machinery/button/door{
+	id = "BathroomBolt3";
+	name = "Bathroom Lock";
+	normaldoorcontrol = 1;
+	pixel_x = -25;
+	pixel_y = -8;
+	specialfunctions = 4
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/commons/toilet/locker)
 "ldS" = (
@@ -23201,7 +23221,8 @@
 /area/hallway/primary/starboard)
 "mqM" = (
 /obj/machinery/door/airlock{
-	name = "Unit 1"
+	name = "Unit 1";
+	id_tag = "BathroomBolt1"
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/commons/toilet/locker)
@@ -23260,7 +23281,8 @@
 /area/security/warden)
 "mtr" = (
 /obj/machinery/door/airlock{
-	name = "Unit 2"
+	name = "Unit 2";
+	id_tag = "BathroomBolt2"
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/commons/toilet/locker)
@@ -23397,7 +23419,8 @@
 /area/hallway/primary/central)
 "mwu" = (
 /obj/machinery/door/airlock{
-	name = "Unit 3"
+	name = "Unit 3";
+	id_tag = "BathroomBolt3"
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/commons/toilet/locker)
@@ -33958,14 +33981,10 @@
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "rBS" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/machinery/atmospherics/components/unary/portables_connector/visible{
-	dir = 8
-	},
-/turf/open/floor/iron,
-/area/science/mixing)
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/east,
+/turf/open/floor/plating,
+/area/maintenance/solars/port/fore)
 "rCf" = (
 /turf/closed/wall/r_wall,
 /area/hallway/primary/central)
@@ -68108,7 +68127,7 @@ udI
 rGy
 vcV
 vDn
-rBS
+nSc
 nSc
 nCI
 xlC
@@ -69354,7 +69373,7 @@ jjW
 jjW
 wdC
 efL
-hxO
+rBS
 eKq
 gnX
 vFE
