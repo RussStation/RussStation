@@ -7,3 +7,12 @@
 	opendoors = FALSE
 	rename_team = "Wizard Response Team"
 	polldesc = "a contracted Wizard Federation Emergency Response Team"
+
+// for no good reason in particular
+/datum/ert/honk_squad
+	roles = list(/datum/antagonist/ert/honk_squad)
+	leader_role = /datum/antagonist/ert/honk_squad
+	teamsize = 5
+	opendoors = FALSE
+	rename_team = "Honk Squad"
+	polldesc = "a Nanotrasen Clown Conscript Team"

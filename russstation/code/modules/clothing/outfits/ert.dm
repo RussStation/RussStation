@@ -31,3 +31,10 @@
 	if(S)
 		S.owner = H
 	return ..()
+
+/datum/outfit/job/clown/ert
+	name = "Honk Squad"
+	id = /obj/item/card/id/advanced/centcom/ert
+	id_trim = /datum/id_trim/centcom/ert/clown
+	ears = /obj/item/radio/headset/headset_cent/alt
+
