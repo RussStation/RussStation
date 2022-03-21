@@ -50,7 +50,7 @@
 	back = /obj/item/storage/backpack/clown
 	implants = list(/obj/item/implant/sad_trombone)
 
-/datum/outfit/job/centcom/ert/clown/post_equip(mob/living/carbon/human/H, visualsOnly)
+/datum/outfit/centcom/ert/clown/post_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
 	if(visualsOnly)
 		return
