@@ -7,7 +7,16 @@
 	. = ..()
 	name_source = GLOB.wizard_first
 
-/datum/antagonist/ert/honk_squad
-	role = "Clown Conscript"
+/datum/antagonist/ert/clown/New()
+	. = ..()
+	name_source = GLOB.clown_names
+
+/datum/antagonist/ert/clown/honk_squad
+	role = JOB_ERT_HONK_SQUAD
 	suicide_cry = "Hjonk.."
-	outfit = /datum/outfit/job/clown/ert
+	outfit = /datum/outfit/centcom/ert/clown/honk_squad
+
+/datum/antagonist/ert/clown/circus_seal
+	role = JOB_ERT_CIRCUS_SEAL
+	suicide_cry = "Get honked, assholes"
+	outfit = /datum/outfit/centcom/ert/clown/circus_seal

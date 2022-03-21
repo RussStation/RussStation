@@ -10,9 +10,17 @@
 
 // for no good reason in particular
 /datum/ert/honk_squad
-	roles = list(/datum/antagonist/ert/honk_squad)
-	leader_role = /datum/antagonist/ert/honk_squad
+	roles = list(/datum/antagonist/ert/clown/honk_squad)
+	leader_role = /datum/antagonist/ert/clown/honk_squad
 	teamsize = 5
 	opendoors = FALSE
 	rename_team = "Honk Squad"
 	polldesc = "a Nanotrasen Clown Conscript Team"
+
+/datum/ert/circus_seal
+	roles = list(/datum/antagonist/ert/clown/circus_seal)
+	leader_role = /datum/antagonist/ert/clown/circus_seal
+	teamsize = 5
+	opendoors = TRUE
+	rename_team = "CIRCUS-SEALs"
+	polldesc = "a contracted Clownian Navy CIRCUS-SEAL Team"
