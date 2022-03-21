@@ -16,6 +16,7 @@
 	opendoors = FALSE
 	rename_team = "Honk Squad"
 	polldesc = "a Nanotrasen Clown Conscript Team"
+	mission = "Clown around."
 
 /datum/ert/circus_seal
 	roles = list(/datum/antagonist/ert/clown/circus_seal)
@@ -24,3 +25,4 @@
 	opendoors = TRUE
 	rename_team = "CIRCUS-SEALs"
 	polldesc = "a contracted Clownian Navy CIRCUS-SEAL Team"
+	mission = "Honk up the station."
