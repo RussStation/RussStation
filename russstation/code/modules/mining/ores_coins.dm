@@ -36,6 +36,7 @@
 	custom_materials = list(/datum/material/adamantine = MINERAL_MATERIAL_AMOUNT)
 	refined_type = /obj/item/stack/sheet/mineral/adamantine
 	reagent_id = /datum/reagent/adamantine
+	merge_type = /obj/item/stack/ore/adamantine
 
 /obj/item/stack/ore/stone
 	name = "rough stones"

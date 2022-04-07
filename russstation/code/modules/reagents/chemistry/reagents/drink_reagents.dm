@@ -29,7 +29,7 @@
 
 
 /datum/reagent/consumable/superlaughter/traitor_pen
-	name = "Super Laughter"
+	name = "Long Lasting Laughter" // Name changed to avoid confusion and fix unit test
 	description = "Funny until you're the one laughing."
 	metabolization_rate = 1.5 * REAGENTS_METABOLISM
 	color = "#FF4DD2"
