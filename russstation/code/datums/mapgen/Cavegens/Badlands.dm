@@ -1,6 +1,6 @@
 // you thought you could abandon the station and party on lavaland?
 /datum/map_generator/cave_generator/badlands
-	open_turf_types = list(/turf/open/floor/plating/asteroid/basalt/wasteland = 40, \
+	open_turf_types = list(/turf/open/misc/asteroid/basalt/wasteland = 40, \
 		/turf/open/chasm/lavaland = 1)
 	// no, you don't get nice things
 	closed_turf_types = list(/turf/closed/mineral/random/low_chance = 20, \

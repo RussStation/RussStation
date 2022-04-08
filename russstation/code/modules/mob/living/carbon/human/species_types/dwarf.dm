@@ -10,7 +10,6 @@
 		TRAIT_VIRUSIMMUNE, // lavaland has miasma
 	)
 	mutant_bodyparts = list("wings" = "None")
-	limbs_id = "human"
 	use_skintones = TRUE
 	speedmod = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human

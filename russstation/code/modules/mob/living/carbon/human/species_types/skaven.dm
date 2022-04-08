@@ -28,6 +28,15 @@
 	outfit_important_for_life = /datum/outfit/skaven
 	species_language_holder = /datum/language_holder/skaven
 	sexes = FALSE //ever heard of female skaven? didnt think so
+	// Bodypay Overrides (similar to /datum/species/lizard)
+	bodypart_overrides = list(
+		BODY_ZONE_HEAD = /obj/item/bodypart/head/skaven,
+		BODY_ZONE_CHEST = /obj/item/bodypart/chest/skaven,
+		BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm/skaven,
+		BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/skaven,
+		BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/skaven,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/skaven,
+	)
 
 /datum/species/skaven/get_features()
 	. = ..()

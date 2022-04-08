@@ -6,4 +6,4 @@
 	icon_state = "brick"
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	floor_tile = /obj/item/stack/tile/stone
-	baseturfs = /turf/open/floor/plating/asteroid/basalt/lava_land_surface
+	baseturfs = /turf/open/misc/asteroid/basalt/lava_land_surface
