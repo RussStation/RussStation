@@ -29,11 +29,10 @@
 
 
 /datum/reagent/consumable/superlaughter/traitor_pen
-	name = "Super Laughter"
+	// Name changed to avoid confusion and fix unit test
+	name = "Hysteria"
+	// Description updated from underlying `superlaughter`
 	description = "Funny until you're the one laughing."
-	metabolization_rate = 1.5 * REAGENTS_METABOLISM
-	color = "#FF4DD2"
-	taste_description = "laughter"
 
 /datum/reagent/consumable/superlaughter/traitor_pen/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(DT_PROB(30, delta_time))

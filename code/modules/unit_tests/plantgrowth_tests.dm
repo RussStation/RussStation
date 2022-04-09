@@ -9,7 +9,11 @@
 	states |= icon_states('icons/obj/hydroponics/growing_mushrooms.dmi')
 	states |= icon_states('icons/obj/hydroponics/growing_vegetables.dmi')
 	states |= icon_states('goon/icons/obj/hydroponics.dmi')
-	var/list/paths = subtypesof(/obj/item/seeds) - /obj/item/seeds - typesof(/obj/item/seeds/sample) - /obj/item/seeds/lavaland
+	// honk start -- add russstation growing dmi files to be used in testing
+	states |= icon_states('russstation/icons/obj/hydroponics/growing.dmi')
+	states |= icon_states('russstation/icons/obj/hydroponics/growing_fruits.dmi')
+	// honk end
+	var/list/paths = subtypesof(/obj/item/seeds) - /obj/item/seeds - typesof(/obj/item/seeds/sample) - /obj/item/seeds/lavaland - /obj/item/seeds/russ // honk -- remove /obj/item/seeds/russ from paths
 
 	for(var/seedpath in paths)
 		var/obj/item/seeds/seed = new seedpath

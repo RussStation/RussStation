@@ -29,7 +29,7 @@
 	sharp_result = TRUE
 
 /datum/reagent/dorf_plasma
-	name = "Plasma"
+	name = "Dwarven Plasma" // Name changed to avoid confusion and fix unit test
 	description = "Dwarven tameable material"
 	reagent_state = LIQUID
 	color = "#9d03fc" //RGB 157, 3, 252
