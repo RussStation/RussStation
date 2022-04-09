@@ -2,19 +2,19 @@
 	name = "Skaven"
 	id = "skaven"
 	say_mod = "jitters"
-	default_color = "2E2E2E"
+	default_color = "#2E2E2E"
+	mutant_bodyparts = list("tail_skaven" = "Skaven")
+	mutantears = /obj/item/organ/ears/skaven
+	mutantlungs = /obj/item/organ/lungs/skaven
+	mutanttongue = /obj/item/organ/tongue/skaven
+	mutant_organs = list(/obj/item/organ/tail/skaven)
 	species_traits = list(MUTCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
 	)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	mutant_bodyparts = list("tail_skaven" = "Skaven")
 	external_organs = list(/obj/item/organ/external/horns = "None", /obj/item/organ/external/snout = "Round")
-	mutantears = /obj/item/organ/ears/skaven
-	mutantlungs = /obj/item/organ/lungs/skaven
-	mutanttongue = /obj/item/organ/tongue/skaven
-	mutant_organs = list(/obj/item/organ/tail/skaven)
 	payday_modifier = 0.25 //Might as well be a slave
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	attack_verb = "claw"
@@ -64,7 +64,7 @@
 /datum/species/skaven/spec_death(gibbed, mob/living/carbon/human/H)
 	if(H)
 		stop_wagging_tail(H)
-	. = ..()
+	// . = ..()
 
 /datum/species/skaven/spec_stun(mob/living/carbon/human/H, amount)
 	if(H)
@@ -93,14 +93,18 @@
 	var/mob/living/carbon/human/skaven = C
 	var/real_tail_type = skaven.dna.features["tail_skaven"] // hold onto tail until parent proc finished?
 
+	. = ..()
+
+	// Special handler for loading preferences. If we're doing it from a preference load, we'll want
+	// to make sure we give the appropriate lizard tail AFTER we call the parent proc, as the parent
+	// proc will overwrite the lizard tail. Species code at its finest.
 	if(!pref_load)
 		if(skaven.dna.features["ears"] == "None")
 			skaven.dna.features["ears"] = "Skaven"
+
 	if(skaven.dna.features["ears"] == "Skaven")
 		var/obj/item/organ/ears/skaven/ears = new
 		ears.Insert(skaven, drop_if_replaced = FALSE)
-
-	. = ..()
 
 	//Loads tail preferences.
 	if(pref_load)
@@ -112,7 +116,7 @@
 		var/obj/item/organ/tail/skaven/new_tail = new /obj/item/organ/tail/skaven()
 
 		new_tail.tail_type = skaven.dna.features["tail_skaven"]
-		new_tail.Insert(skaven, TRUE, FALSE)
+		new_tail.Insert(skaven, special = TRUE, drop_if_replaced = FALSE)
 
 	// ensure colors are synchronized
 	default_color = skaven.dna.features["mcolor"] = skaven.dna.features["skaven_color"]
