@@ -1,4 +1,4 @@
-#define EXP_ASSIGN_WAYFINDER 1200
+#define EXP_ASSIGN_WAYFINDER 1200 // honk -- not removed (yet) but marking it as needed
 #define RANDOM_QUIRK_BONUS 3
 #define MINIMUM_RANDOM_QUIRKS 3
 //Used to process and handle roundstart quirks
@@ -73,11 +73,13 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	if(badquirk)
 		cli.prefs.save_character()
 
+	// honk start -- re-add new player wayfinder code
 	// Assign wayfinding pinpointer granting quirk if they're new
 	if(cli.get_exp_living(TRUE) < EXP_ASSIGN_WAYFINDER && !user.has_quirk(/datum/quirk/item_quirk/needswayfinder))
 		var/datum/quirk/wayfinder = /datum/quirk/item_quirk/needswayfinder
 		if(user.add_quirk(wayfinder))
 			SSblackbox.record_feedback("nested tally", "quirks_taken", 1, list(initial(wayfinder.name)))
+	// honk end
 
 /*
  *Randomises the quirks for a specified mob

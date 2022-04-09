@@ -53,7 +53,7 @@
 		if(H.nutrition > NUTRITION_LEVEL_ALMOST_FULL)
 			H.set_nutrition(NUTRITION_LEVEL_ALMOST_FULL)
 		if(light_amount > 0.2) //if there's enough light, heal
-			H.heal_overall_damage(2,1, 0, BODYPART_ORGANIC)
+			H.heal_overall_damage(2,1, 0, BODYTYPE_ORGANIC)
 
 	if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
 		H.take_overall_damage(2,0)

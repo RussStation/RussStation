@@ -17,11 +17,8 @@
 	end_message = "<span class='notice'>The air seems to be cooling off again.</span>"
 
 	area_type = /area
-	// honk start - add mining areas to rad-protected list for IceCube
 	protected_areas = list(/area/maintenance, /area/ai_monitored/turret_protected/ai_upload, /area/ai_monitored/turret_protected/ai_upload_foyer, /area/ai_monitored/turret_protected/aisat/maint, /area/ai_monitored/command/storage/satellite,
-	/area/ai_monitored/turret_protected/ai, /area/commons/storage/emergency/starboard, /area/commons/storage/emergency/port, /area/shuttle, /area/security/prison/safe, /area/security/prison/toilet, \
-	/area/icemoon, /area/lavaland)
-	// honk end
+	/area/ai_monitored/turret_protected/ai, /area/commons/storage/emergency/starboard, /area/commons/storage/emergency/port, /area/shuttle, /area/security/prison/safe, /area/security/prison/toilet, /area/icemoon/underground, /area/icemoon, /area/lavaland) // honk -- add mining areas to rad-protected list for IceCube (/area/icemoon, /area/lavaland)
 	target_trait = ZTRAIT_STATION
 
 	immunity_type = TRAIT_RADSTORM_IMMUNE
