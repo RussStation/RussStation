@@ -32692,10 +32692,8 @@
 "pSB" = (
 /obj/machinery/computer/atmos_control/mix_tank{
 	dir = 1;
-	input_tag = "mix2_in";
 	name = "Gas Mix Tank #2 Control";
-	output_tag = "mix2_out";
-	sensors = list("mix2_sensor" = "Gas Mix Tank #2")
+	atmos_chambers = list("mix2" = "Mix Chamber #2")
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/green/visible,
 /obj/structure/window/reinforced,
@@ -36645,10 +36643,8 @@
 /turf/open/floor/plating,
 /area/maintenance/central)
 "shh" = (
-/obj/machinery/atmospherics/components/unary/outlet_injector/on{
-	dir = 1;
-	frequency = 1441;
-	id = "inc_in"
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored{
+	dir = 1
 	},
 /turf/open/floor/engine/vacuum,
 /area/engineering/atmos/upper)
@@ -42104,8 +42100,8 @@
 "vjP" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/monitored/mix_input{
 	dir = 1;
-	id = "mix2_in";
-	name = "mix tank #2 input injector"
+	name = "mix tank #2 input injector";
+	chamber_id = "mix2"
 	},
 /turf/open/floor/engine/vacuum,
 /area/engineering/atmos)
@@ -42170,7 +42166,8 @@
 /area/tcommsat/server)
 "vmq" = (
 /obj/machinery/air_sensor/mix_tank{
-	id_tag = "mix2_sensor"
+	id_tag = "mix2_sensor";
+	chamber_id = "mix2"
 	},
 /turf/open/floor/engine/vacuum,
 /area/engineering/atmos)
@@ -42196,7 +42193,8 @@
 "vnQ" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/mix_output{
 	dir = 1;
-	id_tag = "mix2_out"
+	id_tag = "mix2_out";
+	chamber_id = "mix2"
 	},
 /turf/open/floor/engine/vacuum,
 /area/engineering/atmos)
@@ -42734,7 +42732,7 @@
 "vGA" = (
 /obj/machinery/computer/atmos_control{
 	dir = 1;
-	sensors = list("n2_sensor" = "Nitrogen Tank", "o2_sensor" = "Oxygen Tank", "co2_sensor" = "Carbon Dioxide Tank", "tox_sensor" = "Plasma Tank", "n2o_sensor" = "Nitrous Oxide Tank", "air_sensor" = "Mixed Air Tank", "mix_sensor" = "Mix Tank", "mix2_sensor" = "Mix Tank #2", "distro-loop_meter" = "Distribution Loop", "atmos-waste_loop_meter" = "Atmos Waste Loop", "incinerator_sensor" = "Incinerator Chamber", "toxinslab_sensor" = "Toxins Mixing Chamber")
+	atmos_chambers = list("n2" = "Nitrogen Supply", "o2" = "Oxygen Supply", "co2" = "Carbon Dioxide Supply", "plas" = "Plasma Supply", "n2o" = "Nitrous Oxide Supply", "air" = "Mixed Air Supply", "mix" = "Mix Tank", "mix2" = "Mix Tank #2", "distro" = "Distribution Loop", "waste" = "Atmos Waste Loop", "incinerator" = "Incinerator Chamber", "ordnancelab" = "Ordnance Chamber")
 	},
 /turf/open/floor/iron/dark,
 /area/engineering/break_room)
@@ -45616,10 +45614,9 @@
 /turf/open/floor/engine,
 /area/engineering/supermatter/room)
 "xme" = (
-/obj/machinery/atmospherics/components/unary/outlet_injector/on{
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored{
 	dir = 1;
-	frequency = 1441;
-	id = "inc_in"
+	chamber_id = "incinerator"
 	},
 /turf/open/floor/plating/airless,
 /area/maintenance/disposal/incinerator)

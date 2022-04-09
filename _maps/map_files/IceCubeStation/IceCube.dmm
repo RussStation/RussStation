@@ -15981,6 +15981,13 @@
 	},
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
+"gNK" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored/ordnance_mixing_input{
+	dir = 8;
+	chamber_id = "ordnancelab2"
+	},
+/turf/open/floor/engine/vacuum,
+/area/science/mixing/chamber)
 "gNS" = (
 /obj/structure/chair/stool/bar/directional/east,
 /turf/open/floor/carpet/purple,
@@ -18307,7 +18314,8 @@
 /obj/machinery/air_sensor/ordnance_mixing_tank{
 	id_tag = "ordnancelab_sensor2";
 	pixel_x = -24;
-	pixel_y = -24
+	pixel_y = -24;
+	chamber_id = "ordnancelab2"
 	},
 /obj/machinery/igniter/incinerator_ordmix{
 	id = "ordmix_igniter2"
@@ -31839,7 +31847,7 @@
 /area/engineering/main)
 "nyR" = (
 /obj/machinery/computer/atmos_control/nocontrol/ordnancemix{
-	sensors = list("ordnancelab_sensor2" = "Ordnance Mixing Chamber")
+	atmos_chambers = list("ordnancelab2" = "Ordnance Chamber 2")
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/science/mixing)
@@ -54345,7 +54353,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/power/apc/auto_name/directional/south{
-	areastring = "/area/medical/surgery/room_b"
+	areastring = "/area/medical/surgery"
 	},
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment{
@@ -153178,7 +153186,7 @@ wlS
 fmM
 wlS
 hOr
-lOU
+gNK
 hFB
 rUQ
 cEI

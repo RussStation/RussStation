@@ -128,6 +128,10 @@
 		visible_message(span_danger("[src] vomits up [consumed_mob]!"))
 		consumed_mob.forceMove(loc)
 		consumed_mob.Paralyze(50)
+	// honk start -- prevent error when mind is null (remove if fixed upstream)
+	if(!mind)
+		return
+	// honk end
 	if(!mind.has_antag_datum(/datum/antagonist/space_dragon))
 		return
 	if((rifts_charged == 3 || (SSshuttle.emergency.mode == SHUTTLE_DOCKED && rifts_charged > 0)) && !objective_complete)
