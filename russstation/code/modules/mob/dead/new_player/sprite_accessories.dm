@@ -4,7 +4,8 @@
 
 /datum/sprite_accessory/diona_hair
 	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
-	color_src = null
+	em_block = TRUE
+	color_src = 0
 
 /datum/sprite_accessory/diona_hair/diona_bracket
 	name = "Bracket"

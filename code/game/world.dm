@@ -66,7 +66,6 @@ GLOBAL_VAR(restart_counter)
 		world.log = file("[GLOB.log_directory]/dd.log") //not all runtimes trigger world/Error, so this is the only way to ensure we can see all of them.
 #endif
 
-	init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_hair, GLOB.diona_hair_list, roundstart = TRUE)  // honk -- creates a list of diona hair options()
 	LoadVerbs(/datum/verbs/menu)
 	if(CONFIG_GET(flag/usewhitelist))
 		load_whitelist()

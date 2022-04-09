@@ -41,6 +41,7 @@
 	H.dna.features["moth_wings"] = pick(GLOB.moth_wings_list)
 	H.dna.features["moth_antennae"] = pick(GLOB.moth_antennae_list)
 	H.dna.features["pod_hair"] = pick(GLOB.pod_hair_list)
+	H.dna.features["diona_hair"] = pick(GLOB.diona_hair_list) // honk -- diona hair
 
 	H.update_body(is_creating = TRUE)
 	H.update_hair(is_creating = TRUE)

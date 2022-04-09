@@ -38,6 +38,7 @@
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings, GLOB.moth_markings_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/monkey, GLOB.tails_list_monkey)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair, GLOB.pod_hair_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_hair, GLOB.diona_hair_list) // honk -- diona hair loading
 
 	//Species
 	for(var/spath in subtypesof(/datum/species))

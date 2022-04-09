@@ -1,23 +1,40 @@
 /datum/species/diona
 	// An amalgamation of a number of diona nymphs becomes a gestalt that appears similar to other bipedal organics
-	name = "Diona"
+	name = "\improper Diona"
+	plural_form = "Dionae"
 	id = "diona"
-	sexes = 0
+	sexes = FALSE
 	species_traits = list(NOBLOOD, NOEYESPRITES, NO_UNDERWEAR)
 	inherent_traits = list(
 		TRAIT_NOBREATH,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTLOWPRESSURE,
+		// TRAIT_PLANT_SAFE, // honk -- maybe add this?
 	)
-	mutant_bodyparts = list("diona_hair" = "diona_bracket")
+	// mutant_bodyparts = list("diona_hair" = "Bracket")
+	external_organs = list(
+		/obj/item/organ/external/diona_hair = "None",
+	)
+	inherent_biotypes = MOB_ORGANIC | MOB_PLANT // are we a human? If so add `| MOB_HUMANOID`
+	inherent_factions = list("plants", "vines")
 	damage_overlay_type = "" // dionas don't have blood
 	burnmod = 1.5 // take more damage from lasers
 	heatmod = 2 // take more damage from fire
 	speedmod = 5 // very slow
 	meat = /obj/item/food/meat/slab/human/mutant/plant
+	// exotic_blood = /datum/reagent/water
 	disliked_food = MEAT | DAIRY
 	liked_food = VEGETABLES | FRUIT | GRAIN
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | ERT_SPAWN
+
+	bodypart_overrides = list(
+		BODY_ZONE_HEAD = /obj/item/bodypart/head/diona,
+		BODY_ZONE_CHEST = /obj/item/bodypart/chest/diona,
+		BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm/diona,
+		BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/diona,
+		BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/diona,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/diona,
+	)
 
 /datum/species/diona/random_name(gender,unique,lastname)
 	if(unique)
@@ -30,60 +47,51 @@
 
 	return randname
 
-/datum/species/diona/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
-	C.draw_russ_parts()  //changes icons to be fetched from russstation/icons/mob/mutant_bodyparts.dmi
-	. = ..()
-	C.faction |= "plants"
-	C.faction |= "vines"
-
-/datum/species/diona/on_species_loss(mob/living/carbon/C, datum/species/old_species, pref_load)
-	C.draw_russ_parts(TRUE)  //icon path is reset to default
-	. = ..()
-	C.faction -= "plants"
-	C.faction -= "vines"
-
-/datum/species/diona/spec_life(mob/living/carbon/human/H)
+// Similar to podpeople.dm
+/datum/species/diona/spec_life(mob/living/carbon/human/H, delta_time, times_fired)
 	if(H.stat == DEAD)
 		return
+
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 	if(isturf(H.loc)) //else, there's considered to be no light
 		var/turf/T = H.loc
-		light_amount = min(1,T.get_lumcount()) - 0.5
-		H.adjust_nutrition(light_amount * 10)
+		light_amount = min(1, T.get_lumcount()) - 0.5
+		// Maybe set to `5 *` like podpeople?
+		H.adjust_nutrition(10 * light_amount * delta_time)
 		if(H.nutrition > NUTRITION_LEVEL_ALMOST_FULL)
 			H.set_nutrition(NUTRITION_LEVEL_ALMOST_FULL)
 		if(light_amount > 0.2) //if there's enough light, heal
-			H.heal_overall_damage(2,1, 0, BODYTYPE_ORGANIC)
+			// OLD HEAL CODE
+			// H.heal_overall_damage(2,1, 0, BODYTYPE_ORGANIC)
+			// New Code | Might need to tweak numbers to match podpeople `0.5 * delta_time, 0.5 * delta_time`
+			H.heal_overall_damage(2 * delta_time, 1 * delta_time, 0, BODYTYPE_ORGANIC)
+			H.adjustToxLoss(-0.5 * delta_time)
+			// I assume we don't need this as we have `TRAIT_NOBREATH`
+			// H.adjustOxyLoss(-0.5 * delta_time)
 
 	if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
-		H.take_overall_damage(2,0)
+		// Possibly reduce to `1 *` similar to podpeople?
+		H.take_overall_damage(2 * delta_time, 0)
+	..()
 
-/datum/species/diona/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
+/datum/species/diona/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H, delta_time, times_fired)
 	if(chem.type == /datum/reagent/toxin/plantbgone)
-		H.adjustToxLoss(3)
-		H.reagents.remove_reagent(chem.type, REAGENTS_METABOLISM)
+		H.adjustToxLoss(3 * REAGENTS_EFFECT_MULTIPLIER * delta_time)
+		H.reagents.remove_reagent(chem.type, REAGENTS_METABOLISM * delta_time)
 		return TRUE
 
-/datum/species/diona/on_hit(obj/projectile/P, mob/living/carbon/human/H)
-	switch(P.type)
-		if(/obj/projectile/energy/floramut)
-			if(prob(15))
-				H.AddComponent(/datum/component/irradiated)
-				H.Paralyze(100)
-				H.visible_message(
-					span_warning("[H] writhes in pain as [H.p_their()] vacuoles boil."),
-					span_userdanger("You writhe in pain as your vacuoles boil!"),
-					span_hear("You hear the crunching of leaves."),
-				)
-				if(prob(80))
-					H.easy_random_mutate(NEGATIVE+MINOR_NEGATIVE)
-				else
-					H.easy_random_mutate(POSITIVE)
-				H.random_mutate_unique_identity()
-				H.random_mutate_unique_features()
-				H.domutcheck()
-			else
-				H.adjustFireLoss(rand(5,15))
-				H.show_message(span_userdanger("The radiation beam singes you!"))
-		if(/obj/projectile/energy/florayield)
-			H.set_nutrition(min(H.nutrition+30, NUTRITION_LEVEL_FULL))
+/datum/species/diona/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
+	var/hairstyle = pick(GLOB.diona_hair_list)
+	human_mob.dna.features["diona_hair"] = hairstyle
+	mutant_bodyparts["diona_hair"] = hairstyle
+	human_mob.update_body()
+
+// Override change_hairstyle for Diona; Similar to podpeople override
+/datum/species/diona/proc/change_hairstyle(mob/living/carbon/human/human_mob, new_style)
+	var/obj/item/organ/external/organ = human_mob.getorganslot(ORGAN_SLOT_EXTERNAL_DIONA_HAIR)
+	organ.set_sprite(new_style)
+	human_mob.update_body_parts()
+
+// Diona mob define
+/mob/living/carbon/human/species/diona
+	race = /datum/species/diona

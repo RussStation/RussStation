@@ -91,6 +91,10 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings, GLOB.moth_markings_list)
 	if(!GLOB.pod_hair_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/pod_hair, GLOB.pod_hair_list)
+	// honk start -- diona hair
+	if(!GLOB.diona_hair_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_hair, GLOB.diona_hair_list)
+	// honk end
 
 	//For now we will always return none for tail_human and ears.
 	return(list(
@@ -100,6 +104,7 @@
 		"skaven_color" = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)],
 		"tail_skaven" = pick(GLOB.tails_list_skaven),
 		// honk end
+		"diona_hair" = pick(GLOB.diona_hair_list), // honk -- diona hair
 		"tail_lizard" = pick(GLOB.tails_list_lizard),
 		"tail_human" = "None",
 		"wings" = "None",

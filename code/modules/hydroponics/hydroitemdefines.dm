@@ -574,6 +574,7 @@
 
 /// Secateurs can be used to style podperson "hair"
 /obj/item/secateurs/attack(mob/trimmed, mob/living/trimmer)
+	// honk -- TODO: Add this for diona
 	if(ispodperson(trimmed))
 		var/mob/living/carbon/human/pod = trimmed
 		var/location = trimmer.zone_selected
