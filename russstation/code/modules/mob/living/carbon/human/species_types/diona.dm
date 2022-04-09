@@ -9,7 +9,7 @@
 		TRAIT_NOBREATH,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTLOWPRESSURE,
-		// TRAIT_PLANT_SAFE, // honk -- maybe add this?
+		TRAIT_PLANT_SAFE, // honk -- maybe add this?
 	)
 	// mutant_bodyparts = list("diona_hair" = "Bracket")
 	external_organs = list(
@@ -91,7 +91,3 @@
 	var/obj/item/organ/external/organ = human_mob.getorganslot(ORGAN_SLOT_EXTERNAL_DIONA_HAIR)
 	organ.set_sprite(new_style)
 	human_mob.update_body_parts()
-
-// Diona mob define
-/mob/living/carbon/human/species/diona
-	race = /datum/species/diona

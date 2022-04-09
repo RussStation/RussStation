@@ -1162,4 +1162,7 @@
 
 /mob/living/carbon/human/species/dwarf
 	race = /datum/species/dwarf
+
+/mob/living/carbon/human/species/skaven
+	race = /datum/species/skaven
 // honk end
