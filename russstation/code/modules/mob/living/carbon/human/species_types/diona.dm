@@ -9,9 +9,8 @@
 		TRAIT_NOBREATH,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTLOWPRESSURE,
-		TRAIT_PLANT_SAFE, // honk -- maybe add this?
+		// TRAIT_PLANT_SAFE, // honk -- maybe add this? Podpeople have it
 	)
-	// mutant_bodyparts = list("diona_hair" = "Bracket")
 	external_organs = list(
 		/obj/item/organ/external/diona_hair = "None",
 	)
@@ -22,6 +21,7 @@
 	heatmod = 2 // take more damage from fire
 	speedmod = 5 // very slow
 	meat = /obj/item/food/meat/slab/human/mutant/plant
+	// PodPeople bleed water, we don't
 	// exotic_blood = /datum/reagent/water
 	disliked_food = MEAT | DAIRY
 	liked_food = VEGETABLES | FRUIT | GRAIN
