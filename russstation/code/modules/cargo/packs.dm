@@ -74,3 +74,15 @@
 		/obj/item/circuitboard/machine/vending/monkey
 	)
 	crate_name = "monkey supply crate"
+
+//////////////////////////////////////////////////////////////////////////////
+////////////////////////////// Engineering ///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/datum/supply_pack/engineering/crypto_mining
+	name = "Crypto Mining Crate"
+	desc = "INSERT cryptobro propaganda here"
+	cost = CARGO_CRATE_VALUE * 5 // haha good luck making that back
+	contains = list(/obj/item/circuitboard/machine/crypto_mining_rig)
+	crate_name = "crypto mining crate"
+	crate_type = /obj/structure/closet/crate/engineering/electrical
