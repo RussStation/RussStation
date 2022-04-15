@@ -3,7 +3,8 @@
 	name = "MOD frozen stability module"
 	desc = "A module made experimentally by Nanotrasen, based off the work of Nakamura \
 		Engineering. It changes the boot grip to a special grip pattern which was specifically designed to prevent slipping on frozen surfaces."
-	icon_state = "magnet"
+	icon = 'russstation/icons/obj/clothing/modsuit/mod_modules.dmi'
+	icon_state = "ice_boots_mod"
 	module_type = MODULE_TOGGLE
 	complexity = 2
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
