@@ -1,0 +1,60 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.231.3/containers/ubuntu
+{
+	"name": "RussStation 13 - DevContainer",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
+			// Use hirsute or bionic on local arm64/Apple Silicon.
+			"VARIANT": "focal",
+			// TODO: Update/Set these from dependencies.sh
+			"BYOND_MAJOR": "514",
+			"BYOND_MINOR": "1560",
+			"RUST_G_VERSION": "0.5.0",
+		}
+	},
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		// Lets you preview .dmi files in the editor
+		"workbench.editorAssociations": {
+			"*.dmi": "imagePreview.previewEditor"
+		},
+		// Set byond path for container
+		"dreammaker.byondPath": [
+			"/usr/local/byond",
+		],
+		"tgstationTestExplorer.apps.dreamdaemon": "/usr/local/byond/bin/DreamDaemon",
+		"tgstationTestExplorer.apps.dreammaker": "/usr/local/byond/bin/DreamMaker",
+		// Set TG Station Test Explorer DME filename
+		"tgstationTestExplorer.project.DMEName": "RussStation.dme",
+		// Set Result Type to JSON
+		"tgstationTestExplorer.project.resultsType": "json"
+	},
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		// Good remote container extension for displaying container stats (CPU, Ram, etc.)
+		"mutantdino.resourcemonitor",
+		// Install TG's recommended extensions
+		"gbasood.byond-dm-language-support",
+		"platymuus.dm-langclient",
+		"EditorConfig.EditorConfig",
+		"arcanis.vscode-zipfs",
+		"dbaeumer.vscode-eslint",
+		"stylemistake.auto-comment-blocks",
+		// Commented out because it doesn't seem to work correctly in remote containers
+		// "Donkie.vscode-tgstation-test-adapter",
+	],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally. (Should forward automatically)
+	"forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// Moves downloaded `librust_g.so` file to our end container workspace folder and chowns
+	"postCreateCommand": "sudo mv /opt/rust_g/librust_g.so ${containerWorkspaceFolder} && sudo chown vscode:vscode ${containerWorkspaceFolder}/librust_g.so",
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+	// Features to add to the dev container.
+	"features": {
+		// TODO: Update/Set this from dependencies.sh
+		"node": "14"
+	}
+}
