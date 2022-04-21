@@ -28,9 +28,10 @@
 	// Mutant randomizing, doesn't affect the mob appearance unless it's the specific mutant.
 	H.dna.features["mcolor"] = "#[random_color()]"
 	H.dna.features["ethcolor"] = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
-	//honk start - random skaven tail and color
+	//honk start - random skaven tail and color and diona hair
 	H.dna.features["tail_skaven"] = pick(GLOB.tails_list_skaven)
 	H.dna.features["skaven_color"] = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)]
+	H.dna.features["diona_hair"] = GLOB.diona_hair_list[pick(GLOB.diona_hair_list)]
 	//honk end
 	H.dna.features["tail_lizard"] = pick(GLOB.tails_list_lizard)
 	H.dna.features["snout"] = pick(GLOB.snouts_list)
@@ -41,7 +42,6 @@
 	H.dna.features["moth_wings"] = pick(GLOB.moth_wings_list)
 	H.dna.features["moth_antennae"] = pick(GLOB.moth_antennae_list)
 	H.dna.features["pod_hair"] = pick(GLOB.pod_hair_list)
-	H.dna.features["diona_hair"] = pick(GLOB.diona_hair_list) // honk -- diona hair
 
 	H.update_body(is_creating = TRUE)
 	H.update_hair(is_creating = TRUE)

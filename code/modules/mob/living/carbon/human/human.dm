@@ -1158,7 +1158,7 @@
 
 // honk start -- adds russ station species
 /mob/living/carbon/human/species/diona
-    race = /datum/species/diona
+	race = /datum/species/diona
 
 /mob/living/carbon/human/species/dwarf
 	race = /datum/species/dwarf

@@ -85,9 +85,3 @@
 	human_mob.dna.features["diona_hair"] = hairstyle
 	mutant_bodyparts["diona_hair"] = hairstyle
 	human_mob.update_body()
-
-// Override change_hairstyle for Diona; Similar to podpeople override
-/datum/species/diona/proc/change_hairstyle(mob/living/carbon/human/human_mob, new_style)
-	var/obj/item/organ/external/organ = human_mob.getorganslot(ORGAN_SLOT_EXTERNAL_DIONA_HAIR)
-	organ.set_sprite(new_style)
-	human_mob.update_body_parts()
