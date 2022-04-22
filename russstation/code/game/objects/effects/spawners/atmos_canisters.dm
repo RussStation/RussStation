@@ -17,6 +17,10 @@
 	icon_state = "air"
 	can_type = /obj/machinery/portable_atmospherics/canister/air
 
+/obj/effect/spawner/atmos_canister/anesthetic_mix
+	icon_state = "anesthetic_mix"
+	can_type = /obj/machinery/portable_atmospherics/canister/anesthetic_mix
+
 /obj/effect/spawner/atmos_canister/carbon_dioxide
 	icon_state = "carbon_dioxide"
 	can_type = /obj/machinery/portable_atmospherics/canister/carbon_dioxide
