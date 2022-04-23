@@ -1,4 +1,5 @@
-GLOBAL_LIST_EMPTY(diona_hair_list) // List with all possible diona hair
+// List with all possible diona hair
+GLOBAL_LIST_EMPTY(diona_hair_list)
 
 //Skaven defines
 GLOBAL_LIST_EMPTY(tails_list_skaven)

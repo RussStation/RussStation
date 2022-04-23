@@ -63,9 +63,11 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/human, GLOB.tails_list_human)
 	if(!GLOB.tails_list_lizard.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/lizard, GLOB.tails_list_lizard)
-	//honk start - skaven random tail
+	//honk start - skaven random tail and diona hair
 	if(!GLOB.tails_list_skaven.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/skaven, GLOB.tails_list_skaven)
+	if(!GLOB.diona_hair_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_hair, GLOB.diona_hair_list)
 	//honk end
 	if(!GLOB.snouts_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/snouts, GLOB.snouts_list)
@@ -96,9 +98,10 @@
 	return(list(
 		"mcolor" = "#[pick("7F","FF")][pick("7F","FF")][pick("7F","FF")]",
 		"ethcolor" = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)],
-		// honk start - adds skaven tails and colors to random features
+		// honk start - adds skaven tails and colors and diona hair to random features
 		"skaven_color" = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)],
 		"tail_skaven" = pick(GLOB.tails_list_skaven),
+		"diona_hair" = GLOB.diona_hair_list[pick(GLOB.diona_hair_list)],
 		// honk end
 		"tail_lizard" = pick(GLOB.tails_list_lizard),
 		"tail_human" = "None",

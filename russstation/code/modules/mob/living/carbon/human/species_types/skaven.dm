@@ -157,7 +157,3 @@
 	)
 
 	return to_add
-
-//Skaven mob define
-/mob/living/carbon/human/species/skaven
-	race = /datum/species/skaven
