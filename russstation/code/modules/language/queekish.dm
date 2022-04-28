@@ -3,7 +3,7 @@
 	name = "Queekish"
 	icon = 'russstation/icons/misc/language.dmi'
 	desc = "The chittering and hasty language of the Skaven, spoken with rapid squeaks trills and often littered with short, clipped words."
-	key = "6"
+	key = "s"
 	flags = TONGUELESS_SPEECH
 	space_chance = 60
 	sentence_chance = 20
