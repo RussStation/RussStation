@@ -270,7 +270,7 @@ Difficulty: Medium
 	src.stageTwo = TRUE
 	src.visible_message(
 		span_danger("[src] lets out a piercing howl!"),
-		span_userdanger("You let out a piercing howl!"), piercing
+		span_userdanger("You let out a piercing howl!"),
 	)
 	playsound(src, 'russstation/sound/effects/howl.ogg', 100, 1)
 	var/mob/living/L = target
