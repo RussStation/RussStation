@@ -23,7 +23,7 @@ Speical attacks:
 
 Sif has three stages:
  1. Normal state when it has health above 50%.
- 2. When Sif reaches below 50% health it enters a angered state, which makes Sif's movement speed faster and attack speed slower,
+ 2. When Sif falls below 50% health it enters an angered state, which makes Sif's movement speed faster and attack speed slower,
  	with increased usage of specials.
  3. At 20% health Sif is significantly slowed but constantly doing special attacks.
 
@@ -94,7 +94,7 @@ Difficulty: Medium
 	///Every few seconds this variable gets higher - When it gets high enough, it will use a special attack then reset the variable to 0
 	var/currentPower = 0
 
-//A living beacon for the sif ruins (hard to find sif considering the GPS only shows when sif is summoned)
+//A living beacon for the Sif ruins (hard to find Sif considering the GPS only shows when Sif is summoned)
 //Spawns on a really small enclosed lava island that is hard to reach in Sifs ruins
 /mob/living/simple_animal/hostile/megafauna/sif/living_beacon
 	name = "Beacon"
@@ -133,21 +133,21 @@ Difficulty: Medium
 	faction = list("mining")
 	layer = MOB_LAYER
 
-//no medals rewarded for killing the beacon
+//no medals awarded for killing the beacon
 /mob/living/simple_animal/hostile/megafauna/sif/living_beacon/grant_achievement(medaltype, scoretype, crusher_kill, list/grant_achievement)
 	return
 
-//Sword structure, used to summon sif.
+//Sword structure, used to summon Sif.
 /obj/structure/sword/sif
-	name = "Massive Glowing Sword"
+	name = "Massif Glowing Sword"
 	desc = "Sweet! A free sword!"
 	max_integrity = 10000
 	anchored = TRUE
 	icon = 'russstation/icons/mob/lavaland/sif_sword.dmi'
 	icon_state = "Idle_Sword"
-	layer = HIGH_OBJ_LAYER //Looks better when its over everything... cause its huge
+	layer = HIGH_OBJ_LAYER //Looks better when it's over everything... cause it's huge
 
-//When the sword is touched it will spawn sif.
+//When the sword is touched it will spawn Sif.
 /obj/structure/sword/sif/attack_hand(mob/user)
 	icon_state = "Interact_Sword"
 	playsound(get_turf(src.loc), 'sound/effects/curse1.ogg', 100, 1)
@@ -166,18 +166,18 @@ Difficulty: Medium
 
 	//Target
 	if(!target)
-		return //Exit porc
+		return //Exit proc
 
 	var/chargeturf = get_turf(target)
 
-	//Targets turf
+	//Target's turf
 	if(!chargeturf)
 		return //Exit proc
 
 	var/dir = get_dir(src, chargeturf)
 	var/turf/T = get_ranged_target_turf(chargeturf, dir, 2)
 
-	//Turfs area
+	//Turf's area
 	if(!T)
 		return //Exit proc
 
@@ -207,11 +207,11 @@ Difficulty: Medium
 	if(!charging || !spinning)
 		src.currentPower += 2
 
-	//Sets sif's anger status.
+	//Sets Sif's anger status.
 	if(src.health <= 1000 && src.stageTwo == FALSE)
 		angered()
 
-	//Sets sifs enrage status.
+	//Sets Sifs enrage status.
 	if(src.health <= 400 && src.stageThree == FALSE)
 		enraged()
 
@@ -242,18 +242,17 @@ Difficulty: Medium
 	spin(5,2)// Spin me boi
 
 //Chance to dodge projectiles when angered or enraged
+//Technically this gives Sif a 2/101 (1.98%) or 6/101 (5.94%) chance to dodge but *shrug*
 /mob/living/simple_animal/hostile/megafauna/sif/bullet_act(obj/projectile/P)
 	var/passed = FALSE
+	var/rng = rand(0,100)
 
 	if(angered)
-		switch(rand(0,100))
-			if(0 to 1)
-				passed = TRUE
-
-	if(enraged)
-		switch(rand(0,100))
-			if(0 to 5)
-				passed = TRUE
+		if(rng <= 1)
+			passed = TRUE
+	else if(enraged)
+		if(rng <= 5)
+			passed = TRUE
 
 	if(passed == TRUE)
 		visible_message(
@@ -270,8 +269,8 @@ Difficulty: Medium
 	src.angered = TRUE
 	src.stageTwo = TRUE
 	src.visible_message(
-		span_userdanger("[src] lets out a ear ripping howl!"),
-		span_userdanger("[src] lets out an ear ripping roar!"),
+		span_danger("[src] lets out a piercing howl!"),
+		span_userdanger("You let out a piercing howl!"), piercing
 	)
 	playsound(src, 'russstation/sound/effects/howl.ogg', 100, 1)
 	var/mob/living/L = target
@@ -287,8 +286,8 @@ Difficulty: Medium
 	src.stageThree = TRUE
 	src.enraged = TRUE
 	src.visible_message(
-		span_userdanger("[src] lets out a ear ripping yelp!"),
-		span_userdanger("[src] lets out an ear ripping yelp!"),
+		span_danger("[src] lets out an ear-shattering howl!"),
+		span_userdanger("You let out an ear-shattering howl!"),
 	)
 	playsound(src, 'russstation/sound/effects/howl.ogg', 100, 1)
 	var/mob/living/L = target
@@ -387,7 +386,7 @@ Difficulty: Medium
 	playsound(src, 'sound/effects/meteorimpact.ogg', 200, 1, 2, 1)
 	..()
 
-//Activated when sif collides with target when charging.
+//Activated when Sif collides with target when charging.
 /mob/living/simple_animal/hostile/megafauna/sif/Bump(atom/A)
 	if(charging != TRUE)
 		return
@@ -397,8 +396,8 @@ Difficulty: Medium
 	if(isliving(A))
 		var/mob/living/L = A
 		L.visible_message(
-			span_danger("[src] stomps on [L]!</span>"),
-			span_userdanger("[src] stomps on you!</span>"),
+			span_danger("[src] stomps on [L]!"),
+			span_userdanger("You stomp on [L]!"),
 		)
 		src.forceMove(get_turf(L))
 		L.apply_damage(20, BRUTE)
@@ -447,7 +446,7 @@ Difficulty: Medium
 		final_block_chance = 5
 	return ..()
 
-//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=End of Sworf Of The Forsaken=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=End of Sword Of The Forsaken=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 
 
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=Necklace Of The Forsaken=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
@@ -510,7 +509,7 @@ Difficulty: Medium
 /datum/action/item_action/hands_free/necklace_of_the_forsaken
 	check_flags = NONE
 	name = "Necklace of the Forsaken"
-	desc = "Bind the necklaces ember to yourself, so that next time you activate it, it will revive or fully heal you whether dead or knocked out. (Beware of being gibbed)"
+	desc = "Bind the necklace's ember to yourself. The next time you activate it, it will revive or fully heal you whether dead or knocked out. (Beware of being gibbed)"
 
 //What happens when the user clicks on datum
 /datum/action/item_action/hands_free/necklace_of_the_forsaken/Trigger(trigger_flags)
@@ -521,13 +520,13 @@ Difficulty: Medium
 		if(ishuman(owner))
 			MM.temp_buff(owner)
 		src.desc = "Revive or fully heal yourself, but you can only do this once! Can be used when knocked out or dead."
-		to_chat(MM.active_owner, span_userdanger("You have binded the ember to yourself! The next time you use the necklace it will heal you!"))
+		to_chat(MM.active_owner, span_userdanger("You have bound the ember to yourself! The next time you use the necklace it will heal you!"))
 	else if(MM.numUses == 1 && MM.active_owner)//revive / heal then remove usage
 		MM.second_chance()
 		MM.numUses = 0
 		MM.icon_state = "necklace_forsaken"
 		MM.desc = "A rose gold necklace that used to have a bright burning ember inside of it."
-		src.desc = "The necklaces ember has already been used..."
+		src.desc = "The necklace's ember has fizzled out and it's gone cold to the touch..."
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=End of Necklace of The Forsaken=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 
 
