@@ -14,7 +14,7 @@
 	transit_timer = addtimer(CALLBACK(src, .proc/attempt_transfer_vote), timing, TIMER_STOPPABLE)
 
 /datum/controller/subsystem/vote/proc/attempt_transfer_vote()
-	if(SSshuttle.emergency.mode == SHUTTLE_IDLE || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+	if(EMERGENCY_IDLE_OR_RECALLED)
 		initiate_vote("crew transfer","the server")
 	else
 		// recheck to see if the shuttle is no longer busy after ten minutes
