@@ -3,8 +3,8 @@
 	var/transfer_vote_config = 0
 
 /datum/controller/subsystem/vote/proc/shuttlecall()
-	var/shuttle_timer = SSshuttle.emergency.timeLeft()
-	SSshuttle.block_recall(6000)
+	var/shuttle_timer = SSshuttle.emergency.timeLeft(1)
+	SSshuttle.emergency_no_recall = TRUE
 	if(shuttle_timer >= 6000 || (SSshuttle.emergency.mode != SHUTTLE_CALL && SSshuttle.emergency.mode != SHUTTLE_DOCKED && SSshuttle.emergency.mode != SHUTTLE_ESCAPE))
 		if(SSshuttle.emergency.mode == SHUTTLE_CALL && shuttle_timer >= 6000)	//Apparently doing the emergency request twice cancels the call so these check are just in case
 			SSshuttle.emergency.setTimer(6000)
