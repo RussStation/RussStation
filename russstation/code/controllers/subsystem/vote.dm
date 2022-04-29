@@ -1,7 +1,3 @@
-/datum/controller/subsystem/vote/
-	var/shuttle_refuel_delay = 0
-	var/transfer_vote_config = 0
-
 /datum/controller/subsystem/vote/proc/shuttlecall()
 	SSshuttle.emergency_no_recall = TRUE
 	// check to prevent the vote resetting an already called shuttle

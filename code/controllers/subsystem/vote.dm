@@ -308,11 +308,11 @@ SUBSYSTEM_DEF(vote)
 				initiate_vote("restart",usr.key)
 		// honk start -- crew transfer vote
 		if("crew transfer")
-			if(transfer_vote_config || usr.client.holder)
-				if(shuttle_refuel_delay < world.time)
+			if(CONFIG_GET(flag/transfer_vote) || usr.client.holder)
+				if(CONFIG_GET(number/shuttle_refuel_delay) < world.time)
 					initiate_vote("crew transfer",usr.key)
 				else
-					to_chat(usr, "<span style='boldannounce'>Shuttle call can only initiate after [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))].</span>")
+					to_chat(usr, "<span style='boldannounce'>Shuttle call can only initiate after [DisplayTimeText(CONFIG_GET(number/shuttle_refuel_delay) - (world.time - SSticker.round_start_time))].</span>")
 		// honk end
 		if("map")
 			if(CONFIG_GET(flag/allow_vote_map) || usr.client.holder)

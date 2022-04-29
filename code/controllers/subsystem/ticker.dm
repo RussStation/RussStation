@@ -142,9 +142,7 @@ SUBSYSTEM_DEF(ticker)
 		gametime_offset = world.timeofday
 
 	initial_delay = CONFIG_GET(number/transfer_delay_initial) // honk start -- gets config values
-	subsequent_delay = CONFIG_GET(number/transfer_delay_subsequent)
-	SSvote.shuttle_refuel_delay = CONFIG_GET(number/shuttle_refuel_delay)
-	SSvote.transfer_vote_config = CONFIG_GET(flag/transfer_vote) // honk end
+	subsequent_delay = CONFIG_GET(number/transfer_delay_subsequent)// honk end
 	return ..()
 
 /datum/controller/subsystem/ticker/fire()
