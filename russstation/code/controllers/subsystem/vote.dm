@@ -1,15 +1,24 @@
-/datum/controller/subsystem/vote/OnConfigLoad()
-	if (CONFIG_GET(flag/transfer_vote))
-		var/initial_delay = CONFIG_GET(number/transfer_delay_initial)
-		addtimer(CALLBACK(src, .proc/attempt_transfer_vote), initial_delay)
+/datum/controller/subsystem/vote/var/transit_timer
 
+/datum/controller/subsystem/vote/OnConfigLoad()
+	if(CONFIG_GET(flag/transfer_vote))
+		var/initial_delay = CONFIG_GET(number/transfer_delay_initial)
+		if(initial_delay > world.time)
+			set_transfer_timer(initial_delay - world.time)
+		else
+			set_transfer_timer(CONFIG_GET(number/transfer_delay_subsequent))
+
+/datum/controller/subsystem/vote/proc/set_transfer_timer(timing)
+	if(transit_timer)
+		deltimer(transit_timer)
+	transit_timer = addtimer(CALLBACK(src, .proc/attempt_transfer_vote), timing)
 
 /datum/controller/subsystem/vote/proc/attempt_transfer_vote()
 	if(SSshuttle.emergency.mode == SHUTTLE_IDLE || SSshuttle.emergency.mode == SHUTTLE_RECALL)
 		initiate_vote("crew transfer","the server")
 	else
 		// recheck to see if the shuttle is no longer busy after ten minutes
-		addtimer(CALLBACK(src, .proc/attempt_transfer_vote), 10 MINUTES)
+		set_transfer_timer(10 MINUTES)
 
 /datum/controller/subsystem/vote/proc/shuttlecall()
 	SSshuttle.emergency_no_recall = TRUE
