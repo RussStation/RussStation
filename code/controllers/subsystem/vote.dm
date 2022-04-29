@@ -127,6 +127,8 @@ SUBSYSTEM_DEF(vote)
 			if("crew transfer")
 				if(. == "Initiate Crew Transfer")
 					shuttlecall()
+				var/delay = CONFIG_GET(number/transfer_delay_subsequent)
+				addtimer(CALLBACK(src, .proc/attempt_transfer_vote), delay)
 			//honk end
 	if(restart)
 		var/active_admins = FALSE
