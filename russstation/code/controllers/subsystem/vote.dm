@@ -21,10 +21,9 @@
 		set_transfer_timer(10 MINUTES)
 
 /datum/controller/subsystem/vote/proc/shuttlecall()
-	var/obj/docking_port/mobile/emergency/e_shuttle = SSshuttle.emergency
 	// check to prevent the vote resetting an already called shuttle
-	if(e_shuttle.mode == SHUTTLE_IDLE || e_shuttle.mode == SHUTTLE_RECALL)
-		e_shuttle.request()
+	if(EMERGENCY_IDLE_OR_RECALLED)
+		SSshuttle.emergency.request()
 		SSshuttle.emergency_no_recall = TRUE
 		message_admins("The emergency shuttle has been requested because of a successful transfer vote")
 	else
