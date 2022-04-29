@@ -140,9 +140,6 @@ SUBSYSTEM_DEF(ticker)
 		gametime_offset = rand(0, 23) HOURS
 	else if(CONFIG_GET(flag/shift_time_realtime))
 		gametime_offset = world.timeofday
-
-	initial_delay = CONFIG_GET(number/transfer_delay_initial) // honk start -- gets config values
-	subsequent_delay = CONFIG_GET(number/transfer_delay_subsequent)// honk end
 	return ..()
 
 /datum/controller/subsystem/ticker/fire()
