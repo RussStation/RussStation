@@ -199,10 +199,6 @@ SUBSYSTEM_DEF(ticker)
 		if(GAME_STATE_PLAYING)
 			mode.process(wait * 0.1)
 			check_queue()
-			//honk start -- starts the automatic crew transfer vote timer
-			if(CONFIG_GET(flag/transfer_vote))
-				votetimer()
-			//honk end
 
 			if(!roundend_check_paused && mode.check_finished(force_ending) || force_ending)
 				current_state = GAME_STATE_FINISHED

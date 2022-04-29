@@ -1,6 +1,7 @@
 /datum/controller/subsystem/vote/OnConfigLoad()
-	var/initial_delay = CONFIG_GET(number/transfer_delay_initial)
-	addtimer(CALLBACK(src, .proc/attempt_transfer_vote), initial_delay)
+	if (CONFIG_GET(flag/transfer_vote))
+		var/initial_delay = CONFIG_GET(number/transfer_delay_initial)
+		addtimer(CALLBACK(src, .proc/attempt_transfer_vote), initial_delay)
 
 
 /datum/controller/subsystem/vote/proc/attempt_transfer_vote()
