@@ -5,9 +5,9 @@
 
 /datum/controller/subsystem/ticker/proc/votetimer()
 	if(world.time - (initial_delay + (subsequent_delay * transfer_votes)) >= 0)
-		if(SSshuttle.emergency.timeLeft() >= 6000 || SSshuttle.emergency.mode == SHUTTLE_IDLE || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+		if(SSshuttle.emergency.mode == SHUTTLE_IDLE || SSshuttle.emergency.mode == SHUTTLE_RECALL)
 			SSvote.initiate_vote("crew transfer","the server")
-			transfer_votes ++
+			transfer_votes++
 
 // do more stuff during station setup without editing tg files
 /datum/controller/subsystem/ticker/setup()
