@@ -1,19 +1,30 @@
-/datum/controller/subsystem/vote/
-	var/shuttle_refuel_delay = 0
-	var/transfer_vote_config = 0
+/datum/controller/subsystem/vote/var/transit_timer
+
+/datum/controller/subsystem/vote/OnConfigLoad()
+	if(CONFIG_GET(flag/transfer_vote))
+		var/initial_delay = CONFIG_GET(number/transfer_delay_initial)
+		if(initial_delay > world.time)
+			set_transfer_timer(initial_delay - world.time)
+		else
+			set_transfer_timer(CONFIG_GET(number/transfer_delay_subsequent))
+
+/datum/controller/subsystem/vote/proc/set_transfer_timer(timing)
+	if(transit_timer)
+		deltimer(transit_timer)
+	transit_timer = addtimer(CALLBACK(src, .proc/attempt_transfer_vote), timing, TIMER_STOPPABLE)
+
+/datum/controller/subsystem/vote/proc/attempt_transfer_vote()
+	if(EMERGENCY_IDLE_OR_RECALLED)
+		initiate_vote("crew transfer","the server")
+	else
+		// recheck to see if the shuttle is no longer busy after ten minutes
+		set_transfer_timer(10 MINUTES)
 
 /datum/controller/subsystem/vote/proc/shuttlecall()
-	var/shuttle_timer = SSshuttle.emergency.timeLeft()
-	SSshuttle.block_recall(6000)
-	if(shuttle_timer >= 6000 || (SSshuttle.emergency.mode != SHUTTLE_CALL && SSshuttle.emergency.mode != SHUTTLE_DOCKED && SSshuttle.emergency.mode != SHUTTLE_ESCAPE))
-		if(SSshuttle.emergency.mode == SHUTTLE_CALL && shuttle_timer >= 6000)	//Apparently doing the emergency request twice cancels the call so these check are just in case
-			SSshuttle.emergency.setTimer(6000)
-			priority_announce("The emergency shuttle will arrive in [SSshuttle.emergency.timeLeft()/60] minutes.")
-		else if (SSshuttle.emergency.mode != SHUTTLE_CALL)
-			SSshuttle.emergency.request()
-			SSshuttle.emergency.setTimer(6000)
-			priority_announce("The emergency shuttle will arrive in [SSshuttle.emergency.timeLeft()/60] minutes.")
-
-		message_admins("The emergency shuttle has been force-called due to a successful crew transfer vote.")
+	// check to prevent the vote resetting an already called shuttle
+	if(EMERGENCY_IDLE_OR_RECALLED)
+		SSshuttle.emergency.request()
+		SSshuttle.emergency_no_recall = TRUE
+		message_admins("The emergency shuttle has been requested because of a successful transfer vote")
 	else
-		to_chat(world, span_boldannounce("Notice: The crew transfer vote has failed because the shuttle has already been called."))
+		to_chat(world, span_boldannounce("Notice: The crew transfer vote has failed because the shuttle is unavailable"))

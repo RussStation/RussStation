@@ -140,11 +140,6 @@ SUBSYSTEM_DEF(ticker)
 		gametime_offset = rand(0, 23) HOURS
 	else if(CONFIG_GET(flag/shift_time_realtime))
 		gametime_offset = world.timeofday
-
-	initial_delay = CONFIG_GET(number/transfer_delay_initial) // honk start -- gets config values
-	subsequent_delay = CONFIG_GET(number/transfer_delay_subsequent)
-	SSvote.shuttle_refuel_delay = CONFIG_GET(number/shuttle_refuel_delay)
-	SSvote.transfer_vote_config = CONFIG_GET(flag/transfer_vote) // honk end
 	return ..()
 
 /datum/controller/subsystem/ticker/fire()
@@ -204,10 +199,6 @@ SUBSYSTEM_DEF(ticker)
 		if(GAME_STATE_PLAYING)
 			mode.process(wait * 0.1)
 			check_queue()
-			//honk start -- starts the automatic crew transfer vote timer
-			if(CONFIG_GET(flag/transfer_vote))
-				votetimer()
-			//honk end
 
 			if(!roundend_check_paused && mode.check_finished(force_ending) || force_ending)
 				current_state = GAME_STATE_FINISHED
