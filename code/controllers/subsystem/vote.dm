@@ -236,7 +236,15 @@ SUBSYSTEM_DEF(vote)
 			V.Grant(C.mob)
 			generated_actions += V
 			if(C.prefs.toggles & SOUND_ANNOUNCEMENTS)
-				SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
+				// honk start -- vote sounds
+				switch(vote_type)
+					if("crew transfer")
+						SEND_SOUND(C, sound('russstation/sound/misc/transfer_vote.ogg'))
+					if("map")
+						SEND_SOUND(C, sound('russstation/sound/misc/map_vote.ogg'))
+					else
+						SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
+				// honk end
 		return TRUE
 	return FALSE
 
