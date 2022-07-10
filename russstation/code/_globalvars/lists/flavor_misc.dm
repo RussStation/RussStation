@@ -16,3 +16,7 @@ GLOBAL_LIST_INIT(color_list_skaven, list(
 	"Sickly Green" = "#17241c",
 	"Sickly Yellow" = "#232418",
 	"Black Blue" = "#1f1f2e"))
+
+	// Kitsune defines
+GLOBAL_LIST_EMPTY(tails_list_kitsune)
+GLOBAL_LIST_EMPTY(animated_tails_list_kitsune)

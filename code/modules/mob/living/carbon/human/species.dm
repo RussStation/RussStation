@@ -668,7 +668,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 	var/obj/item/bodypart/head/noggin = source.get_bodypart(BODY_ZONE_HEAD)
 
-	//honk start - tail handling for skaven
+	//honk start - tail handling for skaven amd kitsune
 	if(mutant_bodyparts["tail_skaven"])
 		if(source.wear_suit && (source.wear_suit.flags_inv & HIDEJUMPSUIT))
 			bodyparts_to_add -= "tail_skaven"
@@ -678,6 +678,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			bodyparts_to_add -= "waggingtail_skaven"
 		else if (mutant_bodyparts["tail_skaven"])
 			bodyparts_to_add -= "waggingtail_skaven"
+
+	if(mutant_bodyparts["tail_kitsune"])
+		if(source.wear_suit && (source.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "tail_kitsune"
+
+	if(mutant_bodyparts["waggingtail_kitsune"])
+		if(source.wear_suit && (source.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "waggingtail_kitsune"
+		else if (mutant_bodyparts["tail_kitsune"])
+			bodyparts_to_add -= "waggingtail_kitsune"
 	//honk end
 
 	if(mutant_bodyparts["tail_lizard"])
@@ -729,11 +739,16 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		for(var/bodypart in bodyparts_to_add)
 			var/datum/sprite_accessory/accessory
 			switch(bodypart)
-				//honk start - tail for skaven
+				//honk start - tail for skaven and kitsune
 				if("tail_skaven")
 					accessory = GLOB.tails_list_skaven[source.dna.features["tail_skaven"]]
 				if("waggingtail_skaven")
 					accessory = GLOB.animated_tails_list_skaven[source.dna.features["tail_skaven"]]
+
+				if("tail_kitsune")
+					accessory = GLOB.tails_list_kitsune[source.dna.features["tail_kitsune"]]
+				if("waggingtail_kitsune")
+					accessory = GLOB.animated_tails_list_kitsune[source.dna.features["tail_kitsune"]]
 				//honk end
 				if("tail_lizard")
 					accessory = GLOB.tails_list_lizard[source.dna.features["tail_lizard"]]
@@ -765,9 +780,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 			//A little rename so we don't have to use tail_lizard or tail_human when naming the sprites.
 			// honk start - adds skaven to rename if statements
-			if(bodypart == "tail_lizard" || bodypart == "tail_human" || bodypart == "tail_monkey" || bodypart == "tail_skaven")
+			if(bodypart == "tail_lizard" || bodypart == "tail_human" || bodypart == "tail_monkey" || bodypart == "tail_skaven" || bodypart == "tail_kitsune")
 				bodypart = "tail"
-			else if(bodypart == "waggingtail_lizard" || bodypart == "waggingtail_human" || bodypart == "waggingtail_skaven")
+			else if(bodypart == "waggingtail_lizard" || bodypart == "waggingtail_human" || bodypart == "waggingtail_skaven" || bodypart == "waggingtail_kitsune")
 				bodypart = "waggingtail"
 			// honk end
 

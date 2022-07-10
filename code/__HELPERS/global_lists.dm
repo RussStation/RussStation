@@ -21,6 +21,8 @@
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/skaven, GLOB.tails_list_skaven)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails_animated/skaven, GLOB.animated_tails_list_skaven)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_hair, GLOB.diona_hair_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/kitsune, GLOB.tails_list_kitsune)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails_animated/kitsune, GLOB.animated_tails_list_kitsune)
 	//honk end
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/human, GLOB.tails_list_human)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails_animated/human, GLOB.animated_tails_list_human)

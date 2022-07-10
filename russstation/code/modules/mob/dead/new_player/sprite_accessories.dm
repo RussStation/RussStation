@@ -74,12 +74,33 @@
 	name = "Skaven"
 	icon_state = "skaven"
 
+// Kitsune Tail
+/datum/sprite_accessory/tails/kitsune
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	color_src = 0
+
+/datum/sprite_accessory/tails_animated/kitsune
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	color_src = 0
+
+/datum/sprite_accessory/tails/kitsune/normal
+	name = "Kitsune"
+	icon_state = "kitsune"
+
+/datum/sprite_accessory/tails_animated/kitsune/normal
+	name = "Kitsune"
+	icon_state = "kitsune"
+
 //Skaven ears
 /datum/sprite_accessory/ears/skaven
 	name = "Skaven"
 	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
 	icon_state = "skaven"
-
+//Kitsune Ears
+/datum/sprite_accessory/ears/kitsune
+	name = "Kitsune"
+	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "kitsune"
 //More horns (the tg ones are pretty lackluster for skaven)
 /datum/sprite_accessory/horns/seer
 	name = "Seer"
