@@ -77,11 +77,11 @@
 // Kitsune Tail
 /datum/sprite_accessory/tails/kitsune
 	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
-	color_src = 0
+	color_src = HAIR
 
 /datum/sprite_accessory/tails_animated/kitsune
 	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
-	color_src = 0
+	color_src = HAIR
 
 /datum/sprite_accessory/tails/kitsune/normal
 	name = "Kitsune"
@@ -101,6 +101,7 @@
 	name = "Kitsune"
 	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
 	icon_state = "kitsune"
+	// color_src = HAIR
 //More horns (the tg ones are pretty lackluster for skaven)
 /datum/sprite_accessory/horns/seer
 	name = "Seer"

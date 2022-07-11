@@ -91,6 +91,6 @@
 	name = "Kitsune Mutation Toxin"
 	description = "A sickly glowing toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
-	race = /datum/species/kitsune
+	race = /datum/species/human/kitsune
 	taste_description = "tingling"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED

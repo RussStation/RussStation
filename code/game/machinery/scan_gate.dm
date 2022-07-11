@@ -150,7 +150,7 @@
 					if(SCANGATE_SKAVEN)
 						scan_species = /datum/species/skaven
 					if(SCANGATE_KITSUNE)
-						scan_species = /datum/species/kitsune
+						scan_species = /datum/species/human/kitsune
 					if(SCANGATE_DIONA)
 						scan_species = /datum/species/diona
 					//honk end

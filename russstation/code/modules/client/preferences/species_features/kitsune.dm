@@ -29,5 +29,5 @@
 // 	target.dna.features["ears"] = value
 
 // /datum/preference/choiced/ears/create_default_value()
-// 	var/datum/sprite_accessory/ears/cat/ears = /datum/sprite_accessory/ears/cat
+// 	var/datum/sprite_accessory/ears/kitsune/ears = /datum/sprite_accessory/ears/kitsune
 // 	return initial(ears.name)
