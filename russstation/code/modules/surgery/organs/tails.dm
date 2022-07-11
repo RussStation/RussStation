@@ -33,6 +33,8 @@
 /obj/item/organ/tail/kitsune
 	name = "Fox tail"
 	desc = "A severed fox tail. are you sure this isn't cursed..?"
+	icon = 'russstation/icons/obj/surgery.dmi'
+	icon_state = "kitsunetail"
 	color = "#FFA500"
 	tail_type = "kitsune"
 

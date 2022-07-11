@@ -105,7 +105,7 @@
 	return list(
 		"Bio-engineering has resulted in many different variants of animalids, some more.. eccentric than others, \
 			Kitsune are one such result, being very similar to felinids in that while they mostly just gained a tail and ears \
-			there were some more.. unintended effects on their though process and speech patterns.",
+			there were some more.. unintended effects on their thought process and speech patterns.",
 
 		"Never the less, these variant of animalid is still popular among small groups of frea- of like minded individuals, enjoying \
 			the fluffy ears and tails that the procedure gave them, alongside the violent racism and distain from non animalid races.",
