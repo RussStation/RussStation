@@ -15,10 +15,10 @@
 	liked_food = MEAT | FRUIT
 	payday_modifier = 0.75
 	ass_image = 'icons/ass/asscat.png'
-	family_heirlooms = list(/obj/item/food/egg)
+	family_heirlooms = list(/obj/item/food/egg, /obj/item/gohei)
 	examine_limb_id = SPECIES_HUMAN
 
-/datum/species/kitsune/random_name(gender, unique, lastname)
+/datum/species/human/kitsune/random_name(gender, unique, lastname)
 	if(unique)
 		return random_unique_kitsune_name()
 
@@ -85,11 +85,19 @@
 			tail.Insert(H, special = TRUE, drop_if_replaced = FALSE)
 		else
 			mutant_organs = list()
-		H.dna.features["mcolor"] = H.hair_color
+		// H.dna.features["mcolor"] = H.hair_color
 	return ..()
 
+/datum/species/human/kitsune/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
+	var/tail = pick(GLOB.tails_list_kitsune)
+	human_mob.dna.features["tail_kitsune"] = tail
+	mutant_bodyparts["tail_kitsune"] = tail
+	var/ears = pick(GLOB.ears_list)
+	human_mob.dna.features["ears"] = ears
+	human_mob.update_body()
+
 /datum/species/human/kitsune/get_species_description()
-	return "Kitsune are one of the many types of bespoke genetic \
+	return "Kitsune are one of the many types of genetic \
 		modifications to come of humanity's mastery of genetic science, and are \
 		a relatively uncommon variant of the animalids"
 
@@ -102,3 +110,18 @@
 		"Never the less, these variant of animalid is still popular among small groups of frea- of like minded individuals, enjoying \
 			the fluffy ears and tails that the procedure gave them, alongside the violent racism and distain from non animalid races.",
 	)
+
+/datum/species/human/kitsune/create_pref_unique_perks()
+	var/list/to_add = list()
+
+	to_add += list(
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_ICON = "assistive-listening-systems",
+			SPECIES_PERK_NAME = "Sensitive Hearing",
+			SPECIES_PERK_DESC = "Kitsunes are more sensitive to loud sounds, such as flashbangs, or the sound of a chef cracking \
+			an egg",
+		),
+	)
+
+	return to_add

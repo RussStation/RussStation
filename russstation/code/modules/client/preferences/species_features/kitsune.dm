@@ -2,7 +2,7 @@
 	savefile_key = "feature_kitsune_tail"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
-	can_randomize = FALSE
+	can_randomize = TRUE
 	relevant_mutant_bodypart = "tail_kitsune"
 
 /datum/preference/choiced/tail_kitsune/init_possible_values()
@@ -19,7 +19,7 @@
 // 	savefile_key = "feature_kitsune_ears"
 // 	savefile_identifier = PREFERENCE_CHARACTER
 // 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
-// 	can_randomize = FALSE
+// 	can_randomize = TRUE
 // 	relevant_mutant_bodypart = "ears"
 
 // /datum/preference/choiced/ears/init_possible_values()
