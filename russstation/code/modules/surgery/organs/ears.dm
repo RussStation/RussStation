@@ -20,7 +20,7 @@
 
 /obj/item/organ/ears/kitsune
 	name = "fox ears"
-	icon = 'icons/obj/clothing/hats.dmi'
+	icon = 'russstation/icons/obj/clothing/hats.dmi'
 	icon_state = "foxie"
 	visual = TRUE
 	damage_multiplier = 2

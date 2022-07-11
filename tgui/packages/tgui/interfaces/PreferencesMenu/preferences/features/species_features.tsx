@@ -89,3 +89,12 @@ export const feature_skaven_tail: FeatureChoiced = {
 };
 
 // honk end
+
+// honk start -- Kitsune tail
+
+export const feature_kitsune_tail: FeatureChoiced = {
+  name: "Tail",
+  component: FeatureDropdownInput,
+};
+
+// honk end
