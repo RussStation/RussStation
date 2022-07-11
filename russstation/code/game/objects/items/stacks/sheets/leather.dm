@@ -7,7 +7,7 @@
 	merge_type = /obj/item/stack/sheet/animalhide/skaven
 
 /obj/item/stack/sheet/animalhide/kitsune
-	name = "foxy flesh"
+	name = "kitsune flesh"
 	desc = "Flesh from a mutilated Kitsune."
 	singular_name = "kitsune flesh piece"
 	icon = 'russstation/icons/obj/stack_objects.dmi'

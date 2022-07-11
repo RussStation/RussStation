@@ -17,6 +17,8 @@
 	ass_image = 'icons/ass/asscat.png'
 	family_heirlooms = list(/obj/item/food/egg, /obj/item/gohei)
 	examine_limb_id = SPECIES_HUMAN
+	meat = /obj/item/food/meat/slab/human/mutant/kitsune
+	skinned_type = /obj/item/stack/sheet/animalhide/kitsune
 
 /datum/species/human/kitsune/random_name(gender, unique, lastname)
 	if(unique)
