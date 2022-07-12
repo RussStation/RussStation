@@ -24,7 +24,11 @@
 	/// Our internal techweb for limbgrower designs.
 	var/datum/techweb/stored_research
 	/// All the categories of organs we can print.
-	var/list/categories = list(SPECIES_HUMAN, SPECIES_LIZARD, SPECIES_MOTH, SPECIES_PLASMAMAN, SPECIES_ETHEREAL, "other")
+	var/list/categories = list(SPECIES_HUMAN, SPECIES_LIZARD, SPECIES_MOTH, SPECIES_PLASMAMAN, SPECIES_ETHEREAL,
+	//honk start - Adds the skaven category to the Limb Grower
+	SPECIES_SKAVEN,
+	//honk end
+	 "other")
 
 /obj/machinery/limbgrower/Initialize(mapload)
 	create_reagents(100, OPENCONTAINER)
