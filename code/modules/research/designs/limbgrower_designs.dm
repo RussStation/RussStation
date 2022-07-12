@@ -322,7 +322,7 @@
 /datum/design/limb_disk/skaven
 	name = "Skaven Organ Design Disk"
 	desc = "Contains designs for skaven organs for the limbgrower - Skaven ears, tail, lungs, and tongue."
-	id = "limbedesign_skaven"
+	id = "limbdesign_skaven"
 	build_path = /obj/item/disk/design_disk/limbs/skaven
 
 //honk end
