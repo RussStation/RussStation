@@ -362,10 +362,8 @@
 		"limbdesign_ethereal",
 		"limbdesign_felinid",
 		"limbdesign_lizard",
-		"limbdesign_plasmaman",
-		//honk start - Adding the Skaven Designs to the Research
-		"limbdesign_skaven",
-		//honk end
+		"limbdesign_plasmaman",//honk start - Adding the Skaven Designs to the Research
+		"limbdesign_skaven",//honk end
 		)
 
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 6500)
