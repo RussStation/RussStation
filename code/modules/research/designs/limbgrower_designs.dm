@@ -198,7 +198,7 @@
 	category = list(SPECIES_ETHEREAL)
 
 //honk start - Skaven Organ Limb Designs
-	/datum/design/skaven_lungs
+/datum/design/skaven_lungs
 	name = "Skaven Lungs"
 	id = "skavenlungs"
 	build_type = LIMBGROWER
