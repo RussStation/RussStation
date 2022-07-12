@@ -107,9 +107,6 @@
 #define SPECIES_ZOMBIE "zombie"
 #define SPECIES_ZOMBIE_INFECTIOUS "memezombie"
 #define SPECIES_ZOMBIE_KROKODIL "krokodil_zombie"
-//honk start - Defines Skaven for the limb printers
-#define SPECIES_SKAVEN "skaven"
-//honk end
 
 //See: datum/species/var/digitigrade_customization
 ///The species does not have digitigrade legs in generation.
