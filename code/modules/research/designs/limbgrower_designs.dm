@@ -197,6 +197,41 @@
 	build_path = /obj/item/organ/lungs/ethereal
 	category = list(SPECIES_ETHEREAL)
 
+//honk start - Skaven Organ Limb Designs
+	/datum/design/skaven_lungs
+	name = "Skaven Lungs"
+	id = "skavenlungs"
+	build_type = LIMBGROWER
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 15, /datum/reagent/toxin/bad_food = 10)
+	build_path = /obj/item/organ/lungs/skaven
+	category = list(SPECIES_SKAVEN)
+
+/datum/design/skaven_tongue
+	name = "Putrid Blistering Tongue"
+	id = "skaventongue"
+	build_type = LIMBGROWER
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/toxin/bad_food = 10)
+	build_path = /obj/item/organ/tongue/skaven
+	category = list(SPECIES_SKAVEN)
+
+/datum/design/skaven_ears
+	name = "Skaven Ears"
+	id = "skavenears"
+	build_type = LIMBGROWER
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/toxin/bad_food = 10)
+	build_path = /obj/item/organ/ears/skaven
+	category = list(SPECIES_SKAVEN)
+
+/datum/design/skaven_tail
+	name = "Skaven Tail"
+	id = "skaventail"
+	build_type = LIMBGROWER
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 20, /datum/reagent/toxin/bad_food = 10)
+	build_path = /obj/item/organ/tail/skaven
+	category = list(SPECIES_SKAVEN)
+
+//honk end
+
 // Intentionally not growable by normal means - for balance conerns.
 /datum/design/ethereal_heart
 	name = "Crystal Core"
@@ -278,3 +313,16 @@
 	desc = "Contains designs for ethereal organs for the limbgrower - Ethereal tongue and stomach."
 	id = "limbdesign_ethereal"
 	build_path = /obj/item/disk/design_disk/limbs/ethereal
+
+//honk start - Skaven Limb Design Disk
+/obj/item/disk/design_disk/limbs/skaven
+	name = "Skaven Organ Design Disk"
+	limb_designs = list(/datum/design/skaven_lungs, /datum/design/skaven_tongue, /datum/design/skaven_ears, /datum/design/skaven_tail)
+
+/datum/design/limb_disk/skaven
+	name = "Skaven Organ Design Disk"
+	desc = "Contains designs for skaven organs for the limbgrower - Skaven ears, tail, lungs, and tongue."
+	id = "limbedesign_skaven"
+	build_path = /obj/item/disk/design_disk/limbs/skaven
+
+//honk end
