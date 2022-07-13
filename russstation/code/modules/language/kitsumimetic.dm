@@ -10,5 +10,5 @@
 		"sou", "dono", "chan", "san", "kun", "mahou", "yatta", "suki", "usagi", "domo", "ori",
 		"anya", "zaazaa", "shiku", "puru", "ira", "heto", "etto"
 	)
-	icon_state = "animal"
+	icon_state = "iconfox"
 	default_priority = 90
