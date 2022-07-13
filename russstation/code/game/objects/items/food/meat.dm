@@ -26,7 +26,7 @@
 	name = "kitsune steak"
 	icon_state = "meatsteak"
 	tastes = list("meat" = 2, "egg?" = 1, "kami" = 1)
-	foodtypes = MEAT
+	foodtypes = MEAT | GROSS
 
 //kitsune borgor
 /obj/item/food/meat/slab/human/mutant/kitsune/MakeGrillable()
