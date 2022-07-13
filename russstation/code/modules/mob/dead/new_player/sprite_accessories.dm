@@ -83,15 +83,6 @@
 	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
 	color_src = HAIR
 
-/datum/sprite_accessory/tails/kitsune/normal
-	name = "Kitsune"
-	icon_state = "kitsune"
-
-/datum/sprite_accessory/tails_animated/kitsune/normal
-	name = "Kitsune"
-	icon_state = "kitsune"
-
-
 /datum/sprite_accessory/tails/kitsune/none
 	name = "None"
 	icon_state = "none"
@@ -99,6 +90,14 @@
 /datum/sprite_accessory/tails_animated/kitsune/none
 	name = "None"
 	icon_state = "none"
+
+/datum/sprite_accessory/tails/kitsune/normal
+	name = "Kitsune"
+	icon_state = "kitsune"
+
+/datum/sprite_accessory/tails_animated/kitsune/normal
+	name = "Kitsune"
+	icon_state = "kitsune"
 
 //Skaven ears
 /datum/sprite_accessory/ears/skaven

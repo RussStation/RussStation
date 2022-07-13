@@ -1,11 +1,11 @@
 /datum/species/human/kitsune
 	name = "Kitsune"
-	id = "kitsune"
+	id = SPECIES_KITSUNE
 	say_mod = "gekkers"
 	// use_skintones = 1
 	// species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,HAS_FLESH,HAS_BONE)
 
-	mutant_bodyparts = list("tail_kitsune" = "kitsune", "ears" = "kitsune", "wings" = "None")
+	mutant_bodyparts = list("tail_kitsune" = "Kitsune", "ears" = "Kitsune", "wings" = "None")
 
 	mutantears = /obj/item/organ/ears/kitsune
 	mutant_organs = list(/obj/item/organ/tail/kitsune)
@@ -14,7 +14,7 @@
 	disliked_food = GROSS | CLOTH | RAW
 	liked_food = MEAT | FRUIT
 	payday_modifier = 0.75
-	ass_image = 'icons/ass/asscat.png'
+	ass_image = 'icons/ass/assfox.png'
 	family_heirlooms = list(/obj/item/food/egg, /obj/item/gohei)
 	examine_limb_id = SPECIES_HUMAN
 	meat = /obj/item/food/meat/slab/human/mutant/kitsune
@@ -74,15 +74,15 @@
 		var/mob/living/carbon/human/H = C
 		if(!pref_load)
 			if(H.dna.features["tail_kitsune"] == "None")
-				H.dna.features["tail_kitsune"] = "kitsune"
+				H.dna.features["tail_kitsune"] = "Kitsune"
 			if(H.dna.features["ears"] == "None")
-				H.dna.features["ears"] = "kitsune"
-		if(H.dna.features["ears"] == "kitsune")
+				H.dna.features["ears"] = "Kitsune"
+		if(H.dna.features["ears"] == "Kitsune")
 			var/obj/item/organ/ears/kitsune/ears = new
 			ears.Insert(H, drop_if_replaced = FALSE)
 		else
 			mutantears = /obj/item/organ/ears
-		if(H.dna.features["tail_kitsune"] == "kitsune")
+		if(H.dna.features["tail_kitsune"] == "Kitsune")
 			var/obj/item/organ/tail/kitsune/tail = new
 			tail.Insert(H, special = TRUE, drop_if_replaced = FALSE)
 		else
