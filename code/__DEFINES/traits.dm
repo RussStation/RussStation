@@ -857,3 +857,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Ignores body_parts_covered during the add_fingerprint() proc. Works both on the person and the item in the glove slot.
 #define TRAIT_FINGERPRINT_PASSTHROUGH "fingerprint_passthrough"
+
+// Honk Start: Kitsune Tackling Trait
+
+#define TRAIT_NATURALTACKLER "natural_tackler"
+
+
+// Honk end

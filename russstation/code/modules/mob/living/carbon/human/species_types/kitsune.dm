@@ -4,6 +4,9 @@
 	say_mod = "gekkers"
 	// use_skintones = 1
 	// species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,HAS_FLESH,HAS_BONE)
+	inherent_traits = list(
+		TRAIT_NATURALTACKLER,
+	)
 
 	mutant_bodyparts = list("tail_kitsune" = "Kitsune", "ears" = "Kitsune", "wings" = "None")
 
@@ -123,6 +126,13 @@
 			SPECIES_PERK_NAME = "Sensitive Hearing",
 			SPECIES_PERK_DESC = "Kitsunes are more sensitive to loud sounds, such as flashbangs, or the sound of a chef cracking \
 			an egg",
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "fist-raised",
+			SPECIES_PERK_NAME = "Natural Tackler",
+			SPECIES_PERK_DESC = "Kitsunes are experts at tackling their prey, and are naturally skilled when using \
+			 gripper gloves and their ilk.",
 		),
 	)
 
