@@ -270,25 +270,25 @@
 	var/mob/living/carbon/human/human_holder = quirk_holder
 	human_holder.cure_trauma_type(/datum/brain_trauma/mild/phobia, TRAUMA_RESILIENCE_ABSOLUTE)
 
-// honk start -- re-add navigationally challenged
-/datum/quirk/item_quirk/needswayfinder
-	name = "Navigationally Challenged"
-	desc = "Lacking familiarity with certain stations, you start with a wayfinding pinpointer where available."
-	icon = "route"
-	value = 0
-	medical_record_text = "Patient demonstrates a keen ability to get lost."
+// honk start -- navigationally challenged -- TODO: Re-add?
+// /datum/quirk/item_quirk/needswayfinder
+// 	name = "Navigationally Challenged"
+// 	desc = "Lacking familiarity with certain stations, you start with a wayfinding pinpointer where available."
+// 	icon = "route"
+// 	value = 0
+// 	medical_record_text = "Patient demonstrates a keen ability to get lost."
 
-/datum/quirk/item_quirk/needswayfinder/add_unique()
-	if(!GLOB.wayfindingbeacons.len)
-		return
+// /datum/quirk/item_quirk/needswayfinder/add_unique()
+// 	if(!GLOB.navigate_destination.len)
+// 		return
 
-	var/mob/living/carbon/human/human_holder = quirk_holder
+// 	var/mob/living/carbon/human/human_holder = quirk_holder
 
-	var/obj/item/pinpointer/wayfinding/wayfinder = new(get_turf(quirk_holder))
-	wayfinder.owner = human_holder.real_name
-	wayfinder.from_quirk = TRUE
+// 	var/obj/item/pinpointer/wayfinding/wayfinder = new(get_turf(quirk_holder))
+// 	wayfinder.owner = human_holder.real_name
+// 	wayfinder.from_quirk = TRUE
 
-	give_item_to_holder(wayfinder, list(LOCATION_LPOCKET = ITEM_SLOT_LPOCKET, LOCATION_RPOCKET = ITEM_SLOT_RPOCKET, LOCATION_BACKPACK = ITEM_SLOT_BACKPACK, LOCATION_HANDS = ITEM_SLOT_HANDS))
+// 	give_item_to_holder(wayfinder, list(LOCATION_LPOCKET = ITEM_SLOT_LPOCKET, LOCATION_RPOCKET = ITEM_SLOT_RPOCKET, LOCATION_BACKPACK = ITEM_SLOT_BACKPACK, LOCATION_HANDS = ITEM_SLOT_HANDS))
 // honk end
 
 /datum/quirk/shifty_eyes

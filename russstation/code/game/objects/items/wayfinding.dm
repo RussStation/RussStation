@@ -1,3 +1,4 @@
+// Old wayfinding system, moved here to allow use as it was removed upstream
 #define COOLDOWN_SPAWN 3 MINUTES
 #define COOLDOWN_INTERACT 6 SECONDS
 #define COOLDOWN_SLOGAN 5 MINUTES
@@ -255,7 +256,7 @@
 
 	if(length(beacons))
 		beacons.Cut()
-	for(var/obj/machinery/navbeacon/B in GLOB.wayfindingbeacons)
+	for(var/obj/machinery/navbeacon/B in GLOB.navigate_destinations)
 		beacons[B.codes["wayfinding"]] = B
 
 	if(!length(beacons))
