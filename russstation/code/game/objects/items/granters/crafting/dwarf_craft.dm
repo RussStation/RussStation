@@ -16,7 +16,7 @@
 	)
 	icon = 'russstation/icons/obj/library.dmi'
 	icon_state = "dwarf"
-	oneuse = FALSE
+	uses = INFINITY
 	pages_to_mastery = 1 // don't waste time
 	// quotes from here: http://dwarffortresswiki.org/index.php/Main_Page/Quote/list uttered by Toadyone, Dwarf Fortress itself, or anonymous players
 	remarks = list(
