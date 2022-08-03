@@ -6,7 +6,7 @@
 	build_type = IMPRINTER | COMPONENT_PRINTER
 	category = list("Circuitry", "Core")
 	materials = list(/datum/material/glass = 1000, /datum/material/iron = 1000)
-	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/circuit_multitool
 	name = "Circuit Multitool"
@@ -16,7 +16,7 @@
 	build_type = PROTOLATHE | COMPONENT_PRINTER
 	category = list("Circuitry", "Core")
 	materials = list(/datum/material/glass = 1000, /datum/material/iron = 1000)
-	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/usb_cable
 	name = "USB Cable"
@@ -27,14 +27,14 @@
 	category = list("Circuitry", "Core")
 	// Yes, it would make sense to make them take plastic, but then less people would make them, and I think they're cool
 	materials = list(/datum/material/iron = 2500)
-	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/component
 	name = "Component ( NULL ENTRY )"
 	desc = "A component that goes into an integrated circuit."
 	build_type = IMPRINTER | COMPONENT_PRINTER
 	materials = list(/datum/material/glass = 1000)
-	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 	category = list("Circuitry", "Components")
 
 /datum/design/component/New()
@@ -116,12 +116,12 @@
 /datum/design/component/binary_conversion
 	name = "Binary Conversion Component"
 	id = "comp_binary_convert"
-	build_path = /obj/item/circuit_component/binary_decimal/binary_conversion
+	build_path = /obj/item/circuit_component/binary_conversion
 
 /datum/design/component/decimal_conversion
 	name = "Decimal Conversion Component"
 	id = "comp_decimal_convert"
-	build_path = /obj/item/circuit_component/binary_decimal/decimal_conversion
+	build_path = /obj/item/circuit_component/decimal_conversion
 
 /datum/design/component/species
 	name = "Get Species Component"
@@ -132,6 +132,11 @@
 	name = "Speech Component"
 	id = "comp_speech"
 	build_path = /obj/item/circuit_component/speech
+
+/datum/design/component/laserpointer
+	name = "Laser Pointer Component"
+	id = "comp_laserpointer"
+	build_path = /obj/item/circuit_component/laserpointer
 
 /datum/design/component/timepiece
 	name = "Timepiece Component"
@@ -316,17 +321,12 @@
 /datum/design/component/list_assoc_literal
 	name = "Associative List Literal"
 	id = "comp_list_assoc_literal"
-	build_path = /obj/item/circuit_component/list_literal/assoc_literal
+	build_path = /obj/item/circuit_component/assoc_literal
 
 /datum/design/component/typecast
 	name = "Typecast Component"
 	id = "comp_typecast"
 	build_path = /obj/item/circuit_component/typecast
-
-/datum/design/component/printer
-	name = "Printer Component"
-	id = "comp_printer"
-	build_path = /obj/item/circuit_component/printer
 
 /datum/design/component/pinpointer
 	name = "Proximity Pinpointer Component"

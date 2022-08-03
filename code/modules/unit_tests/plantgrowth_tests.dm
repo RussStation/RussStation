@@ -8,8 +8,8 @@
 	states |= icon_states('icons/obj/hydroponics/growing_flowers.dmi')
 	states |= icon_states('icons/obj/hydroponics/growing_mushrooms.dmi')
 	states |= icon_states('icons/obj/hydroponics/growing_vegetables.dmi')
+	// honk start -- add russstation & goon growing dmi files to be used in testing
 	states |= icon_states('goon/icons/obj/hydroponics.dmi')
-	// honk start -- add russstation growing dmi files to be used in testing
 	states |= icon_states('russstation/icons/obj/hydroponics/growing.dmi')
 	states |= icon_states('russstation/icons/obj/hydroponics/growing_fruits.dmi')
 	// honk end
@@ -21,11 +21,11 @@
 		for(var/i in 1 to seed.growthstages)
 			if("[seed.icon_grow][i]" in states)
 				continue
-			Fail("[seed.name] ([seed.type]) lacks the [seed.icon_grow][i] icon!")
+			TEST_FAIL("[seed.name] ([seed.type]) lacks the [seed.icon_grow][i] icon!")
 
 		if(!(seed.icon_dead in states))
-			Fail("[seed.name] ([seed.type]) lacks the [seed.icon_dead] icon!")
+			TEST_FAIL("[seed.name] ([seed.type]) lacks the [seed.icon_dead] icon!")
 
 		if(seed.icon_harvest) // mushrooms have no grown sprites, same for items with no product
 			if(!(seed.icon_harvest in states))
-				Fail("[seed.name] ([seed.type]) lacks the [seed.icon_harvest] icon!")
+				TEST_FAIL("[seed.name] ([seed.type]) lacks the [seed.icon_harvest] icon!")

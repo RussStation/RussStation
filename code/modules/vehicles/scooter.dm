@@ -26,7 +26,7 @@
 	qdel(src)
 	return TRUE
 
-/obj/vehicle/ridden/scooter/Moved()
+/obj/vehicle/ridden/scooter/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
 	for(var/mob/living/buckled_mob as anything in buckled_mobs)
 		if(buckled_mob.num_legs > 0)
@@ -77,10 +77,10 @@
 	. = ..()
 	// honk start -- adds a suicide for skateboards
 	if(suicide)
-		autogrant_actions_controller.Cut()
+		// autogrant_actions_controller.Cut()
 		initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie/suicide, VEHICLE_CONTROL_DRIVE) // honk -- moved old action initialize to here
 	else
-		autogrant_actions_controller.Cut()
+		// autogrant_actions_controller.Cut()
 		initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie, VEHICLE_CONTROL_DRIVE)
 	// honk end
 
