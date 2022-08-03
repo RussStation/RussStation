@@ -355,7 +355,17 @@ Difficulty: Medium
 		spinning = FALSE
 		src.speed = default_attackspeed()
 
-/mob/living/simple_animal/hostile/megafauna/sif/Moved()
+
+/mob/living/simple_animal/hostile/megafauna/hierophant/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	if(!stat && .)
+		var/obj/effect/temp_visual/hierophant/squares/HS = new(old_loc)
+		HS.setDir(movement_dir)
+		playsound(src, 'sound/mecha/mechmove04.ogg', 150, TRUE, -4)
+		if(target)
+			arena_trap(target)
+
+/mob/living/simple_animal/hostile/megafauna/sif/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 
 	if(can_special != TRUE)
 		return
