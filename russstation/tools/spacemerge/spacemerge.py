@@ -26,6 +26,7 @@ import time # for timing script execution
 
 # i don't expect these to get modified, but this avoids littering hard code
 upstream = "tgstation"
+upstream_url = "https://github.com/tgstation/tgstation.git"
 upstream_branch = upstream + "/master"
 their_dme = "tgstation.dme"
 our_dme = "RussStation.dme"
@@ -33,20 +34,83 @@ epoch_path = "last_merge"
 build_path = "tools/build/build.js"
 spaceman_path = "SpacemanDMM.toml"
 # files to skip parsing and take ours or theirs
-ours = ["README.md"]
+ours = ["README.md",
+	"our.gitignore",
+	"RussStation.dme",
+	# Lobby music volume preference
+	"tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/game_preferences/lobby_music_volume.tsx",
+	# Custom map shuttles
+	"_maps/shuttles/arrival_echo.dmm",
+	"_maps/shuttles/cargo_echo.dmm",
+	"_maps/shuttles/emergency_echo.dmm",
+	"_maps/shuttles/mining_echo.dmm",
+	"_maps/shuttles/cargo_icecube.dmm",
+	"_maps/shuttles/cargo_lima.dmm",
+	"_maps/shuttles/emergency_lima.dmm",
+	"_maps/shuttles/labour_lima.dmm",
+	"_maps/shuttles/mining_lima.dmm",
+	"_maps/shuttles/arrival_shit.dmm",
+	"_maps/shuttles/cargo_shit.dmm",
+	"_maps/shuttles/emergency_shit.dmm",
+	# Custom mining maps
+	"_maps/map_files/Mining/Badlands.dmm",
+	"_maps/map_files/Mining/IceMoon.dmm",
+	# Custom ruins
+	"_maps/RandomRuins/LavaRuins/lavaland_surface_dwarf.dmm",
+	"_maps/RandomRuins/LavaRuins/lavaland_surface_sif_spawn.dmm",
+	# Custom map wiki pictures
+	"wiki/cube.png",
+	"wiki/dorf_dorm.png",
+	"wiki/echo.png",
+	"wiki/icecube_above.png",
+	"wiki/icecube_below.png",
+	"wiki/lima.png",
+	"wiki/pubby.png",
+	"wiki/shitstation_above.png",
+	"wiki/shitstation_below.png",
+	# Custom map dm files, apparently required <insert old PR conversation link here>
+	"_maps/cubestation.dm",
+	"_maps/echostation.dm",
+	"_maps/limastation.dm",
+	"_maps/shitstation.dm",
+	# Custom map json files
+	"_maps/cubestation.json",
+	"_maps/echostation.json",
+	"_maps/icecubestation.json",
+	"_maps/limastation.json",
+	"_maps/pubbystation.json",
+	"_maps/shitstation.json",
+	# Russ strings
+	"strings/names/diona_first.txt",
+	"strings/names/diona_last.txt",
+	"strings/names/dwarf_first.txt",
+	"strings/names/dwarf_last.txt",
+	"strings/russ_ion_laws.json",
+	"strings/russ_traumas.json"]
 # .gitattributes is theirs but handled special to avoid git problems
 theirs = [".editorconfig",
 	"tgstation.dme"]
 # dirs processed after individual files
 our_dirs = [".github",
+	".devcontainer",
 	"config",
-	"russstation"]
+	"last_merge",
+	"russstation",
+	"goon",
+	"code/__DEFINES/~russ_defines",
+	"_maps/map_files/CubeStation",
+	"_maps/map_files/EchoStation",
+	"_maps/map_files/IceCubeStation",
+	"_maps/map_files/LimaStation",
+	"_maps/map_files/PubbyStation",
+	"_maps/map_files/ShitStation"]
 # theirs previously included _maps and tgui; we keep maps and local UI tweaks in those so process them
 their_dirs = ["icons",
 	"interface",
 	"sound",
 	"SQL",
-	"tools"]
+	"tools",
+	"html/changelogs"]
 # binary files break the parser so please exclude them
 binaries = ["*.dmm",
 	"*.dmi",
@@ -122,6 +186,10 @@ def clean_state(repo):
 def create_branch(repo, target_time):
 	print("Creating merge branch...")
 	repo.remotes.origin.fetch()
+	# Check if upstream remote exists
+	if not upstream in repo.remotes:
+		# If not, create it
+		repo.create_remote(upstream, upstream_url)
 	repo.remotes[upstream].fetch()
 	printv("Fetched origin and upstream")
 	# TODO target time merge maybe isn't working, was missing commits in the time range when testing
@@ -219,6 +287,11 @@ def remove_deleted_files(repo, delete_all):
 			for dir in our_dirs:
 				# skip stuff in our dirs
 				if path.startswith(dir + "/"):
+					is_ours = True
+					break
+			for our_file in ours:
+				# skip our files
+				if path == our_file:
 					is_ours = True
 					break
 			if not is_ours and os.path.isfile(path):
