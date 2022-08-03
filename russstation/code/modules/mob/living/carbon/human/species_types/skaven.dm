@@ -2,7 +2,7 @@
 	name = "Skaven"
 	id = "skaven"
 	say_mod = "jitters"
-	default_color = "2E2E2E"
+	var/default_color = "2E2E2E"
 	species_traits = list(MUTCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
@@ -45,10 +45,9 @@
 		GLOB.features_by_species[type] += "feature_skavencolor"
 		. += "feature_skavencolor"
 
-/datum/species/skaven/pre_equip_species_outfit(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE)
-	H.equipOutfit(/datum/outfit/skaven, visualsOnly)
-	H.internal = H.get_item_for_held_index(2)
-	H.update_internals_hud_icon(1)
+/datum/species/skaven/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only = FALSE)
+	equipping.equipOutfit(/datum/outfit/skaven, visuals_only)
+	equipping.internal = equipping.get_item_for_held_index(2)
 
 /datum/species/skaven/random_name(gender, unique, lastname)
 	if(unique)
