@@ -34,11 +34,10 @@ epoch_path = "last_merge"
 build_path = "tools/build/build.js"
 spaceman_path = "SpacemanDMM.toml"
 # files to skip parsing and take ours or theirs
-ours = ["README.md",
+ours = ["last_merge",
 	"our.gitignore",
 	"RussStation.dme",
-	# Lobby music volume preference
-	"tgui/packages/tgui/interfaces/PreferencesMenu/preferences/features/game_preferences/lobby_music_volume.tsx",
+	"README.md",
 	# Custom map shuttles
 	"_maps/shuttles/arrival_echo.dmm",
 	"_maps/shuttles/cargo_echo.dmm",
@@ -55,9 +54,15 @@ ours = ["README.md",
 	# Custom mining maps
 	"_maps/map_files/Mining/Badlands.dmm",
 	"_maps/map_files/Mining/IceMoon.dmm",
+	# Mining related code (to be moved)
+	"code/modules/ruins/icemoonruin_code/library.dm",
+	"code/modules/ruins/icemoonruin_code/hotsprings.dm",
+	"code/modules/ruins/icemoonruin_code/mailroom.dm",
+	"code/modules/ruins/icemoonruin_code/wrath.dm",
 	# Custom ruins
 	"_maps/RandomRuins/LavaRuins/lavaland_surface_dwarf.dmm",
 	"_maps/RandomRuins/LavaRuins/lavaland_surface_sif_spawn.dmm",
+	"_maps/RandomRuins/IceRuins/icemoon_underground_hierophant.dmm",
 	# Custom map wiki pictures
 	"wiki/cube.png",
 	"wiki/dorf_dorm.png",
@@ -94,7 +99,6 @@ theirs = [".editorconfig",
 our_dirs = [".github",
 	".devcontainer",
 	"config",
-	"last_merge",
 	"russstation",
 	"goon",
 	"code/__DEFINES/~russ_defines",
