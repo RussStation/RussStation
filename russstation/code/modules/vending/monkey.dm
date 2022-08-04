@@ -14,7 +14,7 @@
 	premium = list(/obj/item/storage/box/monkeycubes = 2)
 	refill_canister = /obj/item/vending_refill/monkey
 	circuit = /obj/item/circuitboard/machine/vending/monkey
-	default_price = PAYCHECK_MEDIUM
+	default_price = PAYCHECK_CREW
 	extra_price = PAYCHECK_COMMAND
 	payment_department = ACCOUNT_SCI
 	light_mask = "monkey-light-mask"
