@@ -1,4 +1,4 @@
-/obj/item/organ/lungs/skaven
+/obj/item/organ/internal/lungs/skaven
 	name = "skaven lungs"
 	desc = "A putrid pile of squishy flesh that somewhat resemble lungs."
 	icon = 'russstation/icons/obj/surgery.dmi'
