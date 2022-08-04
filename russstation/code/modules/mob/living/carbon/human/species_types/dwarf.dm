@@ -2,7 +2,6 @@
 /datum/species/dwarf
 	name = "Dwarf"
 	id = "dwarf"
-	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS)
 	inherent_traits = list(
 		TRAIT_NOBREATH,
