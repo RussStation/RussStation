@@ -54,11 +54,6 @@ ours = ["last_merge",
 	# Custom mining maps
 	"_maps/map_files/Mining/Badlands.dmm",
 	"_maps/map_files/Mining/IceMoon.dmm",
-	# Mining related code (to be moved)
-	"code/modules/ruins/icemoonruin_code/library.dm",
-	"code/modules/ruins/icemoonruin_code/hotsprings.dm",
-	"code/modules/ruins/icemoonruin_code/mailroom.dm",
-	"code/modules/ruins/icemoonruin_code/wrath.dm",
 	# Custom ruins
 	"_maps/RandomRuins/LavaRuins/lavaland_surface_dwarf.dmm",
 	"_maps/RandomRuins/LavaRuins/lavaland_surface_sif_spawn.dmm",
