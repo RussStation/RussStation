@@ -13,7 +13,7 @@
 /datum/cinematic/shitty
 	cleanup_time = 70
 
-/datum/cinematic/shitty/content()
+/datum/cinematic/shitty/play_cinematic()
 	screen.icon = 'russstation/icons/effects/station_explosion.dmi'
 	flick("shitty_explosion",screen)
 	sleep(30)

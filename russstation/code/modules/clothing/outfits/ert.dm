@@ -37,7 +37,7 @@
 	id_trim = /datum/id_trim/centcom/ert/clown
 	uniform = /obj/item/clothing/under/rank/civilian/clown
 	mask = /obj/item/clothing/mask/gas/clown_hat
-	belt = /obj/item/pda/clown
+	r_pocket = /obj/item/modular_computer/tablet/pda/clown
 	box = /obj/item/storage/box/hug/survival
 	gloves = null
 	shoes = /obj/item/clothing/shoes/clown_shoes

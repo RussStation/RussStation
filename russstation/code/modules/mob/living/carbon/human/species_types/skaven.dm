@@ -42,11 +42,11 @@
 	)
 
 /datum/species/skaven/get_features()
-	. = ..()
-	// skaven color is a DNA property which get_features doesn't retrieve; add it manually if missing
-	if (!("feature_skavencolor" in GLOB.features_by_species[type]))
-		GLOB.features_by_species[type] += "feature_skavencolor"
-		. += "feature_skavencolor"
+	var/list/features = ..()
+
+	features += "feature_skavencolor"
+
+	return features
 
 /datum/species/skaven/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only = FALSE)
 	equipping.equipOutfit(/datum/outfit/skaven, visuals_only)
@@ -62,28 +62,6 @@
 		randname += " [lastname]"
 
 	return randname
-
-// /datum/species/skaven/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
-// 	var/mob/living/carbon/human/skaven = C
-// 	var/real_tail_type = skaven.dna.features["tail_skaven"] // hold onto tail until parent proc finished?
-// 	if(!pref_load)
-// 		if(skaven.dna.features["ears"] == "None")
-// 			skaven.dna.features["ears"] = "Skaven"
-// 	if(skaven.dna.features["ears"] == "Skaven")
-// 		var/obj/item/organ/ears/skaven/ears = new
-// 		ears.Insert(skaven, drop_if_replaced = FALSE)
-// 	. = ..()
-// 	//Loads tail preferences.
-// 	if(pref_load)
-// 		if(!real_tail_type || real_tail_type == "None")
-// 			skaven.dna.features["tail_skaven"] = "Skaven"
-// 		else
-// 			skaven.dna.features["tail_skaven"] = real_tail_type
-// 		var/obj/item/organ/external/tail/skaven/new_tail = new /obj/item/organ/external/tail/skaven()
-// 		new_tail.tail_type = skaven.dna.features["tail_skaven"]
-// 		new_tail.Insert(skaven, TRUE, FALSE)
-// 	// ensure colors are synchronized
-// 	default_color = skaven.dna.features["mcolor"] = skaven.dna.features["skaven_color"]
 
 /datum/species/skaven/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
 	var/tail = pick(GLOB.tails_list_skaven)

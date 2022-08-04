@@ -1,7 +1,8 @@
 //this pleases armoks beard
 /datum/species/dwarf
-	name = "Dwarf"
-	id = "dwarf"
+	name = "\improper Dwarf"
+	plural_form = "Dwarfs"
+	id = SPECIES_DWARF
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS)
 	inherent_traits = list(
 		TRAIT_NOBREATH,
@@ -15,7 +16,7 @@
 	brutemod = 0.9
 	coldmod = 0.85
 	punchdamagehigh = 11 //fist fighting with dorfs is very dangerous
-	mutanteyes = /obj/item/organ/eyes/night_vision
+	mutanteyes = /obj/item/organ/internal/eyes/night_vision
 	species_language_holder = /datum/language_holder/dwarf
 
 /datum/species/dwarf/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
