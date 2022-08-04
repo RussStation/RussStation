@@ -30,7 +30,7 @@
 					var/obj/item/I = H.get_item_by_slot(ITEM_SLOT_OCLOTHING)
 					H.dropItemToGround(I, force = TRUE)
 
-				var/obj/item/clothing/suit/poncho/ponchoshame/S = new /obj/item/clothing/suit/poncho/ponchoshame(H.loc)
+				var/obj/item/clothing/suit/costume/poncho/ponchoshame/S = new /obj/item/clothing/suit/costume/poncho/ponchoshame(H.loc)
 				H.equip_to_slot_or_del(S, ITEM_SLOT_OCLOTHING)
 
 	punish_log(target, punishment)
