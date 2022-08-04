@@ -219,9 +219,11 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		L[DNA_MUSHROOM_CAPS_BLOCK] = construct_block(GLOB.caps_list.Find(features["caps"]), GLOB.caps_list.len)
 	if(features["pod_hair"])
 		L[DNA_POD_HAIR_BLOCK] = construct_block(GLOB.pod_hair_list.Find(features["pod_hair"]), GLOB.pod_hair_list.len)
-	// honk start -- diona hair
+	// honk start -- diona hair & skaven tail
 	if(features["diona_hair"])
 		L[DNA_DIONA_HAIR_BLOCK] = construct_block(GLOB.diona_hair_list.Find(features["diona_hair"]), GLOB.diona_hair_list.len)
+	if(features["tail_skaven"])
+		L[DNA_SKAVEN_TAIL_BLOCK] = construct_block(GLOB.tails_list_skaven.Find(features["tail_skaven"]), GLOB.tails_list_skaven.len)
 	// honk end
 
 	for(var/blocknum in 1 to DNA_FEATURE_BLOCKS)
@@ -334,6 +336,8 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		if(DNA_LIZARD_MARKINGS_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(GLOB.body_markings_list.Find(features["body_markings"]), GLOB.body_markings_list.len))
 		if(DNA_TAIL_BLOCK)
+			set_uni_feature_block(blocknumber, construct_block(GLOB.tails_list.Find(features["tail_cat"]), GLOB.tails_list.len))
+		if(DNA_LIZARD_TAIL_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(GLOB.tails_list.Find(features["tail_lizard"]), GLOB.tails_list.len))
 		if(DNA_SNOUT_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(GLOB.snouts_list.Find(features["snout"]), GLOB.snouts_list.len))
@@ -358,6 +362,8 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		// honk start -- diona hair
 		if(DNA_DIONA_HAIR_BLOCK)
 			set_uni_feature_block(blocknumber, construct_block(GLOB.diona_hair_list.Find(features["diona_hair"]), GLOB.diona_hair_list.len))
+		if(DNA_SKAVEN_TAIL_BLOCK)
+			set_uni_feature_block(blocknumber, construct_block(GLOB.tails_list.Find(features["tail_skaven"]), GLOB.tails_list.len))
 		// honk end
 
 //Please use add_mutation or activate_mutation instead
@@ -594,7 +600,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	if(dna.features["tail_cat"])
 		dna.features["tail_cat"] = GLOB.tails_list_human[deconstruct_block(get_uni_feature_block(features, DNA_TAIL_BLOCK), GLOB.tails_list_human.len)]
 	if(dna.features["tail_lizard"])
-		dna.features["tail_cat"] = GLOB.tails_list_lizard[deconstruct_block(get_uni_feature_block(features, DNA_LIZARD_TAIL_BLOCK), GLOB.tails_list_lizard.len)]
+		dna.features["tail_lizard"] = GLOB.tails_list_lizard[deconstruct_block(get_uni_feature_block(features, DNA_LIZARD_TAIL_BLOCK), GLOB.tails_list_lizard.len)]
 	if(dna.features["ears"])
 		dna.features["ears"] = GLOB.ears_list[deconstruct_block(get_uni_feature_block(features, DNA_EARS_BLOCK), GLOB.ears_list.len)]
 	if(dna.features["moth_wings"])
@@ -611,9 +617,11 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 		dna.features["caps"] = GLOB.caps_list[deconstruct_block(get_uni_feature_block(features, DNA_MUSHROOM_CAPS_BLOCK), GLOB.caps_list.len)]
 	if(dna.features["pod_hair"])
 		dna.features["pod_hair"] = GLOB.pod_hair_list[deconstruct_block(get_uni_feature_block(features, DNA_POD_HAIR_BLOCK), GLOB.pod_hair_list.len)]
-	// honk start -- diona hair
+	// honk start -- diona hair & skaven
 	if(dna.features["diona_hair"])
 		dna.features["diona_hair"] = GLOB.diona_hair_list[deconstruct_block(get_uni_feature_block(features, DNA_DIONA_HAIR_BLOCK), GLOB.diona_hair_list.len)]
+	if(dna.features["tail_skaven"])
+		dna.features["tail_skaven"] = GLOB.tails_list_skaven[deconstruct_block(get_uni_feature_block(features, DNA_SKAVEN_TAIL_BLOCK), GLOB.tails_list_skaven.len)]
 	// honk end
 
 	for(var/obj/item/organ/external/external_organ as anything in external_organs)

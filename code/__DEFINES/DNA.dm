@@ -40,7 +40,7 @@
 #define DNA_UNI_IDENTITY_BLOCKS 7
 
 /// This number needs to equal the total number of DNA blocks
-#define DNA_FEATURE_BLOCKS 16 // honk -- 1 more than TG to hold Diona Hair (was 15); update "code/__DEFINES/~russ_defines/DNA.dm" as well to same number
+#define DNA_FEATURE_BLOCKS 17 // honk -- 2 more than TG to hold Diona Hair (was 15); !!! update "code/__DEFINES/~russ_defines/DNA.dm" as well if changed !!!
 
 #define DNA_MUTANT_COLOR_BLOCK 1
 #define DNA_ETHEREAL_COLOR_BLOCK 2
