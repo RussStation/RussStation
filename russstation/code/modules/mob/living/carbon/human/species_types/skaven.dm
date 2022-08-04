@@ -1,22 +1,25 @@
 /datum/species/skaven
-	name = "Skaven"
-	id = "skaven"
+	name = "\improper Skaven"
+	id = SPECIES_SKAVEN
 	say_mod = "jitters"
-	var/default_color = "2E2E2E"
 	species_traits = list(MUTCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
 	)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	mutant_bodyparts = list("tail_skaven" = "Skaven")
-	external_organs = list(/obj/item/organ/external/horns = "None", /obj/item/organ/external/snout = "Round")
-	mutantears = /obj/item/organ/ears/skaven
-	mutantlungs = /obj/item/organ/lungs/skaven
-	mutanttongue = /obj/item/organ/tongue/skaven
-	mutant_organs = list(/obj/item/organ/tail/skaven)
+	external_organs = list(
+		/obj/item/organ/external/horns = "None",
+		/obj/item/organ/external/snout = "Round",
+		/obj/item/organ/external/tail/skaven = "Skaven",
+	)
+	mutantears = /obj/item/organ/internal/ears/skaven
+	mutantlungs = /obj/item/organ/internal/lungs/skaven
+	mutanttongue = /obj/item/organ/internal/tongue/skaven
 	payday_modifier = 0.25 //Might as well be a slave
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
+	// TODO: possibly change cookie to something else
+	species_cookie = /obj/item/food/meat/slab
 	attack_verb = "claw"
 	attack_effect = ATTACK_EFFECT_CLAW
 	attack_sound = 'sound/weapons/slash.ogg'
@@ -28,7 +31,7 @@
 	outfit_important_for_life = /datum/outfit/skaven
 	species_language_holder = /datum/language_holder/skaven
 	sexes = FALSE //ever heard of female skaven? didnt think so
-	// Bodypay Overrides (similar to /datum/species/lizard)
+	hair_color = "mutcolor"
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/skaven,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/skaven,
@@ -60,61 +63,27 @@
 
 	return randname
 
-/datum/species/skaven/spec_death(gibbed, mob/living/carbon/human/H)
-	if(H)
-		stop_wagging_tail(H)
-	. = ..()
-
-/datum/species/skaven/spec_stun(mob/living/carbon/human/H, amount)
-	if(H)
-		stop_wagging_tail(H)
-	. = ..()
-
-/datum/species/skaven/can_wag_tail(mob/living/carbon/human/H)
-	return mutant_bodyparts["tail_skaven"] || mutant_bodyparts["waggingtail_skaven"]
-
-/datum/species/skaven/is_wagging_tail(mob/living/carbon/human/H)
-	return mutant_bodyparts["waggingtail_skaven"]
-
-/datum/species/skaven/start_wagging_tail(mob/living/carbon/human/H)
-	if(mutant_bodyparts["tail_skaven"])
-		mutant_bodyparts["waggingtail_skaven"] = mutant_bodyparts["tail_skaven"]
-		mutant_bodyparts -= "tail_skaven"
-	H.update_body()
-
-/datum/species/skaven/stop_wagging_tail(mob/living/carbon/human/H)
-	if(mutant_bodyparts["waggingtail_skaven"])
-		mutant_bodyparts["tail_skaven"] = mutant_bodyparts["waggingtail_skaven"]
-		mutant_bodyparts -= "waggingtail_skaven"
-	H.update_body()
-
-/datum/species/skaven/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
-	var/mob/living/carbon/human/skaven = C
-	var/real_tail_type = skaven.dna.features["tail_skaven"] // hold onto tail until parent proc finished?
-
-	if(!pref_load)
-		if(skaven.dna.features["ears"] == "None")
-			skaven.dna.features["ears"] = "Skaven"
-	if(skaven.dna.features["ears"] == "Skaven")
-		var/obj/item/organ/ears/skaven/ears = new
-		ears.Insert(skaven, drop_if_replaced = FALSE)
-
-	. = ..()
-
-	//Loads tail preferences.
-	if(pref_load)
-		if(!real_tail_type || real_tail_type == "None")
-			skaven.dna.features["tail_skaven"] = "Skaven"
-		else
-			skaven.dna.features["tail_skaven"] = real_tail_type
-
-		var/obj/item/organ/tail/skaven/new_tail = new /obj/item/organ/tail/skaven()
-
-		new_tail.tail_type = skaven.dna.features["tail_skaven"]
-		new_tail.Insert(skaven, TRUE, FALSE)
-
-	// ensure colors are synchronized
-	default_color = skaven.dna.features["mcolor"] = skaven.dna.features["skaven_color"]
+// /datum/species/skaven/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
+// 	var/mob/living/carbon/human/skaven = C
+// 	var/real_tail_type = skaven.dna.features["tail_skaven"] // hold onto tail until parent proc finished?
+// 	if(!pref_load)
+// 		if(skaven.dna.features["ears"] == "None")
+// 			skaven.dna.features["ears"] = "Skaven"
+// 	if(skaven.dna.features["ears"] == "Skaven")
+// 		var/obj/item/organ/ears/skaven/ears = new
+// 		ears.Insert(skaven, drop_if_replaced = FALSE)
+// 	. = ..()
+// 	//Loads tail preferences.
+// 	if(pref_load)
+// 		if(!real_tail_type || real_tail_type == "None")
+// 			skaven.dna.features["tail_skaven"] = "Skaven"
+// 		else
+// 			skaven.dna.features["tail_skaven"] = real_tail_type
+// 		var/obj/item/organ/external/tail/skaven/new_tail = new /obj/item/organ/external/tail/skaven()
+// 		new_tail.tail_type = skaven.dna.features["tail_skaven"]
+// 		new_tail.Insert(skaven, TRUE, FALSE)
+// 	// ensure colors are synchronized
+// 	default_color = skaven.dna.features["mcolor"] = skaven.dna.features["skaven_color"]
 
 /datum/species/skaven/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
 	var/tail = pick(GLOB.tails_list_skaven)

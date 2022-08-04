@@ -41,8 +41,8 @@
 // /datum/preference/choiced/skaven_tail
 // 	savefile_key = "feature_skaven_tail"
 // 	savefile_identifier = PREFERENCE_CHARACTER
-// 	category = PREFERENCE_CATEGORY_FEATURES
-// 	relevant_mutant_bodypart = "tail_skaven"
+// 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+// 	relevant_external_organ = /obj/item/organ/external/tail/skaven
 
 // /datum/preference/choiced/skaven_tail/init_possible_values()
 // 	return assoc_to_keys(GLOB.tails_list_skaven)
