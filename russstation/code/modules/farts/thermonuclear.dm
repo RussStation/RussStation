@@ -18,7 +18,7 @@
 	user.visible_message(
 		span_danger("[user]'s ass is going supercritical!"),
 	)
-	user.Jitter(2.8 SECONDS)
+	user.set_timed_status_effect(2.8 SECONDS, /datum/status_effect/jitter, only_if_higher = TRUE)
 	user.Knockdown(2.8 SECONDS)
 	playsound(user, 'sound/effects/huuu.ogg', 75)
 	addtimer(CALLBACK(src, .proc/hard_fail_sound, user), 2.4 SECONDS)
