@@ -18,9 +18,9 @@
 /area/station/maintenance/disposal/incinerator)
 "aad" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Brig Infirmary Maintenance";
-	req_access_txt = "63"
+	name = "Brig Infirmary Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
@@ -1081,9 +1081,9 @@
 "aef" = (
 /obj/machinery/door/firedoor/heavy,
 /obj/machinery/door/airlock/atmos/glass{
-	name = "Atmospherics Project Room";
-	req_access_txt = "24"
+	name = "Atmospherics Project Room"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/hfr_room)
@@ -1947,7 +1947,7 @@
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/left/directional/east{
 	name = "Brig Desk";
-	req_access_txt = "1"
+	req_access = list("security")
 	},
 /obj/item/folder/red,
 /obj/item/restraints/handcuffs,
@@ -2450,10 +2450,10 @@
 "aiQ" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
-	name = "Equipment Room";
-	req_access_txt = "1"
+	name = "Equipment Room"
 	},
 /obj/effect/turf_decal/delivery,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/security)
@@ -2500,7 +2500,7 @@
 	name = "Space shutters";
 	pixel_x = -6;
 	pixel_y = 25;
-	req_access_txt = "1"
+	req_access = list("hos")
 	},
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
@@ -3824,9 +3824,10 @@
 /area/space/nearstation)
 "amM" = (
 /obj/machinery/door/airlock/security{
-	name = "Evidence Room";
-	req_access_txt = "63"
+	name = "Evidence Room"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/security/general,
+/obj/effect/mapping_helpers/airlock/access/any/security/detective,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/tile/red/fourcorners,
@@ -4631,9 +4632,9 @@
 	dir = 8
 	},
 /obj/machinery/door/airlock/external{
-	name = "Atmospherics External Access";
-	req_access_txt = "24"
+	name = "Atmospherics External Access"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /turf/open/floor/plating,
 /area/station/maintenance/disposal/incinerator)
 "apS" = (
@@ -5492,7 +5493,7 @@
 	name = "Bridge Space Lockdown";
 	pixel_x = -24;
 	pixel_y = -2;
-	req_access_txt = "19"
+	req_access = list("command")
 	},
 /obj/effect/turf_decal/tile/green/anticorner/contrasted{
 	dir = 1
@@ -5521,7 +5522,7 @@
 	name = "Bridge Space Lockdown";
 	pixel_x = 24;
 	pixel_y = -2;
-	req_access_txt = "19"
+	req_access = list("command")
 	},
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 4
@@ -5699,10 +5700,10 @@
 /area/station/security/brig)
 "atC" = (
 /obj/machinery/door/airlock/security/glass{
-	name = "Brig Desk";
-	req_access_txt = "1"
+	name = "Brig Desk"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
@@ -5711,11 +5712,11 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/machinery/door/airlock/security/glass{
 	id_tag = "innerbrig";
-	name = "Brig";
-	req_access_txt = "63"
+	name = "Brig"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 8
 	},
@@ -5730,10 +5731,10 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/machinery/door/airlock/security/glass{
 	id_tag = "innerbrig";
-	name = "Brig";
-	req_access_txt = "63"
+	name = "Brig"
 	},
 /obj/structure/disposalpipe/segment,
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/tile/red/half/contrasted{
@@ -6069,7 +6070,7 @@
 	normaldoorcontrol = 1;
 	pixel_x = -6;
 	pixel_y = 36;
-	req_access_txt = "63"
+	req_access = list("brig_entrance")
 	},
 /obj/machinery/button/door{
 	desc = "A remote control switch for the medbay foyer.";
@@ -6078,7 +6079,7 @@
 	normaldoorcontrol = 1;
 	pixel_x = -6;
 	pixel_y = 24;
-	req_access_txt = "63"
+	req_access = list("brig_entrance")
 	},
 /obj/machinery/button/flasher{
 	id = "brigentry";
@@ -6101,12 +6102,12 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable,
 /obj/machinery/door/airlock/command{
-	name = "Emergency Escape";
-	req_access_txt = "19"
+	name = "Emergency Escape"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-maint"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/fore)
 "auK" = (
@@ -6511,12 +6512,12 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/door/airlock/command{
-	name = "Emergency Escape";
-	req_access_txt = "19"
+	name = "Emergency Escape"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-maint"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /turf/open/floor/iron/dark,
 /area/station/command/bridge)
 "avR" = (
@@ -6816,10 +6817,10 @@
 	},
 /obj/machinery/door/airlock/security/glass{
 	id_tag = "outerbrig";
-	name = "Brig";
-	req_access_txt = "63"
+	name = "Brig"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 8
 	},
@@ -6832,9 +6833,9 @@
 	},
 /obj/machinery/door/airlock/security/glass{
 	id_tag = "outerbrig";
-	name = "Brig";
-	req_access_txt = "63"
+	name = "Brig"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/structure/disposalpipe/segment,
 /obj/effect/landmark/navigate_destination/sec,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -6850,7 +6851,7 @@
 	dir = 1;
 	icon_state = "right";
 	name = "Brig Desk";
-	req_access_txt = "1"
+	req_access = list("brig")
 	},
 /obj/machinery/door/poddoor/preopen{
 	id = "Secure Gate";
@@ -6888,7 +6889,7 @@
 	dir = 1;
 	icon_state = "right";
 	name = "Brig Desk";
-	req_access_txt = "1"
+	req_access = list("brig")
 	},
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/dark,
@@ -7571,10 +7572,10 @@
 "aze" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
-	name = "Equipment Room";
-	req_access_txt = "1"
+	name = "Equipment Room"
 	},
 /obj/effect/turf_decal/delivery,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /turf/open/floor/iron,
@@ -7773,9 +7774,9 @@
 /area/station/maintenance/department/security/brig)
 "aAb" = (
 /obj/machinery/door/airlock/atmos/glass{
-	name = "Atmospherics Monitoring";
-	req_access_txt = "24"
+	name = "Atmospherics Monitoring"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
@@ -7936,7 +7937,7 @@
 	name = "Bridge Entrance Lockdown";
 	pixel_x = -24;
 	pixel_y = -2;
-	req_access_txt = "19"
+	req_access = list("command")
 	},
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -7993,7 +7994,7 @@
 	name = "Bridge Entrance Lockdown";
 	pixel_x = 24;
 	pixel_y = -2;
-	req_access_txt = "19"
+	req_access = list("command")
 	},
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -8168,12 +8169,12 @@
 "aBr" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
+	name = "Bridge"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-left"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /turf/open/floor/iron/dark,
 /area/station/command/bridge)
 "aBs" = (
@@ -8223,10 +8224,10 @@
 "aBy" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
+	name = "Bridge"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
@@ -10177,10 +10178,10 @@
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
+	name = "Bridge"
 	},
 /obj/effect/turf_decal/delivery,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -10206,10 +10207,10 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
+	name = "Bridge"
 	},
 /obj/effect/turf_decal/delivery,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -10233,10 +10234,10 @@
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
+	name = "Bridge"
 	},
 /obj/effect/turf_decal/delivery,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -11133,7 +11134,7 @@
 /obj/machinery/button/door/directional/south{
 	id = "north-atmos-shutters";
 	name = "Project Shutters";
-	req_access_txt = "24"
+	req_access = list("atmospherics")
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
@@ -12894,7 +12895,7 @@
 /area/station/service/bar)
 "aQV" = (
 /obj/structure/closet/secure_closet/bar{
-	req_access_txt = "25"
+	req_access = list("bar")
 	},
 /obj/item/stack/cable_coil,
 /obj/item/stack/sheet/glass/fifty,
@@ -13229,10 +13230,10 @@
 /area/station/service/bar)
 "aRU" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Bar Storage Maintenance";
-	req_access_txt = "25"
+	name = "Bar Storage Maintenance"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/service/bar,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/department/crew_quarters/bar)
@@ -13763,9 +13764,9 @@
 /area/station/service/theater)
 "aUg" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Bar Maintenance";
-	req_access_txt = "25"
+	name = "Bar Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/bar,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/department/crew_quarters/bar)
@@ -14046,9 +14047,9 @@
 /area/station/maintenance/department/crew_quarters/bar)
 "aVd" = (
 /obj/machinery/door/airlock{
-	name = "Bar Storage";
-	req_access_txt = "25"
+	name = "Bar Storage"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/bar,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
@@ -14128,7 +14129,7 @@
 	id = "barshutters";
 	name = "Bar Lockdown";
 	pixel_x = 28;
-	req_access_txt = "25"
+	req_access = list("bar")
 	},
 /obj/item/radio/intercom{
 	pixel_y = 26
@@ -14915,7 +14916,7 @@
 /obj/machinery/door/window/right/directional/west{
 	dir = 2;
 	name = "Security Checkpoint";
-	req_access_txt = "1"
+	req_access = list("security")
 	},
 /obj/machinery/door/poddoor/preopen{
 	id = "papersplease";
@@ -15595,10 +15596,10 @@
 /area/station/security/checkpoint/customs)
 "aZK" = (
 /obj/machinery/door/airlock/security{
-	name = "Security Checkpoint";
-	req_access_txt = "1"
+	name = "Security Checkpoint"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron,
@@ -15908,7 +15909,7 @@
 	name = "Shutters Control Button";
 	pixel_x = -26;
 	pixel_y = 6;
-	req_access_txt = "1"
+	req_access = list("security")
 	},
 /obj/machinery/button/flasher{
 	id = "brigentry";
@@ -16254,7 +16255,7 @@
 /obj/machinery/door/window/right/directional/west{
 	dir = 1;
 	name = "Security Checkpoint";
-	req_access_txt = "1"
+	req_access = list("security")
 	},
 /obj/machinery/door/poddoor/preopen{
 	id = "papersplease";
@@ -16955,7 +16956,7 @@
 	id = "barshutters";
 	name = "Bar Lockdown";
 	pixel_y = -28;
-	req_access_txt = "25"
+	req_access = list("bar")
 	},
 /turf/open/floor/iron/dark,
 /area/station/service/bar)
@@ -16974,7 +16975,7 @@
 	id = "barshutters";
 	name = "Bar Lockdown";
 	pixel_y = -28;
-	req_access_txt = "25"
+	req_access = list("bar")
 	},
 /turf/open/floor/iron/dark,
 /area/station/service/bar)
@@ -21049,7 +21050,7 @@
 /obj/machinery/button/door/directional/north{
 	id = "south-atmos-shutters";
 	name = "Project Shutters";
-	req_access_txt = "24"
+	req_access = list("atmospherics")
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/orange/visible,
 /turf/open/floor/iron,
@@ -22715,7 +22716,7 @@
 	},
 /obj/machinery/door/window/left/directional/east{
 	name = "Bar Delivery";
-	req_access_txt = "25"
+	req_access = list("bar")
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
@@ -23566,7 +23567,7 @@
 	},
 /obj/machinery/door/window/brigdoor/left/directional/north{
 	name = "Security Desk";
-	req_access_txt = "63"
+	req_access = list("security")
 	},
 /turf/open/floor/plating,
 /area/station/security/checkpoint/supply)
@@ -24988,7 +24989,7 @@
 	},
 /obj/machinery/door/window/brigdoor/right/directional/east{
 	name = "Security Desk";
-	req_access_txt = "63"
+	req_access = list("security")
 	},
 /turf/open/floor/iron,
 /area/station/security/checkpoint/supply)
@@ -25395,9 +25396,9 @@
 "bKo" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/virology/glass{
-	name = "Isolation B";
-	req_access_txt = "39"
+	name = "Isolation B"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/virology,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/freezer,
@@ -25517,9 +25518,9 @@
 "bKU" = (
 /obj/machinery/door/firedoor/heavy,
 /obj/machinery/door/airlock/atmos{
-	name = "Ordnance Storage";
-	req_access_txt = "24"
+	name = "Ordnance Storage"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /turf/open/floor/plating,
 /area/station/maintenance/department/science)
@@ -25593,9 +25594,10 @@
 /area/station/science/ordnance/burnchamber)
 "bLh" = (
 /obj/machinery/door/airlock/security{
-	name = "Interrogation";
-	req_access_txt = "63"
+	name = "Interrogation"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/security/general,
+/obj/effect/mapping_helpers/airlock/access/any/security/detective,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -26064,7 +26066,7 @@
 /obj/machinery/door/window/left/directional/west{
 	dir = 1;
 	name = "Atmospherics Delivery";
-	req_access_txt = "24"
+	req_access = list("atmospherics")
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible,
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
@@ -26540,7 +26542,7 @@
 /obj/machinery/door/window/left/directional/north{
 	dir = 2;
 	name = "Atmospherics Desk";
-	req_access_txt = "24"
+	req_access = list("atmospherics")
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
@@ -26797,7 +26799,7 @@
 /obj/machinery/button/door/directional/west{
 	id = "north-atmos-shutters";
 	name = "Project Shutters";
-	req_access_txt = "24"
+	req_access = list("atmospherics")
 	},
 /obj/effect/turf_decal/tile/green/half/contrasted{
 	dir = 8
@@ -27281,11 +27283,11 @@
 /obj/machinery/door/window/brigdoor{
 	dir = 1;
 	name = "Armory Desk";
-	req_access_txt = "3"
+	req_access = list("armory")
 	},
 /obj/machinery/door/window/left/directional/south{
 	name = "Reception Desk";
-	req_access_txt = "63"
+	req_access = list("security")
 	},
 /obj/item/paper_bin{
 	layer = 2.9
@@ -27361,9 +27363,9 @@
 /area/station/engineering/gravity_generator)
 "bRH" = (
 /obj/machinery/door/airlock/engineering{
-	name = "Gravity Generator";
-	req_access_txt = "11"
+	name = "Gravity Generator"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/engineering/engine_equipment,
 /obj/effect/turf_decal/delivery,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
@@ -27393,9 +27395,9 @@
 "bRK" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/engineering{
-	name = "Gravity Generator";
-	req_access_txt = "11"
+	name = "Gravity Generator"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/engineering/engine_equipment,
 /obj/effect/turf_decal/delivery,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
@@ -28567,10 +28569,10 @@
 /area/station/security/checkpoint/engineering)
 "bUY" = (
 /obj/machinery/door/airlock/security/glass{
-	name = "Engineering Security Post";
-	req_access_txt = "63"
+	name = "Engineering Security Post"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/tile/red/fourcorners,
@@ -28620,9 +28622,9 @@
 /area/station/engineering/atmos)
 "bVd" = (
 /obj/machinery/door/airlock/atmos{
-	name = "Atmospherics";
-	req_access_txt = "24"
+	name = "Atmospherics"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -28759,14 +28761,14 @@
 	id = "Secure Storage";
 	name = "Engineering Secure Storage";
 	pixel_x = -24;
-	req_access_txt = "11"
+	req_access = list("engine_equip")
 	},
 /obj/machinery/button/door{
 	id = "atmos";
 	name = "Atmospherics Lockdown";
 	pixel_x = -24;
 	pixel_y = 10;
-	req_access_txt = "24"
+	req_access = list("atmospherics")
 	},
 /obj/structure/table/reinforced,
 /obj/item/folder/yellow,
@@ -29577,9 +29579,9 @@
 "bYh" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/engineering/glass{
-	name = "Power Storage";
-	req_access_txt = "11"
+	name = "Power Storage"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/engineering/engine_equipment,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -30755,9 +30757,9 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
-	name = "Atmospherics External Access";
-	req_access_txt = "24"
+	name = "Atmospherics External Access"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /turf/open/floor/plating,
 /area/station/maintenance/disposal/incinerator)
 "cdm" = (
@@ -30911,7 +30913,7 @@
 	id = "SupermatterExternal";
 	name = "Shutters Control";
 	pixel_x = 25;
-	req_access_txt = "11"
+	req_access = list("engine_equip")
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -30924,7 +30926,7 @@
 	id = "SupermatterExternal";
 	name = "Shutters Control";
 	pixel_x = -25;
-	req_access_txt = "11"
+	req_access = list("engine_equip")
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -30949,7 +30951,7 @@
 	id = "SupermatterExternal";
 	name = "Shutters Control";
 	pixel_x = 25;
-	req_access_txt = "11"
+	req_access = list("engine_equip")
 	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -30973,7 +30975,7 @@
 	id = "SupermatterExternal";
 	name = "Shutters Control";
 	pixel_x = -25;
-	req_access_txt = "11"
+	req_access = list("engine_equip")
 	},
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
@@ -33204,9 +33206,9 @@
 /area/station/service/bar)
 "cpe" = (
 /obj/machinery/door/airlock{
-	name = "Bar Access";
-	req_access_txt = "25"
+	name = "Bar Access"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/bar,
 /turf/open/floor/iron/dark,
 /area/station/service/bar)
 "cpg" = (
@@ -36685,9 +36687,9 @@
 /area/station/construction/mining/aux_base)
 "fgs" = (
 /obj/machinery/door/airlock/security/glass{
-	name = "Medbay Security Post";
-	req_access_txt = "63"
+	name = "Medbay Security Post"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -36883,9 +36885,9 @@
 /area/station/engineering/main)
 "fwl" = (
 /obj/machinery/door/airlock/security/glass{
-	name = "Cargo Security Post";
-	req_access_txt = "63"
+	name = "Cargo Security Post"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -37244,7 +37246,7 @@
 /obj/machinery/button/door/directional/east{
 	id = "south-atmos-shutters";
 	name = "Project Shutters";
-	req_access_txt = "24"
+	req_access = list("atmospherics")
 	},
 /obj/effect/turf_decal/tile/green/half/contrasted{
 	dir = 4
@@ -37821,9 +37823,9 @@
 /area/station/cargo/warehouse)
 "gRu" = (
 /obj/machinery/door/airlock/security/glass{
-	name = "Research Security Post";
-	req_access_txt = "63"
+	name = "Research Security Post"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
@@ -39302,9 +39304,9 @@
 	autoclose = 0;
 	frequency = 1449;
 	id_tag = "virology_airlock_exterior";
-	name = "Virology Exterior Airlock";
-	req_access_txt = "39"
+	name = "Virology Exterior Airlock"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/virology,
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
@@ -39313,7 +39315,7 @@
 	idSelf = "virology_airlock_control";
 	name = "Virology Access Button";
 	pixel_y = 24;
-	req_access_txt = "39"
+	req_access = list("virology")
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	id_tag = "viro-access"
@@ -39327,17 +39329,17 @@
 	autoclose = 0;
 	frequency = 1449;
 	id_tag = "virology_airlock_interior";
-	name = "Virology Interior Airlock";
-	req_access_txt = "39"
+	name = "Virology Interior Airlock"
 	},
 /obj/machinery/door_buttons/access_button{
 	idDoor = "virology_airlock_interior";
 	idSelf = "virology_airlock_control";
 	name = "Virology Access Button";
 	pixel_x = -24;
-	req_access_txt = "39"
+	req_access = list("virology")
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/medical/virology,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
@@ -40756,9 +40758,9 @@
 "lya" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/virology/glass{
-	name = "Isolation A";
-	req_access_txt = "39"
+	name = "Isolation A"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/virology,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/freezer,
@@ -41287,10 +41289,10 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
+	name = "Bridge"
 	},
 /obj/effect/turf_decal/delivery,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/structure/sign/directions/evac{
 	dir = 1;
 	pixel_x = 32
@@ -41576,9 +41578,9 @@
 /area/station/engineering/lobby)
 "mZR" = (
 /obj/machinery/door/airlock/security/glass{
-	name = "Cargo Security Post";
-	req_access_txt = "63"
+	name = "Cargo Security Post"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron,
 /area/station/security/checkpoint/supply)
 "naq" = (
@@ -41799,11 +41801,10 @@
 "nnf" = (
 /obj/effect/landmark/navigate_destination/incinerator,
 /obj/machinery/door/airlock/atmos{
-	name = "Incinerator";
-	req_access_txt = "24"
+	name = "Incinerator"
 	},
-/obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/disposal/incinerator)
 "nnh" = (
@@ -42658,7 +42659,7 @@
 	id = "Secure Storage";
 	name = "Engineering Secure Storage";
 	pixel_y = -24;
-	req_access_txt = "11"
+	req_access = list("engine_equip")
 	},
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /turf/open/floor/iron,
@@ -43103,12 +43104,12 @@
 "pbX" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
+	name = "Bridge"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-right"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /turf/open/floor/iron/dark,
 /area/station/command/bridge)
 "pcH" = (
@@ -43532,9 +43533,9 @@
 /area/station/cargo/storage)
 "pIh" = (
 /obj/machinery/door/airlock/atmos{
-	name = "Ordnance Storage";
-	req_access_txt = "24"
+	name = "Ordnance Storage"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/science/ordnance_storage,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
@@ -44589,10 +44590,10 @@
 "rlT" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge";
-	req_access_txt = "19"
+	name = "Bridge"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
@@ -47432,7 +47433,7 @@
 /obj/item/gun/syringe,
 /obj/machinery/door/window/right/directional/north{
 	name = "Secure Storage";
-	req_access_txt = "19"
+	req_access = list("command")
 	},
 /obj/machinery/camera/directional/south{
 	c_tag = "Medbay Storage";
@@ -48417,7 +48418,7 @@
 	name = "Virology Access Console";
 	pixel_x = 8;
 	pixel_y = 22;
-	req_access_txt = "39"
+	req_access = list("virology")
 	},
 /obj/machinery/light_switch{
 	pixel_x = -4;

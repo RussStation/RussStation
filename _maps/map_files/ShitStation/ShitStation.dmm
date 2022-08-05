@@ -264,9 +264,9 @@
 	name = "viro navigation beacon"
 	},
 /obj/machinery/door/airlock/virology/glass{
-	name = "Virology";
-	req_access_txt = "39"
+	name = "Virology"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/virology,
 /turf/open/floor/iron/white,
 /area/station/science/genetics)
 "abg" = (
@@ -873,10 +873,10 @@
 "ads" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/bananium/glass{
-	name = "Bridgenana";
-	req_access_txt = "19"
+	name = "Bridgenana"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-left"
 	},
@@ -982,10 +982,10 @@
 /area/station/command/heads_quarters/hos)
 "adI" = (
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge Access";
-	req_access_txt = "19"
+	name = "Bridge Access"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 8
 	},
@@ -1090,9 +1090,10 @@
 /area/station/hallway/primary/port)
 "aeb" = (
 /obj/machinery/door/airlock/security{
-	name = "Interrogation";
-	req_access_txt = "63"
+	name = "Interrogation"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/security/general,
+/obj/effect/mapping_helpers/airlock/access/any/security/detective,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2165,9 +2166,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/bananium/glass{
-	name = "Bridgenana";
-	req_access_txt = "19"
+	name = "Bridgenana"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-left"
 	},
@@ -7420,10 +7421,10 @@
 /area/station/security)
 "axx" = (
 /obj/machinery/door/airlock/security{
-	name = "Security Locker Room";
-	req_access_txt = "1"
+	name = "Security Locker Room"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/security/lockers)
@@ -7454,19 +7455,19 @@
 /area/station/security)
 "axC" = (
 /obj/machinery/door/airlock/security/glass{
-	name = "Security Office";
-	req_access_txt = "63"
+	name = "Security Office"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/security/office)
 "axD" = (
 /obj/machinery/door/airlock/security/glass{
-	name = "Brig Desk";
-	req_access_txt = "1"
+	name = "Brig Desk"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/iron,
 /area/station/security/office)
@@ -10362,7 +10363,7 @@
 /area/station/service/library)
 "aFY" = (
 /obj/machinery/door/window/right/directional/west{
-	req_access_txt = "39"
+	req_access = list("virology")
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/service/abandoned_gambling_den)
@@ -10412,9 +10413,9 @@
 /area/station/service/hydroponics/garden)
 "aGf" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Atmospherics Maintenance";
-	req_access_txt = "24"
+	name = "Atmospherics Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /turf/open/floor/plating,
 /area/station/maintenance/fore/upper)
 "aGh" = (
@@ -10579,10 +10580,10 @@
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
 /obj/machinery/door/airlock/security{
-	name = "GBJ";
-	req_access_txt = "1"
+	name = "GBJ"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/mapping_helpers/airlock/unres,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
@@ -10721,7 +10722,7 @@
 	base_state = "right";
 	dir = 4;
 	name = "Security Desk";
-	req_access_txt = "1"
+	req_access = list("security")
 	},
 /obj/item/book/manual/wiki/security_space_law,
 /turf/open/floor/iron,
@@ -12643,10 +12644,10 @@
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
-	name = "GBJ";
-	req_access_txt = "1"
+	name = "GBJ"
 	},
 /obj/effect/mapping_helpers/airlock/unres,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron,
 /area/station/security/prison)
 "cba" = (
@@ -12882,10 +12883,10 @@
 /area/station/maintenance/aft/upper)
 "cmd" = (
 /obj/machinery/door/airlock/bananium/glass{
-	name = "Bridgenana";
-	req_access_txt = "19"
+	name = "Bridgenana"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-left"
@@ -13269,10 +13270,10 @@
 	name = "perma navigation beacon"
 	},
 /obj/machinery/door/airlock/security{
-	name = "GBJ";
-	req_access_txt = "1"
+	name = "GBJ"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/mapping_helpers/airlock/unres,
 /turf/open/floor/iron,
 /area/station/security/prison)
@@ -16137,10 +16138,10 @@
 /area/station/maintenance/central)
 "eMM" = (
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge Access";
-	req_access_txt = "19"
+	name = "Bridge Access"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 8
 	},
@@ -16374,10 +16375,10 @@
 /area/station/hallway/primary/aft)
 "eXM" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Bridge Maintenance";
-	req_access_txt = "19"
+	name = "Bridge Maintenance"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-right"
 	},
@@ -16483,9 +16484,9 @@
 "fec" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/purple/visible,
 /obj/machinery/door/airlock/maintenance{
-	name = "Atmospherics Maintenance";
-	req_access_txt = "24"
+	name = "Atmospherics Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /turf/open/floor/plating,
 /area/station/science/server)
 "fed" = (
@@ -17488,10 +17489,10 @@
 /area/station/commons/locker)
 "fPb" = (
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge Access";
-	req_access_txt = "19"
+	name = "Bridge Access"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 8
@@ -17660,9 +17661,9 @@
 /area/station/maintenance/fore/upper)
 "fTB" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Atmospherics Maintenance";
-	req_access_txt = "24"
+	name = "Atmospherics Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/layer_manifold,
 /turf/open/floor/plating,
@@ -17849,7 +17850,7 @@
 	name = "Engineering Secure Storage";
 	pixel_x = -4;
 	pixel_y = 28;
-	req_access_txt = "11"
+	req_access = list("engine_equip")
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/fore/upper)
@@ -18012,9 +18013,9 @@
 /area/station/hallway/primary/port)
 "giR" = (
 /obj/machinery/door/airlock/atmos{
-	name = "Atmospherics";
-	req_access_txt = "24"
+	name = "Atmospherics"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -18082,7 +18083,7 @@
 /obj/item/kirbyplants/random,
 /obj/machinery/door/window/right/directional/west{
 	dir = 4;
-	req_access_txt = "1"
+	req_access = list("security")
 	},
 /obj/effect/turf_decal/tile/red/half{
 	dir = 4
@@ -19061,9 +19062,9 @@
 /area/station/maintenance/port/aft)
 "gWD" = (
 /obj/machinery/door/airlock/atmos{
-	name = "Atmospherics";
-	req_access_txt = "24"
+	name = "Atmospherics"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
@@ -20709,10 +20710,10 @@
 "ihE" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
-	name = "GBJ";
-	req_access_txt = "1"
+	name = "GBJ"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/mapping_helpers/airlock/unres,
 /turf/open/floor/iron,
 /area/station/security/prison)
@@ -20831,9 +20832,9 @@
 /area/station/maintenance/port/fore)
 "ioB" = (
 /obj/machinery/door/airlock/engineering/glass{
-	name = "Gravity Generator";
-	req_access_txt = "11"
+	name = "Gravity Generator"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/engineering/engine_equipment,
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
 /obj/effect/landmark/navigate_destination{
@@ -20906,9 +20907,10 @@
 /area/station/maintenance/department/crew_quarters/dorms)
 "isc" = (
 /obj/machinery/door/airlock/security{
-	name = "Interrogation";
-	req_access_txt = "63"
+	name = "Interrogation"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/security/general,
+/obj/effect/mapping_helpers/airlock/access/any/security/detective,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
@@ -21062,7 +21064,7 @@
 	},
 /obj/machinery/door/window/right/directional/west{
 	name = "Bio Suit Closet";
-	req_access_txt = "39"
+	req_access = list("virology")
 	},
 /turf/open/floor/iron/white,
 /area/station/science/genetics)
@@ -22741,7 +22743,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
 /obj/machinery/door/window/right/directional/north{
 	dir = 4;
-	req_access_txt = "39"
+	req_access = list("virology")
 	},
 /obj/structure/sign/poster/contraband/clown{
 	pixel_y = -32
@@ -23236,9 +23238,9 @@
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/virology/glass{
-	name = "Virology";
-	req_access_txt = "39"
+	name = "Virology"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/virology,
 /turf/open/floor/iron/showroomfloor,
 /area/station/service/abandoned_gambling_den)
 "kdr" = (
@@ -25034,9 +25036,9 @@
 /area/station/maintenance/department/crew_quarters/dorms)
 "lAJ" = (
 /obj/machinery/door/airlock/atmos/glass{
-	name = "Hyper-donut Fusion Thing";
-	req_access_txt = "24"
+	name = "Hyper-donut Fusion Thing"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /turf/open/floor/iron/textured,
 /area/station/engineering/atmos)
 "lAR" = (
@@ -27183,10 +27185,10 @@
 /area/station/commons/toilet)
 "nfT" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Bridge Maintenance";
-	req_access_txt = "19"
+	name = "Bridge Maintenance"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/station/maintenance/aft/upper)
@@ -27342,9 +27344,9 @@
 /area/station/science/robotics/lab)
 "nmy" = (
 /obj/machinery/door/airlock/atmos/glass{
-	name = "Hyper-donut Fusion Thing";
-	req_access_txt = "24"
+	name = "Hyper-donut Fusion Thing"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/structure/cable,
 /turf/open/floor/iron/textured,
 /area/station/engineering/atmos/project)
@@ -27748,9 +27750,9 @@
 /area/station/maintenance/department/science)
 "nGp" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Atmospherics Maintenance";
-	req_access_txt = "24"
+	name = "Atmospherics Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/fore/upper)
@@ -28633,9 +28635,9 @@
 /area/station/science/ordnance)
 "olS" = (
 /obj/machinery/door/airlock/plasma{
-	name = "Gas gas gas";
-	req_access_txt = "24"
+	name = "Gas gas gas"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
 "omB" = (
@@ -28900,9 +28902,9 @@
 "oyk" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external{
-	name = "Escape Pod";
-	req_access_txt = "11"
+	name = "Escape Pod"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/engineering/engine_equipment,
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/qm)
@@ -31708,10 +31710,10 @@
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
-	name = "GBJ";
-	req_access_txt = "1"
+	name = "GBJ"
 	},
 /obj/effect/mapping_helpers/airlock/unres,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/security/prison)
@@ -32979,9 +32981,9 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/atmos{
-	name = "Atmospherics";
-	req_access_txt = "24"
+	name = "Atmospherics"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/science/server)
@@ -36435,13 +36437,13 @@
 /area/station/service/lawoffice)
 "tKq" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Bridge Maintenance";
-	req_access_txt = "19"
+	name = "Bridge Maintenance"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /turf/open/floor/plating,
 /area/station/command/meeting_room)
 "tKu" = (
@@ -37292,10 +37294,10 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/bananium/glass{
-	name = "Bridgenana";
-	req_access_txt = "19"
+	name = "Bridgenana"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "bridge-left"
 	},
@@ -38075,7 +38077,7 @@
 	name = "Engineering Secure Storage";
 	pixel_x = 0;
 	pixel_y = -30;
-	req_access_txt = "11"
+	req_access = list("engine_equip")
 	},
 /obj/effect/landmark/blobstart,
 /obj/effect/turf_decal/tile/neutral{
@@ -39430,9 +39432,9 @@
 /area/station/security/brig)
 "vTd" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Atmospherics Maintenance";
-	req_access_txt = "24"
+	name = "Atmospherics Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /turf/open/floor/plating,
@@ -40073,10 +40075,10 @@
 /area/station/security/lockers)
 "wsm" = (
 /obj/machinery/door/airlock/command/glass{
-	name = "Bridge Access";
-	req_access_txt = "19"
+	name = "Bridge Access"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
+/obj/effect/mapping_helpers/airlock/access/any/command/general,
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 8
