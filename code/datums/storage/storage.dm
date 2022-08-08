@@ -136,15 +136,12 @@
 /datum/storage/Destroy()
 	parent = null
 	real_location = null
+	boxes = null
+	closer = null
 
 	for(var/mob/person in is_using)
 		if(person.active_storage == src)
 			person.active_storage = null
-			person.client?.screen -= boxes
-			person.client?.screen -= closer
-
-	QDEL_NULL(boxes)
-	QDEL_NULL(closer)
 
 	is_using.Cut()
 
@@ -162,14 +159,10 @@
 	if(!istype(arrived))
 		return
 
-	var/atom/resolve_parent = parent?.resolve()
-	if(!resolve_parent)
-		return
-
-	resolve_parent.update_appearance(UPDATE_ICON_STATE)
-
 	arrived.item_flags |= IN_STORAGE
+
 	refresh_views()
+
 	arrived.on_enter_storage(src)
 
 /// Automatically ran on all object removals: flag marking and view refreshing.
@@ -179,14 +172,10 @@
 	if(!istype(gone))
 		return
 
-	var/atom/resolve_parent = parent?.resolve()
-	if(!resolve_parent)
-		return
-
-	resolve_parent.update_appearance(UPDATE_ICON_STATE)
-
 	gone.item_flags &= ~IN_STORAGE
+
 	remove_and_refresh(gone)
+
 	gone.on_exit_storage(src)
 
 /**
@@ -474,6 +463,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!resolve_parent)
 		return
 
+	resolve_parent.update_appearance(UPDATE_ICON_STATE)
+
 	if(animated)
 		animate_parent()
 
@@ -686,7 +677,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	var/amount = length(turf_things)
 	if(!amount)
-		resolve_parent.balloon_alert(user, "nothing to pick up!")
+		to_chat(user, span_warning("You failed to pick up anything with [resolve_parent]!"))
 		return
 
 	var/datum/progressbar/progress = new(user, amount, thing.loc)
@@ -696,7 +687,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		stoplag(1)
 
 	progress.end_progress()
-	resolve_parent.balloon_alert(user, "picked up")
+	to_chat(user, span_notice("You put everything you could [insert_preposition]to [resolve_parent]."))
 
 /// Signal handler for whenever we drag the storage somewhere.
 /datum/storage/proc/mousedrop_onto(datum/source, atom/over_object, mob/user)
@@ -975,7 +966,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	if(locked)
 		if(!silent)
-			resolve_parent.balloon_alert(toshow, "locked!")
+			to_chat(toshow, span_warning("[pick("Ka-chunk!", "Ka-chink!", "Plunk!", "Glorf!")] \The [resolve_parent] appears to be locked!"))
 		return FALSE
 
 	if(!quickdraw || toshow.get_active_held_item())
@@ -1007,7 +998,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /datum/storage/proc/put_in_hands_async(mob/toshow, obj/item/toremove)
 	if(!toshow.put_in_hands(toremove))
 		if(!silent)
-			toremove.balloon_alert(toshow, "fumbled!")
+			to_chat(toshow, span_notice("You fumble for [toremove] and it falls on the floor."))
 		return TRUE
 
 /// Signal handler for whenever a mob walks away with us, close if they can't reach us.
@@ -1121,11 +1112,11 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	collection_mode = (collection_mode+1)%3
 	switch(collection_mode)
 		if(COLLECT_SAME)
-			resolve_parent.balloon_alert(user, "will now only pick up a single type")
+			to_chat(user, span_notice("[resolve_parent] now picks up all items of a single type at once."))
 		if(COLLECT_EVERYTHING)
-			resolve_parent.balloon_alert(user, "will now pick up everything")
+			to_chat(user, span_notice("[resolve_parent] now picks up all items in a tile at once."))
 		if(COLLECT_ONE)
-			resolve_parent.balloon_alert(user, "will now pick up one at a time")
+			to_chat(user, span_notice("[resolve_parent] now picks up one item at a time."))
 
 /// Gives a spiffy animation to our parent to represent opening and closing.
 /datum/storage/proc/animate_parent()
