@@ -1404,9 +1404,9 @@
 /area/station/service/chapel)
 "alL" = (
 /obj/machinery/door/airlock/maintenance/glass{
-	name = "Mass Driver Airlock";
-	req_access = "12"
+	name = "Mass Driver Airlock"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/engineering/maintenance,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
@@ -1839,9 +1839,9 @@
 /area/station/maintenance/fore)
 "aql" = (
 /obj/machinery/door/airlock/maintenance/glass{
-	name = "Mass Driver Airlock";
-	req_access = "12"
+	name = "Mass Driver Airlock"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/engineering/maintenance,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
@@ -33862,7 +33862,7 @@
 /obj/machinery/door/window/left/directional/north{
 	dir = 8;
 	name = "Atmospherics Desk";
-	req_access = list("atmospherics","engineering")
+	req_one_access = list("atmospherics","engineering")
 	},
 /obj/structure/table/reinforced,
 /turf/open/floor/plating,
@@ -34124,7 +34124,7 @@
 	dir = 8;
 	icon_state = "right";
 	name = "Atmospherics Desk";
-	req_access = list("atmospherics","engineering")
+	req_one_access = list("atmospherics","engineering")
 	},
 /turf/open/floor/plating,
 /area/station/engineering/break_room)
