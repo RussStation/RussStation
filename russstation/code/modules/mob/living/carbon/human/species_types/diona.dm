@@ -85,3 +85,14 @@
 	human_mob.dna.features["diona_hair"] = hairstyle
 	mutant_bodyparts["diona_hair"] = hairstyle
 	human_mob.update_body()
+
+/datum/species/diona/get_species_description()
+	return "An amalgamation of a number of diona nymphs \
+	becomes a gestalt that appears similar to other bipedal organics."
+
+/datum/species/diona/get_species_lore()
+	return list(
+		"The Dionae are a species of plant-like beings, \
+	composed of many smaller Nymphs. Their world of \
+	origin is unknown.",
+	)
