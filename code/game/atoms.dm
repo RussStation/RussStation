@@ -1043,7 +1043,7 @@
 
 		src_object.atom_storage.handle_mass_transfer(user, src, /* override = */ TRUE)
 
-		atom_storage.orient_to_hud(user)
+		atom_storage?.orient_to_hud(user)
 		src_object.atom_storage?.orient_to_hud(user)
 		user.active_storage?.refresh_views()
 
