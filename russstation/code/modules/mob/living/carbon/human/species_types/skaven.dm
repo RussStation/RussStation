@@ -2,12 +2,7 @@
 	name = "\improper Skaven"
 	id = SPECIES_SKAVEN
 	say_mod = "jitters"
-	species_traits = list(MUTCOLORS, AGENDER, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
-	inherent_traits = list(
-		TRAIT_ADVANCEDTOOLUSER,
-		TRAIT_CAN_STRIP,
-	)
-	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	species_traits = list(DYNCOLORS,AGENDER,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE)
 	external_organs = list(
 		/obj/item/organ/external/horns = "None",
 		/obj/item/organ/external/snout = "Round",
@@ -31,7 +26,7 @@
 	outfit_important_for_life = /datum/outfit/skaven
 	species_language_holder = /datum/language_holder/skaven
 	sexes = FALSE //ever heard of female skaven? didnt think so
-	hair_color = "mutcolor"
+	examine_limb_id = SPECIES_SKAVEN
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/skaven,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/skaven,
@@ -43,9 +38,7 @@
 
 /datum/species/skaven/get_features()
 	var/list/features = ..()
-
 	features += "feature_skavencolor"
-
 	return features
 
 /datum/species/skaven/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only = FALSE)
@@ -55,13 +48,24 @@
 /datum/species/skaven/random_name(gender, unique, lastname)
 	if(unique)
 		return random_unique_skaven_name()
-
 	var/randname = skaven_name()
-
 	if(lastname)
 		randname += " [lastname]"
-
 	return randname
+
+/datum/species/skaven/on_species_gain(mob/living/carbon/carbon_being, datum/species/old_species, pref_load)
+	if(ishuman(carbon_being))
+		var/mob/living/carbon/human/target_human = carbon_being
+		if(!pref_load)
+			target_human.dna.features["tail_skaven"] = "Skaven"
+			if(target_human.dna.features["ears"] == "None")
+				target_human.dna.features["ears"] = "Skaven"
+		if(target_human.dna.features["ears"] == "Skaven")
+			var/obj/item/organ/internal/ears/skaven/ears = new
+			ears.Insert(target_human, drop_if_replaced = FALSE)
+		// ensure our mcolor (used for bodyparts) is set to our skaven's color
+		target_human.dna.features["mcolor"] = target_human.dna.features["skaven_color"]
+	return ..()
 
 /datum/species/skaven/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
 	var/tail = pick(GLOB.tails_list_skaven)

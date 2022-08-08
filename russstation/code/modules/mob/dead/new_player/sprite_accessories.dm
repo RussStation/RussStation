@@ -71,7 +71,6 @@
 	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
 	name = "Skaven"
 	icon_state = "skaven"
-	color_src = MUTCOLORS // use mutant color
 
 //More horns (the tg ones are pretty lackluster for skaven)
 /datum/sprite_accessory/horns/seer

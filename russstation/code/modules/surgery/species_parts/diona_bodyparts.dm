@@ -2,6 +2,7 @@
 	icon = 'russstation/icons/mob/mutant_bodyparts.dmi'
 	icon_static = 'russstation/icons/mob/mutant_bodyparts.dmi'
 	icon_greyscale = 'russstation/icons/mob/mutant_bodyparts.dmi'
+	icon_husk = 'russstation/icons/mob/mutant_bodyparts.dmi'
 	limb_id = SPECIES_DIONA
 	is_dimorphic = FALSE
 

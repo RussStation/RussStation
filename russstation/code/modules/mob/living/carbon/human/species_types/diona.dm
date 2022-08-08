@@ -9,6 +9,7 @@
 		TRAIT_NOBREATH,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTLOWPRESSURE,
+		TRAIT_LITERATE,
 		// TRAIT_PLANT_SAFE, // honk -- maybe add this? Podpeople have it
 	)
 	external_organs = list(

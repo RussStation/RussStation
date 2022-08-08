@@ -8,8 +8,10 @@
 		TRAIT_NOBREATH,
 		TRAIT_CAN_STRIP,
 		TRAIT_VIRUSIMMUNE, // lavaland has miasma
+		TRAIT_LITERATE,
 	)
 	mutant_bodyparts = list("wings" = "None")
+	species_cookie = /obj/item/reagent_containers/food/drinks/bottle/ale
 	use_skintones = TRUE
 	speedmod = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
