@@ -2,7 +2,7 @@
 	// An amalgamation of a number of diona nymphs becomes a gestalt that appears similar to other bipedal organics
 	name = "\improper Diona"
 	plural_form = "Dionae"
-	id = "diona"
+	id = SPECIES_DIONA
 	sexes = FALSE
 	species_traits = list(NOBLOOD, NOEYESPRITES, NO_UNDERWEAR)
 	inherent_traits = list(
