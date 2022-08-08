@@ -6915,7 +6915,7 @@
 	},
 /obj/structure/window,
 /obj/machinery/door/window/left/directional/east{
-	req_one_access_txt = "5;33;69"
+	req_access = list("pharmacy")
 	},
 /obj/structure/table/glass,
 /obj/effect/turf_decal/tile/blue/half{
@@ -6944,7 +6944,7 @@
 	},
 /obj/structure/window,
 /obj/machinery/door/window/left/directional/east{
-	req_one_access_txt = "5;33;69"
+	req_access = list("pharmacy")
 	},
 /obj/structure/table/glass,
 /obj/effect/turf_decal/tile/blue/half{
@@ -6974,7 +6974,7 @@
 /obj/structure/window,
 /obj/machinery/camera/autoname/directional/west,
 /obj/machinery/door/window/left/directional/east{
-	req_one_access_txt = "5;33;69"
+	req_access = list("pharmacy")
 	},
 /obj/structure/table/glass,
 /obj/effect/turf_decal/tile/blue/half{
@@ -7002,7 +7002,7 @@
 	},
 /obj/structure/window,
 /obj/machinery/door/window/left/directional/east{
-	req_one_access_txt = "5;33;69"
+	req_access = list("pharmacy")
 	},
 /obj/structure/table/glass,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
@@ -7042,7 +7042,7 @@
 /obj/structure/window,
 /obj/structure/cable,
 /obj/machinery/door/window/left/directional/east{
-	req_one_access_txt = "5;33;69"
+	req_access = list("pharmacy")
 	},
 /obj/structure/table/glass,
 /obj/effect/turf_decal/tile/blue/half{
@@ -7071,7 +7071,7 @@
 	},
 /obj/structure/window,
 /obj/machinery/door/window/left/directional/east{
-	req_one_access_txt = "5;33;69"
+	req_access = list("pharmacy")
 	},
 /obj/structure/table/glass,
 /obj/structure/cable,
@@ -7101,7 +7101,7 @@
 	},
 /obj/structure/window,
 /obj/machinery/door/window/left/directional/east{
-	req_one_access_txt = "5;33;69"
+	req_access = list("pharmacy")
 	},
 /obj/structure/table/glass,
 /obj/structure/cable,
@@ -7482,9 +7482,10 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Engineering Lobby";
-	req_one_access_txt = "5;10"
+	name = "Engineering Lobby"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/medical/general,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "med-entrance"
@@ -9627,9 +9628,9 @@
 "aDF" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/mining/glass{
-	name = "Rocks";
-	req_one_access_txt = "41;48"
+	name = "Rocks"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/supply/mining,
 /turf/open/floor/iron/dark,
 /area/station/cargo/miningdock)
 "aDH" = (
@@ -17358,9 +17359,10 @@
 /area/station/security/detectives_office)
 "fMD" = (
 /obj/machinery/door/airlock/medical{
-	name = "Ward";
-	req_one_access_txt = "5;10"
+	name = "Ward"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/medical/general,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/white,
 /area/station/science/robotics/lab)
@@ -18233,9 +18235,9 @@
 /area/station/service/abandoned_gambling_den)
 "grS" = (
 /obj/machinery/door/airlock/plasma{
-	name = "Toxins";
-	req_one_access_txt = "31;48"
+	name = "Toxins"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/supply/general,
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
@@ -19567,9 +19569,10 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/engineering{
-	name = "Engineering Lobby";
-	req_one_access_txt = "5;10"
+	name = "Engineering Lobby"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/medical/general,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "med-entrance"
@@ -22432,7 +22435,7 @@
 /area/station/ai_monitored/command/storage/eva)
 "jxS" = (
 /obj/machinery/door/window/right/directional/west{
-	req_one_access_txt = "5;33;69"
+	req_access = list("pharmacy")
 	},
 /obj/effect/turf_decal/delivery,
 /obj/effect/turf_decal/tile/blue/half{
@@ -32341,7 +32344,7 @@
 "qUo" = (
 /obj/machinery/door/window/right/directional/west{
 	name = "Monke";
-	req_one_access_txt = "9;39"
+	req_one_access = list("genetics","virology")
 	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -34202,9 +34205,10 @@
 /area/station/maintenance/port/aft)
 "sdv" = (
 /obj/machinery/door/airlock/medical{
-	name = "Ward";
-	req_one_access_txt = "5;10"
+	name = "Ward"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/medical/general,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/general,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/effect/mapping_helpers/airlock/unres,
@@ -35940,16 +35944,6 @@
 "ttz" = (
 /turf/closed/wall/r_wall,
 /area/station/hallway/secondary/exit/departure_lounge)
-"ttA" = (
-/obj/machinery/door/airlock/grunge{
-	name = "Morgue";
-	req_one_access_txt = "6;12"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "bridge-right"
-	},
-/turf/open/floor/plating,
-/area/station/maintenance/port/aft)
 "ttI" = (
 /obj/machinery/button/door{
 	id = "cargoware";
@@ -69717,7 +69711,7 @@ obH
 muQ
 muQ
 obH
-ttA
+fNw
 ang
 aeq
 flK

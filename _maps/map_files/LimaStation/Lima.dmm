@@ -3712,9 +3712,9 @@
 /obj/machinery/chem_master,
 /obj/machinery/button/door{
 	id = "pharmecyshutters";
-	name = "Pharmecy Shutters";
+	name = "Pharmacy Shutters";
 	pixel_x = -25;
-	req_one_access_txt = "5; 33"
+	req_access = list("pharmacy")
 	},
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
@@ -4828,9 +4828,9 @@
 	},
 /obj/machinery/door/airlock/medical/glass{
 	id_tag = "MedbayFoyer";
-	name = "Medbay";
-	req_one_access_txt = "5"
+	name = "Medbay"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/lobby)
@@ -5300,14 +5300,14 @@
 "bkt" = (
 /obj/structure/flora/bush/grassy/style_random,
 /obj/machinery/door/window/right/directional/east{
-	req_one_access_txt = "12"
+	req_access = list("maint_tunnels")
 	},
 /turf/open/floor/grass,
 /area/station/service/chapel)
 "bky" = (
 /obj/structure/flora/grass/jungle/b,
 /obj/machinery/door/window/left/directional/west{
-	req_one_access_txt = "12"
+	req_access = list("maint_tunnels")
 	},
 /mob/living/simple_animal/butterfly,
 /turf/open/floor/grass,
@@ -7952,9 +7952,9 @@
 /area/space/nearstation)
 "cxs" = (
 /obj/machinery/door/airlock/mining/glass{
-	name = "Cargo Office";
-	req_one_access_txt = "31;48"
+	name = "Cargo Office"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/supply/general,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -9233,9 +9233,9 @@
 /area/station/engineering/atmos)
 "dfs" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Chem Maintenance";
-	req_one_access_txt = "5;69"
+	name = "Chem Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/pharmacy,
 /turf/open/floor/plating,
 /area/station/maintenance/central/lesser)
 "dfW" = (
@@ -10631,9 +10631,9 @@
 /area/station/science/xenobiology)
 "dOj" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Pharmacy Maintenance";
-	req_one_access_txt = "5"
+	name = "Pharmacy Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /turf/open/floor/plating,
 /area/station/maintenance/central/lesser)
 "dOJ" = (
@@ -16009,9 +16009,9 @@
 /turf/open/floor/plating,
 /area/station/maintenance/central/lesser)
 "guc" = (
-/obj/machinery/door/airlock/maintenance{
-	req_one_access_txt = "8;12"
-	},
+/obj/machinery/door/airlock/maintenance,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/maintenance,
+/obj/effect/mapping_helpers/airlock/access/any/science/ordnance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "sci-toxins-passthrough"
 	},
@@ -20818,9 +20818,10 @@
 	dir = 8
 	},
 /obj/machinery/door/airlock/medical/glass{
-	name = "Infirmary";
-	req_one_access_txt = "63;5;4;2"
+	name = "Infirmary"
 	},
+/obj/effect/mapping_helpers/airlock/access/any/security/general,
+/obj/effect/mapping_helpers/airlock/access/any/medical/general,
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/white/textured,
 /area/station/security/brig)
@@ -25384,9 +25385,9 @@
 /area/station/science/xenobiology)
 "lDn" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Medbay Maintenance";
-	req_one_access_txt = "5"
+	name = "Medbay Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /obj/structure/cable,
 /obj/machinery/duct,
 /turf/open/floor/plating,
@@ -26278,7 +26279,7 @@
 /obj/machinery/door/window/left/directional/south{
 	dir = 1;
 	name = "Research Lab Desk";
-	req_one_access_txt = "7"
+	req_access = list("science")
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "rnd";
@@ -27284,16 +27285,6 @@
 "mJK" = (
 /turf/closed/wall,
 /area/station/science/research)
-"mKa" = (
-/obj/structure/cable,
-/obj/machinery/door/airlock/engineering{
-	name = "Tech Storage";
-	req_one_access_txt = "10;23"
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/iron,
-/area/station/engineering/storage/tech)
 "mKk" = (
 /obj/item/radio/intercom{
 	pixel_y = -30
@@ -29844,9 +29835,9 @@
 	},
 /obj/machinery/door/airlock/medical/glass{
 	id_tag = "MedbayFoyer";
-	name = "Medbay";
-	req_one_access_txt = "5"
+	name = "Medbay"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 4
 	},
@@ -31314,7 +31305,7 @@
 /obj/machinery/door/window/left/directional/south{
 	dir = 8;
 	name = "Theater";
-	req_one_access_txt = "25;46"
+	req_one_access = list("bar","theatre")
 	},
 /turf/open/floor/carpet/orange,
 /area/station/service/theater)
@@ -36306,9 +36297,9 @@
 	},
 /obj/machinery/door/airlock/medical/glass{
 	id_tag = "MedbayFoyer";
-	name = "Radiation Chamber";
-	req_one_access_txt = "5"
+	name = "Radiation Chamber"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /obj/machinery/duct,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/aft)
@@ -38346,7 +38337,7 @@
 /obj/machinery/door/window/left/directional/west{
 	dir = 4;
 	name = "Monkey Pen";
-	req_one_access_txt = "9;40"
+	req_one_access = list("cmo","genetics")
 	},
 /turf/open/floor/grass,
 /area/station/science/genetics)
@@ -39267,7 +39258,7 @@
 	id = "aux_base_shutters";
 	name = "Public Shutters Control";
 	pixel_x = 24;
-	req_one_access_txt = "32;47;48"
+	req_access = list("aux_base")
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 9
@@ -39445,9 +39436,9 @@
 /area/station/maintenance/disposal)
 "tLy" = (
 /obj/machinery/door/airlock/engineering{
-	name = "Auxillary Base Construction";
-	req_one_access_txt = "32;47;48"
+	name = "Auxillary Base Construction"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/aux_base,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/mapping_helpers/airlock/abandoned,
@@ -39970,7 +39961,7 @@
 	dir = 1;
 	icon_state = "right";
 	name = "Research Lab Desk";
-	req_one_access_txt = "7"
+	req_access = list("science")
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "rnd";
@@ -40402,9 +40393,9 @@
 /area/station/security/brig)
 "ulS" = (
 /obj/machinery/door/airlock/engineering{
-	name = "Auxillary Base Construction";
-	req_one_access_txt = "32;47;48"
+	name = "Auxillary Base Construction"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/aux_base,
 /turf/open/floor/iron,
 /area/station/construction/mining/aux_base)
 "ulU" = (
@@ -41871,9 +41862,9 @@
 /area/station/medical/exam_room)
 "vdY" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Medbay Maintenance";
-	req_one_access_txt = "5"
+	name = "Medbay Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /obj/machinery/duct,
 /turf/open/floor/plating,
 /area/station/maintenance/central/lesser)
@@ -45243,9 +45234,9 @@
 /turf/open/floor/plating,
 /area/station/security/warden)
 "xfb" = (
-/obj/machinery/door/airlock/maintenance{
-	req_one_access_txt = "8;12"
-	},
+/obj/machinery/door/airlock/maintenance,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/maintenance,
+/obj/effect/mapping_helpers/airlock/access/any/science/ordnance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "sci-toxins-passthrough"
 	},
@@ -65699,7 +65690,7 @@ suS
 xwj
 xwj
 xwj
-mKa
+rMb
 xwj
 xwj
 xwj

@@ -14531,7 +14531,7 @@
 /obj/machinery/door/window{
 	dir = 8;
 	name = "Theatre Stage";
-	req_one_access_txt = "25;46"
+	req_one_access = list("bar","theatre")
 	},
 /turf/open/floor/carpet/green,
 /area/station/service/theater)
@@ -29241,9 +29241,9 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/medical/glass{
 	id_tag = "MedbayFoyer";
-	name = "Medbay";
-	req_one_access_txt = "5"
+	name = "Medbay"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 8
 	},
@@ -29569,7 +29569,7 @@
 	dir = 8;
 	icon_state = "left";
 	name = "Research and Development Desk";
-	req_one_access_txt = "7;29;47"
+	req_access = list("science")
 	},
 /turf/open/floor/plating,
 /area/station/science/lab)
@@ -34623,9 +34623,9 @@
 /area/space/nearstation)
 "sfc" = (
 /obj/machinery/door/airlock/engineering{
-	name = "Auxiliary Base Construction";
-	req_one_access_txt = "72"
+	name = "Auxiliary Base Construction"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/aux_base,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 8
@@ -36319,7 +36319,7 @@
 /obj/machinery/door/window/right/directional/south{
 	dir = 8;
 	name = "Research and Development Desk";
-	req_one_access_txt = "7;29;47"
+	req_access = list("science")
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -39917,7 +39917,7 @@
 /obj/machinery/door/window/left/directional/north{
 	dir = 2;
 	name = "Pharmacy Desk";
-	req_one_access_txt = "5;33"
+	req_access = list("pharmacy")
 	},
 /turf/open/floor/plating,
 /area/station/medical/pharmacy)
@@ -41471,7 +41471,7 @@
 	dir = 2;
 	icon_state = "right";
 	name = "Pharmacy Desk";
-	req_one_access_txt = "5;33"
+	req_access = list("pharmacy")
 	},
 /obj/item/paper/crumpled,
 /turf/open/floor/plating,
@@ -43127,10 +43127,10 @@
 /obj/machinery/chem_dispenser,
 /obj/machinery/button/door{
 	id = "pharmecyshutters";
-	name = "Pharmecy Shutters";
+	name = "Pharmacy Shutters";
 	pixel_x = 25;
 	pixel_y = -9;
-	req_one_access_txt = "5; 33"
+	req_access = list("pharmacy")
 	},
 /turf/open/floor/iron/dark,
 /area/station/medical/pharmacy)
@@ -46811,7 +46811,7 @@
 /obj/machinery/door/window/left/directional/north{
 	dir = 4;
 	name = "Pharmacy Desk";
-	req_one_access_txt = "5;33"
+	req_access = list("pharmacy")
 	},
 /obj/item/paper_bin,
 /obj/item/folder/white,
