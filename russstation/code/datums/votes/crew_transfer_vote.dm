@@ -60,7 +60,7 @@
 
 	CRASH("[type] wasn't passed a valid winning choice. (Got: [winning_option || "null"])")
 
-/datum/vote/crew_transfer_vote/shuttlecall()
+/datum/vote/crew_transfer_vote/proc/shuttlecall()
 	// check to prevent the vote resetting an already called shuttle
 	if(EMERGENCY_IDLE_OR_RECALLED)
 		SSshuttle.emergency.request()
