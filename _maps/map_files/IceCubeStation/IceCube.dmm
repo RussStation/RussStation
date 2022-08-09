@@ -7042,7 +7042,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "perma-entrence"
+	cycle_id = "perma-entrance"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
@@ -7546,7 +7546,7 @@
 /area/station/cargo/office)
 "dfC" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "perma-entrence"
+	cycle_id = "perma-entrance"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security/glass{
@@ -8394,7 +8394,7 @@
 	name = "Brig"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "brig-entrence"
+	cycle_id = "brig-entrance"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
@@ -16045,9 +16045,9 @@
 /area/station/hallway/primary/central/aft)
 "gVe" = (
 /obj/machinery/door/window/brigdoor/left/directional/east{
-	name = "Evidence Storage"
+	name = "Evidence Storage";
+	req_access = list("security")
 	},
-/obj/effect/mapping_helpers/airlock/access/all/security/detective,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "gVq" = (
@@ -25821,7 +25821,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "brig-entrence"
+	cycle_id = "brig-entrance"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
@@ -26613,7 +26613,7 @@
 /area/station/security/brig)
 "lwc" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "perma-entrence"
+	cycle_id = "perma-entrance"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security/glass{
@@ -43067,7 +43067,8 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/purple/visible,
 /obj/machinery/meter,
 /obj/machinery/power/apc/auto_name/directional/south{
-	areastring = "/area/station/engineering/atmospherics_engine"
+	areastring = "/area/station/engineering/atmos";
+	name = "Atmospherics APC #2"
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
