@@ -15,7 +15,7 @@
 
 /datum/controller/subsystem/vote/proc/attempt_transfer_vote()
 	if(EMERGENCY_IDLE_OR_RECALLED)
-		var/successful = initiate_vote(/datum/vote/crew_transfer_vote,"Crew Transfer","the server")
+		var/successful = initiate_vote(/datum/vote/crew_transfer_vote,"Automatic Crew Transfer",forced = TRUE)
 		// Check if we were successful in creating the vote
 		if(successful)
 			// We were able to create the vote

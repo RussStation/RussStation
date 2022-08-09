@@ -33,10 +33,12 @@
 			if(by_who)
 				to_chat(by_who, span_warning("Transfer voting is disabled."))
 			return FALSE
+
 	// TODO: possibly replace with SSshuttle.canEvac(by_who)
 	var/srd = CONFIG_GET(number/shuttle_refuel_delay)
 	if(world.time - SSticker.round_start_time < srd)
-		to_chat(by_who, span_warning("Shuttle call can only initiate after [DisplayTimeText(srd - (world.time - SSticker.round_start_time))]."))
+		if(by_who)
+			to_chat(by_who, span_warning("Shuttle call can only initiate after [DisplayTimeText(srd - (world.time - SSticker.round_start_time))]."))
 		return FALSE
 
 	return TRUE
