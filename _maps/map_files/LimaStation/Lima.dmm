@@ -23382,9 +23382,9 @@
 	dir = 4
 	},
 /obj/machinery/door/window/left/directional/south{
-	name = "Animal Containment"
+	name = "Animal Containment";
+	req_access = list("maint_tunnels")
 	},
-/obj/effect/mapping_helpers/airlock/access/any/engineering/maintenance,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
 	},
@@ -26025,7 +26025,7 @@
 	id_tag = "innerbrig";
 	name = "Brig"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/effect/mapping_helpers/airlock/access/all/security/entrance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "brig-entrence"
 	},
@@ -29718,7 +29718,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "brig-entrence"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/effect/mapping_helpers/airlock/access/all/security/entrance,
 /turf/open/floor/iron,
 /area/station/security/brig)
 "oiN" = (
@@ -36702,10 +36702,10 @@
 /obj/machinery/door/window/brigdoor/right/directional/north{
 	dir = 4;
 	id = "Cell 4";
-	name = "Cell 4"
+	name = "Cell 4";
+	req_access = list("security")
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 4
 	},
@@ -46892,10 +46892,10 @@
 /obj/machinery/door/window/brigdoor/right/directional/north{
 	dir = 4;
 	id = "Cell 2";
-	name = "Cell 2"
+	name = "Cell 2";
+	req_access = list("security")
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 4
 	},
