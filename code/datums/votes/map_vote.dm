@@ -1,5 +1,6 @@
 /datum/vote/map_vote
 	name = "Map"
+	vote_sound = 'russstation/sound/misc/map_vote.ogg' // Honk -- custom map vote sound
 
 /datum/vote/map_vote/New()
 	. = ..()
