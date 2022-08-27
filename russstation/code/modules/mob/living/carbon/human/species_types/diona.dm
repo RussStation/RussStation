@@ -6,6 +6,8 @@
 	sexes = FALSE
 	species_traits = list(NOBLOOD, NOEYESPRITES, NO_UNDERWEAR)
 	inherent_traits = list(
+		TRAIT_ADVANCEDTOOLUSER,// honk -- imagine not having this
+		TRAIT_CAN_STRIP,
 		TRAIT_NOBREATH,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTLOWPRESSURE,
