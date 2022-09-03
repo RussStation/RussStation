@@ -9,10 +9,10 @@
 	clothing_flags = MASKINTERNALS
 	visor_flags = MASKINTERNALS
 	w_class = WEIGHT_CLASS_SMALL
-	permeability_coefficient = 0.5
 	flags_inv = HIDEEYES|HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
 	flags_cover = NONE
 	visor_flags_cover = NONE
 	resistance_flags = NONE
 	tint = 0
 	has_fov = FALSE
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 50, FIRE = 0, ACID = 0)

@@ -117,7 +117,6 @@
 	verb_ask = "beeps"
 	verb_exclaim = "beeps"
 	req_access = list(ACCESS_JANITOR)
-	req_access_txt = "26"
 
 	///Will we slip?
 	var/will_slip = FALSE

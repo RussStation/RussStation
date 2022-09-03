@@ -15,16 +15,10 @@
 
 /datum/controller/subsystem/vote/proc/attempt_transfer_vote()
 	if(EMERGENCY_IDLE_OR_RECALLED)
-		initiate_vote("crew transfer","the server")
-	else
-		// recheck to see if the shuttle is no longer busy after ten minutes
-		set_transfer_timer(10 MINUTES)
-
-/datum/controller/subsystem/vote/proc/shuttlecall()
-	// check to prevent the vote resetting an already called shuttle
-	if(EMERGENCY_IDLE_OR_RECALLED)
-		SSshuttle.emergency.request()
-		SSshuttle.emergency_no_recall = TRUE
-		message_admins("The emergency shuttle has been requested because of a successful transfer vote")
-	else
-		to_chat(world, span_boldannounce("Notice: The crew transfer vote has failed because the shuttle is unavailable"))
+		var/successful = initiate_vote(/datum/vote/crew_transfer_vote,"Automatic Crew Transfer",forced = TRUE)
+		// Check if we were successful in creating the vote
+		if(successful)
+			// We were able to create the vote
+			return
+	// recheck to see if the shuttle is no longer busy after delay
+	set_transfer_timer(10 MINUTES)

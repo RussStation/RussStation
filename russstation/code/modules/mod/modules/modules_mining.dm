@@ -27,7 +27,7 @@
 		clothing_part.clothing_flags |= NOSLIP_ICE
 		return
 
-/obj/item/mod/module/ice_boots/on_deactivation(display_message = TRUE)
+/obj/item/mod/module/ice_boots/on_deactivation(display_message = TRUE, deleting = FALSE)
 	. = ..()
 	if(!.)
 		return

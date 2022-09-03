@@ -25,7 +25,7 @@
 ///Adds a mob reference to the list of all suicided mobs
 /mob/proc/add_to_mob_suicide_list()
 	GLOB.suicided_mob_list += src
-	
+
 ///Removes a mob references from the list of all suicided mobs
 /mob/proc/remove_from_mob_suicide_list()
 	GLOB.suicided_mob_list -= src
@@ -126,7 +126,14 @@
 /mob/proc/add_to_current_living_antags()
 	if(!SSticker?.mode)
 		return
-	GLOB.current_living_antags |= src
+
+	if (length(mind.antag_datums) == 0)
+		return
+
+	for (var/datum/antagonist/antagonist in mind.antag_datums)
+		if (antagonist.count_against_dynamic_roll_chance)
+			GLOB.current_living_antags |= src
+			return
 
 ///Removes the mob reference from the list of living antag player-mobs.
 /mob/proc/remove_from_current_living_antags()

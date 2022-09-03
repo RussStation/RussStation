@@ -398,7 +398,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	for(var/mob/M in listening)
 		if(M.client && (!M.client.prefs.read_preference(/datum/preference/toggle/enable_runechat) || (SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES))))
 			speech_bubble_recipients.Add(M.client)
-	var/image/I = image('icons/mob/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
+	var/image/I = image(bubble_file, src, "[bubble_type][say_test(message)]", FLY_LAYER) // honk -- use `bubble_file` instead of hardcoded value
 	I.plane = ABOVE_GAME_PLANE
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	INVOKE_ASYNC(GLOBAL_PROC, /.proc/flick_overlay, I, speech_bubble_recipients, 30)
@@ -436,21 +436,10 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 
 /mob/living/proc/treat_message(message)
-
 	if(HAS_TRAIT(src, TRAIT_UNINTELLIGIBLE_SPEECH))
 		message = unintelligize(message)
 
-	if(derpspeech)
-		message = derpspeech(message, stuttering)
-
-	if(stuttering)
-		message = stutter(message)
-
-	if(slurring)
-		message = slur(message)
-
-	if(cultslurring)
-		message = cultslur(message)
+	SEND_SIGNAL(src, COMSIG_LIVING_TREAT_MESSAGE, args)
 
 	message = capitalize(message)
 
@@ -491,12 +480,12 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		. = "[verb_whisper] in [p_their()] last breath"
 	else if(message_mods[MODE_SING])
 		. = verb_sing
-	else if(stuttering)
+	else if(has_status_effect(/datum/status_effect/speech/stutter))
 		if(HAS_TRAIT(src, TRAIT_SIGN_LANG))
 			. = "shakily signs"
 		else
 			. = "stammers"
-	else if(derpspeech)
+	else if(has_status_effect(/datum/status_effect/speech/stutter/derpspeech))
 		if(HAS_TRAIT(src, TRAIT_SIGN_LANG))
 			. = "incoherently signs"
 		else
@@ -504,7 +493,21 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	else
 		. = ..()
 
-/mob/living/whisper(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, filterproof)
+/**
+ * Living level whisper.
+ *
+ * Living mobs which whisper have their message only appear to people very close.
+ *
+ * message - the message to display
+ * bubble_type - the type of speech bubble that shows up when they speak (currently does nothing)
+ * spans - a list of spans to apply around the message
+ * sanitize - whether we sanitize the message
+ * language - typepath language to force them to speak / whisper in
+ * ignore_spam - whether we ignore the spam filter
+ * forced - string source of what forced this speech to happen, also bypasses spam filter / mutes if supplied
+ * filterproof - whether we ignore the word filter
+ */
+/mob/living/whisper(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language, ignore_spam = FALSE, forced, filterproof)
 	if(!message)
 		return
 	say("#[message]", bubble_type, spans, sanitize, language, ignore_spam, forced, filterproof)

@@ -10,11 +10,11 @@
 	worn_icon = 'russstation/icons/mob/feet.dmi'
 	icon_state = "cowboy_clown"
 	slowdown = SHOES_SLOWDOWN+1
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes/clown
 	var/enabled_waddle = TRUE
 
 /obj/item/clothing/shoes/cowboy/clown/Initialize()
 	. = ..()
+	create_storage(type = /datum/storage/pockets/shoes/clown)
 	AddComponent(/datum/component/squeak, list('sound/effects/clownstep1.ogg'=1,'sound/effects/clownstep2.ogg'=1), 50)
 
 /obj/item/clothing/shoes/cowboy/clown/equipped(mob/user, slot)
