@@ -211,7 +211,7 @@
 	id = "skavenlungs"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 15, /datum/reagent/toxin/bad_food = 10)
-	build_path = /obj/item/organ/lungs/skaven
+	build_path = /obj/item/organ/internal/lungs/skaven
 	category = list(SPECIES_SKAVEN)
 
 /datum/design/skaven_tongue
@@ -219,7 +219,7 @@
 	id = "skaventongue"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/toxin/bad_food = 10)
-	build_path = /obj/item/organ/tongue/skaven
+	build_path = /obj/item/organ/internal/tongue/skaven
 	category = list(SPECIES_SKAVEN)
 
 /datum/design/skaven_ears
@@ -227,7 +227,7 @@
 	id = "skavenears"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/toxin/bad_food = 10)
-	build_path = /obj/item/organ/ears/skaven
+	build_path = /obj/item/organ/internal/ears/skaven
 	category = list(SPECIES_SKAVEN)
 
 /datum/design/skaven_tail
@@ -235,7 +235,7 @@
 	id = "skaventail"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 20, /datum/reagent/toxin/bad_food = 10)
-	build_path = /obj/item/organ/tail/skaven
+	build_path = /obj/item/organ/external/tail/skaven
 	category = list(SPECIES_SKAVEN)
 
 //honk end

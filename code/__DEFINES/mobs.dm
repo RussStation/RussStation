@@ -110,9 +110,6 @@
 #define SPECIES_ZOMBIE "zombie"
 #define SPECIES_ZOMBIE_INFECTIOUS "memezombie"
 #define SPECIES_ZOMBIE_KROKODIL "krokodil_zombie"
-//honk start - Defines Skaven for the limb printers
-#define SPECIES_SKAVEN "skaven"
-//honk end
 
 // Like species IDs, but not specifically attached a species.
 #define BODYPART_TYPE_ALIEN "alien"
