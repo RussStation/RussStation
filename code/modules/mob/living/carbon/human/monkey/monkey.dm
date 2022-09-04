@@ -24,10 +24,15 @@
 /mob/living/carbon/human/species/monkey/angry/Initialize(mapload)
 	. = ..()
 	if(prob(10))
-		var/obj/item/clothing/head/helmet/justice/escape/helmet = new(src)
-		equip_to_slot_or_del(helmet,ITEM_SLOT_HEAD)
-		helmet.attack_self(src) // todo encapsulate toggle
+		INVOKE_ASYNC(src, .proc/give_ape_escape_helmet)
 
+/// Gives our funny monkey an Ape Escape hat reference
+/mob/living/carbon/human/species/monkey/angry/proc/give_ape_escape_helmet()
+	var/obj/item/clothing/head/helmet/justice/escape/helmet = new(src)
+	equip_to_slot_or_del(helmet, ITEM_SLOT_HEAD)
+	helmet.attack_self(src) // todo encapsulate toggle
+
+GLOBAL_DATUM(the_one_and_only_punpun, /mob/living/carbon/human/species/monkey/punpun)
 
 /mob/living/carbon/human/species/monkey/punpun //except for a few special persistence features, pun pun is just a normal monkey
 	name = "Pun Pun" //C A N O N
@@ -51,10 +56,14 @@
 		if(ancestor_chain > 1)
 			name_to_use += " \Roman[ancestor_chain]"
 	else if(prob(10))
-		name_to_use = pick(list("Russ","Father Knees","Fluff","Lily","Yerikk","Wah","Ari","Conx","Fami")) // honk - rare monkey names live here, hard coded...
+		name_to_use = pick(list("Russ","Father Knees","Fluff","Lily","Yerikk","Wah","Ari","Conx","Fami","Furious George")) // honk - rare monkey names live here, hard coded...
 		if(name_to_use == "Furious George")
 			ai_controller = /datum/ai_controller/monkey/angry //hes always mad
+
 	. = ..()
+
+	if(!GLOB.the_one_and_only_punpun && mapload)
+		GLOB.the_one_and_only_punpun = src
 
 	fully_replace_character_name(real_name, name_to_use)
 
@@ -67,17 +76,26 @@
 		equip_to_slot_or_del(new relic_hat, ITEM_SLOT_HEAD)
 	if(relic_mask)
 		equip_to_slot_or_del(new relic_mask, ITEM_SLOT_MASK)
+	equip_to_slot_or_del(new /obj/item/clothing/under/suit/waiter(src), ITEM_SLOT_ICLOTHING)
+
+/mob/living/carbon/human/species/monkey/punpun/Destroy()
+	if(GLOB.the_one_and_only_punpun == src)
+		GLOB.the_one_and_only_punpun = null
+
+	return ..()
 
 /mob/living/carbon/human/species/monkey/punpun/Life(delta_time = SSMOBS_DT, times_fired)
 	if(!stat && SSticker.current_state == GAME_STATE_FINISHED && !memory_saved)
 		Write_Memory(FALSE, FALSE)
 		memory_saved = TRUE
-	..()
+
+	return ..()
 
 /mob/living/carbon/human/species/monkey/punpun/death(gibbed)
 	if(!memory_saved)
 		Write_Memory(TRUE, gibbed)
-	..()
+
+	return ..()
 
 /mob/living/carbon/human/species/monkey/punpun/proc/Read_Memory()
 	if(fexists("data/npc_saves/Punpun.sav")) //legacy compatability to convert old format to new

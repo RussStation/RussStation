@@ -37,7 +37,7 @@
 	id_trim = /datum/id_trim/centcom/ert/clown
 	uniform = /obj/item/clothing/under/rank/civilian/clown
 	mask = /obj/item/clothing/mask/gas/clown_hat
-	belt = /obj/item/pda/clown
+	r_pocket = /obj/item/modular_computer/tablet/pda/clown
 	box = /obj/item/storage/box/hug/survival
 	gloves = null
 	shoes = /obj/item/clothing/shoes/clown_shoes
@@ -55,10 +55,10 @@
 	if(visualsOnly)
 		return
 
-	var/obj/item/pda/P = H.belt
-	P.owner = H.real_name
-	P.ownjob = name
-	P.update_label()
+	// new NtOS setup
+	var/obj/item/modular_computer/tablet/pda/clown/pda = H.r_store
+	pda.saved_identification = H.real_name
+	pda.saved_job = name // TODO: Verify this is working correctly
 
 	H.fart = new /datum/fart/human/clown()
 	ADD_TRAIT(H, TRAIT_NAIVE, JOB_TRAIT)

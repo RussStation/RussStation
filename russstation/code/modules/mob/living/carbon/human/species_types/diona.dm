@@ -2,13 +2,14 @@
 	// An amalgamation of a number of diona nymphs becomes a gestalt that appears similar to other bipedal organics
 	name = "\improper Diona"
 	plural_form = "Dionae"
-	id = "diona"
+	id = SPECIES_DIONA
 	sexes = FALSE
 	species_traits = list(NOBLOOD, NOEYESPRITES, NO_UNDERWEAR)
 	inherent_traits = list(
 		TRAIT_NOBREATH,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTLOWPRESSURE,
+		TRAIT_LITERATE,
 		// TRAIT_PLANT_SAFE, // honk -- maybe add this? Podpeople have it
 	)
 	external_organs = list(
@@ -39,12 +40,9 @@
 /datum/species/diona/random_name(gender,unique,lastname)
 	if(unique)
 		return random_unique_diona_name()
-
 	var/randname = diona_name()
-
 	if(lastname)
 		randname += " [lastname]"
-
 	return randname
 
 // Similar to podpeople.dm
@@ -85,3 +83,14 @@
 	human_mob.dna.features["diona_hair"] = hairstyle
 	mutant_bodyparts["diona_hair"] = hairstyle
 	human_mob.update_body()
+
+/datum/species/diona/get_species_description()
+	return "An amalgamation of a number of diona nymphs \
+	becomes a gestalt that appears similar to other bipedal organics."
+
+/datum/species/diona/get_species_lore()
+	return list(
+		"The Dionae are a species of plant-like beings, \
+	composed of many smaller Nymphs. Their world of \
+	origin is unknown.",
+	)

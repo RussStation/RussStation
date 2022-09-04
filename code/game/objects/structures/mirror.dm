@@ -203,9 +203,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 						to_chat(amazed_human, span_notice("Invalid color. Your color is not bright enough."))
 						return TRUE
 
-			amazed_human.update_body()
-			amazed_human.update_hair()
-			amazed_human.update_body_parts()
+			amazed_human.update_body(is_creating = TRUE)
 			amazed_human.update_mutations_overlay() // no hulk lizard
 
 		if("gender")
@@ -255,12 +253,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 				amazed_human.update_hair()
 
 		if(BODY_ZONE_PRECISE_EYES)
-			var/new_eye_color = input(amazed_human, "Choose your eye color", "Eye Color", amazed_human.eye_color) as color|null
+			var/new_eye_color = input(amazed_human, "Choose your eye color", "Eye Color", amazed_human.eye_color_left) as color|null
 			if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 				return TRUE
 			if(new_eye_color)
-				amazed_human.eye_color = sanitize_hexcolor(new_eye_color)
-				amazed_human.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+				amazed_human.eye_color_left = sanitize_hexcolor(new_eye_color)
+				amazed_human.eye_color_right = sanitize_hexcolor(new_eye_color)
+				amazed_human.dna.update_ui_block(DNA_EYE_COLOR_LEFT_BLOCK)
+				amazed_human.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
 				amazed_human.update_body()
 
 /obj/structure/mirror/magic/lesser/Initialize(mapload)

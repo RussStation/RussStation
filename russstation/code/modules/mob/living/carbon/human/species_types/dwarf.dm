@@ -1,22 +1,24 @@
 //this pleases armoks beard
 /datum/species/dwarf
-	name = "Dwarf"
-	id = "dwarf"
-	default_color = "FFFFFF"
+	name = "\improper Dwarf"
+	plural_form = "Dwarfs"
+	id = SPECIES_DWARF
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS)
 	inherent_traits = list(
 		TRAIT_NOBREATH,
 		TRAIT_CAN_STRIP,
 		TRAIT_VIRUSIMMUNE, // lavaland has miasma
+		TRAIT_LITERATE,
 	)
 	mutant_bodyparts = list("wings" = "None")
+	species_cookie = /obj/item/reagent_containers/food/drinks/bottle/ale
 	use_skintones = TRUE
 	speedmod = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	brutemod = 0.9
 	coldmod = 0.85
 	punchdamagehigh = 11 //fist fighting with dorfs is very dangerous
-	mutanteyes = /obj/item/organ/eyes/night_vision
+	mutanteyes = /obj/item/organ/internal/eyes/night_vision
 	species_language_holder = /datum/language_holder/dwarf
 
 /datum/species/dwarf/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
