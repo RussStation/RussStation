@@ -10,5 +10,6 @@
 		"sou", "dono", "chan", "san", "kun", "mahou", "yatta", "suki", "usagi", "domo", "ori",
 		"anya", "zaazaa", "shiku", "puru", "ira", "heto", "etto"
 	)
+	icon = 'russstation/icons/misc/language.dmi'
 	icon_state = "iconfox"
 	default_priority = 90

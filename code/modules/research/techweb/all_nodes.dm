@@ -368,7 +368,7 @@
 		"limbdesign_ethereal",
 		"limbdesign_felinid",
 		"limbdesign_lizard",
-		"limbdesign_plasmaman",//honk start - Adding the Skaven Designs to the Research
+		"limbdesign_plasmaman",//honk start - Adding the Skaven and kitsune Designs to the Research
 		"limbdesign_skaven",
 		"limbdesign_kitsune",//honk end
 		)

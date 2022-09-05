@@ -257,8 +257,7 @@
 	build_path = /obj/item/melee/synthetic_arm_blade
 	category = list("other","emagged")
 
-// Honk start
-
+// Honk start -- Kitsune designs
 /datum/design/fox_ears
 	name = "Fox Ears"
 	id = "foxears"
@@ -274,6 +273,8 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 15)
 	build_path = /obj/item/organ/external/tail/kitsune
 	category = list(SPECIES_KITSUNE)
+// honk end
+
 /// Design disks and designs - for adding limbs and organs to the limbgrower.
 /obj/item/disk/design_disk/limbs
 	name = "Limb Design Disk"
@@ -338,8 +339,8 @@
 	desc = "Contains designs for ethereal organs for the limbgrower - Ethereal tongue and stomach."
 	id = "limbdesign_ethereal"
 	build_path = /obj/item/disk/design_disk/limbs/ethereal
-//Honk start
 
+// Honk start -- kitsune and skaven design disks
 /obj/item/disk/design_disk/limbs/kitsune
 	name = "Kitsune Organ Design Disk"
 	limb_designs = list(/datum/design/fox_ears, /datum/design/fox_tail)
@@ -350,7 +351,6 @@
 	id = "limbdesign_kitsune"
 	build_path = /obj/item/disk/design_disk/limbs/kitsune
 
-//honk start - Skaven Limb Design Disk
 /obj/item/disk/design_disk/limbs/skaven
 	name = "Skaven Organ Design Disk"
 	limb_designs = list(/datum/design/skaven_lungs, /datum/design/skaven_tongue, /datum/design/skaven_ears, /datum/design/skaven_tail)
@@ -361,4 +361,4 @@
 	id = "limbdesign_skaven"
 	build_path = /obj/item/disk/design_disk/limbs/skaven
 
-//honk end
+// honk end
