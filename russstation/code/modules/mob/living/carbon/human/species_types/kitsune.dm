@@ -2,16 +2,14 @@
 	name = "Kitsune"
 	id = SPECIES_KITSUNE
 	say_mod = "gekkers"
-	// use_skintones = 1
-	// species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,HAS_FLESH,HAS_BONE)
 	inherent_traits = list(
 		TRAIT_NATURALTACKLER,
 	)
-
-	mutant_bodyparts = list("tail_kitsune" = "Kitsune", "ears" = "Kitsune", "wings" = "None")
-
-	mutantears = /obj/item/organ/ears/kitsune
-	mutant_organs = list(/obj/item/organ/tail/kitsune)
+	mutant_bodyparts = list("wings" = "None")
+	mutantears = /obj/item/organ/internal/ears/kitsune
+	external_organs = list(
+		/obj/item/organ/external/tail/kitsune = "Kitsune",
+	)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/kitsune
 	disliked_food = GROSS | CLOTH | RAW
@@ -26,79 +24,37 @@
 /datum/species/human/kitsune/random_name(gender, unique, lastname)
 	if(unique)
 		return random_unique_kitsune_name()
-
 	var/randname = kitsune_name()
-
 	if(lastname)
 		randname += " [lastname]"
-
 	return randname
-
-/datum/species/human/kitsune/spec_death(gibbed, mob/living/carbon/human/H)
-	if(H)
-		stop_wagging_tail(H)
-	. = ..()
-
-/datum/species/human/kitsune/spec_stun(mob/living/carbon/human/H, amount)
-	if(H)
-		stop_wagging_tail(H)
-	. = ..()
-
-/datum/species/human/kitsune/can_wag_tail(mob/living/carbon/human/H)
-	return mutant_bodyparts["tail_kitsune"] || mutant_bodyparts["waggingtail_kitsune"]
-
-/datum/species/human/kitsune/is_wagging_tail(mob/living/carbon/human/H)
-	return mutant_bodyparts["waggingtail_kitsune"]
-
-/datum/species/human/kitsune/start_wagging_tail(mob/living/carbon/human/H)
-	if(mutant_bodyparts["tail_kitsune"])
-		mutant_bodyparts["waggingtail_kitsune"] = mutant_bodyparts["tail_kitsune"]
-		mutant_bodyparts -= "tail_kitsune"
-	H.update_body()
-
-/datum/species/human/kitsune/stop_wagging_tail(mob/living/carbon/human/H)
-	if(mutant_bodyparts["waggingtail_kitsune"])
-		mutant_bodyparts["tail_kitsune"] = mutant_bodyparts["waggingtail_kitsune"]
-		mutant_bodyparts -= "waggingtail_kitsune"
-	H.update_body()
 
 /datum/species/human/kitsune/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.hairstyle = "Long Bedhead"
 	human.hair_color = "#ffb004" // ORANG
-	human.update_hair()
+	human.update_hair(is_creating = TRUE)
 
-	var/obj/item/organ/ears/kitsune/fox_ears = human.getorgan(/obj/item/organ/ears/kitsune)
+	var/obj/item/organ/internal/ears/kitsune/fox_ears = human.getorgan(/obj/item/organ/internal/ears/kitsune)
 	if (fox_ears)
 		fox_ears.color = human.hair_color
 		human.update_body()
 
-/datum/species/human/kitsune/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
-	if(ishuman(C))
-		var/mob/living/carbon/human/H = C
+/datum/species/human/kitsune/on_species_gain(mob/living/carbon/carbon_being, datum/species/old_species, pref_load)
+	if(ishuman(carbon_being))
+		var/mob/living/carbon/human/target_human = carbon_being
 		if(!pref_load)
-			if(H.dna.features["tail_kitsune"] == "None")
-				H.dna.features["tail_kitsune"] = "Kitsune"
-			if(H.dna.features["ears"] == "None")
-				H.dna.features["ears"] = "Kitsune"
-		if(H.dna.features["ears"] == "Kitsune")
-			var/obj/item/organ/ears/kitsune/ears = new
-			ears.Insert(H, drop_if_replaced = FALSE)
-		else
-			mutantears = /obj/item/organ/ears
-		if(H.dna.features["tail_kitsune"] == "Kitsune")
-			var/obj/item/organ/tail/kitsune/tail = new
-			tail.Insert(H, special = TRUE, drop_if_replaced = FALSE)
-		else
-			mutant_organs = list()
-		// H.dna.features["mcolor"] = H.hair_color
+			target_human.dna.features["tail_kitsune"] = "Kitsune"
+			if(target_human.dna.features["ears"] == "None")
+				target_human.dna.features["ears"] = "Kitsune"
+		if(target_human.dna.features["ears"] == "Kitsune")
+			var/obj/item/organ/internal/ears/kitsune/ears = new
+			ears.Insert(target_human, drop_if_replaced = FALSE)
 	return ..()
 
 /datum/species/human/kitsune/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
 	var/tail = pick(GLOB.tails_list_kitsune)
 	human_mob.dna.features["tail_kitsune"] = tail
 	mutant_bodyparts["tail_kitsune"] = tail
-	var/ears = pick(GLOB.ears_list)
-	human_mob.dna.features["ears"] = ears
 	human_mob.update_body()
 
 /datum/species/human/kitsune/get_species_description()

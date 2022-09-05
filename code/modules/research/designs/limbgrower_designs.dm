@@ -264,7 +264,7 @@
 	id = "foxears"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
-	build_path = /obj/item/organ/ears/kitsune
+	build_path = /obj/item/organ/internal/ears/kitsune
 	category = list(SPECIES_KITSUNE)
 
 /datum/design/fox_tail
@@ -272,7 +272,7 @@
 	id = "foxtail"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 15)
-	build_path = /obj/item/organ/tail/kitsune
+	build_path = /obj/item/organ/external/tail/kitsune
 	category = list(SPECIES_KITSUNE)
 /// Design disks and designs - for adding limbs and organs to the limbgrower.
 /obj/item/disk/design_disk/limbs
