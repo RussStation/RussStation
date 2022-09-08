@@ -175,3 +175,11 @@
 	description = "benis"
 	mappath = "_maps/templates/holodeck_refuelingstation.dmm"
 	restricted = TRUE
+//honk start
+/datum/map_template/holodeck/lavaland
+	name = "Holodeck - Lavaland (DANGER: CORRUPTED)"
+	template_id = "holodeck_lavaland"
+	description = "benis"
+	mappath = "_maps/templates/holodeck_lavaland.dmm"
+	restricted = TRUE
+//honk end
