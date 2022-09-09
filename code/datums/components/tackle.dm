@@ -308,6 +308,10 @@
 		attack_mod -= 2
 	if(HAS_TRAIT(sacker, TRAIT_GIANT))
 		attack_mod += 2
+	// honk start -- Natural Tackler trait check
+	if(HAS_TRAIT(sacker, TRAIT_NATURALTACKLER))
+		attack_mod += 2
+	// honk end
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/S = sacker
