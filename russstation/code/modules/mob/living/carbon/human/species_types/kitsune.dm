@@ -3,6 +3,10 @@
 	id = SPECIES_KITSUNE
 	say_mod = "gekkers"
 	inherent_traits = list(
+		TRAIT_ADVANCEDTOOLUSER,
+		TRAIT_CAN_STRIP,
+		TRAIT_CAN_USE_FLIGHT_POTION,
+		TRAIT_LITERATE,
 		TRAIT_NATURALTACKLER,
 	)
 	mutant_bodyparts = list("wings" = "None")
