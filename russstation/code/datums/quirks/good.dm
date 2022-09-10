@@ -1,6 +1,6 @@
 /datum/quirk/multilingual
 	name = "Multilingual"
-	desc = "You speak another language, usefull for when you're speaking to foreign exchange interns!"
+	desc = "You speak another language, useful for when you're speaking to foreign exchange interns!"
 	icon = "language"
 	value = 4
 	gain_text = "<span class='notice'>You've developed fluency in another language."
@@ -9,6 +9,11 @@
 	var/multilingual
 
 /datum/quirk/multilingual/add()
+	var/mob/living/carbon/human/human_holder = quirk_holder
+	// Check if we can add the quirk if not just skip checking all together
+	if(!ishumanbasic(human_holder))
+		return
+	// Get the mutilingual stored or in preferences
 	multilingual = multilingual || quirk_holder.client?.prefs?.read_preference(/datum/preference/choiced/multilingual)
 	switch(multilingual) // honk -- there's probably a better way for this but I couldnt figure it out without breaking everything. credit to the nearsighted perk giving me the precedent to make these if statements :)
 		if ("uncommon")
@@ -27,12 +32,7 @@
 			multilingual = /datum/language/gamer
 		if ("queekish")
 			multilingual = /datum/language/queekish
-		else
-			multilingual = /datum/language/uncommon
-
-	var/mob/living/carbon/human/human_holder = quirk_holder
-	if(ishumanbasic(human_holder))
-		human_holder.grant_language(multilingual)
+	human_holder.grant_language(multilingual)
 
 /datum/quirk/multilingual/remove()
 	var/mob/living/carbon/human/human_holder = quirk_holder
