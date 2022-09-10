@@ -24,14 +24,10 @@
 			multilingual = /datum/language/moffic
 		if ("nekomimetic")
 			multilingual = /datum/language/nekomimetic
-		if ("beachbum")
-			multilingual = /datum/language/beachbum
-		if ("dwarvish")
-			multilingual = /datum/language/dwarvish
-		if ("gamer")
-			multilingual = /datum/language/gamer
 		if ("queekish")
 			multilingual = /datum/language/queekish
+		if("kitsumimetic")
+			multilingual = /datum/language/kitsumimetic
 	human_holder.grant_language(multilingual)
 
 /datum/quirk/multilingual/remove()

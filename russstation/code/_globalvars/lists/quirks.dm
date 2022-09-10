@@ -3,8 +3,6 @@ GLOBAL_LIST_INIT(multilingual_languages, list(
 	"draconic",
 	"moffic",
 	"nekomimetic",
-	"beachbum",
-	"dwarvish",
-	"gamer",
-	"queekish"
+	"queekish",
+	"kitsumimetic"
 ))
