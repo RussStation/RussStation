@@ -6231,6 +6231,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor/heavy,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/engineering/break_room)
 "dtQ" = (
@@ -6743,9 +6744,11 @@
 /area/station/engineering/supermatter/room)
 "dHz" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/east{
-	name = "Brig Desk";
-	req_access = list("security")
+/obj/machinery/door/window/left/directional/west{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Outer Window"
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "briggate";
@@ -6757,6 +6760,11 @@
 	},
 /obj/item/pen{
 	pixel_x = -3
+	},
+/obj/machinery/door/window/brigdoor{
+	dir = 8;
+	name = "Brig Control Desk";
+	req_access = list("armory")
 	},
 /turf/open/floor/plating,
 /area/station/security/brig)
@@ -14251,6 +14259,7 @@
 	req_access = list("science")
 	},
 /obj/machinery/door/firedoor/heavy,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/science/lab)
 "hzf" = (
@@ -15899,6 +15908,16 @@
 "ivt" = (
 /turf/open/floor/iron/cafeteria,
 /area/station/command/heads_quarters/rd)
+"ivM" = (
+/obj/machinery/door/firedoor,
+/obj/structure/table,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "kitchen";
+	name = "Serving Hatch"
+	},
+/obj/structure/desk_bell,
+/turf/open/floor/plating,
+/area/station/service/kitchen)
 "ivQ" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -21246,15 +21265,21 @@
 /area/station/maintenance/port/fore)
 "lpG" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/south{
+/obj/machinery/door/window/left/directional/west{
 	base_state = "right";
+	dir = 2;
 	icon_state = "right";
-	name = "Brig Desk";
-	req_access = list("security")
+	name = "Reception Window"
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "briggate";
 	name = "Security Shutters"
+	},
+/obj/structure/desk_bell,
+/obj/machinery/door/window/brigdoor{
+	dir = 1;
+	name = "Brig Control Desk";
+	req_access = list("armory")
 	},
 /turf/open/floor/plating,
 /area/station/security/brig)
@@ -21488,6 +21513,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/wood,
 /area/station/service/bar)
 "lwW" = (
@@ -26037,6 +26063,7 @@
 	id = "pharmacyshutters"
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/medical/pharmacy)
 "nMe" = (
@@ -29304,6 +29331,7 @@
 	req_access = list("robotics")
 	},
 /obj/machinery/door/firedoor/heavy,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/science/robotics/lab)
 "psP" = (
@@ -32621,6 +32649,7 @@
 	name = "Privacy Shutters"
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/hop)
 "qTx" = (
@@ -38744,6 +38773,7 @@
 	req_access = list("shipping")
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/cargo/office)
 "tYc" = (
@@ -41717,6 +41747,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/cargo/sorting)
 "vvk" = (
@@ -43527,6 +43558,7 @@
 	req_access = list("plumbing")
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/medical/chemistry)
 "wmw" = (
@@ -44870,6 +44902,7 @@
 	req_access = list("hydroponics")
 	},
 /obj/item/reagent_containers/glass/bucket,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/service/hydroponics)
 "wRv" = (
@@ -81721,7 +81754,7 @@ mda
 pVg
 jrr
 gyi
-mgM
+ivM
 ssA
 pRy
 pZy

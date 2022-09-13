@@ -19010,9 +19010,11 @@
 /area/station/hallway/primary/fore)
 "kho" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/east{
-	name = "Brig Desk";
-	req_access = list("security")
+/obj/machinery/door/window/left/directional/west{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Outer Window"
 	},
 /obj/item/paper_bin{
 	pixel_y = 4
@@ -19022,6 +19024,11 @@
 	name = "Security Shutters"
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/window/brigdoor{
+	dir = 8;
+	name = "Brig Control Desk";
+	req_access = list("armory")
+	},
 /turf/open/floor/plating,
 /area/station/security/brig)
 "khB" = (
@@ -20600,10 +20607,10 @@
 /area/station/medical/medbay/central)
 "laZ" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/south{
+/obj/machinery/door/window/brigdoor{
 	dir = 1;
-	name = "Brig Desk";
-	req_access = list("security")
+	name = "Brig Control Desk";
+	req_access = list("armory")
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "briggate";
@@ -20611,6 +20618,13 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
+/obj/structure/desk_bell,
+/obj/machinery/door/window/left/directional/west{
+	base_state = "right";
+	dir = 2;
+	icon_state = "right";
+	name = "Reception Window"
+	},
 /turf/open/floor/plating,
 /area/station/security/brig)
 "lbo" = (
@@ -21311,6 +21325,7 @@
 	name = "HoP Reception Window";
 	req_access = list("hop")
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/hop)
 "lsl" = (
@@ -21724,6 +21739,7 @@
 	req_access = list("shipping")
 	},
 /obj/item/clipboard,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/cargo/sorting)
 "lBH" = (
@@ -26985,6 +27001,7 @@
 	name = "Atmospherics Desk";
 	req_one_access = list("atmospherics","engineering")
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/engineering/break_room)
 "ooH" = (
@@ -27077,6 +27094,7 @@
 "oqS" = (
 /obj/structure/table/wood/shuttle_bar,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/service/bar)
 "oqY" = (
@@ -27629,6 +27647,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/science/robotics/lab)
 "oDN" = (
@@ -29521,6 +29540,7 @@
 	req_access = list("cargo")
 	},
 /obj/item/storage/fancy/donut_box,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/cargo/office)
 "pCd" = (
@@ -32014,6 +32034,7 @@
 /obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/folder/white,
+/obj/structure/desk_bell,
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/medbay/central)
 "qRr" = (
@@ -34704,9 +34725,11 @@
 /area/station/ai_monitored/command/nuke_storage)
 "skd" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/right/directional/east{
-	name = "Brig Desk";
-	req_access = list("brig")
+/obj/machinery/door/window/left/directional/west{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Outer Window"
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "briggate";
@@ -34714,6 +34737,11 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/item/storage/fancy/donut_box,
+/obj/machinery/door/window/brigdoor{
+	dir = 8;
+	name = "Brig Control Desk";
+	req_access = list("armory")
+	},
 /turf/open/floor/plating,
 /area/station/security/brig)
 "skk" = (
@@ -35135,6 +35163,7 @@
 	req_access = list("hydroponics")
 	},
 /obj/item/reagent_containers/glass/bucket,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/service/hydroponics)
 "sxA" = (
@@ -36239,6 +36268,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/science/explab)
 "tfR" = (
@@ -41116,6 +41146,7 @@
 	id = "kitchen";
 	name = "Kitchen Shutters"
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
 "vva" = (
@@ -41349,6 +41380,7 @@
 	req_access = list("pharmacy")
 	},
 /obj/item/paper/crumpled,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/medical/pharmacy)
 "vAc" = (

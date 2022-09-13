@@ -10919,6 +10919,7 @@
 	req_access = list("hydroponics")
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/service/hydroponics)
 "eAT" = (
@@ -11315,6 +11316,7 @@
 /obj/structure/table/reinforced,
 /obj/item/paper_bin,
 /obj/effect/spawner/random/bureaucracy/pen,
+/obj/structure/desk_bell,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hop)
 "eKX" = (
@@ -13032,6 +13034,7 @@
 	req_access = list("mining_station")
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
 "fBR" = (
@@ -17599,6 +17602,14 @@
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/port/central)
+"hDE" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/structure/desk_bell,
+/turf/open/floor/wood,
+/area/station/service/bar)
 "hDP" = (
 /turf/open/floor/plating,
 /area/station/maintenance/solars/port)
@@ -18699,6 +18710,7 @@
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "pharmacyshutters"
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/medical/pharmacy)
 "idJ" = (
@@ -21061,6 +21073,7 @@
 	name = "Psychology Office";
 	req_access = list("psychology")
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/medical/psychology)
 "jeX" = (
@@ -21320,6 +21333,7 @@
 	name = "Robotics Desk";
 	req_access = list("robotics")
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/science/robotics)
 "jlK" = (
@@ -24412,14 +24426,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/tcommsat/server/upper)
-"kCc" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/table/reinforced,
-/obj/machinery/door/firedoor/heavy,
-/turf/open/floor/iron,
-/area/station/engineering/lobby)
 "kCe" = (
 /obj/structure/chair,
 /obj/effect/turf_decal/siding/purple,
@@ -30088,9 +30094,11 @@
 /area/station/medical/medbay)
 "mUR" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/east{
-	name = "Brig Desk";
-	req_access = list("security")
+/obj/machinery/door/window/left/directional/west{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Outer Window"
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "briggate";
@@ -30102,6 +30110,11 @@
 	},
 /obj/item/pen{
 	pixel_x = -3
+	},
+/obj/machinery/door/window/brigdoor{
+	dir = 8;
+	name = "Brig Control Desk";
+	req_access = list("armory")
 	},
 /turf/open/floor/plating,
 /area/station/security/brig)
@@ -33901,6 +33914,16 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/port/central)
+"oBb" = (
+/obj/structure/table/reinforced,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "kitchen";
+	name = "Serving Hatch"
+	},
+/obj/structure/desk_bell,
+/turf/open/floor/plating,
+/area/station/service/kitchen)
 "oBe" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/brown/visible,
 /obj/machinery/meter,
@@ -35210,10 +35233,6 @@
 /area/station/tcommsat/computer)
 "pdO" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/north{
-	name = "Engineering Desk";
-	req_access = list("construction")
-	},
 /obj/item/paper_bin{
 	pixel_x = -5;
 	pixel_y = 4
@@ -35223,6 +35242,11 @@
 	pixel_y = 7
 	},
 /obj/machinery/door/firedoor/heavy,
+/obj/machinery/door/window/left/directional/south{
+	name = "Engineering Desk";
+	req_access = list("construction")
+	},
+/obj/structure/desk_bell,
 /turf/open/floor/iron,
 /area/station/engineering/lobby)
 "pdP" = (
@@ -36140,6 +36164,7 @@
 	req_access = list("science")
 	},
 /obj/structure/table/reinforced,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/science/lab)
 "pCf" = (
@@ -39490,6 +39515,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/cargo/sorting)
 "qWn" = (
@@ -40744,6 +40770,7 @@
 	req_access = list("shipping")
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/cargo/office)
 "ryM" = (
@@ -55226,15 +55253,21 @@
 /area/station/maintenance/port/fore)
 "xKB" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/south{
+/obj/machinery/door/window/left/directional/west{
 	base_state = "right";
+	dir = 2;
 	icon_state = "right";
-	name = "Brig Desk";
-	req_access = list("security")
+	name = "Reception Window"
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "briggate";
 	name = "Security Shutters"
+	},
+/obj/structure/desk_bell,
+/obj/machinery/door/window/brigdoor{
+	dir = 1;
+	name = "Brig Control Desk";
+	req_access = list("armory")
 	},
 /turf/open/floor/plating,
 /area/station/security/brig)
@@ -90565,7 +90598,7 @@ fVi
 lVe
 eUe
 hOa
-kCc
+cjf
 iMD
 xQd
 olL
@@ -95675,7 +95708,7 @@ gbM
 mva
 pOL
 llC
-uFO
+hDE
 rQl
 nQi
 kya
@@ -100039,7 +100072,7 @@ vSZ
 xYU
 kXZ
 jWb
-lVk
+oBb
 vYd
 wlC
 tPe

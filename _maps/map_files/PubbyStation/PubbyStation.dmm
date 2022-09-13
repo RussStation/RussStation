@@ -1130,6 +1130,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
+/obj/structure/window/reinforced/spawner,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "aeq" = (
@@ -1938,12 +1939,19 @@
 /area/station/medical/chemistry)
 "agZ" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/east{
-	name = "Brig Desk";
-	req_access = list("security")
+/obj/machinery/door/window/left/directional/west{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Outer Window"
 	},
 /obj/item/folder/red,
 /obj/item/restraints/handcuffs,
+/obj/machinery/door/window/brigdoor{
+	dir = 8;
+	name = "Brig Control Desk";
+	req_access = list("armory")
+	},
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "aha" = (
@@ -6834,12 +6842,10 @@
 /area/station/security/brig)
 "awO" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/left/directional/south{
-	base_state = "right";
+/obj/machinery/door/window/brigdoor{
 	dir = 1;
-	icon_state = "right";
-	name = "Brig Desk";
-	req_access = list("brig")
+	name = "Brig Control Desk";
+	req_access = list("armory")
 	},
 /obj/machinery/door/poddoor/preopen{
 	id = "Secure Gate";
@@ -6872,14 +6878,13 @@
 	id = "Secure Gate";
 	name = "Brig Shutters"
 	},
-/obj/machinery/door/window/left/directional/south{
-	base_state = "right";
+/obj/machinery/door/window/brigdoor{
 	dir = 1;
-	icon_state = "right";
-	name = "Brig Desk";
-	req_access = list("brig")
+	name = "Brig Control Desk";
+	req_access = list("armory")
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/desk_bell,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "awR" = (
@@ -9734,6 +9739,7 @@
 	id = "hop";
 	name = "Privacy Shutters"
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/hop)
 "aFC" = (
@@ -16324,6 +16330,7 @@
 	req_access = list("hydroponics")
 	},
 /obj/item/food/monkeycube,
+/obj/structure/desk_bell,
 /turf/open/floor/iron/dark,
 /area/station/service/hydroponics)
 "bce" = (
@@ -18233,6 +18240,7 @@
 	id = "robotics";
 	name = "Robotics Lab Shutters"
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/science/robotics/lab)
 "bjn" = (
@@ -19893,6 +19901,7 @@
 	name = "Research Shutters"
 	},
 /obj/item/folder/white,
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/science/research)
 "bqd" = (
@@ -23536,6 +23545,7 @@
 	name = "Security Desk";
 	req_access = list("security")
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/plating,
 /area/station/security/checkpoint/supply)
 "bDI" = (
@@ -26501,6 +26511,7 @@
 	name = "Atmospherics Desk";
 	req_access = list("atmospherics")
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
 "bOO" = (
@@ -34556,6 +34567,7 @@
 	name = "Cargo Desk";
 	req_access = list("shipping")
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
 "cxK" = (
@@ -40715,6 +40727,7 @@
 	name = "Medbay Front Desk";
 	req_access = list("medical")
 	},
+/obj/structure/desk_bell,
 /turf/open/floor/iron/white,
 /area/station/medical/paramedic)
 "lya" = (
@@ -41902,6 +41915,7 @@
 	},
 /obj/item/paper_bin/carbon,
 /obj/item/pen,
+/obj/structure/desk_bell,
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry)
 "nyB" = (
@@ -41932,6 +41946,19 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
+"nAy" = (
+/obj/structure/table/reinforced,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "kitchenshutters";
+	name = "Kitchen Shutters"
+	},
+/obj/machinery/door/firedoor,
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 8
+	},
+/obj/structure/desk_bell,
+/turf/open/floor/iron/dark,
+/area/station/service/kitchen)
 "nBt" = (
 /obj/structure/rack,
 /obj/item/storage/box/shipping,
@@ -45661,6 +45688,14 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/station/maintenance/department/cargo)
+"sUy" = (
+/obj/structure/table/reinforced,
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 1
+	},
+/obj/structure/desk_bell,
+/turf/open/floor/iron/dark,
+/area/station/service/bar)
 "sUP" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment,
@@ -79956,7 +79991,7 @@ aRN
 aYX
 bad
 bbl
-bbl
+nAy
 bbl
 sbI
 aRN
@@ -82008,7 +82043,7 @@ aKT
 aVi
 bah
 aXh
-aZd
+sUy
 bag
 beB
 abc
