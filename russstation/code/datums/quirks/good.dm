@@ -8,7 +8,8 @@
 	medical_record_text = "Patient spent time learning another language, what a nerd."
 	var/multilingual
 
-/datum/quirk/multilingual/add()
+// Utilizing post_add here to ensure that we have a valid client with preferences loaded
+/datum/quirk/multilingual/post_add()
 	// Get the mutilingual stored or in preferences
 	multilingual = multilingual || quirk_holder.client?.prefs?.read_preference(/datum/preference/choiced/multilingual)
 	switch(multilingual) // honk -- there's probably a better way for this but I couldnt figure it out without breaking everything. credit to the nearsighted perk giving me the precedent to make these if statements :)
@@ -22,7 +23,7 @@
 			multilingual = /datum/language/nekomimetic
 		if ("queekish")
 			multilingual = /datum/language/queekish
-		if("kitsumimetic")
+		if ("kitsumimetic")
 			multilingual = /datum/language/kitsumimetic
 	quirk_holder.grant_language(multilingual)
 

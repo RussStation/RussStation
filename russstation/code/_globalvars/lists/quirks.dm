@@ -4,5 +4,5 @@ GLOBAL_LIST_INIT(multilingual_languages, list(
 	"moffic",
 	"nekomimetic",
 	"queekish",
-	"kitsumimetic"
+	"kitsumimetic",
 ))
