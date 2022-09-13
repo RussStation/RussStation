@@ -319,7 +319,8 @@ Key procs
 								/datum/language/calcic = list(LANGUAGE_ATOM),
 								/datum/language/voltaic = list(LANGUAGE_ATOM),
 								/datum/language/nekomimetic = list(LANGUAGE_ATOM),
-								/datum/language/kitsumimetic = list(LANGUAGE_ATOM)) // honk -- add kitsumimetic
+								/datum/language/kitsumimetic = list(LANGUAGE_ATOM), // honk -- add kitsumimetic
+								/datum/language/queekish = list(LANGUAGE_ATOM)) // honk -- add queekish
 	spoken_languages = list(/datum/language/common = list(LANGUAGE_ATOM),
 							/datum/language/uncommon = list(LANGUAGE_ATOM),
 							/datum/language/machine = list(LANGUAGE_ATOM),
@@ -328,7 +329,8 @@ Key procs
 							/datum/language/calcic = list(LANGUAGE_ATOM),
 							/datum/language/voltaic = list(LANGUAGE_ATOM),
 							/datum/language/nekomimetic = list(LANGUAGE_ATOM),
-							/datum/language/kitsumimetic = list(LANGUAGE_ATOM)) // honk -- add kitsumimetic
+							/datum/language/kitsumimetic = list(LANGUAGE_ATOM), // honk -- add kitsumimetic
+							/datum/language/queekish = list(LANGUAGE_ATOM)) // honk -- add queekish
 
 /datum/language_holder/moth
 	understood_languages = list(/datum/language/common = list(LANGUAGE_ATOM),
