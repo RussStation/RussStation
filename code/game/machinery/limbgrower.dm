@@ -24,6 +24,7 @@
 	var/list/categories = list(SPECIES_HUMAN, SPECIES_LIZARD, SPECIES_MOTH, SPECIES_PLASMAMAN, SPECIES_ETHEREAL,
 	//honk start - Adds the skaven category to the Limb Grower
 	SPECIES_SKAVEN,
+	SPECIES_KITSUNE,
 	//honk end
 	 "other")
 

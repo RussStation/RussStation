@@ -32,6 +32,7 @@
 	human.dna.features["ethcolor"] = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
 	//honk start - random skaven tail and color and diona hair
 	human.dna.features["tail_skaven"] = pick(GLOB.tails_list_skaven)
+	human.dna.features["tail_kitsune"] = pick(GLOB.tails_list_kitsune)
 	human.dna.features["skaven_color"] = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)]
 	human.dna.features["diona_hair"] = GLOB.diona_hair_list[pick(GLOB.diona_hair_list)]
 	//honk end

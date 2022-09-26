@@ -33,7 +33,8 @@
 		/datum/language/sylvan,
 		/datum/language/shadowtongue,
 		/datum/language/terrum,
-		/datum/language/nekomimetic
+		/datum/language/nekomimetic,
+		/datum/language/kitsumimetic // honk - kitsune
 	))
 
 /obj/item/organ/internal/tongue/Initialize(mapload)
@@ -210,6 +211,7 @@
 		/datum/language/shadowtongue,
 		/datum/language/terrum,
 		/datum/language/nekomimetic,
+		/datum/language/kitsumimetic, // honk - kitsune
 		/datum/language/buzzwords
 	))
 
@@ -351,6 +353,7 @@
 		/datum/language/shadowtongue,
 		/datum/language/terrum,
 		/datum/language/nekomimetic,
+		/datum/language/kitsumimetic, // honk - kitsune
 		/datum/language/calcic
 	))
 
@@ -430,6 +433,7 @@
 		/datum/language/shadowtongue,
 		/datum/language/terrum,
 		/datum/language/nekomimetic,
+		/datum/language/kitsumimetic, // honk - kitsune
 		/datum/language/voltaic
 	))
 

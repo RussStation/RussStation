@@ -1166,4 +1166,7 @@
 
 /mob/living/carbon/human/species/skaven
 	race = /datum/species/skaven
+
+/mob/living/carbon/human/species/kitsune
+	race = /datum/species/human/kitsune
 // honk end
