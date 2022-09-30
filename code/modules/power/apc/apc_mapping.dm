@@ -24,3 +24,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/auto_name, APC_PIXEL_OFFSET
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/five_k, APC_PIXEL_OFFSET)
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/ten_k, APC_PIXEL_OFFSET)
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/sm_apc, APC_PIXEL_OFFSET)
+// honk start -- highcap directionals
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/five_k, APC_PIXEL_OFFSET)
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/highcap/ten_k, APC_PIXEL_OFFSET)
+// honk end
