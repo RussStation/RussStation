@@ -9,7 +9,6 @@
 	states |= icon_states('icons/obj/hydroponics/growing_mushrooms.dmi')
 	states |= icon_states('icons/obj/hydroponics/growing_vegetables.dmi')
 	// honk start -- add russstation & goon growing dmi files to be used in testing
-	states |= icon_states('goon/icons/obj/hydroponics.dmi')
 	states |= icon_states('russstation/icons/obj/hydroponics/growing.dmi')
 	states |= icon_states('russstation/icons/obj/hydroponics/growing_fruits.dmi')
 	// honk end
