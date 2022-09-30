@@ -86,7 +86,7 @@
 	id = /obj/item/card/id/advanced/black/deathsquad/circus_seal
 	id_trim = /datum/id_trim/centcom/deathsquad/circus_seal
 	suit_store = /obj/item/tank/internals/oxygen
-	back = /obj/item/mod/control/pre_equipped/cosmohonk
+	back = /obj/item/mod/control/pre_equipped/cosmohonk/circus_seal
 	internals_slot = ITEM_SLOT_SUITSTORE
 	glasses = /obj/item/clothing/glasses/hud/toggle/thermal
 	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
