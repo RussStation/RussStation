@@ -3,16 +3,16 @@
 	name = "\improper Dwarf"
 	plural_form = "Dwarfs"
 	id = SPECIES_DWARF
-	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS)
+	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH ,HAS_BONE)
 	inherent_traits = list(
-		TRAIT_NOBREATH,
+		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
-		TRAIT_VIRUSIMMUNE, // lavaland has miasma
+		// TRAIT_VIRUSIMMUNE, // lavaland has miasma
 		TRAIT_LITERATE,
 	)
 	mutant_bodyparts = list("wings" = "None")
 	species_cookie = /obj/item/reagent_containers/food/drinks/bottle/ale
-	use_skintones = TRUE
+	use_skintones = 1
 	speedmod = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	brutemod = 0.9
@@ -20,6 +20,30 @@
 	punchdamagehigh = 11 //fist fighting with dorfs is very dangerous
 	mutanteyes = /obj/item/organ/internal/eyes/night_vision
 	species_language_holder = /datum/language_holder/dwarf
+	disliked_food = GROSS | RAW | CLOTH | BUGS
+	liked_food = ALCOHOL
+	
+/// Returns the species's scream sound. (human screams)
+/datum/species/dwarf/get_scream_sound(mob/living/carbon/human/human)
+	if(human.gender == MALE)
+		if(prob(1))
+			return 'sound/voice/human/wilhelm_scream.ogg'
+		return pick(
+			'sound/voice/human/malescream_1.ogg',
+			'sound/voice/human/malescream_2.ogg',
+			'sound/voice/human/malescream_3.ogg',
+			'sound/voice/human/malescream_4.ogg',
+			'sound/voice/human/malescream_5.ogg',
+			'sound/voice/human/malescream_6.ogg',
+		)
+
+	return pick(
+		'sound/voice/human/femalescream_1.ogg',
+		'sound/voice/human/femalescream_2.ogg',
+		'sound/voice/human/femalescream_3.ogg',
+		'sound/voice/human/femalescream_4.ogg',
+		'sound/voice/human/femalescream_5.ogg',
+	)
 
 /datum/species/dwarf/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
 	. = ..()
@@ -43,3 +67,14 @@
 
 /datum/species/dwarf/random_name(gender, unique, lastname)
 	return dwarf_name()
+
+/datum/species/dwarf/get_species_description()
+	return "Short and sturdy creatures fond \
+	of industry and drink."
+
+/datum/species/dwarf/get_species_lore()
+	return list(
+		"Dwarves are beings who favor crafting with \
+	rock and stone and metal. They often have long \
+	beards and known to clash with elves.",
+	)
