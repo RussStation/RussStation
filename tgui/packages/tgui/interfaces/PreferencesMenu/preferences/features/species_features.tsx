@@ -1,9 +1,4 @@
-import {
-  FeatureColorInput,
-  Feature,
-  FeatureChoiced,
-  FeatureDropdownInput,
-} from './base';
+import { FeatureColorInput, Feature, FeatureChoiced, FeatureDropdownInput } from './base';
 
 export const eye_color: Feature<string> = {
   name: 'Eye color',
@@ -100,7 +95,7 @@ export const feature_skaven_tail: FeatureChoiced = {
 // honk start -- Kitsune tail
 
 export const feature_kitsune_tail: FeatureChoiced = {
-  name: "Tail",
+  name: 'Tail',
   component: FeatureDropdownInput,
 };
 

@@ -30,7 +30,7 @@
 	C.bubble_icon = "dwarf"
 	var/dwarf_hair = pick("Beard (Dwarf)", "Beard (Very Long)", "Beard (Full)")
 	C.facial_hairstyle = dwarf_hair
-	C.update_hair()
+	C.update_hair(is_creating = TRUE)
 	// dwarves can see ghosts! and no putting them to rest with slabs, that would be too much
 	C.AddComponent(/datum/component/spookable)
 
