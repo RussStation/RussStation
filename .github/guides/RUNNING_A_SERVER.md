@@ -8,8 +8,8 @@ Double-click `BUILD.bat` in the root directory of the source code. This'll take
 a little while, and if everything's done right you'll get a message like this:
 
 ```
-saving tgstation.dmb (DEBUG mode)
-tgstation.dmb - 0 errors, 0 warnings
+saving RussStation.dmb (DEBUG mode)
+RussStation.dmb - 0 errors, 0 warnings
 ```
 
 If you see any errors or warnings, something has gone wrong - possibly a corrupt
@@ -43,7 +43,7 @@ and install it themselves. Directions can be found at the [rust-g
 repo](https://github.com/tgstation/rust-g).
 
 Finally, to start the server, run Dream Daemon and enter the path to your
-compiled tgstation.dmb file. Make sure to set the port to the one you
+compiled RussStation.dmb file. Make sure to set the port to the one you
 specified in the config.txt, and set the Security box to 'Safe'. Then press GO
 and the server should start up and be ready to join. It is also recommended that
 you set up the SQL backend (see below).
@@ -68,11 +68,11 @@ https://github.com/tgstation/tgstation-server
 If you decide to go this route, here are /tg/ specific details on hosting with TGS.
 
 - We have two directories which should be setup in the instance's `Configuration/GameStaticFiles` directory:
-	- `config` should be where you place your production configuration. Overwrites the default contents of the repo's [config](../config) directory.
+	- `config` should be where you place your production configuration. Overwrites the default contents of the repo's [config](../../config) directory.
 	- `data` should be initially created as an empty directory. The game stores persistent data here.
-- You should incorporate our [custom build scripts for TGS4](../tools/tgs4_scripts) in the instance's `Configuration/EventScripts` directory. These handle including TGUI in the build and setting up rust-g on Linux.
+- You should incorporate our [custom build scripts for TGS4](../../tools/tgs4_scripts) in the instance's `Configuration/EventScripts` directory. These handle including TGUI in the build and setting up rust-g on Linux.
 - Deployment security level must be set to `Trusted` or it will likely fail due to our native library usage.
-- We highly recommend using the BYOND version specified in [dependencies.sh](../dependencies.sh) to avoid potential unrecorded issues.
+- We highly recommend using the BYOND version specified in [dependencies.sh](../../dependencies.sh) to avoid potential unrecorded issues.
 
 ## SQL SETUP
 
