@@ -85,7 +85,7 @@
 	inherent_traits = list(
 		TRAIT_CAN_STRIP,
 		TRAIT_VIRUSIMMUNE, // lavaland has miasma
-		// TRAIT_LITERATE,  // you don't need to read or write to mine!
+		TRAIT_LITERATE,  // Required to be able to read the notes and books for crafting
 		// TRAIT_CHUNKYFINGERS, // Might add to prevent using guns etc.
 		// TRAIT_DISCOORDINATED_TOOL_USER // could be added (prevents advanced tool usage)
 	)
