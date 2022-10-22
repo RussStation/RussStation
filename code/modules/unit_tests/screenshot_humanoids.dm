@@ -43,7 +43,7 @@
 	test_screenshot("[/datum/species/moth]", get_flat_icon_for_all_directions(moth))
 
 	// The rest of the species
-	for (var/datum/species/species_type as anything in subtypesof(/datum/species) - /datum/species/moth - /datum/species/lizard - /datum/species/skaven - /datum/species/dwarf) // honk -- remove our species defined above
+	for (var/datum/species/species_type as anything in subtypesof(/datum/species) - /datum/species/moth - /datum/species/lizard - /datum/species/skaven - /datum/species/dwarf - /datum/species/dwarf/lavaland) // honk -- remove our species defined above
 		test_screenshot("[species_type]", get_flat_icon_for_all_directions(make_dummy(species_type, /datum/outfit/job/assistant/consistent)))
 
 /datum/unit_test/screenshot_humanoids/proc/get_flat_icon_for_all_directions(atom/thing)

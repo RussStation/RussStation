@@ -7,7 +7,7 @@
 	density = TRUE
 	anchored = TRUE
 	move_resist = MOVE_FORCE_NORMAL
-	mob_species = /datum/species/dwarf
+	mob_species = /datum/species/dwarf/lavaland
 	outfit = /datum/outfit/dorf
 	you_are_text = "You are a dwarf."
 	flavour_text = "You have arrived. After a journey from the Mountainhomes into the forbidding wilderness beyond, \

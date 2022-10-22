@@ -1,13 +1,12 @@
 //this pleases armoks beard
 /datum/species/dwarf
 	name = "\improper Dwarf"
-	plural_form = "Dwarfs"
+	plural_form = "Dwarves"
 	id = SPECIES_DWARF
-	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH ,HAS_BONE)
+	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,HAS_FLESH,HAS_BONE)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
-		// TRAIT_VIRUSIMMUNE, // lavaland has miasma
 		TRAIT_LITERATE,
 	)
 	mutant_bodyparts = list("wings" = "None")
@@ -18,11 +17,13 @@
 	brutemod = 0.9
 	coldmod = 0.85
 	punchdamagehigh = 11 //fist fighting with dorfs is very dangerous
+	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	mutanteyes = /obj/item/organ/internal/eyes/night_vision
 	species_language_holder = /datum/language_holder/dwarf
 	disliked_food = GROSS | RAW | CLOTH | BUGS
 	liked_food = ALCOHOL
-	
+	examine_limb_id = SPECIES_DWARF
+
 /// Returns the species's scream sound. (human screams)
 /datum/species/dwarf/get_scream_sound(mob/living/carbon/human/human)
 	if(human.gender == MALE)
@@ -78,3 +79,17 @@
 	rock and stone and metal. They often have long \
 	beards and known to clash with elves.",
 	)
+
+/datum/species/dwarf/lavaland
+	id = SPECIES_DWARF_LAVA
+	inherent_traits = list(
+		TRAIT_CAN_STRIP,
+		TRAIT_VIRUSIMMUNE, // lavaland has miasma
+		TRAIT_LITERATE,  // Required to be able to read the notes and books for crafting
+		// TRAIT_CHUNKYFINGERS, // Might add to prevent using guns etc.
+		// TRAIT_DISCOORDINATED_TOOL_USER // could be added (prevents advanced tool usage)
+	)
+	species_language_holder = /datum/language_holder/dwarf/lavaland
+	// Lizard lungs (just to avoid needing no breath)
+	mutantlungs = /obj/item/organ/internal/lungs/ashwalker
+	examine_limb_id = SPECIES_DWARF

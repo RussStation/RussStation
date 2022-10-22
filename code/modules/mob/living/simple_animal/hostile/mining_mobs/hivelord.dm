@@ -215,7 +215,7 @@
 
 ///Create a legion at the location of a corpse. Exists so that legion subtypes can override it with their own type of legion.
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/proc/make_legion(mob/living/carbon/human/H)
-	if(HAS_TRAIT(H, TRAIT_DWARF) || isdwarf(H)) //dwarf legions aren't just fluff! //HONK - Added dwarfs to legion conversion
+	if(HAS_TRAIT(H, TRAIT_DWARF) || islavalanddwarf(H)) //dwarf legions aren't just fluff! //HONK - Added dwarfs to legion conversion
 		return new /mob/living/simple_animal/hostile/asteroid/hivelord/legion/dwarf(H.loc)
 	else
 		return new /mob/living/simple_animal/hostile/asteroid/hivelord/legion(H.loc)
