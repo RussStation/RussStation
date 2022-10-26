@@ -30,6 +30,20 @@
 	fishing_line_traits = FISHING_LINE_BOUNCY
 	line_color = "#99313f"
 
+/obj/item/fishing_line/sinew
+	name = "fishing sinew"
+	desc = "an all-natural fishing line made of stretched out sinew"
+	icon = 'icons/obj/fishing.dmi'
+	icon_state = "reel_sinew"
+	line_color = "#d1cca3"
+
+/datum/crafting_recipe/sinew_line
+	name = "Sinew Fishing Line Reel"
+	result = /obj/item/fishing_line/sinew
+	reqs = list(/obj/item/stack/sheet/sinew = 2)
+	time = 2 SECONDS
+	category = CAT_PRIMAL
+
 // Hooks
 
 /obj/item/fishing_hook

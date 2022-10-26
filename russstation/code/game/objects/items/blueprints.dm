@@ -7,8 +7,8 @@
 
 /obj/item/areaeditor/dwarf/attack_self(mob/user)
 	add_fingerprint(user)
-	// only dwarves can use them
-	if(!is_species(usr, /datum/species/dwarf))
+	// only lavaland dwarves can use them
+	if(!islavalanddwarf(usr))
 		to_chat(usr, span_warning("You can't seem to make sense of the dwarven property laws or their handwriting."))
 	else
 		// don't call ..() as it inserts information the dwarves won't know.

@@ -82,7 +82,7 @@
 /datum/species/skaven/get_species_lore()
 	return list(
 		"The Skaven have made homes and hovels underground on many planets, but poor recordkeeping and countless civil wars between numerous clans have lost their origin planet to time. What little records remain hint of a mysterious substance known as warpstone, but any accounts beyond being a source of great power have been chewed beyond recognition.",
-    	"Accustomed to depths far below most races would go, Skaven being among the surface dwellers are a relatively recent development. The clans united in an effort to seek the warpstone once more, so they might one day understand where they came from, and what drove their clans to such violence.",
+		"Accustomed to depths far below most races would go, Skaven being among the surface dwellers are a relatively recent development. The clans united in an effort to seek the warpstone once more, so they might one day understand where they came from, and what drove their clans to such violence.",
 	)
 
 /datum/species/skaven/create_pref_unique_perks()
@@ -102,7 +102,7 @@
 			SPECIES_PERK_ICON = "hand-holding-usd",
 			SPECIES_PERK_NAME = "Reduced Salary",
 			SPECIES_PERK_DESC = "Skaven are not held in high regard. Your salary will be \
-        		significantly less than other species.",
+				significantly less than other species.",
 		),
 	)
 

@@ -31,7 +31,7 @@
 	)
 
 /obj/item/book/granter/crafting_recipe/dwarf/attack_self(mob/user)
-	if(!is_species(user, /datum/species/dwarf))
+	if(!islavalanddwarf(user))
 		to_chat(user, span_warning("The book was written by a particularly inebriated dwarf and doesn't make any sense to you."))
 		return FALSE
 	return ..()

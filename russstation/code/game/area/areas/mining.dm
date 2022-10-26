@@ -8,6 +8,7 @@
 
 /area/badlands
 	name = "Badlands"
+	icon = 'icons/area/areas_station.dmi'
 	icon_state = "mining"
 	outdoors = TRUE
 	mood_bonus = -3
@@ -19,18 +20,21 @@
 	power_equip = FALSE
 	power_light = FALSE
 	requires_power = TRUE
+	forced_ambience = TRUE
 	ambience_index = AMBIENCE_CREEPY
 	sound_environment = SOUND_AREA_ASTEROID
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED | NO_ALERTS
 	min_ambience_cooldown = 70 SECONDS
 	max_ambience_cooldown = 220 SECONDS
-	base_lighting_color = COLOR_ORANGE
+	static_lighting = FALSE
+	base_lighting_alpha = 180
+	base_lighting_color = "#77aa44"
 
-/area/badlands/unexplored //monsters and ruins spawn here
+/area/badlands/unexplored // a tiny safety buffer for miners
 	icon_state = "unexplored"
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | NO_ALERTS
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | NO_ALERTS
 	map_generator = /datum/map_generator/cave_generator/badlands
 
-/area/badlands/unexplored/danger //megafauna will also spawn here
+/area/badlands/unexplored/danger
 	icon_state = "danger"
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED | NO_ALERTS
