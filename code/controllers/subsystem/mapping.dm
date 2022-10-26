@@ -176,6 +176,14 @@ SUBSYSTEM_DEF(mapping)
 		for (var/ice_z in ice_ruins_underground)
 			spawn_rivers(ice_z, 4, level_trait(ice_z, ZTRAIT_BASETURF), /area/icemoon/underground/unexplored/rivers)
 
+	// honk start - badlands ruins generation
+	var/list/badlands_ruins = levels_by_trait(ZTRAIT_BADLANDS_RUINS)
+	if (badlands_ruins.len)
+		seedRuins(badlands_ruins, CONFIG_GET(number/lavaland_budget), list(/area/badlands/unexplored), themed_ruins[ZTRAIT_BADLANDS_RUINS])
+		for (var/bad_z in badlands_ruins)
+			spawn_rivers(bad_z, 4, level_trait(bad_z, ZTRAIT_BASETURF), /area/badlands/unexplored)
+	// honk end
+
 	// Generate deep space ruins
 	var/list/space_ruins = levels_by_trait(ZTRAIT_SPACE_RUINS)
 	if (space_ruins.len)

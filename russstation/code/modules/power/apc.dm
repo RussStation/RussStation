@@ -34,18 +34,4 @@
 	// finally finish init now that cell_type is set
 	. = ..()
 
-/obj/machinery/power/apc/auto_cell/north //Pixel offsets get overwritten on New()
-	dir = NORTH
-	pixel_y = 23
-
-/obj/machinery/power/apc/auto_cell/south
-	dir = SOUTH
-	pixel_y = -23
-
-/obj/machinery/power/apc/auto_cell/east
-	dir = EAST
-	pixel_x = 24
-
-/obj/machinery/power/apc/auto_cell/west
-	dir = WEST
-	pixel_x = -25
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/auto_cell, APC_PIXEL_OFFSET)
