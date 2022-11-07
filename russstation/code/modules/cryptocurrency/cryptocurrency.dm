@@ -183,6 +183,7 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 
 	var/datum/gas_mixture/environment = loc.return_air()
 	var/dissipated_heat = internal_heat / dissipation_index
+	// efficient parts will magically remove extra heat
 	internal_heat -= dissipated_heat * efficiency
 	var/delta_temperature = dissipated_heat / environment.heat_capacity()
 	if(delta_temperature)
@@ -214,6 +215,7 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 		say(result)
 
 /obj/machinery/crypto_mining_rig/RefreshParts()
+	. = ..()
 	var/rating = 0
 	var/num_components = 0
 	// only count capacitors, lasers are for show
