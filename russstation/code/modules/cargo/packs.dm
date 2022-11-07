@@ -81,8 +81,8 @@
 
 /datum/supply_pack/engineering/crypto_mining
 	name = "Crypto Mining Crate"
-	desc = "INSERT cryptobro propaganda here"
-	cost = CARGO_CRATE_VALUE * 5 // haha good luck making that back
+	desc = "Keep Calm and HODL."
+	cost = CARGO_CRATE_VALUE * 5 // gotta buy in to make it big
 	contains = list(/obj/item/circuitboard/machine/crypto_mining_rig)
 	crate_name = "crypto mining crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical

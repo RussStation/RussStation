@@ -7,7 +7,7 @@
 	if(!GLOB.cryptocurrency)
 		return FALSE
 	// don't run event if no one is mining yet
-	if(GLOB.cryptocurrency.complexity < 5)
+	if(GLOB.cryptocurrency.complexity < 4)
 		return FALSE
 	return ..()
 
@@ -38,12 +38,12 @@
 	return reason
 
 /datum/round_event/crypto_market_crash/announce(fake)
-	priority_announce("Due to [reason()], the [GLOB.cryptocurrency.name] market has crashed! Cash out before it's too late!", "[GLOB.cryptocurrency.name] Speculative Investment Report")
+	priority_announce("Because of [reason()], the [GLOB.cryptocurrency.name] market has crashed! Cash out before it's too late!", "[GLOB.cryptocurrency.name] Speculative Investment Report")
 
 /datum/round_event/crypto_market_crash/start()
 	// crypto wallets don't exist so just tank the mining payout and reported value
-	GLOB.cryptocurrency.payout = GLOB.cryptocurrency.payout / 2
-	GLOB.cryptocurrency.exchange_rate = GLOB.cryptocurrency.exchange_rate / 2
+	var/dip = pick(list(1.5, 2, 2.5, 3))
+	GLOB.cryptocurrency.payout = GLOB.cryptocurrency.payout / dip
 
 // boost the market and tempt people to give a damn
 /datum/round_event_control/crypto_market_boom
@@ -51,7 +51,7 @@
 	typepath = /datum/round_event/crypto_market_crash/boom
 	// likely to happen and early availability so it gets growing
 	weight = 30
-	earliest_start = 10 MINUTES
+	earliest_start = 15 MINUTES
 
 /datum/round_event_control/crypto_market_boom/canSpawnEvent(players)
 	if(!GLOB.cryptocurrency)
@@ -62,12 +62,12 @@
 /datum/round_event/crypto_market_crash/boom
 
 /datum/round_event/crypto_market_crash/boom/announce(fake)
-	priority_announce("Due to [pick(reasons)], the [GLOB.cryptocurrency.name] market is booming! Dump your life savings into [GLOB.cryptocurrency.name]!", "[GLOB.cryptocurrency.name] Speculative Investment Report")
+	priority_announce("Because of [reason()], the [GLOB.cryptocurrency.name] market is booming! Dump your life savings into [GLOB.cryptocurrency.name]!", "[GLOB.cryptocurrency.name] Speculative Investment Report")
 
 /datum/round_event/crypto_market_crash/boom/start()
 	// crypto wallets don't exist so just boost the mining payout and reported value
-	GLOB.cryptocurrency.payout = GLOB.cryptocurrency.payout * 2
-	GLOB.cryptocurrency.exchange_rate = GLOB.cryptocurrency.exchange_rate * 2
+	var/stonks = pick(list(1.5, 2, 2.5, 3, 5))
+	GLOB.cryptocurrency.payout = GLOB.cryptocurrency.payout * stonks
 
 // make payouts harder if players are really taking advantage of crypto
 /datum/round_event_control/crypto_algorithm_change
@@ -75,13 +75,13 @@
 	typepath = /datum/round_event/crypto_algorithm_change
 	// likely to happen if spawn condition met
 	weight = 20
-	earliest_start = 40 MINUTES
+	earliest_start = 45 MINUTES
 
 /datum/round_event_control/crypto_algorithm_change/canSpawnEvent(players)
 	if(!GLOB.cryptocurrency)
 		return FALSE
 	// crypto hasn't boomed enough for the invisible hand of the market to step in
-	if(GLOB.cryptocurrency.payout < 2 * initial(GLOB.cryptocurrency.payout) || GLOB.cryptocurrency.complexity < 4 * initial(GLOB.cryptocurrency.complexity))
+	if(GLOB.cryptocurrency.payout < 2 * initial(GLOB.cryptocurrency.payout) || GLOB.cryptocurrency.complexity < 4)
 		return FALSE
 	return ..()
 
@@ -89,7 +89,7 @@
 
 /datum/round_event/crypto_algorithm_change/announce(fake)
 	var/nerd_name = "[pick(list("Satoshi", "Kiryu", "Doraemon", "Greg"))] [pick(list("Naka", "Baka", "Shiba", "Tako"))][pick(list("moto", "mura", "nashi", "bana"))]"
-	priority_announce("Due to aggressive mining, the proof-of-work algorithm for [GLOB.cryptocurrency.name] is being changed to be more difficult.", "[GLOB.cryptocurrency.name] Creator [nerd_name]")
+	priority_announce("Because of aggressive mining, the proof-of-work algorithm for [GLOB.cryptocurrency.name] is being changed to be more difficult.", "[GLOB.cryptocurrency.name] Creator [nerd_name]")
 
 /datum/round_event/crypto_algorithm_change/start()
 	GLOB.cryptocurrency.complexity = GLOB.cryptocurrency.complexity * 3

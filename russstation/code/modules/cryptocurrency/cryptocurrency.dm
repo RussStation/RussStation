@@ -8,11 +8,11 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 	var/complexity = 1
 	// complexity growth factor, multiplicative
 	var/complexity_growth = 1.05
-	// how much power is required for one machine to perform one unit of work
-	var/power_usage = 10000
+	// how much power is required to compute a hash and get paid
+	var/power_usage = 30000
 	// how much is payed out for an individual mining operation. scales inversely with complexity
-	var/payout = 2000
-	// how much of a unit of work has been performed
+	var/payout = 1000
+	// how much energy has been spent calculating the next payout
 	var/progress = 0
 	// how many NT credits a single coin of this currency is worth (purely for flavor)
 	var/exchange_rate = 1
@@ -31,7 +31,7 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 		"BananaBucks",
 		))
 	// either a fraction or a large number
-	exchange_rate = pick(list(rand(), rand(10, 1000)))
+	exchange_rate = pick(list(rand(), rand(10, 100)))
 
 /datum/cryptocurrency/proc/mine(power)
 	// *obviously* don't actually do crypto hash calculations, the game lags enough as is
@@ -39,13 +39,15 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 	if(progress >= power_usage * complexity)
 		progress = 0
 		complexity *= complexity_growth
+		// what if we could pay out to other accounts?
 		var/datum/bank_account/the_dump = SSeconomy.get_dep_account(ACCOUNT_CAR)
 		var/gains = get_payout()
-		the_dump.adjust_money(gains)
+		the_dump.adjust_money(ROUND_UP(gains))
 		// funny payout message for machine to shout
 		return "Successfully computed a proof-of-work hash on the blockchain! [gains * exchange_rate] [name] payed to the [ACCOUNT_CAR_NAME] account."
 
 /datum/cryptocurrency/proc/get_payout()
+	// payouts slowly diminish
 	return payout / complexity
 
 /obj/item/circuitboard/machine/crypto_mining_rig
@@ -69,7 +71,7 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 	base_icon_state = "mining_rig"
 	desc = "A computer purpose-built for cryptocurrency mining."
 	density = TRUE
-	//active_power_usage = 200
+	active_power_usage = 1500 // drain that APC
 	circuit = /obj/item/circuitboard/machine/crypto_mining_rig
 	// exactly what it says
 	var/on = FALSE
@@ -78,55 +80,41 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 	// literally a space heater
 	var/internal_heat = 0
 	// when to start on fire
-	var/static/combustion_heat = 100000
+	var/static/combustion_heat = 50000
 	// how much heat do we release into the environment
-	var/static/dissipation_index = 10
-	// our connection to the powernet, were you expecting to mine off wireless electricity?
-	var/obj/structure/cable/power_cable
+	var/static/dissipation_index = 12
 	// component rating. cool machines have upgradeable components
 	var/efficiency = 1
-	// how much power to drain from the wire (manual active_power_usage)
-	var/static/wire_power_usage = 500
-	// how much power to drain from APCs when the powernet lacks sufficient power (and emagged)
-	var/static/apc_drain = 10
 
 /obj/machinery/crypto_mining_rig/Initialize(mapload)
 	. = ..()
 	currency = GLOB.cryptocurrency
-	if(!power_cable)
-		var/turf/local_turf = loc
-		if(isturf(local_turf) && local_turf.underfloor_accessibility >= UNDERFLOOR_INTERACTABLE)
-			power_cable = locate() in local_turf
 
 /obj/machinery/crypto_mining_rig/examine(mob/user)
 	. = ..()
 	if(anchored)
-		. += "\The [src] is bolted to the floor and has [power_cable ? "a" : "no"] power cable attached."
-		. += "\The [src] is [on ? "on" : "off"]."
-	if((in_range(user, src) || isobserver(user)) && internal_heat > combustion_heat * 0.5)
+		. += "\The [src] is bolted to the floor and is [on ? "on" : "off"]."
+	if((in_range(user, src) || isobserver(user)) && internal_heat > combustion_heat)
 		. += span_danger("The air is warping above it. It must be very hot.")
 
 /obj/machinery/crypto_mining_rig/Destroy()
 	SSair.stop_processing_machine(src)
 	STOP_PROCESSING(SSmachines, src)
+	// release stored heat (but like a reasonable portion)
+	var/datum/gas_mixture/environment = loc.return_air()
+	environment.temperature += internal_heat / 500
+	air_update_turf(FALSE, FALSE)
 	return ..()
 
 /obj/machinery/crypto_mining_rig/update_icon_state()
 	. = ..()
-	icon_state = "[base_icon_state]_[on ? internal_heat > combustion_heat * 0.5 ? "hot" : "on" : "off"]"
+	// das blinkenlights
+	icon_state = "[base_icon_state]_[on ? internal_heat > combustion_heat ? "hot" : "on" : "off"]"
 
 /obj/machinery/crypto_mining_rig/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
-	if(!power_cable)
-		var/turf/local_turf = loc
-		if(isturf(local_turf) && local_turf.underfloor_accessibility >= UNDERFLOOR_INTERACTABLE)
-			power_cable = locate() in local_turf
-		// still no cable?
-		if(!power_cable)
-			to_chat(user, span_warning("\The [src] must be placed over an exposed, powered cable node!"))
-			return
 	on = !on
 	user.visible_message(span_notice("[usr] switches [on ? "on" : "off"] \the [src]."), span_notice("You switch [on ? "on" : "off"] \the [src]."), span_hear("You hear a click."))
 	update_appearance()
@@ -135,6 +123,17 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 	else
 		STOP_PROCESSING(SSmachines, src)
 
+/obj/machinery/crypto_mining_rig/attackby(obj/item/W, mob/user, params)
+	if(istype(W, /obj/item/analyzer))
+		// get temperature reading vaguely indicating how hot the expensive space heater is
+		var/datum/gas_mixture/environment = loc.return_air()
+		// stored units of energy doesn't scale right with expected kelvins for a hot machine,
+		// but powersink worked this way so just shrink the displayed number
+		var/sane_temp = environment.temperature + internal_heat / 300
+		to_chat(user, span_notice("The temperature of \the [src] reads [sane_temp]K. [internal_heat > combustion_heat ? "Dayum." : ""]"))
+	else
+		return ..()
+
 /obj/machinery/crypto_mining_rig/crowbar_act(mob/living/user, obj/item/tool)
 	if(default_deconstruction_crowbar(tool))
 		return TRUE
@@ -142,26 +141,17 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 /obj/machinery/crypto_mining_rig/wrench_act(mob/living/user, obj/item/tool)
 	. = TRUE
 	if(!anchored)
-		var/turf/local_turf = loc
-		if(isturf(local_turf) && local_turf.underfloor_accessibility >= UNDERFLOOR_INTERACTABLE)
-			power_cable = locate() in local_turf
-			if(!power_cable)
-				to_chat(user, span_warning("\The [src] must be placed over an exposed, powered cable node!"))
-				return FALSE
-			else if(default_unfasten_wrench(user, tool))
-				user.visible_message( \
-					"[user] attaches \the [src] to the cable.", \
-					span_notice("You bolt \the [src] into the floor and connect it to the cable."),
-					span_hear("You hear some wires being connected to something."))
-		else
-			to_chat(user, span_warning("\The [src] must be placed over an exposed, powered cable node!"))
-			return FALSE
+		if(default_unfasten_wrench(user, tool))
+			user.visible_message( \
+				"[user] attaches \the [src] to the floor.", \
+				span_notice("You bolt \the [src] into the floor."),
+				span_hear("You hear a something stupid being wrenched."))
 	else if(default_unfasten_wrench(user, tool))
 		on = FALSE
 		user.visible_message( \
-			"[user] detaches \the [src] from the cable.", \
-			span_notice("You unbolt \the [src] from the floor and detach it from the cable."),
-			span_hear("You hear some wires being disconnected from something."))
+			"[user] detaches \the [src] from the floor.", \
+			span_notice("You unbolt \the [src] from the floor."),
+			span_hear("You hear something stupid being wrenched."))
 		update_appearance()
 	return TOOL_ACT_TOOLTYPE_SUCCESS
 
@@ -172,67 +162,61 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 	playsound(src, SFX_SPARKS, 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	to_chat(user, span_warning("You short out the power controller."))
 
+/obj/machinery/crypto_mining_rig/emp_act(severity)
+	. = ..()
+
+	if(machine_stat & (BROKEN|NOPOWER) || . & EMP_PROTECT_CONTENTS)
+		return
+
+	if(on)
+		// pump up the heat
+		internal_heat += active_power_usage * severity
+		// increase power use on EMP; could be used strategically?
+		active_power_usage += severity * 50
+
 // remove internal heat and shares it with the atmosphere
 /obj/machinery/crypto_mining_rig/process_atmos()
 	// no more heat to give? take a break
-	if(internal_heat <= 0)
+	if(internal_heat <= 1)
 		internal_heat = 0
 		return PROCESS_KILL
 
-	var/turf/local_turf = loc
-	if(!istype(local_turf))
-		// where is it?? space heaters have this check for some reason
-		return
-
-	var/datum/gas_mixture/environment = local_turf.return_air()
-	var/dissipated_heat = internal_heat / dissipation_index * efficiency
-	internal_heat -= dissipated_heat
+	var/datum/gas_mixture/environment = loc.return_air()
+	var/dissipated_heat = internal_heat / dissipation_index
+	internal_heat -= dissipated_heat * efficiency
 	var/delta_temperature = dissipated_heat / environment.heat_capacity()
 	if(delta_temperature)
 		environment.temperature += delta_temperature
 		air_update_turf(FALSE, FALSE)
 
 	// combust when running really hot (cooldown?)
-	if(internal_heat >= combustion_heat)
-		local_turf.hotspot_expose(1000,100) // yoinked from igniters, are these good values?
+	if(internal_heat >= combustion_heat && prob(1))
+		do_sparks(1, FALSE, src)
 	update_appearance()
 
 // drain power from the connected powernet and get money
-/obj/machinery/crypto_mining_rig/process()
-	if(!power_cable || !on || machine_stat & (BROKEN))
+/obj/machinery/crypto_mining_rig/process(delta_time)
+	if(!on || machine_stat & (BROKEN|NOPOWER))
 		on = FALSE
 		update_appearance()
 		return PROCESS_KILL
 
-	// consume power on the wire
-	var/avail = power_cable.newavail()
-	power_cable.add_load(wire_power_usage)
-	var/drained = wire_power_usage
-	if(drained > avail)
-		drained = avail
-		if(obj_flags & EMAGGED)
-			// if tried to drain more than available on powernet, now look for APCs and drain their cells
-			for(var/obj/machinery/power/terminal/terminal in power_cable.powernet.nodes)
-				if(istype(terminal.master, /obj/machinery/power/apc))
-					var/obj/machinery/power/apc/apc = terminal.master
-					if(wire_power_usage > drained && apc.operating && apc.cell)
-						apc.cell.charge = max(0, apc.cell.charge - apc_drain)
-						drained += apc_drain
-						// set fully charged cell to charging mode (these states are already undefined so here have some magic numbers)
-						if(apc.charging == 2)
-							apc.charging = 1
+	// consume power, from anywhere on the wire if emagged
+	var/drained = use_power_from_net(active_power_usage * delta_time, take_any = obj_flags & EMAGGED)
 	// reactivate air processing if it was off
 	if(internal_heat == 0 && drained > 0)
 		SSair.start_processing_machine(src)
 	// heat decreases with efficiency while mining power increases
 	internal_heat += drained / efficiency
 	var/result = currency.mine(drained * efficiency)
+	// announce result when finishing a mining unit
 	if(result)
 		say(result)
 
 /obj/machinery/crypto_mining_rig/RefreshParts()
 	var/rating = 0
 	var/num_components = 0
+	// only count capacitors, lasers are for show
 	for(var/obj/item/stock_parts/capacitor/cappy in component_parts)
 		rating += cappy.rating
 		num_components += 1
