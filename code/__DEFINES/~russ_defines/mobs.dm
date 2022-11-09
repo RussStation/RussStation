@@ -4,3 +4,4 @@
 #define SPECIES_DWARF_LAVA "lavadwarf"
 #define SPECIES_KITSUNE "kitsune"
 #define SPECIES_SKAVEN "skaven"
+#define SPECIES_KOBOLD "kobold"
