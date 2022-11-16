@@ -18,8 +18,8 @@
 
 //Kobold ===============
 /obj/item/food/meat/slab/human/mutant/kobold
-	icon = '' //todo
-	icon_state = "koboldmeat" //todo
+	icon = 'russstation/icons/obj/food/food.dmi'
+	icon_state = "koboldmeat"
 	desc = "Meat from a skulking kobold."
 	tastes = list("gamey meat" = 4, "scales" = 1, "cave dirt" = 1)
 	foodtypes = MEAT | RAW
@@ -27,9 +27,9 @@
 
 /obj/item/food/meat/steak/plain/human/kobold
 	name = "kobold steak"
-	icon = '' //todo
-	icon_state = "koboldsteak" //todo
-	tastes = list("chewy meat" = 3, "scales" = 1)
+	icon = 'russstation/icons/obj/food/food.dmi'
+	icon_state = "koboldsteak"
+	tastes = list("veal" = 1, "scales" = 1, "meat" = 1, "dust flakes" = 1)
 	foodtypes = MEAT
 
 /obj/item/food/meat/slab/human/mutant/kobold/MakeGrillable()
