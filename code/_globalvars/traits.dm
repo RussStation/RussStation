@@ -179,6 +179,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_GAMER" = TRAIT_GAMER,
 		"TRAIT_ALERT_GHOSTS_ON_DEATH" = TRAIT_ALERT_GHOSTS_ON_DEATH,
 		"TRAIT_NATURALTACKLER" = TRAIT_NATURALTACKLER, // honk -- add natural tackler
+		"TRAIT_LESSER_DWARFISM" = TRAIT_LESSER_DWARFISM // HONK -- add lesser dwarfism
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS,
