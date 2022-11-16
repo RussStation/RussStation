@@ -3,6 +3,7 @@
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
+	icon_state = "skaven_head"
 	limb_id = SPECIES_SKAVEN
 	uses_mutcolor = TRUE
 	is_dimorphic = FALSE
@@ -12,6 +13,7 @@
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
+	icon_state = "skaven_chest"
 	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
 	is_dimorphic = FALSE
@@ -21,6 +23,7 @@
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
+	icon_state = "skaven_l_arm"
 	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
 
@@ -29,6 +32,7 @@
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
+	icon_state = "skaven_r_arm"
 	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
 
@@ -37,6 +41,7 @@
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
+	icon_state = "skaven_l_leg"
 	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
 
@@ -45,5 +50,6 @@
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
+	icon_state = "skaven_r_leg"
 	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
