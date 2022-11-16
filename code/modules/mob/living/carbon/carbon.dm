@@ -186,9 +186,9 @@
 		var/power_throw = 0
 		if(HAS_TRAIT(src, TRAIT_HULK))
 			power_throw++
-		if(HAS_TRAIT(src, TRAIT_DWARF))
+		if(HAS_TRAIT(src, TRAIT_DWARF) || HAS_TRAIT(src, TRAIT_LESSER_DWARFISM)) //HONK - Added lesser dwarf trait
 			power_throw--
-		if(HAS_TRAIT(thrown_thing, TRAIT_DWARF))
+		if(HAS_TRAIT(thrown_thing, TRAIT_DWARF) || HAS_TRAIT(thrown_thing, TRAIT_LESSER_DWARFISM)) //HONK - Added lesser dwarf trait
 			power_throw++
 		if(neckgrab_throw)
 			power_throw++
