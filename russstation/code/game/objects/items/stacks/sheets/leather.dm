@@ -11,7 +11,7 @@
 	desc = "Covered in a thick layer of dust and grime."
 	singular_name = "kobold skin piece"
 	icon = 'russstation/icons/obj/stack_objects.dmi'
-	icon_state = "sheet-kobold" //todo
+	icon_state = "sheet-kobold"
 	merge_type = /obj/item/stack/sheet/animalhide/kobold
 
 /obj/item/stack/sheet/animalhide/kitsune
