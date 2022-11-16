@@ -1172,4 +1172,13 @@
 
 /mob/living/carbon/human/species/kitsune
 	race = /datum/species/human/kitsune
+
+/mob/living/carbon/human/species/kobold
+	race = /datum/species/kobold
+
+/mob/living/carbon/human/species/dwarf/mountain
+	race = /datum/species/dwarf/mountain
+
+/mob/living/carbon/human/species/dwarf/chaos
+	race = /datum/species/dwarf/chaos
 // honk end
