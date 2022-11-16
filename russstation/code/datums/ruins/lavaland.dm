@@ -9,10 +9,18 @@
 
 //always spawn dwarfs
 /datum/map_template/ruin/lavaland/dwarf
-	name = "Dorf Colony"
+	name = "Dwarf Colony"
 	id = "dorf-man"
 	description = "A new chapter of dwarven history starts here."
 	suffix = "lavaland_surface_dwarf.dmm"
 	always_place = TRUE
 	cost = 10
+	allow_duplicates = FALSE
+
+/datum/map_template/ruin/lavaland/chaos_dwarf
+	name = "Chaos Dwarf Tribe"
+	id = "chaos-dwarfs"
+	description = "A handful of Dwarf's dug too deep..."
+	suffix = "lavaland_surface_chaos_dwarf.dmm"
+	always_place = TRUE
 	allow_duplicates = FALSE
