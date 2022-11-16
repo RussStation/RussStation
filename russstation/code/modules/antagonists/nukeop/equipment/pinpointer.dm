@@ -33,6 +33,8 @@
 
 /obj/item/pinpointer/nuke/pinpointer_pinpointer/scan_for_target()
 	for(var/obj/item/pinpointer/nuke/pinpointer/P in GLOB.pinpointer_list)
-		target = P
-		break
+		// but wait, i'm a pinpointer too!
+		if(target != src)
+			target = P
+			break
 	..()
