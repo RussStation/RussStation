@@ -5,3 +5,5 @@
 #define SPECIES_KITSUNE "kitsune"
 #define SPECIES_SKAVEN "skaven"
 #define SPECIES_KOBOLD "kobold"
+#define SPECIES_DWARF_MOUNTAIN "mountaindwarf"
+#define SPECIES_DWARF_CHAOS "chaosdwarf"
