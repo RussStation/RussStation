@@ -5,6 +5,22 @@
 	back = /obj/item/storage/backpack/satchel/leather
 	gloves = /obj/item/clothing/gloves/dwarf
 
+/datum/outfit/dorf/mountain
+	name = "Moutain Dwarf Standard"
+	suit = /obj/item/clothing/suit/hooded/wintercoat/miner/dwarf
+	uniform = /obj/item/clothing/under/dwarf
+	shoes = /obj/item/clothing/shoes/dwarf
+	back = /obj/item/storage/backpack/satchel/leather
+	gloves = /obj/item/clothing/gloves/dwarf
+
+/datum/outfit/dorf/chaos
+	name = "Chaos Dwarf Uniform"
+	suit = /obj/item/clothing/suit/hooded/cultrobes/alt
+	uniform = /obj/item/clothing/under/color/black
+	shoes = /obj/item/clothing/shoes/cult/alt
+	back = /obj/item/storage/backpack/satchel/leather
+	gloves = null
+
 //Dwarf-unique clothes
 /obj/item/clothing/under/dwarf
 	name = "dwarven tunic"

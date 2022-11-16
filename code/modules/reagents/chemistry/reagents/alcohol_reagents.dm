@@ -54,6 +54,11 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			var/obj/item/organ/internal/liver/liver = drinker.getorganslot(ORGAN_SLOT_LIVER)
 			if (istype(liver))
 				liver.applyOrganDamage(((max(sqrt(volume) * (boozepwr ** ALCOHOL_EXPONENT) * liver.alcohol_tolerance * delta_time, 0))/150))
+	//HONK START -- Dwarf healing
+	if(isdwarftype(drinker))
+		drinker.adjustBruteLoss(-0.9 * REM * delta_time)
+		drinker.adjustFireLoss(-0.9 * REM * delta_time)
+	//HONK END
 	return ..()
 
 /datum/reagent/consumable/ethanol/expose_obj(obj/exposed_obj, reac_volume)
@@ -429,7 +434,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /datum/reagent/consumable/ethanol/amaretto
 	name = "Amaretto"
 	description = "A gentle drink that carries a sweet aroma."
-	color = "#E17600" 
+	color = "#E17600"
 	boozepwr = 25
 	taste_description = "fruity and nutty sweetness"
 	glass_icon_state = "amarettoglass"
@@ -843,20 +848,18 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_name = "The Manly Dorf"
 	glass_desc = "A manly concoction made from Ale and Beer. Intended for true men only."
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	var/dorf_mode
 
 /datum/reagent/consumable/ethanol/manly_dorf/on_mob_metabolize(mob/living/drinker)
 	if(ishuman(drinker))
 		var/mob/living/carbon/human/potential_dwarf = drinker
-		if(HAS_TRAIT(potential_dwarf, TRAIT_DWARF))
+		if(HAS_TRAIT(potential_dwarf, TRAIT_DWARF) || HAS_TRAIT(potential_dwarf, TRAIT_LESSER_DWARFISM)) //HONK - Added Lesser Dwarf
 			to_chat(potential_dwarf, span_notice("Now THAT is MANLY!"))
 			boozepwr = 50 // will still smash but not as much.
-			dorf_mode = TRUE
 
 /datum/reagent/consumable/ethanol/manly_dorf/on_mob_life(mob/living/carbon/dwarf, delta_time, times_fired)
-	if(dorf_mode)
-		dwarf.adjustBruteLoss(-2 * REM * delta_time)
-		dwarf.adjustFireLoss(-2 * REM * delta_time)
+	if(isdwarftype(dwarf))
+		dwarf.adjustBruteLoss(-1.40 * REM * delta_time)
+		dwarf.adjustFireLoss(-1.40 * REM * delta_time)
 	return ..()
 
 /datum/reagent/consumable/ethanol/longislandicedtea
@@ -2569,7 +2572,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_desc = "A classic from old Italy and enjoyed by gangsters, pray the orange peel doesnt end up in your mouth."
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	glass_price = DRINK_PRICE_MEDIUM
-			
+
 /datum/reagent/consumable/ethanol/godmother
 	name = "Godmother"
 	description = "A twist on a classic, liked more by mature women."
@@ -2581,7 +2584,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_name = "Godmother"
 	glass_desc = "A lovely fresh smelling cocktail, a true Sicilian delight."
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	
+
 /datum/reagent/consumable/ethanol/kortara
 	name = "Kortara"
 	description = "A sweet, milky nut-based drink enjoyed on Tizira. Frequently mixed with fruit juices and cocoa for extra refreshment."

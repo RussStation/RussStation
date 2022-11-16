@@ -13,7 +13,6 @@
 	mutanttongue = /obj/item/organ/internal/tongue/skaven
 	payday_modifier = 0.25 //Might as well be a slave
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
-	// TODO: possibly change cookie to something else
 	species_cookie = /obj/item/food/meat/slab
 	attack_verb = "claw"
 	attack_effect = ATTACK_EFFECT_CLAW
@@ -22,7 +21,7 @@
 	meat = /obj/item/food/meat/slab/human/mutant/skaven
 	skinned_type = /obj/item/stack/sheet/animalhide/skaven
 	disliked_food = NONE
-	liked_food = GROSS | MEAT
+	liked_food = GROSS | MEAT | BUGS | RAW
 	outfit_important_for_life = /datum/outfit/skaven
 	species_language_holder = /datum/language_holder/skaven
 	sexes = FALSE //ever heard of female skaven? didnt think so
@@ -34,6 +33,28 @@
 		BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/skaven,
 		BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/skaven,
 		BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/skaven,
+	)
+
+/// Returns the species's scream sound. (human screams)
+/datum/species/skaven/get_scream_sound(mob/living/carbon/human/human)
+	if(human.gender == MALE)
+		if(prob(1))
+			return 'sound/voice/human/wilhelm_scream.ogg'
+		return pick(
+			'sound/voice/human/malescream_1.ogg',
+			'sound/voice/human/malescream_2.ogg',
+			'sound/voice/human/malescream_3.ogg',
+			'sound/voice/human/malescream_4.ogg',
+			'sound/voice/human/malescream_5.ogg',
+			'sound/voice/human/malescream_6.ogg',
+		)
+
+	return pick(
+		'sound/voice/human/femalescream_1.ogg',
+		'sound/voice/human/femalescream_2.ogg',
+		'sound/voice/human/femalescream_3.ogg',
+		'sound/voice/human/femalescream_4.ogg',
+		'sound/voice/human/femalescream_5.ogg',
 	)
 
 /datum/species/skaven/get_features()
@@ -54,6 +75,11 @@
 	return randname
 
 /datum/species/skaven/on_species_gain(mob/living/carbon/carbon_being, datum/species/old_species, pref_load)
+
+	//Adds skaven custom speech bubble
+	// carbon_being.bubble_file = 'russstation/icons/mob/talk.dmi'
+	// carbon_being.bubble_icon = "skaven"
+
 	if(ishuman(carbon_being))
 		var/mob/living/carbon/human/target_human = carbon_being
 		if(!pref_load)
