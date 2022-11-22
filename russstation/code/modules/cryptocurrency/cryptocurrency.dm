@@ -168,3 +168,29 @@
 	// efficiency based on average component rating to keep scaling down
 	// balanced so tier 3 is "100%" efficiency
 	efficiency = rating / num_components / 3
+
+// NTOS program for crypto stuff
+/datum/computer_file/program/cryptocurrency
+	filename = "cryptoass"
+	filedesc = "Crypto Assistant"
+	category = PROGRAM_CATEGORY_MISC
+	program_icon_state = "generic"
+	extended_desc = "This program monitors cryptocurrency markets and mining activity."
+	size = 2
+	requires_ntnet = TRUE
+	available_on_ntnet = TRUE
+	tgui_id = "NtosCryptocurrency"
+	program_icon = "coins"
+
+/datum/computer_file/program/cryptocurrency/ui_data()
+	var/list/data = get_header_data()
+
+	data["coin_name"] = SScryptocurrency.coin_name
+	data["exchange_rate"] = SScryptocurrency.exchange_rate
+	data["total_mined"] = SScryptocurrency.total_mined
+	data["total_payout"] = SScryptocurrency.total_payout
+	data["event_chance"] = SScryptocurrency.event_chance
+	data["mining_history"] = SScryptocurrency.mining_history
+	data["payout_history"] = SScryptocurrency.payout_history
+
+	return data

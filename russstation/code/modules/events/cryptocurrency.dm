@@ -1,7 +1,11 @@
+// crypto events all have 0 occurrences because they are not spawned by the normal event system,
+// but implementing them here lets admins fire them for memes. see SScryptocurrency
+
 // mess with crypto mining and annoy everyone who doesn't care
 /datum/round_event_control/crypto_market_crash
 	name = "Market Crash (Crypto)"
 	typepath = /datum/round_event/crypto_market_crash
+	max_occurrences = 0
 
 /datum/round_event_control/crypto_market_crash/canSpawnEvent(players)
 	// don't run event if no one is mining yet
@@ -50,6 +54,7 @@
 	// likely to happen and early availability so it gets growing
 	weight = 30
 	earliest_start = 15 MINUTES
+	max_occurrences = 0
 
 // subtype crash event to share reasons and timer
 /datum/round_event/crypto_market_crash/boom
@@ -69,6 +74,7 @@
 	// likely to happen if spawn condition met
 	weight = 20
 	earliest_start = 45 MINUTES
+	max_occurrences = 0
 
 /datum/round_event_control/crypto_algorithm_change/canSpawnEvent(players)
 	if(!SScryptocurrency)
