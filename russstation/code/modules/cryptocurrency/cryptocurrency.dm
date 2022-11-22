@@ -1,54 +1,3 @@
-GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
-
-// tracks diminishing returns for "computing" more proof-of-work hashes
-/datum/cryptocurrency
-	// funny name for alerts?
-	var/name = "SpaceCoin"
-	// how much work is required for mining more money. scales power and time
-	var/complexity = 1
-	// complexity growth factor, multiplicative
-	var/complexity_growth = 1.05
-	// how much power is required to compute a hash and get paid
-	var/power_usage = 30000
-	// how much is payed out for an individual mining operation. scales inversely with complexity
-	var/payout = 1000
-	// how much energy has been spent calculating the next payout
-	var/progress = 0
-	// how many NT credits a single coin of this currency is worth (purely for flavor)
-	var/exchange_rate = 1
-
-/datum/cryptocurrency/New()
-	. = ..()
-	// coin of the week
-	name = pick(list(
-		"SpaceCoin",
-		"StarBucks", // this is clearly legally distinct
-		"ClownCoin",
-		"MimeMoney",
-		"FunnyMoney",
-		"RussMoney", // haha i referenced the streamer
-		"SyndiCoin",
-		"BananaBucks",
-		))
-	// either a fraction or a large number
-	exchange_rate = pick(list(rand(), rand(10, 100)))
-
-/datum/cryptocurrency/proc/mine(power)
-	// *obviously* don't actually do crypto hash calculations, the game lags enough as is
-	progress += power
-	if(progress >= power_usage * complexity)
-		progress = 0
-		complexity *= complexity_growth
-		// what if we could pay out to other accounts?
-		var/datum/bank_account/the_dump = SSeconomy.get_dep_account(ACCOUNT_CAR)
-		var/gains = get_payout()
-		the_dump.adjust_money(ROUND_UP(gains))
-		// funny payout message for machine to shout
-		return "Successfully computed a proof-of-work hash on the blockchain! [gains * exchange_rate] [name] payed to the [ACCOUNT_CAR_NAME] account."
-
-/datum/cryptocurrency/proc/get_payout()
-	// payouts slowly diminish
-	return payout / complexity
 
 /obj/item/circuitboard/machine/crypto_mining_rig
 	name = "Crypto Mining Rig (Machine Board)"
@@ -75,8 +24,6 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 	circuit = /obj/item/circuitboard/machine/crypto_mining_rig
 	// exactly what it says
 	var/on = FALSE
-	// the currency we're mining
-	var/datum/cryptocurrency/currency
 	// literally a space heater
 	var/internal_heat = 0
 	// when to start on fire
@@ -85,10 +32,6 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 	var/static/dissipation_index = 12
 	// component rating. cool machines have upgradeable components
 	var/efficiency = 1
-
-/obj/machinery/crypto_mining_rig/Initialize(mapload)
-	. = ..()
-	currency = GLOB.cryptocurrency
 
 /obj/machinery/crypto_mining_rig/examine(mob/user)
 	. = ..()
@@ -209,7 +152,7 @@ GLOBAL_DATUM_INIT(cryptocurrency, /datum/cryptocurrency, new)
 		SSair.start_processing_machine(src)
 	// heat decreases with efficiency while mining power increases
 	internal_heat += drained / efficiency
-	var/result = currency.mine(drained * efficiency)
+	var/result = SScryptocurrency.mine(drained * efficiency)
 	// announce result when finishing a mining unit
 	if(result)
 		say(result)
