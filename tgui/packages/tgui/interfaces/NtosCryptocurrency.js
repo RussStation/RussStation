@@ -19,7 +19,7 @@ export const NtosCryptocurrency = (props, context) => {
               {exchange_rate} : 1
             </LabeledList.Item>
             <LabeledList.Item label="Total Mined">
-              {total_mined / 1000} kW
+              {total_mined} Units
             </LabeledList.Item>
             <LabeledList.Item label="Total Payout">
               {total_payout} C

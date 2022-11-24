@@ -1,8 +1,9 @@
 // tracks diminishing returns for "computing" more proof-of-work hashes
 SUBSYSTEM_DEF(cryptocurrency)
 	name = "Cryptocurrency"
-	wait = 1 MINUTES // same as economy, doesn't need to run frequently - maybe 1 minute?
+	wait = 1 MINUTES // like economy, doesn't need to run frequently - maybe 1 minute?
 	runlevels = RUNLEVEL_GAME // doesn't need to run during setup/postgame
+	priority = FIRE_PRIORITY_DEFAULT - 1 // this isn't as important as similar subsystems
 
 	// funny name for display
 	var/coin_name = "SpaceCoin"
@@ -20,20 +21,25 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/exchange_rate = 1
 
 	// history tracking
+	// list of sums for each processing period
 	var/list/mining_history = list()
 	var/list/payout_history = list()
 	// amount processed between SS fires
 	var/mining_processed = 0
 	var/payout_processed = 0
-	// totals
+	// grand totals
 	var/total_mined = 0
 	var/total_payout = 0
 
 	// market fluctuation and events
+	// minimum time between crypto events
 	var/event_cooldown = 20 MINUTES
+	// time of last event
 	var/last_event = 0
+	// prob we roll event on an SS fire
 	var/event_chance = 10
-	var/event_chance_growth = 5 // increase chance if we don't proc event
+	// increase chance if we don't proc event
+	var/event_chance_growth = 5
 	var/list/event_types = list(
 		/datum/round_event_control/crypto_market_crash,
 		/datum/round_event_control/crypto_market_boom,
@@ -54,11 +60,13 @@ SUBSYSTEM_DEF(cryptocurrency)
 		))
 	// either a fraction or a large number
 	exchange_rate = pick(list(rand(), rand(10, 100)))
+	// set last_event to now so there's no events in beginning of round
 	last_event = REALTIMEOFDAY
 	return ..()
 
 /datum/controller/subsystem/cryptocurrency/proc/mine(power)
 	// *obviously* don't actually do crypto hash calculations, the game lags enough as is
+	// just consume power and add it to progress
 	progress += power
 	mining_processed += power
 	total_mined += power

@@ -1,13 +1,13 @@
+// Cryptocurrency mining module
+// Contains machines and apps for turning power into money
 
 /obj/item/circuitboard/machine/crypto_mining_rig
 	name = "Crypto Mining Rig (Machine Board)"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/crypto_mining_rig
 	needs_anchored = FALSE
-	// no graphics cards currently to shove into this so here's some other funny stuff
 	req_components = list(
-		/obj/item/stock_parts/capacitor = 6, // replace with graphics cards eventually?
-		/obj/item/stock_parts/micro_laser = 1, // it does nothing, just like RGBs
+		// gfx cards SOON
 		/obj/item/pickaxe = 1, // haha mining
 		/obj/item/stack/cable_coil = 3)
 
@@ -20,16 +20,36 @@
 	base_icon_state = "mining_rig"
 	desc = "A computer purpose-built for cryptocurrency mining."
 	density = TRUE
-	active_power_usage = 1500 // drain that APC
+	active_power_usage = 500 // more expensive than average, but we're just starting
 	circuit = /obj/item/circuitboard/machine/crypto_mining_rig
 	// exactly what it says
 	var/on = FALSE
-	// literally a space heater
-	var/internal_heat = 0
+	// internal calculation numbers cached for troubleshooting performance
+	// how much power was wasted last process
+	var/power_wasted = 0
+	// how hot the machine was on last atmos process
+	var/temperature = 0
+	// how much temperature is affecting performance
+	var/temperature_index = 1
+	// how much heat we're dissipating in the current environment
+	var/dissipation_index = 0.5
+	// how much mining progress we produced
+	var/progress = 0
 	// when to start on fire
-	var/static/combustion_heat = 50000
-	// how much heat do we release into the environment
-	var/static/dissipation_index = 12
+	var/static/combustion_heat = 5000
+	// if power consumption is below this, we can stop processing it. non-zero to catch fractions sitting around
+	var/static/min_power_to_process = 1
+	// ideal temperature in current tile; lower temperature = better performance
+	var/static/ideal_temperature = TCMB
+	// ideal moles in current tile; more gas = more convection?
+	// conflicts with ideal_temperature intentionally for more nuance than spacing the rig
+	var/static/ideal_moles = MOLES_CELLSTANDARD * 2
+	// how much freon reduces power waste at max
+	var/static/freon_bonus_max = 0.5
+	// how much freon can provide a power bonus
+	var/static/freon_max = 20
+	// how many moles of freon to consume for the cooling bonus
+	var/static/freon_consumption = 1
 	// component rating. cool machines have upgradeable components
 	var/efficiency = 1
 
@@ -37,26 +57,21 @@
 	. = ..()
 	if(anchored)
 		. += "\The [src] is bolted to the floor and is [on ? "on" : "off"]."
-	if((in_range(user, src) || isobserver(user)) && internal_heat > combustion_heat)
+	if((in_range(user, src) || isobserver(user)) && temperature > combustion_heat)
 		. += span_danger("The air is warping above it. It must be very hot.")
 
 /obj/machinery/crypto_mining_rig/Destroy()
-	SSair.stop_processing_machine(src)
 	STOP_PROCESSING(SSmachines, src)
-	// release stored heat (but like a reasonable portion)
-	var/datum/gas_mixture/environment = loc.return_air()
-	environment.temperature += internal_heat / 500
-	air_update_turf(FALSE, FALSE)
 	return ..()
 
 /obj/machinery/crypto_mining_rig/update_icon_state()
 	. = ..()
 	// das blinkenlights
-	icon_state = "[base_icon_state]_[on ? internal_heat > combustion_heat ? "hot" : "on" : "off"]"
+	icon_state = "[base_icon_state]_[on ? temperature > combustion_heat ? "hot" : "on" : "off"]"
 
 /obj/machinery/crypto_mining_rig/attack_hand(mob/user, list/modifiers)
 	. = ..()
-	if(.)
+	if(. || !anchored)
 		return
 	on = !on
 	user.visible_message(span_notice("[usr] switches [on ? "on" : "off"] \the [src]."), span_notice("You switch [on ? "on" : "off"] \the [src]."), span_hear("You hear a click."))
@@ -68,18 +83,24 @@
 
 /obj/machinery/crypto_mining_rig/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/analyzer))
-		// get temperature reading vaguely indicating how hot the expensive space heater is
-		var/datum/gas_mixture/environment = loc.return_air()
-		// stored units of energy doesn't scale right with expected kelvins for a hot machine,
-		// but powersink worked this way so just shrink the displayed number
-		var/sane_temp = environment.temperature + internal_heat / 300
-		to_chat(user, span_notice("The temperature of \the [src] reads [sane_temp]K. [internal_heat > combustion_heat ? "Dayum." : ""]"))
+		// get temp and atmos related info
+		to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
+	else if(istype(W, /obj/item/multitool))
+		// display other info about the machine
+		to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
+	else if(default_deconstruction_crowbar(W))
+		return
 	else
 		return ..()
 
-/obj/machinery/crypto_mining_rig/crowbar_act(mob/living/user, obj/item/tool)
-	if(default_deconstruction_crowbar(tool))
-		return TRUE
+/obj/machinery/crypto_mining_rig/attack_ghost(mob/user)
+	. = ..()
+	if(.)
+		return
+	if(isAdminGhostAI(user))
+		// for debugging, perform the tool inspections for admins
+		to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
+		to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
 
 /obj/machinery/crypto_mining_rig/wrench_act(mob/living/user, obj/item/tool)
 	. = TRUE
@@ -107,55 +128,82 @@
 
 /obj/machinery/crypto_mining_rig/emp_act(severity)
 	. = ..()
-
 	if(machine_stat & (BROKEN|NOPOWER) || . & EMP_PROTECT_CONTENTS)
 		return
-
 	if(on)
-		// pump up the heat
-		internal_heat += active_power_usage * severity
 		// increase power use on EMP; could be used strategically?
 		active_power_usage += severity * 50
+		// maybe come up with a better interaction
 
-// remove internal heat and shares it with the atmosphere
-/obj/machinery/crypto_mining_rig/process_atmos()
-	// no more heat to give? take a break
-	if(internal_heat <= 1)
-		internal_heat = 0
+// drain power from the connected powernet and get money
+/obj/machinery/crypto_mining_rig/process(delta_time)
+	// if we aren't on and working, obviously stop. also if we're in a no-no area (no free power for you)
+	var/area/area = get_area(src)
+	if(!on || machine_stat & (BROKEN|NOPOWER) || !powered() || !area.requires_power)
+		on = FALSE
+		update_appearance()
 		return PROCESS_KILL
 
+	var/power_consumed = 0
+	if(obj_flags & EMAGGED)
+		// consume power from anywhere on the wire if emagged
+		power_consumed = use_power_from_net(active_power_usage, take_any = TRUE)
+	if(power_consumed == 0)
+		use_power(active_power_usage)
+		// use_power doesn't tell us how much was actually used, assume it was all
+		power_consumed = active_power_usage
+	// get the ambient gas for processing
 	var/datum/gas_mixture/environment = loc.return_air()
-	var/dissipated_heat = internal_heat / dissipation_index
-	// efficient parts will magically remove extra heat
-	internal_heat -= dissipated_heat * efficiency
+
+	// first check temperature to see how efficiently the machine operates in this environment
+	temperature = environment.temperature
+	// if we're within 1 degree just use 1 to avoid div by zero
+	var/temperature_difference = max(abs(temperature - ideal_temperature), 1)
+	// index balanced around 1x at 50 deg diff. bigger diff = smaller index (ex: 1000 deg diff = 0.55ish)
+	// below 50 diff, index quickly scales up approaching 2.19ish at 1 deg diff
+	temperature_index = (50 / temperature_difference) ** 0.2
+
+	// next check moles to see how efficiently the machine loses heat to the environment
+	// more heat loss = less heat in the machine impairing operation
+	var/total_moles = environment.total_moles()
+	// heat dissipated is a portion of power consumed between 0.1 and 0.9 (a range of 0.8), more moles = higher dissipated
+	dissipation_index = (min(total_moles, ideal_moles) / ideal_moles) * 0.8 + 0.1
+	var/dissipated_heat = power_consumed * dissipation_index
+
+	// check freon content for bonus because using particular gasses is "cool"
+	// haha, cool, because it's a coolant
+	var/list/freon_content = environment.gases[/datum/gas/freon]
+	var/freon_bonus = 0
+	if(freon_content && freon_content[MOLES] > 0)
+		// bonus is between 0 and max bonus (0.5) based on content up to freon_max moles
+		freon_bonus = min(freon_content[MOLES] / freon_max * freon_bonus_max, freon_bonus_max)
+		// consume a tiny amount of freon
+		freon_content[MOLES] -= freon_consumption * freon_bonus
+
+	// how much power did we waste? didn't dissipate or apply to mining progress. freon magically reduces this
+	power_wasted = (power_consumed - dissipated_heat) * (1 - freon_bonus)
+	// how much power actually contributed to mining progress? whatever wasn't wasted
+	// ex: (500W consumed - 200W wasted) * 0.8 index * 0.6 parts = 144 proggers
+	progress = (power_consumed - power_wasted) * temperature_index * efficiency
+	// mine dat fukken coin
+	var/result = SScryptocurrency.mine(progress)
+	// announce result when finishing a mining unit
+	if(result)
+		say(result)
+
+	// apply dissipated heat to environment
 	var/delta_temperature = dissipated_heat / environment.heat_capacity()
 	if(delta_temperature)
 		environment.temperature += delta_temperature
 		air_update_turf(FALSE, FALSE)
 
-	// combust when running really hot (cooldown?)
-	if(internal_heat >= combustion_heat && prob(1))
-		do_sparks(1, FALSE, src)
 	update_appearance()
-
-// drain power from the connected powernet and get money
-/obj/machinery/crypto_mining_rig/process(delta_time)
-	if(!on || machine_stat & (BROKEN|NOPOWER))
-		on = FALSE
-		update_appearance()
-		return PROCESS_KILL
-
-	// consume power, from anywhere on the wire if emagged
-	var/drained = use_power_from_net(active_power_usage * delta_time, take_any = obj_flags & EMAGGED)
-	// reactivate air processing if it was off
-	if(internal_heat == 0 && drained > 0)
-		SSair.start_processing_machine(src)
-	// heat decreases with efficiency while mining power increases
-	internal_heat += drained / efficiency
-	var/result = SScryptocurrency.mine(drained * efficiency)
-	// announce result when finishing a mining unit
-	if(result)
-		say(result)
+	// combust/explode when running really hot (cooldown?)
+	if(temperature >= combustion_heat * 2)
+		// copied from crab17, should just destroy the rig
+		explosion(src, light_impact_range = 1, flame_range = 2)
+	else if(temperature >= combustion_heat && prob(1))
+		do_sparks(1, FALSE, src)
 
 /obj/machinery/crypto_mining_rig/RefreshParts()
 	. = ..()
