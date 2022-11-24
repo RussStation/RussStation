@@ -140,6 +140,8 @@
 	invocation = "Vreet'ka'rankka!"
 	invocation_type = INVOCATION_SHOUT
 
+	spell_requirements = NONE
+
 	active_msg = "You summon forth three warpstone daggers of putrid filth."
 	deactive_msg = "You conceal the warpstone daggers of putrid filth."
 
