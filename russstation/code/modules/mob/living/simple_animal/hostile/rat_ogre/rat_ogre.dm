@@ -349,6 +349,7 @@
 	damage = 20
 	armour_penetration = 75
 	sharpness = SHARP_EDGED
+	damage_type = TOX
 	wound_bonus = 10
 	pass_flags = PASSTABLE | PASSFLAPS
 
