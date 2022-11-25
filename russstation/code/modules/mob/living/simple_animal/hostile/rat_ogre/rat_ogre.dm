@@ -5,8 +5,8 @@
 	icon_state = "rat_ogre"
 	icon_living = "rat_ogre"
 	icon_dead = "dead"
-	health_doll_icon = "crawling"
-	mob_biotypes = MOB_ORGANIC
+	health_doll_icon = "rat_ogre"
+	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speak_chance = 80
 	maxHealth = 525
 	health = 525
@@ -30,7 +30,7 @@
 	attack_sound = 'sound/weapons/punch1.ogg'
 	dextrous = TRUE //Oh shit
 	held_items = list(null, null)
-	faction = list("skaven")
+	faction = list("rat")
 	robust_searching = TRUE
 	stat_attack = HARD_CRIT
 	minbodytemp = 150
@@ -48,6 +48,8 @@
 	. = ..()
 	warpstone_blade = new /datum/action/cooldown/spell/pointed/projectile/warpstone_blade()
 	warpstone_blade.Grant(src)
+	var/datum/atom_hud/medsensor = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
+	medsensor.show_to(src)
 
 /mob/living/simple_animal/hostile/rat_ogre/Destroy()
 	QDEL_NULL(warpstone_blade)
@@ -345,6 +347,8 @@
 	name = "warpstone dagger"
 	icon = 'russstation/icons/obj/skaven.dmi'
 	icon_state = "skaven_dagger"
+	hitsound = 'sound/weapons/pierce_slow.ogg'
+	hitsound_wall = 'sound/weapons/plasma_cutter.ogg'
 	speed = 2
 	damage = 20
 	armour_penetration = 75
@@ -355,7 +359,7 @@
 
 /obj/projectile/warpstone/Initialize(mapload)
 	. = ..()
-	add_filter("skaven_dagger", 2, list("type" = "outline", "color" = "#00b609", "size" = 1))
+	add_filter("skaven_dagger", 2, list("type" = "outline", "color" = "#60ff95", "size" = 1))
 
 /obj/projectile/warpstone/prehit_pierce(atom/hit)
 	if(isliving(hit) && isliving(firer))
