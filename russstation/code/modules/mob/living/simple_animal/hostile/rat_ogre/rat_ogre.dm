@@ -5,7 +5,6 @@
 	icon_state = "rat_ogre"
 	icon_living = "rat_ogre"
 	icon_dead = "dead"
-	health_doll_icon = "rat_ogre"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speak_chance = 80
 	maxHealth = 525
