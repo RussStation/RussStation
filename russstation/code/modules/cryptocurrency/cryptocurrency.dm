@@ -1,15 +1,28 @@
 // Cryptocurrency mining module
 // Contains machines and apps for turning power into money
 
+// board for base rig - nothing too bad but you won't get much for spamming these
 /obj/item/circuitboard/machine/crypto_mining_rig
 	name = "Crypto Mining Rig (Machine Board)"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/crypto_mining_rig
 	needs_anchored = FALSE
 	req_components = list(
-		// gfx cards SOON
+		// graphics cards aren't required
 		/obj/item/pickaxe = 1, // haha mining
-		/obj/item/stack/cable_coil = 3)
+		/obj/item/stack/cable_coil = 5)
+
+// design for printing the boards at a lathe once they're researched
+/datum/design/crypto_mining_rig
+	name = "Machine Design (Crypto Mining Rig)"
+	desc = "Allows for the construction of circuit boards used to build a crypto mining rig."
+	id = "crypto_mining_rig"
+	build_type = IMPRINTER
+	materials = list(/datum/material/glass = 1000, /datum/material/gold = 2000, /datum/material/diamond = 1000)
+	//reagents_list = list() TBH i love the idea of requiring a stupid chem just for more department involvement
+	build_path = /obj/item/circuitboard/machine/crypto_mining_rig
+	category = list("Misc")
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING
 
 // a machine for mining them coins. highly derivative of power sinks and space heaters.
 // going long with the name to avoid any confusion with normal mining.
@@ -22,6 +35,10 @@
 	density = TRUE
 	active_power_usage = 500 // more expensive than average, but we're just starting
 	circuit = /obj/item/circuitboard/machine/crypto_mining_rig
+	// graphics cards in the rig
+	var/list/cards = list()
+	// how many cards can be inserted max
+	var/static/cards_max = 4
 	// exactly what it says
 	var/on = FALSE
 	// internal calculation numbers cached for troubleshooting performance
@@ -81,15 +98,33 @@
 	else
 		STOP_PROCESSING(SSmachines, src)
 
-/obj/machinery/crypto_mining_rig/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/analyzer))
+/obj/machinery/crypto_mining_rig/attackby(obj/item/thing, mob/user, params)
+	if(istype(thing, /obj/item/analyzer))
 		// get temp and atmos related info
 		to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
-	else if(istype(W, /obj/item/multitool))
+	else if(istype(thing, /obj/item/multitool))
 		// display other info about the machine
 		to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
-	else if(default_deconstruction_crowbar(W))
+	else if(default_deconstruction_crowbar(thing))
 		return
+	else if(istype(thing, /obj/item/crypto_mining_card))
+		if(on)
+			to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
+		else if(cards.len < cards_max)
+			// add card if there's room
+			thing.forceMove(src)
+			cards += thing
+			to_chat(user, span_notice("You pop \the [thing] into \the [src]."))
+		else
+			to_chat(user, span_notice("\The [src] is already full of cards! Remove some first with a screwdriver!"))
+	else if(istype(thing, /obj/item/screwdriver))
+		if(on)
+			to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
+		else if(cards.len > 0)
+			// i don't want to make an interface for removing/replacing individual cards, dump em all
+			dump_inventory_contents()
+			cards = list()
+			to_chat(user, span_notice("You pop out the cards in \the [src]."))
 	else
 		return ..()
 
@@ -184,7 +219,7 @@
 	power_wasted = (power_consumed - dissipated_heat) * (1 - freon_bonus)
 	// how much power actually contributed to mining progress? whatever wasn't wasted
 	// ex: (500W consumed - 200W wasted) * 0.8 index * 0.6 parts = 144 proggers
-	progress = (power_consumed - power_wasted) * temperature_index * efficiency
+	progress = (power_consumed - power_wasted) * temperature_index * efficiency / SScryptocurrency.complexity
 	// mine dat fukken coin
 	var/result = SScryptocurrency.mine(progress)
 	// announce result when finishing a mining unit
@@ -207,15 +242,46 @@
 
 /obj/machinery/crypto_mining_rig/RefreshParts()
 	. = ..()
-	var/rating = 0
-	var/num_components = 0
-	// only count capacitors, lasers are for show
-	for(var/obj/item/stock_parts/capacitor/cappy in component_parts)
-		rating += cappy.rating
-		num_components += 1
-	// efficiency based on average component rating to keep scaling down
-	// balanced so tier 3 is "100%" efficiency
-	efficiency = rating / num_components / 3
+	efficiency = 1
+	for(var/obj/item/crypto_mining_card/card in cards)
+		efficiency += card.efficiency
+
+// "graphics" cards for shoving into the rig to get the most performance out
+/obj/item/crypto_mining_card
+	name = "Brandless Graphics Card"
+	desc = "Only capable of producing the pipe dream screensaver."
+	w_class = WEIGHT_CLASS_SMALL
+	// TODO icons
+	// TODO make sure these have miserable resale value
+	// how much power this card adds to the rig's usage
+	var/power_usage = 250
+	// efficiency factor for making cards more worthwhile than rigs
+	var/efficiency = 1
+
+/obj/item/crypto_mining_card/get_part_rating()
+	. = ..()
+	// just compare efficiency since it always increases
+	return efficiency
+
+/obj/item/crypto_mining_card/two
+	name = "Electron 9000 Graphics Card"
+	desc = "Last year's top-tier card is this year's unwanted garbage."
+	power_usage = 400
+	efficiency = 3
+
+/obj/item/crypto_mining_card/three
+	name = "Plastitanium 650 Graphics Card"
+	desc = "The latest and greatest... that was in stock."
+	w_class = WEIGHT_CLASS_NORMAL
+	power_usage = 650
+	efficiency = 6
+
+/obj/item/crypto_mining_card/four
+	name = "Syndivideo Ruby Graphics Card"
+	desc = "An experimental card using bluespace technology to render frames before they exist."
+	w_class = WEIGHT_CLASS_BULKY // they didn't even consider the consumers on this one
+	power_usage = 800
+	efficiency = 10
 
 // NTOS program for crypto stuff
 /datum/computer_file/program/cryptocurrency
@@ -235,6 +301,8 @@
 
 	data["coin_name"] = SScryptocurrency.coin_name
 	data["exchange_rate"] = SScryptocurrency.exchange_rate
+	data["complexity"] = SScryptocurrency.complexity
+	data["mining_limit"] SScryptocurrency.progress_required
 	data["total_mined"] = SScryptocurrency.total_mined
 	data["total_payout"] = SScryptocurrency.total_payout
 	data["event_chance"] = SScryptocurrency.event_chance

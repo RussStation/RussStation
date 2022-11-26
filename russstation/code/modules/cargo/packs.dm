@@ -79,10 +79,26 @@
 ////////////////////////////// Engineering ///////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-/datum/supply_pack/engineering/crypto_mining
-	name = "Crypto Mining Crate"
-	desc = "Keep Calm and HODL."
-	cost = CARGO_CRATE_VALUE * 5 // gotta buy in to make it big
-	contains = list(/obj/item/circuitboard/machine/crypto_mining_rig)
-	crate_name = "crypto mining crate"
+/datum/supply_pack/engineering/crypto_mining_card
+	name = "Basic Graphics Card"
+	desc = "A poor gamer out there is suffering without this, but you're going to use it to mine crypto. Mining rig required."
+	cost = CARGO_CRATE_VALUE * 2
+	contains = list(/obj/item/crypto_mining_card)
+	crate_name = "graphics card crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
+	special = TRUE // must be unlocked by market activity
+
+/datum/supply_pack/engineering/crypto_mining_card/two
+	name = "Intermediate Graphics Card"
+	cost = CARGO_CRATE_VALUE * 4
+	contains = list(/obj/item/crypto_mining_card/two)
+
+/datum/supply_pack/engineering/crypto_mining_card/three
+	name = "Advanced Graphics Card"
+	cost = CARGO_CRATE_VALUE * 6
+	contains = list(/obj/item/crypto_mining_card/three)
+
+/datum/supply_pack/engineering/crypto_mining_card/four
+	name = "Experimental Graphics Card"
+	cost = CARGO_CRATE_VALUE * 8
+	contains = list(/obj/item/crypto_mining_card/four)

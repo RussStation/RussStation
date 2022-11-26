@@ -4,9 +4,20 @@ import { NtosWindow } from '../layouts';
 
 export const NtosCryptocurrency = (props, context) => {
   const { data } = useBackend(context);
-  const { coin_name, exchange_rate, total_mined, total_payout, event_chance, mining_history, payout_history } = data;
+  const {
+    coin_name,
+    exchange_rate,
+    complexity,
+    mining_limit,
+    total_mined,
+    total_payout,
+    event_chance,
+    mining_history,
+    payout_history,
+  } = data;
   const mining_data = mining_history.map((value, i) => [i, value]);
   const payout_data = payout_history.map((value, i) => [i, value]);
+  const mining_max = Math.max(mining_limit, ...mining_history);
   return (
     <NtosWindow>
       <NtosWindow.Content scrollable>
@@ -18,6 +29,7 @@ export const NtosCryptocurrency = (props, context) => {
             <LabeledList.Item label="Exchange Rate">
               {exchange_rate} : 1
             </LabeledList.Item>
+            <LabeledList.Item label="Complexity">{complexity}</LabeledList.Item>
             <LabeledList.Item label="Total Mined">
               {total_mined} Units
             </LabeledList.Item>
@@ -35,7 +47,7 @@ export const NtosCryptocurrency = (props, context) => {
               fillPositionedParent
               data={mining_data}
               rangeX={[0, mining_data.length - 1]}
-              rangeY={[0, Math.max(...mining_history)]}
+              rangeY={[0, mining_max]}
               strokeColor="rgba(204, 60, 0, 1)"
               fillColor="rgba(204, 60, 0, 0.25)"
               height="150px"
@@ -47,6 +59,17 @@ export const NtosCryptocurrency = (props, context) => {
               rangeY={[0, Math.max(...payout_history)]}
               strokeColor="rgba(57, 224, 57, 1)"
               fillColor="rgba(57, 224, 57, 0.25)"
+              height="150px"
+            />
+            <Chart.Line
+              fillPositionedParent
+              data={[
+                [0, mining_limit],
+                [1, mining_limit],
+              ]}
+              rangeX={[0, 1]}
+              rangeY={[0, mining_max]}
+              strokeColor="rgba(200,200,200,1)"
               height="150px"
             />
           </Box>
