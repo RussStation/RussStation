@@ -347,3 +347,21 @@
 	data["payout_history"] = SScryptocurrency.payout_history
 
 	return data
+
+// station goal
+/datum/station_goal/cryptocurrency
+	name = "Cryptocurrency"
+	var/goal_payout = 500000 // half of market cap
+
+/datum/station_goal/cryptocurrency/get_report()
+	return {"The Chief Financial Officer heard about cryptocurrency and we can't convince them it's a bad investment.
+		Your station has been selected to research the technology and corner the market before competitors can.
+
+		The base parts are part of your engineering research, and additional components will become available for shipping via cargo.
+		-Nanotrasen Financial Office"}
+
+/datum/station_goal/cryptocurrency/check_completion()
+	if(..())
+		return TRUE
+	// check if total payout is more than the goal
+	return SScryptocurrency.total_payout >= goal_payout
