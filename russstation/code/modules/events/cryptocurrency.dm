@@ -87,13 +87,22 @@
 /datum/round_event_control/cryptocurrency/algorithm_change
 	name = "Algorithm Change (Crypto)"
 	typepath = /datum/round_event/cryptocurrency/algorithm_change
+	// when the payout gets this good, let's not give you more than one of these per minute
+	var/lodes_a_mone = 10000
+
+/datum/round_event_control/cryptocurrency/algorithm_change/adjust_weight()
+	// extremely likely when we are mining multiple huge payouts within one period
+	if(SScryptocurrency.mining_processed > SScryptocurrency.progress_required && SScryptocurrency.payout > lodes_a_mone)
+		weight = 60
+	else
+		weight = 0
 
 /datum/round_event/cryptocurrency/algorithm_change/announce(fake)
 	priority_announce("Because of aggressive mining, the proof-of-work algorithm for [SScryptocurrency.coin_name] is being changed to be more difficult.", "[SScryptocurrency.coin_name] Creator [SScryptocurrency.nerd_name]")
 
 /datum/round_event/cryptocurrency/algorithm_change/start()
 	// increase complexity by a lot to slow down payouts
-	SScryptocurrency.complexity *= 3
+	SScryptocurrency.complexity *= 2
 
 // increase cost of cards because realism fuck you
 /datum/round_event_control/cryptocurrency/card_stock
@@ -124,17 +133,20 @@
 	typepath = /datum/round_event/cryptocurrency/card_release
 	max_occurrences = 4
 
-/datum/round_event/cryptocurrency/card_release/announce(fake)
-	// limit should be enforced by SScrypto, this prevents admemes messing around releasing non-existing cards
-	if(occurrences <= SScryptocurrency.card_packs.len)
-		// cringe gamer advertisement - yes that's right, Donk makes the cards
-		priority_announce("Gamers rise up! New graphics cards now available. Slot one in your donk socket today!", "Donk Co. Product Release")
+/datum/round_event_control/cryptocurrency/card_release/adjust_weight()
+	// extremely likely whenever we pass release thresholds
+	// for some reason indexing on this array seems to be 1 based
+	if(SScryptocurrency.released_cards_count < SScryptocurrency.card_packs_thresholds.len && SScryptocurrency.total_payout >= SScryptocurrency.card_packs_thresholds[SScryptocurrency.card_packs_thresholds[SScryptocurrency.released_cards_count + 1]])
+		weight = 100
 	else
-		message_admins("Stop pressing buttons, there are no more cards to release!")
+		weight = 0
+
+/datum/round_event/cryptocurrency/card_release/announce(fake)
+	// cringe gamer advertisement - yes that's right, Donk makes the cards
+	priority_announce("Gamers rise up! New graphics cards now available. Slot one in your donk socket today!", "Donk Co. Product Release")
 
 /datum/round_event/cryptocurrency/card_release/start()
-	// occurrences is already incremented so subtract 1 to index our list
-	if(occurrences <= SScryptocurrency.card_packs.len)
-		var/datum/supply_pack/pack = SSshuttle.supply_packs[SScryptocurrency.card_packs[occurrences - 1]]
+	if(SScryptocurrency.released_cards_count < SScryptocurrency.card_packs_thresholds.len)
+		var/datum/supply_pack/pack = SSshuttle.supply_packs[SScryptocurrency.card_packs_thresholds[SScryptocurrency.released_cards_count + 1]]
 		pack.special_enabled = TRUE
-		SScryptocurrency.card_packs_unlocked += 1
+		SScryptocurrency.released_cards_count += 1

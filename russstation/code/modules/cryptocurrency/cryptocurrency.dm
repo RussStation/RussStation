@@ -13,7 +13,7 @@
 		/obj/item/stack/cable_coil = 5)
 
 // design for printing the boards at a lathe once they're researched
-/datum/design/crypto_mining_rig
+/datum/design/board/crypto_mining_rig
 	name = "Machine Design (Crypto Mining Rig)"
 	desc = "Allows for the construction of circuit boards used to build a crypto mining rig."
 	id = "crypto_mining_rig"
@@ -21,7 +21,7 @@
 	materials = list(/datum/material/glass = 1000, /datum/material/gold = 2000, /datum/material/diamond = 1000)
 	//reagents_list = list() TBH i love the idea of requiring a stupid chem just for more department involvement
 	build_path = /obj/item/circuitboard/machine/crypto_mining_rig
-	category = list("Misc")
+	category = list ("Engineering Machinery")
 	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING
 
 // a machine for mining them coins. highly derivative of power sinks and space heaters.
@@ -29,7 +29,7 @@
 /obj/machinery/crypto_mining_rig
 	name = "mining rig"
 	icon = 'russstation/icons/obj/machines/cryptocurrency.dmi'
-	icon_state = "mining_rig_off"
+	icon_state = "mining_rig_2_off" // for preview in techweb
 	base_icon_state = "mining_rig"
 	desc = "A computer purpose-built for cryptocurrency mining."
 	density = TRUE
@@ -60,7 +60,7 @@
 	var/static/ideal_temperature = TCMB
 	// ideal moles in current tile; more gas = more convection?
 	// conflicts with ideal_temperature intentionally for more nuance than spacing the rig
-	var/static/ideal_moles = MOLES_CELLSTANDARD * 2
+	var/static/ideal_moles = MOLES_CELLSTANDARD * 4
 	// how much freon reduces power waste at max
 	var/static/freon_bonus_max = 0.5
 	// how much freon can provide a power bonus
@@ -69,13 +69,20 @@
 	var/static/freon_consumption = 1
 	// component rating. cool machines have upgradeable components
 	var/efficiency = 1
+	// how much to divide efficiency sum by
+	var/static/efficiency_divisor = 8
 
 /obj/machinery/crypto_mining_rig/examine(mob/user)
 	. = ..()
+	. += "\The [src] has [cards.len] graphics cards installed."
 	if(anchored)
 		. += "\The [src] is bolted to the floor and is [on ? "on" : "off"]."
 	if((in_range(user, src) || isobserver(user)) && temperature > combustion_heat)
 		. += span_danger("The air is warping above it. It must be very hot.")
+	if(isobserver(user))
+		// for debugging, perform the tool inspections for ghosts
+		to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
+		to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
 
 /obj/machinery/crypto_mining_rig/Destroy()
 	STOP_PROCESSING(SSmachines, src)
@@ -84,14 +91,18 @@
 /obj/machinery/crypto_mining_rig/update_icon_state()
 	. = ..()
 	// das blinkenlights
-	icon_state = "[base_icon_state]_[on ? temperature > combustion_heat ? "hot" : "on" : "off"]"
+	icon_state = "[base_icon_state]_[cards.len]_[on ? temperature > combustion_heat ? "hot" : "on" : "off"]"
 
 /obj/machinery/crypto_mining_rig/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(. || !anchored)
 		return
-	on = !on
 	user.visible_message(span_notice("[usr] switches [on ? "on" : "off"] \the [src]."), span_notice("You switch [on ? "on" : "off"] \the [src]."), span_hear("You hear a click."))
+	change_on(!on)
+
+/obj/machinery/crypto_mining_rig/proc/change_on(new_on)
+	on = new_on
+	update_use_power(on ? ACTIVE_POWER_USE : IDLE_POWER_USE)
 	update_appearance()
 	if (on)
 		START_PROCESSING(SSmachines, src)
@@ -99,15 +110,7 @@
 		STOP_PROCESSING(SSmachines, src)
 
 /obj/machinery/crypto_mining_rig/attackby(obj/item/thing, mob/user, params)
-	if(istype(thing, /obj/item/analyzer))
-		// get temp and atmos related info
-		to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
-	else if(istype(thing, /obj/item/multitool))
-		// display other info about the machine
-		to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
-	else if(default_deconstruction_crowbar(thing))
-		return
-	else if(istype(thing, /obj/item/crypto_mining_card))
+	if(istype(thing, /obj/item/crypto_mining_card))
 		if(on)
 			to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
 		else if(cards.len < cards_max)
@@ -115,30 +118,53 @@
 			thing.forceMove(src)
 			cards += thing
 			to_chat(user, span_notice("You pop \the [thing] into \the [src]."))
+			update_appearance()
+			RefreshParts()
 		else
-			to_chat(user, span_notice("\The [src] is already full of cards! Remove some first with a screwdriver!"))
-	else if(istype(thing, /obj/item/screwdriver))
-		if(on)
-			to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
-		else if(cards.len > 0)
-			// i don't want to make an interface for removing/replacing individual cards, dump em all
-			dump_inventory_contents()
-			cards = list()
-			to_chat(user, span_notice("You pop out the cards in \the [src]."))
+			to_chat(user, span_warning("\The [src] is already full of cards! Remove some first with a screwdriver."))
 	else
 		return ..()
+
+/obj/machinery/crypto_mining_rig/analyzer_act(mob/living/user, obj/item/tool)
+	// get temp and atmos related info
+	to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/crypto_mining_rig/multitool_act(mob/living/user, obj/item/tool)
+	// display other info about the machine
+	to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/crypto_mining_rig/crowbar_act(mob/living/user, obj/item/tool)
+	if(on)
+		to_chat(user, span_warning("You need to turn \the [src] off to deconstruct it!"))
+	else
+		tool.play_tool_sound(src, 50)
+		deconstruct(TRUE)
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/crypto_mining_rig/screwdriver_act(mob/living/user, obj/item/tool)
+	if(on)
+		to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
+	else if(cards.len > 0)
+		// i don't want to make an interface for removing/replacing individual cards, dump em all
+		dump_inventory_contents()
+		cards = list()
+		to_chat(user, span_notice("You pop out the cards in \the [src]."))
+		tool.play_tool_sound(src, 50)
+		update_appearance()
+		RefreshParts()
+	return TOOL_ACT_TOOLTYPE_SUCCESS
 
 /obj/machinery/crypto_mining_rig/attack_ghost(mob/user)
 	. = ..()
 	if(.)
 		return
 	if(isAdminGhostAI(user))
-		// for debugging, perform the tool inspections for admins
-		to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
-		to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
+		// admin ghosts can turn on/off
+		attack_hand(user, list())
 
 /obj/machinery/crypto_mining_rig/wrench_act(mob/living/user, obj/item/tool)
-	. = TRUE
 	if(!anchored)
 		if(default_unfasten_wrench(user, tool))
 			user.visible_message( \
@@ -146,12 +172,11 @@
 				span_notice("You bolt \the [src] into the floor."),
 				span_hear("You hear a something stupid being wrenched."))
 	else if(default_unfasten_wrench(user, tool))
-		on = FALSE
+		change_on(FALSE)
 		user.visible_message( \
 			"[user] detaches \the [src] from the floor.", \
 			span_notice("You unbolt \the [src] from the floor."),
 			span_hear("You hear something stupid being wrenched."))
-		update_appearance()
 	return TOOL_ACT_TOOLTYPE_SUCCESS
 
 /obj/machinery/crypto_mining_rig/emag_act(mob/user)
@@ -166,17 +191,18 @@
 	if(machine_stat & (BROKEN|NOPOWER) || . & EMP_PROTECT_CONTENTS)
 		return
 	if(on)
-		// increase power use on EMP; could be used strategically?
-		active_power_usage += severity * 50
-		// maybe come up with a better interaction
+		// mess with the cards stats - does nothing to base rig i guess
+		for(var/obj/item/crypto_mining_card/card in cards)
+			var/base = initial(card.power_usage)
+			card.power_usage = rand(base * 0.8, base * 1.2)
+		RefreshParts()
 
 // drain power from the connected powernet and get money
 /obj/machinery/crypto_mining_rig/process(delta_time)
 	// if we aren't on and working, obviously stop. also if we're in a no-no area (no free power for you)
 	var/area/area = get_area(src)
 	if(!on || machine_stat & (BROKEN|NOPOWER) || !powered() || !area.requires_power)
-		on = FALSE
-		update_appearance()
+		change_on(FALSE)
 		return PROCESS_KILL
 
 	var/power_consumed = 0
@@ -242,16 +268,22 @@
 
 /obj/machinery/crypto_mining_rig/RefreshParts()
 	. = ..()
+	// no "stock parts" so manually add up the stats
 	efficiency = 1
+	active_power_usage = initial(active_power_usage)
 	for(var/obj/item/crypto_mining_card/card in cards)
 		efficiency += card.efficiency
+		active_power_usage += card.power_usage
+	efficiency /= efficiency_divisor
+	update_current_power_usage()
 
 // "graphics" cards for shoving into the rig to get the most performance out
 /obj/item/crypto_mining_card
 	name = "Brandless Graphics Card"
 	desc = "Only capable of producing the pipe dream screensaver."
+	icon = 'icons/obj/module.dmi'
+	icon_state = "cyborg_upgrade2"
 	w_class = WEIGHT_CLASS_SMALL
-	// TODO icons
 	// TODO make sure these have miserable resale value
 	// how much power this card adds to the rig's usage
 	var/power_usage = 250
@@ -266,22 +298,26 @@
 /obj/item/crypto_mining_card/two
 	name = "Electron 9000 Graphics Card"
 	desc = "Last year's top-tier card is this year's unwanted garbage."
+	icon_state = "std_mod"
 	power_usage = 400
-	efficiency = 3
+	efficiency = 2
 
 /obj/item/crypto_mining_card/three
 	name = "Plastitanium 650 Graphics Card"
 	desc = "The latest and greatest... that was in stock."
+	icon_state = "circuit_map"
 	w_class = WEIGHT_CLASS_NORMAL
 	power_usage = 650
-	efficiency = 6
+	efficiency = 3
 
 /obj/item/crypto_mining_card/four
 	name = "Syndivideo Ruby Graphics Card"
 	desc = "An experimental card using bluespace technology to render frames before they exist."
+	icon = 'icons/obj/stack_objects.dmi'
+	icon_state = "circuit_mess"
 	w_class = WEIGHT_CLASS_BULKY // they didn't even consider the consumers on this one
 	power_usage = 800
-	efficiency = 10
+	efficiency = 4
 
 // NTOS program for crypto stuff
 /datum/computer_file/program/cryptocurrency
@@ -302,7 +338,8 @@
 	data["coin_name"] = SScryptocurrency.coin_name
 	data["exchange_rate"] = SScryptocurrency.exchange_rate
 	data["complexity"] = SScryptocurrency.complexity
-	data["mining_limit"] SScryptocurrency.progress_required
+	data["mining_limit"] = SScryptocurrency.progress_required
+	data["payout_limit"] = initial(SScryptocurrency.payout) * 2
 	data["total_mined"] = SScryptocurrency.total_mined
 	data["total_payout"] = SScryptocurrency.total_payout
 	data["event_chance"] = SScryptocurrency.event_chance

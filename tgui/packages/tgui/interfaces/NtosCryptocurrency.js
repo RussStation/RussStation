@@ -9,6 +9,7 @@ export const NtosCryptocurrency = (props, context) => {
     exchange_rate,
     complexity,
     mining_limit,
+    payout_limit,
     total_mined,
     total_payout,
     event_chance,
@@ -18,6 +19,7 @@ export const NtosCryptocurrency = (props, context) => {
   const mining_data = mining_history.map((value, i) => [i, value]);
   const payout_data = payout_history.map((value, i) => [i, value]);
   const mining_max = Math.max(mining_limit, ...mining_history);
+  const payout_max = Math.max(payout_limit, ...payout_history);
   return (
     <NtosWindow>
       <NtosWindow.Content scrollable>
@@ -29,7 +31,9 @@ export const NtosCryptocurrency = (props, context) => {
             <LabeledList.Item label="Exchange Rate">
               {exchange_rate} : 1
             </LabeledList.Item>
-            <LabeledList.Item label="Complexity">{complexity}</LabeledList.Item>
+            <LabeledList.Item label="Complexity">
+              {complexity} x
+            </LabeledList.Item>
             <LabeledList.Item label="Total Mined">
               {total_mined} Units
             </LabeledList.Item>
@@ -56,7 +60,7 @@ export const NtosCryptocurrency = (props, context) => {
               fillPositionedParent
               data={payout_data}
               rangeX={[0, payout_data.length - 1]}
-              rangeY={[0, Math.max(...payout_history)]}
+              rangeY={[0, payout_max]}
               strokeColor="rgba(57, 224, 57, 1)"
               fillColor="rgba(57, 224, 57, 0.25)"
               height="150px"
@@ -69,7 +73,7 @@ export const NtosCryptocurrency = (props, context) => {
               ]}
               rangeX={[0, 1]}
               rangeY={[0, mining_max]}
-              strokeColor="rgba(200,200,200,1)"
+              strokeColor="rgba(150,150,150,1)"
               height="150px"
             />
           </Box>
@@ -80,7 +84,7 @@ export const NtosCryptocurrency = (props, context) => {
                 minValue={0}
                 maxValue={1}
                 color="rgba(204, 60, 0, 1)">
-                Mining
+                Mining ({mining_max})
               </ProgressBar>
             </LabeledList.Item>
             <LabeledList.Item>
@@ -89,7 +93,7 @@ export const NtosCryptocurrency = (props, context) => {
                 minValue={0}
                 maxValue={1}
                 color="rgba(57, 224, 57, 1)">
-                Payout
+                Payout ({payout_max})
               </ProgressBar>
             </LabeledList.Item>
           </LabeledList>
