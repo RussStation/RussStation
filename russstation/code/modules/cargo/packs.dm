@@ -82,7 +82,7 @@
 /datum/supply_pack/engineering/crypto_mining_card
 	name = "Basic Graphics Card"
 	desc = "A poor gamer out there is suffering without this, but you're going to use it to mine crypto. Mining rig required."
-	cost = CARGO_CRATE_VALUE * 2
+	cost = CARGO_CRATE_VALUE * 5
 	contains = list(/obj/item/crypto_mining_card)
 	crate_name = "graphics card crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
@@ -90,15 +90,15 @@
 
 /datum/supply_pack/engineering/crypto_mining_card/two
 	name = "Intermediate Graphics Card"
-	cost = CARGO_CRATE_VALUE * 4
+	cost = CARGO_CRATE_VALUE * 10
 	contains = list(/obj/item/crypto_mining_card/two)
 
 /datum/supply_pack/engineering/crypto_mining_card/three
 	name = "Advanced Graphics Card"
-	cost = CARGO_CRATE_VALUE * 6
+	cost = CARGO_CRATE_VALUE * 20
 	contains = list(/obj/item/crypto_mining_card/three)
 
 /datum/supply_pack/engineering/crypto_mining_card/four
 	name = "Experimental Graphics Card"
-	cost = CARGO_CRATE_VALUE * 8
+	cost = CARGO_CRATE_VALUE * 30
 	contains = list(/obj/item/crypto_mining_card/four)

@@ -91,7 +91,7 @@
 /obj/machinery/crypto_mining_rig/update_icon_state()
 	. = ..()
 	// das blinkenlights
-	icon_state = "[base_icon_state]_[cards.len]_[on ? temperature > combustion_heat ? "hot" : "on" : "off"]"
+	icon_state = "[base_icon_state]_[cards.len]_[on ? "on" : "off"]"
 
 /obj/machinery/crypto_mining_rig/attack_hand(mob/user, list/modifiers)
 	. = ..()
@@ -245,7 +245,7 @@
 	power_wasted = (power_consumed - dissipated_heat) * (1 - freon_bonus)
 	// how much power actually contributed to mining progress? whatever wasn't wasted
 	// ex: (500W consumed - 200W wasted) * 0.8 index * 0.6 parts = 144 proggers
-	progress = (power_consumed - power_wasted) * temperature_index * efficiency / SScryptocurrency.complexity
+	progress = (power_consumed - power_wasted) * temperature_index * efficiency
 	// mine dat fukken coin
 	var/result = SScryptocurrency.mine(progress)
 	// announce result when finishing a mining unit
@@ -299,15 +299,15 @@
 	name = "Electron 9000 Graphics Card"
 	desc = "Last year's top-tier card is this year's unwanted garbage."
 	icon_state = "std_mod"
-	power_usage = 400
+	power_usage = 500
 	efficiency = 2
 
 /obj/item/crypto_mining_card/three
-	name = "Plastitanium 650 Graphics Card"
+	name = "Plastitanium 800 Graphics Card"
 	desc = "The latest and greatest... that was in stock."
 	icon_state = "circuit_map"
 	w_class = WEIGHT_CLASS_NORMAL
-	power_usage = 650
+	power_usage = 800
 	efficiency = 3
 
 /obj/item/crypto_mining_card/four
@@ -316,10 +316,10 @@
 	icon = 'icons/obj/stack_objects.dmi'
 	icon_state = "circuit_mess"
 	w_class = WEIGHT_CLASS_BULKY // they didn't even consider the consumers on this one
-	power_usage = 800
+	power_usage = 1200
 	efficiency = 4
 
-// NTOS program for crypto stuff
+// NtOS program for crypto stuff
 /datum/computer_file/program/cryptocurrency
 	filename = "cryptoass"
 	filedesc = "Crypto Assistant"
@@ -335,18 +335,34 @@
 /datum/computer_file/program/cryptocurrency/ui_data()
 	var/list/data = get_header_data()
 
+	var/can_cash_out = FALSE
+	var/obj/item/card/id/user_id = computer.GetID()
+	if(user_id && (ACCESS_COMMAND in user_id.access))
+		can_cash_out = TRUE
+	data["authenticated"] = can_cash_out
 	data["coin_name"] = SScryptocurrency.coin_name
 	data["exchange_rate"] = SScryptocurrency.exchange_rate
-	data["complexity"] = SScryptocurrency.complexity
-	data["mining_limit"] = SScryptocurrency.progress_required
-	data["payout_limit"] = initial(SScryptocurrency.payout) * 2
+	data["wallet"] = SScryptocurrency.wallet
+	data["progress_required"] = SScryptocurrency.progress_required
+	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 2
 	data["total_mined"] = SScryptocurrency.total_mined
 	data["total_payout"] = SScryptocurrency.total_payout
 	data["event_chance"] = SScryptocurrency.event_chance
 	data["mining_history"] = SScryptocurrency.mining_history
 	data["payout_history"] = SScryptocurrency.payout_history
+	data["exchange_rate_history"] = SScryptocurrency.exchange_rate_history
 
 	return data
+
+/datum/computer_file/program/cryptocurrency/ui_act(action, list/params, datum/tgui/ui)
+	. = ..()
+	if(.)
+		return
+	switch(action)
+		if("PRG_exchange")
+			var/message = SScryptocurrency.cash_out()
+			// people nearby can hear the cashout message
+			computer.say(message)
 
 // station goal
 /datum/station_goal/cryptocurrency

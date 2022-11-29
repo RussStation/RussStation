@@ -9,28 +9,22 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/coin_name = "SpaceCoin"
 	// the "person" that made the coin, used for some special alerts
 	var/nerd_name = "cake" // haha but not really :o)
-	// factor to reduce machine performance over time
-	var/complexity = 1
-	// complexity growth factor, multiplicative
-	var/complexity_growth = 1.01
-	// how much is payed out for an individual mining operation. scales inversely with complexity
+	// how much is payed out for an individual mining operation
 	var/payout = 1000
-	// is market trending up or down?
-	var/market_trend_up = TRUE
-	// how much payout can change by each time multiplicative
-	var/market_change_factor = 0.1
 	// how much energy has been spent calculating the next payout
 	var/progress = 0
 	// how many work units are required to compute a hash and get paid
-	// does NOT need adjusted normally because we instead tweak the progress generation
-	var/progress_required = 30000
-	// how many NT credits a single coin of this currency is worth (purely for flavor)
-	var/exchange_rate = 1
+	var/progress_required = 10000
+	// how much required progress grows after each pay
+	var/progress_required_growth = 1.05
+	// how much coin has been mined and waiting to convert to credits
+	var/wallet = 0
 
 	// history tracking
 	// list of sums for each processing period
 	var/list/mining_history = list()
 	var/list/payout_history = list()
+	var/list/exchange_rate_history = list()
 	// amount processed between SS fires
 	var/mining_processed = 0
 	var/payout_processed = 0
@@ -39,10 +33,19 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/total_payout = 0
 
 	// market fluctuation and events
+	// is market trending up or down?
+	var/market_trend_up = TRUE
+	// how much payout can change by each time multiplicative
+	var/market_change_factor = 0.1
+	// how likely to change trend each process
+	var/market_change_chance = 10
+	// how many NT credits a single coin of this currency is worth
+	var/exchange_rate = 0.01
 	// minimum time between crypto events
-	var/event_cooldown = 5 MINUTES
-	// time of last event
-	var/last_event = 0
+	var/event_cooldown_low = 6 MINUTES
+	var/event_cooldown_high = 12 MINUTES
+	// time of next event
+	var/next_event = 0
 	// prob we roll event on an SS fire
 	var/event_chance = 10
 	// increase chance if we don't proc event
@@ -73,8 +76,6 @@ SUBSYSTEM_DEF(cryptocurrency)
 		"SyndiCoin",
 		"BananaBucks",
 		))
-	// either a fraction or a large number
-	exchange_rate = pick(list(randf(0.01, 0.1), rand(10, 100)))
 	// inspired by the bitcoin creator but meme?
 	nerd_name = "[pick(list("Satoshi", "Kiryu", "Doraemon", "Greg"))] [pick(list("Naka", "Baka", "Shiba", "Tako"))][pick(list("moto", "mura", "nashi", "bana"))]"
 	// initialize event cache - copied from SSevents
@@ -99,45 +100,57 @@ SUBSYSTEM_DEF(cryptocurrency)
 	progress += power
 	mining_processed += power
 	total_mined += power
-	// complexity already factored into power at machine level
 	if(progress >= progress_required)
 		progress = 0 // lose excess progress lol
-		complexity *= complexity_growth
-		// what if we could pay out to other accounts?
-		var/datum/bank_account/the_dump = SSeconomy.get_dep_account(ACCOUNT_CAR)
-		payout = adjust_payout()
+		// next payout requires slightly more progress
+		progress_required *= progress_required_growth
+		wallet += payout
 		payout_processed += payout
 		total_payout += payout
-		the_dump.adjust_money(ROUND_UP(payout)) // don't pay fractions of credits
 		// funny payout message for machine to shout
-		return "Successfully computed a proof-of-work hash on the blockchain! [payout * exchange_rate] [coin_name] payed to the [ACCOUNT_CAR_NAME] account."
+		return "Successfully computed a proof-of-work hash on the blockchain!"
 
-// pick next payout amount slightly randomly
-/datum/controller/subsystem/cryptocurrency/proc/adjust_payout()
+// pick next exchange rate slightly randomly
+/datum/controller/subsystem/cryptocurrency/proc/adjust_exchange_rate(rate)
 	// min < 1 means value fluctuates instead of only going in trend direction
 	var/min_change = 1 - market_change_factor
 	// increased factor by event_chance% so trend direction is more likely, especially just before events
 	var/max_change = 1 + market_change_factor + event_chance / 100
 	var/change = randf(min_change, max_change)
 	if(market_trend_up)
-		return payout * change
+		return rate * change
 	else
-		return payout / change
+		return rate / change
+
+// withdraw coin and exchange to credits
+/datum/controller/subsystem/cryptocurrency/proc/cash_out()
+	// how much credits we're paying out based on current exchange rate
+	var/amount = wallet
+	var/credits = amount * exchange_rate
+	wallet = 0
+	// what if we could pay out to other accounts?
+	var/datum/bank_account/the_dump = SSeconomy.get_dep_account(ACCOUNT_CAR)
+	the_dump.adjust_money(credits)
+	return "[amount] [coin_name] exchanged for [credits] Credits and payed to the [ACCOUNT_CAR_NAME] account."
 
 /datum/controller/subsystem/cryptocurrency/fire(resumed = 0)
 	// add processed amounts from this period to history lists
 	mining_history += mining_processed
 	payout_history += payout_processed
-	// if amounts were 0, don't process anything else
+	exchange_rate_history += exchange_rate
+	// small chance to flip the trend so it's more dynamic between events
+	if(prob(market_change_chance))
+		market_trend_up = !market_trend_up
+	exchange_rate = adjust_exchange_rate(exchange_rate)
+	// if amounts were 0, don't process anything else- no events when no one is mining
 	if(mining_processed == 0 && payout_processed == 0)
 		return
 	// process events - we don't want them eating up "real" event opportunities so gotta handle manually
 	var/now = REALTIMEOFDAY
-	if(now > last_event + event_cooldown)
+	if(now >= next_event)
 		if(prob(event_chance))
 			var/datum/round_event_control/control
-			event_chance = initial(event_chance)
-			last_event = now
+			next_event = now + rand(event_cooldown_low, event_cooldown_high)
 			// check if we've paid the market cap (because it waits for event fire, can pay slightly more than cap)
 			if(total_payout >= market_cap)
 				// not an event so admemes can't force this
@@ -153,6 +166,10 @@ SUBSYSTEM_DEF(cryptocurrency)
 		else
 			// increase chance for next time
 			event_chance += event_chance_growth
+	else
+		// "animate" market volatility going down after an event
+		if(event_chance > initial(event_chance))
+			event_chance -= event_chance_growth
 	// finally reset processed trackers
 	mining_processed = 0
 	payout_processed = 0

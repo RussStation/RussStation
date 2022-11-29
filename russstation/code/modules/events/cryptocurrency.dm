@@ -43,22 +43,25 @@
 	typepath = /datum/round_event/cryptocurrency/market_crash
 
 /datum/round_event_control/cryptocurrency/market_crash/adjust_weight()
-	// don't crash below initial payout which already sucks
-	if(SScryptocurrency.payout <= initial(SScryptocurrency.payout) * 2)
+	// don't crash below initial exchange rate which already sucks
+	if(SScryptocurrency.exchange_rate <= initial(SScryptocurrency.exchange_rate) * 2)
 		weight = 0
 	// likely to crash if value has significantly boomed
-	else if(SScryptocurrency.payout >= initial(SScryptocurrency.payout) * 10)
+	else if(SScryptocurrency.exchange_rate >= initial(SScryptocurrency.exchange_rate) * 10)
 		weight = 30
 	else
 		weight = 10
+
+/datum/round_event/cryptocurrency/market_crash
+	startWhen = 30
 
 /datum/round_event/cryptocurrency/market_crash/announce(fake)
 	priority_announce("Because of [reason()], the [SScryptocurrency.coin_name] market has crashed! Cash out before it's too late!", "[SScryptocurrency.coin_name] Speculative Investment Report")
 
 /datum/round_event/cryptocurrency/market_crash/start()
-	// crypto wallets don't exist so just tank the mining payout and market trend
+	// tank the mining exchange rate and market trend
 	var/dip = pick(list(1.5, 2, 2.5, 3))
-	SScryptocurrency.payout /= dip
+	SScryptocurrency.exchange_rate /= dip
 	SScryptocurrency.market_trend_up = FALSE
 
 // boost the market and tempt people to give a damn
@@ -67,33 +70,33 @@
 	typepath = /datum/round_event/cryptocurrency/market_boom
 
 /datum/round_event_control/cryptocurrency/market_boom/adjust_weight()
-	// much more likely to boom at low payouts
-	if(SScryptocurrency.payout <= initial(SScryptocurrency.payout) * 3)
-		weight = 40
-	else
-		// twice as likely as crash
+	// much more likely to boom at low exchange rate
+	if(SScryptocurrency.exchange_rate <= initial(SScryptocurrency.exchange_rate) * 3)
 		weight = 20
+	else
+		weight = 10
+
+/datum/round_event/cryptocurrency/market_boom
+	startWhen = 30
 
 /datum/round_event/cryptocurrency/market_boom/announce(fake)
 	priority_announce("Because of [reason()], the [SScryptocurrency.coin_name] market is booming! Dump your life savings into [SScryptocurrency.coin_name]!", "[SScryptocurrency.coin_name] Speculative Investment Report")
 
 /datum/round_event/cryptocurrency/market_boom/start()
-	// crypto wallets don't exist so just boost the mining payout and market trend
+	// boost the mining exchange rate and market trend
 	var/stonks = pick(list(1.5, 2, 2.5, 3, 5))
-	SScryptocurrency.payout *= stonks
+	SScryptocurrency.exchange_rate *= stonks
 	SScryptocurrency.market_trend_up = TRUE
 
 // make payouts harder if players are really taking advantage of crypto
 /datum/round_event_control/cryptocurrency/algorithm_change
 	name = "Algorithm Change (Crypto)"
 	typepath = /datum/round_event/cryptocurrency/algorithm_change
-	// when the payout gets this good, let's not give you more than one of these per minute
-	var/lodes_a_mone = 10000
 
 /datum/round_event_control/cryptocurrency/algorithm_change/adjust_weight()
-	// extremely likely when we are mining multiple huge payouts within one period
-	if(SScryptocurrency.mining_processed > SScryptocurrency.progress_required && SScryptocurrency.payout > lodes_a_mone)
-		weight = 60
+	// possible once we're making more than one payout per period
+	if(SScryptocurrency.mining_processed > SScryptocurrency.progress_required)
+		weight = 10
 	else
 		weight = 0
 
@@ -101,8 +104,8 @@
 	priority_announce("Because of aggressive mining, the proof-of-work algorithm for [SScryptocurrency.coin_name] is being changed to be more difficult.", "[SScryptocurrency.coin_name] Creator [SScryptocurrency.nerd_name]")
 
 /datum/round_event/cryptocurrency/algorithm_change/start()
-	// increase complexity by a lot to slow down payouts
-	SScryptocurrency.complexity *= 2
+	// increase progress required by a lot to slow down payouts
+	SScryptocurrency.progress_required *= pick(1.5, 2, 2.5)
 
 // increase cost of cards because realism fuck you
 /datum/round_event_control/cryptocurrency/card_stock
