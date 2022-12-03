@@ -94,3 +94,10 @@
 	race = /datum/species/human/kitsune
 	taste_description = "tingling"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
+/datum/reagent/super_coolant
+	name = "Super Coolant"
+	description = "A viscous fluid with superior heat conduction. Looks like shimmering liquid ice."
+	color = "#8baac9"
+	taste_description = "cold steel" // nothing personnel
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED

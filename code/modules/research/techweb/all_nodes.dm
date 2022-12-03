@@ -527,6 +527,7 @@
 		"welding_goggles",
 		"anomaly_refinery",
 		"tank_compressor",
+		"crypto_mining_rig", // honk - add crypto base rig to basic engineering techweb
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 12500)
 	discount_experiments = list(/datum/experiment/scanning/random/material/easy = 7500)
