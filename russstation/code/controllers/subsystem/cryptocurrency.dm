@@ -10,13 +10,14 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// the "person" that made the coin, used for some special alerts
 	var/nerd_name = "cake" // haha but not really :o)
 	// how much is payed out for an individual mining operation
-	var/payout = 1000
+	var/payout_min = 800
+	var/payout_max = 1200
 	// how much energy has been spent calculating the next payout
 	var/progress = 0
 	// how many work units are required to compute a hash and get paid
 	var/progress_required = 10000
 	// how much required progress grows after each pay
-	var/progress_required_growth = 1.05
+	var/progress_required_growth = 1.01
 	// how much coin has been mined and waiting to convert to credits
 	var/wallet = 0
 
@@ -40,10 +41,10 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// how likely to change trend each process
 	var/market_change_chance = 10
 	// how many NT credits a single coin of this currency is worth
-	var/exchange_rate = 0.01
+	var/exchange_rate = 0.05
 	// minimum time between crypto events
-	var/event_cooldown_low = 6 MINUTES
-	var/event_cooldown_high = 12 MINUTES
+	var/event_cooldown_min = 6 MINUTES
+	var/event_cooldown_max = 12 MINUTES
 	// time of next event
 	var/next_event = 0
 	// prob we roll event on an SS fire
@@ -62,7 +63,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// track released packs count
 	var/released_cards_count = 0
 	// if we've paid out this much, crypto is over. go home. stop playing.
-	var/market_cap = 1000000 // yeah that's a bicycle
+	var/market_cap = 1000000
 
 /datum/controller/subsystem/cryptocurrency/Initialize(timeofday)
 	// coin of the day
@@ -86,11 +87,6 @@ SUBSYSTEM_DEF(cryptocurrency)
 		random_events += E // add it to the list of crypto events
 	return ..()
 
-// why doesn't this already exist? save some copypaste in this file
-/datum/controller/subsystem/cryptocurrency/proc/randf(low, high)
-	// use rand() to get a float between 0 and 1, then adjust it to desired range
-	return rand() * (high - low) + low
-
 // add mining progress and calculate payouts if qualified
 /datum/controller/subsystem/cryptocurrency/proc/mine(power)
 	if(!can_fire)
@@ -104,11 +100,12 @@ SUBSYSTEM_DEF(cryptocurrency)
 		progress = 0 // lose excess progress lol
 		// next payout requires slightly more progress
 		progress_required *= progress_required_growth
+		var/payout = rand(payout_min, payout_max)
 		wallet += payout
 		payout_processed += payout
 		total_payout += payout
 		// funny payout message for machine to shout
-		return "Successfully computed a proof-of-work hash on the blockchain!"
+		return "Successfully computed a proof-of-work hash on the blockchain! [payout] [coin_name] awarded."
 
 // pick next exchange rate slightly randomly
 /datum/controller/subsystem/cryptocurrency/proc/adjust_exchange_rate(rate)
@@ -116,14 +113,16 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/min_change = 1 - market_change_factor
 	// increased factor by event_chance% so trend direction is more likely, especially just before events
 	var/max_change = 1 + market_change_factor + event_chance / 100
-	var/change = randf(min_change, max_change)
+	var/change = LERP(min_change, max_change, rand())
 	if(market_trend_up)
 		return rate * change
 	else
 		return rate / change
 
 // withdraw coin and exchange to credits
-/datum/controller/subsystem/cryptocurrency/proc/cash_out()
+/datum/controller/subsystem/cryptocurrency/proc/cash_out(mob/user)
+	if(wallet == 0)
+		return
 	// how much credits we're paying out based on current exchange rate
 	var/amount = wallet
 	var/credits = amount * exchange_rate
@@ -131,17 +130,20 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// what if we could pay out to other accounts?
 	var/datum/bank_account/the_dump = SSeconomy.get_dep_account(ACCOUNT_CAR)
 	the_dump.adjust_money(credits)
-	return "[amount] [coin_name] exchanged for [credits] Credits and payed to the [ACCOUNT_CAR_NAME] account."
+	var/blame = "Someone"
+	if(user && istype(user))
+		blame = user.name
+	return "[blame] exchanged [amount] [coin_name] for [credits] Credits and paid to the [ACCOUNT_CAR_NAME] account."
 
 /datum/controller/subsystem/cryptocurrency/fire(resumed = 0)
-	// add processed amounts from this period to history lists
-	mining_history += mining_processed
-	payout_history += payout_processed
-	exchange_rate_history += exchange_rate
 	// small chance to flip the trend so it's more dynamic between events
 	if(prob(market_change_chance))
 		market_trend_up = !market_trend_up
 	exchange_rate = adjust_exchange_rate(exchange_rate)
+	// add processed amounts from this period to history lists
+	mining_history += mining_processed
+	payout_history += payout_processed
+	exchange_rate_history += exchange_rate
 	// if amounts were 0, don't process anything else- no events when no one is mining
 	if(mining_processed == 0 && payout_processed == 0)
 		return
@@ -150,7 +152,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 	if(now >= next_event)
 		if(prob(event_chance))
 			var/datum/round_event_control/control
-			next_event = now + rand(event_cooldown_low, event_cooldown_high)
+			next_event = now + rand(event_cooldown_min, event_cooldown_max)
 			// check if we've paid the market cap (because it waits for event fire, can pay slightly more than cap)
 			if(total_payout >= market_cap)
 				// not an event so admemes can't force this
@@ -163,6 +165,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 			// finally run the event
 			if(control)
 				control.runEvent(TRUE)
+			// else no event, just let the market change up and down naturally
 		else
 			// increase chance for next time
 			event_chance += event_chance_growth
@@ -186,8 +189,11 @@ SUBSYSTEM_DEF(cryptocurrency)
 
 	// now subtract event weights until we hit our random target
 	for(var/datum/round_event_control/cryptocurrency/event in random_events)
+		// don't pick 0 weight events
+		if(event.weight == 0)
+			continue
 		sum_of_weights -= event.weight
 		if(sum_of_weights <= 0) //we've hit our goal
 			return event
-	// didn't pick an event somehow, this will crash so return *something*. shouldn't occur!
-	return pick(random_events)
+
+	return null

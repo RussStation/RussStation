@@ -9,6 +9,7 @@
 	needs_anchored = FALSE
 	req_components = list(
 		// graphics cards aren't required
+		/obj/item/reagent_containers/glass/beaker = 1, // for coolant
 		/obj/item/pickaxe = 1, // haha mining
 		/obj/item/stack/cable_coil = 5)
 
@@ -36,53 +37,57 @@
 	active_power_usage = 500 // more expensive than average, but we're just starting
 	circuit = /obj/item/circuitboard/machine/crypto_mining_rig
 	// graphics cards in the rig
-	var/list/cards = list()
+	var/card_count = 0
 	// how many cards can be inserted max
 	var/static/cards_max = 4
 	// exactly what it says
 	var/on = FALSE
 	// internal calculation numbers cached for troubleshooting performance
-	// how much power was wasted last process
-	var/power_wasted = 0
 	// how hot the machine was on last atmos process
 	var/temperature = 0
 	// how much temperature is affecting performance
 	var/temperature_index = 1
-	// how much heat we're dissipating in the current environment
-	var/dissipation_index = 0.5
+	// how much power we're dissipating as heat
+	var/coolant_factor = 0.1
 	// how much mining progress we produced
 	var/progress = 0
+	// not-quite-consts are static so you can varedit all machines at once
 	// when to start on fire
 	var/static/combustion_heat = 5000
 	// if power consumption is below this, we can stop processing it. non-zero to catch fractions sitting around
 	var/static/min_power_to_process = 1
 	// ideal temperature in current tile; lower temperature = better performance
 	var/static/ideal_temperature = TCMB
-	// ideal moles in current tile; more gas = more convection?
-	// conflicts with ideal_temperature intentionally for more nuance than spacing the rig
-	var/static/ideal_moles = MOLES_CELLSTANDARD * 4
+	// temperature at which temperature index = 1
+	var/static/temperature_index_pivot = 50
 	// how much freon reduces power waste at max
 	var/static/freon_bonus_max = 0.5
 	// how much freon can provide a power bonus
-	var/static/freon_max = 20
+	var/static/freon_max = 100
 	// how many moles of freon to consume for the cooling bonus
 	var/static/freon_consumption = 1
-	// component rating. cool machines have upgradeable components
-	var/efficiency = 1
-	// how much to divide efficiency sum by
-	var/static/efficiency_divisor = 8
+	// how much coolant used per cycle
+	var/static/coolant_consumption = 0.025
+	// valid coolants and their bonus factors (1 = max)
+	var/static/list/coolants = list(
+		/datum/reagent/water = 0.1,
+		/datum/reagent/cryostylane = 0.5,
+		/datum/reagent/super_coolant = 1
+	)
+
+/obj/machinery/crypto_mining_rig/Initialize(mapload)
+	. = ..()
+	create_reagents(50, OPENCONTAINER) // size adjusted in RefreshParts
 
 /obj/machinery/crypto_mining_rig/examine(mob/user)
 	. = ..()
-	. += "\The [src] has [cards.len] graphics cards installed."
+	. += "\The [src] has [card_count] graphics cards installed and the coolant reservoir has [reagents.total_volume]/[reagents.maximum_volume] units."
 	if(anchored)
 		. += "\The [src] is bolted to the floor and is [on ? "on" : "off"]."
-	if((in_range(user, src) || isobserver(user)) && temperature > combustion_heat)
-		. += span_danger("The air is warping above it. It must be very hot.")
 	if(isobserver(user))
 		// for debugging, perform the tool inspections for ghosts
-		to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
-		to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
+		. += "The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [coolant_factor] and temperature performance index is [temperature_index]."
+		. += "The power usage of \the [src] reads [active_power_usage]W. It is contributing [progress] work units per cycle."
 
 /obj/machinery/crypto_mining_rig/Destroy()
 	STOP_PROCESSING(SSmachines, src)
@@ -91,14 +96,17 @@
 /obj/machinery/crypto_mining_rig/update_icon_state()
 	. = ..()
 	// das blinkenlights
-	icon_state = "[base_icon_state]_[cards.len]_[on ? "on" : "off"]"
+	icon_state = "[base_icon_state]_[card_count]_[on ? "on" : "off"]"
 
 /obj/machinery/crypto_mining_rig/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(. || !anchored)
 		return
-	user.visible_message(span_notice("[usr] switches [on ? "on" : "off"] \the [src]."), span_notice("You switch [on ? "on" : "off"] \the [src]."), span_hear("You hear a click."))
 	change_on(!on)
+	user.visible_message( \
+		span_notice("[usr] switches [on ? "on" : "off"] \the [src]."), \
+		span_notice("You switch [on ? "on" : "off"] \the [src]."), \
+		span_hear("You hear a click."))
 
 /obj/machinery/crypto_mining_rig/proc/change_on(new_on)
 	on = new_on
@@ -110,14 +118,18 @@
 		STOP_PROCESSING(SSmachines, src)
 
 /obj/machinery/crypto_mining_rig/attackby(obj/item/thing, mob/user, params)
-	if(istype(thing, /obj/item/crypto_mining_card))
+	if(istype(thing, /obj/item/stock_parts/crypto_mining_card))
 		if(on)
 			to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
-		else if(cards.len < cards_max)
+		else if(card_count < cards_max)
 			// add card if there's room
 			thing.forceMove(src)
-			cards += thing
-			to_chat(user, span_notice("You pop \the [thing] into \the [src]."))
+			card_count += 1
+			component_parts += thing
+			user.visible_message( \
+				span_notice("[user] pops \the [thing] into \the [src]."), \
+				span_notice("You pop \the [thing] into \the [src]."), \
+				span_hear("You hear the satisfying click of a card popping into a PCIe slot. Nice."))
 			update_appearance()
 			RefreshParts()
 		else
@@ -127,12 +139,12 @@
 
 /obj/machinery/crypto_mining_rig/analyzer_act(mob/living/user, obj/item/tool)
 	// get temp and atmos related info
-	to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [dissipation_index] and temperature performance index is [temperature_index]."))
+	to_chat(user, span_notice("The temperature of \the [src] reads [temperature]K. Its heat dissipation index is [coolant_factor] and temperature performance index is [temperature_index]."))
 	return TOOL_ACT_TOOLTYPE_SUCCESS
 
 /obj/machinery/crypto_mining_rig/multitool_act(mob/living/user, obj/item/tool)
 	// display other info about the machine
-	to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W, [power_wasted]W of which is being wasted due to cooling conditions. It is contributing [progress] work units."))
+	to_chat(user, span_notice("The power usage of \the [src] reads [active_power_usage]W. It is contributing [progress] work units per cycle."))
 	return TOOL_ACT_TOOLTYPE_SUCCESS
 
 /obj/machinery/crypto_mining_rig/crowbar_act(mob/living/user, obj/item/tool)
@@ -146,11 +158,16 @@
 /obj/machinery/crypto_mining_rig/screwdriver_act(mob/living/user, obj/item/tool)
 	if(on)
 		to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
-	else if(cards.len > 0)
+	else if(card_count > 0)
 		// i don't want to make an interface for removing/replacing individual cards, dump em all
-		dump_inventory_contents()
-		cards = list()
-		to_chat(user, span_notice("You pop out the cards in \the [src]."))
+		for(var/obj/item/stock_parts/crypto_mining_card/card in component_parts)
+			if(istype(card))
+				card.forceMove(loc)
+		card_count = 0
+		user.visible_message( \
+			span_notice("[user] pops the cards out of \the [src]."), \
+			span_notice("You pop out the cards in \the [src]."), \
+			span_hear("You hear expensive hardware falling on the ground."))
 		tool.play_tool_sound(src, 50)
 		update_appearance()
 		RefreshParts()
@@ -168,7 +185,7 @@
 	if(!anchored)
 		if(default_unfasten_wrench(user, tool))
 			user.visible_message( \
-				"[user] attaches \the [src] to the floor.", \
+				span_notice("[user] attaches \the [src] to the floor."), \
 				span_notice("You bolt \the [src] into the floor."),
 				span_hear("You hear a something stupid being wrenched."))
 	else if(default_unfasten_wrench(user, tool))
@@ -179,57 +196,45 @@
 			span_hear("You hear something stupid being wrenched."))
 	return TOOL_ACT_TOOLTYPE_SUCCESS
 
-/obj/machinery/crypto_mining_rig/emag_act(mob/user)
-	if(obj_flags & EMAGGED)
-		return
-	obj_flags |= EMAGGED
-	playsound(src, SFX_SPARKS, 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-	to_chat(user, span_warning("You short out the power controller."))
-
-/obj/machinery/crypto_mining_rig/emp_act(severity)
-	. = ..()
-	if(machine_stat & (BROKEN|NOPOWER) || . & EMP_PROTECT_CONTENTS)
-		return
-	if(on)
-		// mess with the cards stats - does nothing to base rig i guess
-		for(var/obj/item/crypto_mining_card/card in cards)
-			var/base = initial(card.power_usage)
-			card.power_usage = rand(base * 0.8, base * 1.2)
-		RefreshParts()
-
 // drain power from the connected powernet and get money
 /obj/machinery/crypto_mining_rig/process(delta_time)
 	// if we aren't on and working, obviously stop. also if we're in a no-no area (no free power for you)
 	var/area/area = get_area(src)
-	if(!on || machine_stat & (BROKEN|NOPOWER) || !powered() || !area.requires_power)
+	if(!on || machine_stat & (BROKEN|NOPOWER) || !powered() || !area.requires_power || !SScryptocurrency.can_fire)
 		change_on(FALSE)
 		return PROCESS_KILL
 
-	var/power_consumed = 0
-	if(obj_flags & EMAGGED)
-		// consume power from anywhere on the wire if emagged
-		power_consumed = use_power_from_net(active_power_usage, take_any = TRUE)
-	if(power_consumed == 0)
-		use_power(active_power_usage)
-		// use_power doesn't tell us how much was actually used, assume it was all
-		power_consumed = active_power_usage
 	// get the ambient gas for processing
 	var/datum/gas_mixture/environment = loc.return_air()
-
-	// first check temperature to see how efficiently the machine operates in this environment
+	// check temperature to see how efficiently the machine operates in this environment
 	temperature = environment.temperature
 	// if we're within 1 degree just use 1 to avoid div by zero
 	var/temperature_difference = max(abs(temperature - ideal_temperature), 1)
 	// index balanced around 1x at 50 deg diff. bigger diff = smaller index (ex: 1000 deg diff = 0.55ish)
 	// below 50 diff, index quickly scales up approaching 2.19ish at 1 deg diff
-	temperature_index = (50 / temperature_difference) ** 0.2
+	// about 0.7 at standard atmos
+	temperature_index = (temperature_index_pivot / temperature_difference) ** 0.2
 
-	// next check moles to see how efficiently the machine loses heat to the environment
-	// more heat loss = less heat in the machine impairing operation
-	var/total_moles = environment.total_moles()
-	// heat dissipated is a portion of power consumed between 0.1 and 0.9 (a range of 0.8), more moles = higher dissipated
-	dissipation_index = (min(total_moles, ideal_moles) / ideal_moles) * 0.8 + 0.1
-	var/dissipated_heat = power_consumed * dissipation_index
+	// can consume more power than parts rating with temp bonus
+	var/power_consumed = active_power_usage * temperature_index
+	use_power(power_consumed)
+
+	// release consumed heat based on coolant content
+	// 0.1 to 1.1, meaning you can produce more heat than exists. m a g i c
+	coolant_factor = 0.1
+	for(var/coolant in coolants)
+		if(reagents.has_reagent(coolant))
+			// measure how much of the reagents are our coolant: presence of other stuff impairs function
+			var/proportion = reagents.get_reagent_amount(coolant) / reagents.total_volume
+			// purity affects performance too
+			var/purity = reagents.get_reagent_purity(coolant)
+			// combine factors including the coolant's factor
+			coolant_factor += proportion * purity * coolants[coolant]
+	// consume a fraction of coolant from evaporation
+	reagents.remove_all(coolant_consumption)
+
+	// coolant determines how much power is released as heat
+	var/dissipated_heat = power_consumed * coolant_factor
 
 	// check freon content for bonus because using particular gasses is "cool"
 	// haha, cool, because it's a coolant
@@ -241,16 +246,18 @@
 		// consume a tiny amount of freon
 		freon_content[MOLES] -= freon_consumption * freon_bonus
 
-	// how much power did we waste? didn't dissipate or apply to mining progress. freon magically reduces this
-	power_wasted = (power_consumed - dissipated_heat) * (1 - freon_bonus)
-	// how much power actually contributed to mining progress? whatever wasn't wasted
-	// ex: (500W consumed - 200W wasted) * 0.8 index * 0.6 parts = 144 proggers
-	progress = (power_consumed - power_wasted) * temperature_index * efficiency
+	// how much power actually contributed to mining progress? whatever was dissipated + other bonuses
+	progress = dissipated_heat * (1 + freon_bonus)
 	// mine dat fukken coin
 	var/result = SScryptocurrency.mine(progress)
 	// announce result when finishing a mining unit
 	if(result)
-		say(result)
+		// don't spam with says because it fills log and assholes will put it on radio
+		// ripped out the runechat part of an audible message since it's not standalone
+		var/list/hearers = get_hearers_in_view(4, src)
+		for(var/mob/M in hearers)
+			if(runechat_prefs_check(M) && M.can_hear())
+				M.create_chat_message(src, get_selected_language(), result)
 
 	// apply dissipated heat to environment
 	var/delta_temperature = dissipated_heat / environment.heat_capacity()
@@ -258,8 +265,7 @@
 		environment.temperature += delta_temperature
 		air_update_turf(FALSE, FALSE)
 
-	update_appearance()
-	// combust/explode when running really hot (cooldown?)
+	// combust/explode when running really hot
 	if(temperature >= combustion_heat * 2)
 		// copied from crab17, should just destroy the rig
 		explosion(src, light_impact_range = 1, flame_range = 2)
@@ -268,56 +274,48 @@
 
 /obj/machinery/crypto_mining_rig/RefreshParts()
 	. = ..()
-	// no "stock parts" so manually add up the stats
-	efficiency = 1
-	active_power_usage = initial(active_power_usage)
-	for(var/obj/item/crypto_mining_card/card in cards)
-		efficiency += card.efficiency
-		active_power_usage += card.power_usage
-	efficiency /= efficiency_divisor
-	update_current_power_usage()
+	// upgradeable coolant reservoir
+	var/volume = 0
+	for(var/obj/item/reagent_containers/glass/beaker/B in component_parts)
+		volume += B.reagents.maximum_volume
+	reagents.maximum_volume = volume
 
 // "graphics" cards for shoving into the rig to get the most performance out
-/obj/item/crypto_mining_card
-	name = "Brandless Graphics Card"
+/obj/item/stock_parts/crypto_mining_card
+	name = "Brandless graphics card"
 	desc = "Only capable of producing the pipe dream screensaver."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "cyborg_upgrade2"
 	w_class = WEIGHT_CLASS_SMALL
 	// TODO make sure these have miserable resale value
-	// how much power this card adds to the rig's usage
-	var/power_usage = 250
-	// efficiency factor for making cards more worthwhile than rigs
-	var/efficiency = 1
+	rating = 1
+	base_name = "graphics card"
+	energy_rating = 2
+	custom_materials = list(/datum/material/iron=50, /datum/material/glass=50)
 
-/obj/item/crypto_mining_card/get_part_rating()
-	. = ..()
-	// just compare efficiency since it always increases
-	return efficiency
-
-/obj/item/crypto_mining_card/two
-	name = "Electron 9000 Graphics Card"
+/obj/item/stock_parts/crypto_mining_card/two
+	name = "Electron 9000 graphics card"
 	desc = "Last year's top-tier card is this year's unwanted garbage."
 	icon_state = "std_mod"
-	power_usage = 500
-	efficiency = 2
+	rating = 2
+	energy_rating = 5
 
-/obj/item/crypto_mining_card/three
-	name = "Plastitanium 800 Graphics Card"
+/obj/item/stock_parts/crypto_mining_card/three
+	name = "Plastitanium 800 graphics card"
 	desc = "The latest and greatest... that was in stock."
 	icon_state = "circuit_map"
 	w_class = WEIGHT_CLASS_NORMAL
-	power_usage = 800
-	efficiency = 3
+	rating = 3
+	energy_rating = 8
 
-/obj/item/crypto_mining_card/four
-	name = "Syndivideo Ruby Graphics Card"
+/obj/item/stock_parts/crypto_mining_card/four
+	name = "Syndivideo Ruby graphics card"
 	desc = "An experimental card using bluespace technology to render frames before they exist."
 	icon = 'icons/obj/stack_objects.dmi'
 	icon_state = "circuit_mess"
 	w_class = WEIGHT_CLASS_BULKY // they didn't even consider the consumers on this one
-	power_usage = 1200
-	efficiency = 4
+	rating = 4
+	energy_rating = 12
 
 // NtOS program for crypto stuff
 /datum/computer_file/program/cryptocurrency
@@ -344,13 +342,14 @@
 	data["exchange_rate"] = SScryptocurrency.exchange_rate
 	data["wallet"] = SScryptocurrency.wallet
 	data["progress_required"] = SScryptocurrency.progress_required
-	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 2
+	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 4
 	data["total_mined"] = SScryptocurrency.total_mined
 	data["total_payout"] = SScryptocurrency.total_payout
 	data["event_chance"] = SScryptocurrency.event_chance
 	data["mining_history"] = SScryptocurrency.mining_history
 	data["payout_history"] = SScryptocurrency.payout_history
 	data["exchange_rate_history"] = SScryptocurrency.exchange_rate_history
+	data["market_closed"] = !SScryptocurrency.can_fire
 
 	return data
 
@@ -360,18 +359,21 @@
 		return
 	switch(action)
 		if("PRG_exchange")
-			var/message = SScryptocurrency.cash_out()
-			// people nearby can hear the cashout message
-			computer.say(message)
+			var/mob/user = usr
+			var/message = SScryptocurrency.cash_out(user)
+			if(message)
+				minor_announce(message, "[SScryptocurrency.coin_name] Exchange Market")
 
 // station goal
 /datum/station_goal/cryptocurrency
 	name = "Cryptocurrency"
-	var/goal_payout = 500000 // half of market cap
+	var/goal_payout = 500000
 
 /datum/station_goal/cryptocurrency/get_report()
 	return {"The Chief Financial Officer heard about cryptocurrency and we can't convince them it's a bad investment.
 		Your station has been selected to research the technology and corner the market before competitors can.
+
+		Mine [goal_payout] [SScryptocurrency.coin_name].
 
 		The base parts are part of your engineering research, and additional components will become available for shipping via cargo.
 		-Nanotrasen Financial Office"}
