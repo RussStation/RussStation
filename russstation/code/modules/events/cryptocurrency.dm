@@ -107,7 +107,7 @@
 /datum/round_event_control/cryptocurrency/card_release
 	name = "Graphics Card Release (Crypto)"
 	typepath = /datum/round_event/cryptocurrency/card_release
-	max_occurrences = 4
+	max_occurrences = 3
 
 /datum/round_event_control/cryptocurrency/card_release/adjust_weight()
 	// extremely likely whenever we pass release thresholds

@@ -86,19 +86,22 @@
 	contains = list(/obj/item/stock_parts/crypto_mining_card)
 	crate_name = "graphics card crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
-	special = TRUE // must be unlocked by market activity
+	special = FALSE // unlocked by default
 
 /datum/supply_pack/engineering/crypto_mining_card/two
 	name = "Intermediate Graphics Card"
 	cost = CARGO_CRATE_VALUE * 10
 	contains = list(/obj/item/stock_parts/crypto_mining_card/two)
+	special = TRUE // must be unlocked by market activity
 
 /datum/supply_pack/engineering/crypto_mining_card/three
 	name = "Advanced Graphics Card"
 	cost = CARGO_CRATE_VALUE * 20
 	contains = list(/obj/item/stock_parts/crypto_mining_card/three)
+	special = TRUE // must be unlocked by market activity
 
 /datum/supply_pack/engineering/crypto_mining_card/four
 	name = "Experimental Graphics Card"
 	cost = CARGO_CRATE_VALUE * 30
 	contains = list(/obj/item/stock_parts/crypto_mining_card/four)
+	special = TRUE // must be unlocked by market activity

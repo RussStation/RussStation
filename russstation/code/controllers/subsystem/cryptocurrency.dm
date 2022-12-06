@@ -55,7 +55,6 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/list/random_events = list()
 	// maps packs to their release payout thresholds
 	var/list/card_packs_thresholds = list(
-		/datum/supply_pack/engineering/crypto_mining_card = 0,
 		/datum/supply_pack/engineering/crypto_mining_card/two = 50000,
 		/datum/supply_pack/engineering/crypto_mining_card/three = 150000,
 		/datum/supply_pack/engineering/crypto_mining_card/four = 400000
@@ -133,7 +132,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/blame = "Someone"
 	if(user && istype(user))
 		blame = user.name
-	return "[blame] exchanged [amount] [coin_name] for [credits] Credits and paid to the [ACCOUNT_CAR_NAME] account."
+	return "[blame] exchanged [amount] [coin_name] for [credits] Credits, paid to the [ACCOUNT_CAR_NAME] account."
 
 /datum/controller/subsystem/cryptocurrency/fire(resumed = 0)
 	// small chance to flip the trend so it's more dynamic between events
