@@ -33,8 +33,8 @@
 /area/station/medical/medbay/lobby)
 "aai" = (
 /obj/machinery/door/window/right/directional/west{
-	req_access = list("pharmacy");
-	dir = 2
+	dir = 2;
+	req_access = list("pharmacy")
 	},
 /obj/effect/turf_decal/delivery,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer4,
@@ -607,15 +607,15 @@
 /obj/machinery/camera/autoname/directional/north,
 /obj/structure/closet/firecloset,
 /obj/structure/sign/directions/science/directional/north{
-	pixel_y = 41;
-	dir = 4
+	dir = 4;
+	pixel_y = 41
 	},
 /obj/structure/sign/directions/evac/directional/north{
 	dir = 2
 	},
 /obj/structure/sign/directions/command/directional/north{
-	pixel_y = 24;
-	dir = 2
+	dir = 2;
+	pixel_y = 24
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
@@ -897,9 +897,9 @@
 /area/station/science/xenobiology)
 "aeo" = (
 /obj/machinery/door/poddoor/shutters{
+	dir = 1;
 	id = "mechbay";
-	name = "Mech Bay Shutters";
-	dir = 1
+	name = "Mech Bay Shutters"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer2,
@@ -2640,8 +2640,8 @@
 /area/station/cargo/storage)
 "amO" = (
 /obj/machinery/conveyor/inverted{
-	id = "disposalbelt";
-	dir = 9
+	dir = 9;
+	id = "disposalbelt"
 	},
 /turf/open/floor/plating,
 /area/station/cargo/storage)
@@ -2651,8 +2651,8 @@
 /area/station/medical/chemistry)
 "amR" = (
 /obj/machinery/conveyor/inverted{
-	id = "disposalbelt";
-	dir = 10
+	dir = 10;
+	id = "disposalbelt"
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -4101,9 +4101,9 @@
 /area/station/service/chapel)
 "asT" = (
 /obj/machinery/door/window/right/directional/west{
+	dir = 1;
 	name = "Monke";
-	req_one_access = list("genetics","virology");
-	dir = 1
+	req_one_access = list("genetics","virology")
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/virology)
@@ -6990,6 +6990,7 @@
 /obj/structure/closet/crate/solarpanel_small,
 /obj/item/paper/guides/jobs/engi/solars,
 /obj/item/stack/rods/fifty,
+/obj/machinery/light/small/directional/south,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
 "aEW" = (
@@ -7959,6 +7960,8 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/science/xenobiology)
 "bbK" = (
+/obj/structure/cable,
+/obj/machinery/power/smes/engineering,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
 "bcU" = (
@@ -9124,8 +9127,8 @@
 	pixel_x = 4
 	},
 /obj/machinery/door/window/left/directional/east{
-	req_access = list("research");
-	dir = 2
+	dir = 2;
+	req_access = list("research")
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer4,
 /obj/structure/disposalpipe/segment,
@@ -9625,9 +9628,9 @@
 /area/station/commons/dorms)
 "cHT" = (
 /obj/machinery/door/poddoor/shutters{
+	dir = 1;
 	id = "mechbay";
-	name = "Mech Bay Shutters";
-	dir = 1
+	name = "Mech Bay Shutters"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer2,
@@ -9749,8 +9752,8 @@
 "cQN" = (
 /obj/effect/turf_decal/tile/red,
 /obj/machinery/computer/turbine_computer{
-	mapping_id = "main_turbine";
-	dir = 4
+	dir = 4;
+	mapping_id = "main_turbine"
 	},
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -11473,8 +11476,8 @@
 /area/station/commons/vacant_room/office)
 "eFs" = (
 /obj/machinery/conveyor/inverted{
-	id = "disposalbelt";
-	dir = 6
+	dir = 6;
+	id = "disposalbelt"
 	},
 /obj/effect/spawner/random/trash/food_packaging,
 /turf/open/floor/plating,
@@ -12906,7 +12909,12 @@
 /turf/open/floor/iron,
 /area/station/security/lockers)
 "gbg" = (
-/obj/machinery/light/small/directional/south,
+/obj/structure/cable,
+/obj/machinery/power/solar_control{
+	dir = 1;
+	id = "starboardsolar";
+	name = "Starboard Quarter Solar Control"
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
 "gbp" = (
@@ -15953,8 +15961,6 @@
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/central)
 "jeL" = (
-/obj/structure/cable,
-/obj/machinery/power/smes/engineering,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
 "jfr" = (
@@ -18835,6 +18841,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/fore)
 "mhD" = (
@@ -19258,9 +19265,6 @@
 /area/station/maintenance/department/science)
 "mCx" = (
 /obj/structure/cable,
-/obj/machinery/power/terminal{
-	dir = 8
-	},
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
 "mCF" = (
@@ -21139,6 +21143,7 @@
 	id = "foreport";
 	name = "Port Bow Solar Control"
 	},
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/port/fore)
 "owO" = (
@@ -21359,12 +21364,12 @@
 	dir = 8
 	},
 /obj/structure/sign/directions/dorms/directional/north{
-	pixel_y = 24;
-	dir = 8
+	dir = 8;
+	pixel_y = 24
 	},
 /obj/structure/sign/directions/security/directional/north{
-	pixel_y = 41;
-	dir = 2
+	dir = 2;
+	pixel_y = 41
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/port)
@@ -26511,6 +26516,7 @@
 	id = "forestarboard";
 	name = "Starboard Bow Solar Control"
 	},
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/fore)
 "ton" = (
@@ -26794,12 +26800,12 @@
 	dir = 2
 	},
 /obj/structure/sign/directions/lavaland/directional/east{
-	pixel_y = -9;
-	dir = 2
+	dir = 2;
+	pixel_y = -9
 	},
 /obj/structure/sign/directions/engineering/directional/east{
-	pixel_y = 9;
-	dir = 1
+	dir = 1;
+	pixel_y = 9
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/port)
@@ -27970,8 +27976,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/components/binary/pump/off{
-	name = "To Turbine";
-	dir = 8
+	dir = 8;
+	name = "To Turbine"
 	},
 /turf/open/floor/iron/textured,
 /area/station/engineering/atmos)
@@ -30248,8 +30254,8 @@
 /area/station/service/hydroponics)
 "wNf" = (
 /obj/machinery/conveyor/inverted{
-	id = "disposalbelt";
-	dir = 5
+	dir = 5;
+	id = "disposalbelt"
 	},
 /turf/open/floor/plating,
 /area/station/cargo/storage)
@@ -30285,10 +30291,9 @@
 /turf/open/floor/iron,
 /area/station/security/warden)
 "wPl" = (
-/obj/machinery/power/solar_control{
-	dir = 1;
-	id = "starboardsolar";
-	name = "Starboard Quarter Solar Control"
+/obj/structure/cable,
+/obj/machinery/power/terminal{
+	dir = 8
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/solars/starboard/aft)
@@ -30642,8 +30647,8 @@
 /area/station/engineering/gravity_generator)
 "xmv" = (
 /obj/machinery/firealarm/partyalarm{
-	pixel_x = 26;
-	dir = 4
+	dir = 4;
+	pixel_x = 26
 	},
 /turf/open/floor/iron/vaporwave,
 /area/station/service/library/lounge)
@@ -55365,7 +55370,7 @@ ahC
 rah
 wUc
 owp
-rDy
+thr
 thr
 oUV
 wUc
@@ -71666,7 +71671,7 @@ mcj
 vDw
 mcj
 mcj
-mcj
+aaa
 aaa
 aaa
 aaa
@@ -71922,7 +71927,7 @@ cch
 mcj
 ekn
 bbK
-wPl
+mcj
 mcj
 aaa
 aaa
@@ -72178,7 +72183,7 @@ qja
 sDO
 mcj
 jeL
-bbK
+wPl
 aEV
 mcj
 aaa
