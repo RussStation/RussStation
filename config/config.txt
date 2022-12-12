@@ -5,30 +5,30 @@ $include dbconfig.txt
 $include comms.txt
 $include resources.txt
 $include interviews.txt
-$include russstation_config.txt
+$include lua.txt
 
 # You can use the @ character at the beginning of a config option to lock it from being edited in-game
 # Example usage:
-# @SERVERNAME RussStation
+# @SERVERNAME tgstation
 # Which sets the SERVERNAME, and disallows admins from being able to change it using View Variables.
 # @LOG_TWITTER 0
 # Which explicitly disables LOG_TWITTER, as well as locking it.
 # There are various options which are hard-locked for security reasons.
 
 ## Server name: This appears at the top of the screen in-game and in the BYOND hub. Uncomment and replace 'tgstation' with the name of your choice.
-SERVERNAME Russ Station
+# SERVERNAME tgstation
 
 ## Server SQL name: This is the name used to identify the server to the SQL DB, distinct from SERVERNAME as it must be at most 32 characters.
-SERVERSQLNAME RussStationSQL
+# SERVERSQLNAME tgstation
 
 ## Station name: The name of the station as it is referred to in-game. If commented out, the game will generate a random name instead.
-#STATIONNAME Russ Station
+STATIONNAME Space Station 13
 
 ## Put on byond hub: Uncomment this to put your server on the byond hub.
 #HUB
 
 ## Lobby time: This is the amount of time between rounds that players have to setup their characters and be ready.
-LOBBY_COUNTDOWN 240
+LOBBY_COUNTDOWN 120
 
 ## Round End Time: This is the amount of time after the round ends that players have to murder death kill each other.
 ROUND_END_COUNTDOWN 90
@@ -39,10 +39,10 @@ ROUND_END_COUNTDOWN 90
 ADMIN_LEGACY_SYSTEM
 
 ##Uncomment this to stop any admins loaded by the legacy system from having their rank edited by the permissions panel
-PROTECT_LEGACY_ADMINS
+#PROTECT_LEGACY_ADMINS
 
 ##Uncomment this to stop any ranks loaded by the legacy system from having their flags edited by the permissions panel
-PROTECT_LEGACY_RANKS
+#PROTECT_LEGACY_RANKS
 
 ##Uncomment this to have admin ranks only loaded from the legacy admin_ranks.txt
 ##If enabled, each time admins are loaded ranks the database will be updated with the current ranks and their flags
@@ -62,7 +62,7 @@ ENABLE_LOCALHOST_RANK
 #USE_ACCOUNT_AGE_FOR_JOBS
 
 ## Unhash this to track player playtime in the database. Requires database to be enabled.
-USE_EXP_TRACKING
+#USE_EXP_TRACKING
 ## Unhash this to enable playtime requirements for head jobs.
 #USE_EXP_RESTRICTIONS_HEADS
 ## Unhash this to override head jobs' playtime requirements with this number of hours.
@@ -73,7 +73,7 @@ USE_EXP_TRACKING
 ## Unhash this to enable playtime requirements for certain non-head jobs, like Engineer and Scientist.
 #USE_EXP_RESTRICTIONS_OTHER
 ## Allows admins to bypass job playtime requirements.
-USE_EXP_RESTRICTIONS_ADMIN_BYPASS
+#USE_EXP_RESTRICTIONS_ADMIN_BYPASS
 ## Unhash this to have intern tags automatically added to ID cards for station roles depending on the living hours of the player holding them.
 #USE_LOW_LIVING_HOUR_INTERN
 ## If USE_LOW_LIVING_HOUR_INTERN is unhashed, players under this number of living hours have [Intern] added to their ID card. If this isn't set, uses USE_EXP_RESTRICTIONS_HEADS_HOURS instead. If that isn't set, it finally defaults to a hardcoded fallback of 15 hours.
@@ -118,17 +118,23 @@ LOG_ATTACK
 ## log pda messages
 LOG_PDA
 
+## log uplink purchases
+LOG_UPLINK
+
 ## log telecomms messages
 LOG_TELECOMMS
 
 ## log prayers
 LOG_PRAYER
 
-## log silocns
+## log silicons
 LOG_SILICON
 
 ## log economy actions
 LOG_ECON
+
+## log traitor objectives
+LOG_TRAITOR
 
 ## log crew manifest to separate file
 LOG_MANIFEST
@@ -147,31 +153,34 @@ LOG_MANIFEST
 LOG_PICTURES
 
 ## log mecha actions
-LOG_MECHA
+# LOG_MECHA
 
 ## log virus and actions
 LOG_VIRUS
 
-## log cloning actions
-LOG_CLONING
-
 ## log shuttle actions
 LOG_SHUTTLE
 
+## log tool interactions [/atom/proc/tool_act]
+LOG_TOOLS
+
 ## Log all timers on timer auto reset
 # LOG_TIMERS_ON_BUCKET_RESET
+
+## log speech indicators
+LOG_SPEECH_INDICATORS
 
 ##Log camera pictures - Must have picture logging enabled
 PICTURE_LOGGING_CAMERA
 
 ## period of time in seconds for players to be considered inactive
-INACTIVITY_PERIOD 300
+# INACTIVITY_PERIOD 300
 
 ## period of time in seconds for players to be considered afk and kickable
-AFK_PERIOD 1800
+# AFK_PERIOD 600
 
 ## disconnect players who are considered afk
-KICK_INACTIVE
+# KICK_INACTIVE
 
 ## Comment this out to stop admins being able to choose their personal ooccolor
 ALLOW_ADMIN_OOCCOLOR
@@ -191,8 +200,14 @@ ID_CONSOLE_JOBSLOT_DELAY 30
 ## allow players to initiate a map-change vote
 #ALLOW_VOTE_MAP
 
+## allow players to rock the vote, or to vote on the map again if they didn't like the last results
+#ALLOW_ROCK_THE_VOTE
+
+## the number of times you wish to allow players to rock the vote in a given shift
+MAX_ROCKING_VOTES 1
+
 ## min delay (deciseconds) between voting sessions (default 10 minutes)
-VOTE_DELAY 0
+VOTE_DELAY 6000
 
 ## time period (deciseconds) which voting session will last (default 1 minute)
 VOTE_PERIOD 600
@@ -207,7 +222,7 @@ VOTE_PERIOD 600
 NORESPAWN
 
 ## set a hosted by name for unix platforms
-HOSTEDBY RussMoney
+HOSTEDBY Yournamehere
 
 ## Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting)
 GUEST_BAN
@@ -255,6 +270,9 @@ RULESURL https://honksquad.com/ss13/
 ## Github address
 GITHUBURL https://github.com/RussStation/RussStation
 
+## Discord bot command prefix, if the discord bot is used
+# DISCORDBOTCOMMANDPREFIX ?
+
 ## Round specific stats address
 ## Link to round specific parsed logs; IE statbus. It is appended with the RoundID automatically by ticker/Reboot()
 ## This will take priority over the game logs address during reboot.
@@ -278,8 +296,12 @@ BANAPPEALS https://discord.gg/honk
 # INVOKE_YOUTUBEDL youtube-dl
 
 ## In-game features
-##Toggle for having jobs load up from the .txt
-# LOAD_JOBS_FROM_TXT
+
+## Toggle for having jobs load up from the jobconfig.toml (or jobs.txt) file. Will use codebase defaults if commented out.
+## Jobs have specific "keys" tied to their in-game datums, those should sync up otherwise it will fail to load.
+## Setting Total/Spawn Positions to -1 will open unlimited join slots for it.
+## Playtime Requirements is in minutes, Required Account Age is in days.
+#LOAD_JOBS_FROM_TXT
 
 ## Uncomment this to forbid admins from possessing the singularity.
 #FORBID_SINGULO_POSSESSION
@@ -294,13 +316,12 @@ ALLOW_HOLIDAYS
 ## Uncomment to show the names of the admin sending a pm from IRC instead of showing as a stealthmin.
 #SHOW_IRC_NAME
 
-## Defines the ticklimit for subsystem initialization (In percents of a byond tick). Lower makes world start smoother. Higher makes it faster.
-##This is currently a testing optimized setting. A good value for production would be 98.
-TICK_LIMIT_MC_INIT 98
+## Uncomment to prevent machines syncing to the Science techweb by default.
+#NO_DEFAULT_TECHWEB_LINK
 
 ##Defines the ticklag for the world. Ticklag is the amount of time between game ticks (aka byond ticks) (in 1/10ths of a second).
 ##	This also controls the client network update rate, as well as the default client fps
-TICKLAG 1
+TICKLAG 0.5
 
 ##Can also be set as per-second value, the following value is identical to the above.
 #FPS 20
@@ -345,11 +366,11 @@ BYOND_MEMBER_BYPASS_POPCAP
 
 ## Notify admins when a new player connects for the first x days a player's been around. (0 for first connection only, -1 for never)
 ##	Requres database
-NOTIFY_NEW_PLAYER_AGE 2
+NOTIFY_NEW_PLAYER_AGE 0
 
 ## Notify admins when a player connects if their byond account was created in the last X days
 ## Requires database
-NOTIFY_NEW_PLAYER_ACCOUNT_AGE 2
+NOTIFY_NEW_PLAYER_ACCOUNT_AGE 1
 
 ## Notify the irc channel when a new player makes their first connection
 ##	Requres database
@@ -387,7 +408,7 @@ AUTOCONVERT_NOTES
 ANNOUNCE_ADMIN_LOGOUT
 
 ## Uncomment to have an admin message sent anytime an admin connects to a round in play, you can edit the messages in admin.dm
-ANNOUNCE_ADMIN_LOGIN
+#ANNOUNCE_ADMIN_LOGIN
 
 ## Map rotation
 ## You should edit maps.txt to match your configuration when you enable this.
@@ -400,7 +421,7 @@ PREFERENCE_MAP_VOTING 1
 
 ## AUTOADMIN
 ## The default admin rank
-AUTOADMIN_RANK Badmin
+AUTOADMIN_RANK Game Master
 
 ## Uncomment to automatically give that admin rank to all players
 #AUTOADMIN
@@ -410,7 +431,7 @@ AUTOADMIN_RANK Badmin
 #AUTO_DEADMIN_PLAYERS
 
 ## Uncomment to automatically deadmin antagonists when they gain the role.
-AUTO_DEADMIN_ANTAGONISTS
+#AUTO_DEADMIN_ANTAGONISTS
 
 ## Uncomment to automatically deadmin specific role sets when a player joins the game.
 #AUTO_DEADMIN_HEADS
@@ -453,13 +474,13 @@ MINUTE_CLICK_LIMIT 400
 
 ##Error handling related options
 ## The "cooldown" time for each occurence of a unique error
-ERROR_COOLDOWN 600
+#ERROR_COOLDOWN 600
 ## How many occurences before the next will silence them
-ERROR_LIMIT 90
+#ERROR_LIMIT 90
 ## How long a unique error will be silenced for
-ERROR_SILENCE_TIME 6000
+#ERROR_SILENCE_TIME 6000
 ##How long to wait between messaging admins about occurences of a unique error
-ERROR_MSG_DELAY 50
+#ERROR_MSG_DELAY 50
 
 
 ## Game Chat Message Options
@@ -468,14 +489,14 @@ ERROR_MSG_DELAY 50
 ## If using TGS4, the string option can be set as one of more chat channel tags (separated by ','s) to limit the message to channels with that tag name (case-sensitive). This will have no effect on TGS3.
 ## i.e. CHAT_ANNOUNCE_NEW_GAME chat_channel_tag
 
-## Send a message with the station name starting a new game. Also required for the notify function
+## Send a message with the station name starting a new game.
 #CHAT_ANNOUNCE_NEW_GAME
 
 ## Ping users who use the `notify` command when a new game starts.
 #CHAT_NEW_GAME_NOTIFICATIONS
 
 ## Allow admin hrefs that don't use the new token system, will eventually be removed
-DEBUG_ADMIN_HREFS
+#DEBUG_ADMIN_HREFS
 
 ###Master Controller High Pop Mode###
 
@@ -492,10 +513,10 @@ BASE_MC_TICK_RATE 1
 HIGH_POP_MC_TICK_RATE 1.1
 
 ##Engage high pop mode if player count raises above this (Player in this context means any connected user. Lobby, ghost or in-game all count)
-HIGH_POP_MC_MODE_AMOUNT 50
+HIGH_POP_MC_MODE_AMOUNT 65
 
 ##Disengage high pop mode if player count drops below this
-DISABLE_HIGH_POP_MC_MODE_AMOUNT 47
+DISABLE_HIGH_POP_MC_MODE_AMOUNT 60
 
 ## Uncomment to prevent the world from sleeping while no players are connected after initializations
 #RESUME_AFTER_INITIALIZATIONS
@@ -556,16 +577,27 @@ DEFAULT_VIEW_SQUARE 15x15
 
 ## The URL to the webhook for adminhelps to relay the urgent ahelp message to
 ## If not set, will disable urgent ahelps.
-#ADMINHELP_WEBHOOK_URL
+#URGENT_ADMINHELP_WEBHOOK_URL
+
+## See above, but for non-urgent ahelps
+#REGULAR_ADMINHELP_WEBHOOK_URL
 
 ## The urgent ahelp cooldown for a given player if they're alone on a server and need to send an urgent ahelp.
 URGENT_AHELP_COOLDOWN 300
 
 ## The message that is sent to the discord if an urgent ahelp is sent. Useful for sending a role ping.
-#URGENT_AHELP_MESSAGE Ban ban ban ban
+#URGENT_AHELP_MESSAGE
+
+## See above, but for non-urgent ahelps.
+#AHELP_MESSAGE
 
 ## The message that the player receives whenever prompted whether they want to send an urgent ahelp or not.
 #URGENT_AHELP_USER_PROMPT This'll ping the admins!
+
+## The link that the title of a ticket can link to.
+## If not set, it will link nowhere
+## use $RID for the round ID and $TID for the ticket ID
+#ADMINHELP_AHELP_LINK
 
 ## The URL for the pfp of the webhook
 #ADMINHELP_WEBHOOK_PFP
@@ -578,3 +610,25 @@ URGENT_AHELP_COOLDOWN 300
 ## Based on config directory, so "motd.txt" points to "config/motd.txt"
 MOTD motd.txt
 #MOTD motd_extra.txt
+
+## Assets can opt-in to caching their results into `tmp`.
+## This is important, as preferences assets take upwards of 30 seconds (without sleeps) to collect.
+## The cache is assumed to be cleared by TGS recompiling, which deletes `tmp`.
+## This should be disabled (through `CACHE_ASSETS 0`) on development,
+## but enabled on production (the default).
+CACHE_ASSETS 0
+
+## Uncomment to allow the station name to be in the hub entry.
+## You should only enable this if you can guarantee a station name doesn't break BYOND's TOS.
+## BYOND staff have gotten upset at us in the past for inappropriate station names.
+#STATION_NAME_IN_HUB_ENTRY
+
+## The number of PR announcements allowed for the same pull request per round
+## This makes sure that somebody can only spam a few reopens and closes before being ignored
+PR_ANNOUNCEMENTS_PER_ROUND 5
+
+## Uncomment to block all attempts to profile, for performance reasons
+#FORBID_ALL_PROFILING
+
+## Uncomment to block granting profiling privileges to users with R_DEBUG, for performance purposes
+#FORBID_ADMIN_PROFILING

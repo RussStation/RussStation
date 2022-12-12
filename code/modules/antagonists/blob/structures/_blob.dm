@@ -1,7 +1,7 @@
 //I will need to recode parts of this but I am way too tired atm //I don't know who left this comment but they never did come back
 /obj/structure/blob
 	name = "blob"
-	icon = 'icons/mob/blob.dmi'
+	icon = 'icons/mob/nonhuman-player/blob.dmi'
 	light_range = 2
 	desc = "A thick wall of writhing tendrils."
 	density = TRUE
@@ -124,6 +124,8 @@
 
 /obj/structure/blob/proc/ConsumeTile()
 	for(var/atom/A in loc)
+		if(!A.can_blob_attack())
+			continue
 		if(isliving(A) && overmind && !isblobmonster(A)) // Make sure to inject strain-reagents with automatic attacks when needed.
 			overmind.blobstrain.attack_living(A)
 			continue // Don't smack them twice though
@@ -175,6 +177,8 @@
 	for(var/atom/A in T)
 		if(!A.CanPass(src, get_dir(T, src))) //is anything in the turf impassable
 			make_blob = FALSE
+		if(!A.can_blob_attack())
+			continue
 		if(isliving(A) && overmind && !controller) // Make sure to inject strain-reagents with automatic attacks when needed.
 			overmind.blobstrain.attack_living(A)
 			continue // Don't smack them twice though

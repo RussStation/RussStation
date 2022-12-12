@@ -6,13 +6,13 @@
 	sexes = FALSE
 	species_traits = list(NOBLOOD, NOEYESPRITES, NO_UNDERWEAR)
 	inherent_traits = list(
-		TRAIT_ADVANCEDTOOLUSER,// honk -- imagine not having this
+		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
 		TRAIT_NOBREATH,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_LITERATE,
-		// TRAIT_PLANT_SAFE, // honk -- maybe add this? Podpeople have it
+		// TRAIT_PLANT_SAFE, // maybe add this? Podpeople have it
 	)
 	external_organs = list(
 		/obj/item/organ/external/diona_hair = "None",

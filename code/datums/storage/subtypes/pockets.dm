@@ -59,9 +59,9 @@
 
 /datum/storage/pockets/chefhat/can_insert(obj/item/to_insert, mob/user, messages, force)
 	. = ..()
-	if(istype(to_insert, /obj/item/clothing/head/mob_holder))
+	if(ispickedupmob(to_insert))
 		var/obj/item/clothing/head/mob_holder/mausholder = to_insert
-		if(locate(/mob/living/simple_animal/mouse) in mausholder.contents)
+		if(locate(/mob/living/basic/mouse) in mausholder.contents)
 			return
 		return FALSE
 
@@ -96,7 +96,8 @@
 		/obj/item/lighter,
 		/obj/item/match,
 		/obj/item/holochip,
-		/obj/item/toy/crayon),
+		/obj/item/toy/crayon,
+		/obj/item/reagent_containers/cup/glass/flask),
 		list(/obj/item/screwdriver/power,
 		/obj/item/ammo_casing/caseless/rocket,
 		/obj/item/clothing/mask/cigarette/pipe,
@@ -129,7 +130,8 @@
 		/obj/item/match,
 		/obj/item/holochip,
 		/obj/item/toy/crayon,
-		/obj/item/bikehorn),
+		/obj/item/bikehorn,
+		/obj/item/reagent_containers/cup/glass/flask),
 		list(/obj/item/screwdriver/power,
 		/obj/item/ammo_casing/caseless/rocket,
 		/obj/item/clothing/mask/cigarette/pipe,
@@ -157,9 +159,9 @@
 
 /datum/storage/pockets/helmet/New()
 	. = ..()
-	set_holdable(list(/obj/item/reagent_containers/food/drinks/bottle/vodka,
-					  /obj/item/reagent_containers/food/drinks/bottle/molotov,
-					  /obj/item/reagent_containers/food/drinks/drinkingglass,
+	set_holdable(list(/obj/item/reagent_containers/cup/glass/bottle/vodka,
+					  /obj/item/reagent_containers/cup/glass/bottle/molotov,
+					  /obj/item/reagent_containers/cup/glass/drinkingglass,
 					  /obj/item/ammo_box/a762))
 
 
@@ -181,7 +183,7 @@
 		/obj/item/melee/rune_carver,
 		/obj/item/melee/sickly_blade, // Normal sized, so you can only fit one.
 		/obj/item/organ, // Organs are also often used in rituals.
-		/obj/item/reagent_containers/glass/beaker/eldritch,
+		/obj/item/reagent_containers/cup/beaker/eldritch,
 	))
 
 	var/static/list/exception_cache = typecacheof(list(/obj/item/bodypart, /obj/item/melee/sickly_blade))

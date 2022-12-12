@@ -1,6 +1,7 @@
 /obj/item/storage/lockbox
 	name = "lockbox"
 	desc = "A locked box."
+	icon = 'icons/obj/storage/case.dmi'
 	icon_state = "lockbox+l"
 	inhand_icon_state = "lockbox"
 	lefthand_file = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi'
@@ -13,12 +14,14 @@
 	var/icon_closed = "lockbox"
 	var/icon_broken = "lockbox+b"
 
-/obj/item/storage/lockbox/Initialize()
+/obj/item/storage/lockbox/Initialize(mapload)
 	. = ..()
 	atom_storage.max_specific_storage = WEIGHT_CLASS_NORMAL
 	atom_storage.max_total_storage = 14
 	atom_storage.max_slots = 4
 	atom_storage.locked = TRUE
+
+	register_context()
 
 /obj/item/storage/lockbox/attackby(obj/item/W, mob/user, params)
 	var/locked = atom_storage.locked
@@ -96,7 +99,7 @@
 	icon_closed = "medalbox"
 	icon_broken = "medalbox+b"
 
-/obj/item/storage/lockbox/medal/Initialize()
+/obj/item/storage/lockbox/medal/Initialize(mapload)
 	. = ..()
 	atom_storage.max_specific_storage = WEIGHT_CLASS_SMALL
 	atom_storage.max_slots = 10
@@ -109,7 +112,7 @@
 		. += span_notice("Alt-click to [open ? "close":"open"] it.")
 
 /obj/item/storage/lockbox/medal/AltClick(mob/user)
-	if(user.canUseTopic(src, BE_CLOSE))
+	if(user.canUseTopic(src, be_close = TRUE))
 		if(!atom_storage.locked)
 			open = (open ? FALSE : TRUE)
 			update_appearance()
@@ -169,12 +172,12 @@
 	name = "security medal box"
 	desc = "A locked box used to store medals to be given to members of the security department."
 	req_access = list(ACCESS_HOS)
-	
+
 /obj/item/storage/lockbox/medal/med
 	name = "medical medal box"
 	desc = "A locked box used to store medals to be given to members of the medical department."
 	req_access = list(ACCESS_CMO)
-	
+
 /obj/item/storage/lockbox/medal/med/PopulateContents()
 	new /obj/item/clothing/accessory/medal/med_medal(src)
 	new /obj/item/clothing/accessory/medal/med_medal2(src)
@@ -211,8 +214,8 @@
 /obj/item/storage/lockbox/order
 	name = "order lockbox"
 	desc = "A box used to secure small cargo orders from being looted by those who didn't order it. Yeah, cargo tech, that means you."
-	icon = 'icons/obj/storage.dmi'
 	icon_state = "secure"
+	icon_broken = "secure+b"
 	inhand_icon_state = "sec-case"
 	lefthand_file = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/briefcase_righthand.dmi'
@@ -223,12 +226,13 @@
 /obj/item/storage/lockbox/order/Initialize(mapload, datum/bank_account/_buyer_account)
 	. = ..()
 	buyer_account = _buyer_account
+	ADD_TRAIT(src, TRAIT_NO_MISSING_ITEM_ERROR, TRAIT_GENERIC)
 
 /obj/item/storage/lockbox/order/attackby(obj/item/W, mob/user, params)
-	if(!istype(W, /obj/item/card/id))
+	var/obj/item/card/id/id_card = W.GetID()
+	if(!id_card)
 		return ..()
 
-	var/obj/item/card/id/id_card = W
 	if(iscarbon(user))
 		add_fingerprint(user)
 
@@ -241,3 +245,13 @@
 	user.visible_message(span_notice("[user] [privacy_lock ? "" : "un"]locks [src]'s privacy lock."),
 					span_notice("You [privacy_lock ? "" : "un"]lock [src]'s privacy lock."))
 
+///screentips for lockboxes
+/obj/item/storage/lockbox/add_context(atom/source, list/context, obj/item/held_item, mob/user)
+	if(!held_item)
+		return NONE
+	if(src.broken)
+		return NONE
+	if(!held_item.GetID())
+		return NONE
+	context[SCREENTIP_CONTEXT_LMB] = atom_storage.locked ? "Unlock with ID" : "Lock with ID"
+	return CONTEXTUAL_SCREENTIP_SET

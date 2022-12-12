@@ -24,6 +24,13 @@
 #define APPRENTICE_ROBELESS "robeless"
 #define APPRENTICE_HEALING "healing"
 
+//Pirates
+
+///Minimum amount the pirates will demand
+#define PAYOFF_MIN 20000
+///How long pirates will wait for a response before attacking
+#define RESPONSE_MAX_TIME 2 MINUTES
+
 //ERT Types
 #define ERT_BLUE "Blue"
 #define ERT_RED  "Red"
@@ -121,9 +128,6 @@
 
 ///File to the malf flavor
 #define MALFUNCTION_FLAVOR_FILE "antagonist_flavor/malfunction_flavor.json"
-
-///File to the thief flavor
-#define THIEF_FLAVOR_FILE "antagonist_flavor/thief_flavor.json"
 
 /// JSON string file for all of our heretic influence flavors
 #define HERETIC_INFLUENCE_FILE "antagonist_flavor/heretic_influences.json"
@@ -258,8 +262,10 @@ GLOBAL_LIST_INIT(ai_employers, list(
 #define OBJECTIVE_STATE_INVALID 5
 
 /// Weights for traitor objective categories
-#define OBJECTIVE_WEIGHT_TINY    5
-#define OBJECTIVE_WEIGHT_SMALL 	 7
+#define OBJECTIVE_WEIGHT_TINY 5
+#define OBJECTIVE_WEIGHT_SMALL 7
 #define OBJECTIVE_WEIGHT_DEFAULT 10
-#define OBJECTIVE_WEIGHT_BIG	 15
-#define OBJECTIVE_WEIGHT_HUGE	 20
+#define OBJECTIVE_WEIGHT_BIG 15
+#define OBJECTIVE_WEIGHT_HUGE 20
+
+#define REVENANT_NAME_FILE "revenant_names.json"

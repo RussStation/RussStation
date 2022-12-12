@@ -1,6 +1,6 @@
 /obj/item/toy/xmas_cracker
 	name = "xmas cracker"
-	icon = 'icons/obj/christmas.dmi'
+	icon = 'icons/obj/holiday/christmas.dmi'
 	icon_state = "cracker"
 	desc = "Directions for use: Requires two people, one to pull each end."
 	/// The crack state of the toy. If set to TRUE, you can no longer crack it by attacking.
@@ -22,7 +22,7 @@
 			"Why is Christmas just like life on ss13?\n\n<i>You do all the work and the fat guy gets all the credit.</i>",
 			"Why doesn't Santa have any children?\n\n<i>Because he only comes down the chimney.</i>"))
 		joke_paper.update_appearance()
-		new /obj/item/clothing/head/festive(target.loc)
+		new /obj/item/clothing/head/costume/festive(target.loc)
 		user.update_icons()
 		cracked = TRUE
 		icon_state = "cracker1"
@@ -34,7 +34,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/clothing/head/festive
+/obj/item/clothing/head/costume/festive
 	name = "festive paper hat"
 	icon_state = "xmashat"
 	desc = "A crappy paper hat that you are REQUIRED to wear."
@@ -55,13 +55,11 @@
 	var/christmas_tree = /obj/structure/flora/tree/pine/xmas/presents
 
 /obj/effect/spawner/xmastree/Initialize(mapload)
-	..()
-	if((CHRISTMAS in SSevents.holidays) && christmas_tree)
+	. = ..()
+	if(check_holidays(CHRISTMAS) && christmas_tree)
 		new christmas_tree(get_turf(src))
-	else if((FESTIVE_SEASON in SSevents.holidays) && festive_tree)
+	else if(check_holidays(FESTIVE_SEASON) && festive_tree)
 		new festive_tree(get_turf(src))
-
-	return INITIALIZE_HINT_QDEL
 
 /obj/effect/spawner/xmastree/rdrod
 	name = "festivus pole spawner"
@@ -75,6 +73,8 @@
 	weight = 20
 	max_occurrences = 1
 	earliest_start = 30 MINUTES
+	category = EVENT_CATEGORY_HOLIDAY
+	description = "Spawns santa, who shall roam the station, handing out gifts."
 
 /datum/round_event/santa
 	var/mob/living/carbon/human/santa //who is our santa?

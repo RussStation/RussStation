@@ -13,7 +13,7 @@ REVIVAL_BRAIN_LIFE -1
 
 ## OOC DURING ROUND ###
 ## Comment this out if you want OOC to be automatically disabled during the round, it will be enabled during the lobby and after the round end results.
-#OOC_DURING_ROUND
+OOC_DURING_ROUND
 
 ## EMOJI ###
 ## Comment this out if you want to disable emojis
@@ -21,7 +21,7 @@ EMOJIS
 
 ## HEART COMMENDATIONS ###
 ## Uncomment this if you'd like to enable commendation pollings for this percentage of players near the end of the round (5% suggested)
-#COMMENDATION_PERCENT_POLL 0.05
+COMMENDATION_PERCENT_POLL 0.05
 
 ## MOB MOVEMENT ###
 
@@ -33,7 +33,7 @@ EMOJIS
 ## To speed things up make the number negative, to slow things down, make the number positive.
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
-RUN_DELAY 2
+RUN_DELAY 1.5
 WALK_DELAY 4
 
 ## The variables below affect the movement of specific mob types. THIS AFFECTS ALL SUBTYPES OF THE TYPE YOU CHOOSE!
@@ -42,21 +42,20 @@ WALK_DELAY 4
 ## /mob/living/carbon/human on the last entry, the last entry will override the first.
 ##MULTIPLICATIVE_MOVESPEED /mob/living/carbon/human 0
 ##MULTIPLICATIVE_MOVESPEED /mob/living/silicon/robot 0
-##MULTIPLICATIVE_MOVESPEED /mob/living/carbon/monkey 0
 ##MULTIPLICATIVE_MOVESPEED /mob/living/carbon/alien 0
-##MULTIPLICATIVE_MOVESPEED /mob/living/simple_animal/slime 1
-MULTIPLICATIVE_MOVESPEED /mob/living/simple_animal 1
+##MULTIPLICATIVE_MOVESPEED /mob/living/simple_animal/slime 0
+MULTIPLICATIVE_MOVESPEED /mob/living/simple_animal 0
 
 
 ## NAMES ###
 ## If uncommented this adds a random surname to a player's name if they only specify one name.
-#HUMANS_NEED_SURNAMES
+HUMANS_NEED_SURNAMES
 
 ## If uncommented, this forces all players to use random names !and appearances!.
 #FORCE_RANDOM_NAMES
 
 ## Unhash this to turn on automatic reopening of a player's job if they suicide at roundstart
-REOPEN_ROUNDSTART_SUICIDE_ROLES
+#REOPEN_ROUNDSTART_SUICIDE_ROLES
 
 ## Unhash to enable reopening of command level positions
 #REOPEN_ROUNDSTART_SUICIDE_ROLES_COMMAND_POSITIONS
@@ -64,7 +63,7 @@ REOPEN_ROUNDSTART_SUICIDE_ROLES
 ## Define the delay for roles to be reopened after the round starts in seconds.
 ## Has a minimum delay of 30 seconds, though it's suggested to keep over 1 min
 ## If undefined, the delay defaults to 4 minutes.
-REOPEN_ROUNDSTART_SUICIDE_ROLES_DELAY 240
+#REOPEN_ROUNDSTART_SUICIDE_ROLES_DELAY 240
 
 ## Unhash to enable a printed command report for reopened roles listing what roles were reopened.
 #REOPEN_ROUNDSTART_SUICIDE_ROLES_COMMAND_REPORT
@@ -78,6 +77,17 @@ ALERT_RED_UPTO There is an immediate serious threat to the station. Security may
 ALERT_RED_DOWNTO The station's destruction has been averted. There is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised.
 ALERT_DELTA Destruction of the station is imminent. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
 
+## The total weight of station goals possible for a round (allows multiple goals)
+STATION_GOAL_BUDGET 1
+
+## GAME MODES ###
+
+## Uncomment to not send a roundstart intercept report. Gamemodes may override this.
+#NO_INTERCEPT_REPORT
+
+## Percent weight reductions for three of the most recent modes
+
+REPEATED_MODE_ADJUST 45 30 10
 
 ## The amount of time it takes for the emergency shuttle to be called, from round start.
 SHUTTLE_REFUEL_DELAY 12000
@@ -92,7 +102,7 @@ CHANGELING_SCALING_COEFF 6
 ## Variables calculate how number of open security officer positions will scale to population.
 ## Used as (Officers = Population / Coeff)
 ## Set to 0 to disable scaling and use default numbers instead.
-SECURITY_SCALING_COEFF 0
+SECURITY_SCALING_COEFF 8
 
 ## The number of objectives traitors get.
 ## Not including escaping/hijacking.
@@ -104,10 +114,13 @@ BROTHER_OBJECTIVES_AMOUNT 2
 PROTECT_ROLES_FROM_ANTAGONIST
 
 ## Uncomment to prohibit assistants from becoming most antagonists.
-PROTECT_ASSISTANT_FROM_ANTAGONIST
+#PROTECT_ASSISTANT_FROM_ANTAGONIST
 
 ## If non-human species are barred from joining as a head of staff
-ENFORCE_HUMAN_AUTHORITY
+#ENFORCE_HUMAN_AUTHORITY
+
+## If non-human species are barred from joining as a head of staff, including jobs flagged as allowed for non-humans, ie. Quartermaster.
+#ENFORCE_HUMAN_AUTHORITY_ON_EVERYONE
 
 ## If late-joining players have a chance to become a traitor/changeling
 ALLOW_LATEJOIN_ANTAGONISTS
@@ -124,36 +137,33 @@ ALLOW_RANDOM_EVENTS
 
 ## Multiplier for earliest start time of dangerous events.
 ## Set to 0 to make dangerous events avaliable from round start.
-EVENTS_MIN_TIME_MUL 2
+EVENTS_MIN_TIME_MUL 1
 
 ## Multiplier for minimal player count (players = alive non-AFK humans) for dangerous events to start.
 ## Set to 0 to make dangerous events avaliable for all populations.
-EVENTS_MIN_PLAYERS_MUL 0.5
+EVENTS_MIN_PLAYERS_MUL 1
 
 
 ## AI ###
 
 ## Allow the AI job to be picked.
-#ALLOW_AI
+ALLOW_AI
 
 ## Allow the AI Multicamera feature to be used by AI players
 ALLOW_AI_MULTICAM
 
 ## Secborg ###
-## Uncomment to prevent the security cyborg module from being chosen
-DISABLE_SECBORG
+## Uncomment to prevent the security cyborg model from being chosen
+#DISABLE_SECBORG
 
 ## Peacekeeper Borg ###
-## Uncomment to prevent the peacekeeper cyborg module from being chosen
+## Uncomment to prevent the peacekeeper cyborg model from being chosen
 #DISABLE_PEACEBORG
 
 ## AWAY MISSIONS ###
 
-## Uncomment to load the virtual reality hub map
-VIRTUAL_REALITY
-
 ## Uncomment to load one of the missions from awaymissionconfig.txt or away_missions/ at roundstart.
-ROUNDSTART_AWAY
+#ROUNDSTART_AWAY
 
 ## How long the delay is before the Away Mission gate opens. Default is half an hour.
 ## 600 is one minute.
@@ -176,21 +186,27 @@ MINIMAL_ACCESS_THRESHOLD 20
 #JOBS_HAVE_MINIMAL_ACCESS
 
 ## Uncomment to give assistants maint access.
-ASSISTANTS_HAVE_MAINT_ACCESS
+#ASSISTANTS_HAVE_MAINT_ACCESS
 
 ## Uncoment to give security maint access. Note that if you dectivate JOBS_HAVE_MINIMAL_ACCESS security already gets maint from that.
-SECURITY_HAS_MAINT_ACCESS
+#SECURITY_HAS_MAINT_ACCESS
 
 ## Uncomment to give everyone maint access.
-EVERYONE_HAS_MAINT_ACCESS
+#EVERYONE_HAS_MAINT_ACCESS
 
 ## Comment this out this to make security officers spawn in departmental security posts
-SEC_START_BRIG
+#SEC_START_BRIG
+
+## This variable is how you may configure "Scaling Access" for Departmental Security Officers.
+## Set to 0/commented out for "off", Departmental Security Officers will never get additional room-specific access (beyond general departmental doors).
+## Set to 1 if you want to enable "Scaling Access", where Departmental Security Officers will get access to most rooms within a department depending on how many security officers there are relative to the number of people on a station.
+## Set to 2 if you want Departmental Security Officers to always have access to all rooms in a department.
+DEPSEC_ACCESS_LEVEL 1
 
 
 ## GHOST INTERACTION ###
 ## Uncomment to let ghosts spin chairs. You may be wondering why this is a config option. Don't ask.
-GHOST_INTERACTION
+#GHOST_INTERACTION
 
 ## NEAR-DEATH EXPERIENCE ###
 ## Comment this out to disable mobs hearing ghosts when unconscious and very close to death
@@ -201,20 +217,29 @@ NEAR_DEATH_EXPERIENCE
 #SILENT_AI
 #SILENT_BORG
 
-## SANDBOX PANEL AUTOCLOSE ###
-## The sandbox panel's item spawning dialog now stays open even after you click an option.
-## If you find that your players are abusing the sandbox panel, this option may slow them down
-## without preventing people from using it properly.
-## Only functions in sandbox game mode.
-#SANDBOX_AUTOCLOSE
-
 ## ROUNDSTART SILICON LAWS ###
 ## This controls what the AI's laws are at the start of the round.
 ## Set to 0/commented out for "off", silicons will just start with Asimov.
 ## Set to 1 for "custom", silicons will start with the custom laws defined in silicon_laws.txt. (If silicon_laws.txt is empty, the AI will spawn with asimov and Custom boards will auto-delete.)
 ## Set to 2 for "random", silicons will start with a random lawset picked from random laws specified below.
 ## Set to 3 for "weighted random", using values in "silicon_weights.txt", a law will be selected, with weights specifed in that file.
+## Set to 4 for "specified", silicons will start with an existing lawset. (If no specified lawset is identified, the AI will spawn with asimov.)
+
+
 DEFAULT_LAWS 0
+
+## SILICON ASIMOV SUPERIORITY OVERRIDE ###
+## This makes "Asimov Superiority" show up as a perk for humans in the character creation menu even if asimov is not the default lawset, such as when used with asimov++
+## Uncomment this out to make "Asimov Superiority" show up as a perk for humans
+# SILICON_ASIMOV_SUPERIORITY_OVERRIDE
+
+## SPECIFIED LAWS ##
+## ------------------------------------------------------------------------------------------
+## These control what lawset the AI will use, edit the specified law to an *existing* lawset to make it the default.
+## See datums\ai_laws.dm for the full law lists
+## IE, SPECIFIED_LAWS asimovpp, SPECIFIED_LAWS robocop, SPECIFIED_LAWS antimov
+
+SPECIFIED_LAWS asimovpp
 
 ## RANDOM LAWS ##
 ## ------------------------------------------------------------------------------------------
@@ -231,17 +256,18 @@ RANDOM_LAWS corporate
 ## Quirky laws. Shouldn't cause too much harm
 #RANDOM_LAWS hippocratic
 #RANDOM_LAWS maintain
-#RANDOM_LAWS drone
 #RANDOM_LAWS liveandletlive
 #RANDOM_LAWS peacekeeper
 #RANDOM_LAWS reporter
 #RANDOM_LAWS hulkamania
+#RANDOM_LAWS ten_commandments
 
 ## Bad idea laws. Probably shouldn't enable these
 #RANDOM_LAWS syndie
 #RANDOM_LAWS ninja
 #RANDOM_LAWS antimov
 #RANDOM_LAWS thermodynamic
+#RANDOM_LAWS drone
 
 ## meme laws. Honk
 #RANDOM_LAWS buildawall
@@ -254,27 +280,36 @@ RANDOM_LAWS corporate
 LAW_WEIGHT custom,0
 
 ## standard-ish laws. These are fairly ok to run
-LAW_WEIGHT asimov,32
-LAW_WEIGHT asimovpp,12
-LAW_WEIGHT paladin,12
-LAW_WEIGHT robocop,12
-LAW_WEIGHT corporate,12
+## Unique AI station trait uses weights so we don't want asimov
+LAW_WEIGHT asimov,0
+LAW_WEIGHT asimovpp,5
+LAW_WEIGHT paladin,5
+LAW_WEIGHT paladin5,5
+LAW_WEIGHT robocop,5
+LAW_WEIGHT corporate,5
+LAW_WEIGHT hippocratic,5
+LAW_WEIGHT maintain,5
+LAW_WEIGHT liveandletlive,5
+LAW_WEIGHT peacekeeper,5
+LAW_WEIGHT ten_commandments,5
+LAW_WEIGHT nutimov,5
 
 ## Quirky laws. Shouldn't cause too much harm
-LAW_WEIGHT hippocratic,3
-LAW_WEIGHT maintain,4
-LAW_WEIGHT drone,3
-LAW_WEIGHT liveandletlive,3
-LAW_WEIGHT peacekeeper,3
-LAW_WEIGHT reporter,4
-LAW_WEIGHT hulkamania,4
+LAW_WEIGHT reporter,3
+LAW_WEIGHT hulkamania,3
+LAW_WEIGHT tyrant,3
+LAW_WEIGHT overlord,3
+LAW_WEIGHT painter,3
+LAW_WEIGHT dungeon_master,3
 
 ## Bad idea laws. Probably shouldn't enable these
 LAW_WEIGHT syndie,0
 LAW_WEIGHT ninja,0
 LAW_WEIGHT antimov,0
+LAW_WEIGHT balance,0
 LAW_WEIGHT thermodynamic,0
 LAW_WEIGHT buildawall,0
+LAW_WEIGHT drone,0
 
 ##------------------------------------------------
 
@@ -302,20 +337,15 @@ SILICON_MAX_LAW_AMOUNT 12
 ROUNDSTART_RACES human
 
 ## Races that are strictly worse than humans that could probably be turned on without balance concerns
-#ROUNDSTART_RACES lizard
+ROUNDSTART_RACES felinid
+ROUNDSTART_RACES lizard
 #ROUNDSTART_RACES fly
-#ROUNDSTART_RACES moth
-#ROUNDSTART_RACES plasmaman
-#ROUNDSTART_RACES felinid
-#ROUNDSTART_RACES kitsune
-#ROUNDSTART_RACES ethereal
-ROUNDSTART_RACES skaven
-ROUNDSTART_RACES dwarf
-ROUNDSTART_RACES kobold
+ROUNDSTART_RACES moth
+ROUNDSTART_RACES plasmaman
 #ROUNDSTART_RACES shadow
 
 ## Races that are better than humans in some ways, but worse in others
-#ROUNDSTART_RACES diona
+ROUNDSTART_RACES ethereal
 #ROUNDSTART_RACES jelly
 #ROUNDSTART_RACES abductor
 #ROUNDSTART_RACES synth
@@ -362,6 +392,24 @@ ROUNDSTART_RACES kobold
 ## Races defined here will not cause existing characters to be reset to human if they currently have a non-roundstart species defined.
 #ROUNDSTART_NO_HARD_CHECK felinid
 
+## Disable roundstart species morgue cadavers?
+## Cadavers in the morgue at the start of the round will be randomly picked from all enabled ROUNDSTART_RACES
+## Recommended to leave this commented out so nonhuman species will have viable replacement bodies / organs when they die.
+# MORGUE_CADAVER_DISABLE_NONHUMANS
+
+## Morgue Cadaver Species Probability
+## The probability for nonhuman cadavers to spawn in the morgue.
+## Only used if MORGUE_CADAVER_DISABLE_NONHUMANS is commented out
+## If left undefined, defaults to 50%.
+MORGUE_CADAVER_OTHER_SPECIES_PROBABILITY 50
+
+## A single specific Species ID to supplement human morgue cadavers.
+## Set MORGUE_CADAVER_OTHER_SPECIES_PROBABILITY to determine the chances between being a human and this specific species.
+## Only used if MORGUE_CADAVER_DISABLE_NONHUMANS is commented out
+## Prob = 100 means all corpses will be this race.
+#MORGUE_CADAVER_OVERRIDE_SPECIES lizard
+
+
 ##Overflow job. Default is assistant
 OVERFLOW_JOB Assistant
 
@@ -370,10 +418,10 @@ OVERFLOW_CAP -1
 
 ## Starlight for exterior walls and breaches. Uncomment for starlight!
 ## This is disabled by default to make testing quicker, should be enabled on production servers or testing servers messing with lighting
-STARLIGHT
+#STARLIGHT
 
 ## Uncomment to bring back old grey suit assistants instead of the now default rainbow colored assistants.
-GREY_ASSISTANTS
+#GREY_ASSISTANTS
 
 ##Limit Spell Choices##
 ## Uncomment to disallow wizards from using certain spells that may be too chaotic/fun for your playerbase
@@ -415,17 +463,17 @@ Space_Budget 16
 
 ## Time in ds from when a player latejoins till the arrival shuttle docks at the station
 ## Must be at least 30. At least 55 recommended to be visually/aurally appropriate
-ARRIVALS_SHUTTLE_DOCK_WINDOW 120
+ARRIVALS_SHUTTLE_DOCK_WINDOW 55
 
 ## Uncomment to require the arrivals shuttle to be in flight (if it can fly) before late join players can join
-ARRIVALS_SHUTTLE_REQUIRE_UNDOCKED
+#ARRIVALS_SHUTTLE_REQUIRE_UNDOCKED
 
 ## Uncomment to prevent late join players from spawning if the arrivals shuttle is depressurized
-ARRIVALS_SHUTTLE_REQUIRE_SAFE_LATEJOIN
+#ARRIVALS_SHUTTLE_REQUIRE_SAFE_LATEJOIN
 
 ## How many wirechewing rodents you want to spawn on exposed maintenane wires at the start of the round. You may wish to set this to 0 if you're testing powernets.
 
-MICE_ROUNDSTART 8
+MICE_ROUNDSTART 10
 
 ## If the percentage of players alive (doesn't count conversions) drops below this threshold the emergency shuttle will be forcefully called (provided it can be)
 #EMERGENCY_SHUTTLE_AUTOCALL_THRESHOLD 0.2
@@ -460,12 +508,14 @@ MAXFINE 2000
 #DRONE_REQUIRED_ROLE Silicon
 
 ## How many played hours of DRONE_REQUIRED_ROLE required to be a Maintenance Done
-#DRONE_ROLE_PLAYTIME 40
-
-## Uncomment to enable SDQL spells
-## Warning: SDQL is a powerful tool and can break many things or expose security sensitive information.
-## Giving players access to it has major security concerns, be careful and deliberate when using this feature.
-SDQL_SPELLS
+#DRONE_ROLE_PLAYTIME 14
 
 ## Whether native FoV is enabled for all people.
 #NATIVE_FOV
+
+## Whether circuit sounds are allowed to be played or not.
+#DISALLOW_CIRCUIT_SOUNDS
+
+## Comment if you wish to enable title music playing at the lobby screen. This flag is disabled by default to facilitate better code testing on local machines.
+## Do keep in mind that this flag will not affect individual player's preferences: if they opt-out on your server, it will never play for them.
+DISALLOW_TITLE_MUSIC
