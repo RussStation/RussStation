@@ -2,7 +2,6 @@
 	name = "\improper Kobold"
 	plural_form = "Kobolds"
 	id = SPECIES_KOBOLD
-	say_mod = "hisses"
 	species_traits = list(MUTCOLORS, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
@@ -25,18 +24,14 @@
 	payday_modifier = 0.50
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	species_cookie = /obj/item/food/meat/slab
-	attack_verb = "slash"
-	attack_effect = ATTACK_EFFECT_CLAW
-	attack_sound = 'sound/weapons/slash.ogg'
-	miss_sound = 'sound/weapons/slashmiss.ogg'
 	meat = /obj/item/food/meat/slab/human/mutant/kobold
 	skinned_type = /obj/item/stack/sheet/animalhide/kobold
-	exotic_blood = "L"
+	exotic_bloodtype = "L"
 	disliked_food = DAIRY
 	liked_food = GROSS | MEAT | SEAFOOD | NUTS | BUGS | RAW
 	inert_mutation = /datum/mutation/human/firebreath
-	deathsound = 'sound/voice/lizard/deathsound.ogg'
-	wings_icons = list("Dragon")
+	death_sound = 'sound/voice/lizard/deathsound.ogg'
+	wing_types = list(/obj/item/organ/external/wings/functional/dragon)
 	species_language_holder = /datum/language_holder/lizard
 	digitigrade_customization = DIGITIGRADE_OPTIONAL
 
@@ -48,10 +43,10 @@
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/lizard,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/lizard,
-		BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm/lizard,
-		BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/lizard,
-		BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/lizard,
-		BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/lizard,
+		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/lizard,
+		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/lizard,
+		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/lizard,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/lizard,
 	)
 
 //Small dudes
@@ -67,7 +62,7 @@
 
 /datum/species/kobold/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	C.dna.remove_mutation(/datum/mutation/human/lesser_dwarfism)
-	C.bubble_file = 'icons/mob/talk.dmi'
+	C.bubble_file = 'icons/mob/effects/talk.dmi'
 	C.bubble_icon = initial(C.bubble_icon)
 	. = ..()
 

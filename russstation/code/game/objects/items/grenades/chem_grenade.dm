@@ -5,8 +5,8 @@
 
 /obj/item/grenade/chem_grenade/spacelube/Initialize()
 	. = ..()
-	var/obj/item/reagent_containers/glass/beaker/bluespace/B1 = new(src)
-	var/obj/item/reagent_containers/glass/beaker/bluespace/B2 = new(src)
+	var/obj/item/reagent_containers/cup/beaker/bluespace/B1 = new(src)
+	var/obj/item/reagent_containers/cup/beaker/bluespace/B2 = new(src)
 
 	B1.reagents.add_reagent(/datum/reagent/lube, 150)
 	B1.reagents.add_reagent(/datum/reagent/water, 150)

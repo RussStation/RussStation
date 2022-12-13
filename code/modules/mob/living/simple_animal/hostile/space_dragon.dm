@@ -113,26 +113,6 @@
 		visible_message(span_danger("[src] vomits up [consumed_mob]!"))
 		consumed_mob.forceMove(loc)
 		consumed_mob.Paralyze(50)
-	// honk start -- prevent error when mind is null (remove if fixed upstream)
-	if(!mind)
-		return
-	// honk end
-	if(!mind.has_antag_datum(/datum/antagonist/space_dragon))
-		return
-	if((rifts_charged == 3 || (SSshuttle.emergency.mode == SHUTTLE_DOCKED && rifts_charged > 0)) && !objective_complete)
-		victory()
-	if(riftTimer == -1)
-		return
-	riftTimer = min(riftTimer + 1, maxRiftTimer + 1)
-	if(riftTimer == (maxRiftTimer - 60))
-		to_chat(src, span_boldwarning("You have a minute left to summon the rift! Get to it!"))
-		return
-	if(riftTimer >= maxRiftTimer)
-		to_chat(src, span_boldwarning("You've failed to summon the rift in a timely manner! You're being pulled back from whence you came!"))
-		destroy_rifts()
-		empty_contents()
-		playsound(src, 'sound/magic/demon_dies.ogg', 100, TRUE)
-		QDEL_NULL(src)
 
 /mob/living/simple_animal/hostile/space_dragon/AttackingTarget()
 	if(using_special)

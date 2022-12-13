@@ -19,7 +19,6 @@
 	)
 	inherent_biotypes = MOB_ORGANIC | MOB_PLANT // are we a human? If so add `| MOB_HUMANOID`
 	inherent_factions = list("plants", "vines")
-	damage_overlay_type = "" // dionas don't have blood
 	burnmod = 1.5 // take more damage from lasers
 	heatmod = 2 // take more damage from fire
 	speedmod = 5 // very slow
@@ -33,10 +32,10 @@
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/diona,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/diona,
-		BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm/diona,
-		BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/diona,
-		BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/diona,
-		BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/diona,
+		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/diona,
+		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/diona,
+		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/diona,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/diona,
 	)
 
 /datum/species/diona/random_name(gender,unique,lastname)
@@ -46,6 +45,11 @@
 	if(lastname)
 		randname += " [lastname]"
 	return randname
+
+/datum/species/skaven/randomize_features(mob/living/carbon/human/human_mob)
+	. = ..()
+	human_mob.dna.features["diona_hair"] = GLOB.diona_hair_list[pick(GLOB.diona_hair_list)]
+	randomize_external_organs(human_mob)
 
 // Similar to podpeople.dm
 /datum/species/diona/spec_life(mob/living/carbon/human/H, delta_time, times_fired)

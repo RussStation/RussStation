@@ -29,7 +29,7 @@
 	if(selected)
 		// spawn and copy over the vars
 		var/obj/docking_port/stationary/dock = new /obj/docking_port/stationary(loc)
-		dock.id = id
+		dock.shuttle_id = id
 		dock.width = width
 		dock.height = height
 		dock.dwidth = dwidth

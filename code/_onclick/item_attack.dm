@@ -205,7 +205,7 @@
 
 	//HONK - start
 	if(smelted_material)
-		smelted_material.expose_mob(M, TOUCH, 30)
+		smelted_material.expose_mob(target_mob, TOUCH, 30)
 	//HONK - end
 
 /// The equivalent of [/obj/item/proc/attack] but for alternate attacks, AKA right clicking

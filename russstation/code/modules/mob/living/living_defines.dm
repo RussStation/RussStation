@@ -1,2 +1,2 @@
 /mob/living
-	var/bubble_file = 'icons/mob/talk.dmi'
+	var/bubble_file = 'icons/mob/effects/talk.dmi'

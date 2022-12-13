@@ -75,8 +75,8 @@ Difficulty: Medium
 	crusher_achievement_type = /datum/award/achievement/boss/sif_crusher
 	score_achievement_type = /datum/award/score/sif_score
 
-	deathmessage = "falls into the abyss."
-	deathsound = 'russstation/sound/effects/death_howl.ogg'
+	death_message = "falls into the abyss."
+	death_sound = 'russstation/sound/effects/death_howl.ogg'
 	///Can he spin and charge?
 	var/can_special = TRUE
 	///Counted number of spins Sif does before setting spinning status to FALSE
@@ -121,8 +121,8 @@ Difficulty: Medium
 	loot = list()
 	crusher_loot = list()
 	gps_name = "Infinity Signal"
-	deathmessage = "moans as the sound of its power begins to wind down."
-	deathsound = 'sound/voice/borg_deathsound.ogg'
+	death_message = "moans as the sound of its power begins to wind down."
+	death_sound = 'sound/voice/borg_deathsound.ogg'
 	can_special = FALSE
 	true_spawn = TRUE
 	environment_smash = ENVIRONMENT_SMASH_NONE

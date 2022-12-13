@@ -19,7 +19,7 @@
 					var/obj/item/I = H.get_item_by_slot(ITEM_SLOT_HEAD)
 					H.dropItemToGround(I, force = TRUE)
 
-				var/obj/item/clothing/head/sombrero/shamebrero/S = new /obj/item/clothing/head/sombrero/shamebrero(H.loc)
+				var/obj/item/clothing/head/costume/sombrero/shamebrero/S = new /obj/item/clothing/head/costume/sombrero/shamebrero(H.loc)
 				H.equip_to_slot_or_del(S, ITEM_SLOT_HEAD)
 				///obj/item/clothing/suit/poncho/ponchoshame
 

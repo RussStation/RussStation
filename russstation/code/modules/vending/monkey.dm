@@ -7,7 +7,7 @@
 	product_ads = "Ooh ooh ooh!;Smell the science;Water not included"
 	req_access = list(ACCESS_GENETICS,ACCESS_VIROLOGY,ACCESS_XENOBIOLOGY)
 	products = list(/obj/item/food/monkeycube = 30,
-					/obj/item/reagent_containers/food/drinks/waterbottle = 5,
+					/obj/item/reagent_containers/cup/glass/waterbottle = 5,
 					/obj/item/food/grown/banana = 8)
 	contraband = list(/obj/item/food/monkeycube/gorilla = 1,
 					/obj/item/dnainjector/h2m = 1)

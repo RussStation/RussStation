@@ -1,5 +1,5 @@
 /datum/action/small_sprite/clown
-	icon_icon = 'icons/mob/actions/actions_xeno.dmi'
+	button_icon = 'icons/mob/actions/actions_xeno.dmi'
 	button_icon_state = "smallqueen"
 	background_icon_state = "bg_alien"
 	small_icon = 'russstation/icons/mob/clown_mobs.dmi'
