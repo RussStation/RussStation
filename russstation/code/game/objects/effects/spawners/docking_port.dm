@@ -5,7 +5,7 @@
 	var/list/static/spawners = list()
 	var/selected = FALSE // indicate the selected spawner, useful if it's not the one that ran first
 	// docking_port passthrough vars
-	var/id = ""
+	var/shuttle_id = ""
 	var/width = 0
 	var/height = 0
 	var/dwidth = 0
@@ -29,7 +29,7 @@
 	if(selected)
 		// spawn and copy over the vars
 		var/obj/docking_port/stationary/dock = new /obj/docking_port/stationary(loc)
-		dock.shuttle_id = id
+		dock.shuttle_id = shuttle_id
 		dock.width = width
 		dock.height = height
 		dock.dwidth = dwidth
