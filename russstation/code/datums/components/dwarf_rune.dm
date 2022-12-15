@@ -7,7 +7,7 @@
 
 /datum/component/dwarf_rune/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, .proc/onAttackBy)
-	RegisterSignal(parent, list(COMSIG_ITEM_ATTACK, COMSIG_ITEM_ATTACK_SECONDARY), .proc/onItemAttack)
+	RegisterSignals(parent, list(COMSIG_ITEM_ATTACK, COMSIG_ITEM_ATTACK_SECONDARY), .proc/onItemAttack)
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK_OBJ, .proc/onItemAttackObj)
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, .proc/examine)
 	RegisterSignal(parent, COMSIG_TOOL_START_USE, .proc/toolStartCheck)

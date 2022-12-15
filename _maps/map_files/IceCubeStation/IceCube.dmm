@@ -9344,8 +9344,8 @@
 	dir = 4;
 	dwidth = 12;
 	height = 18;
-	shuttle_id = "emergency_home";
 	name = "BoxStation emergency evac bay";
+	shuttle_id = "emergency_home";
 	width = 32
 	},
 /turf/open/floor/plating/snowed/icemoon,
@@ -14318,18 +14318,12 @@
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/underground/explored)
 "gDO" = (
-/obj/item/radio/intercom{
-	desc = "Talk through this. It looks like it has been modified to not broadcast.";
-	name = "Prison Intercom (General)";
-	pixel_x = -25;
-	pixel_y = -2;
-	prison_radio = 1
-	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/secure_closet/brig{
 	id = "Cell 1";
 	name = "Cell 1 Locker"
 	},
+/obj/item/radio/intercom/prison/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "gEk" = (
@@ -18729,8 +18723,8 @@
 "izR" = (
 /obj/docking_port/stationary/random/icemoon{
 	dir = 2;
-	shuttle_id = "pod_3_lavaland";
-	name = "lavaland"
+	name = "lavaland";
+	shuttle_id = "pod_3_lavaland"
 	},
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/underground/explored)
@@ -19972,18 +19966,12 @@
 /turf/open/floor/iron/white/textured,
 /area/station/medical/virology)
 "jdj" = (
-/obj/item/radio/intercom{
-	desc = "Talk through this. It looks like it has been modified to not broadcast.";
-	name = "Prison Intercom (General)";
-	pixel_x = -25;
-	pixel_y = -2;
-	prison_radio = 1
-	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/secure_closet/brig{
 	id = "Cell 3";
 	name = "Cell 3 Locker"
 	},
+/obj/item/radio/intercom/prison/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "jdn" = (
@@ -22615,7 +22603,6 @@
 /area/station/maintenance/port/aft)
 "klj" = (
 /obj/machinery/mineral/stacking_unit_console{
-	machinedir = 1;
 	pixel_x = -32
 	},
 /obj/effect/landmark/navigate_destination/disposals,
@@ -27747,9 +27734,9 @@
 /obj/docking_port/stationary{
 	dwidth = 3;
 	height = 5;
-	shuttle_id = "commonmining_home";
 	name = "SS13: Common Mining Dock";
 	roundstart_template = /datum/map_template/shuttle/mining_common/meta;
+	shuttle_id = "commonmining_home";
 	width = 7
 	},
 /turf/open/floor/plating/snowed/icemoon,
@@ -31662,7 +31649,7 @@
 	dir = 4
 	},
 /obj/machinery/power/apc/auto_name/directional/east{
-	areastring = "/area/station/security/checkpoint/auxiliary"
+	areastring = "/area/station/security/checkpoint/arrivals"
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/fore/upper)
@@ -35931,8 +35918,8 @@
 /obj/docking_port/stationary{
 	dwidth = 2;
 	height = 13;
-	shuttle_id = "ferry_home";
 	name = "Station Ferry Dock";
+	shuttle_id = "ferry_home";
 	width = 5
 	},
 /turf/open/floor/plating/snowed/icemoon,
@@ -35940,7 +35927,7 @@
 "pTz" = (
 /obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/incinerator_ordmix{
 	dir = 1;
-	id = "ordmix_airlock_pump2"
+	id_tag = "ordmix_airlock_pump2"
 	},
 /turf/open/floor/engine,
 /area/station/science/ordnance/burnchamber)
@@ -38887,9 +38874,9 @@
 	dir = 4;
 	dwidth = 3;
 	height = 15;
-	shuttle_id = "arrivals_stationary";
 	name = "arrivals";
 	roundstart_template = /datum/map_template/shuttle/arrival/box;
+	shuttle_id = "arrival_stationary";
 	width = 7
 	},
 /turf/open/misc/asteroid/snow/icemoon,
@@ -40078,8 +40065,8 @@
 	dir = 2;
 	dwidth = 5;
 	height = 7;
-	shuttle_id = "supply_home";
 	name = "Cargo Bay";
+	shuttle_id = "cargo_home";
 	width = 12
 	},
 /turf/open/floor/plating/snowed/icemoon,
@@ -46021,18 +46008,12 @@
 /turf/open/floor/iron,
 /area/station/service/hydroponics/upper)
 "uqc" = (
-/obj/item/radio/intercom{
-	desc = "Talk through this. It looks like it has been modified to not broadcast.";
-	name = "Prison Intercom (General)";
-	pixel_x = -25;
-	pixel_y = -2;
-	prison_radio = 1
-	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/secure_closet/brig{
 	id = "Cell 2";
 	name = "Cell 2 Locker"
 	},
+/obj/item/radio/intercom/prison/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "uqe" = (
@@ -46447,10 +46428,7 @@
 "uyy" = (
 /mob/living/basic/mouse/white{
 	desc = "The mimes pet mouse. He doesn't really say a lot.";
-	emote_hear = list("");
-	name = "Silent Squeak";
-	speak = list("*Mimes at you in mouse, 'Squeak!'","!!!","...");
-	speak_emote = list("squeaks, but in mime")
+	name = "Silent Squeak"
 	},
 /turf/open/floor/iron/white/side{
 	dir = 4
@@ -48932,8 +48910,8 @@
 "vDA" = (
 /obj/docking_port/stationary/random/icemoon{
 	dir = 4;
-	shuttle_id = "pod_2_lavaland";
-	name = "lavaland"
+	name = "lavaland";
+	shuttle_id = "pod_2_lavaland"
 	},
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
@@ -52898,9 +52876,9 @@
 /obj/docking_port/stationary{
 	dwidth = 3;
 	height = 5;
-	shuttle_id = "mining_home";
 	name = "mining shuttle bay";
 	roundstart_template = /datum/map_template/shuttle/mining/lima;
+	shuttle_id = "mining_home";
 	width = 7
 	},
 /turf/open/floor/plating/snowed/icemoon,
@@ -53586,9 +53564,9 @@
 	dheight = 4;
 	dwidth = 4;
 	height = 9;
-	shuttle_id = "aux_base_zone";
 	name = "aux base zone";
 	roundstart_template = /datum/map_template/shuttle/aux_base/default;
+	shuttle_id = "aux_base_zone";
 	width = 9
 	},
 /turf/open/floor/plating,

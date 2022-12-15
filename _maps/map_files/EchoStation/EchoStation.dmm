@@ -21,9 +21,9 @@
 /obj/docking_port/stationary{
 	dwidth = 2;
 	height = 5;
-	shuttle_id = "laborcamp_home";
 	name = "fore bay 1";
 	roundstart_template = /datum/map_template/shuttle/labour/lima;
+	shuttle_id = "laborcamp_home";
 	width = 9
 	},
 /turf/open/space/basic,
@@ -1098,9 +1098,9 @@
 /obj/docking_port/stationary{
 	dwidth = 3;
 	height = 5;
-	shuttle_id = "commonmining_home";
 	name = "SS13: Common Mining Dock";
 	roundstart_template = /datum/map_template/shuttle/mining_common/meta;
+	shuttle_id = "commonmining_home";
 	width = 7
 	},
 /turf/open/space/basic,
@@ -1203,8 +1203,8 @@
 	dir = 4;
 	dwidth = 11;
 	height = 9;
-	shuttle_id = "emergency_home";
 	name = "Echostation Evac Bay";
+	shuttle_id = "emergency_home";
 	width = 20
 	},
 /turf/open/space/basic,
@@ -3113,9 +3113,9 @@
 	dir = 2;
 	dwidth = 4;
 	height = 17;
-	shuttle_id = "arrivals_stationary";
 	name = "Echo arrivals port";
 	roundstart_template = /datum/map_template/shuttle/arrival/echo;
+	shuttle_id = "arrival_stationary";
 	width = 9
 	},
 /turf/open/space/basic,
@@ -3716,8 +3716,8 @@
 /obj/docking_port/stationary{
 	dwidth = 2;
 	height = 13;
-	shuttle_id = "ferry_home";
 	name = "Station Ferry Dock";
+	shuttle_id = "ferry_home";
 	width = 5
 	},
 /turf/open/space/basic,
@@ -9372,6 +9372,9 @@
 "eYm" = (
 /obj/machinery/door/window/left/directional/west,
 /obj/effect/decal/cleanable/blood,
+/obj/machinery/mineral/stacking_unit_console{
+	pixel_y = 32
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/disposal)
 "eYz" = (
@@ -9737,7 +9740,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
-/obj/machinery/atmospherics/pipe/smart/simple/supply/visible/layer2,
+/obj/machinery/atmospherics/pipe/smart/simple/supply/visible,
 /turf/open/floor/engine/vacuum,
 /area/station/science/ordnance/burnchamber)
 "feO" = (
@@ -11065,7 +11068,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
-/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible/layer2,
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible,
 /turf/open/floor/engine/vacuum,
 /area/station/science/ordnance/burnchamber)
 "fWQ" = (
@@ -15519,9 +15522,7 @@
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
 "ioj" = (
-/obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/layer2{
-	id = "ordmix_airlock_pump"
-	},
+/obj/machinery/atmospherics/components/binary/dp_vent_pump/high_volume/incinerator_ordmix,
 /turf/open/floor/engine/vacuum,
 /area/station/science/ordnance/burnchamber)
 "ior" = (
@@ -21982,17 +21983,11 @@
 	id = "Cell 2";
 	name = "Cell 2 Locker"
 	},
-/obj/item/radio/intercom{
-	desc = "Talk through this. It looks like it has been modified to not broadcast.";
-	name = "Prison Intercom (General)";
-	pixel_x = -25;
-	pixel_y = -2;
-	prison_radio = 1
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
 	},
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "lMC" = (
@@ -23305,17 +23300,11 @@
 	id = "Cell 1";
 	name = "Cell 1 Locker"
 	},
-/obj/item/radio/intercom{
-	desc = "Talk through this. It looks like it has been modified to not broadcast.";
-	name = "Prison Intercom (General)";
-	pixel_x = -25;
-	pixel_y = -2;
-	prison_radio = 1
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
 	},
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "mDz" = (
@@ -24426,8 +24415,8 @@
 	dir = 4;
 	dwidth = 4;
 	height = 7;
-	shuttle_id = "supply_home";
 	name = "Cargo Bay";
+	shuttle_id = "cargo_home";
 	width = 12
 	},
 /turf/open/space/basic,
@@ -26233,7 +26222,6 @@
 /turf/open/floor/wood,
 /area/station/service/bar)
 "nYP" = (
-/obj/machinery/light/small/directional/east,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 9
@@ -26241,6 +26229,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 1
 	},
+/obj/item/radio/intercom/prison/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "nYQ" = (
@@ -29539,14 +29528,8 @@
 /area/station/engineering/atmos)
 "pIb" = (
 /obj/structure/cable,
-/obj/item/radio/intercom{
-	desc = "Talk through this. It looks like it has been modified to not broadcast.";
-	name = "Prison Intercom (General)";
-	pixel_x = -25;
-	pixel_y = -2;
-	prison_radio = 1
-	},
 /obj/structure/chair/stool/directional/north,
+/obj/item/radio/intercom/prison/directional/west,
 /turf/open/floor/iron/grimy,
 /area/station/security/prison)
 "pIw" = (
@@ -31005,10 +30988,7 @@
 	},
 /mob/living/basic/mouse/white{
 	desc = "The mimes pet mouse. He doesn't really say a lot.";
-	emote_hear = list("");
-	name = "Silent Squeak";
-	speak = list("*Mimes at you in mouse, 'Squeak!'","!!!","...");
-	speak_emote = list("squeaks, but in mime")
+	name = "Silent Squeak"
 	},
 /turf/open/floor/iron/white/corner{
 	dir = 8
@@ -32213,13 +32193,7 @@
 /turf/open/floor/iron,
 /area/station/security/lockers)
 "qYq" = (
-/obj/item/radio/intercom{
-	desc = "Talk through this. It looks like it has been modified to not broadcast.";
-	name = "Prison Intercom (General)";
-	pixel_x = -25;
-	pixel_y = -2;
-	prison_radio = 1
-	},
+/obj/item/radio/intercom/prison/directional/west,
 /turf/open/floor/iron/grimy,
 /area/station/security/prison)
 "qYC" = (
@@ -37263,9 +37237,9 @@
 	dir = 2;
 	dwidth = 3;
 	height = 7;
-	shuttle_id = "aux_base_zone";
 	name = "aux base zone";
 	roundstart_template = /datum/map_template/shuttle/aux_base/small;
+	shuttle_id = "aux_base_zone";
 	width = 7
 	},
 /turf/open/floor/plating,
@@ -40011,9 +39985,6 @@
 /turf/open/floor/wood,
 /area/station/service/library)
 "uXW" = (
-/obj/machinery/mineral/stacking_unit_console{
-	pixel_x = -32
-	},
 /obj/structure/window,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -40601,17 +40572,11 @@
 	id = "Cell 3";
 	name = "Cell 3 Locker"
 	},
-/obj/item/radio/intercom{
-	desc = "Talk through this. It looks like it has been modified to not broadcast.";
-	name = "Prison Intercom (General)";
-	pixel_x = -25;
-	pixel_y = -2;
-	prison_radio = 1
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
 	},
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "vnr" = (
@@ -44096,9 +44061,9 @@
 	dir = 2;
 	dwidth = 3;
 	height = 5;
-	shuttle_id = "mining_home";
 	name = "mining shuttle bay";
 	roundstart_template = /datum/map_template/shuttle/mining/echo;
+	shuttle_id = "mining_home";
 	width = 7
 	},
 /turf/open/space/basic,
@@ -73343,7 +73308,7 @@ jjW
 doI
 wLS
 wLS
-wLS
+wTt
 eYm
 dBX
 uAI

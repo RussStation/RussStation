@@ -284,7 +284,7 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
  */
 GLOBAL_LIST_INIT(wood_recipes, list ( \
 	//honk start - adds compost bins to the wood recipes list
-	new/datum/stack_recipe("compost bin", /obj/machinery/portable_atmospherics/canister/compost_bin, 10, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
+	new/datum/stack_recipe("compost bin", /obj/machinery/portable_atmospherics/canister/compost_bin, 10, time = 15, one_per_turf = TRUE, on_solid_ground = TRUE), \
 	//honk end
 	new/datum/stack_recipe("wooden sandals", /obj/item/clothing/shoes/sandal, 1), \
 	new/datum/stack_recipe("wood floor tile", /obj/item/stack/tile/wood, 1, 4, 20), \
