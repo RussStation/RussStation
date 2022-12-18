@@ -13,7 +13,6 @@
 		/obj/item/organ/internal/eyes = 1,
 		/obj/item/stack/sheet/bone = 15,
 	)
-	language_holder = /datum/language_holder/dwarf/lavaland
 
 /mob/living/simple_animal/chicken/lavaland
 	name = "\improper lavaland chicken"
@@ -31,7 +30,6 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
-	language_holder = /datum/language_holder/dwarf/lavaland
 
 /mob/living/simple_animal/chicken/lavaland/Initialize(mapload)
 	. = ..()
@@ -61,7 +59,6 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
-	language_holder = /datum/language_holder/dwarf/lavaland
 
 /mob/living/simple_animal/chick/lavaland/Life(delta_time = SSMOBS_DT, times_fired)
 	if(!stat && !ckey)
