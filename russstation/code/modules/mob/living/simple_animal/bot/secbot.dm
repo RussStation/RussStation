@@ -58,7 +58,7 @@
 	)
 
 	var/atom/location = drop_location()
-	new /obj/item/clothing/head/bearpelt(location)
+	new /obj/item/clothing/head/costume/bearpelt(location)
 	new /obj/effect/decal/cleanable/oil(location)
 
 	do_sparks(8, TRUE, src) // lots of sparks

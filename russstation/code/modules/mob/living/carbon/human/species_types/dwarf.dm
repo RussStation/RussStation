@@ -11,12 +11,12 @@
 		TRAIT_LITERATE,
 	)
 	mutant_bodyparts = list("wings" = "None")
-	species_cookie = /obj/item/reagent_containers/food/drinks/bottle/ale
+	species_cookie = /obj/item/reagent_containers/cup/glass/bottle/ale
 	use_skintones = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	brutemod = 1.15
 	coldmod = 1.15
-	punchdamagehigh = 11 //fist fighting with dorfs is very dangerous
+	//punchdamagehigh = 11 //fist fighting with dorfs is very dangerous
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/dwarf
 	disliked_food = GROSS | RAW | CLOTH | BUGS
@@ -55,7 +55,7 @@
 
 /datum/species/dwarf/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	C.dna.remove_mutation(/datum/mutation/human/lesser_dwarfism)
-	C.bubble_file = 'icons/mob/talk.dmi'
+	C.bubble_file = 'icons/mob/effects/talk.dmi'
 	C.bubble_icon = initial(C.bubble_icon)
 	. = ..()
 
@@ -140,7 +140,7 @@
 	coldmod = 0.5
 	heatmod = 1.5 //youch
 	brutemod = 0.4
-	punchdamagelow = 5 //Mountain dwarfs pack a meaner punch cause of the local wild life
+	//punchdamagelow = 5 //Mountain dwarfs pack a meaner punch cause of the local wild life
 	species_language_holder = /datum/language_holder/dwarf/lavaland
 	mutanteyes = /obj/item/organ/internal/eyes/night_vision
 
@@ -164,13 +164,13 @@
 	)
 	coldmod = 0.9
 	heatmod = 0.9
-	punchdamagelow = 3 //Pissed off that they are alive
+	//punchdamagelow = 3 //Pissed off that they are alive
 	disliked_food = NONE
 	liked_food = BUGS | ALCOHOL | RAW | CLOTH | NUTS | VEGETABLES | SEAFOOD | MEAT
 	species_language_holder = /datum/language_holder/dwarf/lavaland
 	mutanteyes = /obj/item/organ/internal/eyes/night_vision
-	deathsound = 'sound/machines/clockcult/ark_deathrattle.ogg' //spooky
-	say_mod = "gurgles"
+	death_sound = 'sound/machines/clockcult/ark_deathrattle.ogg' //spooky
+	//say_mod = "gurgles"
 
 	//Variables for holding our randomly generated limbs on creation
 	var/random_head
@@ -189,10 +189,10 @@
 /datum/species/dwarf/chaos/replace_body(mob/living/carbon/target, datum/species/new_species)
 	random_head  = pick(list( /obj/item/bodypart/head/lizard,  /obj/item/bodypart/head/ethereal,  /obj/item/bodypart/head/abductor,  /obj/item/bodypart/head/alien,  /obj/item/bodypart/head/fly,  /obj/item/bodypart/head/golem, /obj/item/bodypart/head/golem/bone, /obj/item/bodypart/head/golem/cardboard, /obj/item/bodypart/head/golem/cloth, /obj/item/bodypart/head/golem/cult, /obj/item/bodypart/head/golem/durathread, /obj/item/bodypart/head/golem/snow, /obj/item/bodypart/head/jelly, /obj/item/bodypart/head/luminescent, /obj/item/bodypart/head/monkey, /obj/item/bodypart/head/moth, /obj/item/bodypart/head/mushroom, /obj/item/bodypart/head/plasmaman, /obj/item/bodypart/head/pod, /obj/item/bodypart/head/robot, /obj/item/bodypart/head/shadow, /obj/item/bodypart/head/skaven, /obj/item/bodypart/head/skeleton, /obj/item/bodypart/head/slime, /obj/item/bodypart/head/snail, /obj/item/bodypart/head/zombie))
 	random_chest = pick(list(/obj/item/bodypart/chest/lizard, /obj/item/bodypart/chest/ethereal, /obj/item/bodypart/chest/abductor, /obj/item/bodypart/chest/alien, /obj/item/bodypart/chest/fly, /obj/item/bodypart/chest/golem,/obj/item/bodypart/chest/golem/bone,/obj/item/bodypart/chest/golem/cardboard,/obj/item/bodypart/chest/golem/cloth,/obj/item/bodypart/chest/golem/cult,/obj/item/bodypart/chest/golem/durathread,/obj/item/bodypart/chest/golem/snow,/obj/item/bodypart/chest/jelly,/obj/item/bodypart/chest/luminescent,/obj/item/bodypart/chest/monkey,/obj/item/bodypart/chest/moth,/obj/item/bodypart/chest/mushroom,/obj/item/bodypart/chest/plasmaman,/obj/item/bodypart/chest/pod,/obj/item/bodypart/chest/robot,/obj/item/bodypart/chest/shadow,/obj/item/bodypart/chest/skaven,/obj/item/bodypart/chest/skeleton,/obj/item/bodypart/chest/slime,/obj/item/bodypart/chest/snail,/obj/item/bodypart/chest/zombie))
-	random_l_arm = pick(list(/obj/item/bodypart/l_arm/lizard, /obj/item/bodypart/l_arm/ethereal, /obj/item/bodypart/l_arm/abductor, /obj/item/bodypart/l_arm/alien, /obj/item/bodypart/l_arm/fly, /obj/item/bodypart/l_arm/golem,/obj/item/bodypart/l_arm/golem/bone,/obj/item/bodypart/l_arm/golem/cardboard,/obj/item/bodypart/l_arm/golem/cloth,/obj/item/bodypart/l_arm/golem/cult,/obj/item/bodypart/l_arm/golem/durathread,/obj/item/bodypart/l_arm/golem/snow,/obj/item/bodypart/l_arm/jelly,/obj/item/bodypart/l_arm/luminescent,/obj/item/bodypart/l_arm/monkey,/obj/item/bodypart/l_arm/moth,/obj/item/bodypart/l_arm/mushroom,/obj/item/bodypart/l_arm/plasmaman,/obj/item/bodypart/l_arm/pod,/obj/item/bodypart/l_arm/robot,/obj/item/bodypart/l_arm/shadow,/obj/item/bodypart/l_arm/skaven,/obj/item/bodypart/l_arm/skeleton,/obj/item/bodypart/l_arm/slime,/obj/item/bodypart/l_arm/snail,/obj/item/bodypart/l_arm/zombie))
-	random_r_arm = pick(list(/obj/item/bodypart/r_arm/lizard, /obj/item/bodypart/r_arm/ethereal, /obj/item/bodypart/r_arm/abductor, /obj/item/bodypart/r_arm/alien, /obj/item/bodypart/r_arm/fly, /obj/item/bodypart/r_arm/golem,/obj/item/bodypart/r_arm/golem/bone,/obj/item/bodypart/r_arm/golem/cardboard,/obj/item/bodypart/r_arm/golem/cloth,/obj/item/bodypart/r_arm/golem/cult,/obj/item/bodypart/r_arm/golem/durathread,/obj/item/bodypart/r_arm/golem/snow,/obj/item/bodypart/r_arm/jelly,/obj/item/bodypart/r_arm/luminescent,/obj/item/bodypart/r_arm/monkey,/obj/item/bodypart/r_arm/moth,/obj/item/bodypart/r_arm/mushroom,/obj/item/bodypart/r_arm/plasmaman,/obj/item/bodypart/r_arm/pod,/obj/item/bodypart/r_arm/robot,/obj/item/bodypart/r_arm/shadow,/obj/item/bodypart/r_arm/skaven,/obj/item/bodypart/r_arm/skeleton,/obj/item/bodypart/r_arm/slime,/obj/item/bodypart/r_arm/snail,/obj/item/bodypart/r_arm/zombie))
-	random_l_leg = pick(list(/obj/item/bodypart/l_leg/lizard, /obj/item/bodypart/l_leg/ethereal, /obj/item/bodypart/l_leg/abductor, /obj/item/bodypart/l_leg/alien, /obj/item/bodypart/l_leg/fly, /obj/item/bodypart/l_leg/golem,/obj/item/bodypart/l_leg/golem/bone,/obj/item/bodypart/l_leg/golem/cardboard,/obj/item/bodypart/l_leg/golem/cloth,/obj/item/bodypart/l_leg/golem/cult,/obj/item/bodypart/l_leg/golem/durathread,/obj/item/bodypart/l_leg/golem/snow,/obj/item/bodypart/l_leg/jelly,/obj/item/bodypart/l_leg/luminescent,/obj/item/bodypart/l_leg/monkey,/obj/item/bodypart/l_leg/moth,/obj/item/bodypart/l_leg/mushroom,/obj/item/bodypart/l_leg/plasmaman,/obj/item/bodypart/l_leg/pod,/obj/item/bodypart/l_leg/robot,/obj/item/bodypart/l_leg/shadow,/obj/item/bodypart/l_leg/skaven,/obj/item/bodypart/l_leg/skeleton,/obj/item/bodypart/l_leg/slime,/obj/item/bodypart/l_leg/snail,/obj/item/bodypart/l_leg/zombie))
-	random_r_leg = pick(list(/obj/item/bodypart/r_leg/lizard, /obj/item/bodypart/r_leg/ethereal, /obj/item/bodypart/r_leg/abductor, /obj/item/bodypart/r_leg/alien, /obj/item/bodypart/r_leg/fly, /obj/item/bodypart/r_leg/golem,/obj/item/bodypart/r_leg/golem/bone,/obj/item/bodypart/r_leg/golem/cardboard,/obj/item/bodypart/r_leg/golem/cloth,/obj/item/bodypart/r_leg/golem/cult,/obj/item/bodypart/r_leg/golem/durathread,/obj/item/bodypart/r_leg/golem/snow,/obj/item/bodypart/r_leg/jelly,/obj/item/bodypart/r_leg/luminescent,/obj/item/bodypart/r_leg/monkey,/obj/item/bodypart/r_leg/moth,/obj/item/bodypart/r_leg/mushroom,/obj/item/bodypart/r_leg/plasmaman,/obj/item/bodypart/r_leg/pod,/obj/item/bodypart/r_leg/robot,/obj/item/bodypart/r_leg/shadow,/obj/item/bodypart/r_leg/skaven,/obj/item/bodypart/r_leg/skeleton,/obj/item/bodypart/r_leg/slime,/obj/item/bodypart/r_leg/snail,/obj/item/bodypart/r_leg/zombie))
+	random_l_arm = pick(list(/obj/item/bodypart/arm/left/lizard, /obj/item/bodypart/arm/left/ethereal, /obj/item/bodypart/arm/left/abductor, /obj/item/bodypart/arm/left/alien, /obj/item/bodypart/arm/left/fly, /obj/item/bodypart/arm/left/golem,/obj/item/bodypart/arm/left/golem/bone,/obj/item/bodypart/arm/left/golem/cardboard,/obj/item/bodypart/arm/left/golem/cloth,/obj/item/bodypart/arm/left/golem/cult,/obj/item/bodypart/arm/left/golem/durathread,/obj/item/bodypart/arm/left/golem/snow,/obj/item/bodypart/arm/left/jelly,/obj/item/bodypart/arm/left/luminescent,/obj/item/bodypart/arm/left/monkey,/obj/item/bodypart/arm/left/moth,/obj/item/bodypart/arm/left/mushroom,/obj/item/bodypart/arm/left/plasmaman,/obj/item/bodypart/arm/left/pod,/obj/item/bodypart/arm/left/robot,/obj/item/bodypart/arm/left/shadow,/obj/item/bodypart/arm/left/skaven,/obj/item/bodypart/arm/left/skeleton,/obj/item/bodypart/arm/left/slime,/obj/item/bodypart/arm/left/snail,/obj/item/bodypart/arm/left/zombie))
+	random_r_arm = pick(list(/obj/item/bodypart/arm/right/lizard, /obj/item/bodypart/arm/right/ethereal, /obj/item/bodypart/arm/right/abductor, /obj/item/bodypart/arm/right/alien, /obj/item/bodypart/arm/right/fly, /obj/item/bodypart/arm/right/golem,/obj/item/bodypart/arm/right/golem/bone,/obj/item/bodypart/arm/right/golem/cardboard,/obj/item/bodypart/arm/right/golem/cloth,/obj/item/bodypart/arm/right/golem/cult,/obj/item/bodypart/arm/right/golem/durathread,/obj/item/bodypart/arm/right/golem/snow,/obj/item/bodypart/arm/right/jelly,/obj/item/bodypart/arm/right/luminescent,/obj/item/bodypart/arm/right/monkey,/obj/item/bodypart/arm/right/moth,/obj/item/bodypart/arm/right/mushroom,/obj/item/bodypart/arm/right/plasmaman,/obj/item/bodypart/arm/right/pod,/obj/item/bodypart/arm/right/robot,/obj/item/bodypart/arm/right/shadow,/obj/item/bodypart/arm/right/skaven,/obj/item/bodypart/arm/right/skeleton,/obj/item/bodypart/arm/right/slime,/obj/item/bodypart/arm/right/snail,/obj/item/bodypart/arm/right/zombie))
+	random_l_leg = pick(list(/obj/item/bodypart/leg/left/lizard, /obj/item/bodypart/leg/left/ethereal, /obj/item/bodypart/leg/left/abductor, /obj/item/bodypart/leg/left/alien, /obj/item/bodypart/leg/left/fly, /obj/item/bodypart/leg/left/golem,/obj/item/bodypart/leg/left/golem/bone,/obj/item/bodypart/leg/left/golem/cardboard,/obj/item/bodypart/leg/left/golem/cloth,/obj/item/bodypart/leg/left/golem/cult,/obj/item/bodypart/leg/left/golem/durathread,/obj/item/bodypart/leg/left/golem/snow,/obj/item/bodypart/leg/left/jelly,/obj/item/bodypart/leg/left/luminescent,/obj/item/bodypart/leg/left/monkey,/obj/item/bodypart/leg/left/moth,/obj/item/bodypart/leg/left/mushroom,/obj/item/bodypart/leg/left/plasmaman,/obj/item/bodypart/leg/left/pod,/obj/item/bodypart/leg/left/robot,/obj/item/bodypart/leg/left/shadow,/obj/item/bodypart/leg/left/skaven,/obj/item/bodypart/leg/left/skeleton,/obj/item/bodypart/leg/left/slime,/obj/item/bodypart/leg/left/snail,/obj/item/bodypart/leg/left/zombie))
+	random_r_leg = pick(list(/obj/item/bodypart/leg/right/lizard, /obj/item/bodypart/leg/right/ethereal, /obj/item/bodypart/leg/right/abductor, /obj/item/bodypart/leg/right/alien, /obj/item/bodypart/leg/right/fly, /obj/item/bodypart/leg/right/golem,/obj/item/bodypart/leg/right/golem/bone,/obj/item/bodypart/leg/right/golem/cardboard,/obj/item/bodypart/leg/right/golem/cloth,/obj/item/bodypart/leg/right/golem/cult,/obj/item/bodypart/leg/right/golem/durathread,/obj/item/bodypart/leg/right/golem/snow,/obj/item/bodypart/leg/right/jelly,/obj/item/bodypart/leg/right/luminescent,/obj/item/bodypart/leg/right/monkey,/obj/item/bodypart/leg/right/moth,/obj/item/bodypart/leg/right/mushroom,/obj/item/bodypart/leg/right/plasmaman,/obj/item/bodypart/leg/right/pod,/obj/item/bodypart/leg/right/robot,/obj/item/bodypart/leg/right/shadow,/obj/item/bodypart/leg/right/skaven,/obj/item/bodypart/leg/right/skeleton,/obj/item/bodypart/leg/right/slime,/obj/item/bodypart/leg/right/snail,/obj/item/bodypart/leg/right/zombie))
 
 	new_species.bodypart_overrides = list(
 		BODY_ZONE_HEAD = random_head,

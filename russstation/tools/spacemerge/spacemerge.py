@@ -55,24 +55,12 @@ ours = ["last_merge",
 	"_maps/map_files/Mining/Badlands.dmm",
 	"_maps/map_files/Mining/IceMoon.dmm",
 	# Custom ruins
+	"_maps/RandomRuins/LavaRuins/lavaland_surface_chaos_dwarf.dmm",
 	"_maps/RandomRuins/LavaRuins/lavaland_surface_dwarf.dmm",
 	"_maps/RandomRuins/LavaRuins/lavaland_surface_sif_spawn.dmm",
+	"_maps/RandomRuins/IceRuins/icemoon_underground_chaos_dwarf.dmm",
+	"_maps/RandomRuins/IceRuins/icemoon_underground_dwarf.dmm",
 	"_maps/RandomRuins/IceRuins/icemoon_underground_hierophant.dmm",
-	# Custom map wiki pictures
-	"wiki/cube.png",
-	"wiki/dorf_dorm.png",
-	"wiki/echo.png",
-	"wiki/icecube_above.png",
-	"wiki/icecube_below.png",
-	"wiki/lima.png",
-	"wiki/pubby.png",
-	"wiki/shitstation_above.png",
-	"wiki/shitstation_below.png",
-	# Custom map dm files, apparently required <insert old PR conversation link here>
-	"_maps/cubestation.dm",
-	"_maps/echostation.dm",
-	"_maps/limastation.dm",
-	"_maps/shitstation.dm",
 	# Custom map json files
 	"_maps/cubestation.json",
 	"_maps/echostation.json",
@@ -81,10 +69,6 @@ ours = ["last_merge",
 	"_maps/pubbystation.json",
 	"_maps/shitstation.json",
 	# Russ strings
-	"strings/names/diona_first.txt",
-	"strings/names/diona_last.txt",
-	"strings/names/dwarf_first.txt",
-	"strings/names/dwarf_last.txt",
 	"strings/russ_ion_laws.json",
 	"strings/russ_traumas.json"]
 # .gitattributes is theirs but handled special to avoid git problems
@@ -92,8 +76,7 @@ theirs = [".editorconfig",
 	"tgstation.dme"]
 # dirs processed after individual files
 our_dirs = [".github",
-	".devcontainer",
-	"config",
+	#"config",
 	"russstation",
 	"code/__DEFINES/~russ_defines",
 	"_maps/map_files/CubeStation",
@@ -101,7 +84,8 @@ our_dirs = [".github",
 	"_maps/map_files/IceCubeStation",
 	"_maps/map_files/LimaStation",
 	"_maps/map_files/PubbyStation",
-	"_maps/map_files/ShitStation"]
+	"_maps/map_files/ShitStation",
+	"wiki"]
 # theirs previously included _maps and tgui; we keep maps and local UI tweaks in those so process them
 their_dirs = ["icons",
 	"interface",
@@ -326,25 +310,46 @@ def delete_prompt(repo, path):
 def preprocess_checkouts(repo):
 	print("Checking out files that don't need processed...")
 	for filename in ours:
-		repo.git.checkout(filename, "--ours")
-		repo.git.add(filename)
-		printvv("Checked out our", filename)
+		try:
+			repo.git.checkout(filename, "--ours")
+			repo.git.add(filename)
+			printvv("Checked out our", filename)
+		except git.exc.GitCommandError as e:
+			# git checkout fails if file doesn't exist for some reason
+			printvv("Couldn't checkout", path)
+			printvv(repr(e))
 	for filename in theirs:
-		repo.git.checkout(filename, "--theirs")
-		repo.git.add(filename)
-		printvv("Checked out their", filename)
+		try:
+			repo.git.checkout(filename, "--theirs")
+			repo.git.add(filename)
+			printvv("Checked out their", filename)
+		except git.exc.GitCommandError as e:
+			printvv("Couldn't checkout", path)
+			printvv(repr(e))
 	for dirname in our_dirs:
-		repo.git.checkout(dirname, "--ours")
-		repo.git.add(dirname)
-		printvv("Checked out our", dirname + "/*")
+		try:
+			repo.git.checkout(dirname, "--ours")
+			repo.git.add(dirname)
+			printvv("Checked out our", dirname + "/*")
+		except git.exc.GitCommandError as e:
+			printvv("Couldn't checkout", path)
+			printvv(repr(e))
 	for dirname in their_dirs:
-		repo.git.checkout(dirname, "--theirs")
-		repo.git.add(dirname)
-		printvv("Checked out their", dirname + "/*")
+		try:
+			repo.git.checkout(dirname, "--theirs")
+			repo.git.add(dirname)
+			printvv("Checked out their", dirname + "/*")
+		except git.exc.GitCommandError as e:
+			printvv("Couldn't checkout", path)
+			printvv(repr(e))
 	for ext in binaries:
-		repo.git.checkout(ext, "--theirs")
-		repo.git.add(ext)
-		printvv("Checked out their", ext)
+		try:
+			repo.git.checkout(ext, "--theirs")
+			repo.git.add(ext)
+			printvv("Checked out their", ext)
+		except git.exc.GitCommandError as e:
+			printvv("Couldn't checkout", path)
+			printvv(repr(e))
 
 # get a list of files that were updated upstream
 def get_upstream_updated_paths(repo, last_merge, current_merge):

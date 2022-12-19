@@ -27,7 +27,7 @@
 	force = 10
 	w_class = WEIGHT_CLASS_TINY
 
-/obj/item/melee/smith_hammer/ComponentInitialize()
+/obj/item/melee/smith_hammer/Initialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 
@@ -52,7 +52,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 
-/obj/item/melee/smithed_sword/ComponentInitialize()
+/obj/item/melee/smithed_sword/Initialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 
@@ -78,7 +78,7 @@
 	icon_state = "pickaxe_base"
 	inhand_icon_state = "spickaxe"
 
-/obj/item/pickaxe/smithed_pickaxe/ComponentInitialize()
+/obj/item/pickaxe/smithed_pickaxe/Initialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 
@@ -105,7 +105,7 @@
 	icon_state = "shovel"
 	inhand_icon_state = "shovel"
 
-/obj/item/shovel/smithed_shovel/ComponentInitialize()
+/obj/item/shovel/smithed_shovel/Initialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 
@@ -135,7 +135,7 @@
 	icon_state = "knife_base"
 	inhand_icon_state = "knife"
 
-/obj/item/knife/smithed_knife/ComponentInitialize()
+/obj/item/knife/smithed_knife/Initialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 
@@ -186,7 +186,7 @@
 		armour_penetration = W.armour_penetration * 3
 		sharpness = W.sharpness
 
-/obj/item/smithed_war_hammer/ComponentInitialize()
+/obj/item/smithed_war_hammer/Initialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE, force_multiplier=2)

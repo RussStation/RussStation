@@ -28,11 +28,12 @@
 		if(istype(ghost))
 			near_ghost = TRUE
 			break
+	var/mob/living/carbon/C = parent
 	if(near_ghost && !spooked)
-		SEND_SIGNAL(parent, COMSIG_ADD_MOOD_EVENT, "spooked", /datum/mood_event/spooked)
+		C.add_mood_event("spooked", /datum/mood_event/spooked)
 		spooked = TRUE
 	else if (!near_ghost && spooked)
-		SEND_SIGNAL(parent, COMSIG_CLEAR_MOOD_EVENT, "spooked")
+		C.clear_mood_event("spooked")
 		spooked = FALSE
 	// because we're calling expensive `in view`, rate limit checks
 	addtimer(CALLBACK(src, .proc/ghost_check, SPOOK_COOLDOWN))

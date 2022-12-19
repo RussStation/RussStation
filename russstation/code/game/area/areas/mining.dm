@@ -2,7 +2,7 @@
 
 // no-monster area for lower station level
 /area/icemoon/underground/unexplored/rivers/no_monsters
-	area_flags = UNIQUE_AREA | FLORA_ALLOWED | CAVES_ALLOWED | NO_ALERTS
+	area_flags = UNIQUE_AREA | FLORA_ALLOWED | CAVES_ALLOWED
 
 // areas for the bad version of lavaland
 
@@ -23,7 +23,7 @@
 	forced_ambience = TRUE
 	ambience_index = AMBIENCE_CREEPY
 	sound_environment = SOUND_AREA_ASTEROID
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED | NO_ALERTS
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
 	min_ambience_cooldown = 70 SECONDS
 	max_ambience_cooldown = 220 SECONDS
 	static_lighting = FALSE
@@ -32,9 +32,9 @@
 
 /area/badlands/unexplored // a tiny safety buffer for miners
 	icon_state = "unexplored"
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | NO_ALERTS
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED
 	map_generator = /datum/map_generator/cave_generator/badlands
 
 /area/badlands/unexplored/danger
 	icon_state = "danger"
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED | NO_ALERTS
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED

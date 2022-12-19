@@ -30,14 +30,15 @@
 
 /obj/item/food/muffin/moffin
 	name = "moffin"
-	icon_state = "moffin"
+	icon_state = "moffin_1"
+	base_icon_state = "moffin"
 	desc = "A delicious and spongy little cake."
 	tastes = list("muffin" = 3, "dust" = 1, "lint" = 1)
 	foodtypes = CLOTH | GRAIN | SUGAR | BREAKFAST
 
 /obj/item/food/muffin/moffin/Initialize(mapload)
 	. = ..()
-	icon_state = "[icon_state]_[rand(1, 3)]"
+	icon_state = "[base_icon_state]_[rand(1, 3)]"
 
 /obj/item/food/muffin/moffin/examine(mob/user)
 	. = ..()
@@ -88,7 +89,7 @@
 	trash_type = /obj/item/trash/waffles
 	bite_consumption = 4
 	food_reagents = list(/datum/reagent/consumable/nutriment = 8, /datum/reagent/drug/mushroomhallucinogen = 2, /datum/reagent/consumable/nutriment/vitamin = 4)
-	tastes = list("waffle" = 1, "mushrooms" = 1)
+	tastes = list("waffles" = 1, "mushrooms" = 1)
 	foodtypes = GRAIN | VEGETABLES | SUGAR | BREAKFAST
 	w_class = WEIGHT_CLASS_SMALL
 
@@ -116,7 +117,7 @@
 	name = "fortune cookie"
 	desc = "A true prophecy in each cookie!"
 	icon_state = "fortune_cookie"
-	trash_type = /obj/item/paper
+	trash_type = /obj/item/paperslip
 	food_reagents = list(/datum/reagent/consumable/nutriment = 5)
 	tastes = list("cookie" = 1)
 	foodtypes = GRAIN | SUGAR
@@ -131,13 +132,18 @@
 	if (fortune)
 		fortune.forceMove(drop_location)
 		return fortune
-	// Otherwise, make a blank page.
-	var/out_paper = new trash_type(drop_location)
-	return out_paper
+
+	// Otherwise, use a generic one
+	var/obj/item/paperslip/fortune_slip = new trash_type(drop_location)
+	fortune_slip.name = "fortune slip"
+	// if someone adds lottery tickets in the future, be sure to add random numbers to this
+	fortune_slip.desc = pick(GLOB.wisdoms)
+
+	return fortune_slip
 
 /obj/item/food/fortunecookie/MakeLeaveTrash()
 	if(trash_type)
-		AddElement(/datum/element/food_trash, trash_type, food_flags, /obj/item/food/fortunecookie/proc/get_fortune)
+		AddElement(/datum/element/food_trash, trash_type, food_flags, TYPE_PROC_REF(/obj/item/food/fortunecookie, get_fortune))
 
 /obj/item/food/poppypretzel
 	name = "poppy pretzel"
@@ -199,7 +205,7 @@
 
 /obj/item/food/cookie/sugar/Initialize(mapload)
 	. = ..()
-	if(SSevents.holidays && SSevents.holidays[FESTIVE_SEASON])
+	if(check_holidays(FESTIVE_SEASON))
 		var/shape = pick("tree", "bear", "santa", "stocking", "present", "cane")
 		desc = "A sugar cookie in the shape of a [shape]. I hope Santa likes it!"
 		icon_state = "sugarcookie_[shape]"
@@ -334,7 +340,7 @@
 	burns_in_oven = TRUE
 
 /obj/item/food/brownie_sheet/MakeProcessable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/brownie, 4, 3 SECONDS, table_required = TRUE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/brownie, 4, 3 SECONDS, table_required = TRUE,  screentip_verb = "Slice")
 
 /obj/item/food/brownie
 	name = "brownie"

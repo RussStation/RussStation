@@ -5,6 +5,7 @@ $include dbconfig.txt
 $include comms.txt
 $include resources.txt
 $include interviews.txt
+$include lua.txt
 $include russstation_config.txt
 
 # You can use the @ character at the beginning of a config option to lock it from being edited in-game
@@ -118,17 +119,23 @@ LOG_ATTACK
 ## log pda messages
 LOG_PDA
 
+## log uplink purchases
+LOG_UPLINK
+
 ## log telecomms messages
 LOG_TELECOMMS
 
 ## log prayers
 LOG_PRAYER
 
-## log silocns
+## log silicons
 LOG_SILICON
 
 ## log economy actions
 LOG_ECON
+
+## log traitor objectives
+LOG_TRAITOR
 
 ## log crew manifest to separate file
 LOG_MANIFEST
@@ -147,19 +154,22 @@ LOG_MANIFEST
 LOG_PICTURES
 
 ## log mecha actions
-LOG_MECHA
+# LOG_MECHA
 
 ## log virus and actions
 LOG_VIRUS
 
-## log cloning actions
-LOG_CLONING
-
 ## log shuttle actions
 LOG_SHUTTLE
 
+## log tool interactions [/atom/proc/tool_act]
+LOG_TOOLS
+
 ## Log all timers on timer auto reset
 # LOG_TIMERS_ON_BUCKET_RESET
+
+## log speech indicators
+LOG_SPEECH_INDICATORS
 
 ##Log camera pictures - Must have picture logging enabled
 PICTURE_LOGGING_CAMERA
@@ -190,6 +200,12 @@ ID_CONSOLE_JOBSLOT_DELAY 30
 
 ## allow players to initiate a map-change vote
 #ALLOW_VOTE_MAP
+
+## allow players to rock the vote, or to vote on the map again if they didn't like the last results
+#ALLOW_ROCK_THE_VOTE
+
+## the number of times you wish to allow players to rock the vote in a given shift
+MAX_ROCKING_VOTES 1
 
 ## min delay (deciseconds) between voting sessions (default 10 minutes)
 VOTE_DELAY 0
@@ -255,6 +271,9 @@ RULESURL https://honksquad.com/ss13/
 ## Github address
 GITHUBURL https://github.com/RussStation/RussStation
 
+## Discord bot command prefix, if the discord bot is used
+# DISCORDBOTCOMMANDPREFIX ?
+
 ## Round specific stats address
 ## Link to round specific parsed logs; IE statbus. It is appended with the RoundID automatically by ticker/Reboot()
 ## This will take priority over the game logs address during reboot.
@@ -278,8 +297,12 @@ BANAPPEALS https://discord.gg/honk
 # INVOKE_YOUTUBEDL youtube-dl
 
 ## In-game features
-##Toggle for having jobs load up from the .txt
-# LOAD_JOBS_FROM_TXT
+
+## Toggle for having jobs load up from the jobconfig.toml (or jobs.txt) file. Will use codebase defaults if commented out.
+## Jobs have specific "keys" tied to their in-game datums, those should sync up otherwise it will fail to load.
+## Setting Total/Spawn Positions to -1 will open unlimited join slots for it.
+## Playtime Requirements is in minutes, Required Account Age is in days.
+#LOAD_JOBS_FROM_TXT
 
 ## Uncomment this to forbid admins from possessing the singularity.
 #FORBID_SINGULO_POSSESSION
@@ -294,9 +317,8 @@ ALLOW_HOLIDAYS
 ## Uncomment to show the names of the admin sending a pm from IRC instead of showing as a stealthmin.
 #SHOW_IRC_NAME
 
-## Defines the ticklimit for subsystem initialization (In percents of a byond tick). Lower makes world start smoother. Higher makes it faster.
-##This is currently a testing optimized setting. A good value for production would be 98.
-TICK_LIMIT_MC_INIT 98
+## Uncomment to prevent machines syncing to the Science techweb by default.
+#NO_DEFAULT_TECHWEB_LINK
 
 ##Defines the ticklag for the world. Ticklag is the amount of time between game ticks (aka byond ticks) (in 1/10ths of a second).
 ##	This also controls the client network update rate, as well as the default client fps
@@ -410,7 +432,7 @@ AUTOADMIN_RANK Badmin
 #AUTO_DEADMIN_PLAYERS
 
 ## Uncomment to automatically deadmin antagonists when they gain the role.
-AUTO_DEADMIN_ANTAGONISTS
+#AUTO_DEADMIN_ANTAGONISTS
 
 ## Uncomment to automatically deadmin specific role sets when a player joins the game.
 #AUTO_DEADMIN_HEADS
@@ -468,7 +490,7 @@ ERROR_MSG_DELAY 50
 ## If using TGS4, the string option can be set as one of more chat channel tags (separated by ','s) to limit the message to channels with that tag name (case-sensitive). This will have no effect on TGS3.
 ## i.e. CHAT_ANNOUNCE_NEW_GAME chat_channel_tag
 
-## Send a message with the station name starting a new game. Also required for the notify function
+## Send a message with the station name starting a new game.
 #CHAT_ANNOUNCE_NEW_GAME
 
 ## Ping users who use the `notify` command when a new game starts.
@@ -556,16 +578,27 @@ DEFAULT_VIEW_SQUARE 15x15
 
 ## The URL to the webhook for adminhelps to relay the urgent ahelp message to
 ## If not set, will disable urgent ahelps.
-#ADMINHELP_WEBHOOK_URL
+#URGENT_ADMINHELP_WEBHOOK_URL
+
+## See above, but for non-urgent ahelps
+#REGULAR_ADMINHELP_WEBHOOK_URL
 
 ## The urgent ahelp cooldown for a given player if they're alone on a server and need to send an urgent ahelp.
 URGENT_AHELP_COOLDOWN 300
 
 ## The message that is sent to the discord if an urgent ahelp is sent. Useful for sending a role ping.
-#URGENT_AHELP_MESSAGE Ban ban ban ban
+#URGENT_AHELP_MESSAGE
+
+## See above, but for non-urgent ahelps.
+#AHELP_MESSAGE
 
 ## The message that the player receives whenever prompted whether they want to send an urgent ahelp or not.
 #URGENT_AHELP_USER_PROMPT This'll ping the admins!
+
+## The link that the title of a ticket can link to.
+## If not set, it will link nowhere
+## use $RID for the round ID and $TID for the ticket ID
+#ADMINHELP_AHELP_LINK
 
 ## The URL for the pfp of the webhook
 #ADMINHELP_WEBHOOK_PFP
@@ -578,3 +611,25 @@ URGENT_AHELP_COOLDOWN 300
 ## Based on config directory, so "motd.txt" points to "config/motd.txt"
 MOTD motd.txt
 #MOTD motd_extra.txt
+
+## Assets can opt-in to caching their results into `tmp`.
+## This is important, as preferences assets take upwards of 30 seconds (without sleeps) to collect.
+## The cache is assumed to be cleared by TGS recompiling, which deletes `tmp`.
+## This should be disabled (through `CACHE_ASSETS 0`) on development,
+## but enabled on production (the default).
+CACHE_ASSETS 0
+
+## Uncomment to allow the station name to be in the hub entry.
+## You should only enable this if you can guarantee a station name doesn't break BYOND's TOS.
+## BYOND staff have gotten upset at us in the past for inappropriate station names.
+#STATION_NAME_IN_HUB_ENTRY
+
+## The number of PR announcements allowed for the same pull request per round
+## This makes sure that somebody can only spam a few reopens and closes before being ignored
+PR_ANNOUNCEMENTS_PER_ROUND 5
+
+## Uncomment to block all attempts to profile, for performance reasons
+#FORBID_ALL_PROFILING
+
+## Uncomment to block granting profiling privileges to users with R_DEBUG, for performance purposes
+#FORBID_ADMIN_PROFILING

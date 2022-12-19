@@ -9,7 +9,7 @@
 	needs_anchored = FALSE
 	req_components = list(
 		// graphics cards aren't required
-		/obj/item/reagent_containers/glass/beaker = 1, // for coolant
+		/obj/item/reagent_containers/cup/beaker = 1, // for coolant
 		/obj/item/pickaxe = 1, // haha mining
 		/obj/item/stack/cable_coil = 5)
 
@@ -276,7 +276,7 @@
 	. = ..()
 	// upgradeable coolant reservoir
 	var/volume = 0
-	for(var/obj/item/reagent_containers/glass/beaker/B in component_parts)
+	for(var/obj/item/reagent_containers/cup/beaker/B in component_parts)
 		volume += B.reagents.maximum_volume
 	reagents.maximum_volume = volume
 

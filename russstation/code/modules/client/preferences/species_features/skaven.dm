@@ -13,10 +13,10 @@
 	skaven_base.Blend(icon('russstation/icons/mob/human_parts_greyscale.dmi', "skaven_l_arm"), ICON_OVERLAY)
 	skaven_base.Blend(icon('russstation/icons/mob/human_parts_greyscale.dmi', "skaven_r_arm"), ICON_OVERLAY)
 
-	var/icon/eyes = icon('icons/mob/human_face.dmi', "eyes")
+	var/icon/eyes = icon('icons/mob/species/human/human_face.dmi', "eyes")
 	eyes.Blend(COLOR_GRAY, ICON_MULTIPLY)
 	skaven_base.Blend(eyes, ICON_OVERLAY)
-	skaven_base.Blend(icon('icons/mob/mutant_bodyparts.dmi', "m_snout_round_ADJ"), ICON_OVERLAY)
+	skaven_base.Blend(icon('icons/mob/species/lizard/lizard_misc.dmi', "m_snout_round_ADJ"), ICON_OVERLAY)
 
 	skaven_base.Scale(64, 64)
 	skaven_base.Crop(15, 64, 15 + 31, 64 - 31)

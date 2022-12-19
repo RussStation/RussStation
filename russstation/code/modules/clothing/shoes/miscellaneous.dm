@@ -17,19 +17,19 @@
 	create_storage(type = /datum/storage/pockets/shoes/clown)
 	AddComponent(/datum/component/squeak, list('sound/effects/clownstep1.ogg'=1,'sound/effects/clownstep2.ogg'=1), 50)
 
-/obj/item/clothing/shoes/cowboy/clown/equipped(mob/user, slot)
+/obj/item/clothing/shoes/cowboy/clown/equipped(mob/living/user, slot)
 	. = ..()
 	if(slot == ITEM_SLOT_FEET)
 		if(enabled_waddle)
 			user.AddElement(/datum/element/waddling)
 		if(user.mind && user.mind.assigned_role == "Clown")
-			SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "clownboy boots", /datum/mood_event/clownshoes)
+			user.add_mood_event("clownboy boots", /datum/mood_event/clownshoes)
 
-/obj/item/clothing/shoes/cowboy/clown/dropped(mob/user)
+/obj/item/clothing/shoes/cowboy/clown/dropped(mob/living/user)
 	. = ..()
 	user.RemoveElement(/datum/element/waddling)
 	if(user.mind && user.mind.assigned_role == "Clown")
-		SEND_SIGNAL(user, COMSIG_CLEAR_MOOD_EVENT, "clownboy boots")
+		user.clear_mood_event("clownboy boots")
 
 /obj/item/clothing/shoes/cowboy/clown/CtrlClick(mob/living/user)
 	if(!isliving(user))

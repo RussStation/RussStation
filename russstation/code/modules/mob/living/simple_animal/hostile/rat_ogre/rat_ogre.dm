@@ -128,10 +128,10 @@
 		While orbiting you, these blades will protect you from from attacks, but will be consumed on use. \
 		Additionally, you can click to fire the blades at a target, dealing damage and causing bleeding."
 
-	button_icon = 'russstation/icons/mob/actions/backgrounds.dmi'
+	background_icon = 'russstation/icons/mob/actions/backgrounds.dmi'
 	background_icon_state = "bg_skaven"
 
-	icon_icon = 'russstation/icons/mob/actions/actions_skaven.dmi'
+	button_icon = 'russstation/icons/mob/actions/actions_skaven.dmi'
 	button_icon_state = "warpstone_blade0"
 	base_icon_state = "warpstone_blade"
 

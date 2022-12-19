@@ -5,7 +5,6 @@
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_head"
 	limb_id = SPECIES_SKAVEN
-	uses_mutcolor = TRUE
 	is_dimorphic = FALSE
 
 /obj/item/bodypart/chest/skaven
@@ -14,42 +13,45 @@
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_chest"
-	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
 	is_dimorphic = FALSE
 
-/obj/item/bodypart/l_arm/skaven
+/obj/item/bodypart/arm/left/skaven
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_l_arm"
-	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
+	unarmed_attack_verb = "claw"
+	unarmed_attack_effect = ATTACK_EFFECT_CLAW
+	unarmed_attack_sound = 'sound/weapons/slash.ogg'
+	unarmed_miss_sound = 'sound/weapons/slashmiss.ogg'
 
-/obj/item/bodypart/r_arm/skaven
+/obj/item/bodypart/arm/right/skaven
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_r_arm"
-	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
+	unarmed_attack_verb = "claw"
+	unarmed_attack_effect = ATTACK_EFFECT_CLAW
+	unarmed_attack_sound = 'sound/weapons/slash.ogg'
+	unarmed_miss_sound = 'sound/weapons/slashmiss.ogg'
 
-/obj/item/bodypart/l_leg/skaven
+/obj/item/bodypart/leg/left/skaven
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_l_leg"
-	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN
 
-/obj/item/bodypart/r_leg/skaven
+/obj/item/bodypart/leg/right/skaven
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_r_leg"
-	uses_mutcolor = TRUE
 	limb_id = SPECIES_SKAVEN

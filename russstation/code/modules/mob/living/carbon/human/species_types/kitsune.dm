@@ -1,7 +1,6 @@
 /datum/species/human/kitsune
 	name = "Kitsune"
 	id = SPECIES_KITSUNE
-	say_mod = "gekkers"
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
@@ -19,7 +18,6 @@
 	disliked_food = GROSS | CLOTH | RAW
 	liked_food = MEAT | FRUIT
 	payday_modifier = 0.75
-	ass_image = 'icons/ass/assfox.png'
 	family_heirlooms = list(/obj/item/food/egg, /obj/item/gohei)
 	examine_limb_id = SPECIES_HUMAN
 	meat = /obj/item/food/meat/slab/human/mutant/kitsune

@@ -1,4 +1,4 @@
-/obj/item/reagent_containers/food/drinks/drinkingglass/proc/check_full_icon_state(datum/reagent/R)
+/obj/item/reagent_containers/cup/glass/drinkingglass/proc/check_full_icon_state(datum/reagent/R)
 	if(R.glass_icon_state in GLOB.drinkingglassrussicons)
 		icon = 'russstation/icons/obj/drinks.dmi'
 	else

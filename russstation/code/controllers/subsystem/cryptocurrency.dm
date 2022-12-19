@@ -84,7 +84,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 		if(!E.typepath)
 			continue // don't want this one!
 		random_events += E // add it to the list of crypto events
-	return ..()
+	return SS_INIT_SUCCESS
 
 // add mining progress and calculate payouts if qualified
 /datum/controller/subsystem/cryptocurrency/proc/mine(power)

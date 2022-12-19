@@ -9,7 +9,6 @@
 		/obj/item/food/grown/russ/citrus,
 		// honk end
 		/obj/item/food/grown/mushroom,
-		/obj/item/food/deepfryholder,
 		/obj/item/food/clothing,
 		/obj/item/food/meat/slab/human/mutant,
 		/obj/item/food/grown/shell)

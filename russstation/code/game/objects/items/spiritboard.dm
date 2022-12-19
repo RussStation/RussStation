@@ -23,9 +23,6 @@
 	. = ..()
 	// allow ghosts to orbit for easier haunting
 	SSpoints_of_interest.make_point_of_interest(src)
-
-/obj/item/spiritboard/ComponentInitialize()
-	. = ..()
 	// keep it on station so ghosts can keep using it
 	AddComponent(/datum/component/stationloving, TRUE, FALSE)
 
@@ -58,4 +55,4 @@
 				if(M.client)
 					// display descriptive message in chat, but just the selected word in runechat
 					to_chat(M, span_blue("<B>The board spells out a message ... \"[selected]\"</B>"))
-					M.create_chat_message(src, M.get_random_understood_language(), selected)
+					M.create_chat_message(src, get_selected_language(), selected)

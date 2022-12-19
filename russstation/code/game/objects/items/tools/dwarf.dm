@@ -27,7 +27,7 @@
 	toolspeed = 1
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 50, ACID = 30)
 
-/obj/item/dwarf_tool/ComponentInitialize()
+/obj/item/dwarf_tool/Initialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 

@@ -2,7 +2,7 @@
 /obj/effect/gibspawner/confetti
 	gibtypes = list(/obj/effect/decal/cleanable/confetti, /obj/effect/decal/cleanable/confetti)
 	gibamounts = list(3, 1) //seperated to leave one in place
-	gib_mob_type = /mob/living/simple_animal/mouse/russ/clouse
+	gib_mob_type = /mob/living/basic/mouse/russ/clouse
 	sound_to_play = 'russstation/sound/effects/confetti_partywhistle.ogg'
 	sound_vol = 30
 

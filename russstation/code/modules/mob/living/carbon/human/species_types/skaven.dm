@@ -1,7 +1,6 @@
 /datum/species/skaven
 	name = "\improper Skaven"
 	id = SPECIES_SKAVEN
-	say_mod = "jitters"
 	species_traits = list(DYNCOLORS,AGENDER,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE)
 	external_organs = list(
 		/obj/item/organ/external/horns = "None",
@@ -14,10 +13,6 @@
 	payday_modifier = 0.25 //Might as well be a slave
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	species_cookie = /obj/item/food/meat/slab
-	attack_verb = "claw"
-	attack_effect = ATTACK_EFFECT_CLAW
-	attack_sound = 'sound/weapons/slash.ogg'
-	miss_sound = 'sound/weapons/slashmiss.ogg'
 	meat = /obj/item/food/meat/slab/human/mutant/skaven
 	skinned_type = /obj/item/stack/sheet/animalhide/skaven
 	disliked_food = NONE
@@ -29,10 +24,10 @@
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/skaven,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest/skaven,
-		BODY_ZONE_L_ARM = /obj/item/bodypart/l_arm/skaven,
-		BODY_ZONE_R_ARM = /obj/item/bodypart/r_arm/skaven,
-		BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg/skaven,
-		BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg/skaven,
+		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/skaven,
+		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/skaven,
+		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/skaven,
+		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/skaven,
 	)
 
 /// Returns the species's scream sound. (human screams)
@@ -73,6 +68,12 @@
 	if(lastname)
 		randname += " [lastname]"
 	return randname
+
+/datum/species/skaven/randomize_features(mob/living/carbon/human/human_mob)
+	. = ..()
+	human_mob.dna.features["tail_skaven"] = pick(GLOB.tails_list_skaven)
+	human_mob.dna.features["skaven_color"] = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)]
+	randomize_external_organs(human_mob)
 
 /datum/species/skaven/on_species_gain(mob/living/carbon/carbon_being, datum/species/old_species, pref_load)
 

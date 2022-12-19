@@ -11,7 +11,7 @@ GLOBAL_LIST_INIT(clay_recipes, list(
 	new /datum/stack_recipe("hammer mold", /obj/item/reagent_containers/molten_container/smelt_mold/war_hammer, req_amount=1, res_amount=1), \
 	new /datum/stack_recipe("armour mold", /obj/item/reagent_containers/molten_container/smelt_mold/armour, req_amount=1, res_amount=1), \
 	new /datum/stack_recipe("helmet mold", /obj/item/reagent_containers/molten_container/smelt_mold/helmet, req_amount=1, res_amount=1), \
-	new /datum/stack_recipe("sand", /obj/item/stack/ore/glass, req_amount=1, one_per_turf = FALSE, on_floor = TRUE) \
+	new /datum/stack_recipe("sand", /obj/item/stack/ore/glass, req_amount=1, one_per_turf = FALSE, on_solid_ground = TRUE) \
 	))
 
 /obj/item/stack/sheet/mineral/clay
@@ -36,15 +36,15 @@ GLOBAL_LIST_INIT(clay_recipes, list(
  */
 
 GLOBAL_LIST_INIT(stone_recipes, list( \
-	new /datum/stack_recipe("Stone bed", /obj/structure/bed/stone, 3, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
-	new /datum/stack_recipe("Stone table frame", /obj/structure/table_frame/stone, 4, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
-	new /datum/stack_recipe("Stone throne", /obj/structure/chair/stone, 2, time = 10, one_per_turf = TRUE, on_floor = TRUE), \
-	new /datum/stack_recipe("Stone door", /obj/structure/mineral_door/stone, 20, time = 30, one_per_turf = TRUE, on_floor = TRUE), \
-	new /datum/stack_recipe("Stone coffer", /obj/structure/closet/crate/stone, 3, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
+	new /datum/stack_recipe("Stone bed", /obj/structure/bed/stone, 3, time = 15, one_per_turf = TRUE, on_solid_ground = TRUE), \
+	new /datum/stack_recipe("Stone table frame", /obj/structure/table_frame/stone, 4, time = 15, one_per_turf = TRUE, on_solid_ground = TRUE), \
+	new /datum/stack_recipe("Stone throne", /obj/structure/chair/stone, 2, time = 10, one_per_turf = TRUE, on_solid_ground = TRUE), \
+	new /datum/stack_recipe("Stone door", /obj/structure/mineral_door/stone, 20, time = 30, one_per_turf = TRUE, on_solid_ground = TRUE), \
+	new /datum/stack_recipe("Stone coffer", /obj/structure/closet/crate/stone, 3, time = 15, one_per_turf = TRUE, on_solid_ground = TRUE), \
 	new /datum/stack_recipe("Stone floor tiles", /obj/item/stack/tile/stone, 1, 4, 20), \
-	new /datum/stack_recipe("Stone wall frame", /obj/structure/girder/stone, 4, time = 40, one_per_turf = TRUE, on_floor = TRUE), \
-	new /datum/stack_recipe("Stone window", /obj/structure/stone_window, 5, time = 15, one_per_turf = TRUE, on_floor = TRUE), \
-	new /datum/stack_recipe("Carving block", /obj/structure/carving_block, 5, time = 5, one_per_turf = TRUE, on_floor = TRUE, applies_mats = TRUE) \
+	new /datum/stack_recipe("Stone wall frame", /obj/structure/girder/stone, 4, time = 40, one_per_turf = TRUE, on_solid_ground = TRUE), \
+	new /datum/stack_recipe("Stone window", /obj/structure/stone_window, 5, time = 15, one_per_turf = TRUE, on_solid_ground = TRUE), \
+	new /datum/stack_recipe("Carving block", /obj/structure/carving_block, 5, time = 5, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE) \
 	))
 
 /obj/item/stack/sheet/mineral/stone
