@@ -37,7 +37,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// is market trending up or down?
 	var/market_trend_up = TRUE
 	// how much payout can change by each time multiplicative
-	var/market_change_factor = 0.1
+	var/market_change_percent = 10
 	// how likely to change trend each process
 	var/market_change_chance = 10
 	// how many NT credits a single coin of this currency is worth
@@ -108,11 +108,15 @@ SUBSYSTEM_DEF(cryptocurrency)
 
 // pick next exchange rate slightly randomly
 /datum/controller/subsystem/cryptocurrency/proc/adjust_exchange_rate(rate)
+	// small chance to flip the trend so it's more dynamic between events
+	if(prob(market_change_chance))
+		market_trend_up = !market_trend_up
 	// min < 1 means value fluctuates instead of only going in trend direction
-	var/min_change = 1 - market_change_factor
+	var/min_change_percent = 100 - market_change_percent
 	// increased factor by event_chance% so trend direction is more likely, especially just before events
-	var/max_change = 1 + market_change_factor + event_chance / 100
-	var/change = LERP(min_change, max_change, rand())
+	var/max_change_percent = 100 + market_change_percent + event_chance
+	// get a float in the change range and convert percent to fraction for math
+	var/change = LERP(min_change_percent, max_change_percent, rand()) / 100
 	if(market_trend_up)
 		return rate * change
 	else
@@ -132,12 +136,15 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/blame = "Someone"
 	if(user && istype(user))
 		blame = user.name
+	// cashing out tanks the market proportional to the amount "removed from circulation"?
+	// shut up i know how money works, punishes spamming cashout button during a boom
+	// truncate to (0.1,0.9) so the value is always perceptible but doesn't risk zeroing the exchange rate
+	var/market_portion = min(max(amount / market_cap, 0.1), 0.9)
+	exchange_rate *= (1 - market_portion)
+	market_trend_up = FALSE
 	return "[blame] exchanged [amount] [coin_name] for [credits] Credits, paid to the [ACCOUNT_CAR_NAME] account."
 
 /datum/controller/subsystem/cryptocurrency/fire(resumed = 0)
-	// small chance to flip the trend so it's more dynamic between events
-	if(prob(market_change_chance))
-		market_trend_up = !market_trend_up
 	exchange_rate = adjust_exchange_rate(exchange_rate)
 	// add processed amounts from this period to history lists
 	mining_history += mining_processed
@@ -156,7 +163,6 @@ SUBSYSTEM_DEF(cryptocurrency)
 			if(total_payout >= market_cap)
 				// not an event so admemes can't force this
 				priority_announce("The market cap for [coin_name] has been paid. Congratulations! You won crypto! Please touch grass.", "[SScryptocurrency.coin_name] Creator [SScryptocurrency.nerd_name]")
-				// idea: destroy all existing crypto machines??
 				can_fire = FALSE
 			// else do one of the random events
 			else

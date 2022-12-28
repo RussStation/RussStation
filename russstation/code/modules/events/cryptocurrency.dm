@@ -32,7 +32,7 @@
 	var/reason = pick(reasons)
 	if(reason == "a crewmember")
 		// blame a real person
-		var/mob/living/player = pick(GLOB.player_list)
+		var/mob/living/player = pick(GLOB.alive_player_list)
 		if(player)
 			reason = player.name
 	return reason
@@ -49,12 +49,21 @@
 	else
 		weight = 10
 
+/datum/round_event/cryptocurrency/market_crash
+	announce_when = 10
+	announce_chance = 80
+
 /datum/round_event/cryptocurrency/market_crash/announce(fake)
 	minor_announce("Because of [reason()], the [SScryptocurrency.coin_name] market has crashed! Cash out before it's too late!", "[SScryptocurrency.coin_name] Speculative Investment Report")
 
 /datum/round_event/cryptocurrency/market_crash/start()
+	var/dip = 1
+	// crash harder the bigger the exchange rate is
+	if(SScryptocurrency.exchange_rate > 10)
+		dip = LERP(2, 5, rand())
+	else
+		dip = LERP(1, 2, rand())
 	// tank the mining exchange rate and market trend
-	var/dip = pick(list(1.5, 2, 2.5, 3))
 	SScryptocurrency.exchange_rate /= dip
 	SScryptocurrency.market_trend_up = FALSE
 
@@ -71,12 +80,21 @@
 	else
 		weight = 10
 
+/datum/round_event/cryptocurrency/market_boom
+	announce_when = 10
+	announce_chance = 90
+
 /datum/round_event/cryptocurrency/market_boom/announce(fake)
 	minor_announce("Because of [reason()], the [SScryptocurrency.coin_name] market is booming! Dump your life savings into [SScryptocurrency.coin_name]!", "[SScryptocurrency.coin_name] Speculative Investment Report")
 
 /datum/round_event/cryptocurrency/market_boom/start()
+	var/stonks = 1
+	// boom harder the smaller the exchange rate is
+	if(SScryptocurrency.exchange_rate < 1)
+		stonks = LERP(2, 10, rand())
+	else
+		stonks = LERP(1, 2, rand())
 	// boost the mining exchange rate and market trend
-	var/stonks = pick(list(1.5, 2, 2.5, 3, 5))
 	SScryptocurrency.exchange_rate *= stonks
 	SScryptocurrency.market_trend_up = TRUE
 

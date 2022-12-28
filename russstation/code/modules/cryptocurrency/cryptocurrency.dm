@@ -68,11 +68,13 @@
 	var/static/freon_consumption = 1
 	// how much coolant used per cycle
 	var/static/coolant_consumption = 0.025
-	// valid coolants and their bonus factors (1 = max)
+	// coolant factor when empty
+	var/static/min_coolant_factor = 0.1
+	// valid coolants and their bonus factors
 	var/static/list/coolants = list(
-		/datum/reagent/water = 0.1,
-		/datum/reagent/cryostylane = 0.5,
-		/datum/reagent/super_coolant = 1
+		/datum/reagent/water = 0.5,
+		/datum/reagent/cryostylane = 1.0,
+		/datum/reagent/super_coolant = 1.5
 	)
 
 /obj/machinery/crypto_mining_rig/Initialize(mapload)
@@ -220,8 +222,8 @@
 	use_power(power_consumed)
 
 	// release consumed heat based on coolant content
-	// 0.1 to 1.1, meaning you can produce more heat than exists. m a g i c
-	coolant_factor = 0.1
+	// 0.1 to 1.5, meaning you can produce more heat than exists. m a g i c
+	coolant_factor = 0
 	for(var/coolant in coolants)
 		if(reagents.has_reagent(coolant))
 			// measure how much of the reagents are our coolant: presence of other stuff impairs function
@@ -230,6 +232,8 @@
 			var/purity = reagents.get_reagent_purity(coolant)
 			// combine factors including the coolant's factor
 			coolant_factor += proportion * purity * coolants[coolant]
+	// empty/impure needs to still be non-zero
+	coolant_factor = max(coolant_factor, min_coolant_factor)
 	// consume a fraction of coolant from evaporation
 	reagents.remove_all(coolant_consumption)
 
