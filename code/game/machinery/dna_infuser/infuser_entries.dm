@@ -132,6 +132,9 @@ GLOBAL_LIST_INIT(infuser_entries, prepare_entries())
 		/mob/living/simple_animal/pet/fox,
 	)
 	output_organs = list(
-		/obj/item/organ/internal/ears/fox,
+		// honk start - uses our kitsune organs
+		/obj/item/organ/internal/ears/kitsune,
+		/obj/item/organ/external/tail/kitsune,
+		// honk end
 	)
 	infusion_desc = "inexcusable"
