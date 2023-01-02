@@ -16,6 +16,10 @@
 	spoken_languages = list(/datum/language/common = list(LANGUAGE_ATOM),
 							/datum/language/queekish = list(LANGUAGE_ATOM))
 
+/datum/language_holder/skaven_only
+	understood_languages = list(/datum/language/queekish = list(LANGUAGE_ATOM))
+	spoken_languages = list(/datum/language/queekish = list(LANGUAGE_ATOM))
+
 /datum/language_holder/kitsune
 	understood_languages = list(/datum/language/common = list(LANGUAGE_ATOM),
 								/datum/language/kitsumimetic = list(LANGUAGE_ATOM))
