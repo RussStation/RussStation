@@ -18,10 +18,18 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/progress_required = 10000
 	// how much required progress grows after each pay
 	var/progress_required_growth = 1.01
+	// how many times a payout has been awarded
+	var/payouts_earned = 0
 	// how much coin has been mined and waiting to convert to credits
 	var/wallet = 0
 
+	// machine tracking
+	// list of crypto rigs that exist
+	var/list/machines = list()
+
 	// history tracking
+	// nothing starts until at least one machine runs
+	var/started = FALSE
 	// list of sums for each processing period
 	var/list/mining_history = list()
 	var/list/payout_history = list()
@@ -42,9 +50,11 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/market_change_chance = 10
 	// how many NT credits a single coin of this currency is worth
 	var/exchange_rate = 0.05
+	// what the exchange rate is becoming next cycle
+	var/next_exchange_rate = 0.05
 	// minimum time between crypto events
-	var/event_cooldown_min = 6 MINUTES
-	var/event_cooldown_max = 12 MINUTES
+	var/min_event_cooldown = 6 MINUTES
+	var/max_event_cooldown = 12 MINUTES
 	// time of next event
 	var/next_event = 0
 	// prob we roll event on an SS fire
@@ -55,9 +65,9 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/list/random_events = list()
 	// maps packs to their release payout thresholds
 	var/list/card_packs_thresholds = list(
-		/datum/supply_pack/engineering/crypto_mining_card/two = 50000,
-		/datum/supply_pack/engineering/crypto_mining_card/three = 150000,
-		/datum/supply_pack/engineering/crypto_mining_card/four = 400000
+		/datum/supply_pack/engineering/crypto_mining_card/tier2 = 50000,
+		/datum/supply_pack/engineering/crypto_mining_card/tier3 = 150000,
+		/datum/supply_pack/engineering/crypto_mining_card/tier4 = 400000
 	)
 	// track released packs count
 	var/released_cards_count = 0
@@ -90,6 +100,11 @@ SUBSYSTEM_DEF(cryptocurrency)
 /datum/controller/subsystem/cryptocurrency/proc/mine(power)
 	if(!can_fire)
 		return
+	// let market start doing stuff
+	if(!started)
+		started = TRUE
+		// wait a bit before first event
+		next_event = REALTIMEOFDAY + min_event_cooldown
 	// *obviously* don't actually do crypto hash calculations, the game lags enough as is
 	// just consume power and add it to progress
 	progress += power
@@ -97,12 +112,13 @@ SUBSYSTEM_DEF(cryptocurrency)
 	total_mined += power
 	if(progress >= progress_required)
 		progress = 0 // lose excess progress lol
-		// next payout requires slightly more progress
+		// next payout requires more progress
 		progress_required *= progress_required_growth
 		var/payout = rand(payout_min, payout_max)
 		wallet += payout
 		payout_processed += payout
 		total_payout += payout
+		payouts_earned += 1
 		// funny payout message for machine to shout
 		return "Successfully computed a proof-of-work hash on the blockchain! [payout] [coin_name] awarded."
 
@@ -140,12 +156,16 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// shut up i know how money works, punishes spamming cashout button during a boom
 	// truncate to (0.1,0.9) so the value is always perceptible but doesn't risk zeroing the exchange rate
 	var/market_portion = min(max(amount / market_cap, 0.1), 0.9)
-	exchange_rate *= (1 - market_portion)
+	next_exchange_rate *= (1 - market_portion)
 	market_trend_up = FALSE
 	return "[blame] exchanged [amount] [coin_name] for [credits] Credits, paid to the [ACCOUNT_CAR_NAME] account."
 
 /datum/controller/subsystem/cryptocurrency/fire(resumed = 0)
-	exchange_rate = adjust_exchange_rate(exchange_rate)
+	if(!started)
+		return
+	// update exchange rate and determine the next value (the market is controlled!)
+	exchange_rate = next_exchange_rate
+	next_exchange_rate = adjust_exchange_rate(exchange_rate)
 	// add processed amounts from this period to history lists
 	mining_history += mining_processed
 	payout_history += payout_processed
@@ -158,7 +178,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 	if(now >= next_event)
 		if(prob(event_chance))
 			var/datum/round_event_control/control
-			next_event = now + rand(event_cooldown_min, event_cooldown_max)
+			next_event = now + rand(min_event_cooldown, max_event_cooldown)
 			// check if we've paid the market cap (because it waits for event fire, can pay slightly more than cap)
 			if(total_payout >= market_cap)
 				// not an event so admemes can't force this

@@ -8,6 +8,7 @@ export const Cryptocurrency = () => {
       <Window.Content scrollable>
         <CryptocurrencyDetails />
         <CryptocurrencyHistory />
+        <CryptocurrencyMachineList />
       </Window.Content>
     </Window>
   );
@@ -43,22 +44,22 @@ export const CryptocurrencyDetails = (props, context) => {
                 {coin_name}
               </LabeledList.Item>
               <LabeledList.Item label="Exchange Rate">
-                {exchange_rate}
+                {exchange_rate}x
               </LabeledList.Item>
-              <LabeledList.Item label="Wallet">
+              <LabeledList.Item label="Wallet Balance">
                 {wallet}
               </LabeledList.Item>
               <LabeledList.Item label="Work Units Required">
                 {progress_required} Units
               </LabeledList.Item>
-              <LabeledList.Item label="Total Mined">
+              <LabeledList.Item label="Total Mined Work">
                 {total_mined} Units
               </LabeledList.Item>
-              <LabeledList.Item label="Total Payout">
-                {total_payout} C
+              <LabeledList.Item label="Total Earned Coin">
+                {total_payout}
               </LabeledList.Item>
               <LabeledList.Item label="Market Volatility">
-                {event_chance} %
+                {event_chance}%
               </LabeledList.Item>
             </LabeledList>
           </Stack.Item>
@@ -148,5 +149,36 @@ export const CryptocurrencyHistory = (props, context) => {
         </LabeledList.Item>
       </LabeledList>
     </Section>
+  );
+};
+
+export const CryptocurrencyMachineList = (props, context) => {
+  const { act, data } = useBackend(context);
+  const {
+    machines,
+  } = data;
+  return (
+    <Section title="Mining Rigs">
+      {(!machines || machines.length === 0) ? 'None detected' :
+      <LabeledList>
+        {
+          machines.map((rig) => (
+            <CryptocurrencyMachineDetails key={rig.id_tag} rig={rig} />
+          ))
+        }
+      </LabeledList>
+      }
+    </Section>
+  );
+};
+
+export const CryptocurrencyMachineDetails = (props, context) => {
+  const {
+    rig,
+  } = props;
+  return (
+    <LabeledList.Item label={rig.name}>
+      {rig.progress} Units
+    </LabeledList.Item>
   );
 };

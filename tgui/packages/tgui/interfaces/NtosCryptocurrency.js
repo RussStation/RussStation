@@ -1,5 +1,5 @@
 import { NtosWindow } from '../layouts';
-import { CryptocurrencyDetails, CryptocurrencyHistory } from './Cryptocurrency';
+import { CryptocurrencyDetails, CryptocurrencyHistory, CryptocurrencyMachineList } from './Cryptocurrency';
 
 export const NtosCryptocurrency = () => {
   return (
@@ -7,6 +7,7 @@ export const NtosCryptocurrency = () => {
       <NtosWindow.Content scrollable>
         <CryptocurrencyDetails />
         <CryptocurrencyHistory />
+        <CryptocurrencyMachineList />
       </NtosWindow.Content>
     </NtosWindow>
   );
