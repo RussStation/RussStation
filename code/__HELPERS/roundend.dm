@@ -527,6 +527,14 @@
 			parts += "<span class='reallybig greentext'>Centcom is incredibly impressed with service today! What a team!</span><br>"
 			award_service(/datum/award/achievement/jobs/service_good)
 
+	// honk start - crypto round end report
+	// only report if any crypto activity occurred
+	if(SScryptocurrency.total_mined > 0)
+		parts += "<b>Cryptocurrency Statistics:</b><br>"
+		parts += "There were [SScryptocurrency.total_payout] [SScryptocurrency.coin_name] earned by crew this shift for [SScryptocurrency.total_mined] work units performed.<br>"
+		log_econ("Roundend crypto total: [SScryptocurrency.total_payout] coin. Work units: [SScryptocurrency.total_mined]")
+	// honk end
+
 	parts += "<b>General Statistics:</b><br>"
 	parts += "There were [station_vault] credits collected by crew this shift.<br>"
 	if(total_players > 0)

@@ -43,6 +43,14 @@
 	data["payout_history"] = SScryptocurrency.payout_history
 	data["exchange_rate_history"] = SScryptocurrency.exchange_rate_history
 	data["market_closed"] = !SScryptocurrency.can_fire
+	var/list/rigs = list()
+	for(var/obj/machinery/crypto_mining_rig/rig in SScryptocurrency.machines)
+		var/rig_data = list()
+		rig_data["name"] = rig.name
+		rig_data["on"] = rig.on
+		rig_data["progress"] = rig.progress
+		rigs += list(rig_data)
+	data["machines"] = rigs
 
 	return data
 
