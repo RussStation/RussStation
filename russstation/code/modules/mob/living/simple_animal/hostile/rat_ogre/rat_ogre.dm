@@ -16,6 +16,7 @@
 	response_disarm_simple = "challenge"
 	response_harm_continuous = "smacks"
 	response_harm_simple = "smack"
+	initial_language_holder = /datum/language_holder/skaven_only
 	speed = 0.5
 	pixel_x = -16
 	base_pixel_x = -16
@@ -29,7 +30,7 @@
 	attack_sound = 'sound/weapons/punch1.ogg'
 	dextrous = TRUE //Oh shit
 	held_items = list(null, null)
-	faction = list("rat")
+	faction = list(FACTION_RAT, "hostile")
 	robust_searching = TRUE
 	stat_attack = HARD_CRIT
 	minbodytemp = 150
@@ -47,6 +48,13 @@
 	. = ..()
 	warpstone_blade = new /datum/action/cooldown/spell/pointed/projectile/warpstone_blade()
 	warpstone_blade.Grant(src)
+
+	var/datum/action/small_sprite/rat_ogre/smallsprite = new(src)
+	smallsprite.Grant(src)
+
+	var/datum/action/adjust_vision/night_vision = new(src)
+	night_vision.Grant(src)
+
 	var/datum/atom_hud/medsensor = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medsensor.show_to(src)
 
@@ -120,6 +128,15 @@
 /mob/living/simple_animal/hostile/rat_ogre/can_use_guns(obj/item/G)
 	to_chat(src, span_warning("Your meaty finger is much too large for the trigger guard!"))
 	return FALSE
+
+//Small sprite mode (only controller can see change in sprite)
+/datum/action/small_sprite/rat_ogre
+	small_icon = 'icons/mob/simple/animal.dmi'
+	small_icon_state = "mouse_gray"
+	background_icon = 'russstation/icons/mob/actions/backgrounds.dmi'
+	background_icon_state = "bg_skaven"
+	button_icon = 'russstation/icons/mob/actions/actions_skaven.dmi'
+	button_icon_state = "rat"
 
 //Warpstone Daggers Spell
 /datum/action/cooldown/spell/pointed/projectile/warpstone_blade
