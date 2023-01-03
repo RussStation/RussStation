@@ -7,6 +7,3 @@
 
 /proc/skaven_name()
 	return "[pick(GLOB.skaven_first)] [pick(GLOB.skaven_last)]"
-
-/proc/kitsune_name()
-	return "[pick(GLOB.kitsune_first)] [pick(GLOB.kitsune_last)]"

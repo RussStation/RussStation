@@ -2,7 +2,6 @@
 #define SPECIES_DIONA "diona"
 #define SPECIES_DWARF "dwarf"
 #define SPECIES_DWARF_LAVA "lavadwarf"
-#define SPECIES_KITSUNE "kitsune"
 #define SPECIES_SKAVEN "skaven"
 #define SPECIES_KOBOLD "kobold"
 #define SPECIES_DWARF_MOUNTAIN "mountaindwarf"

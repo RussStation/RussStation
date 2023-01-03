@@ -3,8 +3,6 @@ GLOBAL_LIST_EMPTY(diona_hair_list)
 
 //Skaven defines
 GLOBAL_LIST_EMPTY(tails_list_skaven) //Only exists for preference choices. Use "tails_list" otherwise.
-// Kitsune defines
-GLOBAL_LIST_EMPTY(tails_list_kitsune) //Only exists for preference choices. Use "tails_list" otherwise.
 
 //The colors skaven can be
 GLOBAL_LIST_INIT(color_list_skaven, list(

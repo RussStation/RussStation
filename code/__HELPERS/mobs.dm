@@ -68,8 +68,6 @@
 	//honk start - skaven random tail and diona hair
 	if(!GLOB.tails_list_skaven.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/skaven, GLOB.tails_list_skaven, add_blank = TRUE)
-	if(!GLOB.tails_list_kitsune.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/kitsune, GLOB.tails_list_kitsune, add_blank = TRUE)
 	if(!GLOB.diona_hair_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_hair, GLOB.diona_hair_list)
 	//honk end
@@ -105,7 +103,6 @@
 		// honk start - adds skaven tails and colors and diona hair to random features
 		"skaven_color" = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)],
 		"tail_skaven" = "Skaven",
-		"tail_kitsune" = "Kitsune",
 		"diona_hair" = GLOB.diona_hair_list[pick(GLOB.diona_hair_list)],
 		// honk end
 		"tail_cat" = "None",

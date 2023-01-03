@@ -431,10 +431,12 @@
 		"limbdesign_ethereal",
 		"limbdesign_felinid",
 		"limbdesign_lizard",
-		"limbdesign_plasmaman",//honk start - Adding the Skaven and kitsune Designs to the Research
+		"limbdesign_plasmaman",
 		"limbdesign_skaven",
-		"limbdesign_kitsune",//honk end
-	)
+		"limbdesign_kitsune",
+		"limbdesign_plasmaman",
+		"limbdesign_skaven",
+		)
 
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 6500)
 	discount_experiments = list(

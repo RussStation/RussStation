@@ -308,10 +308,6 @@
 		attack_mod -= 2
 	if(HAS_TRAIT(sacker, TRAIT_GIANT))
 		attack_mod += 2
-	// honk start -- Natural Tackler trait check
-	if(HAS_TRAIT(sacker, TRAIT_NATURALTACKLER))
-		attack_mod += 2
-	// honk end
 
 	if(HAS_TRAIT(sacker, TRAIT_TACKLING_WINGED_ATTACKER))
 		var/obj/item/organ/external/wings/moth/sacker_moth_wing = sacker.getorganslot(ORGAN_SLOT_EXTERNAL_WINGS)

@@ -86,18 +86,10 @@
 	taste_description = "tingling"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-//Fox girl mutation toxin
-/datum/reagent/mutationtoxin/kitsune
-	name = "Kitsune Mutation Toxin"
-	description = "A sickly glowing toxin."
-	color = "#5EFF3B" //RGB: 94, 255, 59
-	race = /datum/species/human/kitsune
-	taste_description = "tingling"
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-
 /datum/reagent/super_coolant
 	name = "Super Coolant"
 	description = "A viscous fluid with superior heat conduction. Looks like shimmering liquid ice."
 	color = "#8baac9"
 	taste_description = "cold steel" // nothing personnel
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+

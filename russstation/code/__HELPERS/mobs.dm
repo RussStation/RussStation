@@ -11,10 +11,3 @@
 
 		if(!findname(.))
 			break
-
-/proc/random_unique_kitsune_name(attempts_to_find_unique_name=10)
-	for(var/i in 1 to attempts_to_find_unique_name)
-		. = capitalize(pick(GLOB.kitsune_first)) + " " + capitalize(pick(GLOB.kitsune_last))
-
-		if(!findname(.))
-			break

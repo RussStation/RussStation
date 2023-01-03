@@ -21,7 +21,6 @@
 	//honk start - skaven and diona subtype inits
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/skaven, GLOB.tails_list_skaven, add_blank = TRUE)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/diona_hair, GLOB.diona_hair_list)
-	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/kitsune, GLOB.tails_list_kitsune, add_blank = TRUE)
 	//honk end
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/snouts, GLOB.snouts_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/horns,GLOB.horns_list)

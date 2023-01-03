@@ -19,7 +19,6 @@
 //honk start - skaven define
 #define SCANGATE_SKAVEN "skaven"
 #define SCANGATE_DIONA "diona"
-#define SCANGATE_KITSUNE "kitsune"
 //honk end
 
 /obj/machinery/scanner_gate
@@ -147,8 +146,6 @@
 					//honk start - allows skaven and diona to be scanned by the gate
 					if(SCANGATE_SKAVEN)
 						scan_species = /datum/species/skaven
-					if(SCANGATE_KITSUNE)
-						scan_species = /datum/species/human/kitsune
 					if(SCANGATE_DIONA)
 						scan_species = /datum/species/diona
 					//honk end
@@ -297,5 +294,4 @@
 //honk start - undefine skaven and diona
 #undef SCANGATE_SKAVEN
 #undef SCANGATE_DIONA
-#undef SCANGATE_KITSUNE
 //honk end

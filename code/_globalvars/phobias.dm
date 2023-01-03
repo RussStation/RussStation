@@ -530,7 +530,6 @@ GLOBAL_LIST_INIT(phobia_species, list(
 	"the supernatural" = typecacheof(list(
 		/datum/species/golem/runic,
 		/datum/species/skaven,
-		/datum/species/human/kitsune,
 	)),
 	//honk end
 ))
