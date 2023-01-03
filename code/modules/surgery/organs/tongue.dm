@@ -189,8 +189,6 @@
 				qdel(dropped)
 	qdel(owner)
 
-<<<<<<< HEAD
-=======
 /obj/item/organ/internal/tongue/fly
 	name = "proboscis"
 	desc = "A freakish looking meat tube that apparently can take in liquids."
@@ -231,7 +229,6 @@
 	. = ..()
 	languages_possible = languages_possible_fly
 
->>>>>>> parent of e7feb847c (Kitsune Race! (#327))
 /obj/item/organ/internal/tongue/abductor
 	name = "superlingual matrix"
 	desc = "A mysterious structure that allows for instant communication between users. Pretty impressive until you need to eat something."
