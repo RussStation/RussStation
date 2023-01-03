@@ -28,15 +28,11 @@
 
 	human.dna.blood_type = random_blood_type()
 	human.dna.features["mcolor"] = "#[random_color()]"
-<<<<<<< HEAD
 	human.dna.species.randomize_active_underwear(human)
-=======
 	human.dna.features["ethcolor"] = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
-	//honk start - random skaven tail and color and diona hair
 	human.dna.features["tail_skaven"] = pick(GLOB.tails_list_skaven)
 	human.dna.features["skaven_color"] = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)]
 	human.dna.features["diona_hair"] = GLOB.diona_hair_list[pick(GLOB.diona_hair_list)]
-	//honk end
 	human.dna.features["tail_cat"] = pick(GLOB.tails_list_human)
 	human.dna.features["tail_lizard"] = pick(GLOB.tails_list_lizard)
 	human.dna.features["snout"] = pick(GLOB.snouts_list)
@@ -47,7 +43,7 @@
 	human.dna.features["moth_wings"] = pick(GLOB.moth_wings_list)
 	human.dna.features["moth_antennae"] = pick(GLOB.moth_antennae_list)
 	human.dna.features["pod_hair"] = pick(GLOB.pod_hair_list)
->>>>>>> parent of e7feb847c (Kitsune Race! (#327))
+
 
 	for(var/datum/species/species_path as anything in subtypesof(/datum/species))
 		var/datum/species/new_species = new species_path
