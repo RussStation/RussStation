@@ -21,6 +21,8 @@
 			multilingual = /datum/language/moffic
 		if ("queekish")
 			multilingual = /datum/language/queekish
+		if ("nekomimetic")
+			multilingual = /datum/language/nekomimetic
 	quirk_holder.grant_language(multilingual)
 
 /datum/quirk/multilingual/remove()
