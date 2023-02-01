@@ -2135,7 +2135,6 @@
 /area/station/hallway/primary/starboard)
 "bfP" = (
 /obj/structure/table,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/iron,
 /area/station/engineering/break_room)
 "bfU" = (
@@ -7008,7 +7007,11 @@
 /area/station/science/xenobiology)
 "dNP" = (
 /obj/structure/table,
-/obj/item/storage/box/cups,
+/obj/machinery/coffeemaker/impressa,
+/obj/item/storage/box/coffeepack{
+	pixel_x = 15;
+	pixel_y = 10
+	},
 /turf/open/floor/iron,
 /area/station/science/lab)
 "dNX" = (
@@ -7316,7 +7319,7 @@
 /turf/open/floor/grass,
 /area/station/command/heads_quarters/rd)
 "dVr" = (
-/obj/item/a_gift,
+/obj/item/a_gift/anything,
 /turf/open/floor/plating,
 /area/station/science/xenobiology)
 "dVt" = (
@@ -7568,7 +7571,6 @@
 "eda" = (
 /obj/structure/cable,
 /obj/structure/table/glass,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/carpet/red,
 /area/station/command/bridge)
 "edm" = (
@@ -8482,6 +8484,7 @@
 /area/station/medical/medbay/aft)
 "exE" = (
 /obj/structure/table/wood,
+/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/carpet/royalblack,
 /area/station/commons/dorms)
 "eyi" = (
@@ -12779,10 +12782,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/miningdock)
-"gKw" = (
-/obj/effect/spawner/random/exotic/languagebook,
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/fore)
 "gKy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -14516,6 +14515,7 @@
 /area/station/command/teleporter)
 "hFO" = (
 /obj/effect/mapping_helpers/broken_floor,
+/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/plating,
 /area/station/service/chapel)
 "hGa" = (
@@ -15218,11 +15218,15 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "hZD" = (
-/obj/machinery/fax{
-	fax_name = "Cargo Office";
-	name = "Cargo Office Fax Machine"
-	},
 /obj/structure/table,
+/obj/item/stamp{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/stamp/denied{
+	pixel_x = 4;
+	pixel_y = -2
+	},
 /turf/open/floor/iron,
 /area/station/cargo/office)
 "hZE" = (
@@ -17577,7 +17581,6 @@
 /obj/item/trash/popcorn,
 /obj/item/trash/pistachios,
 /obj/effect/mapping_helpers/broken_floor,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "jqj" = (
@@ -18646,11 +18649,6 @@
 	},
 /turf/open/floor/iron/sepia,
 /area/station/service/chapel)
-"jSY" = (
-/obj/structure/table/wood,
-/obj/effect/spawner/random/exotic/languagebook,
-/turf/open/floor/wood,
-/area/station/maintenance/port/aft)
 "jTu" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -19278,17 +19276,12 @@
 "kkD" = (
 /obj/structure/table,
 /obj/effect/spawner/random/trash/garbage,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "kkM" = (
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
-"klb" = (
-/obj/effect/spawner/random/exotic/languagebook,
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/aft)
 "klk" = (
 /obj/effect/spawner/random/trash/garbage,
 /obj/structure/cable,
@@ -19631,19 +19624,14 @@
 /area/station/engineering/supermatter)
 "kuk" = (
 /obj/structure/table,
-/obj/item/stamp{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/stamp/denied{
-	pixel_x = 4;
-	pixel_y = -2
-	},
 /obj/machinery/newscaster{
 	pixel_y = -32
 	},
 /obj/machinery/light/directional/south,
-/obj/effect/spawner/random/exotic/languagebook,
+/obj/machinery/fax{
+	fax_name = "Cargo Office";
+	name = "Cargo Office Fax Machine"
+	},
 /turf/open/floor/iron,
 /area/station/cargo/office)
 "kuE" = (
@@ -22538,11 +22526,6 @@
 /area/station/maintenance/port/aft)
 "mbw" = (
 /obj/structure/table/wood,
-/obj/effect/spawner/random/exotic/languagebook,
-/obj/effect/spawner/random/exotic/languagebook{
-	pixel_x = -3;
-	pixel_y = -3
-	},
 /turf/open/floor/wood,
 /area/station/service/library)
 "mbG" = (
@@ -23885,7 +23868,6 @@
 	dir = 4
 	},
 /obj/structure/table/wood,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/carpet/black,
 /area/station/commons/dorms)
 "mKv" = (
@@ -24000,7 +23982,6 @@
 "mMA" = (
 /obj/structure/table/wood/fancy/royalblue,
 /obj/item/stack/spacecash/c10,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/wood,
 /area/station/maintenance/port/aft)
 "mMI" = (
@@ -25091,7 +25072,6 @@
 "nmk" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/effect/decal/cleanable/cobweb,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "nmq" = (
@@ -25661,15 +25641,6 @@
 	},
 /turf/open/floor/plating,
 /area/station/hallway/secondary/entry)
-"nAh" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/cable,
-/obj/structure/table,
-/obj/effect/spawner/random/exotic/languagebook,
-/turf/open/floor/iron,
-/area/station/security)
 "nAo" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -26038,11 +26009,7 @@
 /area/station/command/heads_quarters/captain)
 "nLG" = (
 /obj/structure/table,
-/obj/machinery/coffeemaker/impressa,
-/obj/item/storage/box/coffeepack{
-	pixel_x = 15;
-	pixel_y = 10
-	},
+/obj/item/storage/box/cups,
 /turf/open/floor/iron,
 /area/station/science/lab)
 "nLK" = (
@@ -26130,7 +26097,7 @@
 	dir = 1
 	},
 /turf/open/space/basic,
-/area/station/engineering/atmos)
+/area/space/nearstation)
 "nNo" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 4
@@ -28747,11 +28714,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/miningdock)
-"pfF" = (
-/obj/structure/table,
-/obj/effect/spawner/random/exotic/languagebook,
-/turf/open/floor/iron,
-/area/station/security/prison)
 "pfS" = (
 /obj/effect/spawner/random/trash/grille_or_waste,
 /turf/open/floor/plating,
@@ -28891,7 +28853,7 @@
 	dir = 8
 	},
 /turf/open/space/basic,
-/area/station/engineering/atmos)
+/area/space/nearstation)
 "piX" = (
 /obj/structure/table,
 /obj/item/book/manual/wiki/cooking_to_serve_man,
@@ -34679,10 +34641,6 @@
 /obj/machinery/camera/autoname/directional/west{
 	network = list("ss13","rd")
 	},
-/obj/effect/spawner/random/exotic/languagebook{
-	pixel_x = -3;
-	pixel_y = -3
-	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/science/lab)
 "rPP" = (
@@ -36277,7 +36235,7 @@
 /area/station/maintenance/port)
 "sLn" = (
 /obj/structure/closet,
-/obj/item/a_gift,
+/obj/item/a_gift/anything,
 /turf/open/space/basic,
 /area/station/maintenance/aft)
 "sLB" = (
@@ -36631,10 +36589,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/aft)
-"sVs" = (
-/obj/effect/spawner/random/exotic/languagebook,
-/turf/open/floor/plating,
-/area/station/maintenance/fore/lesser)
 "sVO" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 1
@@ -37074,7 +37028,6 @@
 /obj/structure/closet/secure_closet/contraband/armory,
 /obj/effect/spawner/random/contraband/armory,
 /obj/item/circuitboard/computer/advanced_camera,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/iron/dark,
 /area/station/ai_monitored/security/armory)
 "thG" = (
@@ -37965,7 +37918,6 @@
 /obj/machinery/firealarm{
 	pixel_y = 25
 	},
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/wood,
 /area/station/service/library)
 "tFj" = (
@@ -39181,7 +39133,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 9
 	},
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/plating,
 /area/station/maintenance/port)
 "ule" = (
@@ -40741,7 +40692,6 @@
 	pixel_y = 30
 	},
 /obj/item/clothing/neck/stethoscope,
-/obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/central)
 "uYS" = (
@@ -59182,7 +59132,7 @@ pRn
 pRn
 hST
 dxc
-jSY
+dXv
 pmR
 dXv
 adJ
@@ -65448,7 +65398,7 @@ dpw
 ses
 qHZ
 eMh
-pfF
+qHZ
 aLG
 fHe
 xNj
@@ -74764,7 +74714,7 @@ hEb
 hEb
 beQ
 tbo
-nAh
+eEd
 tbo
 xEU
 ftC
@@ -78394,7 +78344,7 @@ wMU
 wMU
 wMU
 qZe
-sVs
+iSG
 eGA
 xxn
 tGa
@@ -78865,7 +78815,7 @@ iSG
 vhr
 iSG
 tGa
-sVs
+iSG
 iSG
 iSG
 mUC
@@ -83914,7 +83864,7 @@ lbY
 lAx
 xpK
 hVG
-klb
+ewG
 fyd
 iEq
 hVG
@@ -85247,7 +85197,7 @@ hyu
 wbO
 hyu
 hyu
-gKw
+rZu
 eCW
 xon
 gbf
@@ -85287,7 +85237,7 @@ uAu
 ewG
 afT
 ewG
-klb
+ewG
 hVG
 eDr
 vFF
