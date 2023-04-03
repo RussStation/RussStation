@@ -16,8 +16,6 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/progress = 0
 	// how many work units are required to compute a hash and get paid
 	var/progress_required = 10000
-	// how much required progress grows after each pay
-	var/progress_required_growth = 1.01
 	// how many times a payout has been awarded
 	var/payouts_earned = 0
 	// how much coin has been mined and waiting to convert to credits
@@ -47,14 +45,16 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// how much payout can change by each time multiplicative
 	var/market_change_percent = 10
 	// how likely to change trend each process
-	var/market_change_chance = 10
+	var/market_change_chance = 20
 	// how many NT credits a single coin of this currency is worth
-	var/exchange_rate = 0.05
+	var/exchange_rate = 0.1
 	// what the exchange rate is becoming next cycle
-	var/next_exchange_rate = 0.05
-	// minimum time between crypto events
-	var/min_event_cooldown = 6 MINUTES
-	var/max_event_cooldown = 12 MINUTES
+	var/next_exchange_rate = 0.1
+	// time between crypto events - grows slowly based on # of events occurred
+	var/min_event_cooldown = 3 MINUTES
+	var/event_cooldown_multiplier = 30 SECONDS
+	// how many events have occurred
+	var/event_count = 0
 	// time of next event
 	var/next_event = 0
 	// prob we roll event on an SS fire
@@ -65,14 +65,12 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/list/random_events = list()
 	// maps packs to their release payout thresholds
 	var/list/card_packs_thresholds = list(
-		/datum/supply_pack/engineering/crypto_mining_card/tier2 = 50000,
-		/datum/supply_pack/engineering/crypto_mining_card/tier3 = 150000,
-		/datum/supply_pack/engineering/crypto_mining_card/tier4 = 400000
+		/datum/supply_pack/engineering/crypto_mining_card/tier2 = 125000, // about 2,291,666 progress
+		/datum/supply_pack/engineering/crypto_mining_card/tier3 = 250000, // about 10,833,333 progress
+		/datum/supply_pack/engineering/crypto_mining_card/tier4 = 500000 // about 71,666,666 progress
 	)
 	// track released packs count
 	var/released_cards_count = 0
-	// if we've paid out this much, crypto is over. go home. stop playing.
-	var/market_cap = 1000000
 
 /datum/controller/subsystem/cryptocurrency/Initialize(timeofday)
 	// coin of the day
@@ -112,13 +110,13 @@ SUBSYSTEM_DEF(cryptocurrency)
 	total_mined += power
 	if(progress >= progress_required)
 		progress = 0 // lose excess progress lol
+		payouts_earned += 1
 		// next payout requires more progress
-		progress_required *= progress_required_growth
+		progress_required = 1000 * (10 + (payouts_earned / 25) ** 2)
 		var/payout = rand(payout_min, payout_max)
 		wallet += payout
 		payout_processed += payout
 		total_payout += payout
-		payouts_earned += 1
 		// funny payout message for machine to shout
 		return "Successfully computed a proof-of-work hash on the blockchain! [payout] [coin_name] awarded."
 
@@ -152,11 +150,8 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/blame = "Someone"
 	if(user && istype(user))
 		blame = user.name
-	// cashing out tanks the market proportional to the amount "removed from circulation"?
-	// shut up i know how money works, punishes spamming cashout button during a boom
-	// truncate to (0.1,0.9) so the value is always perceptible but doesn't risk zeroing the exchange rate
-	var/market_portion = min(max(amount / market_cap, 0.1), 0.9)
-	next_exchange_rate *= (1 - market_portion)
+	// market reacts to huge sales
+	next_exchange_rate *= 0.9
 	market_trend_up = FALSE
 	return "[blame] exchanged [amount] [coin_name] for [credits] Credits, paid to the [ACCOUNT_CAR_NAME] account."
 
@@ -178,16 +173,13 @@ SUBSYSTEM_DEF(cryptocurrency)
 	if(now >= next_event)
 		if(prob(event_chance))
 			var/datum/round_event_control/control
+			// increment event counter
+			event_count += 1
+			// how long until next event; tends to get longer with each event
+			var/max_event_cooldown = min_event_cooldown + event_count * event_cooldown_multiplier
 			next_event = now + rand(min_event_cooldown, max_event_cooldown)
-			// check if we've paid the market cap (because it waits for event fire, can pay slightly more than cap)
-			if(total_payout >= market_cap)
-				// not an event so admemes can't force this
-				priority_announce("The market cap for [coin_name] has been paid. Congratulations! You won crypto! Please touch grass.", "[SScryptocurrency.coin_name] Creator [SScryptocurrency.nerd_name]")
-				can_fire = FALSE
-			// else do one of the random events
-			else
-				control = pickEvent()
-			// finally run the event
+			// try to do one of the random events
+			control = pickEvent()
 			if(control)
 				control.runEvent(TRUE)
 			// else no event, just let the market change up and down naturally
@@ -195,7 +187,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 			// increase chance for next time
 			event_chance += event_chance_growth
 	else
-		// "animate" market volatility going down after an event
+		// slowly reset market volatility after an event
 		if(event_chance > initial(event_chance))
 			event_chance -= event_chance_growth
 	// finally reset processed trackers

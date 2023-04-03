@@ -77,7 +77,7 @@
 	// oops too late to cash out
 	announce_when = 40
 	// we don't need to hear this every time; also keeps players on their toes
-	announce_chance = 80
+	announce_chance = 75
 
 /datum/round_event/cryptocurrency/market_crash/announce(fake)
 	crypto_announce("Because of [reason()], the [SScryptocurrency.coin_name] market has crashed! Cash out before it's too late!")
@@ -86,9 +86,9 @@
 	var/dip = 1
 	// crash harder when the exchange rate is high
 	if(SScryptocurrency.exchange_rate > 1)
-		dip = LERP(2, 10, rand())
+		dip = LERP(3, 10, rand())
 	else
-		dip = LERP(1.5, 2.5, rand())
+		dip = LERP(2, 3, rand())
 	// tank the mining exchange rate and market trend
 	SScryptocurrency.next_exchange_rate /= dip
 	SScryptocurrency.market_trend_up = FALSE
@@ -97,7 +97,7 @@
 /datum/round_event_control/cryptocurrency/market_boom
 	name = "Market Boom (Crypto)"
 	typepath = /datum/round_event/cryptocurrency/market_boom
-	max_occurrences = 5
+	max_occurrences = 8
 
 /datum/round_event_control/cryptocurrency/market_boom/adjust_weight()
 	// can only boom so many times - hope you cashed out!
@@ -109,7 +109,7 @@
 /datum/round_event/cryptocurrency/market_boom
 	announce_when = 40
 	// what's that, you didn't see the exchange skyrocket? were you tabbed out?
-	announce_chance = 90
+	announce_chance = 85
 
 /datum/round_event/cryptocurrency/market_boom/announce(fake)
 	crypto_announce("Because of [reason()], the [SScryptocurrency.coin_name] market is booming! We're going to the moon!")
@@ -118,35 +118,12 @@
 	var/stonks = 1
 	// boom harder when the exchange rate is smol
 	if(SScryptocurrency.exchange_rate < 0.5)
-		stonks = LERP(2, 10, rand())
+		stonks = LERP(3, 10, rand())
 	else
-		stonks = LERP(1.5, 2.5, rand())
+		stonks = LERP(2, 3, rand())
 	// boost the mining exchange rate and market trend
 	SScryptocurrency.next_exchange_rate *= stonks
 	SScryptocurrency.market_trend_up = TRUE
-
-// increase cost of cards because realism fuck you
-/datum/round_event_control/cryptocurrency/card_stock
-	name = "Silicon Shortage (Crypto)"
-	typepath = /datum/round_event/cryptocurrency/card_stock
-	max_occurrences = 1
-
-/datum/round_event_control/cryptocurrency/card_stock/adjust_weight()
-	// likely to occur ONCE after we've made good progress toward market cap
-	if(occurrences < max_occurrences && SScryptocurrency.total_payout >= SScryptocurrency.market_cap / 3)
-		weight = 20
-	else
-		weight = 0
-
-/datum/round_event/cryptocurrency/card_stock/announce(fake)
-	crypto_announce("Because of [reason()], everyone is buying graphics cards to mine [SScryptocurrency.coin_name]! Cards will now be sourced from scalpers at exorbitant prices.")
-
-/datum/round_event/cryptocurrency/card_stock/start()
-	. = ..()
-	// double the cost of the card supply packs
-	for(var/pack_type in typesof(/datum/supply_pack/engineering/crypto_mining_card))
-		var/datum/supply_pack/pack = SSshuttle.supply_packs[pack_type]
-		pack.cost *= 2
 
 // release a new graphics card
 /datum/round_event_control/cryptocurrency/card_release
