@@ -231,7 +231,7 @@
 /obj/machinery/crypto_mining_rig/process(delta_time)
 	// if we aren't on and working, obviously stop. also if we're in a no-no area (no free power for you)
 	var/area/area = get_area(src)
-	if(!on || machine_stat & BROKEN || (!wired_power && !powered()) || !area.requires_power || !SScryptocurrency.can_fire)
+	if(!on || machine_stat & BROKEN || (!wired_power && !powered(AREA_USAGE_EQUIP, TRUE)) || !area.requires_power || !SScryptocurrency.can_fire)
 		change_on(FALSE)
 		return PROCESS_KILL
 
@@ -460,10 +460,9 @@
 	data["exchange_rate"] = SScryptocurrency.exchange_rate
 	data["wallet"] = SScryptocurrency.wallet
 	data["progress_required"] = SScryptocurrency.progress_required
-	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 4
+	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 2
 	data["total_mined"] = SScryptocurrency.total_mined
 	data["total_payout"] = SScryptocurrency.total_payout
-	data["event_chance"] = SScryptocurrency.event_chance
 	data["mining_history"] = SScryptocurrency.mining_history
 	data["payout_history"] = SScryptocurrency.payout_history
 	data["exchange_rate_history"] = SScryptocurrency.exchange_rate_history

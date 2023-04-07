@@ -38,28 +38,21 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/total_payout = 0
 
 	// market fluctuation and events
-	// is market trending up or down?
-	var/market_trend_up = TRUE
-	// how much payout can change by each time multiplicative
-	var/market_change_percent = 10
-	// how likely to change trend each process
-	var/market_change_chance = 20
+	// how much rate can increase/decrease by
+	var/potential_growth_percent = 10
+	var/potential_decline_percent = 10
+	// how likely to cancel the current event's change rates
+	var/trend_reset_chance = 10
 	// how many NT credits a single coin of this currency is worth
 	var/exchange_rate = 0.1
-	// what the exchange rate is becoming next cycle
-	var/next_exchange_rate = 0.1
-	// time between crypto events - grows slowly based on # of events occurred
+	// time between crypto events
 	var/min_event_cooldown = 3 MINUTES
-	var/event_cooldown_multiplier = 30 SECONDS
+	var/max_event_cooldown = 6 MINUTES
 	// how many events have occurred
 	var/event_count = 0
 	// time of next event
 	var/next_event = 0
-	// prob we roll event on an SS fire
-	var/event_chance = 10
-	// increase chance if we don't proc event
-	var/event_chance_growth = 10
-	// events that we pick from when there are no "planned" events
+	// events that we pick from
 	var/list/random_events = list()
 	// maps packs to their release payout thresholds
 	var/list/card_packs_thresholds = list(
@@ -109,19 +102,15 @@ SUBSYSTEM_DEF(cryptocurrency)
 
 // pick next exchange rate slightly randomly
 /datum/controller/subsystem/cryptocurrency/proc/adjust_exchange_rate(rate)
-	// small chance to flip the trend so it's more dynamic between events
-	if(prob(market_change_chance))
-		market_trend_up = !market_trend_up
-	// min < 1 means value fluctuates instead of only going in trend direction
-	var/min_change_percent = 100 - market_change_percent
-	// increased factor by event_chance% so trend direction is more likely, especially just before events
-	var/max_change_percent = 100 + market_change_percent + event_chance
+	// small chance to disrupt the market trend so it's more dynamic between events
+	if(prob(trend_reset_chance))
+		potential_growth_percent = pick(5, 10, 15)
+		potential_decline_percent = pick(5, 10, 15)
+	var/min_change_percent = 100 - potential_decline_percent
+	var/max_change_percent = 100 + potential_growth_percent
 	// get a float in the change range and convert percent to fraction for math
 	var/change = LERP(min_change_percent, max_change_percent, rand()) / 100
-	if(market_trend_up)
-		return rate * change
-	else
-		return rate / change
+	return rate * change
 
 // withdraw coin and exchange to credits
 /datum/controller/subsystem/cryptocurrency/proc/cash_out(mob/user)
@@ -137,17 +126,13 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/blame = "Someone"
 	if(user && istype(user))
 		blame = user.name
-	// market reacts to huge sales
-	next_exchange_rate *= 0.9
-	market_trend_up = FALSE
 	return "[blame] exchanged [amount] [coin_name] for [credits] Credits, paid to the [ACCOUNT_CAR_NAME] account."
 
 /datum/controller/subsystem/cryptocurrency/fire(resumed = 0)
 	if(!started)
 		return
 	// update exchange rate and determine the next value (the market is controlled!)
-	exchange_rate = next_exchange_rate
-	next_exchange_rate = adjust_exchange_rate(exchange_rate)
+	exchange_rate = adjust_exchange_rate(exchange_rate)
 	// add processed amounts from this period to history lists
 	mining_history += mining_processed
 	payout_history += payout_processed
@@ -158,25 +143,16 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// process events - we don't want them eating up "real" event opportunities so gotta handle manually
 	var/now = REALTIMEOFDAY
 	if(now >= next_event)
-		if(prob(event_chance))
-			var/datum/round_event_control/control
-			// increment event counter
-			event_count += 1
-			// how long until next event; tends to get longer with each event
-			var/max_event_cooldown = min_event_cooldown + event_count * event_cooldown_multiplier
-			next_event = now + rand(min_event_cooldown, max_event_cooldown)
-			// try to do one of the random events
-			control = pickEvent()
-			if(control)
-				control.runEvent(TRUE)
-			// else no event, just let the market change up and down naturally
-		else
-			// increase chance for next time
-			event_chance += event_chance_growth
-	else
-		// slowly reset market volatility after an event
-		if(event_chance > initial(event_chance))
-			event_chance -= event_chance_growth
+		var/datum/round_event_control/control
+		// increment event counter
+		event_count += 1
+		// how long until next event
+		next_event = now + rand(min_event_cooldown, max_event_cooldown)
+		// try to do one of the random events
+		control = pickEvent()
+		if(control)
+			control.runEvent(TRUE)
+		// else no event, just let the market change up and down naturally
 	// finally reset processed trackers
 	mining_processed = 0
 	payout_processed = 0

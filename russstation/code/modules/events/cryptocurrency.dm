@@ -7,15 +7,33 @@
 	typepath = /datum/round_event/cryptocurrency
 	// bad holiday ID means event will never be selected by the normal event system
 	holidayID = "NEVER"
+	// these fire a lot, don't spam ghost logs
+	alert_observers = FALSE
 
 // crypto events change weight depending on how the round is going
 /datum/round_event_control/cryptocurrency/proc/adjust_weight()
-	return
+	// manual event system? manual occurrence checking
+	if(occurrences >= max_occurrences)
+		weight = 0
 
 GLOBAL_LIST_INIT(crypto_reasons, world.file2list("russstation/strings/crypto_reasons.txt"))
 
 // event base for shared crypto stuff
 /datum/round_event/cryptocurrency
+	// we don't need to hear these every time; also keeps players on their toes
+	announce_chance = 70
+	// change rates to use during event period
+	var/growth_percent = 10
+	var/decline_percent = 10
+
+/datum/round_event/cryptocurrency/setup()
+	// announce a bit after the trend has started and people are reacting
+	announce_when = rand(60, 120)
+
+/datum/round_event/cryptocurrency/start()
+	// apply new rate change percents
+	SScryptocurrency.potential_growth_percent = growth_percent
+	SScryptocurrency.potential_decline_percent = decline_percent
 
 /datum/round_event/cryptocurrency/proc/reason()
 	var/reason = pick(GLOB.crypto_reasons)
@@ -50,69 +68,97 @@ GLOBAL_LIST_INIT(crypto_reasons, world.file2list("russstation/strings/crypto_rea
 			var/sound_to_play = sound_override || (alert ? 'sound/misc/notice1.ogg' : 'sound/misc/notice2.ogg')
 			SEND_SOUND(target, sound(sound_to_play))
 
+// stabilize market for a while
+/datum/round_event_control/cryptocurrency/stable
+	name = "Stable Market (Crypto)"
+	typepath = /datum/round_event/cryptocurrency/stable
+	// this is boring, don't do it often
+	weight = 4
+
+/datum/round_event/cryptocurrency/stable
+	// no announcement
+	announce_chance = 0
+	// don't change much
+	growth_percent = 5
+	decline_percent = 5
+
 // tank the market and force people to HODL
 /datum/round_event_control/cryptocurrency/market_crash
 	name = "Market Crash (Crypto)"
 	typepath = /datum/round_event/cryptocurrency/market_crash
 
 /datum/round_event_control/cryptocurrency/market_crash/adjust_weight()
-	// don't crash below initial exchange rate which already sucks
-	if(SScryptocurrency.exchange_rate <= initial(SScryptocurrency.exchange_rate))
-		weight = 0
-	else
+	// crash more when the rate is decent
+	if(SScryptocurrency.exchange_rate > 0.5)
 		weight = 10
+	else if(SScryptocurrency.exchange_rate > 0.1)
+		weight = 5
+	else
+		weight = 0
+	. = ..()
 
 /datum/round_event/cryptocurrency/market_crash
-	// oops too late to cash out
-	announce_when = 40
-	// we don't need to hear this every time; also keeps players on their toes
-	announce_chance = 75
+	decline_percent = 30
 
 /datum/round_event/cryptocurrency/market_crash/announce(fake)
-	crypto_announce("Because of [reason()], the [SScryptocurrency.coin_name] market has crashed! Cash out before it's too late!")
+	crypto_announce("Because of [reason()], the [SScryptocurrency.coin_name] market is crashing!")
 
-/datum/round_event/cryptocurrency/market_crash/start()
-	var/dip = 1
-	// crash harder when the exchange rate is high
-	if(SScryptocurrency.exchange_rate > 1)
-		dip = LERP(3, 10, rand())
+// crash hard if the rate gets crazy
+/datum/round_event_control/cryptocurrency/market_implode
+	name = "Market Implosion (Crypto)"
+	typepath = /datum/round_event/cryptocurrency/market_implode
+
+/datum/round_event_control/cryptocurrency/market_implode/adjust_weight()
+	// only if rate is really good
+	if(SScryptocurrency.exchange_rate > 10)
+		weight = 10
 	else
-		dip = LERP(2, 3, rand())
-	// tank the mining exchange rate and market trend
-	SScryptocurrency.next_exchange_rate /= dip
-	SScryptocurrency.market_trend_up = FALSE
+		weight = 0
+	. = ..()
+
+/datum/round_event/cryptocurrency/market_implode
+	announce_chance = 100
+	growth_percent = 0
+	decline_percent = 80
+
+/datum/round_event/cryptocurrency/market_implode/announce(fake)
+	crypto_announce("Because of [reason()], the [SScryptocurrency.coin_name] market is crashing! Cash out before it's too late!")
 
 // boost the market and tempt people to give a damn
 /datum/round_event_control/cryptocurrency/market_boom
 	name = "Market Boom (Crypto)"
 	typepath = /datum/round_event/cryptocurrency/market_boom
-	max_occurrences = 8
 
 /datum/round_event_control/cryptocurrency/market_boom/adjust_weight()
-	// can only boom so many times - hope you cashed out!
-	if(occurrences >= max_occurrences)
-		weight = 0
-	else
+	// boom more when the rate is trash
+	if(SScryptocurrency.exchange_rate < 1)
 		weight = 10
+	else if(SScryptocurrency.exchange_rate < 10)
+		weight = 5
+	else
+		weight = 0
+	. = ..()
 
 /datum/round_event/cryptocurrency/market_boom
-	announce_when = 40
-	// what's that, you didn't see the exchange skyrocket? were you tabbed out?
-	announce_chance = 85
+	growth_percent = 30
 
 /datum/round_event/cryptocurrency/market_boom/announce(fake)
-	crypto_announce("Because of [reason()], the [SScryptocurrency.coin_name] market is booming! We're going to the moon!")
+	crypto_announce("Because of [reason()], the [SScryptocurrency.coin_name] market is booming!")
 
-/datum/round_event/cryptocurrency/market_boom/start()
-	var/stonks = 1
-	// boom harder when the exchange rate is smol
-	if(SScryptocurrency.exchange_rate < 0.5)
-		stonks = LERP(3, 10, rand())
-	else
-		stonks = LERP(2, 3, rand())
-	// boost the mining exchange rate and market trend
-	SScryptocurrency.next_exchange_rate *= stonks
-	SScryptocurrency.market_trend_up = TRUE
+// one really big boom can happen each round
+/datum/round_event_control/cryptocurrency/market_explode
+	name = "Market Explosion (Crypto)"
+	typepath = /datum/round_event/cryptocurrency/market_explode
+	weight = 2
+	max_occurrences = 1
+
+/datum/round_event/cryptocurrency/market_explode
+	announce_chance = 100
+	// to the moon!
+	growth_percent = 100
+
+/datum/round_event/cryptocurrency/market_explode/announce(fake)
+	crypto_announce("Because of [reason()], the [SScryptocurrency.coin_name] market is booming! We're going to the moon!")
 
 // release a new graphics card
 /datum/round_event_control/cryptocurrency/card_release
@@ -122,17 +168,27 @@ GLOBAL_LIST_INIT(crypto_reasons, world.file2list("russstation/strings/crypto_rea
 
 /datum/round_event_control/cryptocurrency/card_release/adjust_weight()
 	// extremely likely whenever we pass release thresholds
-	// for some reason indexing on this array seems to be 1 based
 	if(SScryptocurrency.released_cards_count < SScryptocurrency.card_packs_thresholds.len && SScryptocurrency.total_payout >= SScryptocurrency.card_packs_thresholds[SScryptocurrency.card_packs_thresholds[SScryptocurrency.released_cards_count + 1]])
 		weight = 500
 	else
 		weight = 0
+	. = ..()
+
+/datum/round_event/cryptocurrency/card_release
+	// don't suppress important event announcement
+	announce_chance = 100
+
+/datum/round_event/cryptocurrency/card_release/setup()
+	// override delayed announce range
+	announce_when = 0
 
 /datum/round_event/cryptocurrency/card_release/announce(fake)
 	// cringe gamer advertisement - yes that's right, Donk makes the cards
 	crypto_announce("Gamers rise up! New graphics cards now available. Slot one in your donk socket today!", "Donk Co. Product Release")
 
 /datum/round_event/cryptocurrency/card_release/start()
+	. = ..()
+	// unlock next cargo pack (yeah it's complicated)
 	if(SScryptocurrency.released_cards_count < SScryptocurrency.card_packs_thresholds.len)
 		var/datum/supply_pack/pack = SSshuttle.supply_packs[SScryptocurrency.card_packs_thresholds[SScryptocurrency.released_cards_count + 1]]
 		pack.special_enabled = TRUE

@@ -24,7 +24,6 @@ export const CryptocurrencyDetails = (props, context) => {
     progress_required,
     total_mined,
     total_payout,
-    event_chance,
     market_closed,
   } = data;
   return (
@@ -52,14 +51,11 @@ export const CryptocurrencyDetails = (props, context) => {
               <LabeledList.Item label="Work Units Required">
                 {progress_required} Units
               </LabeledList.Item>
-              <LabeledList.Item label="Total Mined Work">
-                {total_mined} Units
-              </LabeledList.Item>
               <LabeledList.Item label="Total Earned Coin">
                 {total_payout}
               </LabeledList.Item>
-              <LabeledList.Item label="Market Volatility">
-                {event_chance}%
+              <LabeledList.Item label="Total Mined Work">
+                {total_mined} Units
               </LabeledList.Item>
             </LabeledList>
           </Stack.Item>
