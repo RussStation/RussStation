@@ -12,24 +12,13 @@
 /datum/round_event_control/cryptocurrency/proc/adjust_weight()
 	return
 
+GLOBAL_LIST_INIT(crypto_reasons, world.file2list("russstation/strings/crypto_reasons.txt"))
+
 // event base for shared crypto stuff
 /datum/round_event/cryptocurrency
-	var/reasons = list(
-		"a reddit post",
-		"a Melon Tusk tweet",
-		"boomers",
-		"terrorist hackers",
-		"someone sneezing",
-		"a star going supernova",
-		"yo mama",
-		"a funny cat video",
-		"cargo bounty volume",
-		"unmaxed suit sensors",
-		"a crewmember",
-	)
 
 /datum/round_event/cryptocurrency/proc/reason()
-	var/reason = pick(reasons)
+	var/reason = pick(GLOB.crypto_reasons)
 	if(reason == "a crewmember")
 		// blame a real person
 		var/mob/living/player = pick(GLOB.alive_player_list)

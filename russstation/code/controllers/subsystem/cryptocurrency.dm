@@ -7,8 +7,6 @@ SUBSYSTEM_DEF(cryptocurrency)
 
 	// funny name for display
 	var/coin_name = "SpaceCoin"
-	// the "person" that made the coin, used for some special alerts
-	var/nerd_name = "cake" // haha but not really :o)
 	// how much is payed out for an individual mining operation
 	var/payout_min = 800
 	var/payout_max = 1200
@@ -74,18 +72,7 @@ SUBSYSTEM_DEF(cryptocurrency)
 
 /datum/controller/subsystem/cryptocurrency/Initialize(timeofday)
 	// coin of the day
-	coin_name = pick(list(
-		"SpaceCoin",
-		"StarBucks", // this is clearly legally distinct
-		"ClownCoin",
-		"MimeMoney",
-		"FunnyMoney",
-		"RussMoney", // haha i referenced the streamer
-		"SyndiCoin",
-		"BananaBucks",
-		))
-	// inspired by the bitcoin creator but meme?
-	nerd_name = "[pick(list("Satoshi", "Kiryu", "Doraemon", "Greg"))] [pick(list("Naka", "Baka", "Shiba", "Tako"))][pick(list("moto", "mura", "nashi", "bana"))]"
+	coin_name = pick(world.file2list("russstation/strings/crypto_names.txt"))
 	// initialize event cache - copied from SSevents
 	for(var/type in subtypesof(/datum/round_event_control/cryptocurrency))
 		var/datum/round_event_control/cryptocurrency/E = new type()
