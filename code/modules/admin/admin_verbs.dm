@@ -118,6 +118,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/show_tip,
 	/client/proc/smite,
 	/client/proc/honk_smite, // honk -- new smites
+	/client/proc/twitchmeteor, // honk -- twitch intergration
 	/client/proc/admin_away,
 	/client/proc/add_mob_ability,
 	/client/proc/remove_mob_ability,
