@@ -1,23 +1,3 @@
-// /datum/round_event_control/meteor_redemption
-// 	name = "Twitch Meteor Redemption"
-// 	typepath = /datum/round_event/meteor_redemption
-// 	weight = 0
-// 	min_players = 1
-// 	max_occurrences = 1000
-// 	earliest_start = 1 SECONDS
-// 	category = EVENT_CATEGORY_SPACE
-// 	description = "A regular meteor sent by a twitch viewer."
-
-// /datum/round_event/meteor_redemption
-// 	start_when = 0
-// 	end_when = 1
-// 	announce_when = 1
-// 	var/list/wave_type = list(/obj/effect/meteor/medium=1)
-
-// /datum/round_event/meteor_redemption/tick()
-// 	if(ISMULTIPLE(activeFor, 3))
-		// spawn_meteors(1, wave_type)
-
 /client/proc/twitchmeteor()
 	set category = "Server"
 	set desc = "Twitch Sent a Meteor"
