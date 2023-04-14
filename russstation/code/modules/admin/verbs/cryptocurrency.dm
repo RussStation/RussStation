@@ -35,10 +35,9 @@
 	data["exchange_rate"] = SScryptocurrency.exchange_rate
 	data["wallet"] = SScryptocurrency.wallet
 	data["progress_required"] = SScryptocurrency.progress_required
-	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 4
+	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 2
 	data["total_mined"] = SScryptocurrency.total_mined
 	data["total_payout"] = SScryptocurrency.total_payout
-	data["event_chance"] = SScryptocurrency.event_chance
 	data["mining_history"] = SScryptocurrency.mining_history
 	data["payout_history"] = SScryptocurrency.payout_history
 	data["exchange_rate_history"] = SScryptocurrency.exchange_rate_history

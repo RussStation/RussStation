@@ -81,27 +81,30 @@
 
 /datum/supply_pack/engineering/crypto_mining_card
 	name = "Basic Graphics Card"
-	desc = "A poor gamer out there is suffering without this, but you're going to use it to mine crypto. Mining rig required."
+	desc = "An old card from a simpler time when games didn't have to look fancy to be fun. Mining rig required."
 	cost = CARGO_CRATE_VALUE * 5
-	contains = list(/obj/item/crypto_mining_card)
+	contains = list(/obj/item/electronics/crypto_mining_card)
 	crate_name = "graphics card crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
 	special = FALSE // unlocked by default
 
 /datum/supply_pack/engineering/crypto_mining_card/tier2
 	name = "Intermediate Graphics Card"
+	desc = "Last year's top-tier card is this year's unwanted garbage."
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/crypto_mining_card/tier2)
+	contains = list(/obj/item/electronics/crypto_mining_card/tier2)
 	special = TRUE // must be unlocked by market activity
 
 /datum/supply_pack/engineering/crypto_mining_card/tier3
 	name = "Advanced Graphics Card"
+	desc = "The latest and greatest... that was in stock."
 	cost = CARGO_CRATE_VALUE * 20
-	contains = list(/obj/item/crypto_mining_card/tier3)
+	contains = list(/obj/item/electronics/crypto_mining_card/tier3)
 	special = TRUE // must be unlocked by market activity
 
 /datum/supply_pack/engineering/crypto_mining_card/tier4
 	name = "Experimental Graphics Card"
+	desc = "A Syndicate double-agent is selling these ridiculous cards. We're not asking questions."
 	cost = CARGO_CRATE_VALUE * 30
-	contains = list(/obj/item/crypto_mining_card/tier4)
+	contains = list(/obj/item/electronics/crypto_mining_card/tier4)
 	special = TRUE // must be unlocked by market activity

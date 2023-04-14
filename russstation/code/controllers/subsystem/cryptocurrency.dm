@@ -7,8 +7,6 @@ SUBSYSTEM_DEF(cryptocurrency)
 
 	// funny name for display
 	var/coin_name = "SpaceCoin"
-	// the "person" that made the coin, used for some special alerts
-	var/nerd_name = "cake" // haha but not really :o)
 	// how much is payed out for an individual mining operation
 	var/payout_min = 800
 	var/payout_max = 1200
@@ -16,8 +14,6 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/progress = 0
 	// how many work units are required to compute a hash and get paid
 	var/progress_required = 10000
-	// how much required progress grows after each pay
-	var/progress_required_growth = 1.01
 	// how many times a payout has been awarded
 	var/payouts_earned = 0
 	// how much coin has been mined and waiting to convert to credits
@@ -42,52 +38,34 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/total_payout = 0
 
 	// market fluctuation and events
-	// is market trending up or down?
-	var/market_trend_up = TRUE
-	// how much payout can change by each time multiplicative
-	var/market_change_percent = 10
-	// how likely to change trend each process
-	var/market_change_chance = 10
+	// how much rate can increase/decrease by
+	var/potential_growth_percent = 10
+	var/potential_decline_percent = 10
+	// how likely to cancel the current event's change rates
+	var/trend_reset_chance = 10
 	// how many NT credits a single coin of this currency is worth
-	var/exchange_rate = 0.05
-	// what the exchange rate is becoming next cycle
-	var/next_exchange_rate = 0.05
-	// minimum time between crypto events
-	var/min_event_cooldown = 6 MINUTES
-	var/max_event_cooldown = 12 MINUTES
+	var/exchange_rate = 0.1
+	// time between crypto events
+	var/min_event_cooldown = 3 MINUTES
+	var/max_event_cooldown = 6 MINUTES
+	// how many events have occurred
+	var/event_count = 0
 	// time of next event
 	var/next_event = 0
-	// prob we roll event on an SS fire
-	var/event_chance = 10
-	// increase chance if we don't proc event
-	var/event_chance_growth = 10
-	// events that we pick from when there are no "planned" events
+	// events that we pick from
 	var/list/random_events = list()
 	// maps packs to their release payout thresholds
 	var/list/card_packs_thresholds = list(
-		/datum/supply_pack/engineering/crypto_mining_card/tier2 = 50000,
-		/datum/supply_pack/engineering/crypto_mining_card/tier3 = 150000,
-		/datum/supply_pack/engineering/crypto_mining_card/tier4 = 400000
+		/datum/supply_pack/engineering/crypto_mining_card/tier2 = 125000, // about 2,291,666 progress
+		/datum/supply_pack/engineering/crypto_mining_card/tier3 = 250000, // about 10,833,333 progress
+		/datum/supply_pack/engineering/crypto_mining_card/tier4 = 500000 // about 71,666,666 progress
 	)
 	// track released packs count
 	var/released_cards_count = 0
-	// if we've paid out this much, crypto is over. go home. stop playing.
-	var/market_cap = 1000000
 
 /datum/controller/subsystem/cryptocurrency/Initialize(timeofday)
 	// coin of the day
-	coin_name = pick(list(
-		"SpaceCoin",
-		"StarBucks", // this is clearly legally distinct
-		"ClownCoin",
-		"MimeMoney",
-		"FunnyMoney",
-		"RussMoney", // haha i referenced the streamer
-		"SyndiCoin",
-		"BananaBucks",
-		))
-	// inspired by the bitcoin creator but meme?
-	nerd_name = "[pick(list("Satoshi", "Kiryu", "Doraemon", "Greg"))] [pick(list("Naka", "Baka", "Shiba", "Tako"))][pick(list("moto", "mura", "nashi", "bana"))]"
+	coin_name = pick(world.file2list("russstation/strings/crypto_names.txt"))
 	// initialize event cache - copied from SSevents
 	for(var/type in subtypesof(/datum/round_event_control/cryptocurrency))
 		var/datum/round_event_control/cryptocurrency/E = new type()
@@ -112,31 +90,27 @@ SUBSYSTEM_DEF(cryptocurrency)
 	total_mined += power
 	if(progress >= progress_required)
 		progress = 0 // lose excess progress lol
+		payouts_earned += 1
 		// next payout requires more progress
-		progress_required *= progress_required_growth
+		progress_required = 1000 * (10 + (payouts_earned / 25) ** 2)
 		var/payout = rand(payout_min, payout_max)
 		wallet += payout
 		payout_processed += payout
 		total_payout += payout
-		payouts_earned += 1
 		// funny payout message for machine to shout
 		return "Successfully computed a proof-of-work hash on the blockchain! [payout] [coin_name] awarded."
 
 // pick next exchange rate slightly randomly
 /datum/controller/subsystem/cryptocurrency/proc/adjust_exchange_rate(rate)
-	// small chance to flip the trend so it's more dynamic between events
-	if(prob(market_change_chance))
-		market_trend_up = !market_trend_up
-	// min < 1 means value fluctuates instead of only going in trend direction
-	var/min_change_percent = 100 - market_change_percent
-	// increased factor by event_chance% so trend direction is more likely, especially just before events
-	var/max_change_percent = 100 + market_change_percent + event_chance
+	// small chance to disrupt the market trend so it's more dynamic between events
+	if(prob(trend_reset_chance))
+		potential_growth_percent = pick(5, 10, 15)
+		potential_decline_percent = pick(5, 10, 15)
+	var/min_change_percent = 100 - potential_decline_percent
+	var/max_change_percent = 100 + potential_growth_percent
 	// get a float in the change range and convert percent to fraction for math
 	var/change = LERP(min_change_percent, max_change_percent, rand()) / 100
-	if(market_trend_up)
-		return rate * change
-	else
-		return rate / change
+	return rate * change
 
 // withdraw coin and exchange to credits
 /datum/controller/subsystem/cryptocurrency/proc/cash_out(mob/user)
@@ -152,20 +126,13 @@ SUBSYSTEM_DEF(cryptocurrency)
 	var/blame = "Someone"
 	if(user && istype(user))
 		blame = user.name
-	// cashing out tanks the market proportional to the amount "removed from circulation"?
-	// shut up i know how money works, punishes spamming cashout button during a boom
-	// truncate to (0.1,0.9) so the value is always perceptible but doesn't risk zeroing the exchange rate
-	var/market_portion = min(max(amount / market_cap, 0.1), 0.9)
-	next_exchange_rate *= (1 - market_portion)
-	market_trend_up = FALSE
 	return "[blame] exchanged [amount] [coin_name] for [credits] Credits, paid to the [ACCOUNT_CAR_NAME] account."
 
 /datum/controller/subsystem/cryptocurrency/fire(resumed = 0)
 	if(!started)
 		return
 	// update exchange rate and determine the next value (the market is controlled!)
-	exchange_rate = next_exchange_rate
-	next_exchange_rate = adjust_exchange_rate(exchange_rate)
+	exchange_rate = adjust_exchange_rate(exchange_rate)
 	// add processed amounts from this period to history lists
 	mining_history += mining_processed
 	payout_history += payout_processed
@@ -176,28 +143,16 @@ SUBSYSTEM_DEF(cryptocurrency)
 	// process events - we don't want them eating up "real" event opportunities so gotta handle manually
 	var/now = REALTIMEOFDAY
 	if(now >= next_event)
-		if(prob(event_chance))
-			var/datum/round_event_control/control
-			next_event = now + rand(min_event_cooldown, max_event_cooldown)
-			// check if we've paid the market cap (because it waits for event fire, can pay slightly more than cap)
-			if(total_payout >= market_cap)
-				// not an event so admemes can't force this
-				priority_announce("The market cap for [coin_name] has been paid. Congratulations! You won crypto! Please touch grass.", "[SScryptocurrency.coin_name] Creator [SScryptocurrency.nerd_name]")
-				can_fire = FALSE
-			// else do one of the random events
-			else
-				control = pickEvent()
-			// finally run the event
-			if(control)
-				control.runEvent(TRUE)
-			// else no event, just let the market change up and down naturally
-		else
-			// increase chance for next time
-			event_chance += event_chance_growth
-	else
-		// "animate" market volatility going down after an event
-		if(event_chance > initial(event_chance))
-			event_chance -= event_chance_growth
+		var/datum/round_event_control/control
+		// increment event counter
+		event_count += 1
+		// how long until next event
+		next_event = now + rand(min_event_cooldown, max_event_cooldown)
+		// try to do one of the random events
+		control = pickEvent()
+		if(control)
+			control.runEvent(TRUE)
+		// else no event, just let the market change up and down naturally
 	// finally reset processed trackers
 	mining_processed = 0
 	payout_processed = 0

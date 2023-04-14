@@ -94,7 +94,7 @@
 	. = ..()
 	. += "Its card slots contain:"
 	if(card_count > 0)
-		for(var/obj/item/crypto_mining_card/card in contents)
+		for(var/obj/item/electronics/crypto_mining_card/card in contents)
 			if(istype(card))
 				. += "&bull; \A [card.name]"
 		. += span_notice("Use a <b>screwdriver</b> to remove the cards.")
@@ -132,9 +132,6 @@
 	add_fingerprint(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/chair/AltClick(mob/user)
-	return ..() // This hotkey is BLACKLISTED since it's used by /datum/component/simple_rotation
-
 /obj/machinery/crypto_mining_rig/proc/change_on(new_on)
 	on = new_on
 	update_appearance()
@@ -152,7 +149,7 @@
 		wired_power = null
 
 /obj/machinery/crypto_mining_rig/attackby(obj/item/thing, mob/user, params)
-	if(istype(thing, /obj/item/crypto_mining_card))
+	if(istype(thing, /obj/item/electronics/crypto_mining_card))
 		if(on)
 			to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
 		else if(card_count < max_cards)
@@ -194,7 +191,7 @@
 		to_chat(user, span_warning("You need to turn \the [src] off to mess with its cards!"))
 	else if(card_count > 0)
 		// i don't want to make an interface for removing/replacing individual cards, dump em all
-		for(var/obj/item/crypto_mining_card/card in contents)
+		for(var/obj/item/electronics/crypto_mining_card/card in contents)
 			if(istype(card))
 				card.forceMove(loc)
 		card_count = 0
@@ -234,7 +231,7 @@
 /obj/machinery/crypto_mining_rig/process(delta_time)
 	// if we aren't on and working, obviously stop. also if we're in a no-no area (no free power for you)
 	var/area/area = get_area(src)
-	if(!on || machine_stat & BROKEN || (!wired_power && !powered()) || !area.requires_power || !SScryptocurrency.can_fire)
+	if(!on || machine_stat & BROKEN || (!wired_power && !powered(AREA_USAGE_EQUIP, TRUE)) || !area.requires_power || !SScryptocurrency.can_fire)
 		change_on(FALSE)
 		return PROCESS_KILL
 
@@ -295,7 +292,7 @@
 	if(raw_progress < min_progress_to_process)
 		raw_progress = 0
 	// adjust progress based on an exponent so individual rigs are better than many with the same power draw
-	progress = raw_progress / 2 + (raw_progress / 500) ** 2
+	progress = raw_progress / 1.5 + (raw_progress / 500) ** 2
 	// mine dat fukken coin
 	var/result = SScryptocurrency.mine(progress)
 	// announce result when finishing a mining unit
@@ -318,7 +315,7 @@
 	// graphics cards for real gamer hours
 	var/energy_rating = 1
 	var/overclock_rating = 0
-	for(var/obj/item/crypto_mining_card/card in contents)
+	for(var/obj/item/electronics/crypto_mining_card/card in contents)
 		energy_rating += card.energy_rating
 		overclock_rating += card.overclock_rating
 	active_power_usage = initial(active_power_usage) * energy_rating
@@ -379,14 +376,12 @@
 				. = TRUE
 
 // "graphics" cards for shoving into the rig to get the most performance out
-/obj/item/crypto_mining_card
+/obj/item/electronics/crypto_mining_card
 	name = "\improper Brandless graphics card"
 	desc = "Only capable of producing the pipe dream screensaver."
 	icon = 'russstation/icons/obj/machines/cryptocurrency.dmi'
 	icon_state = "graphics_card_1"
 	w_class = WEIGHT_CLASS_SMALL
-	// TODO make sure these have miserable resale value
-	custom_materials = list(/datum/material/iron=50, /datum/material/glass=50)
 	// these are like stock parts but not so we can have finer control
 	var/rating = 1
 	// energy rating determines base power consumption
@@ -394,7 +389,7 @@
 	// overclock rating determines how much extra power can be consumed
 	var/overclock_rating = 0
 
-/obj/item/crypto_mining_card/examine(mob/user)
+/obj/item/electronics/crypto_mining_card/examine(mob/user)
 	. = ..()
 	. += "It requires [energy_rating * BASE_MACHINE_ACTIVE_CONSUMPTION]W to use."
 	if(overclock_rating > 0)
@@ -402,28 +397,29 @@
 	else
 		. += "It does not support overclocking."
 
-/obj/item/crypto_mining_card/tier2
+/obj/item/electronics/crypto_mining_card/tier2
 	name = "\improper Electron 9000 graphics card"
-	desc = "Last year's top-tier card is this year's unwanted garbage."
+	desc = "A decent graphics card that can play real games like Cargonian Warfare."
 	icon_state = "graphics_card_2"
 	rating = 2
 	energy_rating = 5
 	overclock_rating = 1.5
 
-/obj/item/crypto_mining_card/tier3
+/obj/item/electronics/crypto_mining_card/tier3
 	name = "\improper Plastitanium 800 graphics card"
-	desc = "The latest and greatest... that was in stock."
+	desc = "A poor gamer out there is suffering without this, but you're going to use it to mine crypto."
 	icon_state = "graphics_card_3"
 	w_class = WEIGHT_CLASS_NORMAL
 	rating = 3
 	energy_rating = 8
 	overclock_rating = 4
 
-/obj/item/crypto_mining_card/tier4
+/obj/item/electronics/crypto_mining_card/tier4
 	name = "\improper Syndivideo Ruby graphics card"
 	desc = "An experimental card using bluespace technology to render frames before they exist."
 	icon = 'russstation/icons/obj/machines/crypto_huge.dmi'
 	icon_state = "graphics_card_4"
+	// pixel offset because the icon is huge; not sure if working
 	pixel_x = -16
 	base_pixel_x = -16
 	pixel_y = -16
@@ -432,6 +428,12 @@
 	rating = 4
 	energy_rating = 12
 	overclock_rating = 12 // now that's spicy
+	// toolbox-esque combat applications
+	force = 10
+	throwforce = 10
+	throw_speed = 2
+	throw_range = 7
+	wound_bonus = 7 // sharp edges
 
 // NtOS program for crypto stuff
 /datum/computer_file/program/cryptocurrency
@@ -458,10 +460,9 @@
 	data["exchange_rate"] = SScryptocurrency.exchange_rate
 	data["wallet"] = SScryptocurrency.wallet
 	data["progress_required"] = SScryptocurrency.progress_required
-	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 4
+	data["exchange_rate_limit"] = initial(SScryptocurrency.exchange_rate) * 2
 	data["total_mined"] = SScryptocurrency.total_mined
 	data["total_payout"] = SScryptocurrency.total_payout
-	data["event_chance"] = SScryptocurrency.event_chance
 	data["mining_history"] = SScryptocurrency.mining_history
 	data["payout_history"] = SScryptocurrency.payout_history
 	data["exchange_rate_history"] = SScryptocurrency.exchange_rate_history
