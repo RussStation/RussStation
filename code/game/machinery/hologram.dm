@@ -43,7 +43,7 @@ Possible to do for anyone motivated enough:
 	plane = GAME_PLANE
 	req_access = list(ACCESS_KEYCARD_AUTH) //Used to allow for forced connecting to other (not secure) holopads. Anyone can make a call, though.
 	max_integrity = 300
-	armor = list(MELEE = 50, BULLET = 20, LASER = 20, ENERGY = 20, BOMB = 0, BIO = 0, FIRE = 50, ACID = 0)
+	armor_type = /datum/armor/machinery_holopad
 	circuit = /obj/item/circuitboard/machine/holopad
 	/// associative lazylist of the form: list(mob calling us = hologram representing that mob).
 	/// this is only populated for holopads answering calls from another holopad
@@ -86,6 +86,13 @@ Possible to do for anyone motivated enough:
 	var/calling = FALSE
 	///bitfield. used to turn on and off hearing sensitivity depending on if we can act on Hear() at all - meant for lowering the number of unessesary hearable atoms
 	var/can_hear_flags = NONE
+
+/datum/armor/machinery_holopad
+	melee = 50
+	bullet = 20
+	laser = 20
+	energy = 20
+	fire = 50
 
 /obj/machinery/holopad/Initialize(mapload)
 	. = ..()
@@ -202,8 +209,8 @@ Possible to do for anyone motivated enough:
 /obj/machinery/holopad/RefreshParts()
 	. = ..()
 	var/holograph_range = 4
-	for(var/obj/item/stock_parts/capacitor/B in component_parts)
-		holograph_range += 1 * B.rating
+	for(var/datum/stock_part/capacitor/capacitor in component_parts)
+		holograph_range += 1 * capacitor.tier
 	holo_range = holograph_range
 
 /obj/machinery/holopad/examine(mob/user)
@@ -238,7 +245,7 @@ Possible to do for anyone motivated enough:
 	if(default_deconstruction_screwdriver(user, "holopad_open", "holopad0", P))
 		return
 
-	if(default_pry_open(P))
+	if(default_pry_open(P, close_after_pry = TRUE, closed_density = FALSE))
 		return
 
 	if(default_deconstruction_crowbar(P))
@@ -438,6 +445,7 @@ Possible to do for anyone motivated enough:
 		if(!LAZYLEN(holo_calls))
 			set_can_hear_flags(CAN_HEAR_ACTIVE_HOLOCALLS, FALSE)
 
+	update_appearance(UPDATE_ICON_STATE)
 	return TRUE
 
 /**
@@ -487,7 +495,7 @@ Possible to do for anyone motivated enough:
 	if(outgoing_call)
 		outgoing_call.Check()
 
-	ringing = FALSE
+	var/are_ringing = FALSE
 
 	for(var/datum/holocall/holocall as anything in holo_calls)
 		if(holocall.connected_holopad == src)
@@ -503,9 +511,11 @@ Possible to do for anyone motivated enough:
 			holocall.Disconnect(src)//can't answer calls while calling
 		else
 			playsound(src, 'sound/machines/twobeep.ogg', 100) //bring, bring!
-			ringing = TRUE
+			are_ringing = TRUE
 
-	update_appearance(UPDATE_ICON_STATE)
+	if(ringing != are_ringing)
+		ringing = are_ringing
+		update_appearance(UPDATE_ICON_STATE)
 
 /obj/machinery/holopad/proc/activate_holo(mob/living/user)
 	var/mob/living/silicon/ai/AI = user
@@ -849,9 +859,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	pixel_y = -32
 	alpha = 100
 
-#undef HOLOPAD_PASSIVE_POWER_USAGE
-#undef HOLOGRAM_POWER_USAGE
-#undef CAN_HEAR_MASTERS
 #undef CAN_HEAR_ACTIVE_HOLOCALLS
-#undef CAN_HEAR_RECORD_MODE
 #undef CAN_HEAR_ALL_FLAGS
+#undef CAN_HEAR_HOLOCALL_USER
+#undef CAN_HEAR_MASTERS
+#undef CAN_HEAR_RECORD_MODE
+#undef HOLOGRAM_POWER_USAGE
+#undef HOLOPAD_PASSIVE_POWER_USAGE
