@@ -149,6 +149,10 @@
 	add_gas_reaction(/datum/gas/healium, while_present = PROC_REF(consume_healium), on_loss = PROC_REF(lose_healium))
 	add_gas_reaction(/datum/gas/helium, while_present = PROC_REF(consume_helium), on_loss = PROC_REF(lose_helium))
 	add_gas_reaction(/datum/gas/hypernoblium, while_present = PROC_REF(consume_hypernoblium))
+	// honk start - sniff that fart gas
+	if(safe_miasma_min)
+		add_gas_reaction(/datum/gas/plasma, always = PROC_REF(breathe_miasma))
+	// honk end
 	if(suffers_miasma)
 		add_gas_reaction(/datum/gas/miasma, while_present = PROC_REF(too_much_miasma), on_loss = PROC_REF(safe_miasma))
 	add_gas_reaction(/datum/gas/nitrous_oxide, while_present = PROC_REF(too_much_n2o), on_loss = PROC_REF(safe_n2o))
@@ -375,7 +379,8 @@
 /obj/item/organ/internal/lungs/proc/safe_plasma(mob/living/carbon/breather, datum/gas_mixture/breath, old_plasma_pp)
 	breather.clear_alert(ALERT_TOO_MUCH_PLASMA)
 
-/// honk start - Miasma breathing, TG handles too much miasma
+/// honk start - Miasma breathing, TG handles too_much_miasma
+/obj/item/organ/internal/lungs/proc/breathe_miasma(mob/living/carbon/breather, datum/gas_mixture/breath, miasma_pp, old_miasma_pp)
 	if(miasma_pp < safe_miasma_min && !HAS_TRAIT(src, TRAIT_SPACEBREATHING))
 		// Suffocation
 		breather.throw_alert(ALERT_NOT_ENOUGH_MIASMA, /atom/movable/screen/alert/not_enough_miasma)

@@ -64,8 +64,8 @@
 				liver.apply_organ_damage(((max(sqrt(volume) * (boozepwr ** ALCOHOL_EXPONENT) * liver.alcohol_tolerance * seconds_per_tick, 0))/150))
 	//HONK START -- Dwarf healing
 	if(isdwarftype(drinker))
-		drinker.adjustBruteLoss(-0.9 * REM * delta_time)
-		drinker.adjustFireLoss(-0.9 * REM * delta_time)
+		drinker.adjustBruteLoss(-0.9 * REM * seconds_per_tick)
+		drinker.adjustFireLoss(-0.9 * REM * seconds_per_tick)
 	//HONK END
 	return ..()
 

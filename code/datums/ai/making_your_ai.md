@@ -97,10 +97,10 @@ Let's take a look at a simple subtree:
 ```dm
 /datum/ai_planning_subtree/item_throw_attack
 
-/datum/ai_planning_subtree/item_throw_attack/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/item_throw_attack/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/obj/item/item_pawn = controller.pawn
 
-	if(!controller.blackboard[BB_ITEM_TARGET] || !DT_PROB(ITEM_AGGRO_ATTACK_CHANCE, delta_time))
+	if(!controller.blackboard[BB_ITEM_TARGET] || !SPT_PROB(ITEM_AGGRO_ATTACK_CHANCE, seconds_per_tick))
 		return //no target, or didn't aggro
 
 	controller.queue_behavior(controller.blackboard[BB_ITEM_MOVE_AND_ATTACK_TYPE], BB_ITEM_TARGET, BB_ITEM_THROW_ATTEMPT_COUNT)
@@ -206,7 +206,7 @@ As before, let's take a look at a basic example of one:
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_MOVE_AND_PERFORM
 	required_distance = 1
 
-/datum/ai_behavior/follow/perform(delta_time, datum/ai_controller/controller, follow_key, range_key)
+/datum/ai_behavior/follow/perform(seconds_per_tick, datum/ai_controller/controller, follow_key, range_key)
 	. = ..()
 	var/mob/living/living_pawn = controller.pawn
 	if(!istype(living_pawn) || !isturf(living_pawn.loc))
@@ -239,7 +239,7 @@ BAD:
 ```dm
 /datum/ai_behavior/play_instrument
 
-/datum/ai_behavior/play_instrument/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/play_instrument/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 
 	//bzzt! using blackboard keys directly! let the subtree pass this in!
@@ -254,7 +254,7 @@ GOOD:
 ```dm
 /datum/ai_behavior/play_instrument
 
-/datum/ai_behavior/play_instrument/perform(delta_time, datum/ai_controller/controller, song_datum_key)
+/datum/ai_behavior/play_instrument/perform(seconds_per_tick, datum/ai_controller/controller, song_datum_key)
 	. = ..()
 
 	var/datum/song/song = controller.blackboard[song_datum_key]

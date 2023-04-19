@@ -17,7 +17,7 @@
 	var/mob/living/carbon/human/dwarf = allocate(/mob/living/carbon/human/dummy/consistent)
 	dwarf.set_species(/datum/species/dwarf)
 	dwarf.facial_hairstyle = "Beard (Dwarf)"
-	dwarf.update_hair(is_creating = TRUE)
+	dwarf.update_hair()
 	dwarf.equipOutfit(/datum/outfit/dorf, visualsOnly = TRUE)
 	test_screenshot("[/datum/species/dwarf]", get_flat_icon_for_all_directions(dwarf))
 	// honk end

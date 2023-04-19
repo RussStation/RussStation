@@ -21,11 +21,11 @@
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
 
-/mob/living/simple_animal/hostile/guardian/fire/Life(delta_time = SSMOBS_DT, times_fired)
+/mob/living/simple_animal/hostile/guardian/fire/Life(seconds_per_tick = SSMOBS_DT, times_fired)
 	. = ..()
 	if(summoner)
 		summoner.extinguish_mob()
-		summoner.adjust_fire_stacks(-10 * delta_time)
+		summoner.adjust_fire_stacks(-10 * seconds_per_tick)
 
 /mob/living/simple_animal/hostile/guardian/fire/AttackingTarget()
 	. = ..()
