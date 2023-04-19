@@ -34,8 +34,9 @@
 #define MEDAL_RUST_ASCENSION "Rust"
 #define MEDAL_VOID_ASCENSION "Void"
 #define MEDAL_BLADE_ASCENSION "Blade"
+#define MEDAL_COSMOS_ASCENSION "Cosmos"
 #define MEDAL_TOOLBOX_SOUL "Toolsoul"
-#define MEDAL_CHEM_TUT          "Beginner Chemist"
+#define MEDAL_CHEM_TUT "Beginner Chemist"
 #define MEDAL_HOT_DAMN "Hot Damn!"
 #define MEDAL_CAYENNE_DISK "Very Important Piscis"
 #define MEDAL_TRAM_SURFER "Tram Surfer"
@@ -69,8 +70,6 @@
 
 //Mafia medal hub IDs (misc stuff)
 #define MAFIA_MEDAL_HATED "Universally Hated"
-#define MAFIA_MEDAL_CHARISMATIC "Charismatic"
-#define MAFIA_MEDAL_VIP "VIP"
 
 //Boss medals
 
