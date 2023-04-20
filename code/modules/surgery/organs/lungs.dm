@@ -41,7 +41,7 @@
 
 	//Breath damage
 	//These thresholds are checked against what amounts to total_mix_pressure * (gas_type_mols/total_mols)
-	var/safe_miasma_min = 0 // honk - skaven breathing
+	var/safe_miasma_min = 0 // honk - skaven breathing, the real value is inside skaven lungs
 	var/safe_oxygen_min = 16 // Minimum safe partial pressure of O2, in kPa
 	var/safe_oxygen_max = 0
 	var/safe_nitro_min = 0
@@ -118,6 +118,10 @@
 		respiration_type |= RESPIRATION_OXYGEN
 	if(safe_plasma_min)
 		respiration_type |= RESPIRATION_PLASMA
+	// honk start
+	if(safe_miasma_min)
+		respiration_type |= RESPIRATION_MIASMA
+	// honk end
 
 	// Sets up what gases we want to react to, and in what way
 	// always is always processed, while_present is called when the gas is in the breath, and on_loss is called right after a gas is lost
@@ -151,7 +155,7 @@
 	add_gas_reaction(/datum/gas/hypernoblium, while_present = PROC_REF(consume_hypernoblium))
 	// honk start - sniff that fart gas
 	if(safe_miasma_min)
-		add_gas_reaction(/datum/gas/plasma, always = PROC_REF(breathe_miasma))
+		add_gas_reaction(/datum/gas/miasma, always = PROC_REF(breathe_miasma))
 	// honk end
 	if(suffers_miasma)
 		add_gas_reaction(/datum/gas/miasma, while_present = PROC_REF(too_much_miasma), on_loss = PROC_REF(safe_miasma))
