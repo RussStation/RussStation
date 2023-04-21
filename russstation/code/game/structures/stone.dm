@@ -80,7 +80,7 @@
 
 /obj/structure/table/stone/attackby(obj/item/I, mob/living/user, params)
 	var/list/modifiers = params2list(params)
-	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+	if(LAZYACCESS(modifiers, RIGHT_CLICK)) 
 		if (I.tool_behaviour == TOOL_DWARF)
 			to_chat(user, span_notice("You start deconstructing [src]..."))
 			I.play_tool_sound(src)
