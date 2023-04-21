@@ -68,6 +68,13 @@
 	medium_light_cutoff = list(30, 20, 5)
 	high_light_cutoff = list(45, 30, 10)
 
+// honk start -- rat ogre vision, red and angry
+/datum/action/adjust_vision/rat_ogre
+	low_light_cutoff = list(15, 0, 8)
+	medium_light_cutoff = list(35, 15, 25)
+	high_light_cutoff = list(50, 10, 40)
+// honk end
+
 #undef VISION_ACTION_LIGHT_OFF
 #undef VISION_ACTION_LIGHT_LOW
 #undef VISION_ACTION_LIGHT_MID
