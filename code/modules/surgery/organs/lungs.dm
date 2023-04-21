@@ -118,7 +118,7 @@
 		respiration_type |= RESPIRATION_OXYGEN
 	if(safe_plasma_min)
 		respiration_type |= RESPIRATION_PLASMA
-	// honk start
+	// honk start -- miasma
 	if(safe_miasma_min)
 		respiration_type |= RESPIRATION_MIASMA
 	// honk end

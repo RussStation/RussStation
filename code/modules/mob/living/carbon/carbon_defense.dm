@@ -452,7 +452,7 @@
 		if(HAS_TRAIT(src, TRAIT_BADTOUCH)) //How dare they!
 			to_chat(helper, span_warning("[src] makes a grumbling noise as you pull on [p_their()] tail."))
 		/*else // honk start - DON'T activate the weird tail fetish moodlet, please!
-			add_mood_event("tailpulled", /datum/mood_event/tailpulled) honk end */
+			add_mood_event("tailpulled", /datum/mood_event/tailpulled) */// honk end
 	else if ((helper.zone_selected == BODY_ZONE_PRECISE_GROIN) && (istype(head, /obj/item/clothing/head/costume/kitty) || istype(head, /obj/item/clothing/head/collectable/kitty)))
 		var/obj/item/clothing/head/faketail = head
 		helper.visible_message(span_danger("[helper] pulls on [src]'s tail... and it rips off!"), \
