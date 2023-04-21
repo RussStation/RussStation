@@ -33,8 +33,8 @@
 
 /mob/living/simple_animal/chicken/icemoon/Initialize(mapload)
 	. = ..()
-	chicken_count++
-	add_cell_sample()
+	GLOB.chicken_count++
+
 	AddElement(/datum/element/animal_variety, "chicken", pick("brown","black","white"), TRUE)
 	AddComponent(/datum/component/egg_layer,\
 		/obj/item/food/egg/iceegg,\
@@ -60,9 +60,9 @@
 	minbodytemp = 0
 	maxbodytemp = 1500
 
-/mob/living/simple_animal/chick/icemoon/Life(delta_time = SSMOBS_DT, times_fired)
+/mob/living/simple_animal/chick/icemoon/Life(seconds_per_tick = SSMOBS_DT, times_fired)
 	if(!stat && !ckey)
-		amount_grown += rand(0.5 * delta_time, 1 * delta_time)
+		amount_grown += rand(0.5 * seconds_per_tick, 1 * seconds_per_tick)
 		if(amount_grown >= 100)
 			new /mob/living/simple_animal/chicken/icemoon(src.loc)
 			qdel(src)
