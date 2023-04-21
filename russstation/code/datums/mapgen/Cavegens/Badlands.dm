@@ -8,10 +8,10 @@
 
 	// this hodgepodge of mobs have a lot of conflicting factions so they kinda kill each other...
 	mob_spawn_chance = 6
-	weighted_mob_spawn_list = list(/mob/living/simple_animal/hostile/carp = 20, \
-		/mob/living/simple_animal/hostile/carp/megacarp = 8, \
+	weighted_mob_spawn_list = list(/mob/living/basic/carp = 20, \
+		/mob/living/basic/carp/mega = 8, \
 		/mob/living/simple_animal/hostile/space_dragon = 2, \
-		/mob/living/simple_animal/hostile/carp/ranged/chaos = 1, \
+		/mob/living/basic/carp/magic/chaos = 1, \
 		/mob/living/simple_animal/hostile/bear = 18, \
 		/mob/living/simple_animal/hostile/skeleton = 15, \
 		/obj/structure/spawner/lavaland/badlands/carp = 3, \
