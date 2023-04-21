@@ -1,7 +1,12 @@
 /datum/species/skaven
 	name = "\improper Skaven"
 	id = SPECIES_SKAVEN
-	species_traits = list(DYNCOLORS,AGENDER,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE)
+	species_traits = list(
+		DYNCOLORS,
+		AGENDER,
+		EYECOLOR,
+		LIPS,
+	)
 	external_organs = list(
 		/obj/item/organ/external/horns = "None",
 		/obj/item/organ/external/snout = "Round",

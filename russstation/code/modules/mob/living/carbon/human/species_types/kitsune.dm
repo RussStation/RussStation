@@ -34,9 +34,9 @@
 /datum/species/human/kitsune/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.hairstyle = "Long Bedhead"
 	human.hair_color = "#ffb004" // ORANG
-	human.update_hair(is_creating = TRUE)
+	human.update_hair()
 
-	var/obj/item/organ/internal/ears/kitsune/fox_ears = human.getorgan(/obj/item/organ/internal/ears/kitsune)
+	var/obj/item/organ/internal/ears/kitsune/fox_ears = human.get_organ_by_type(/obj/item/organ/internal/ears/kitsune)
 	if (fox_ears)
 		fox_ears.color = human.hair_color
 		human.update_body()
