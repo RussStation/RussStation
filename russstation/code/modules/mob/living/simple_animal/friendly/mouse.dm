@@ -50,4 +50,4 @@
 	icon = 'russstation/icons/mob/animal.dmi'
 	icon_state = "mouse_clown_dead"
 	name = "dead clouse"
-	grind_results = list(/datum/reagent/consumable/laughter = 20, /datum/reagent/liquidgibs = 5)
+	grind_results = list(/datum/reagent/consumable/laughter = 20, /datum/reagent/consumable/liquidgibs = 5)

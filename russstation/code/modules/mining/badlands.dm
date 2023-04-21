@@ -1,7 +1,7 @@
 // badlands versions of monsters and such
 /obj/structure/spawner/lavaland/badlands/carp
 	max_mobs = 4
-	mob_types = list(/mob/living/simple_animal/hostile/carp)
+	mob_types = list(/mob/living/basic/carp)
 
 /obj/structure/spawner/lavaland/badlands/bear
 	max_mobs = 4

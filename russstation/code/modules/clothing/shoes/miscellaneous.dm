@@ -14,7 +14,7 @@
 
 /obj/item/clothing/shoes/cowboy/clown/Initialize()
 	. = ..()
-	create_storage(type = /datum/storage/pockets/shoes/clown)
+	create_storage(storage_type = /datum/storage/pockets/shoes/clown)
 	AddComponent(/datum/component/squeak, list('sound/effects/clownstep1.ogg'=1,'sound/effects/clownstep2.ogg'=1), 50)
 
 /obj/item/clothing/shoes/cowboy/clown/equipped(mob/living/user, slot)

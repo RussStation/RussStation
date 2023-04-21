@@ -2,7 +2,11 @@
 	name = "\improper Kobold"
 	plural_form = "Kobolds"
 	id = SPECIES_KOBOLD
-	species_traits = list(MUTCOLORS, EYECOLOR, LIPS, HAS_FLESH, HAS_BONE)
+	species_traits = list(
+		MUTCOLORS,
+		EYECOLOR,
+		LIPS
+	)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
@@ -67,7 +71,7 @@
 	. = ..()
 
 //Cold blooded
-/datum/species/kobold/body_temperature_core(mob/living/carbon/human/humi, delta_time, times_fired)
+/datum/species/kobold/body_temperature_core(mob/living/carbon/human/humi, seconds_per_tick, times_fired)
 	return
 
 /datum/species/kobold/random_name(gender,unique,lastname)
