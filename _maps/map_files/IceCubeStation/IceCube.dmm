@@ -10000,7 +10000,6 @@
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Atmospherics Storage"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 5
 	},
@@ -10013,6 +10012,7 @@
 /obj/effect/turf_decal/trimline/yellow/filled/corner{
 	dir = 4
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
 "eEE" = (
@@ -15041,7 +15041,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/science/xenobiology)
 "hay" = (
-/obj/structure/sign/barsign,
+/obj/machinery/barsign,
 /turf/closed/wall,
 /area/station/service/bar)
 "haF" = (
@@ -26239,7 +26239,8 @@
 /area/station/security/detectives_office)
 "lTF" = (
 /obj/machinery/door/airlock/research{
-	name = "Research Division Access"
+	name = "Research Division Access";
+	unres_sensor = 1
 	},
 /obj/effect/mapping_helpers/airlock/access/all/science/general,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
@@ -26253,6 +26254,9 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/unres{
+	dir = 8
 	},
 /turf/open/floor/iron,
 /area/station/science)
@@ -26393,7 +26397,9 @@
 /area/station/engineering/storage_shared)
 "lVT" = (
 /obj/machinery/door/airlock/research{
-	name = "Research Division Access"
+	name = "Research Division Access";
+	unres_sensor = 1;
+	unres_sides = 8
 	},
 /obj/effect/mapping_helpers/airlock/access/all/science/general,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
@@ -26401,6 +26407,9 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/unres{
+	dir = 8
 	},
 /turf/open/floor/iron,
 /area/station/science)
@@ -40695,8 +40704,8 @@
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Atmospherics Storage"
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/structure/disposalpipe/segment,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /turf/open/floor/iron,
 /area/station/engineering/supermatter/room)
 "sie" = (
