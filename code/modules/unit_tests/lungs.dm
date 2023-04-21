@@ -67,6 +67,26 @@
 	// Test one breath of Lavaland gas mix on Ashwalker lungs.
 	lungs_test_check_breath("Lavaland air mixture", lab_rat, test_lungs, lavaland_test_mix)
 
+
+// honk start -- skaven lung unit test
+/datum/unit_test/lungs/lungs_sanity_skaven
+
+/datum/unit_test/lungs/lungs_sanity_skaven/Run()
+	// Mostly plasmalungs codes but with miasma
+	var/datum/gas_mixture/miasma_test_mix = create_miasma_mix()
+	var/mob/living/carbon/human/lab_rat = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/organ/internal/lungs/skaven/test_lungs = allocate(/obj/item/organ/internal/lungs/skaven)
+	// Test should come okay
+	lungs_test_check_breath("pure Miasma", lab_rat, test_lungs, miasma_test_mix)
+
+	// Test if they suffocate in O2/N2 mix.
+	var/datum/gas_mixture/test_mix = create_standard_mix()
+	var/mob/living/carbon/human/lab_rat = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/organ/internal/lungs/skaven/test_lungs = allocate(/obj/item/organ/internal/lungs/skaven)
+	// Test one breath.
+	lungs_test_check_breath("standard gas mixture", lab_rat, test_lungs, test_mix, expect_failure = TRUE)
+// honk end
+
 /// Comprehensive unit test for [/obj/item/organ/internal/lungs/proc/check_breath()]
 /// If "expect_failure" is set to TRUE, the test ensures the given Human suffocated.
 /// A "test_name" string is required to contextualize test logs. Describe the gas you're testing.
@@ -195,6 +215,11 @@
 	var/datum/gas_mixture/test_mix = allocate(/datum/gas_mixture, 2500)
 	test_mix.copy_from(lavaland_mix)
 	return test_mix
+
+// honk start -- Miasma gas mix
+/datum/unit_test/lungs/proc/create_miasma_mix()
+	return create_gas_mix(list(/datum/gas/miasma = 1))
+// honk end
 
 #undef TEST_CHECK_BREATH_MESSAGE
 #undef TEST_ALERT_THROW_MESSAGE
