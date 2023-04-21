@@ -2,7 +2,7 @@
 	hotkey_keys = list("Unbound")
 	name = "suicide"
 	full_name = "Suicide"
-	description = "Kill yourself, <b style='color:red'>THERE IS NO CONFIRMATION</b>, use at your own risk"
+	description = "Kills you and makes you unrevivable."
 	keybind_signal = COMSIG_KB_HUMAN_SUICIDE_DOWN
 
 /datum/keybinding/human/suicide/down(client/user)
@@ -11,5 +11,5 @@
 		return
 
 	var/mob/living/carbon/human/H = user.mob
-	H.suicide(intentional = TRUE)
+	H.suicide()
 	return TRUE
