@@ -6,10 +6,10 @@
 	base_icon_state = "wall"
 	sheet_type = /obj/item/stack/sheet/mineral/stone
 	hardness = 45 // between iron walls and wood walls
-	explosion_block = 0
+	explosive_resistance  = 0
 	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = list(SMOOTH_GROUP_CLOSED_TURFS, SMOOTH_GROUP_WALLS, SMOOTH_GROUP_SANDSTONE_WALLS)
-	canSmoothWith = list(SMOOTH_GROUP_SANDSTONE_WALLS) // pretty much the same thing aesthetically
+	smoothing_groups = SMOOTH_GROUP_CLOSED_TURFS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_SANDSTONE_WALLS
+	canSmoothWith = SMOOTH_GROUP_SANDSTONE_WALLS // pretty much the same thing aesthetically
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	custom_materials = list(/datum/material/stone = 4000)
 	girder_type = /obj/structure/girder/stone

@@ -71,8 +71,8 @@
 	max_integrity = 100
 	integrity_failure = 0.33
 	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = list(SMOOTH_GROUP_TABLES)
-	canSmoothWith = list(SMOOTH_GROUP_TABLES)
+	smoothing_groups = SMOOTH_GROUP_TABLES
+	canSmoothWith = SMOOTH_GROUP_TABLES
 
 /obj/structure/table/stone/deconstruction_hints(mob/user)
 	. = ..()
@@ -182,12 +182,16 @@
 	mats_per_unit = list(/datum/material/stone = 500)
 	throwforce = 10
 	turf_type = /turf/open/floor/stone/russ
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 100, ACID = 70)
+	armor_type = /datum/armor/stone_tile
 	matter_amount = 1
 	cost = 125
 	source = null
 	merge_type = /obj/item/stack/tile/stone
 	tile_reskin_types = list()
+
+/datum/armor/stone_tile
+	fire = 100
+	acid = 70
 
 /obj/structure/girder/stone
 	name = "stone wall frame"
