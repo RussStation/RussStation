@@ -120,7 +120,7 @@
 	species_language_holder = /datum/language_holder/dwarf/lavaland
 	// Lizard lungs (just to avoid needing no breath) are now named lavaland lungs
 	mutantlungs = /obj/item/organ/internal/lungs/lavaland
-	mutanteyes = /obj/item/organ/internal/eyes/night_vision
+	mutanteyes = /obj/item/organ/internal/eyes/night_vision/dwarf // dwarfs are fun
 	examine_limb_id = SPECIES_DWARF
 
 /datum/species/dwarf/lavaland/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
@@ -172,7 +172,7 @@
 	disliked_food = NONE
 	liked_food = BUGS | ALCOHOL | RAW | CLOTH | NUTS | VEGETABLES | SEAFOOD | MEAT
 	species_language_holder = /datum/language_holder/dwarf/lavaland
-	mutanteyes = /obj/item/organ/internal/eyes/night_vision
+	mutanteyes = /obj/item/organ/internal/eyes/night_vision/dwarf
 	death_sound = 'sound/machines/clockcult/ark_deathrattle.ogg' //spooky
 	//say_mod = "gurgles"
 
