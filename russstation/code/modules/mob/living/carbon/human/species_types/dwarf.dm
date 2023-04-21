@@ -3,7 +3,11 @@
 	name = "\improper Dwarf"
 	plural_form = "Dwarves"
 	id = SPECIES_DWARF
-	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,HAS_FLESH,HAS_BONE)
+	species_traits = list(
+		EYECOLOR,
+		HAIR,
+		FACEHAIR,
+		LIPS)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
@@ -114,8 +118,8 @@
 	coldmod = 1.50 // ouch
 	heatmod = 0.5
 	species_language_holder = /datum/language_holder/dwarf/lavaland
-	// Lizard lungs (just to avoid needing no breath)
-	mutantlungs = /obj/item/organ/internal/lungs/ashwalker
+	// Lizard lungs (just to avoid needing no breath) are now named lavaland lungs
+	mutantlungs = /obj/item/organ/internal/lungs/lavaland
 	mutanteyes = /obj/item/organ/internal/eyes/night_vision
 	examine_limb_id = SPECIES_DWARF
 
@@ -180,10 +184,10 @@
 	var/random_l_leg
 	var/random_r_leg
 
-/datum/species/dwarf/chaos/spec_life(mob/living/carbon/C, delta_time, times_fired)
+/datum/species/dwarf/chaos/spec_life(mob/living/carbon/C, seconds_per_tick, times_fired)
 	. = ..()
 	//Let out a scream of agony once in a while
-	if(!HAS_TRAIT(C, TRAIT_CRITICAL_CONDITION) && DT_PROB(0.8, delta_time))
+	if(!HAS_TRAIT(C, TRAIT_CRITICAL_CONDITION) && SPT_PROB(0.8, seconds_per_tick))
 		playsound(C, pick(list('sound/hallucinations/growl1.ogg','sound/hallucinations/growl2.ogg','sound/hallucinations/growl3.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/wail.ogg')), 50, TRUE, 10)
 
 /datum/species/dwarf/chaos/replace_body(mob/living/carbon/target, datum/species/new_species)
