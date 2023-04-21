@@ -79,7 +79,7 @@
 
 /obj/machinery/crypto_mining_rig/Initialize(mapload)
 	if(!id_tag)
-		id_tag = SSnetworks.assign_random_name(8)
+		id_tag = assign_random_name(8)
 	. = ..()
 	create_reagents(50, OPENCONTAINER) // size adjusted in RefreshParts
 	AddComponent(/datum/component/plumbing/simple_demand)
@@ -228,7 +228,7 @@
 	return TOOL_ACT_TOOLTYPE_SUCCESS
 
 // drain power from the connected powernet and get money
-/obj/machinery/crypto_mining_rig/process(delta_time)
+/obj/machinery/crypto_mining_rig/process(seconds_per_tick)
 	// if we aren't on and working, obviously stop. also if we're in a no-no area (no free power for you)
 	var/area/area = get_area(src)
 	if(!on || machine_stat & BROKEN || (!wired_power && !powered(AREA_USAGE_EQUIP, TRUE)) || !area.requires_power || !SScryptocurrency.can_fire)
@@ -449,7 +449,7 @@
 	program_icon = "coins"
 
 /datum/computer_file/program/cryptocurrency/ui_data()
-	var/list/data = get_header_data()
+	var/list/data = list()
 
 	var/can_cash_out = FALSE
 	var/obj/item/card/id/user_id = computer.GetID()
