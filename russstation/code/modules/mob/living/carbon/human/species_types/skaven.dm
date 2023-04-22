@@ -12,6 +12,7 @@
 		/obj/item/organ/external/snout = "Round",
 		/obj/item/organ/external/tail/skaven = "Skaven",
 	)
+	inherent_respiration_type = RESPIRATION_MIASMA
 	mutantears = /obj/item/organ/internal/ears/skaven
 	mutantlungs = /obj/item/organ/internal/lungs/skaven
 	mutanttongue = /obj/item/organ/internal/tongue/skaven
