@@ -15,4 +15,4 @@
 	resistance_flags = NONE
 	tint = 0
 	has_fov = FALSE
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 50, FIRE = 0, ACID = 0)
+	armor_type = /datum/armor/none

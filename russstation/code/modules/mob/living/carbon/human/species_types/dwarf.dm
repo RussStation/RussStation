@@ -120,7 +120,7 @@
 	species_language_holder = /datum/language_holder/dwarf/lavaland
 	// Lizard lungs (just to avoid needing no breath) are now named lavaland lungs
 	mutantlungs = /obj/item/organ/internal/lungs/lavaland
-	mutanteyes = /obj/item/organ/internal/eyes/night_vision/dwarf // dwarfs are fun
+	mutanteyes = /obj/item/organ/internal/eyes/night_vision/dwarf
 	examine_limb_id = SPECIES_DWARF
 
 /datum/species/dwarf/lavaland/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
@@ -146,7 +146,7 @@
 	brutemod = 0.4
 	//punchdamagelow = 5 //Mountain dwarfs pack a meaner punch cause of the local wild life
 	species_language_holder = /datum/language_holder/dwarf/lavaland
-	mutanteyes = /obj/item/organ/internal/eyes/night_vision
+	mutanteyes = /obj/item/organ/internal/eyes/night_vision/dwarf
 
 /datum/species/dwarf/mountain/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, pref_load)
 	. = ..()

@@ -3,6 +3,7 @@
 	desc = "A very rare species of cow, breed by mountain Dwarf's to withstand harsh winters."
 	color = "#0087bd"
 	mob_biotypes = MOB_BEAST
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	butcher_results = list(
 		/obj/item/food/meat/slab = 6,
 		/obj/item/stack/sheet/animalhide/generic = 8,
