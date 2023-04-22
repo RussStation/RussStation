@@ -110,8 +110,8 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 		//honk start -- added clay to sand recipes
 		new /datum/stack_recipe("clay", /obj/item/stack/sheet/mineral/clay, 1, 1, 50, category = CAT_MISC),\
 		//honk end
-		new /datum/stack_recipe("sandstone", /obj/item/stack/sheet/mineral/sandstone, 1, 1, 50, category = CAT_MISC),\
-		new /datum/stack_recipe("aesthetic volcanic floor tile", /obj/item/stack/tile/basalt, 2, 1, 50, category = CAT_TILES)\
+		new /datum/stack_recipe("sandstone", /obj/item/stack/sheet/mineral/sandstone, 1, 1, 50, check_density = FALSE, category = CAT_MISC),\
+		new /datum/stack_recipe("aesthetic volcanic floor tile", /obj/item/stack/tile/basalt, 2, 1, 50, check_density = FALSE, category = CAT_TILES)\
 ))
 
 /obj/item/stack/ore/glass/get_main_recipes()
