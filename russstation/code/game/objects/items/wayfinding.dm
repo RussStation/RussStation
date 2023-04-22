@@ -1,4 +1,5 @@
-// Old wayfinding system, moved here to allow use as it was removed upstream
+// Old wayfinding system, moved here to allow use as it was removed upstream, we should probably delete it as it is unused.
+/* [CANDIDATE FOR DELETION]
 #define COOLDOWN_SPAWN 3 MINUTES
 #define COOLDOWN_INTERACT 6 SECONDS
 #define COOLDOWN_SLOGAN 5 MINUTES
@@ -79,7 +80,7 @@
 		return
 	set_light(1.4)
 
-/obj/machinery/pinpointer_dispenser/process(delta_time)
+/obj/machinery/pinpointer_dispenser/process(seconds_per_tick)
 	if(machine_stat & (BROKEN|NOPOWER))
 		return PROCESS_KILL
 
@@ -425,3 +426,4 @@
 
 /obj/machinery/navbeacon/wayfinding/disposals
 	location = "Disposals"
+*/

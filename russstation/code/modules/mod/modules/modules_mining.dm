@@ -1,3 +1,6 @@
+/* We have all this code but it seems to never be called??
+Also TG changed their magboots to work  on ice so this could be deleted with 0 impact
+[CANDIDATE FOR DELETION]
 // Based of `/obj/item/mod/module/magboot` + `/obj/item/clothing/shoes/winterboots/ice_boots`
 /obj/item/mod/module/ice_boots
 	name = "MOD frozen stability module"
@@ -47,3 +50,4 @@
 	removable = FALSE
 	complexity = 0
 	slowdown_active = 0
+*/
