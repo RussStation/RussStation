@@ -327,7 +327,7 @@
 			)
 		if(94 to 102)
 			harvested_item = pick(
-				/mob/living/simple_animal/hostile/retaliate/bat,
+				/mob/living/basic/bat,
 				/mob/living/basic/carp,
 				/mob/living/simple_animal/hostile/hivebot,
 				/mob/living/basic/giant_spider/nurse,
