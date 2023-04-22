@@ -28,10 +28,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	color = "#1FB563" // rgb: 31, 181, 99
 	boozepwr = 35
 	taste_description = "a slap to the face"
-	glass_icon_state = "bad_touch"
-	glass_name = "Bad Touch"
-	glass_desc = "We're nothing but mammals after all."
-	shot_glass_icon_state = "shotglassgreen"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
+/datum/glass_style/drinking_glass_russ/badtouch
+	required_drink_type = /datum/reagent/consumable/ethanol/badtouch
+	name = "glass of Bad Touch"
+	desc = "We're nothing but mammals after all."
+	icon_state = "bad_touch"
 
 /datum/reagent/consumable/ethanol/cobaltvelvet
 	name = "Cobalt Velvet"
@@ -39,10 +42,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	color = "#ACFFD8" // rgb: 172, 255, 216
 	boozepwr = 50
 	taste_description = "hot blankets"
-	glass_icon_state = "cobalt_velvet"
-	glass_name = "Cobalt Velvet"
-	glass_desc = "It's like champagne served on a cup that had a bit of cola left"
-	shot_glass_icon_state = "shotglassblue"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
+/datum/glass_style/drinking_glass_russ/cobaltvelvet
+	required_drink_type = /datum/reagent/consumable/ethanol/cobaltvelvet
+	name = "glass of Cobalt Velvet"
+	desc = "It's like champagne served on a cup that had a bit of cola left."
+	icon_state = "cobalt_velvet"
 
 /datum/reagent/consumable/ethanol/cobaltvelvet/on_mob_life(mob/living/carbon/M)
 	M.adjust_bodytemperature(25 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, BODYTEMP_NORMAL + 25) //310.15 is the normal bodytemp.
@@ -54,10 +60,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	color = "#F68F37" // rgb: 246, 143, 55
 	boozepwr = 70
 	taste_description = "hot red sand"
-	glass_icon_state = "marsblast"
-	glass_name = "Marsblast"
-	glass_desc = "One of these is enough to leave your face as red as the planet."
-	shot_glass_icon_state = "shotglassgold"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
+/datum/glass_style/drinking_glass_russ/marsblast
+	required_drink_type = /datum/reagent/consumable/ethanol/marsblast
+	name = "glass of Marsblast"
+	desc = "One of these is enough to leave your face as red as the planet."
+	icon_state = "marsblast"
 
 /datum/reagent/consumable/ethanol/mercuryblast
 	name = "Mercuryblast"
@@ -65,10 +74,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	color = "#1D94D5" // rgb: 29, 148, 213
 	boozepwr = 40
 	taste_description = "chills down your spine"
-	glass_icon_state = "mercuryblast"
-	glass_name = "Mercuryblast"
-	glass_desc = "No thermometer was harmed in the creation of this drink"
-	shot_glass_icon_state = "shotglassblue"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
+/datum/glass_style/drinking_glass_russ/mercuryblast
+	required_drink_type = /datum/reagent/consumable/ethanol/mercuryblast
+	name = "glass of Mercuryblast"
+	desc = "No thermometer was harmed in the creation of this drink"
+	icon_state = "mercuryblast"
 
 /datum/reagent/consumable/ethanol/mercuryblast/on_mob_life(mob/living/carbon/M)
 	M.adjust_bodytemperature(-30 * TEMPERATURE_DAMAGE_COEFFICIENT, T0C) //310.15 is the normal bodytemp.
