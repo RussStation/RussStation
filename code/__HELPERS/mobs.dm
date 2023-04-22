@@ -106,7 +106,7 @@
 		"skaven_color" = GLOB.color_list_skaven[pick(GLOB.color_list_skaven)],
 		"tail_skaven" = "Skaven",
 		"tail_kitsune" = "Kitsune",
-		"diona_hair" = GLOB.diona_hair_list[pick(GLOB.diona_hair_list)],
+		"diona_hair" = pick(GLOB.diona_hair_list),
 		// honk end
 		"tail_cat" = "None",
 		"tail_lizard" = "Smooth",
