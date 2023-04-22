@@ -243,21 +243,15 @@ SUBSYSTEM_DEF(mapping)
 	if (ice_ruins.len)
 		// needs to be whitelisted for underground too so place_below ruins work
 		seedRuins(ice_ruins, CONFIG_GET(number/icemoon_budget), list(/area/icemoon/surface/outdoors/unexplored, /area/icemoon/underground/unexplored), themed_ruins[ZTRAIT_ICE_RUINS])
-		for (var/ice_z in ice_ruins)
-			spawn_rivers(ice_z, 4, /turf/open/misc/asteroid/snow, /area/icemoon/surface/outdoors/unexplored/rivers) // honk - prevent ruin chasms into station
 
 	var/list/ice_ruins_underground = levels_by_trait(ZTRAIT_ICE_RUINS_UNDERGROUND)
 	if (ice_ruins_underground.len)
 		seedRuins(ice_ruins_underground, CONFIG_GET(number/icemoon_budget), list(/area/icemoon/underground/unexplored), themed_ruins[ZTRAIT_ICE_RUINS_UNDERGROUND])
-		for (var/ice_z in ice_ruins_underground)
-			spawn_rivers(ice_z, 4, level_trait(ice_z, ZTRAIT_BASETURF), /area/icemoon/underground/unexplored/rivers)
 
 	// honk start - badlands ruins generation
 	var/list/badlands_ruins = levels_by_trait(ZTRAIT_BADLANDS_RUINS)
 	if (badlands_ruins.len)
 		seedRuins(badlands_ruins, CONFIG_GET(number/lavaland_budget), list(/area/badlands/unexplored), themed_ruins[ZTRAIT_BADLANDS_RUINS])
-		for (var/bad_z in badlands_ruins)
-			spawn_rivers(bad_z, 4, level_trait(bad_z, ZTRAIT_BASETURF), /area/badlands/unexplored)
 	// honk end
 
 	// Generate deep space ruins
@@ -275,11 +269,17 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/ice_ruins = levels_by_trait(ZTRAIT_ICE_RUINS)
 	for (var/ice_z in ice_ruins)
-		spawn_rivers(ice_z, 4, /turf/open/openspace/icemoon, /area/icemoon/surface/outdoors/unexplored/rivers)
+		spawn_rivers(ice_z, 4, /turf/open/misc/asteroid/snow, /area/icemoon/surface/outdoors/unexplored/rivers) // honk - prevent ruin chasms into station
 
 	var/list/ice_ruins_underground = levels_by_trait(ZTRAIT_ICE_RUINS_UNDERGROUND)
 	for (var/ice_z in ice_ruins_underground)
 		spawn_rivers(ice_z, 4, level_trait(ice_z, ZTRAIT_BASETURF), /area/icemoon/underground/unexplored/rivers)
+
+	// honk start -- bad lands shrugs
+	var/list/badlands_ruins = levels_by_trait(ZTRAIT_BADLANDS_RUINS)
+	for (var/bad_z in badlands_ruins)
+		spawn_rivers(bad_z, 4, level_trait(bad_z, ZTRAIT_BASETURF), /area/badlands/unexplored)
+	// honk end
 
 /datum/controller/subsystem/mapping/proc/wipe_reservations(wipe_safety_delay = 100)
 	if(clearing_reserved_turfs || !initialized) //in either case this is just not needed.
