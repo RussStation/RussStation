@@ -81,8 +81,8 @@
 
 	// Test if they suffocate in O2/N2 mix.
 	var/datum/gas_mixture/test_mix = create_standard_mix()
-	var/mob/living/carbon/human/lab_rat = allocate(/mob/living/carbon/human/consistent)
-	var/obj/item/organ/internal/lungs/skaven/test_lungs = allocate(/obj/item/organ/internal/lungs/skaven)
+	lab_rat = allocate(/mob/living/carbon/human/consistent)
+	test_lungs = allocate(/obj/item/organ/internal/lungs/skaven)
 	// Test one breath.
 	lungs_test_check_breath("standard gas mixture", lab_rat, test_lungs, test_mix, expect_failure = TRUE)
 // honk end
