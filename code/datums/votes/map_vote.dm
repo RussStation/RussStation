@@ -2,7 +2,8 @@
 	name = "Map"
 	vote_sound = 'russstation/sound/misc/map_vote.ogg' // Honk -- custom map vote sound
 	message = "Vote for next round's map!"
-
+	count_method = VOTE_COUNT_METHOD_MULTI
+	
 /datum/vote/map_vote/New()
 	. = ..()
 
