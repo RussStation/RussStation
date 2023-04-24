@@ -1,7 +1,7 @@
 /datum/quirk/multilingual
 	name = "Multilingual"
 	desc = "You speak another language, useful for when you're speaking to foreign exchange interns!"
-	icon = "comments"
+	icon = FA_ICON_COMMENTS
 	value = 4
 	gain_text = "<span class='notice'>You've developed fluency in another language."
 	lose_text = "<span class='notice'>Some words being spoken around you don't make any sense anymore."
