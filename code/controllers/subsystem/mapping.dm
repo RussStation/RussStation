@@ -269,7 +269,7 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/ice_ruins = levels_by_trait(ZTRAIT_ICE_RUINS)
 	for (var/ice_z in ice_ruins)
-		spawn_rivers(ice_z, 4, /turf/open/misc/asteroid/snow, /area/icemoon/surface/outdoors/unexplored/rivers) // honk - prevent ruin chasms into station
+		spawn_rivers(ice_z, 4, /turf/open/misc/asteroid/snow/icemoon, /area/icemoon/surface/outdoors/unexplored/rivers) // honk - prevent ruin chasms into station
 
 	var/list/ice_ruins_underground = levels_by_trait(ZTRAIT_ICE_RUINS_UNDERGROUND)
 	for (var/ice_z in ice_ruins_underground)
