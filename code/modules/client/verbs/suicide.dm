@@ -1,15 +1,16 @@
 /// Verb to simply kill yourself (in a very visual way to all players) in game! How family-friendly. Can be governed by a series of multiple checks (i.e. confirmation, is it allowed in this area, etc.) which are
 /// handled and called by the proc this verb invokes. It's okay to block this, because we typically always give mobs in-game the ability to Ghost out of their current mob irregardless of context. This, in contrast,
 /// can have as many different checks as you desire to prevent people from doing the deed to themselves.
-/mob/living/verb/suicide()
+/mob/living/verb/suicide(bypass_prompt = FALSE as num) // honk -- adds the bypass variable
 	set hidden = TRUE
-	handle_suicide()
+	handle_suicide(bypass_prompt) // honk -- adds the bypass variable
 
 /// Actually handles the bare basics of the suicide process. Message type is the message we want to dispatch in the world regarding the suicide, using the defines in this file.
 /// Override this ENTIRELY if you want to add any special behavior to your suicide handling, if you fuck up the order of operations then shit will break.
-/mob/living/proc/handle_suicide()
+/mob/living/proc/handle_suicide(bypass_prompt = FALSE) // honk -- adds the bypass variable
 	SHOULD_CALL_PARENT(FALSE)
-	if(!suicide_alert())
+
+	if(!suicide_alert(bypass_prompt)) // honk -- adds the bypass variable
 		return
 
 	set_suicide(TRUE)
@@ -28,11 +29,16 @@
 		remove_from_mob_suicide_list()
 
 /// Sends a TGUI Alert to the person attempting to commit suicide. Returns TRUE if they confirm they want to die, FALSE otherwise. Check can_suicide here as well.
-/mob/living/proc/suicide_alert()
+/mob/living/proc/suicide_alert(bypass_prompt = FALSE) // honk -- adds the bypass variable
 	// Save this for later to ensure that if we change ckeys somehow, we exit out of the suicide.
 	var/oldkey = ckey
 	if(!can_suicide())
 		return FALSE
+
+	// honk start -- hotkey bypass
+	if(bypass_prompt)
+		return TRUE
+	// honk end
 
 	var/confirm = tgui_alert(src, "Are you sure you want to commit suicide?", "Confirm Suicide", list("Yes", "No"))
 
