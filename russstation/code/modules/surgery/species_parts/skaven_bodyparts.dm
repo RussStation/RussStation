@@ -2,7 +2,6 @@
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
-	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_head"
 	limb_id = SPECIES_SKAVEN
 	is_dimorphic = FALSE
@@ -11,7 +10,6 @@
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
-	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_chest"
 	limb_id = SPECIES_SKAVEN
 	is_dimorphic = FALSE
@@ -20,7 +18,6 @@
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
-	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_l_arm"
 	limb_id = SPECIES_SKAVEN
 	unarmed_attack_verb = "claw"
@@ -32,7 +29,6 @@
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
-	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_r_arm"
 	limb_id = SPECIES_SKAVEN
 	unarmed_attack_verb = "claw"
@@ -44,7 +40,6 @@
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
-	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_l_leg"
 	limb_id = SPECIES_SKAVEN
 
@@ -52,6 +47,5 @@
 	icon = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_static = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_greyscale = 'russstation/icons/mob/human_parts_greyscale.dmi'
-	icon_husk = 'russstation/icons/mob/human_parts_greyscale.dmi'
 	icon_state = "skaven_r_leg"
 	limb_id = SPECIES_SKAVEN
