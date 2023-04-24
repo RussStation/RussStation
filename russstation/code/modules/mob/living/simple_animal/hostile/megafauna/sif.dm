@@ -472,6 +472,7 @@ Difficulty: Medium
 	name = "Necklace of the Forsaken"
 	desc = "A rose gold necklace with a small static ember that burns inside of the black gem stone, making it warm to the touch."
 	icon = 'russstation/icons/obj/lavaland/artefacts.dmi'
+	worn_icon_state = "eldritch_necklace"
 	icon_state = "necklace_forsaken_active"
 	actions_types = list(/datum/action/item_action/hands_free/necklace_of_the_forsaken)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF

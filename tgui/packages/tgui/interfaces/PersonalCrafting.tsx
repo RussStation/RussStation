@@ -53,6 +53,7 @@ const CATEGORY_ICONS_CRAFTING = {
   'Tools': 'screwdriver-wrench',
   'Entertainment': 'masks-theater',
   'Blood Cult': 'users',
+  'Dwarven': 'digging', // honk -- dwarven icon
 } as const;
 
 const CATEGORY_ICONS_COOKING = {
