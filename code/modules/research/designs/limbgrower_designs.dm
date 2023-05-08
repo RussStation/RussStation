@@ -247,7 +247,7 @@
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 75)
 	build_path = /obj/item/melee/synthetic_arm_blade
-	category = list(RND_CATEGORY_LIMBS_OTHER, RND_CATEGORY_EMAGGED)
+	category = list(RND_CATEGORY_LIMBS_OTHER, RND_CATEGORY_HACKED)
 
 // Honk start -- Kitsune designs
 /datum/design/fox_ears
@@ -277,7 +277,6 @@
 
 /obj/item/disk/design_disk/limbs/Initialize(mapload)
 	. = ..()
-	max_blueprints = limb_designs.len
 	for(var/design in limb_designs)
 		var/datum/design/new_design = design
 		blueprints += new new_design

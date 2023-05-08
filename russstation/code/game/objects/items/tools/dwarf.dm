@@ -9,6 +9,8 @@
 	lefthand_file = 'russstation/icons/mob/inhands/item_lefthand.dmi'
 	righthand_file = 'russstation/icons/mob/inhands/item_righthand.dmi'
 	inhand_icon_state = "dwarf_tool"
+	worn_icon = 'russstation/icons/mob/clothing/belt.dmi'
+	worn_icon_state = "dwarf_tool_PLACEHOLDER" // I'm no artist
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
 	force = 5
@@ -25,14 +27,18 @@
 	attack_verb_simple = list("scrape", "hammer", "crank", "pry", "gouge")
 	tool_behaviour = TOOL_DWARF
 	toolspeed = 1
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 50, ACID = 30)
+	armor_type = /datum/armor/dwarf_tool
+
+/datum/armor/dwarf_tool
+	fire = 50
+	acid = 30
 
 /obj/item/dwarf_tool/Initialize()
 	. = ..()
 	AddComponent(/datum/component/dwarf_rune)
 
 /datum/crafting_recipe/dwarf_tool
-	name = "Dwarven omnitool"
+	name = "dwarven omnitool"
 	result = /obj/item/dwarf_tool
 	tool_paths = list(/obj/item/melee/smith_hammer)
 	reqs = list(/obj/item/stack/sheet/mineral/gold = 2)

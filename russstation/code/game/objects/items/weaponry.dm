@@ -46,6 +46,8 @@
 	desc = "A broadsword made of unobtanium, you probably shouldn't be seeing this."
 	attack_verb_continuous = list("attacks", "slashs", "stabs", "slices", "tears", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "rip", "dice", "cut")
+	icon_preview = 'russstation/icons/obj/blacksmithing.dmi'
+	icon_state_preview = "sword_preview"
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "sword_base"
 	inhand_icon_state = "claymore"
@@ -74,8 +76,10 @@
 /obj/item/pickaxe/smithed_pickaxe
 	name = "unobtanium pickaxe"
 	desc = "A pickaxe made of unobtanium, you probably shouldn't be seeing this."
+	icon_preview = 'russstation/icons/obj/blacksmithing.dmi'
+	icon_state_preview = "pickaxe_preview"
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
-	icon_state = "pickaxe_base"
+	icon_state = "pickaxe"
 	inhand_icon_state = "spickaxe"
 
 /obj/item/pickaxe/smithed_pickaxe/Initialize()
@@ -131,6 +135,8 @@
 /obj/item/knife/smithed_knife
 	name = "unobtanium knife"
 	desc = "A knife made of unobtainum, you probably shouldn't be seeing this."
+	icon_preview = 'russstation/icons/obj/blacksmithing.dmi'
+	icon_state_preview = "knife_preview"
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
 	icon_state = "knife_base"
 	inhand_icon_state = "knife"
@@ -158,7 +164,7 @@
 	name = "unobtanium warhammer"
 	desc = "A warhammer made of unobtainium, you probably shouldn't be seeing this."
 	icon = 'russstation/icons/obj/blacksmithing.dmi'
-	icon_state = "pickaxe_base"
+	icon_state = "pickaxe"
 	lefthand_file = 'russstation/icons/mob/inhands/item_lefthand.dmi'
 	righthand_file = 'russstation/icons/mob/inhands/item_righthand.dmi'
 	inhand_icon_state = "warhammer"

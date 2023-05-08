@@ -17,7 +17,7 @@
 	var/mob/living/carbon/human/dwarf = allocate(/mob/living/carbon/human/dummy/consistent)
 	dwarf.set_species(/datum/species/dwarf)
 	dwarf.facial_hairstyle = "Beard (Dwarf)"
-	dwarf.update_hair(is_creating = TRUE)
+	dwarf.update_hair()
 	dwarf.equipOutfit(/datum/outfit/dorf, visualsOnly = TRUE)
 	test_screenshot("[/datum/species/dwarf]", get_flat_icon_for_all_directions(dwarf))
 	// honk end
@@ -43,17 +43,8 @@
 	test_screenshot("[/datum/species/moth]", get_flat_icon_for_all_directions(moth))
 
 	// The rest of the species
-	for (var/datum/species/species_type as anything in subtypesof(/datum/species) - /datum/species/moth - /datum/species/lizard - /datum/species/skaven - /datum/species/dwarf - /datum/species/dwarf/lavaland) // honk -- remove our species defined above
+	for (var/datum/species/species_type as anything in subtypesof(/datum/species) - /datum/species/moth - /datum/species/lizard - /datum/species/skaven - /datum/species/dwarf - /datum/species/dwarf/lavaland)
 		test_screenshot("[species_type]", get_flat_icon_for_all_directions(make_dummy(species_type, /datum/outfit/job/assistant/consistent)))
-
-/datum/unit_test/screenshot_humanoids/proc/get_flat_icon_for_all_directions(atom/thing)
-	var/icon/output = icon('icons/effects/effects.dmi', "nothing")
-
-	for (var/direction in GLOB.cardinals)
-		var/icon/partial = getFlatIcon(thing, defdir = direction, no_anim = TRUE)
-		output.Insert(partial, dir = direction)
-
-	return output
 
 /datum/unit_test/screenshot_humanoids/proc/make_dummy(species, job_outfit)
 	var/mob/living/carbon/human/dummy/consistent/dummy = allocate(/mob/living/carbon/human/dummy/consistent)

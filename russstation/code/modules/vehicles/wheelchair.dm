@@ -5,9 +5,18 @@
 	name = "The Hotrod"
 	desc = "A rugged display of two-wheeled freedom."
 	icon_state = "hotrod"
-	armor = list(MELEE = 20, BULLET = 20, LASER = 20, ENERGY = 0, BOMB = 20, BIO = 0, FIRE = 30, ACID = 40) // American Engineering
+	armor_type = /datum/armor/hot_wheelchair
 	delay_multiplier = 2 // roughly full running speed
 	overlay_icon = "hotrod_overlay"
+
+/datum/armor/hot_wheelchair // American Engineering
+	melee = 20
+	bullet = 20
+	laser = 20
+	bomb = 20
+	fire = 30
+	acid = 40
+
 
 /obj/vehicle/ridden/wheelchair/russ/hotrod/wrench_act(mob/living/user, obj/item/I)
 	to_chat(user, span_notice("You feel deep shame for trying to dismantle such a glorious symbol of freedom"))
@@ -17,7 +26,7 @@
 	name = "Sportschair"
 	desc = "A lightweight model wheelchair."
 	icon_state = "sportschair"
-	armor = list(MELEE = 10, BULLET = 10, LASER = 10, ENERGY = 0, BOMB = 10, BIO = 0, FIRE = 20, ACID = 30)
+	armor_type = /datum/armor/ridden_wheelchair
 	overlay_icon = "sportschair_overlay"
 	var/datum/effect_system/spark_spread/sparks
 	var/grinding = FALSE

@@ -18,13 +18,13 @@
 		var/obj/item/seeds/seed = new seedpath
 
 		for(var/i in 1 to seed.growthstages)
-			if("[seed.icon_grow][i]" in states)
+			if(icon_exists(seed.growing_icon, "[seed.icon_grow][i]"))
 				continue
 			TEST_FAIL("[seed.name] ([seed.type]) lacks the [seed.icon_grow][i] icon!")
 
-		if(!(seed.icon_dead in states))
+		if(!(icon_exists(seed.growing_icon, seed.icon_dead)))
 			TEST_FAIL("[seed.name] ([seed.type]) lacks the [seed.icon_dead] icon!")
 
 		if(seed.icon_harvest) // mushrooms have no grown sprites, same for items with no product
-			if(!(seed.icon_harvest in states))
+			if(!(icon_exists(seed.growing_icon, seed.icon_harvest)))
 				TEST_FAIL("[seed.name] ([seed.type]) lacks the [seed.icon_harvest] icon!")

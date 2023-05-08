@@ -327,22 +327,22 @@
 			)
 		if(94 to 102)
 			harvested_item = pick(
-				/mob/living/simple_animal/hostile/retaliate/bat,
-				/mob/living/simple_animal/hostile/carp,
+				/mob/living/basic/bat,
+				/mob/living/basic/carp,
 				/mob/living/simple_animal/hostile/hivebot,
-				/mob/living/simple_animal/hostile/giant_spider/nurse,
+				/mob/living/basic/giant_spider/nurse,
 				/mob/living/simple_animal/hostile/illusion/escape,
 				/mob/living/simple_animal/hostile/retaliate/snake,
 				/mob/living/simple_animal/hostile/killertomato,
-				/mob/living/simple_animal/hostile/viscerator,
+				/mob/living/basic/viscerator,
 				/mob/living/simple_animal/hostile/retaliate/clown/russ/goblin,
 			)
 		if(103 to 109)
 			harvested_item = pick(
-				/mob/living/simple_animal/hostile/carp/megacarp,
-				/mob/living/simple_animal/hostile/faithless,
+				/mob/living/basic/carp/mega,
+				/mob/living/basic/faithless,
 				/mob/living/simple_animal/hostile/bear,
-				/mob/living/simple_animal/hostile/giant_spider,
+				/mob/living/basic/giant_spider,
 				/mob/living/simple_animal/hostile/hivebot/range,
 				/mob/living/simple_animal/hostile/mimic/copy,
 				/mob/living/simple_animal/hostile/retaliate/clown/russ/goblin,

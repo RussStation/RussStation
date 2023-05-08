@@ -64,7 +64,7 @@
 
 /datum/sprite_accessory/tails/skaven/normal
 	name = "Skaven"
-	icon_state = "skaven"
+	icon_state = "default"
 
 // Kitsune Tail
 /datum/sprite_accessory/tails/kitsune
@@ -77,7 +77,7 @@
 
 /datum/sprite_accessory/tails/kitsune/normal
 	name = "Kitsune"
-	icon_state = "kitsune"
+	icon_state = "default"
 
 //Skaven ears
 /datum/sprite_accessory/ears/skaven

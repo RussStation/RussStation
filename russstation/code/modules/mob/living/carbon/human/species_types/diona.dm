@@ -4,7 +4,9 @@
 	plural_form = "Dionae"
 	id = SPECIES_DIONA
 	sexes = FALSE
-	species_traits = list(NOBLOOD, NOEYESPRITES, NO_UNDERWEAR)
+	species_traits = list(
+		NOEYESPRITES,
+		NO_UNDERWEAR)
 	inherent_traits = list(
 		TRAIT_ADVANCEDTOOLUSER,
 		TRAIT_CAN_STRIP,
@@ -12,6 +14,7 @@
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_LITERATE,
+		TRAIT_NOBLOOD
 		// TRAIT_PLANT_SAFE, // maybe add this? Podpeople have it
 	)
 	external_organs = list(
@@ -52,7 +55,7 @@
 	randomize_external_organs(human_mob)
 
 // Similar to podpeople.dm
-/datum/species/diona/spec_life(mob/living/carbon/human/H, delta_time, times_fired)
+/datum/species/diona/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	if(H.stat == DEAD)
 		return
 
@@ -61,28 +64,29 @@
 		var/turf/T = H.loc
 		light_amount = min(1, T.get_lumcount()) - 0.5
 		// Maybe set to `5 *` like podpeople?
-		H.adjust_nutrition(10 * light_amount * delta_time)
+		H.adjust_nutrition(10 * light_amount * seconds_per_tick)
 		if(H.nutrition > NUTRITION_LEVEL_ALMOST_FULL)
 			H.set_nutrition(NUTRITION_LEVEL_ALMOST_FULL)
 		if(light_amount > 0.2) //if there's enough light, heal
 			// OLD HEAL CODE
 			// H.heal_overall_damage(2,1, 0, BODYTYPE_ORGANIC)
-			// New Code | Might need to tweak numbers to match podpeople `0.5 * delta_time, 0.5 * delta_time`
-			H.heal_overall_damage(2 * delta_time, 1 * delta_time, 0, BODYTYPE_ORGANIC)
-			H.adjustToxLoss(-0.5 * delta_time)
+			// New Code | Might need to tweak numbers to match podpeople `0.5 * seconds_per_tick, 0.5 * seconds_per_tick`
+			H.heal_overall_damage(2 * seconds_per_tick, 1 * seconds_per_tick, 0, BODYTYPE_ORGANIC)
+			H.adjustToxLoss(-0.5 * seconds_per_tick)
 			// I assume we don't need this as we have `TRAIT_NOBREATH`
-			// H.adjustOxyLoss(-0.5 * delta_time)
+			// H.adjustOxyLoss(-0.5 * seconds_per_tick)
 
 	if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
 		// Possibly reduce to `1 *` similar to podpeople?
-		H.take_overall_damage(2 * delta_time, 0)
+		H.take_overall_damage(2 * seconds_per_tick, 0)
 	..()
 
-/datum/species/diona/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H, delta_time, times_fired)
+/datum/species/diona/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	if(chem.type == /datum/reagent/toxin/plantbgone)
-		H.adjustToxLoss(3 * REAGENTS_EFFECT_MULTIPLIER * delta_time)
-		H.reagents.remove_reagent(chem.type, REAGENTS_METABOLISM * delta_time)
+		H.adjustToxLoss(3 * REAGENTS_EFFECT_MULTIPLIER * seconds_per_tick)
+		H.reagents.remove_reagent(chem.type, REAGENTS_METABOLISM * seconds_per_tick)
 		return TRUE
+	return ..()
 
 /datum/species/diona/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
 	var/hairstyle = pick(GLOB.diona_hair_list)

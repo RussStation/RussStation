@@ -6,7 +6,7 @@
 	icon_state = "coatdwarf"
 	worn_icon = 'russstation/icons/mob/clothing/suits/wintercoat.dmi'
 	inhand_icon_state = "coatdwarf"
-	armor = list(MELEE = 25, BULLET = 0, LASER = 10, ENERGY = 10, BOMB = 0, BIO = 0, FIRE = 0, ACID = 0)
+	armor_type = /datum/armor/winterdwarf
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/miner/dwarf
 
 /obj/item/clothing/head/hooded/winterhood/miner/dwarf
@@ -14,4 +14,14 @@
 	icon = 'russstation/icons/obj/clothing/head/winterhood.dmi'
 	icon_state = "hood_dwarf"
 	worn_icon = 'russstation/icons/mob/clothing/head/winterhood.dmi'
-	armor = list(MELEE = 25, BULLET = 0, LASER = 10, ENERGY = 10, BOMB = 0, BIO = 0, FIRE = 0, ACID = 0)
+	armor_type = /datum/armor/winterdwarf
+
+/datum/armor/winterdwarf
+	melee = 25
+	laser = 10
+	bullet = 0
+	energy = 10
+	bomb = 0
+	bio = 0
+	fire = 0
+	acid = 0

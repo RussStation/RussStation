@@ -23,7 +23,7 @@
 	. = ..()
 	COOLDOWN_START(src, change_cooldown, rand(FREQ_CHANGE_COOLDOWN_LENGTH_MIN, FREQ_CHANGE_COOLDOWN_LENGTH_MAX))
 
-/datum/station_trait/frequency_change/process(delta_time)
+/datum/station_trait/frequency_change/process(seconds_per_tick)
 	if(!COOLDOWN_FINISHED(src, change_cooldown))
 		return
 

@@ -52,8 +52,8 @@
 	var/datum/action/small_sprite/rat_ogre/smallsprite = new(src)
 	smallsprite.Grant(src)
 
-	var/datum/action/adjust_vision/night_vision = new(src)
-	night_vision.Grant(src)
+	var/datum/action/adjust_vision/rat_ogre/adjust_vision = new(src)
+	adjust_vision.Grant(src)
 
 	var/datum/atom_hud/medsensor = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medsensor.show_to(src)
@@ -75,7 +75,7 @@
 	for(var/obj/item/bodypart/part as anything in carbon_target.bodyparts)
 		if(part.body_part == HEAD || part.body_part == CHEST)
 			continue
-		if(part.dismemberable)
+		if(!(part.bodypart_flags & BODYPART_UNREMOVABLE))
 			continue
 		parts += part
 	return parts

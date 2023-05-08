@@ -66,10 +66,19 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	cold_protection = CHEST|GROIN|ARMS
 	heat_protection = CHEST|GROIN|ARMS
-	armor = list(MELEE = 50, BULLET = 10, LASER = 10, ENERGY = 10, BOMB = 0, BIO = 0, FIRE = 80, ACID = 80)
+	armor_type = /datum/armor/dwarfvest_armor
 	strip_delay = 80
 	equip_delay_self = 60
 	species_exception = list(/datum/species/dwarf)
+
+/datum/armor/dwarfvest_armor
+	melee = 50
+	bullet = 10
+	laser = 10
+	energy = 10
+	fire = 80
+	acid = 80
+	bomb = 0
 
 /obj/item/clothing/suit/armor/vest/dwarf/CheckParts(list/parts_list)
 	..()
@@ -81,15 +90,10 @@
 		smelted_material = new S.smelted_material.type()
 		name = "[S.material_type] armour"
 		desc += " Armour forged from [S.material_type]."
-
-		armor.melee += S.attack_amt
-		armor.bullet += S.attack_amt
-		armor.laser += S.attack_amt
-		armor.energy += S.attack_amt
-		armor.bomb += S.attack_amt
-		armor.bio += S.attack_amt
-		armor.fire += S.attack_amt
-		armor.acid += S.attack_amt
+		armor = new /datum/armor/dwarfvest_armor
+		armor = armor.generate_new_with_modifiers(list(
+			ARMOR_ALL = S.attack_amt
+		))
 
 //Forged Helmet
 /obj/item/clothing/head/helmet/dwarf
@@ -105,6 +109,15 @@
 	flags_inv = HIDEHAIR
 	species_exception = list(/datum/species/dwarf)
 
+/datum/armor/dwarfhelmet_armor
+	melee = 50
+	bullet = 10
+	laser = 10
+	energy = 10
+	fire = 80
+	acid = 80
+	bomb = 0
+
 /obj/item/clothing/head/helmet/dwarf/CheckParts(list/parts_list)
 	..()
 	var/obj/item/mold_result/helmet_plating/S = locate() in contents
@@ -115,13 +128,8 @@
 		smelted_material = new S.smelted_material.type()
 		name = "[S.material_type] helmet."
 		desc += " Helmet forged from [S.material_type]."
-
-		armor.melee += S.attack_amt
-		armor.bullet += S.attack_amt
-		armor.laser += S.attack_amt
-		armor.energy += S.attack_amt
-		armor.bomb += S.attack_amt
-		armor.bio += S.attack_amt
-		armor.fire += S.attack_amt
-		armor.acid += S.attack_amt
+		armor = new /datum/armor/dwarfhelmet_armor
+		armor = armor.generate_new_with_modifiers(list(
+			ARMOR_ALL = S.attack_amt
+		))
 

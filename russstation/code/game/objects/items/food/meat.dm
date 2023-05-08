@@ -13,7 +13,7 @@
 	foodtypes = MEAT
 
 //Skaven burgers anyone?
-/obj/item/food/meat/slab/human/mutant/skaven/MakeGrillable()
+/obj/item/food/meat/slab/human/mutant/skaven/make_grillable()
 	AddComponent(/datum/component/grillable, /obj/item/food/meat/steak/plain/human/skaven, rand(30 SECONDS, 90 SECONDS), TRUE, TRUE)
 
 //Kobold ===============
@@ -32,7 +32,7 @@
 	tastes = list("veal" = 1, "scales" = 1, "meat" = 1, "dust flakes" = 1)
 	foodtypes = MEAT
 
-/obj/item/food/meat/slab/human/mutant/kobold/MakeGrillable()
+/obj/item/food/meat/slab/human/mutant/kobold/make_grillable()
 	AddComponent(/datum/component/grillable, /obj/item/food/meat/steak/plain/human/kobold, rand(30 SECONDS, 90 SECONDS), TRUE, TRUE)
 
 
@@ -51,5 +51,5 @@
 	foodtypes = MEAT | GROSS
 
 //kitsune borgor
-/obj/item/food/meat/slab/human/mutant/kitsune/MakeGrillable()
+/obj/item/food/meat/slab/human/mutant/kitsune/make_grillable()
 	AddComponent(/datum/component/grillable, /obj/item/food/meat/steak/plain/human/kitsune, rand(30 SECONDS, 90 SECONDS), TRUE, TRUE)

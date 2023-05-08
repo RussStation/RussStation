@@ -5,11 +5,16 @@
 	icon_state = "compost"
 	anchored = FALSE
 	volume = 500
-	armor = list(MELEE = 10, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, FIRE = 10, ACID = 0)
+	armor_type = /datum/armor/compost_bin
 	max_integrity = 100
 	canister_overlay_file = null //no overlay
 	gas_type = /datum/gas/miasma
 	filled = 0
+
+/datum/armor/compost_bin
+	melee = 10
+	bio = 100
+	fire = 10
 
 /obj/machinery/portable_atmospherics/canister/compost_bin/Initialize()
 	//Also can contain compost material that is helpful to botanists (so theres an insentive to use them other then the fact that it creates miasma gas)

@@ -1,12 +1,18 @@
 /datum/species/skaven
 	name = "\improper Skaven"
 	id = SPECIES_SKAVEN
-	species_traits = list(DYNCOLORS,AGENDER,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE)
+	species_traits = list(
+		DYNCOLORS,
+		AGENDER,
+		EYECOLOR,
+		LIPS,
+	)
 	external_organs = list(
 		/obj/item/organ/external/horns = "None",
 		/obj/item/organ/external/snout = "Round",
 		/obj/item/organ/external/tail/skaven = "Skaven",
 	)
+	inherent_respiration_type = RESPIRATION_MIASMA
 	mutantears = /obj/item/organ/internal/ears/skaven
 	mutantlungs = /obj/item/organ/internal/lungs/skaven
 	mutanttongue = /obj/item/organ/internal/tongue/skaven
