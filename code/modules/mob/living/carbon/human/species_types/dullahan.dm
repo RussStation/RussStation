@@ -40,6 +40,7 @@
 	. = ..()
 	human.lose_hearing_sensitivity(TRAIT_GENERIC)
 	var/obj/item/bodypart/head/head = human.get_bodypart(BODY_ZONE_HEAD)
+	human.add_traits(list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LITERATE), GENETIC_MUTATION)// honk - bandaid fix till TG fix (bug: cannot read computers/pdas/machines)
 
 	if(head)
 		head.drop_limb()
