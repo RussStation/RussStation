@@ -87,24 +87,23 @@
 		return
 
 /datum/action/cooldown/spell/pointed/projectile/spit/on_activation(mob/on_who)
-	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_CALL_PARENT(FALSE)
 
 	to_chat(on_who, span_notice("[active_msg]"))
 	build_all_button_icons()
+
+	var/mob/living/spitter = on_who
+	spitter.audible_message("[emote_gurgle_msg].", deaf_message = "<span class='emote'>You see <b>[spitter]</b> gurgle their mouth.</span>", audible_message_flags = EMOTE_MESSAGE)
+
+	if(boolPlaySound)
+		playsound(spitter, 'russstation/sound/voice/spit_windup.ogg', 50, TRUE)
+
 	return TRUE
 
 /datum/action/cooldown/spell/pointed/projectile/spit/unset_click_ability(mob/on_who, refund_cooldown)
 	. = ..()
 	var/mob/living/L = on_who
 	src.Remove(L)
-
-/datum/action/cooldown/spell/pointed/projectile/spit/on_activation(mob/on_who)
-	. = ..()
-	var/mob/living/spitter = on_who
-	spitter.audible_message("[emote_gurgle_msg].", deaf_message = "<span class='emote'>You see <b>[spitter]</b> gurgle their mouth.</span>", audible_message_flags = EMOTE_MESSAGE)
-
-	if(boolPlaySound)
-		playsound(spitter, 'russstation/sound/voice/spit_windup.ogg', 50, TRUE)
 
 /datum/action/cooldown/spell/pointed/projectile/spit/InterceptClickOn(mob/living/caller, params, atom/click_target)
 	var/mob/living/spitter = caller
