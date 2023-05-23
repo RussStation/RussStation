@@ -206,7 +206,7 @@
 	if (!isnull(grandfather_date) && player_join_date < grandfather_date)
 		return FALSE
 
-	return TRUE
+	return FALSE // honk -- tutorial should not run, change to true if we ever fix the database...
 
 /// Marks the tutorial as completed.
 /// Call `/datum/tutorial/proc/complete()` instead.
