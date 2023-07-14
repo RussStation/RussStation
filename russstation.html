@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>russstation&#x2F;README.md - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>russstation/README.md 
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/README.md">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;README.md"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><td colspan="2"><hh6 id="special-thanks-to-hippiestation">Special thanks to <a href="https://github.com/HippieStation/HippieStation/blob/master/hippiestation/README.md">HippieStation</a>.</hh6><hh1 id="introduction-to-the-russstation-folder">Introduction to the &quot;russstation&quot; Folder</hh1><hh2 id="why-do-we-use-it">Why do we use it?</hh2>
+<p>RussStation is trying to keep /tg/station as an upstream and to stay up-to-date with it. Previous attempts failed due to the number of conflicts, so the coders have decided to keep everything modularized. The less code in any folder that isn't this russstation one, the fewer conflicts will exist in future updates.</p>
+<hh2 id="what-does-it-mean-to-modularize-something">What does it mean to modularize something?</hh2>
+<p>Something is modular when it exists independent from the rest of the code. This means that by simply adding something modular to the DME file, it will exist in-game. It is not always possible to completely modularize something, but if standards are followed correctly, then there should be few to none conflicts with /tg/station in the future.</p>
+<hh2 id="please-mark-your-changes">Please mark your changes</hh2>
+<p>All modifications to tg files should be marked.</p>
+<ul>
+<li>Single line changes should have <code>// honk -- reason</code> at the end of the exact line that was edited</li>
+<li>Multi line changes start with <code>// honk start -- reason</code> and end with <code>// honk end</code>. The reason MUST be included in the change in all cases, so that future coders looking at the line will know why it is needed.</li>
+<li>The reason should generally be about what it was before, or what the change is.</li>
+<li>Commenting out some /tg/ code must be done by putting <code>/* honk start -- reason</code> one line before the commented out code, with said line having only the comment itself, and <code>honk end */</code> one line after the commented out code, always in an empty line.</li>
+<li>Some examples:</li>
+</ul>
+<pre><code>var/obj/O = new(clown) // honk -- added argument to new
+</code></pre>
+<pre><code>/* honk start -- mirrored in our file
+/proc/del_everything
+	del(world)
+	del(O)
+	del(everything)
+honk end */
+</code></pre>
+<p>Once marking your changes to the /tg/ files with the proper comment standards, be sure to include the file path of the tg file in our changes.md in this folder. Keep the alphabetical order.</p>
+<hh3 id="tgstation-dme-versus-russstation-dme">tgstation.dme versus RussStation.dme</hh3>
+<p>Do not alter the tgstation.dme file. All additions and removals should be to the RussStation.dme file. Do not manually add files to the dme! Check the file's box in the Dream Maker program. The Dream Maker does not always use alphabetical order, and manually adding a file can cause it to reorder. This means that down the line, many PRs will contain this reorder when it could have been avoided in the first place.</p>
+<hh3 id="icons-code-and-sounds">Icons, code, and sounds</hh3>
+<p>Icons are notorious for conflicts. Because of this, <strong>ALL NEW ICONS</strong> must go in the &quot;russstation/icons&quot; folder. There are to be no exceptions to this rule. Sounds don't cause conflicts, but for the sake of organization they are to go in the &quot;russstation/sounds&quot; folder. No exceptions, either. Unless absolutely necessary, code should go in the &quot;russstation/code&quot; folder. Small changes outside of the folder should be done with &quot;hook&quot; procs. Larger changes should simply mirror the file in the &quot;russstation/code&quot; folder.</p>
+<p>If a multiline addition needs to be made outside of the &quot;russstation&quot; folder, then it should be done by adding a proc called &quot;hook&quot; proc. This proc will be defined inside of the &quot;russstation&quot; folder. By doing this, a large number of things can be done by adding just one line of code outside of the folder! If possible, also add a comment in the russ file pointing at the file and proc where the &quot;hook&quot; proc is called, it can be helpful during upstream merges and such.</p>
+<p>If a file must be completely changed, re-create it with the changes inside of the &quot;russstation/code&quot; folder. <strong>Make sure to follow the file's path correctly</strong> (i.e. code/modules/clothing/clothing.dm.) Then, remove the original file from the russtation.dme and add the new one.</p>
+<hh3 id="defines">Defines</hh3>
+<p>Defines only work if they come before the code in which they are used. Because of this, please put all defines in the `code/__DEFINES/~russ_defines' path. Use an existing file, or create a new one if necessary.</p>
+<hh2 id="specific-cases-and-examples">Specific cases and examples</hh2><hh3 id="clothing">Clothing</hh3>
+<p>New clothing items should be a subtype of &quot;/obj/item/clothing/CLOTHINGTYPE/russ&quot; inside of the respective clothing file. For example, replace CLOTHINGTYPE with ears to get &quot;/obj/item/clothing/ears/russ&quot; inside of &quot;ears.dm&quot; in &quot;code/modules/clothing.&quot; If the file does not exist, create it and follow this format.</p>
+<hh3 id="actions-and-spells">Actions and spells</hh3>
+<p>New actions and spells should use the &quot;russstation/icons/mob/actions.dmi&quot; file. If it is a spell, put the code for the spell in &quot;russstation/code/modules/spells.&quot; To make sure that the spell uses the  icon, please add &quot;action_icon = 'russstation/icons/mob/actions.dmi'&quot; and the &quot;action_icon_state&quot; var.</p>
+<hh3 id="reagents">Reagents</hh3>
+<p>New reagents should go inside &quot;russstation/code/modules/reagents/drug_reagents.dm.&quot; In this case, &quot;drug_reagents&quot; is an example, so please use or create a &quot;toxins.dm&quot; if you are adding a new toxin, etc. Recipes should go inside &quot;russstation/code/modules/reagents/recipes/drug_reagents.dm.&quot; Once again, &quot;drug_reagents&quot; has been used as an example.</p>
+<hh3 id="vending-machine">Vending machine</hh3>
+<p>You can manipulate the products, contraband, and premium items of vending machines by adding items to the following:</p>
+<p><code>russ_products</code> 
+<code>russ_contraband</code>
+<code>russ_premium</code></p>
+<p>Like their counterparts, these are associative lists. The index is a reference to the object and the value is how many of that object. If you want to add 3 items to the products list, you do <code>russ_products = list(/path/to/that/object = 3)</code>. This also works with lowering the count of items. </p>
+<p>If you take away more items then there is then the entry is removed. </p>
+<p>For example if the <code>products</code> list has a entry of <code>/obj/item/screwdriver</code> and this a value of <code>5</code>, and we put an entry of <code>/obj/item/screwdriver</code> with a value of <code>-6</code> into <code>russ_products</code> then there will be no screwdrivers in the vending machine. A large negative value is recommended for this purpose (e.g. <code>-100</code> just to be safe)</p></td></tr></table></main>
+<footer>
+    RussStation.dme
+    <a href="https://github.com/RussStation/RussStation/tree/c5f7e928d5403b052014e3da5d1a1d5e18b134bf">c5f7e92</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
+</body>
+</html>

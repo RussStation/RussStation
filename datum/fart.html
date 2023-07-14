@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;fart - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/fart.html#var">Var Details</a> - <a href="datum/fart.html#proc">Proc Details</a></header>
+<main>
+<h1>fart <aside>/<a href="datum.html">datum</a>/<a href="datum/fart.html">fart</a></aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L2">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 2"/></a></h1>
+
+<p>A datum representing customizable farts</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="datum/fart.html#var/fail_chance">fail_chance</a></th><td>chance of triggering a soft fail when under the safe cooldown</td></tr>
+            <tr><th><a href="datum/fart.html#var/fail_damage">fail_damage</a></th><td>the damage to be taken when failing</td></tr>
+            <tr><th><a href="datum/fart.html#var/fail_damage_type">fail_damage_type</a></th><td>type of damage to do when the fart fails</td></tr>
+            <tr><th><a href="datum/fart.html#var/gas_id">gas_id</a></th><td>gas id as defined in code\modules\atmospherics\gasmixtures\gas_types.dm</td></tr>
+            <tr><th><a href="datum/fart.html#var/gas_volume">gas_volume</a></th><td>volume of gas to spawn in make_gas</td></tr>
+            <tr><th><a href="datum/fart.html#var/hard_cooldown">hard_cooldown</a></th><td>minimum wait time for farting</td></tr>
+            <tr><th><a href="datum/fart.html#var/hard_fail_message">hard_fail_message</a></th><td>message to send to user on hard fails</td></tr>
+            <tr><th><a href="datum/fart.html#var/soft_cooldown">soft_cooldown</a></th><td>time to wait to fart without risk</td></tr>
+            <tr><th><a href="datum/fart.html#var/soft_fail_message">soft_fail_message</a></th><td>message to send to user on soft fails</td></tr>
+            <tr><th><a href="datum/fart.html#var/sounds">sounds</a></th><td>possible fart sounds</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/fart.html#proc/hard_fail">hard_fail</a></th><td>Gets called when the user goes under the hard cooldown</td></tr>
+            <tr><th><a href="datum/fart.html#proc/make_gas">make_gas</a></th><td>Produce side effects when a fart successfully happens</td></tr>
+            <tr><th><a href="datum/fart.html#proc/soft_fail">soft_fail</a></th><td>Gets called when the user is under the safe cooldown and failed the chance</td></tr>
+            <tr><th><a href="datum/fart.html#proc/try_fart">try_fart</a></th><td>Attempt to fart, possibly causing a fail</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/fail_chance"><aside class="declaration">var </aside>fail_chance
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L11">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 11"/></a></h3>
+        <p>chance of triggering a soft fail when under the safe cooldown</p><h3 id="var/fail_damage"><aside class="declaration">var </aside>fail_damage
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L13">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 13"/></a></h3>
+        <p>the damage to be taken when failing</p><h3 id="var/fail_damage_type"><aside class="declaration">var </aside>fail_damage_type
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L19">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 19"/></a></h3>
+        <p>type of damage to do when the fart fails</p><h3 id="var/gas_id"><aside class="declaration">var </aside>gas_id
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L17">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 17"/></a></h3>
+        <p>gas id as defined in code\modules\atmospherics\gasmixtures\gas_types.dm</p><h3 id="var/gas_volume"><aside class="declaration">var </aside>gas_volume
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L15">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 15"/></a></h3>
+        <p>volume of gas to spawn in make_gas</p><h3 id="var/hard_cooldown"><aside class="declaration">var </aside>hard_cooldown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L9">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 9"/></a></h3>
+        <p>minimum wait time for farting</p><h3 id="var/hard_fail_message"><aside class="declaration">var </aside>hard_fail_message
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L25">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 25"/></a></h3>
+        <p>message to send to user on hard fails</p><h3 id="var/soft_cooldown"><aside class="declaration">var </aside>soft_cooldown
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L7">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 7"/></a></h3>
+        <p>time to wait to fart without risk</p><h3 id="var/soft_fail_message"><aside class="declaration">var </aside>soft_fail_message
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L21">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 21"/></a></h3>
+        <p>message to send to user on soft fails</p><h3 id="var/sounds"><aside class="declaration">var </aside>sounds
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L5">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 5"/></a></h3>
+        <p>possible fart sounds</p><h2 id="proc">Proc Details</h2><h3 id="proc/hard_fail"><aside class="declaration">proc </aside>hard_fail<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user) 
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L44">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 44"/></a></aside>
+        </h3>
+        <p>Gets called when the user goes under the hard cooldown</p><h3 id="proc/make_gas"><aside class="declaration">proc </aside>make_gas<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user) 
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L28">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 28"/></a></aside>
+        </h3>
+        <p>Produce side effects when a fart successfully happens</p><h3 id="proc/soft_fail"><aside class="declaration">proc </aside>soft_fail<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user) 
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L35">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 35"/></a></aside>
+        </h3>
+        <p>Gets called when the user is under the safe cooldown and failed the chance</p><h3 id="proc/try_fart"><aside class="declaration">proc </aside>try_fart<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user, last_used) 
+        
+    
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/code/modules/farts/fart.dm#L53">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;code&#x2F;modules&#x2F;farts&#x2F;fart.dm 53"/></a></aside>
+        </h3>
+        <p>Attempt to fart, possibly causing a fail</p></main>
+<footer>
+    RussStation.dme
+    <a href="https://github.com/RussStation/RussStation/tree/c5f7e928d5403b052014e3da5d1a1d5e18b134bf">c5f7e92</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
+</body>
+</html>

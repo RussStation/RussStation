@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>russstation&#x2F;tools&#x2F;spacemerge&#x2F;README.md - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>spacemerge <aside>russstation/tools/spacemerge/README.md</aside> 
+            <a href="https://github.com/RussStation/RussStation/blob/c5f7e928d5403b052014e3da5d1a1d5e18b134bf/russstation/tools/spacemerge/README.md">
+        <img src="git.png" width="16" height="16" title="russstation&#x2F;tools&#x2F;spacemerge&#x2F;README.md"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><td colspan="2"><p>The original Spacemerge process has been converted to a python script that automates even more of the process. Script will make assumptions on what can be safely git checked out so that only select files need to be manually resolved when merging between RussStation and /tg/station.</p>
+<hh2 id="why">why</hh2>
+<p>RussStation and /tg/station's respective commit histories are unrelated. Within that, git has to scan the files directly to check for conflicts. Any difference, including line endings, will cause the file to be marked as conflicting. This leads to a <em>significant</em> number of conflicting files. To make keeping /tg/station upstream of RussStation feasible, this tool has been built to offload as much of the work resolving merge conflicts to an automated process as possible.</p>
+<hh2 id="how">how</hh2>
+<p>Run <code>spacemerge.py</code> with a bash compatable terminal from the root directory of this repo. GitPython required, install with <code>pip install GitPython</code>.</p>
+<p>The script can be configured via the string lists at the beginning of the file. Values that are expected to change eventually are <code>ours</code>, <code>theirs</code>, <code>our_dirs</code>, and <code>their_dirs</code>. The paths specified will be merged by taking all changes from either our side or theirs respectively.</p>
+<p>For the script to run correctly, <code>last_merge</code> needs to exist in the repo root. This file should contain a unix timestamp, and specifies the point in time before which we can safely ignore changes as they've been resolved in previous merges. This will get updated when the script is run.</p>
+<p>Script will output status updates on the steps it takes, and extra detail can be shown via <code>-v</code> verbose flags. Other options may be available, check <code>-h</code> help command. If the script experiences a fatal error, you should be able to just rerun it. At the end, the repo index will be left with all automated merges stages and leave unstaged anything that needs manual review. Script may also report other files to review that aren't processed the same way.</p></td></tr></table></main>
+<footer>
+    RussStation.dme
+    <a href="https://github.com/RussStation/RussStation/tree/c5f7e928d5403b052014e3da5d1a1d5e18b134bf">c5f7e92</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
+</body>
+</html>
